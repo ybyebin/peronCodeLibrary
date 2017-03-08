@@ -1,0 +1,23 @@
+/*文字换行*/
+{
+/*强制不换行*/
+white-space:nowrap;
+/*自动换行*/
+word-wrap: break-word;
+word-break: normal;
+/*强制英文单词断行*/
+word-break:break-all;
+
+/*- 两端对齐*/
+text-align:justify;text-justify:inter-ideogra;
+}
+
+
+
+/*- [去掉Webkit(chrome)浏览器中input(文本框)或textarea的黄色焦点框]*/
+input, button, select, textarea {
+	outline: none;
+}
+textarea {
+	resize: none;
+}

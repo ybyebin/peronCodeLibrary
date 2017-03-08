@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="scal.css">
+</head>
+<script>
+ 	var window_width = document.documentElement.clientWidth;
+    var window_height = document.documentElement.clientHeight;
+    window.onresize= function(){
+        var window_width = document.documentElement.clientWidth;
+        var window_height = document.documentElement.clientHeight;
+    };
+    (function () {
+        function o() {
+            document.documentElement.style.fontSize = (document.documentElement.clientWidth > 640 ? 640 : document.documentElement.clientWidth) / 16 + "px"
+        }
+        var e = null;
+        window.addEventListener("resize", function () {
+            clearTimeout(e), e = setTimeout(o, 300)
+        }, !1), o()
+    })(window);
+</script>
+
+
+
+<body>
+<div id="divs"> 
+	<button id="btn">按钮</button>
+</div>
+	
+</body>
+</html>
