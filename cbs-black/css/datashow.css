@@ -1,0 +1,763 @@
+body {
+    font-family: '微软雅黑'
+}
+
+/*头部-开始*/
+.page-topbar {
+    background-color: #35c99d;
+    max-height: 66px;
+    min-height: 66px;
+}
+.navbar .row {
+    width: 100%;
+}
+.navbar-inverse {
+    background: #35c99d;
+    border-color: #2ac798;
+    max-height: 66px
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+    font-size: 1.1em
+}
+.navbar-header {
+    width: 286px;
+    height: 65px;
+    margin: 0 auto;
+    margin-left: 50px
+}
+.badge-warn {
+    background-color: #ff5555;
+    color: #ffffff;
+    font-weight: normal;
+    padding: 1px 7px;
+    position: relative;
+    top: 0;
+    display: none;
+}
+
+.navbar-inverse .navbar-brand {
+    width: 135px;
+    height: 33px;
+    float: none;
+    padding: 0px;
+    display: inline-block;
+    position: absolute;
+    top: 15px
+}
+
+#navbar-brandImg {
+    width: 135px;
+    height: 33px
+}
+.navbar-header > span {
+    width: 200px;
+    overflow: hidden;
+    display: inline-block;
+    height: 66px;
+    position: absolute;
+    top: 0;
+    left: 180px;
+    line-height: 66px;
+    color: #fff;
+    font-size: 1.2em;
+    right: 10px;
+    margin-top: 1px;
+    margin-left: 5px
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:focus,
+.navbar-inverse .navbar-nav > .active > a:hover {
+    background-color: transparent;
+    color: #fff;
+    border-bottom: 3px solid #fff
+}
+
+.nav > li > a {
+    margin: 0 25px;
+    margin-top: 10px;
+    padding-left: 0;
+    padding-right: 0
+}
+
+.navbar-inverse .navbar-nav > li > a:focus,
+.navbar-inverse .navbar-nav > li > a:hover {
+    background-color: transparent;
+    color: #484c4b
+}
+
+.nav_padding {
+    margin-left: 3%
+}
+
+.time {
+    padding-top: 23px;
+    padding-bottom: 15px;
+    color: #fff
+}
+
+.navbar-right {
+    margin-right: 50px
+}
+
+.navbar-right >.nav> li> a:hover {
+    color: #fff
+}
+
+.navbar-right ul.nav li.main-user {
+    width: 73px;
+    height: 64px;
+    text-align: center;
+    line-height: 70px
+}
+
+.navbar-right ul.nav li.main-user img {
+    cursor: pointer
+}
+
+#main-user .logout-changepsw {
+    border-radius: 3px;
+}
+
+#main-user .logout-changepsw li a {
+    color: #999999
+}
+
+.logout-changepsw::after {
+    width: 0px;
+    height: 0px;
+    border: 7px transparent solid;
+    border-bottom-color: #FFFFFF;
+    position: absolute;
+    top: -14px;
+    left: 116px;
+    content: ""
+}
+
+.logout-changepsw::before {
+    width: 0px;
+    height: 0px;
+    border: 7px transparent solid;
+    border-bottom-color: #D4D4D4;
+    position: absolute;
+    top: -15px;
+    left: 116px;
+    content: ""
+}
+
+@media screen and (max-width:1194px) {
+    .navbar-right{
+        display: none !important;
+    }
+}
+
+/*头部-结束*/
+
+/*tab页开始*/
+.page-container {
+    padding-bottom: 20px;
+}
+.page-container section.wrapper {
+    display: inline-block;
+    width: 100%;
+    padding: 26px 21px 0 21px;
+    min-width: 1200px;
+}
+#tab>.nav > li {
+    margin-right: 6px;
+}
+#tab>.nav > li > a {
+    padding: 7px 15px;
+    margin: 0;
+    font-size: .98em;
+}
+.nav-tabs {
+    border-bottom: 2px solid #35c99d;
+}
+.nav-tabs .tab-style {
+    width: 145px;
+    height: 48px;
+    text-align: center;
+    line-height: 30px;
+}
+.nav-tabs.primary > li.active > a, .nav-tabs.primary > li.active > a:hover, .nav-tabs.primary > li.active > a:focus {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #35c99d;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    color: #fff;
+}
+.tab-content {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffffff;
+    border-color: -moz-use-text-color #eaeaea #eaeaea;
+    border-image: none;
+    border-style: none solid solid;
+    border-width: 0 1px 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.tab-content.primary {
+    border: 1px solid transparent;
+    border-image: none;
+    border-style: none solid solid;
+    border-width: 0 1px 1px;
+    box-shadow: 0 0 5px #ddd, -1px 2px 5px #ddd;
+}
+.tab-content {
+    height: 800px;
+}
+.nav-tabs.primary > li > a {
+    background-color: #fff;
+    border: 1px solid rgba(53, 201, 157, 1);
+    color: #000;
+}
+.row .content-style {
+    border-right: 1px solid #ccc;
+    height: 860px;
+}
+.row .content-style .div-title {
+    height: 60px;
+    border-bottom: 1px solid #ccc;
+}
+/*tab页结束*/
+/*报警-开始*/
+#warntabel,
+#riList{
+    border-bottom: 1px solid #DEDEDE;
+    margin-bottom: 14px;
+}
+#riList  thead th,
+#warntabel  thead th {
+  padding-bottom: 15px !important;
+  font-size: 14px;
+}
+#warntabel thead tr th:last-child{
+    text-align: center;
+}
+#warntabel tbody tr td:last-child{
+    text-align: center;
+}
+#warntabel tbody tr td:first-child{
+    padding-left: 15px;
+}
+#warntabel tbody tr td:nth-child(3) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 250px;
+}
+#warntabel tr td button.btn-sure{
+    height: 27px;
+    width:70px;
+    border: 1px solid #f5a623;
+    padding: 0 !important;
+    padding-bottom: 0px;
+    border-radius: 40px;
+    line-height: 20px;
+    background: #fff;
+    color: #f5a623;
+    outline: none;
+}
+
+#warntabel tr td button.btn-sure:hover{
+    background-color: #f5a623;
+    color: #ffffff;
+}
+#ri header {
+    padding-top: 20px;
+}
+#riList tbody td {
+  border-top: none !important;
+  height: 50px !important;
+  line-height: 31px !important;
+}
+/*报警-结束*/
+
+
+/*系统管理-开始*/
+
+
+/*用户管理*/
+.page-topbar .navbar-inverse{
+    margin-bottom: 0;
+}
+.sys-sidebar {
+    position: fixed;
+    top: 66px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+    min-width: 200px;
+    padding: 0;
+}
+.sys-row{
+    margin:0;
+}
+.sys-sidebar  ul.main-ul{
+    margin: 0;
+    padding: 0;
+}
+.sys-sidebar  ul.main-ul > li{
+    list-style: none;
+    text-align: center;
+}
+.sys-sidebar  ul.main-ul > li.active{
+    background-color: #EEEEEE;    
+}
+.sys-sidebar  ul.main-ul > li.active a{
+    color: #35C99D;
+}
+.sys-sidebar  ul.main-ul > li a{
+    height: 66px;
+    line-height: 66px;
+    color: #9CA5A9;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+
+}
+.sys-sidebar  ul.main-ul > li a:hover{
+    color: #35C99D;
+}
+
+.sys-sidebar  ul.main-ul > li a img{
+    display: inline-block;
+    margin-left: -10px;
+    margin-right: 10px;
+}
+.sys-sidebar  ul.main-ul > li a span{
+    position: relative;
+    top: 2px;
+}
+
+.sys-sidebar  ul.main-ul > li:nth-child(4) >a {
+    padding-left: 15px;
+}
+.system-log[data-toggle="collapse"] i {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #999;
+    border-bottom: 2px solid #999;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    margin-right: 0;
+    position: relative;
+    left: 30%;
+
+}
+.system-log[data-toggle="collapse"].collapsed i {
+   transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+.sys-sidebar  ul.main-ul  li ul{
+    padding: 0;
+    margin: 0;
+}
+.sys-sidebar  ul.main-ul  li ul li{
+    list-style: none;
+}
+.sys-sidebar  ul.main-ul  li ul li a{
+     font-size: 14px;
+     padding-left: 50px;
+
+}
+.sys-sidebar  ul.main-ul  li ul li:nth-child(3) a{
+    padding-left: 70px;
+
+}
+.sys-sidebar  ul.main-ul  li ul li.active{
+    background-color: #EEEEEE;
+   
+}
+.sys-sidebar  ul.main-ul  li ul li.active a{
+     color: #35c99d;
+}
+#sys-main{
+    padding-left: 30px;
+    padding-top: 30px;
+}
+@media screen and (max-width:992px) {
+    .col-sm-offset-3{
+        margin-left: 16%;
+    }
+    .col-sm-9{
+        width: 84.4333333%
+    }
+}
+.message-div{
+    box-shadow: -5px 0 10px #E6E6E6, 5px 5px 10px #E6E6E6, 0 0 0 #FFFFFF, 5px 5px 25px #E6E6E6;
+    -webkit-box-shadow: -5px 0 10px #E6E6E6, 5px 5px 10px #E6E6E6, 0 0 0 #FFFFFF, 5px 5px 25px #E6E6E6;
+    border-top: 2px solid #35C99D;
+    height: 800px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.user-message-div{   
+    height: 770px;
+    border-bottom: 1px solid #eeeeee;
+    overflow: hidden;
+}
+#user-message-tbody .active{
+    border-left: 4px solid #35C99D;
+}
+#user-message-tbody tr{
+    cursor: pointer;
+}
+
+#user-message-tbody tr:hover{
+   /*border-left: 4px solid #35C99D;*/
+}
+.user-message-div  .mCustomScrollBox .mCSB_container {
+    margin-right: 0px;
+}
+
+.user-message-div .mCSB_scrollTools {
+    margin-right: 20px;
+    width: 10px;
+    margin: 0;
+}
+
+.user-message-div  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    background: #DDDDDD;
+    width: 5px;
+}
+
+.user-message-div .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail {
+    background: #FFFFFF;
+    margin-left: 7px;
+}
+
+.message-div-detailed{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.message-div-detailed .head{
+    padding-top: 10px;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 15px;
+}
+.message-div-detailed .head label:nth-child(1){
+    text-align: left;
+    padding-left: 0;
+    font-weight: normal;
+}
+.message-div-detailed .head label:nth-child(1) span{
+    border-left: 4px solid #35c99d;
+    padding-left: 5px;
+}
+.message-div-detailed .head label:nth-child(2){
+    font-weight: normal;
+}
+.message-div-detailed .head label:nth-child(2) a:nth-child(2){
+    margin-left: 20px;
+}
+
+.message-div-detailed .center{
+    padding-bottom: 10px;
+    padding-left: 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+.message-div-detailed .center div label:nth-child(1){
+    width: 80px;
+    padding-left: 20px;
+    padding-right: 0;
+    text-align: left;
+    font-weight: normal;
+}
+
+.message-div-display .center div label:nth-child(1){
+    width: 50px;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+}
+.message-div-display .center div label:nth-child(2){
+    text-align: left;
+    font-weight: normal;
+}
+
+.message-div-detailed .title{
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+}
+.message-div-detailed .foot{
+    border-bottom: 1px solid #eeeeee;
+}
+.message-div-detailed .foot ul{
+    margin: 0;
+    padding: 0;
+}
+.message-div-detailed .foot ul li{
+    list-style: none;
+    height: 47px;
+    line-height: 47px;
+}
+.message-div-detailed .foot ul li label{
+    font-weight: normal;
+    margin-left: 6px;
+}
+
+.message-div-detailed .foot ul li:nth-of-type(odd) {
+  background-color: #f8fbfa;
+}
+
+.message-div-detailed .foot ul li:nth-of-type(even) {
+  background-color: #FFFFFF;
+}
+
+.display-user-ul{
+    height: 477px;
+    overflow: auto;
+}
+.display-user-ul  .mCustomScrollBox .mCSB_container,
+.edit-user-ul  .mCustomScrollBox .mCSB_container,
+.add-user-ul  .mCustomScrollBox .mCSB_container {
+    margin-right: 0px;
+}
+
+.display-user-ul .mCSB_scrollTools,
+.edit-user-ul .mCSB_scrollTools,
+.add-user-ul .mCSB_scrollTools {
+    margin-right: 20px;
+    width: 10px;
+    margin: 0;
+}
+.display-user-ul  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+.edit-user-ul  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+.add-user-ul  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    background: #DDDDDD;
+    width: 5px;
+}
+
+.display-user-ul .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail,
+.edit-user-ul .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail,
+.add-user-ul .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail {
+    background: #FFFFFF;
+    margin-left: 7px;
+}
+
+.edit-user-ul,
+.add-user-ul{
+    height: 350px;
+    overflow: auto;
+}
+/*用户管理*/
+/*通信异常*/
+.form-sys-manage{
+    box-shadow: -5px 0 10px #E6E6E6, 5px 5px 10px #E6E6E6, 0 0 0 #FFFFFF, 5px 5px 25px #E6E6E6;
+    -webkit-box-shadow: -5px 0 10px #E6E6E6, 5px 5px 10px #E6E6E6, 0 0 0 #FFFFFF, 5px 5px 25px #E6E6E6;
+    border-top: 2px solid #35C99D;
+    margin-top: 70px;
+    height: 750px;
+
+}
+.form-sys-manage > div{
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center; 
+}
+.form-sys-manage table{
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.form-sys-manage table thead th {
+  padding-bottom: 20px;
+  font-size: 16px;
+}
+.form-sys-manage table tbody td {
+  text-align: left;
+}
+
+.commexc-form{
+    height: 800px;
+}
+.commexc-div{
+    height: 780px;
+    overflow: hidden;
+}
+
+.commexc-div  .mCustomScrollBox .mCSB_container {
+    margin-right: 0px;
+}
+
+.commexc-div .mCSB_scrollTools {
+    margin-right: 20px;
+    width: 10px;
+    margin: 0;
+}
+.commexc-div  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    background: #DDDDDD;
+    width: 5px;
+}
+.commexc-div .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail {
+    background: #FFFFFF;
+    margin-left: 7px;
+}
+/*通信异常*/
+
+/*目标管理*/
+.primary_shadow .tab-pane form{
+    padding-top: 30px;
+}
+.primary_shadow .tab-pane form > div label:nth-child(1){
+    width: 150px;
+    font-weight: normal;
+    color: #666;
+}
+.primary_shadow .tab-pane form > div  div{
+    width: 300px;
+}
+.primary_shadow .tab-pane form > div label:nth-child(3){
+    width: 40px;
+    padding-left: 0;
+    font-weight: normal;
+    color: #666;
+}
+.primary_shadow .tab-pane form > div:nth-child(6){
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+/*目标管理*/
+
+
+
+/*系统管理-结束*/
+
+
+
+
+/*dataPicker-开始*/
+.daterangepicker,
+.datetimepicker-days,
+.datetimepicker-months,
+.datetimepicker-years,
+.datepicker-days,
+.datepicker-months,
+.datepicker-years {
+    padding: 10px;
+}
+
+.daterangepicker th,
+.datetimepicker th,
+.datepicker th {
+    font-weight: 400;
+    color: #555555;
+}
+
+.daterangepicker td.off,
+.datepicker td.old,
+.datepicker td.new {
+    color: #aaaaaa;
+}
+
+.daterangepicker td,
+.daterangepicker th,
+.datetimepicker-years .year,
+.datetimepicker-months .month,
+.datetimepicker td,
+.datetimepicker th,
+.datepicker-years .year,
+.datepicker-months .month,
+.datepicker td,
+.datepicker th {
+    border-radius: 0px;
+    -o-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+}
+
+.daterangepicker .ranges li.active,
+.daterangepicker .ranges li:hover {
+    border-color: rgba(31, 181, 172, 1.0);
+}
+
+.daterangepicker .ranges li.active,
+.daterangepicker .ranges li:hover,
+.daterangepicker td.active,
+.daterangepicker td.active:hover,
+.datetimepicker table tr td span.active:active,
+.datetimepicker table tr td span.active:hover:active,
+.datetimepicker table tr td span.active.disabled:active,
+.datetimepicker table tr td span.active.disabled:hover:active,
+.datetimepicker table tr td span.active.active,
+.datetimepicker table tr td span.active:hover.active,
+.datetimepicker table tr td span.active.disabled.active,
+.datetimepicker table tr td span.active.disabled:hover.active,
+.datetimepicker table tr td.active:active,
+.datetimepicker table tr td.active:hover:active,
+.datetimepicker table tr td.active.disabled:active,
+.datetimepicker table tr td.active.disabled:hover:active,
+.datetimepicker table tr td.active.active,
+.datetimepicker table tr td.active:hover.active,
+.datetimepicker table tr td.active.disabled.active,
+.datetimepicker table tr td.active.disabled:hover.active,
+.datepicker td span.active:hover,
+.datepicker td span.active:focus,
+.datepicker td span.active:active,
+.datepicker td span.active.active,
+.datepicker td span.active.disabled,
+.datepicker td span.active[disabled],
+.datepicker td.active:hover,
+.datepicker td.active:hover:hover,
+.datepicker td.active:focus,
+.datepicker td.active:hover:focus,
+.datepicker td.active:active,
+.datepicker td.active:hover:active,
+.datepicker td.active.active,
+.datepicker td.active:hover.active,
+.datepicker td.active.disabled,
+.datepicker td.active:hover.disabled,
+.datepicker td.active[disabled],
+.datepicker td.active:hover[disabled] {
+    background-color: rgba(31, 181, 172, 1.0);
+    background-image: none;
+    text-shadow: none;
+}
+
+.datetimepicker-years .year,
+.datetimepicker-months .month,
+.datepicker-years .year,
+.datepicker-months .month {
+    background-image: none;
+    text-shadow: none;
+    width: 42px;
+    height: 36px;
+    line-height: 36px;
+}
+
+.datepicker {
+    padding: 10px;
+    text-align: center;
+}
+
+.datepicker:before {
+    content: '';
+    display: inline-block;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ffffff;
+    border-bottom-color: rgba(200, 200, 200, 0.5);
+    top: -7px;
+    left: 6px;
+}
+/*dataPicker-结束*/

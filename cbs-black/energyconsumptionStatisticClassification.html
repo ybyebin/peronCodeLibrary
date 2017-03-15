@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>智能建筑管理系统</title>
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/basic/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/basic/page.css">
+	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/layer.css" />
+	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/mylayerskin/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/icheck/check_black.css">
+	<link rel="stylesheet" type="text/css" href="js/basic/mCustomScrollbar/jquery.mCustomScrollbar.css">
+	<link rel="stylesheet" type="text/css" href="css/dashboard2.css">
+	<link rel="stylesheet" type="text/css" href="css/systemConfiguration2.css">
+	<script type="text/javascript" src="js/basic/jquery.min.js"></script>
+	<script type="text/javascript" src="js/basic/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div id="sidebar" class="col-sm-3 col-md-2 sidebar">
+				<div id="treeview" class="treeview">
+					<ul>
+						<li>
+							<a id="logo-a" href="homepage.html">
+								<img id="logo" src="images/text/logo-text.png"></a>
+						</li>
+						<li>
+							<a class="title_foursize" href="engineeringManagement.html">
+								<i></i>
+								<span>工程管理</span>
+							</a>
+						</li>
+						<li>
+							<a class="title_foursize" href="nodeManagement.html">
+								<i></i>
+								<span>节点管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="datalabelManagement.html">
+								<i></i>
+								<span>数据标签管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="energyconsumptionStatisticDis.html">
+								<i></i>
+								<span>能耗统计设定</span>
+							</a>
+						</li>
+						<li>
+							<a href="graphicImages.html">
+								<i></i>
+								<span>图形画面管理</span>
+							</a>
+						</li>
+						<li class="active">
+							<a href="energyconsumptionStatisticClassification.html">
+								<i></i>
+								<span>能耗统计分级</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<form  id="classification-main-form" class="content_head classification " style="margin-top: 100px;">
+					<div class="form-group">
+						<button id="btn-edit"  type="button" class="button-normal btn btn-primary">编辑</button>
+					</div>
+					<div id="classification_display" class="form-group grapar_node_tab div-content">
+						<div class="form-group par_node_tab">
+							<div id="trees-parent">
+								<div id="trees" class="tree"></div>
+							</div>
+
+						</div>
+					</div>
+
+				</form>
+
+				<form id="classification-edit-form" class="content_head classification">
+					<div class="form-group" style="margin-top: 100px;">
+						<button id="btn-save" type="button" class="button-normal btn btn-primary">保存</button>
+						<button id="btn-cancle" type="button" class="button-cancle btn btn-primary">取消</button>
+					</div>
+					<div id="classification_edit" class="form-group grapar_node_tab" style="height: 750px;">
+						<div class="form-group par_node_tab  par_node_tabs div-content">
+							<div class="edit-par_node_tab">
+								<div class="form-group">
+									<button id="add-samelevemenu-btn"  type="button" class="button-normal btn btn-primary">添加同级菜单</button>
+									<button id="add-sonlevemenu-btn"  type="button" class="button-normal btn btn-primary">添加子菜单</button>
+
+								</div>
+
+								<div id="tree" class="form-group tree"></div>
+							</div>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="loading" style="display: none;">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+	<div id="classification-groups" style="display: none;">
+		<div class="form-group" style="padding-left: 10px;">
+
+			<div class="col-sm-3 content-search energy_search" style="width: 300px;">
+				<label class="col-sm-1">
+					<span id="search-span" class="glyphicon glyphicon-search" style="cursor: pointer;"></span>
+				</label>
+				<input id="content-search-input" type="text" placeholder="请输入群组名称" required class="col-sm-9">
+				<label class="col-sm-1 label_img">
+					<img id="clearImage" src="images/systemSet/delete.png" style="cursor: pointer;"></label>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<form id="classification-groups-form" class="form-horizontal" style="padding: 10px 10px;height: 400px;overflow: auto;border: 1px solid #DEDEDE">
+
+			<table  class="table table-striped alert-table" >
+				<thead >
+					<tr >
+						<th>组名</th>
+						<th>选择</th>
+					</tr>
+				</thead>
+				<tbody class ="alert-body"></tbody>
+			</table>
+			<!-- <div class="form-group col-sm-12" style="position: fixed;margin-top: 20%;text-align: center;font-size: 18px;font-weight: 900px;">无数据</div>
+		-->
+	</form>
+
+</div>
+
+<div id="classification-delete-group" style="display: none;">
+	<p></p>
+</div>
+
+<script>
+		(function($) {
+		  $(window).load(function() {
+		    // $("#tree").mCustomScrollbar();
+		    $("#trees-parent").mCustomScrollbar();
+		    $("#classification-groups-form").mCustomScrollbar();
+		  });
+		})(jQuery);
+	</script>
+
+<!-- <script type="text/javascript" src="js/publicFunction.js"></script>
+-->
+<script type="text/javascript" src="js/basic/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/basic/layer/layer.js"></script>
+<script type="text/javascript" src="js/basic/icheck.min.js"></script>
+<script type="text/javascript" src="js/basic/api.js"></script>
+<script type="text/javascript" src="js/systemSet/energyconsumptionStatisticClassification.js"></script>
+
+</body>
+</html>

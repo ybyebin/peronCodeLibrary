@@ -1,0 +1,175 @@
+html{
+	padding: 0;
+}
+body
+{
+
+	padding: 0;
+	margin:0;
+	font-family: "微软雅黑";
+	background-image: url(../images/login/bg2.png);
+}
+
+
+.logo
+{
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	/*top: 200px;*/
+	margin-top: 10%;
+	width: 216px;
+	height: 46px;
+}
+
+.login_box
+{
+    position: relative;
+    /*top: 260px;*/
+    /*top: 40%;*/
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: red;
+    width: 695px;
+    height: 519px;
+    background-color: #1C1F38;
+    border-top-radius:4px; 
+    text-align: center;
+}
+
+
+.login_box p.img {
+	width: 100%;
+	height: 12px;
+	border-radius: 4px;
+	background-color: #3e4687;
+
+}
+.login_box p.title{
+	padding-left: 15px;
+	font-size: 30px;
+	color: #fff;
+	margin-top: 63px;
+	letter-spacing:7px;
+}
+.login_box form{
+	text-align: center;
+}
+.login_box form div:nth-child(2) span,
+.login_box form div:first-child span{
+	display: inline-block;
+	width: 22px;
+	height: 25px;
+	background-image: url(../images/login/user.png);
+	position: relative;
+	left: -10px;
+	top: 5px;
+}
+.login_box form div:nth-child(2) span{
+	width: 21px;
+	height: 24px;
+	background-image: url(../images/login/Shape.png);
+}
+.login_box .username,
+.login_box .pwd
+{
+	width: 351px;
+	height: 55px;
+	background-repeat: no-repeat;
+	background-size: 15px;
+	/*background-position-y: 20px;*/
+	/*background-position-x: 10px;*/
+	border: none;
+	/*text-indent: 25px;*/
+	padding-left:15px; 
+	/*border-radius: 2px;*/
+	color: #fff;
+	background-color: #15182d;
+
+}
+.login_box .username{
+	margin-bottom: 16px;
+}
+.login_box .username:focus,
+.login_box .pwd:focus{
+	outline:none; ;
+}
+
+
+.login_box .img 
+{
+	margin-bottom: 10px;
+}
+
+#login
+{
+	margin-top: 30px;
+	border:0;
+	background: #3e4687;
+	color:#fff;
+	font-size: 18px;
+	margin-left: 30px;
+	width: 365px;
+	height: 50px;
+	border: none;
+	outline: none;
+}
+#login:active{
+	border: none;
+	outline: none;
+}
+#login:hover{
+	/*background: #2AB38B;*/
+}
+.paswrong{
+	text-align: left;
+	width: 200px;
+	position: relative;
+	left:5px;
+	top: -5px;
+	font-size: 12px;
+	color: #F57373;
+	display: none;
+}
+.forgetpas{
+	margin-top: 10px;
+	font-size: 12px;
+	color: #999999;
+	display: inline-block;
+	margin-left: 310px;
+	text-decoration: none;
+}
+.forgetpas:hover{
+	color: #fff;
+}
+
+#forget-pas{
+	text-align: center;
+	line-height: 130px;
+	font-size: 24px;
+	color: #fff;
+}
+
+
+.layui-layer.layui-layer-dialog.layui-layer-border.layui-layer-msg .layui-layer-content{
+  background: #3E4687;
+}
+.layui-layer-content{
+  background-color: #2C2F4C;
+}
+.layui-layer-content div > form{
+  padding-right: 40px;
+  padding-left: 40px;
+  height: 100%;
+}
+.form-for-bottom{
+  padding-right: 300px;
+  border-bottom: 1px solid #606277;
+  height: 100%;
+  margin: 0;
+}
+.layui-layer-btn{
+  background-color: #2B2E4B;
+}

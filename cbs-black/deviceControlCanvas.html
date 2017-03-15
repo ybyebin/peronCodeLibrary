@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>智能建筑管理系统</title>
+	
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+
+	<link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
+	<link rel="stylesheet" href="css/basic/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="js/basic/datepicker3/datepicker3.css">
+	<link rel="stylesheet" type="text/css" href="css/icheck/check_black.css">
+	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/layer.css"/>
+	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/mylayerskin/style.css"/>
+	<link rel="stylesheet" type="text/css" href="js/basic/mCustomScrollbar/jquery.mCustomScrollbar.css">
+	<!-- <link rel="stylesheet" href="css/index/style_black.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="css/dashboard2.css">
+	<link rel="stylesheet" type="text/css" href="css/datashow_black.css">
+
+	<!-- 必须导入的12个JS -->
+	<script type="text/javascript" src="canvas/edit/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="canvas/edit/canvg.js"></script>
+	<script type="text/javascript" src="canvas/edit/Class.js"></script>
+	<script type="text/javascript" src="canvas/edit/jquery.autoresize.js"></script>
+	<script type="text/javascript" src="canvas/edit/jquery.contextmenu.js"></script>
+	<script type="text/javascript" src="canvas/edit/jquery-touch_punch.js"></script>
+	<script type="text/javascript" src="canvas/edit/json2.js"></script>
+	<script type="text/javascript" src="canvas/edit/pathfinding-browser.min.js"></script>
+	<script type="text/javascript" src="canvas/edit/raphael.js"></script>
+	<script type="text/javascript" src="canvas/edit/rgbcolor.js"></script>
+	<script type="text/javascript" src="canvas/edit/shifty.js"></script>
+	<script type="text/javascript" src="canvas/edit/draw2d.js"></script>
+	<script type="text/javascript" src="canvas/edit/fraphael.js"></script>
+
+</head>
+<body>
+	<div class='page-topbar navbar-fixed-top'>
+		<nav class="navbar navbar-inverse" >
+			<div class="row" >
+				<div class="navbar-header">
+					<img src="images/text/logo-text.png"  class="navbar-brand" id="navbar-brandImg"/>
+					<span class="projectName"></span>
+				</div>
+				<div class="navbar-collapse collapse " id="navbar">
+					<ul class="nav navbar-nav nav_padding">
+						<li>
+							<a href="homepage.html">概览</a>
+						</li>
+						<li class="active">
+							<a href="deviceControlCanvas.html">设备监控</a>
+						</li>
+						<li>
+							<a href="warn.html">
+								报警
+								<span id="header_alarm_count" class="badge badge-warn"></span>
+							</a>
+						</li>
+						<li>
+							<a href="energyView.html">能源管理</a>
+						</li>
+						<li>
+							<a href="userManagement.html">系统管理</a>
+						</li>
+
+					</ul>
+
+					<div class="navbar-right">
+						<ul class="nav navbar-nav">
+							<li id="CurrentTime">
+								<a></a>
+							</li>
+
+							<li  class="time">
+								<span>|</span>
+							</li>
+							<li>
+								<a href="engineeringManagement.html">系统设置</a>
+							</li>
+							<li id="main-user" class="main-user dropdown" >
+
+								<img src="images/datashow/People.png" title=""  class="dropdown-toggle" data-toggle="dropdown"/>
+								<ul class="dropdown-menu logout-changepsw">
+									<li>
+										<a href="#"  class="user-changePassword">修改密码</a>
+									</li>
+									<li>
+										<a href="#" class="user-logout">退出登录</a>
+									</li>
+
+								</ul>
+
+							</li>
+
+						</ul>
+					</div>
+					<div class="head-warn" >
+						<p>
+							<a href="warn.html">
+								<img src="images/cbsnew/报警状态按钮-无报警.png"></a>
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</nav>
+	</div>
+
+	<div class="page-container row-fluid" style="margin-top: 66px;">
+
+		<section id="main-content" >
+			
+			<div class="left borders " style="background-color: red;"> 
+				<div class="leftMenu" id="main-menu-wrapper">
+				<div class="handle"></div>
+					<div id="div-wraplist"> 
+						<ul id="wraplist" class="wraplist"></ul>
+					</div>
+				</div>
+			</div>
+			<div class="right">
+				<div class="col-xs-12 " id="tab" style="padding-top: 0;margin-bottom: 0;">
+					<ul class="nav nav-tabs primary">
+						<li id="EquipmentMonitoring" class="active">
+							<a href="#jian" data-toggle="tab"  class="tab-style">设备监控</a>
+						</li>
+
+						<li id="EquipmentList">
+							<a href="#qu" data-toggle="tab" class="tab-style" >列表与趋势图</a>
+						</li>
+
+					</ul>
+
+					<div id="device-tab-content" class="tab-content primary" >
+						<div class="tab-pane fade  in active" id="jian">
+							<div class="row">
+								<section class="col-xs-12 content" style="margin-top: 0;padding-left: 0;">
+									<div id="canvas" class="canvas">
+
+										<div id="tooltips" class="CanvasTooltip"></div>
+										<img id="myBgimage" src="images/text/logo-text.png">
+										</div>
+
+									<div id="SecCanvas" class="">
+										<div class="title" data-toggle="collapse" data-target="#SecCanvasFullBtn">
+											<img src="images/cbsnew/caozuo.png"/>
+											操作
+										</div>
+										<div class="scrollFullBtn">
+											<div  id="SecCanvasFullBtn" class="collapse in">
+												<!-- <p>
+													<button class="btn boolean-true">开启</button>
+												</p>
+												<p>
+													<button class="btn boolean-false">关闭</button>
+												</p> -->
+
+											</div>
+										</div>
+									</div>
+
+								</section>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="qu">
+							<div class="qu-scroll">
+								<table class="table table-stripeds table-primary" id="table-stripeds">
+									<thead>
+										<tr>
+											<th>点名称</th>
+											<th>状态</th>
+											<th>值</th>
+											<th>趋势图</th>
+											<th>开关</th>
+										</tr>
+									</thead>
+									<tbody>
+										
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<div id="action" style="display: none;" class="data input_mar">
+		<span>值</span>
+		<div class="controls">
+			<input type="text" id="dataValue" class="form-control">
+			<span style="display: none">错误提醒：</span> <b style="display: none" id="errmsg">请输入数字或字母</b>
+		</div>
+	</div>
+
+	<div id="action_str" style="display: none;" class="data input_mar">
+		<span>值</span>
+		<div class="controls">
+			<input type="text" id="dataValue_str" class="form-control">
+			<span style="display: none">错误提醒：</span> <b style="display: none" id="errmsg">请输入数字或字母</b>
+		</div>
+	</div>
+	<div id="action1" style="display: none;" class="data">
+		<div class="radio_data radio_mar">
+			<input tabindex="5" type="radio" id="open" name="status"  class="skin-square-green"  value="1" checked="checked">
+			<label class="form-label" for="open">开</label>
+		</div>
+		<div class="radio_data ">
+			<input tabindex="5" type="radio" id="close" name="status"  class="skin-square-green"  value="1">
+			<label class="form-label" for="close">关</label>
+		</div>
+	</div>
+
+	<div id="detail" style="display: none;margin-top: 46px;margin-left: 10px;">
+
+		<header>
+			<div class="choosetime" >
+				<div class="btn-group bottom15 right15 selectTypes" style="display:block;" id="slectFen">
+					<button aria-expanded="false" data-toggle="dropdown" class="btn select btn-border dropdown-toggle" type="button" id="selectType" style="height: 44px;">
+						<span class="txt" rel="0">最近3天</span>
+						<span class="caret sarrow"></span>
+						<span class="sr-only">最近3天</span>
+					</button>
+					<ul role="menu" class="dropdown-menu  selectType dropdown-menus">
+						<li>
+							<a href="#" rel="1" >今天</a>
+						</li>
+						<li>
+							<a href="#" rel="2">昨天</a>
+						</li>
+						<li>
+							<a class="threeday" href="#" rel="3">最近3天</a>
+						</li>
+						<li>
+							<a href="#" rel="4">最近7天</a>
+						</li>
+						<li>
+							<a href="#" rel="5">最近30天</a>
+						</li>
+					</ul>
+				</div>
+				<div class="form-group selectTime full-lefts" >
+					<input type="text" data-format="yyyy-mm-dd" class="form-control" id="selectTime"     />
+				</div>
+				<div class="full-left timespaild" style="padding-top:5px;color: #fff">至</div>
+				<div class="form-group selectTime full-lefts">
+					<input type="text" data-format="yyyy-mm-dd" class="form-control" id="endTime"    />
+				</div>
+			</div>
+			<div class="form-group selectTime full-rights" style="float: right;">
+				<button aria-expanded="false" data-toggle="dropdown" class="btn every btn-primary btn-border" type="button" id="every">实时趋势</button>
+			</div>
+
+		</header>
+		<!-- 历史趋势 -->
+		<div id="quChart" class="clear" style="display: none;"></div>
+		<!-- 实时趋势 -->
+
+		<div id="quChart1"  style="width: 1180px;height: 440px;"></div>
+	</div>
+	
+	<div class="loading">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+
+	<div id="foot"></div>
+
+	<!--监控视频 -->
+	<div id="vlc_bg"></div>
+	<div class="vlc_box animation" style="display:none;background-color: black" >
+		<h2>
+			<!-- <span style="color: red;">×</span>
+		-->
+		<span class="title">××视频监控</span>
+		<span class="vlc_close">×</span>
+	</h2>
+	<object type="application/x-vlc-plugin" pluginspage="http://www.videolan.org/" id="vlc" events="false" width="1080" height="620">
+		<param class="rtt" name="target" value="" />
+		<param name="autoplay" value="true" />
+		<param name="controls" value="false" />
+		<param name='controls' value='true' />
+	</object>
+</div>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="js/basic/api.js"></script>
+<script type="text/javascript" src="js/basic/common.js"></script>
+<script type="text/javascript" src="js/basic/icheck.min.js"></script>
+<script type="text/javascript" src="js/basic/datepicker3/datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/basic/datepicker3/scripts.js"></script>
+<script type="text/javascript" src="js/basic/highcharts/highstock.js"></script>
+<script type="text/javascript" src="js/basic/layer/layer.js"></script>
+
+<script type="text/javascript" src="js/basic/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/basic/bootstrap.js"></script>
+<script type="text/javascript" src="js/Component/imageComponent.js"></script>
+<script type="text/javascript" src="js/Component/labelComponent.js"></script>
+<script type="text/javascript" src="js/Component/LineComponent.js"></script>
+<script type="text/javascript" src="js/Component/RectangleComponent.js"></script>
+<script type="text/javascript" src="js/Component/safeComponent.js"></script>
+<script type="text/javascript" src="js/Component/textComponent.js"></script>
+<script type="text/javascript" src="js/basic/mqttws31.js"></script>
+<script type="text/javascript" src="js/datashow/deviceMqtt.js"></script>
+<script type="text/javascript" src="js/datashow/device.js"></script>
+
+</body>
+</html>
