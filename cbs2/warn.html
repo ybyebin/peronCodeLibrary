@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>警告页面</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/layer.css"/>
+	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/mylayerskin/style.css" />
+	<link rel="stylesheet" type="text/css" href="js/basic/datepicker3/datepicker3.css">
+	<link rel="stylesheet" type="text/css" href="css/basic/page.css">
+	<link rel="stylesheet" type="text/css" href="css/dashboard.css">
+	<link rel="stylesheet" type="text/css" href="css/datashow.css">
+	<script type="text/javascript" src="js/basic/jquery.min.js"></script>
+
+</head>
+</head>
+<body>
+	<div class='page-topbar navbar-fixed-top' >
+		<nav class="navbar navbar-inverse">
+			<div class="row">
+				<div class="navbar-header">
+					<img src=""  class="navbar-brand" id="navbar-brandImg"/>
+					<span class="projectName"></span>
+				</div>
+				<div class="navbar-collapse collapse " id="navbar">
+					<ul class="nav navbar-nav nav_padding">
+						<li>
+							<a href="homepage.html">概览</a>
+						</li>
+						<li>
+							<a href="deviceControlCanvas.html">设备监控</a>
+						</li>
+						<li class="active">
+							<a href="#">报警
+							<span id="header_alarm_count" class="badge badge-warn">0</span></a>
+						</li>
+						<li>
+							<a href="energyView.html">能源管理</a>
+						</li>
+						<li>
+							<a href="userManagement.html">系统管理</a>
+
+						</li>
+
+					</ul>
+					<div class="navbar-right">
+						<ul class="nav navbar-nav">
+							<li id="CurrentTime">
+								<a></a>
+							</li>
+
+							<li  class="time">
+								<span>|</span>
+							</li>
+							<li>
+								<a href="engineeringManagement.html">系统设置</a>
+							</li>
+							<li id="main-user" class="main-user dropdown" >
+
+								<img src="images/datashow/People.png" title=""  class="dropdown-toggle" data-toggle="dropdown"/>
+								<ul class="dropdown-menu logout-changepsw">
+									<li>
+										<a href="#" class="user-changePassword">修改密码</a>
+									</li>
+									<li>
+										<a href="#" class="user-logout">退出登录</a>
+									</li>
+
+								</ul>
+
+							</li>
+
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</nav>
+	</div>
+
+	<div class="page-container row-fluid" style="margin-top: 66px;">
+		<section id="main-content">
+			<section class="wrapper">
+				<div class="col-lg-12" id="tab">
+					<ul class="nav nav-tabs primary">
+						<li class="active">
+							<a id="lie_a" href="#lie" data-page="1" data-toggle="tab"  class="tab-style">报警列表</a>
+						</li>
+
+						<li>
+							<a id="ri_a" href="#ri" data-page="1" data-toggle="tab" class="tab-style" >报警日志</a>
+						</li>
+
+					</ul>
+
+					<div class="tab-content primary">
+						<div class="tab-pane fade in active" id="lie">
+							<table id="warntabel" class="table table-stripeds table-primary" >
+								<thead>
+									<tr>
+										<th>级别</th>
+										<th>报警时间</th>
+										<th>报警描述</th>
+										<th>数据标签</th>
+										<th>设定值</th>
+										<th>实际值</th>
+										<th>确认</th>
+									</tr>
+								</thead>
+								<tbody id="tbodys">
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+
+								</tbody>
+							</table>
+							<div class="form-group">
+								<div class="tcdPageCode tcdPageCode-warn"></div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="ri">
+							<div class="row">
+								<section class="col-xs-12 content">
+									<header>
+										<div class="btn-group selecttypes"  id="slectFen">
+											<button aria-expanded="false" data-toggle="dropdown" class="btn dropdown-toggle" type="button" id="ri_selectType">
+												<span class="txt" rel="4">最近7天</span>
+												<span class="caret sarrow"></span>
+											</button>
+											<ul role="menu" class="dropdown-menu selectType">
+												<li>
+													<a href="#" rel="1" >今天</a>
+												</li>
+												<li>
+													<a href="#" rel="2">昨天</a>
+												</li>
+												<li>
+													<a href="#" rel="3">最近3天</a>
+												</li>
+												<li>
+													<a href="#" rel="4">最近7天</a>
+												</li>
+												<li>
+													<a href="#" rel="5">最近30天</a>
+												</li>
+												<li>
+													<a href="#" rel="6">5月</a>
+												</li>
+												<li>
+													<a href="#" rel="7">4月</a>
+												</li>
+												<li>
+													<a href="#" rel="8">3月</a>
+												</li>
+												<li class="9">
+													<a href="#" rel="9">自定义</a>
+												</li>
+											</ul>
+										</div>
+										<div class="form-group selectTime" >
+											<input type="text" class="form-control" id="startTime" readonly="readonly" />
+										</div>
+										<div class="selectTime" style="padding-top: 10px;">至</div>
+										<div class="form-group selectTime ">
+											<input type="text" data-format="yyyy-mm-dd" class="form-control" id="endTime" readonly="readonly"/>
+										</div>
+
+										<div style="float: right;">
+											<button  class="btn button-other" type="button" id="exprot" onclick='exportWarnLog()'>导出</button>
+										</div>
+									</header>
+									<div class="content bao_table warn_border">
+										<div class="msg" id="ri_table">
+
+											<div  id="tab_border">
+												<table id="riList" class="table  table-striped table-primary" >
+													<thead>
+														<tr>
+															<th>级别</th>
+															<th>报警时间</th>
+															<th>报警描述</th>
+															<th>数据标签</th>
+															<th>设定值</th>
+															<th>实际值</th>
+															<th>状态</th>
+															<th>确认时间</th>
+
+														</tr>
+													</thead>
+													<tbody id="logtbody">
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+
+													</tbody>
+												</table>
+												<div class="form-group">
+													<div class="tcdPageCode tcdPageCode-log"></div>
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</section>
+		</section>
+
+	</div>
+
+	
+	<div id="foot"></div>
+	<script type="text/javascript" src="js/basic/bootstrap.js"></script>
+	<script type="text/javascript" src="js/basic/page.js"></script>
+	<script type="text/javascript" src="js/basic/layer/layer.js"></script>
+	<script type="text/javascript" src="js/basic/datepicker3/datetimepicker.min.js"></script>
+	<script type="text/javascript" src="js/basic/api.js"></script>
+	<script type="text/javascript" src="js/basic/common.js"></script>
+	<script type="text/javascript" src="js/datashow/warn.js"></script>
+
+</body>
+</html>
+</html>
