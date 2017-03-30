@@ -6,6 +6,59 @@
 	<script type="text/javascript" src="sort.js"></script>
 </head>
 <body>
-	
+	<script type="text/javascript">
+
+		function hh(arr){
+			var dic = {};
+			for(var i = 0;i<arr.length;i++){
+				var o = arr[i];
+				if (dic[o]) {
+					dic[o] = dic[o] + 1;
+
+				}else{
+					dic[o] = 1;
+				}
+			}
+
+			var arrs =[];
+			for(var key in dic){
+			// var list = [];
+			// list.push(key);
+			// list.push(dic[key]);
+
+			arrs.push([key,dic[key]]);
+			}
+
+
+		var array = insert_sort(arrs)
+		
+		for(var m in array){
+			array[m] =  array[m].join(':');
+		}
+			return array;
+		}
+		
+		var arrayObj = [1,1,1,1,2, 6, 3, 9, 4, 5, 5,7,7,7,6,6,7,7,6];
+		arrayObj=['啊啊啊','啊啊','啊','啊','啊啊啊','啊啊啊']
+			console.log(JSON.stringify(hh(arrayObj),null,2));
+		
+
+
+
+
+		function insert_sort(input) {
+			var i, j, temp;
+			for (i = 1; i < input.length; i++) {
+				temp = input[i];
+				for (j = i - 1; j >= 0 && input[j][1] > temp[1]; j--) {
+					input[j + 1] = input[j];
+				}
+				
+				input[j + 1] = temp;
+			}
+			return input;
+		}
+
+	</script>
 </body>
 </html>

@@ -14,7 +14,7 @@ function insert_sort(input) {
 window.onload = function(){
 	var arr = [7,6,4,2];
 	insert_sort(arr)
-	console.log(JSON.stringify(insert_sort(arr),null,2))
+	// console.log(JSON.stringify(insert_sort(arr),null,2))
 }
 // 冒泡排序
 function bubble_sort(input){

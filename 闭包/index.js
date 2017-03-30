@@ -47,35 +47,38 @@
 
 // 
 // 
-// for (var i = 0; i <=2 ; i++) {
-// 	(function(i) {
-// 		setTimeout(function() {
-// 			console.log(i)
-// 		}, (3-i) * 1000);
-// 	})(i);
-// }
-
-// }
-// 
-// 
-// 
-// 
-// 
-var  fn;
-function foo(){
-	var a = 10;
-
-	function bar(){
-		console.log(a);
-	}
-
-	fn = bar;
+for (var i = 0; i <=2 ; i++) {
+	(function(i) {
+		setTimeout(function() {
+			console.log(i)
+		}, (3-i) * 1000);
+	})(i);
 }
 
-function bar2(){
-	fn();
-}
 
-foo();
-bar2();
+
+
+// }
+// 
+// 
+// 
+// 
+// 
+// var  fn;
+// function foo(){
+// 	var a = 10;
+
+// 	function bar(){
+// 		console.log(a);
+// 	}
+
+// 	fn = bar;
+// }
+
+// function bar2(){
+// 	fn();
+// }
+
+// foo();
+// bar2();
 
