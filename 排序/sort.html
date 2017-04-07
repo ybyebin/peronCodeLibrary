@@ -13,20 +13,15 @@
 		arrayObj=['啊啊啊','啊啊','啊','啊','啊啊啊','啊啊啊']
 
 			var redic =  changes(arrayObj);
-			console.log('数组转json结果：'+JSON.stringify(redic));
-
 			var arrs =[];
 			// 把 json 转成  数组方便排序
 			for(var key in redic){			
 			arrs.push([key,redic[key]]);
 			}
-			console.log('json转数组结果:'+JSON.stringify(arrs))
 
 			// 数组排序
 			var array = insert_sort(arrs);
-			console.log('排序后结果：'+JSON.stringify(array));
-
-			
+		
 			// 数组对象 转字符串
 			for(var m in array){
 				array[m] =  array[m].join(':');
