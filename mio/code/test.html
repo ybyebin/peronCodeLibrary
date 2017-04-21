@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/basic/reset.css">
+    -->
+    <link rel="stylesheet" type="text/css" href="css/my/index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <style type="text/css">
+        .test-div{
+        position: relative;  /*日常相对定位*/
+        width:100px;
+        height:50px;
+        text-align: center;
+        line-height: 60px;
+        background: #E2D9CA;
+        box-shadow: 0 2px 4px 0 rgba(191,191,191,0.45);
+        border-radius: 2px;
+        margin: 0,auto;
+    }
+    .test-div:before{
+        content: "";  /*:before和:after必带技能，重要性为满5颗星*/
+        display: block;
+        position: absolute;  /*日常绝对定位*/
+        width: 0;
+        height: 0;
+        left: -2px;
+        border-top: 10px solid #F8F8F8;
+        border-right: 102px solid transparent;
+    }
+
+    .a{
+         position: relative;  /*日常相对定位*/
+        width:100px;
+        height:50px;
+        text-align: center;
+        line-height: 60px;
+        background: #E2D9CA;
+        box-shadow: 0 2px 4px 0 rgba(191,191,191,0.45);
+        border-radius: 2px;
+        margin: 0,auto;
+        left: 500px;
+    }
+    .a:before{
+
+         content: "";  /*:before和:after必带技能，重要性为满5颗星*/
+        display: block;
+        position: absolute;  /*日常绝对定位*/
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 10px 12px 10px;
+        border-color: transparent transparent #007bff transparent;
+    }
+
+    .a:after{
+         content: "";  /*:before和:after必带技能，重要性为满5颗星*/
+        display: block;
+        position: absolute;  /*日常绝对定位*/
+        width: 0;
+        height: 0;
+        top: 8px;
+        border-style: solid;
+        border-width: 0 10px 4px 10px;
+        border-color: transparent transparent #E2D9CA transparent;
+    }
+
+    ul,
+     li{
+        display: inline-block;
+    }
+    p ul li{
+        background: red;
+    }
+
+    div ul li{
+        background: red;
+    }
+    </style>
+</head>
+<body style="background: #F8F8F8">
+
+    <div class="panel panel-default">
+
+        <p  data-toggle="collapse"  href="#collapseOne" >Collapsible Group Item #1</p>
+
+        <div id="collapseOne" class="panel-collapse collapse in"  style="background-color: red;">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+    </div>
+
+    <div >
+        <p href="#demo" data-toggle="collapse" >点击</p>
+        <div id="demo" class="panel-collapse collapse in" >
+            <ul   style="background-color: blue">
+                <li>1楼</li>
+                <li>1楼</li>
+                <li>5楼</li>
+                <li>3楼</li>
+                <li>1楼</li>
+                <li>1楼</li>
+                <li>1楼</li>
+                <li>1楼</li>
+                <li>1楼</li>
+                <li>1楼</li>
+                <li>1楼</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>

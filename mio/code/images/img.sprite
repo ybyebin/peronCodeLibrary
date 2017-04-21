@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SpriteFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" CssFileName="../images" ImageName="img" IsPhone="false" SpriteImgFileType="Png" xmlns="CssSprite">
+  <SpriteList>
+    <Sprite Path="up.png" LocationX="0" LocationY="0" />
+    <Sprite Path="down.png" LocationX="0" LocationY="11" />
+    <Sprite Path="lou2.png" LocationX="0" LocationY="22" />
+    <Sprite Path="lou.png" LocationX="0" LocationY="40" />
+    <Sprite Path="心跳2.png" LocationX="0" LocationY="58" />
+    <Sprite Path="心跳.png" LocationX="0" LocationY="101" />
+    <Sprite Path="肺.png" LocationX="0" LocationY="144" />
+    <Sprite Path="在床67.png" LocationX="0" LocationY="188" />
+    <Sprite Path="在床4.png" LocationX="0" LocationY="235" />
+  </SpriteList>
+</SpriteFile>
