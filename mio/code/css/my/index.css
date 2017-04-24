@@ -772,10 +772,36 @@ margin-bottom: 20px;
 
 
 
+/*历史数据*/
+.history_body{
+	margin-top: 40px;
+	margin-left: 20px;
+	margin-right: 20px;
+	background: #FFFFFF;
+	border: 1px solid #FFFFFF;
+	box-shadow: 0 3px 3px 0 rgba(181,181,181,0.50);
+	height: 793px;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 50px;
+}
+.history_body div.title{
 
-
-
-
+	padding-left: 10px;
+	background-color: red;
+}
+.history_body div.title button.room_num{
+	width: 140px;
+	height: 40px;
+}
+.history_body div.title .room_num_ul{
+	min-width: 140px !important;
+	width: 140px !important;
+}
+.history_body div.title button.room_num .caret{
+	float: right;
+	margin-top: 7px;
+}
 
 
 
