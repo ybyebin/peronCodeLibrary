@@ -10,5 +10,8 @@
     <Sprite Path="肺.png" LocationX="0" LocationY="144" />
     <Sprite Path="在床67.png" LocationX="0" LocationY="188" />
     <Sprite Path="在床4.png" LocationX="0" LocationY="235" />
+    <Sprite Path="蛋糕.png" LocationX="0" LocationY="282" />
+    <Sprite Path="性别.png" LocationX="0" LocationY="305" />
+    <Sprite Path="离床.png" LocationX="0" LocationY="326" />
   </SpriteList>
 </SpriteFile>
