@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
+</head>
+<body>
+    <button onclick="btnText()">按钮</button>
+
+    <button onclick="gets()">get</button>
+    <script type="text/javascript">
+         function btnText() {
+            var sendData = JSON.stringify({
+                id: 12,
+                'name': 'python'
+            });
+            var d = {
+                id: 12,
+                'name': 'python'
+            }
+                $.ajax({
+                    url: '/getData',
+                    type: 'POST',
+                    data: sendData,
+                    contentType:'JSON',
+                    success: function (result) {
+                       console.log(result);
+                    },
+                    error: function (result) {
+                        alert(result.responseText + result.status);
+                    }
+                });
+        }
+
+        function gets(){
+
+             var sendData = JSON.stringify({
+                id: 12,
+                'name': 'python'
+            });
+            $.ajax({
+                    url: '/getTest',
+                    type: 'GET',
+                    // data: sendData,
+                    // contentType:'JSON',
+                    success: function (result) {
+                       console.log(result);
+                    },
+                    error: function (result) {
+                    }
+                });
+        }
+
+    </script>
+</body>
+</html>

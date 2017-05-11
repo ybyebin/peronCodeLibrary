@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<h1>登录成功</h1>
+	<button onclick="loadData()">请求数据</button>
+	<div id="content">
+		
+	</div>
+	<script type="text/javascript">
+		function loadData(){
+			$.ajax({
+                    url: '/content',
+                    type: 'GET',
+                    success: function (result) {
+                       var data = JSON.parse(result);
+                       var ps = ''
+                      	for (var i = 0; i < data.length; i++) {
+                      		for(var key in data[i]){
+                      			ps+='<p>'+key+':'+data[i][key]+'</p>'
+                      		}
+                      	}
+                      	$('#content').append(ps);
+                    },
+                    error: function (result) {
+                        // alert(result.responseText + result.status);
+                    }
+                });
+		}
+	</script>
+</body>
+</html>

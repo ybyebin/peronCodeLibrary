@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+
+    <h1>这是主页</h1>
+    <input type="button" onclick="btnText()" value="Test" />
+
+    <a href="about.html">切換頁面</a>
+</body>
+<script src="jquery-3.1.1.min.js"></script>
+<script>
+    function btnText() {
+        var sendData = JSON.stringify({
+            id: 12,
+            'name': 'python'
+        });
+        var d = {
+            id: 12,
+            'name': 'python'
+        }
+        $.ajax({
+            url: '/getData?id=10',
+            type: 'POST',
+            data: sendData,
+            // contentType:'JSON',
+            success: function (result) {
+                alert(result)
+            },
+            error: function (result) {
+                alert(result.responseText + result.status);
+            }
+        });
+    }
+
+</script>
+
+</html>
