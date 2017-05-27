@@ -1,11 +1,11 @@
 #coding=utf-8
-from flask import Flask, request, json,abort
-# from flask import render_template
+from flask import Flask, request, json
+from flask import render_template
 app = Flask(__name__, static_url_path='')
 
 
 @app.route('/')
-@app.route('/index')
+@app.route('/login')
 def index():
 	return app.send_static_file('login.html')
 
@@ -19,21 +19,21 @@ def index():
 @app.route('/model')
 def models():
 	# 用户名
-	user = {'name':'World'}
+	user = {'name':'叶彬'}
 	# 提交内容
-	# posts = [
-	# 			{ 
-	# 				'author': {'nickname':'John' }, 
-	# 				'body':'Beautiful day in Portland!' 
-	# 			},
-	# 			{ 
-	# 				'author': { 'nickname': 'Susan' }, 
-	# 				'body': 'The Avengers movie was so cool!' 
-	# 			}
-	# 		]
+	posts = [
+				{ 
+					'author':'张三' , 
+					'body':'组长' 
+				},
+				{ 
+					'author':'李四' , 
+					'body': '组员' 
+				}
+			]
 	return render_template("index.html",
 							title = 'Home',
-							# posts = posts,
+							posts = posts,
 							user = user
 							)
 

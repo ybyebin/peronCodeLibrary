@@ -7,35 +7,14 @@
 	{% else %}
 	<title>欢迎访问</title>
 	{% endif %}
-	
+	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
 	
 </head>
 <body>
-
 	<h1>Hello, {{ user.name }}!</h1>
-	
-	<input id="username" placeholder="用户名"><br><br>
-	<input id="psw" placeholder="密码"><br><br><br>
-	<button onclick="login()">登录</button>
-	<script type="text/javascript" src="../static/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript">
-		function login(){
-			$.ajax({
-				url:'/login',
-				type:'POST',
-				data:{
-					name:$('#username').val(),
-					psw:$('#psw').val()
-				},
-				success:function(data){
-					console.log(data);
-				},
-				error:function(data){
-
-				}
-			})
-		}
-	</script>
+	{% for key in posts %}
+   	<p>{{key.author}}:{{key.body}}</p>
+	{% endfor %}
 </body>
 </head>
 <body></body>
