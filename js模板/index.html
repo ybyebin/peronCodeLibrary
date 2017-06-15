@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+	<table id="tableData">
+		<tr class="firstLine">
+			<th></th>
+			<th>图片</th>
+			<th>图片名称</th>
+			<th>类型</th>
+			<th>大小</th>
+			
+			<th></th>
+		</tr>
+	</table>
+
+	<script type="text/template" id="template1">  
+    <tr mgid="{mgid}" mid="{mid}">  
+        <td>  
+            <input type="checkbox" data-id="{mid}123">
+        </td>  
+        <td>  
+            <a href="{localfile}" data-fancybox-group="button" class="fancybox-buttons">  
+                </a>  
+        </td>  
+        <td>  
+        	{medianame}           
+        </td>  
+        <td>{mediatype}</td>        
+        <td>  
+            <a  href="javascript:void(0);">重命名</a>  
+            <a  name="edit" localfile="{localfile}" href="javascript:void(0);">替换</a>  
+            <a  href="javascript:void(0);">删除</a>  
+            <a  title="设置为分组【{groupname}】的封面" groupname="{groupname}" mid="{mid}" href="javascript:void(0);">设置封面</a>  
+        </td>  
+    </tr>  
+</script>
+	<script type="text/javascript" src="index.js"></script>
+</body>
+</html>

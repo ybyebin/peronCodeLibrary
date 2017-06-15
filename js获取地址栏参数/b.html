@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	页面b
+	<script type="text/javascript">
+   
+//返回的是对象形式的参数    
+function GetRequest(value) { 
+  //url例子：www.bicycle.com?id="123456"&Name="bicycle"； 
+  var url = decodeURI(location.search); //?id="123456"&Name="bicycle";
+  var object = {};
+  if(url.indexOf("?") != -1)//url中存在问号，也就说有参数。 
+ 	 {  
+		   var str = url.substr(1); //得到?后面的字符串
+		   var strs = str.split("&"); //将得到的参数分隔成数组[id="123456",Name="bicycle"];
+		   for(var i = 0; i < strs.length; i ++) 
+		    	{  
+		　　　　　　　　object[strs[i].split("=")[0]]=strs[i].split("=")[1]
+		　　　　}
+　　}
+  return object; 
+} 
+
+	function isEmptyObject(e) {  
+    var t;  
+    for (t in e)  
+        return !1;  
+    return !0  
+} 
+
+
+
+	
+
+
+		window.onload = function(){
+			// alert(JSON.stringify(GetRequest(),null,2))
+		}
+	</script>
+</body>
+</html>

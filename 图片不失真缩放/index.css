@@ -1,0 +1,9 @@
+.comtent{
+	background: gray;
+	width: 772px;
+	height: 526px;
+	background-repeat:no-repeat;
+	background-size:contain;
+	background-image: url(Hydrangeas.jpg);
+	background-position: center;
+}
