@@ -1,0 +1,381 @@
+[
+  {
+    "type": "rectangleComponent",
+    "id": "cc3e9bd5-2500-fe01-a5c5-44cb4b12ae93",
+    "x": 284.953125,
+    "y": 51,
+    "width": 50,
+    "height": 50,
+    "alpha": 1,
+    "angle": 0,
+    "userData": {
+      "havepoint": "",
+      "name": "矩形0",
+      "types": "basicComponent",
+      "proportion": null,
+      "Description": "",
+      "Visible": true,
+      "Enable": false,
+      "AccessLevel": 8,
+      "ShowHint": false,
+      "Hint": "",
+      "Tag": {
+        "tag_id": -1,
+        "tag_type": -1,
+        "tag_name": "",
+        "bingding_status": 0
+      },
+      "value": "",
+      "Readonly": false,
+      "Blinking": false,
+      "BlinkingStroke": 1,
+      "BlinkingColor": "#D8D8D8",
+      "DashArray": null,
+      "BlinkingType": "style",
+      "onTrue": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "FillColor": "#35C99D",
+        "alpha": 1,
+        "Blinking": false
+      },
+      "onFalse": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "alpha": 1,
+        "FillColor": "#35C99D",
+        "Blinking": false
+      },
+      "onAlarm": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "alpha": 1,
+        "FillColor": "#35C99D",
+        "Blinking": false
+      },
+      "onDisconnected": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "alpha": 1,
+        "FillColor": "#35C99D",
+        "Blinking": false
+      }
+    },
+    "cssClass": "rectangleComponent",
+    "ports": [
+      {
+        "type": "draw2d.InputPort",
+        "id": "a0018d60-4b5b-4a30-e479-75ebf406d1de",
+        "width": 10,
+        "height": 10,
+        "alpha": 0.25,
+        "angle": 0,
+        "userData": {},
+        "cssClass": "draw2d_InputPort",
+        "bgColor": "#4F6870",
+        "color": "#1B1B1B",
+        "stroke": 1,
+        "dasharray": null,
+        "maxFanOut": 9007199254740991,
+        "name": "input0",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      },
+      {
+        "type": "draw2d.OutputPort",
+        "id": "e67cc701-8b94-905c-6bd2-2c40e162103f",
+        "width": 10,
+        "height": 10,
+        "alpha": 0.25,
+        "angle": 0,
+        "userData": {},
+        "cssClass": "draw2d_OutputPort",
+        "bgColor": "#4F6870",
+        "color": "#1B1B1B",
+        "stroke": 1,
+        "dasharray": null,
+        "maxFanOut": 9007199254740991,
+        "name": "output0",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }
+    ],
+    "bgColor": "#4D90FE",
+    "color": "#000000",
+    "stroke": 0,
+    "radius": 0,
+    "dasharray": null
+  },
+  {
+    "type": "RoundedRectangleComponent",
+    "id": "d6f9c2f7-3dc0-1d0c-4655-7358fe847fce",
+    "x": 423.953125,
+    "y": 92,
+    "width": 50,
+    "height": 50,
+    "alpha": 1,
+    "angle": 0,
+    "userData": {
+      "havepoint": "",
+      "name": "圆角矩形0",
+      "types": "basicComponent",
+      "proportion": null,
+      "Description": "",
+      "Visible": true,
+      "Enable": false,
+      "AccessLevel": 7,
+      "ShowHint": false,
+      "Hint": "",
+      "Tag": {
+        "tag_id": -1,
+        "tag_type": -1,
+        "tag_name": "",
+        "bingding_status": 0
+      },
+      "value": "",
+      "Readonly": false,
+      "Blinking": false,
+      "BlinkingStroke": 1,
+      "BlinkingColor": "#D8D8D8",
+      "DashArray": null,
+      "BlinkingType": "style",
+      "onTrue": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "alpha": 1,
+        "FillColor": "#35C99D",
+        "Blinking": false
+      },
+      "onFalse": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "alpha": 1,
+        "FillColor": "#35C99D",
+        "Blinking": false
+      },
+      "onAlarm": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "alpha": 1,
+        "FillColor": "#35C99D",
+        "Blinking": false
+      },
+      "onDisconnected": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "alpha": 1,
+        "FillColor": "#35C99D",
+        "Blinking": false
+      }
+    },
+    "cssClass": "RoundedRectangleComponent",
+    "ports": [
+      {
+        "type": "draw2d.InputPort",
+        "id": "84d44116-ca9f-301d-36ec-e7fefa7b08da",
+        "width": 10,
+        "height": 10,
+        "alpha": 1,
+        "angle": 0,
+        "userData": {},
+        "cssClass": "draw2d_InputPort",
+        "bgColor": "#4F6870",
+        "color": "#1B1B1B",
+        "stroke": 1,
+        "dasharray": null,
+        "maxFanOut": 9007199254740991,
+        "name": "input0",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      },
+      {
+        "type": "draw2d.OutputPort",
+        "id": "625afc8d-1eb2-a85e-190b-b8395b238ee3",
+        "width": 10,
+        "height": 10,
+        "alpha": 1,
+        "angle": 0,
+        "userData": {},
+        "cssClass": "draw2d_OutputPort",
+        "bgColor": "#4F6870",
+        "color": "#1B1B1B",
+        "stroke": 1,
+        "dasharray": null,
+        "maxFanOut": 9007199254740991,
+        "name": "output0",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }
+    ],
+    "bgColor": "#35C99D",
+    "color": "#000000",
+    "stroke": 0,
+    "radius": 10,
+    "dasharray": null
+  },
+  {
+    "type": "rectangleComponent",
+    "id": "f5420048-031b-da52-32a0-3a2ba085ac9c",
+    "x": 203.953125,
+    "y": 152,
+    "width": 50,
+    "height": 50,
+    "alpha": 1,
+    "angle": 0,
+    "userData": {
+      "havepoint": "",
+      "name": "矩形0",
+      "types": "basicComponent",
+      "proportion": null,
+      "Description": "",
+      "Visible": true,
+      "Enable": false,
+      "AccessLevel": 8,
+      "ShowHint": false,
+      "Hint": "",
+      "Tag": {
+        "tag_id": -1,
+        "tag_type": -1,
+        "tag_name": "",
+        "bingding_status": 0
+      },
+      "value": "",
+      "Readonly": false,
+      "Blinking": false,
+      "BlinkingStroke": 1,
+      "BlinkingColor": "#D8D8D8",
+      "DashArray": null,
+      "BlinkingType": "style",
+      "onTrue": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "FillColor": "#35C99D",
+        "alpha": 1,
+        "Blinking": false
+      },
+      "onFalse": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "alpha": 1,
+        "FillColor": "#35C99D",
+        "Blinking": false
+      },
+      "onAlarm": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "alpha": 1,
+        "FillColor": "#35C99D",
+        "Blinking": false
+      },
+      "onDisconnected": {
+        "LineWidth": 1,
+        "LineColor": "#35C99D",
+        "LineStyle": null,
+        "alpha": 1,
+        "FillColor": "#35C99D",
+        "Blinking": false
+      }
+    },
+    "cssClass": "rectangleComponent",
+    "ports": [
+      {
+        "type": "draw2d.InputPort",
+        "id": "5e26a0a5-6202-7c60-3803-c7b775d84cf9",
+        "width": 10,
+        "height": 10,
+        "alpha": 1,
+        "angle": 0,
+        "userData": {},
+        "cssClass": "draw2d_InputPort",
+        "bgColor": "#4F6870",
+        "color": "#1B1B1B",
+        "stroke": 1,
+        "dasharray": null,
+        "maxFanOut": 9007199254740991,
+        "name": "input0",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      },
+      {
+        "type": "draw2d.OutputPort",
+        "id": "fe6fc764-df9b-d671-17fe-867df89da918",
+        "width": 10,
+        "height": 10,
+        "alpha": 1,
+        "angle": 0,
+        "userData": {},
+        "cssClass": "draw2d_OutputPort",
+        "bgColor": "#4F6870",
+        "color": "#1B1B1B",
+        "stroke": 1,
+        "dasharray": null,
+        "maxFanOut": 9007199254740991,
+        "name": "output0",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }
+    ],
+    "bgColor": "#4D90FE",
+    "color": "#000000",
+    "stroke": 0,
+    "radius": 0,
+    "dasharray": null
+  },
+  {
+    "type": "draw2d.Connection",
+    "id": "e734d2a7-e3dd-39cd-da7c-9b1f2abccc7f",
+    "alpha": 1,
+    "angle": 0,
+    "userData": {},
+    "cssClass": "draw2d_Connection",
+    "stroke": 1.35,
+    "color": "#68C9FF",
+    "outlineStroke": 0,
+    "outlineColor": "none",
+    "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
+    "vertex": [
+      {
+        "x": 334.953125,
+        "y": 76
+      },
+      {
+        "x": 379.453125,
+        "y": 76
+      },
+      {
+        "x": 379.453125,
+        "y": 117
+      },
+      {
+        "x": 423.953125,
+        "y": 117
+      }
+    ],
+    "router": "draw2d.layout.connection.InteractiveManhattanConnectionRouter",
+    "radius": 5,
+    "routingMetaData": {
+      "routedByUserInteraction": false,
+      "fromDir": 1,
+      "toDir": 3
+    },
+    "source": {
+      "node": "cc3e9bd5-2500-fe01-a5c5-44cb4b12ae93",
+      "port": "output0"
+    },
+    "target": {
+      "node": "d6f9c2f7-3dc0-1d0c-4655-7358fe847fce",
+      "port": "input0"
+    }
+  }
+]

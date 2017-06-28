@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>智能建筑管理系统</title>
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+
+	<link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/layer.css" />
+	<link rel="stylesheet" type="text/css" href="css/basic/check_black.css">
+	<link rel="stylesheet" type="text/css" href="css/basic/jquery.mCustomScrollbar.css">
+	<link rel="stylesheet" type="text/css" href="css/bayax.css">
+	<link rel="stylesheet" type="text/css" href="css/systemConfiguration2.css">
+	<script type="text/javascript" src="js/basic/jquery.min.js"></script>
+	<script type="text/javascript" src="js/basic/jquery.mCustomScrollbar.concat.min.js"></script>
+
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div id="sidebar" class="col-sm-3 col-md-2 sidebar">
+				<div id="treeview" class="treeview">
+					<ul>
+						<li>
+							<a id="logo-a" href="deviceControlCanvas.html">
+								<img id="logo" src="images/logo-text.png"></a>
+						</li>
+						<li>
+							<a class="title_foursize" href="engineeringManagement.html">
+								<i></i>
+								<span>工程管理</span>
+							</a>
+						</li>
+						<li>
+							<a class="title_foursize" href="nodeManagement.html">
+								<i></i>
+								<span>节点管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="datalabelManagement.html">
+
+								<i></i>
+								<span>数据标签管理</span>
+							</a>
+						</li>
+						<li  class="active">
+							<a href="energyconsumptionStatisticDis.html">
+								<i></i>
+								<span>能耗统计设定</span>
+							</a>
+						</li>
+						<li>
+							<a href="graphicImages.html">
+								<i></i>
+								<span>图形画面管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="energyconsumptionStatisticClassification.html">
+								<i></i>
+								<span>能耗统计分级</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<form class="content_head" style="padding-right: 0;">
+					<div class="form-group">
+						<button id="statistical-btn-edit" type="button" class="button-normal btn btn-primary">编辑</button>
+					</div>
+					<div class="form-group div-content-statistical" style="border:none;">
+						<div class="div-display row" style="background-color: #15182D">
+
+							<div class="statistical-left col-sm-3" style="padding-right: 0;">
+								<div class="only-for-border-top">
+								<p>
+									<span>能耗统计</span>
+								</p>
+								<div class="left-div">
+									<p class="left-div-head" data-toggle="collapse" data-target="#collapse-lefts"> <i></i>
+										<span></span>
+									</p>
+
+									<div class="collapse-left-div">
+										<div id="collapse-lefts" class="collapse in collapse-left"></div>
+									</div>
+
+								</div>
+								</div>
+							</div>
+
+							<div class="statistical-right col-sm-my-9" >
+								<p class="right-head-p"></p>
+
+								<div class="div-have-tables">
+									<table id="display-table"  class="table table-striped tabels">
+										<thead>
+											<tr>
+												<th>对象数据标签</th>
+												<th>计算</th>
+												<th>节点</th>
+												<th>寄存器</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="loading" style="display: none;">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+	<script type="text/javascript">
+		$(function(){
+			energyConsumptionDisplayLoadData('display');
+			projectEnergyconsumption();
+			// icheckInitialize();
+			
+		})
+		</script>
+
+	<script>
+		(function($) {
+		  $(window).load(function() {		  		
+		    $(".collapse-left-div").mCustomScrollbar();
+		    $(".div-have-tables").mCustomScrollbar();		   
+		  });
+		})(jQuery);
+		</script>
+
+	<script type="text/javascript" src="js/basic/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/basic/layer/layer.js"></script>
+
+	<script type="text/javascript" src="js/basic/api.js"></script>
+	<script type="text/javascript" src="js/basic/icheck.min.js"></script>
+	<script type="text/javascript" src="js/systemSet/energyconsumptionStatistic.js"></script>
+
+</body>
+</html>

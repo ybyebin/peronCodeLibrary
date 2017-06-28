@@ -1,0 +1,21 @@
+#ff{
+	/*width: 500px;*/
+	/*background: red;*/
+	/*margin: 100px auto;*/
+	position: relative;
+}
+
+#content{
+	position: relative;
+	/*margin: 100px auto;*/
+	/*width: 500px;*/
+	height: 700px;
+	overflow: auto;
+}
+.fixTable{
+	background: #FFF;
+	border: none;
+}
+.hidden{
+	display: none;
+}

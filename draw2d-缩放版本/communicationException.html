@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class=" ">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>智能建筑管理系统</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/layer.css"/>
+	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/mylayerskin/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/basic/jquery.mCustomScrollbar.css">
+	<link rel="stylesheet" type="text/css" href="css/bayax.css">
+	<link rel="stylesheet" type="text/css" href="css/datashow_black.css">
+	<script type="text/javascript" src="js/basic/jquery.min.js"></script>
+
+</head>
+
+<body>
+	<div class='page-topbar navbar-fixed-top'>
+		<nav class="navbar navbar-inverse" style=" ">
+			<div class="row" style=" ">
+				<div class="navbar-header">
+					<img src="images/logo-text.png"  class="navbar-brand" id="navbar-brandImg"/>
+					<span class="projectName"></span>
+				</div>
+				<div class="navbar-collapse collapse " id="navbar">
+					<ul class="nav navbar-nav nav_padding">
+						<!-- <li>
+							<a href="homepage.html">概览</a>
+						</li> -->
+						<li>
+							<a href="deviceControlCanvas.html">设备监控</a>
+						</li>
+						<li>
+							<a href="warn.html">
+								报警
+								<span id="header_alarm_count"  class="badge badge-warn"></span>
+							</a>
+						</li>
+						<li>
+							<a href="energyView.html">能源管理</a>
+						</li>
+						<li  class="active">
+							<a href="userManagement.html">系统管理</a>
+						</li>
+
+					</ul>
+
+					<div class="navbar-right">
+						<ul class="nav navbar-nav">
+							<li id="CurrentTime">
+								<a></a>
+							</li>
+
+							<li  class="time">
+								<span>|</span>
+							</li>
+							<li>
+								<a href="engineeringManagement.html">系统设置</a>
+							</li>
+							<li id="main-user" class="main-user dropdown" >
+
+								<img src="images/People.png" title=""  class="dropdown-toggle" data-toggle="dropdown"/>
+								<ul class="dropdown-menu logout-changepsw">
+									<li>
+										<a href="#"  class="user-changePassword">修改密码</a>
+									</li>
+									<li>
+										<a href="#" class="user-logout">退出登录</a>
+									</li>
+
+								</ul>
+
+							</li>
+
+						</ul>
+					</div>
+					<div class="head-warn" >
+						<p>
+							<a href="warn.html">
+								<img src="images/warn.png"></a>
+						</p>
+				</div>
+			</div>
+
+		</div>
+	</nav>
+</div>
+
+	<div class="row-fluid" style="min-width: 1200px;">
+		<div class="row sys-row">
+			<div class=" col-md-2 sys-sidebar" style="">
+				<ul class="main-ul">
+					<li>
+						<a href="userManagement.html">
+							<i></i>
+							<span>用户管理</span>
+						</a>
+					</li>
+					<!-- <li>
+						<a href="targetManagement.html">
+							<i></i>
+							<span>目标管理</span>
+						</a>
+					</li> -->
+					<li  class="active">
+						<a href="communicationException.html">
+							<i></i>
+							<span>通信状态</span>
+						</a>
+					</li>
+					<li class="system-log" data-toggle="collapse" data-target="#demo">
+
+						<a href="#">
+							<i></i>
+							<span>系统日志</span> <span class="iarrow"></span>
+						</a>
+
+						<ul id="demo" class="collapse in">
+							<!-- <li>
+								<a href="userOperationlog.html">用户操作日志</a>
+							</li> -->
+							<li>
+								<a href="commExceptionlog.html">通信异常日志</a>
+							</li>
+							<!-- <li>
+								<a href="commErrorLog.html">日程表执行日志</a>
+							</li> -->
+
+						</ul>
+					</li>
+					<li>
+						<a href="aboutSystem.html">
+							<i></i>
+							<span>关于系统</span>
+						</a>
+
+					</li>
+				</ul>
+
+			</div>
+			<div id="sys-main" class="col-sm-9  col-sm-offset-3 col-md-10 col-md-offset-2" style="margin-bottom: 30px;">
+				
+				<form class="commexc-father form-horizontal form-sys-manage commexc-form" >
+					<div class="commexc-div">
+						<table  class="table table-stripeds table-primary">
+							<thead>
+								<tr>
+									<th>设备名称</th>
+									<th>IP地址</th>
+									<th>设备状态</th>
+									<th>发生时间</th>
+									<th>查看子设备</th>
+								</tr>
+							</thead>
+							<tbody id="commexc-tbody">
+							
+							</tbody>
+						</table>
+					</div>		
+				</form>
+				<button id="commexc-btn" data-id="" data-status="hide" class="commexc-son btn button-normal btn-primary" style="margin-top: 60px; display: none;">返回</button>
+				<form class="commexc-son form-horizontal form-sys-manage commexc-form" style="margin-top: 10px; display: none;" >
+
+					<div class="commexc-div">
+						<table  class="table table-stripeds table-primary">
+							<thead>
+								<tr>
+									<th>设备名称</th>
+									<th>设备状态</th>
+									<th>发生时间</th>
+								</tr>
+							</thead>
+							<tbody id="commexc-tbody-second">
+							
+							</tbody>
+						</table>
+					</div>		
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+	<div class="loading">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+
+	<div id="foot"></div>
+	<script type="text/javascript" src="js/basic/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/basic/layer/layer.js"></script>
+	<script type="text/javascript" src="js/basic/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script type="text/javascript" src="js/basic/api.js"></script>
+	<script type="text/javascript" src="js/datashow/communicationException.js"></script>
+</body>
+</html>

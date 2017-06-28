@@ -79,7 +79,12 @@ gulp.task('css', function() {
 
 gulp.task('js', function() {
     gulp.src('src/**/*.js')
-        .pipe(uglify())
+        .pipe(uglify({
+                compress: {
+                    drop_console: true //去掉console.log
+                }
+            
+        }))
         .pipe(gulp.dest('dist'))
         .on('data', function(file) {
             console.log(file.history[0])
@@ -112,8 +117,8 @@ gulp.task('watch',function() {
 
 
 gulp.task('default', ['clean'], function(){
-    // gulp.start('js', 'css', 'img', 'htmls','watch');
-    gulp.start('htmls');
+    gulp.start('js', 'css', 'img', 'htmls','watch');
+    // gulp.start('htmls');
 
 });
 
