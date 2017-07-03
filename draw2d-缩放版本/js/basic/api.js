@@ -13,12 +13,13 @@ function projectInfo() {
 		success: function(data) {
 			if (data.success) {
 				var data = data.data;
-				$('#logo').attr('src', data.logo_path);
+				$('#logo').attr('src', data.logo_path).data('proid', data.id);
+				// $('#logo');
 				$('#logo-name').text(data.name);
-				$('#navbar-brandImg').attr('src', data.logo_path);
+				$('#navbar-brandImg').attr('src', data.logo_path).data('proid', data.id);
 				$('.projectName').text(data.name);
-				$('#navbar-brandImg').data('proid', data.id);
-				$('#logo').data('proid', data.id);
+				$('#navbar-brandImg');
+				
 			} else {
 				layer.msg(data.error_message);
 			}
@@ -168,15 +169,7 @@ $('.user-changePassword').on('click', function() {
 					var pattern = new RegExp(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\\]/g);
 					var length_enough = true;
 					var str_format = true;
-					// $('.pas').each(function(index, ele) {
-					// 	if ($(ele).val().length < 8) {
-					// 		$(ele).val('');
-					// 		layer.msg('密码长度过短(最小8个字符)');
-					// 		length_enough = false;
-					// 		return false;
-					// 	}
-					// });
-
+					
 					if (length_enough) {
 						$('.pas').each(function(index, ele) {
 							if (pattern.test($(ele).val())) {
@@ -445,3 +438,18 @@ function publicHeadfun() {
     ms.init(this,args);
   }
 })(jQuery);
+
+
+// 计算json对象的长度
+function CalculationJsonLength(obj){
+	var isjson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;   
+	if (isjson) {
+		var num = 0;
+		for(var key in obj){
+			num+=1;
+		}
+		return num;
+	}else{
+		return false;
+	}
+}

@@ -16,6 +16,9 @@ $(function() {
 
 });
 
+
+var loadings = $('.loading');
+
 // 直线 水平
 $('#horizontal').on('ifChecked', function(event) {
 	if (getNode()) {
@@ -363,13 +366,13 @@ $('#comp-tagaddress').on('input', function() {
 				name: $('#comp-tagaddress').val()
 			},
 			beforeSend: function() {
-				$('.loading').show();
+				loadings.show();
 			},
 			complete: function() {
-				$('.loading').hide();
+				loadings.hide();
 			},
 			success: function(data) {
-				$('.loading').hide();
+				loadings.hide();
 				if (data.success) {
 					node.userData.Tag.tag_type = Number(data.data.tag_type);
 					node.userData.Tag.tag_id = data.data.tag_id;
@@ -388,7 +391,7 @@ $('#comp-tagaddress').on('input', function() {
 				}
 			},
 			error: function(data) {
-				$('.loading').hide();
+				loadings.hide();
 				node.userData.Tag.tag_type = "";
 				node.userData.Tag.tag_id = "";
 				node.userData.Tag.tag_name = $('#comp-tagaddress').val();
@@ -1929,7 +1932,7 @@ function contentSearchInput(page) {
 						}
 					});
 
-					
+
 					var arr = data.data.items;
 					var datalabel_dic = {}; //保存请求来的数据
 					for (var key in arr) {
@@ -1949,10 +1952,10 @@ function contentSearchInput(page) {
 								break;
 						}
 					}
-					
+
 					$("#search_datalabel_tab tbody tr td").html("");
-					$('#search_datalabel_tab tbody tr').each(function(i,ele){
-						if(i<arr.length){
+					$('#search_datalabel_tab tbody tr').each(function(i, ele) {
+						if (i < arr.length) {
 							var tds = '<td class="bdtag-name">' + arr[i].name + '</td>' +
 								'<td>' + arr[i].tag_types + '</td>' +
 								'<td class="bdtag-des">' + arr[i].description + '</td>' +
@@ -1962,7 +1965,6 @@ function contentSearchInput(page) {
 							$(ele).html(tds);
 						}
 					});
-
 
 
 
@@ -2010,7 +2012,6 @@ $('#content-search-input').on('input', function() {
 
 });
 
-
 /**
  * [showPreview 上传画布背景图片]
  */
@@ -2027,10 +2028,7 @@ function showPreview(source) {
 		var fr = new FileReader();
 		fr.readAsDataURL(file);
 		fr.onload = function(e) {
-			// document.getElementById("myBgimage").src = e.target.result;
-			// console.log("背景图片:"+e.target.result)
-			// var fd = new FormData();
-			// fd.append('filename', file);			
+
 			$.ajax({
 				url: apiurl + 'fileupload',
 				type: 'post',
@@ -2039,18 +2037,19 @@ function showPreview(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					$('.loading').show();
+					loadings.show();
 				},
 				complete: function() {
-					$('.loading').hide();
+					loadings.hide();
 				},
 				success: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					if (data.success) {
 						console.log("上传图片成功:" + JSON.stringify(data, null, 2))
 						layer.msg('图片上传成功');
-						$('#myBgimage').data("url", data.data);
-						$('#myBgimage').attr("src", e.target.result);
+						// $('#myBgimage').
+						// $('#myBgimage').attr("src", e.target.result);
+						$('#myBgimage').css('background-image', 'url(' + e.target.result + ')').data("url", data.data);
 						$('#canvas-img').val(data.data);
 
 					} else {
@@ -2058,7 +2057,7 @@ function showPreview(source) {
 					}
 				},
 				error: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			})
@@ -2091,16 +2090,16 @@ function imageShowPreviewStyle(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					$('.loading').show();
+					loadings.show();
 				},
 				beforeSend: function() {
-					$('.loading').show();
+					loadings.show();
 				},
 				complete: function() {
-					$('.loading').hide();
+					loadings.hide();
 				},
 				success: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					if (data.success) {
 						// console.log("上传图片成功style:" + JSON.stringify(data, null, 2))
 						layer.msg('图片上传成功');
@@ -2113,7 +2112,7 @@ function imageShowPreviewStyle(source) {
 					}
 				},
 				error: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			})
@@ -2150,16 +2149,16 @@ function imageShowPreviewOnTrue(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					$('.loading').show();
+					loadings.show();
 				},
 				beforeSend: function() {
-					$('.loading').show();
+					loadings.show();
 				},
 				complete: function() {
-					$('.loading').hide();
+					loadings.hide();
 				},
 				success: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					if (data.success) {
 						layer.msg('图片上传成功');
 						$('#ontrue-image').val(data.data);
@@ -2169,7 +2168,7 @@ function imageShowPreviewOnTrue(source) {
 					}
 				},
 				error: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			});
@@ -2204,16 +2203,16 @@ function imageShowPreviewOnFalse(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					$('.loading').show();
+					loadings.show();
 				},
 				beforeSend: function() {
-					$('.loading').show();
+					loadings.show();
 				},
 				complete: function() {
-					$('.loading').hide();
+					loadings.hide();
 				},
 				success: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					if (data.success) {
 						layer.msg('图片上传成功');
 						$('#onfalse-image').val(data.data);
@@ -2223,7 +2222,7 @@ function imageShowPreviewOnFalse(source) {
 					}
 				},
 				error: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			})
@@ -2258,16 +2257,16 @@ function imageShowPreviewOnAlerm(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					$('.loading').show();
+					loadings.show();
 				},
 				beforeSend: function() {
-					$('.loading').show();
+					loadings.show();
 				},
 				complete: function() {
-					$('.loading').hide();
+					loadings.hide();
 				},
 				success: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					if (data.success) {
 						console.log("上传图片成功onAlarm:" + JSON.stringify(data, null, 2))
 						layer.msg('图片上传成功');
@@ -2278,7 +2277,7 @@ function imageShowPreviewOnAlerm(source) {
 					}
 				},
 				error: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			})
@@ -2313,16 +2312,16 @@ function imageShowPreviewOnDisconnected(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					$('.loading').show();
+					loadings.show();
 				},
 				beforeSend: function() {
-					$('.loading').show();
+					loadings.show();
 				},
 				complete: function() {
-					$('.loading').hide();
+					loadings.hide();
 				},
 				success: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					if (data.success) {
 						layer.msg('图片上传成功');
 						$('#onDisc-image').val(data.data);
@@ -2332,7 +2331,7 @@ function imageShowPreviewOnDisconnected(source) {
 					}
 				},
 				error: function(data) {
-					$('.loading').hide();
+					loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			})
@@ -2341,56 +2340,6 @@ function imageShowPreviewOnDisconnected(source) {
 }
 
 
-
-$('#canvas').on('click', function() {
-	$('.first-attr').show();
-	$('.second-attr').hide();
-});
-$('.have-btn').on('click', 'button', function() {
-	$('.first-attr').hide();
-	$('.second-attr').show();
-});
-
-
-
-/**
- * [点击控件时-重置属性菜单]
- * @return {[type]} [description]
- */
-function resetAttributeMenu() {
-	$('.first-attr').show();
-	$('.second-attr').hide();
-	$('.div-alpha').hide();
-	$('.div-unit').hide();
-	$('.div-font-size').hide();
-	$('.div-text-alpha').hide();
-	$('.tab-ul li:first-child a').click();
-	$('p.p-show').each(function(index, element) {
-		if ($(element).hasClass('collapsed')) {
-			$(element).click();
-		}
-	});
-	$('p.p-hide').each(function(index, element) {
-		if ($(element).hasClass('collapsed')) {} else {
-			$(element).click();
-		}
-	});
-	$('.div-basic-hide').show();
-	$('.just-for-label').show();
-	$('.div-line-only').show();
-	$('.div-fill').hide();
-	$('.div-vlcurl').hide();
-	$('.div-line-check').hide();
-
-	// 边框宽度
-	$('.div-normal-width').show();
-	$('.div-line-conduit').hide();
-
-	setTimeout(function() {
-		$(".component-attr").mCustomScrollbar('scrollTo', 'top');
-	}, 300);
-
-}
 
 /*********全局按钮--开始*******/
 var iForAdd = 0; //区别新添加全局按钮id
@@ -2402,7 +2351,7 @@ $('.span-add').on("click", function() {
 	$('.no-glo-btn').hide();
 	var id = new Date().format("yyyyMMddhhmmss") + iForAdd;
 	iForAdd += 1;
-	var obj = '<p><button id="' + id + '" data-tag-id="-1" data-tag-name="" data-tag-type="-1" data-bingding-status="0" data-readonly="false" data-name="按钮">' + '按钮</button><img src="img/delete.png"></p>';
+	var obj = '<p><button id="' + id + '" data-tag-id="-1" data-tag-name="" data-tag-type="-1" data-bingding-status="0" data-readonly="false" data-name="按钮">' + '按钮</button><img src="images/delete.png"></p>';
 	$('.have-btn #mCSB_2_container').prepend(obj);
 
 	$('.have-btn').mCustomScrollbar('scrollTo', 'top');
@@ -2475,13 +2424,13 @@ $('#glo-btn-tagname').on('input', function() {
 				})
 			},
 			beforeSend: function() {
-				$('.loading').show();
+				loadings.show();
 			},
 			complete: function() {
-				$('.loading').hide();
+				loadings.hide();
 			},
 			success: function(data) {
-				$('.loading').hide();
+				loadings.hide();
 				if (data.success) {
 
 					obj.data('tag-type', data.data.tag_type);
@@ -2501,7 +2450,7 @@ $('#glo-btn-tagname').on('input', function() {
 				}
 			},
 			error: function(data) {
-				$('.loading').hide();
+				loadings.hide();
 				obj.data('tag-type', '');
 				obj.data('tag-id', '');
 				obj.data('tag-name', '');
@@ -2574,6 +2523,117 @@ $('#glo-checkbox').on('ifChanged', function(event) {
 
 
 
+/****************颜色代码转换**rgb-->十六进制********/
+function zero_fill_hex(num, digits) {
+	var s = num.toString(16);
+	while (s.length < digits)
+		s = "0" + s;
+	return s;
+}
+
+function rgb2hex(rgb) {
+	if (rgb.charAt(0) == '#')
+		return rgb;
+	var ds = rgb.split(/\D+/);
+	var decimal = Number(ds[1]) * 65536 + Number(ds[2]) * 256 + Number(ds[3]);
+	return "#" + zero_fill_hex(decimal, 6);
+}
+/****************颜色代码转换************************/
+
+/**
+ * [弹窗-checkbox样式]
+ * @return {[type]} [description]
+ */
+function switchInterface() {
+	$('.search_ckss').iCheck('destroy');
+	$('.search_ckss').iCheck({
+		checkboxClass: 'icheckbox_square-green',
+		radioClass: 'iradio_square-green',
+		increaseArea: '20%'
+	});
+
+}
+
+
+//控件悬浮提示框
+function showTooltips(obj) {
+	var tooltips = $canvas.comTooltips;
+	if (obj.userData.Hint !== '') {
+		tooltips.show().html(obj.userData.Hint);
+		var tPosX = obj.getAbsoluteX() + obj.getWidth() / 2 - tooltips.width() / 2 - 10
+		var tPosY = obj.getAbsoluteY() + obj.getHeight() + 10;
+		tooltips.css({
+			'top': tPosY + 'px',
+			'left': tPosX + 'px'
+		});
+	}
+}
+// 控件缩放  备用
+function componentResize(com){
+	$canvas.comWidth.val(com.getWidth());
+	$canvas.comHeight.val(com.getHeight());
+}
+// 控件移动
+function componentMove(com){
+	$canvas.comOffsetX.val(com.getAbsoluteX());
+	$canvas.comOffsetY.val(com.getAbsoluteY());
+	$canvas.comTooltips.hide();
+}
+
+$('#canvas').on('click', function() {
+	$('.first-attr').show();
+	$('.second-attr').hide();
+});
+$('.have-btn').on('click', 'button', function() {
+	$('.first-attr').hide();
+	$('.second-attr').show();
+});
+
+
+
+/**
+ * [点击控件时-重置属性菜单]
+ * @return {[type]} [description]
+ */
+function resetAttributeMenu() {
+	$('.first-attr').show();
+	$('.second-attr').hide();
+	$('.div-alpha').hide();
+	$('.div-unit').hide();
+	$('.div-font-size').hide();
+	$('.div-text-alpha').hide();
+	$('.tab-ul li:first-child a').click();
+	$('p.p-show').each(function(index, element) {
+		if ($(element).hasClass('collapsed')) {
+			$(element).click();
+		}
+	});
+	$('p.p-hide').each(function(index, element) {
+		if ($(element).hasClass('collapsed')) {} else {
+			$(element).click();
+		}
+	});
+	$('.div-basic-hide').show();
+	$('.just-for-label').show();
+	$('.div-line-only').show();
+	$('.div-fill').hide();
+	$('.div-vlcurl').hide();
+	$('.div-line-check').hide();
+
+	// 边框宽度
+	$('.div-normal-width').show();
+	$('.div-line-conduit').hide();
+
+	$('.div-label').show();
+
+	setTimeout(function() {
+		$(".component-attr").mCustomScrollbar('scrollTo', 'top');
+	}, 300);
+
+}
+
+
+
 /**
  * [编辑控件前 检查前一个控件 TagID 是否绑定上]
  * @return {[type]} [description]
@@ -2593,18 +2653,19 @@ function checkComponentTagidIsNull() {
 /**
  * [检查 本控件 TagID 是否绑定正确]
  */
-function checkThisComponentIsTrue(thiss) {
-	switch (thiss.userData.Tag.bingding_status) {
+function checkThisComponentIsTrue(com) {
+	var tagWrong = $("#tagWrongImg");
+	switch (com.userData.Tag.bingding_status) {
 		case 0:
-			$("#tagWrongImg").hide();
+			tagWrong.hide();
 			break;
 		case 1:
-			$("#tagWrongImg").show();
-			$("#tagWrongImg").attr("src", "images/img/rights.png");
+			tagWrong.show();
+			tagWrong.attr("src", "images/img/rights.png");
 			break;
 		case 2:
-			$("#tagWrongImg").show();
-			$("#tagWrongImg").attr("src", "images/img/worry.png");
+			tagWrong.show();
+			tagWrong.attr("src", "images/img/worry.png");
 			break;
 	}
 }
@@ -2673,49 +2734,341 @@ function getColor(string) {
 }
 
 
-/****************颜色代码转换**rgb-->十六进制********/
-function zero_fill_hex(num, digits) {
-	var s = num.toString(16);
-	while (s.length < digits)
-		s = "0" + s;
-	return s;
-}
-function rgb2hex(rgb) {
 
-	if (rgb.charAt(0) == '#')
-		return rgb;
+window.$canvas = {
+		comTooltips:$('#tooltips'),
+		compID: $("#spanid"), //ID
+		compName: $('#comp-name'), //名称
+		compDesc: $('#comp-desc'), //描述
+		comWidth: $('#comp-width'), //宽
+		comHeight: $('#comp-height'), //高
+		comOffsetX: $('#comp-offsetx'), //位置 x
+		comOffsetY: $('#comp-offsety'), //位置 y
+		comRotation: $('#comp-rotation'),//旋转角度
+		comCaption:$('#comp-title'),//显示标题
+		comCaptionVal:$('#comp-title-val'),//标题内容
+		comHides: $('#comp-hides'), //隐藏控件
+		comEnable: $('#comp-unabel'), //是否可用
+		comLevel: $('#comp-level'), //访问等级
+		comHover: $('#comp-hover'), //hover
+		comHoverVal: $('#comp-hover-val'), //hover内容
+		comTagadd: $('#comp-tagaddress'), //tag
+		comReadonly: $('#comp-readonly'), //只读
 
-	var ds = rgb.split(/\D+/);
-	var decimal = Number(ds[1]) * 65536 + Number(ds[2]) * 256 + Number(ds[3]);
-	return "#" + zero_fill_hex(decimal, 6);
+		styleWidth: $('#style-width'), //style 宽度
+		styleBorderColor: $('.style-border-color ul li'), // style 边框颜色
+		styleFillColor:$('.style-fill-color ul li'),// style 填充颜色
+		styleStyle: $('#style-style'), //style style
+		styleAlpha:$('#comp-alpha-style'),//style 透明度
+		styleFlash: $('#style-flashing'), // style 闪烁
+		stylePicture:$('#style-image'),//style 图片地址
+		styleText:$('#style-text'),//style 文本内容
+		styleFontSize:$('#text-font-size'),//style 字体大小
+		styleFontColor:$('.style-text-color ul li'),//style 字体颜色
+
+		onTrueWidth: $('#ontrue-width'), // ontrue 宽度
+		onTrueBorderColor: $('.ontrue-border-color ul li'), //ontrue 边框颜色
+		onTrueFillColor:$('.ontrue-fill-color ul li'),// ontrue 填充颜色
+		onTrueStyle:$('#ontrue-style'), //ontrue style
+		onTrueAlpha:$('#comp-alpha-ontrue'),//ontrue 透明度
+		onTrueFlash: $('#ontrue-flashing'), // ontrue 闪烁
+		onTruePicture:$('#ontrue-image'),//ontrue 图片地址
+
+		onFalseWidth: $('#onfalse-width'), // onfalse 宽度
+		onFalseBorderColor: $('.onfalse-border-color ul li'), // onfalse 边框颜色
+		onFalseFillColor:$('.onfalse-fill-color ul li'),//onfalse 填充颜色
+		onFalseStyle: $('#onfalse-style'), //onfalse style
+		onFalseAlpha:$('#comp-alpha-onfalse'),//onfalse 透明度
+		onFalseFlash: $('#onfalse-flashing'), //onfalse 闪烁
+		onFalsePicture:$('#onfalse-image'),//onfalse 图片地址
+
+		onAlarmWidth: $('#onalarm-width'), //onalarm 宽度
+		onAlarmBorderColor: $('.onalarm-border-color ul li'), //onalarm 边框颜色
+		onAlarmFillColor:$('.onalarm-fill-color ul li'),//onalarm 填充颜色
+		onAlarmStyle: $('#onalarm-style'), //onalarm style
+		onAlarmAlpha:$('#comp-alpha-onalarm'),//onalarm 透明度
+		onAlarmFlash: $('#onalarm-flashing'), //onalarm 闪烁
+		onAlarmPicture:$('#onalarm-image'),//onalarm 图片地址
+
+		onDiscWidth:$('#onDisc-width') , //ondisc 宽度
+		onDiscBorderColor:$('.onDisc-border-color ul li') , //ondisc 边框颜色
+		onDiscFillColor:$('.onDisc-fill-color ul li'),//ondisc 填充颜色
+		onDiscStyle:$('#onDisc-style') , //ondisc style
+		onDiscAlpha:$('#comp-alpha-ondisc'),//ondisc 透明度
+		onDiscFlash:$('#onDisc-flashing'), //ondisc 闪烁
+		onDiscPicture:$('#onDisc-image'),//ondisc 图片地址
+	}
+	// 补充 组件大小和位置 旋转角度
+function componentSizeAndoffset(com) {
+	$canvas.comWidth.val(com.getWidth());
+	$canvas.comHeight.val(com.getHeight());
+	$canvas.comOffsetX.val(com.getAbsoluteX());
+	$canvas.comOffsetY.val(com.getAbsoluteY());
+	$canvas.comRotation.val(com.getRotationAngle());
 }
-/****************颜色代码转换************************/
+
+function componentCaption(com){
+	// 是否显示标题 ShowCaption 
+	switch (com.getUserData().ShowCaption) {
+		case true:
+			$canvas.comCaption.iCheck('check');
+			$canvas.comCaptionVal.removeAttr("readonly").val(com.getUserData().Caption);
+			break;
+		case false:
+			$canvas.comCaption.iCheck('uncheck');
+			$canvas.comCaptionVal.attr("readonly", "readonly").val(com.getUserData().Caption);
+			break;
+		default:
+			break;
+	}
+
+}
+
 
 /**
- * [弹窗-checkbox样式]
+ * [组件点击显示数据]
  * @return {[type]} [description]
  */
-function switchInterface() {
-	$('.search_ckss').iCheck('destroy');
-	$('.search_ckss').iCheck({
-		checkboxClass: 'icheckbox_square-green',
-		radioClass: 'iradio_square-green',
-		increaseArea: '20%'
+function componentInitData(com) {
+	checkComponentTagidIsNull(); //判断前一个控件是否正确绑定Tag
+
+	checkThisComponentIsTrue(com); //检查本控件的Tag是否正确(如果已经绑定)
+	// =================================基本-开始======================
+	// 暂存该控件的id,用于刷新控件的属性
+	$canvas.compID.html(com.id);
+
+	// 组件名称   name(用户输入)
+	$canvas.compName.val(com.getUserData().name);
+
+	//组件描述   Description
+	$canvas.compDesc.val(com.getUserData().Description);
+
+
+	//隐藏组件 Visible  
+	console.log('隐藏组件:' + com.getUserData().Visible)
+	switch (com.getUserData().Visible) {
+		case true:
+			$canvas.comHides.iCheck('uncheck');
+			break;
+		case false:
+			$canvas.comHides.iCheck('check');
+			break;
+		default:
+			break;
+	}
+
+	//是否不可用 Enable  
+	switch (com.getUserData().Enable) {
+		case true:
+			$canvas.comEnable.iCheck('check');
+			break;
+		case false:
+			$canvas.comEnable.iCheck('uncheck');
+		default:
+			break;
+	}
+
+	//访问等级  AccessLevel 
+	$canvas.comLevel.text(com.getUserData().AccessLevel);
+
+	//是否显示hover  ShowHint 
+	switch (com.getUserData().ShowHint) {
+		case true:
+			$canvas.comHover.iCheck('check');
+			//hover内容  Hint 
+			$canvas.comHoverVal.removeAttr("readonly").val(com.getUserData().Hint);
+			break;
+		case false:
+			$canvas.comHover.iCheck('uncheck');
+			//hover内容  Hint 
+			$canvas.comHoverVal.attr("readonly", "readonly").val(com.getUserData().Hint);
+			break;
+	}
+
+
+	//Tag内容  tag 
+	$canvas.comTagadd.val(com.getUserData().Tag.tag_name);
+
+	//是否只读  Readonly 
+	switch (com.getUserData().Readonly) {
+		case true:
+			$canvas.comReadonly.iCheck('check');
+			break;
+		case false:
+			$canvas.comReadonly.iCheck('uncheck');
+			break;
+	}
+
+	// =================================基本-结束======================
+
+	// =============================style-开始==============================
+	//边框宽度  LineWidth
+	console.log('查看组件边框宽度：' + com.getStroke())
+	$canvas.styleWidth.text(com.getStroke());
+
+	//边框颜色  LineColor
+	$canvas.styleBorderColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.styleBorderColor.each(function(index, element) {
+		if (com.getColor().hash() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
+				$(element).addClass("colorBlackBorder");
+			} else {
+				$(element).addClass("colorWhiteBorder");
+			}
+		}
 	});
 
-}
-
-
-//控件悬浮提示框
-function showTooltips(obj) {
-	var tooltips = $('#tooltips');
-	if (obj.userData.Hint !== '') {
-		tooltips.show().html(obj.userData.Hint);
-		var tPosX = obj.getAbsoluteX() + obj.getWidth() / 2 - tooltips.width() / 2 - 10
-		var tPosY = obj.getAbsoluteY() + obj.getHeight() + 10;
-		tooltips.css({
-			'top': tPosY + 'px',
-			'left': tPosX + 'px'
-		});
+	//边框样式  LineStyle
+	if (com.getDashArray() === null) {
+		$canvas.styleStyle.text("默认")
+	} else {
+		$canvas.styleStyle.text(com.getDashArray())
 	}
+
+	//style 闪烁  blinking  
+	switch (com.getUserData().Blinking) {
+		case true:
+			$canvas.styleFlash.iCheck('check');
+			break;
+		case false:
+			$canvas.styleFlash.iCheck('uncheck');
+	}
+
+	// =============================style-结束==============================
+
+	// =============================onTrue-开始=============================
+	//边框宽度  LineWidth
+	$canvas.onTrueWidth.text(com.getUserData().onTrue.LineWidth);
+
+	//边框颜色  LineColor
+	$canvas.onTrueBorderColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.onTrueBorderColor.each(function(index, element) {
+		if (com.getUserData().onTrue.LineColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
+				$(element).addClass("colorBlackBorder");
+			} else {
+				$(element).addClass("colorWhiteBorder");
+			}
+		}
+	});
+
+
+	//边框样式  LineStyle
+	if (com.getUserData().onTrue.LineStyle === null) {
+		$canvas.onTrueStyle.text("默认")
+	} else {
+		$canvas.onTrueStyle.text(com.getUserData().onTrue.LineStyle)
+	}
+
+	//style 闪烁  blinking  	
+	switch (com.getUserData().onTrue.Blinking) {
+		case true:
+			$canvas.onTrueFlash.iCheck('check');
+			break;
+		case false:
+			$canvas.onTrueFlash.iCheck('uncheck');
+	}
+	// =============================onTrue-结束=============================
+	// 
+	// =============================onFalse-开始===================================
+	//边框宽度  LineWidth
+	$canvas.onFalseWidth.text(com.getUserData().onFalse.LineWidth);
+
+	// 边框颜色  LineColor
+	$canvas.onFalseBorderColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.onFalseBorderColor.each(function(index, element) {
+		if (com.getUserData().onFalse.LineColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
+				$(element).addClass("colorBlackBorder");
+			} else {
+				$(element).addClass("colorWhiteBorder");
+			}
+		}
+	})
+
+	// 边框样式  LineStyle
+	if (com.getUserData().onFalse.LineStyle === null) {
+		$canvas.onFalseStyle.text("默认")
+	} else {
+		$canvas.onFalseStyle.text(com.getUserData().onFalse.LineStyle)
+	}
+
+	// 闪烁  blinking 
+	switch (com.getUserData().onFalse.Blinking) {
+		case true:
+			$canvas.onFalseFlash.iCheck('check');
+			break;
+		case false:
+			$canvas.onFalseFlash.iCheck('uncheck');
+	}
+
+	// =============================onFalse-结束===================================
+	// =============================onAlarm-开始===================================
+	// 边框宽度  LineWidth
+	$canvas.onAlarmWidth.text(com.getUserData().onAlarm.LineWidth);
+
+	// 边框颜色  LineColor
+	$canvas.onAlarmBorderColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.onAlarmBorderColor.each(function(index, element) {
+		if (com.getUserData().onAlarm.LineColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
+				$(element).addClass("colorBlackBorder");
+			} else {
+				$(element).addClass("colorWhiteBorder");
+			}
+		}
+	});
+
+	// 边框样式  LineStyle	
+	if (com.getUserData().onAlarm.LineStyle === null) {
+		$canvas.onAlarmStyle.text("默认")
+	} else {
+		$canvas.onAlarmStyle.text(com.getUserData().onAlarm.LineStyle)
+	}
+
+	// 闪烁  blinking 
+	switch (com.getUserData().onAlarm.Blinking) {
+		case true:
+			$canvas.onAlarmFlash.iCheck('check');
+			break;
+		case false:
+			$canvas.onAlarmFlash.iCheck('uncheck');
+	}
+
+	// =============================onAlarm-结束===================================
+	// 
+	// =============================onDisconnected-开始===================================
+	
+	// 边框宽度  LineWidth
+	$canvas.onDiscWidth.text(com.getUserData().onDisconnected.LineWidth);
+
+	// 边框颜色  LineColor
+	$canvas.onDiscBorderColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.onDiscBorderColor.each(function(index, element) {
+		if (com.getUserData().onDisconnected.LineColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
+				$(element).addClass("colorBlackBorder");
+			} else {
+				$(element).addClass("colorWhiteBorder");
+			}
+		}
+	});
+
+	//边框样式  LineStyle 
+	if (com.getUserData().onDisconnected.LineStyle === null) {
+		$canvas.onDiscStyle.text("默认")
+	} else {
+		$canvas.onDiscStyle.text(com.getUserData().onDisconnected.LineStyle)
+	}
+
+	switch (com.getUserData().onDisconnected.Blinking) {
+		case true:
+			$canvas.onDiscFlash.iCheck('check');
+			break;
+		case false:
+			$canvas.onDiscFlash.iCheck('uncheck');
+	}
+// =============================onDisconnected-结束===================================
+
+
 }

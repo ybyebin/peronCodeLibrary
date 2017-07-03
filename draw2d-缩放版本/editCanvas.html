@@ -12,9 +12,9 @@
 	<link type="text/css" rel="stylesheet" href="css/basic/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" type="text/css" href="css/basic/colpick.css">	
 	<link rel="stylesheet" type="text/css" href="css/basic/check_black.css">	
-	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/layer.css">
+	<link rel="stylesheet" type="text/css" href="css/basic/layer.css">
 	<link rel="stylesheet" type="text/css" href="css/bayax.css">
-	<link rel="stylesheet" type="text/css" href="css/edit.css">
+	<link rel="stylesheet" type="text/css" href="css/canvas.css">
 
 	<!-- 必须导入的JS -->
 	<script type="text/javascript" src="js/edit/jquery-1.10.2.min.js"></script>
@@ -37,13 +37,9 @@
 	<script type="text/javascript" src="js/edit/jquery-ui-1.8.23.custom.min.js"></script>
 	<script type="text/javascript" src="js/actionJS/view.js"></script>
 	<script type="text/javascript" src="js/basic/api.js"></script>
-
 	
 	<script type="text/javascript" src="js/edit/imgScroll.js"></script>
-	<script type="text/javascript" src="js/edit/icheck.min.js"></script>
-
-	<script type="text/javascript" src="js/basic/layer/layer.js"></script>
-	<!-- <script type="text/javascript" src="js/basic/page.js"></script> -->
+	
 
 </head>
 <body>
@@ -61,7 +57,7 @@
 					</span>
 					<label>
 						当前您所在的位置:
-						<span class="group-name"></span>
+						<span class="group-name view-name"></span>
 					</label>
 				</a>
 				</li>
@@ -383,7 +379,7 @@
 													<textarea id="comp-desc" class="form-control"></textarea> </label>
 											</div>
 											
-											<div class="form-group div-size div-line-only">
+											<div class="form-group div-size div-line-only div-label">
 												<label class="control-label col-sm-1">尺寸</label>
 												<label class="control-label col-sm-3">
 													<input id="comp-width" type="text" class="form-control">
@@ -613,7 +609,7 @@
 												<label class="control-label col-sm-8" >
 													<div class="btn-group">
 														<button type="button" class="btn btn-default" disabled="disabled">
-															<span id="style-width">123</span>
+															<span id="style-width"></span>
 														</button>
 														<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 															<span class="caret"></span>
@@ -1730,22 +1726,13 @@
 			<div id="deleteAllcomAndcanvas" style="display: none;">
 				<p style="color: #fff">确认清除画面吗</p>
 			</div>
-	<script type="text/javascript">(function($) {
-			$(window).on("load", function() {
-				$(".component-attr").mCustomScrollbar({
-					autoHideScrollbar: true
-				});
-				
-				$('.have-btn').mCustomScrollbar({
-					autoHideScrollbar: true
-				});
-					});
-				})(jQuery);
-
+	<script type="text/javascript">
 			picrun_ini("List2_1", 'ISL_Cont_1', "List1_1");
 	</script>
 
+		<script type="text/javascript" src="js/edit/icheck.min.js"></script>
 
+		<script type="text/javascript" src="js/basic/layer.js"></script>
 		<script type="text/javascript" src="js/edit/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="js/basic/jquery.mCustomScrollbar.concat.min.js"></script>
 		<script type="text/javascript" src="js/edit/colpick.js"></script>	

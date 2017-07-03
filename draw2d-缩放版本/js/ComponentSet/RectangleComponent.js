@@ -95,14 +95,11 @@ var rectangleComponent = draw2d.shape.node.Between.extend({
 
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -215,14 +212,11 @@ var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
 		});
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -336,14 +330,11 @@ var EllipseComponent = draw2d.shape.node.Between.extend({
 		});
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -451,14 +442,11 @@ var polygonComponent = draw2d.shape.basic.Polygon.extend({
 		});
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -572,14 +560,11 @@ var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
 		});
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -701,14 +686,11 @@ var BothArrowVComponent = draw2d.shape.icon.Icon.extend({
 		});
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -829,14 +811,11 @@ var forRightComponent = draw2d.shape.icon.Icon.extend({
 		});
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -959,14 +938,11 @@ var forLeftComponent = draw2d.shape.icon.Icon.extend({
 		});
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -1088,14 +1064,11 @@ var forUpComponent = draw2d.shape.icon.Icon.extend({
 		});
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -1219,14 +1192,11 @@ var forDownComponent = draw2d.shape.icon.Icon.extend({
 		});
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -1344,14 +1314,11 @@ var conduitCompontent = draw2d.shape.node.HorizontalBus.extend({
 		});
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -1458,14 +1425,11 @@ var conduitCompontentV = draw2d.shape.node.VerticalBus.extend({
 		});
 		// 缩放
 		this.on("resize", function() {
-			$('#comp-width').val(thiss.getWidth());
-			$('#comp-height').val(thiss.getHeight());
+			componentResize(thiss);
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -1501,127 +1465,22 @@ function basicdisplayDiv(obj) {
 	$('.div-basic-hide').hide();
 	$('.div-fill').show();
 	$('.div-alpha').show();
+
+
+	componentSizeAndoffset(obj);
+	componentInitData(obj);
 	setBasicComponentStyleInEditFiled(obj);
 }
 /**
  * [读取并在 属性栏显示 控件属性]
  * @param {[type]} thiss [description]
  */
-function setBasicComponentStyleInEditFiled(thiss) {
-	checkComponentTagidIsNull(); //判断前一个控件是否正确绑定Tag
-
-	/*
-	 * 暂存该控件的id
-	 * 用于刷新控件的属性
-	 */
-	$("#spanid").html(thiss.id);
-	checkThisComponentIsTrue(thiss); //检查本控件的Tag是否正确(如果已经绑定)
-	// =================================基本======================
-	console.log("ID:" + thiss.id)
-
-	// 组件名称   name(用户输入)
-	$('#comp-name').val(thiss.getUserData().name);
-
-	//组件描述   Description
-	$('#comp-desc').val(thiss.getUserData().Description);
-
-	//组件宽度   width
-	$('#comp-width').val(thiss.getWidth());
-
-	// 组件高度   height
-	$('#comp-height').val(thiss.getHeight());
-
-	//组件位置 X轴位置   x
-	$('#comp-offsetx').val(thiss.getAbsoluteX());
-
-	//组件位置 Y轴位置   y
-	$('#comp-offsety').val(thiss.getAbsoluteY());
-
-	//组件旋转角度 Rotation  
-	$('#comp-rotation').val(thiss.getRotationAngle());
-	console.log('旋转角度:' + thiss.getRotationAngle())
-
-	//隐藏组件 Visible  
-	console.log('隐藏组件:' + thiss.getUserData().Visible)
-	switch (thiss.getUserData().Visible) {
-		case true:
-			$('#comp-hides').iCheck('uncheck');
-			break;
-		case false:
-			$('#comp-hides').iCheck('check');
-			break;
-	}
-
-	//是否不可用 Enable  
-	switch (thiss.getUserData().Enable) {
-		case true:
-			$('#comp-unabel').iCheck('check');
-			break;
-		case false:
-			$('#comp-unabel').iCheck('uncheck');
-	}
-
-	//访问等级  AccessLevel 
-	$('#comp-level').text(thiss.getUserData().AccessLevel);
-
-	//是否显示hover  ShowHint 
-	switch (thiss.getUserData().ShowHint) {
-		case true:
-			$('#comp-hover').iCheck('check');
-			$('#comp-hover-val').removeAttr("readonly");
-			break;
-		case false:
-			$('#comp-hover').iCheck('uncheck');
-			$('#comp-hover-val').attr("readonly", "readonly");
-			break;
-	}
-
-	//hover内容  Hint 
-	$('#comp-hover-val').val(thiss.getUserData().Hint);
-	// =============================Data====================================
-
-	//Tag内容  tag 
-	$('#comp-tagaddress').val(thiss.getUserData().Tag.tag_name);
-
-	//是否只读  Readonly 
-	switch (thiss.getUserData().Readonly) {
-		case true:
-			$('#comp-readonly').iCheck('check');
-			break;
-		case false:
-			$('#comp-readonly').iCheck('uncheck');
-			break;
-	}
-
+function setBasicComponentStyleInEditFiled(com) {
 	// =============================style===================================
-
-	//边框宽度  LineWidth
-	$('#style-width').text(thiss.getStroke());
-
-	//边框颜色  LineColor
-	$('.style-border-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.style-border-color ul li').each(function(index, element) {
-		if (thiss.getColor().hash() == rgb2hex($(element).css("background-color")).toUpperCase()) {
-			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
-				$(element).addClass("colorBlackBorder");
-			} else {
-				$(element).addClass("colorWhiteBorder");
-			}
-		}
-	});
-
-	//边框样式  LineStyle
-	if (thiss.getDashArray() === null) {
-		$('#style-style').text("默认")
-	} else {
-		$('#style-style').text(thiss.getDashArray())
-	}
-
-
 	//填充(背景)颜色  fillColor
-	$('.style-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.style-fill-color ul li').each(function(index, element) {
-		if (thiss.getBackgroundColor().hash() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+	$canvas.styleFillColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.styleFillColor.each(function(index, element) {
+		if (com.getBackgroundColor().hash() == rgb2hex($(element).css("background-color")).toUpperCase()) {
 			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
 				$(element).addClass("colorBlackBorder");
 			} else {
@@ -1629,50 +1488,14 @@ function setBasicComponentStyleInEditFiled(thiss) {
 			}
 		}
 	});
-
 	// 透明度
-	$('#comp-alpha-style').val(thiss.getAlpha());
-
-	//style 闪烁  blinking  
-	switch (thiss.getUserData().Blinking) {
-		case true:
-			$('#style-flashing').iCheck('check');
-			break;
-		case false:
-			$('#style-flashing').iCheck('uncheck');
-	}
-
-
+	$canvas.styleAlpha.val(com.getAlpha());
 
 	// =============================onTrue===================================
-
-	//边框宽度  LineWidth
-	$('#ontrue-width').text(thiss.getUserData().onTrue.LineWidth);
-
-	//边框颜色  LineColor
-	$('.ontrue-border-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.ontrue-border-color ul li').each(function(index, element) {
-		if (thiss.getUserData().onTrue.LineColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
-			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
-				$(element).addClass("colorBlackBorder");
-			} else {
-				$(element).addClass("colorWhiteBorder");
-			}
-		}
-	});
-
-
-	//边框样式  LineStyle
-	if (thiss.getUserData().onTrue.LineStyle === null) {
-		$('#ontrue-style').text("默认")
-	} else {
-		$('#ontrue-style').text(thiss.getUserData().onTrue.LineStyle)
-	}
-
 	//填充(背景)颜色  fillColor
-	$('.ontrue-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.ontrue-fill-color ul li').each(function(index, element) {
-		if (thiss.getUserData().onTrue.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+	$canvas.onTrueFillColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.onTrueFillColor.each(function(index, element) {
+		if (com.getUserData().onTrue.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
 			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
 				$(element).addClass("colorBlackBorder");
 			} else {
@@ -1682,45 +1505,13 @@ function setBasicComponentStyleInEditFiled(thiss) {
 	})
 
 	// 透明度
-	$('#comp-alpha-ontrue').val(thiss.getAlpha());
-
-	//style 闪烁  blinking  	
-	switch (thiss.getUserData().onTrue.Blinking) {
-		case true:
-			$('#ontrue-flashing').iCheck('check');
-			break;
-		case false:
-			$('#ontrue-flashing').iCheck('uncheck');
-	}
+	$canvas.onTrueAlpha.val(com.getAlpha());
 
 	// =============================onFalse===================================
-
-	//边框宽度  LineWidth
-	$('#onfalse-width').text(thiss.getUserData().onFalse.LineWidth);
-
-	// 边框颜色  LineColor
-	$('.onfalse-border-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.onfalse-border-color ul li').each(function(index, element) {
-		if (thiss.getUserData().onFalse.LineColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
-			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
-				$(element).addClass("colorBlackBorder");
-			} else {
-				$(element).addClass("colorWhiteBorder");
-			}
-		}
-	})
-
-	// 边框样式  LineStyle
-	if (thiss.getUserData().onFalse.LineStyle === null) {
-		$('#onfalse-style').text("默认")
-	} else {
-		$('#onfalse-style').text(thiss.getUserData().onFalse.LineStyle)
-	}
-
 	// 填充(背景)颜色  fillColor
-	$('.onfalse-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.onfalse-fill-color ul li').each(function(index, element) {
-			if (thiss.getUserData().onFalse.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+	$canvas.onFalseFillColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.onFalseFillColor.each(function(index, element) {
+			if (com.getUserData().onFalse.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
 				if (rgb2hex($(element).css("background-color")) == "#ffffff") {
 					$(element).addClass("colorBlackBorder");
 				} else {
@@ -1730,44 +1521,13 @@ function setBasicComponentStyleInEditFiled(thiss) {
 		})
 
 	// 透明度
-	$('#comp-alpha-onfalse').val(thiss.getAlpha());
-		// 闪烁  blinking 
-	switch (thiss.getUserData().onFalse.Blinking) {
-		case true:
-			$('#onfalse-flashing').iCheck('check');
-			break;
-		case false:
-			$('#onfalse-flashing').iCheck('uncheck');
-	}
-
+	$canvas.onFalseAlpha.val(com.getAlpha());
+	
 	// =============================onAlarm===================================
-
-	// 边框宽度  LineWidth
-	$('#onalarm-width').text(thiss.getUserData().onAlarm.LineWidth);
-
-	// 边框颜色  LineColor
-	$('.onalarm-border-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.onalarm-border-color ul li').each(function(index, element) {
-		if (thiss.getUserData().onAlarm.LineColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
-			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
-				$(element).addClass("colorBlackBorder");
-			} else {
-				$(element).addClass("colorWhiteBorder");
-			}
-		}
-	});
-
-	// 边框样式  LineStyle	
-	if (thiss.getUserData().onAlarm.LineStyle === null) {
-		$('#onalarm-style').text("默认")
-	} else {
-		$('#onalarm-style').text(thiss.getUserData().onAlarm.LineStyle)
-	}
-
 	// 填充(背景)颜色  fillColor
-	$('.onalarm-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.onalarm-fill-color ul li').each(function(index, element) {
-		if (thiss.getUserData().onAlarm.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+	$canvas.onAlarmFillColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.onAlarmFillColor.each(function(index, element) {
+		if (com.getUserData().onAlarm.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
 			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
 				$(element).addClass("colorBlackBorder");
 			} else {
@@ -1777,45 +1537,12 @@ function setBasicComponentStyleInEditFiled(thiss) {
 	});
 
 	// 透明度
-	$('#comp-alpha-onalarm').val(thiss.getAlpha());
-
-	// 闪烁  blinking 
-	switch (thiss.getUserData().onAlarm.Blinking) {
-		case true:
-			$('#onalarm-flashing').iCheck('check');
-			break;
-		case false:
-			$('#onalarm-flashing').iCheck('uncheck');
-	}
-
+	$canvas.onAlarmAlpha.val(com.getAlpha());	
 	// =============================onDisconnected===================================
-
-	// 边框宽度  LineWidth
-	$('#onDisc-width').text(thiss.getUserData().onDisconnected.LineWidth);
-
-	// 边框颜色  LineColor
-	$('.onDisc-border-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.onDisc-border-color ul li').each(function(index, element) {
-		if (thiss.getUserData().onDisconnected.LineColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
-			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
-				$(element).addClass("colorBlackBorder");
-			} else {
-				$(element).addClass("colorWhiteBorder");
-			}
-		}
-	});
-
-	//边框样式  LineStyle 
-	if (thiss.getUserData().onDisconnected.LineStyle === null) {
-		$('#onDisc-style').text("默认")
-	} else {
-		$('#onDisc-style').text(thiss.getUserData().onDisconnected.LineStyle)
-	}
-
 	// 填充(背景)颜色  fillColor
-	$('.onDisc-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.onDisc-fill-color ul li').each(function(index, element) {
-			if (thiss.getUserData().onDisconnected.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+	$canvas.onDiscFillColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.onDiscFillColor.each(function(index, element) {
+			if (com.getUserData().onDisconnected.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
 				if (rgb2hex($(element).css("background-color")) == "#ffffff") {
 					$(element).addClass("colorBlackBorder");
 				} else {
@@ -1824,14 +1551,5 @@ function setBasicComponentStyleInEditFiled(thiss) {
 			}
 		});
 	// 透明度
-	$('#comp-alpha-ondisc').val(thiss.getAlpha());
-		// 闪烁  blinking 
-	switch (thiss.getUserData().onDisconnected.Blinking) {
-		case true:
-			$('#onDisc-flashing').iCheck('check');
-			break;
-		case false:
-			$('#onDisc-flashing').iCheck('uncheck');
-	}
-
+	$canvas.onDiscAlpha.val(com.getAlpha());
 }

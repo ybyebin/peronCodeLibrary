@@ -1,0 +1,1536 @@
+body {
+	margin: 0 auto;
+	padding: 0;
+	font-family: "微软雅黑";
+	background-color: #15182D;
+}
+
+/*系统设置-侧边栏-开始*/
+#sidebar {
+	padding: 0;
+	min-width: 150px;
+	background-image: -webkit-linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%);
+	background-image: -o-linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%);
+	background-image: linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%);
+}
+
+#treeview {
+	padding: 0;
+}
+
+#treeview ul {
+	padding: 0;
+	margin: 0;
+}
+
+#treeview ul li {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	margin-top: 1px;
+	padding-right: 1px;
+}
+
+#treeview ul li:nth-child(1) {
+	margin-top: 0;
+}
+#treeview ul li a {
+	display: inline-block;
+	padding: 0;
+	height: 66px;
+	font-size: 16px;
+	width: 100%;
+	text-align: center;
+	line-height: 60px;
+	color: #9CA5A9;
+}
+
+#treeview ul li:not(:first-child) a:hover {
+	background-color: #3E4687;
+	text-decoration: none;
+}
+
+.treeview ul li a i {
+	display: inline-block;	
+	position: relative;
+	top: 4px;
+	margin-right: 5px;
+	width: 20px;
+	height: 20px;
+}
+
+.treeview ul li:nth-child(2) a i{
+	background:url(../images/syssettitle.png)  no-repeat;
+	background-position:-120px 0;
+}
+.treeview ul li:nth-child(3) a i{
+	background:url(../images/syssettitle.png)  no-repeat;
+	background-position:-140px 0;
+}
+.treeview ul li:nth-child(4) a i{
+	background:url(../images/syssettitle.png)  no-repeat;
+	background-position:0 0;
+}
+.treeview ul li:nth-child(5) a i{
+	background:url(../images/syssettitle.png)  no-repeat;
+	background-position:-160px 0;
+}
+.treeview ul li:nth-child(6) a i{
+	background:url(../images/syssettitle.png)  no-repeat;
+	background-position:-80px 0;
+}
+.treeview ul li:nth-child(7) a i{
+	background:url(../images/syssettitle.png)  no-repeat;
+	background-position:-160px 0;
+}
+
+.treeview ul li:nth-child(2).active a i{
+	background-position:-100px 0;
+}
+
+.treeview ul li:nth-child(3).active a i{
+	background-position:-180px 0;
+}
+.treeview ul li:nth-child(4).active a i{
+	background-position:-40px 0;
+}
+.treeview ul li:nth-child(5).active a i{
+	background-position:-20px 0;
+}
+.treeview ul li:nth-child(6).active a i{
+	background-position:-60px 0;
+}
+.treeview ul li:nth-child(7).active a i{
+	background-position:-20px 0;
+}
+
+#treeview .title_foursize {
+	padding-right: 30px;
+}
+
+#logo-a {
+	background-color: #15182D;
+	text-align: center;
+	line-height: 60px;
+}
+
+#logo-a img {
+	width: 129px;
+	height: 27px;
+	display: inline-block;
+	position: relative;
+}
+
+#treeview .active a {
+	background-color: #3E4687;
+	color: #fff;
+
+}
+
+/*系统设置-侧边栏-结束*/
+
+/*工程管理-开始*/
+#main {
+	padding-left: 50px;
+	padding-right: 40px;
+}
+
+.content_head {
+	margin-top: 90px;
+	padding-right: 20px;
+	text-align: left;
+	min-width: 900px;
+}
+
+.div-content {
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 2px;
+	background-image: -webkit-linear-gradient(left, #C96DD8 20%,  #3023AE 100%);   
+	height: 750px;
+}
+
+.div-display {
+	padding-left: 20px;
+	padding-right: 20px;
+	background: #1C203F;
+	height: 100%;
+}
+
+.div-display-pro {
+	/*margin-top: 30px;*/
+}
+
+.div-display-pro div label:first-child {
+	color: #FFFFFF;
+	font-weight: normal;
+	min-width: 70px;
+	width: 80px;
+	text-align: left;
+	padding-right: 0;
+}
+
+.div-display-pro div label:last-child {
+	color: #FFFFFF;
+	text-align: left;
+	font-weight: normal;
+}
+
+.div-display-pro div img.project-logo-img {
+	width: 400px;
+	height: 90px;
+	/*border: 1px solid #dedede;*/
+	background: #999999;
+}
+
+.div-pro-name,
+.div-pro-img {
+	width: 400px;
+}
+
+.div-display-pro input {
+	height: 44px;
+	width: 400px;
+	min-width: 400px;
+  /*opacity: 0.86;*/
+  background: #1D2142;
+  color: #fff;
+  border: 1px solid rgba(143,152,186,0.31);
+
+}
+
+.div-display-pro div label.label-prompt {
+	width: 300px;
+	margin-left: 30px;
+	color: #FFFFFF;
+	padding-top: 12px;
+}
+
+span.warn_span {
+	color: red;
+}
+
+.label-prompt span.instructions span {
+	color: red;
+}
+
+.div-upimage {
+	margin-left: 30px;
+}
+
+#obj-btn-upLogo {
+	width: 114px;
+}
+
+select.select-language {
+	width: 400px;
+	height: 44px;
+  	background: #1D2142;
+  	color: #fff;
+  	border: 1px solid rgba(143,152,186,0.31);
+}
+select.select-language[disabled]{
+	background: #1D2142;
+}
+#project-edit-management {
+	display: none;
+}
+#project-main-management .div-display,
+#project-edit-management .div-display{
+	padding-top: 30px;
+}
+#project-main-management .button-normal,
+#project-edit-management .button-normal,
+#project-main-management .button-other,
+#project-edit-management .button-other{
+	margin-right: 30px;
+}
+/*工程管理-结束*/
+
+/*节点管理-开始*/
+.div-node-btn {
+	width: 400px;
+	padding-left: 0;
+}
+.node-form-display .button-normal{
+	margin-right: 30px;
+}
+/*搜索框-*/
+.div-content-search {
+	float: right;
+	padding-right: 0;
+}
+
+.content-search {
+	border-radius: 5px;
+	padding-left: 10px;
+	background: #FFFFFF;
+	float: right;
+	width: 265px;
+	background: #1D2142;
+  	color: #fff;
+  	border: 1px solid rgba(143,152,186,0.31);
+}
+
+.content-search label:first-child {
+	padding: 0px;
+	width: 20px;
+}
+
+.content-search label:last-child {
+	width: 20px;
+	top: 10px;
+	left: 10px;
+	display: none;
+}
+
+.content-search span {
+	top: 15px;
+	left: 5px;
+}
+
+.content-search input {
+	height: 44px;
+	border: none;
+	background: #1D2142;
+  	color: #fff;
+}
+
+.content-search input:focus {
+	outline: none;
+}
+
+.content-search img {
+	cursor: pointer;
+}
+
+/*有输入 删除  显示  无输入隐藏*/
+#content-search-input::-ms-clear {
+	display: none;
+}
+
+#content-search-input:valid +.label_img {
+	display: inline;
+}
+
+/*搜索框-*/
+#node-tab {
+	border-bottom: 1px solid #555769;
+	margin-bottom: 10px;
+}
+
+#node-tab thead th {
+	height: 54px !important;
+	padding-top: 20px !important;
+	padding-bottom: 20px;
+	font-size: 16px;
+	color: #666666;
+}
+
+#node-tabody tr td:nth-child(1) {
+	width: 100px;
+}
+
+#node-tabody tr td:nth-child(2) {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 250px;
+}
+
+#node-tabody tr td:nth-child(5) {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 250px;
+}
+
+#node-tabody tr td:last-child a:last-child {
+	margin-left: 10px;
+}
+
+
+#layer-delete-node p {
+	margin-left: 30px;
+	margin-top: 20px;
+	color: #fff;
+	font-size: 16px;
+}
+.node-form-edit{
+	/*height: 100%;*/
+}
+.div-creat-node{
+	padding-top: 30px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+
+.div-creat-node > div label {
+	font-weight: normal;
+	color: #fff;
+}
+
+.div-creat-node > div label:last-child {
+	width: 300px;
+	text-align: left;
+	padding-top: 15px;
+}
+
+.div-creat-node input,
+.div-creat-node select {
+	height: 44px;
+	color: #fff;
+	background: #1D2142;
+  	border: 1px solid rgba(143,152,186,0.31);
+}
+.div-creat-node textarea{
+	color: #fff;
+	background: #1D2142;
+  	border: 1px solid rgba(143,152,186,0.31);
+}
+
+/*节点管理-结束*/
+
+/*数据标签管理-开始*/
+.div-datalabel-btn {
+	width: 400px;
+	padding-left: 0;
+}
+.datalabel-dis .button-normal{
+	margin-right: 30px;
+}
+#datalabel_tab {
+	border-bottom: 1px solid #555769;
+	margin-bottom: 10px;
+}
+
+#datalabel_tab thead th {
+	height: 54px !important;
+	padding-top: 20px !important;
+	padding-bottom: 20px;
+	font-size: 16px;
+	color: #666666;
+}
+
+#datalabel_tab tr td:nth-child(1) {
+	width: 100px;
+}
+
+#datalabel_tab tr td:nth-child(2),
+#datalabel_tab tr td:nth-child(3) {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 250px;
+}
+
+#datalabel_tab tr td:nth-child(5) {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 250px;
+}
+
+#datalabel_tab tr td:nth-child(7) a:nth-child(2) {
+	margin-left: 5px;
+}
+
+#datalab-node{
+	background: red;
+}
+
+
+#layer-new-datalabel .datalabel-edit{
+	padding-top: 30px;
+	padding-left: 60px;
+	padding-right: 60px;
+	background: #1C1F38;
+	background-color: #2C2F4C;
+	color: #fff;
+}
+#layer-new-datalabel .datalabel-edit{
+
+}
+#layer-new-datalabel {
+	width: 96%;
+	margin-left: 30px;
+	/*height: 480px;*/
+	height: 98%;
+	overflow: hidden;
+}
+#layer-new-datalabel{
+	border-bottom:1px solid #606277;
+}
+
+#layer-new-datalabel .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail {
+	background: #2C2F4C;
+}
+
+#datalabel-edit > div label {
+	padding-left: 0;
+	padding-right: 0;
+	font-weight: normal;
+	text-align: left;
+	font-size: 14px;
+}
+
+.basic-parts p span,
+.warn-parts p span,
+.history-parts p span{
+	display: inline-block;
+	height: 13px;
+	border-left: 5px solid  #3E4687;
+	position: relative;
+	top: 2px;
+	margin-right: 10px;
+}
+#datalabel-edit input,
+#datalabel-edit select{
+	height: 44px;
+	color: #fff;
+	background: #1D2142;
+  	border: 1px solid rgba(143,152,186,0.31);
+}
+
+#datalabel-edit label.label-title {
+	width: 100px;
+	text-align: left;
+}
+
+#datalabel-edit label.label-mustfill {
+	color: red;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+#datalabel-edit .detailed-content {
+	padding-top: 20px;
+	padding-left: 16px;
+}
+
+#chengyi {
+	font-size: 12px;
+	font-weight: normal;
+	display: inline-block;
+	position: relative;
+	-webkit-transform: scale(0.7857142857142857);
+}
+#datalabel-edit #datalab-sec-min{
+	border: none;
+	height: 30px;
+	background-color:#2C2F4C; 
+}
+.div-table-warn {
+	width: 80%;
+	padding-right: 20px;
+	padding-bottom: 0;
+}
+
+#datalab-addlimit {
+	cursor: pointer;
+	color: #fff;
+}
+
+#table-warn  tbody > tr:nth-of-type(even) td input {
+	border: none;
+	background-color: #25294F;
+}
+#table-warn  tbody > tr td{
+	border: none !important;
+}
+#table-warn  tbody > tr:nth-of-type(even) {
+  background: #262A50;
+}
+#table-warn  tbody > tr:nth-of-type(odd) {
+  background-color: #1D2141;
+}
+
+#table-warn thead tr th {
+	font-weight: normal;
+}
+
+#table-warn tbody tr td:last-child {
+	width: 50px;
+	color: #428bca;
+	cursor: pointer;
+	padding-top: 15px;
+}
+#table-warn tbody tr td:nth-child(1),
+#table-warn tbody tr td:nth-child(3){
+	width: 70px;
+}
+
+
+/*整理样式*/
+/*.datalabel-edit > div:nth-child(1) {
+	padding-left: 0;
+}
+*/
+/*.datalabel-edit .div-display {
+	padding-top: 20px;
+	padding-left: 30px;
+}*/
+
+/*.datalabel-edit .div-display >div:nth-child(2) label:nth-child(3) {*/
+	/*padding-left: 10px;*/
+/*}*/
+
+/*.datalabel-edit .content > div:nth-child(1) .detailed-content {*/
+	/*padding-bottom: 27px;*/
+/*}*/
+
+/*整理样式*/
+
+/*数据标签管理-结束*/
+
+/*能耗统计设定-开始*/
+.col-sm-my-9 {
+	width: 72%;
+	float: left;
+	min-width: 400px;
+}
+
+@media screen and (max-width:1606px) {
+	.col-sm-my-9 {
+		width: 71%;
+	}
+
+}
+
+@media screen and (max-width:1506px) {
+	.col-sm-my-9 {
+		width: 70%;
+	}
+
+}
+
+@media screen and (max-width:1461px) {
+	.col-sm-my-9 {
+		width: 69%;
+	}
+
+}
+
+@media screen and (max-width:1419px) {
+	.col-sm-my-9 {
+		width: 67%;
+	}
+
+}
+
+@media screen and (max-width:1342px) {
+	.col-sm-my-9 {
+		width: 65%;
+	}
+
+}
+
+@media screen and (max-width:1242px) {
+	.col-sm-my-9 {
+		width: 63%;
+	}
+
+}
+
+div.div-display.row {
+	padding-left: 0;
+	padding-right: 0
+}
+
+.div-content-statistical {
+	padding-left: 15px;	
+	height: 750px;
+}
+.div-content-statistical input,
+.div-content-statistical select{
+	background: #1D2142;
+  	color: #fff;
+  	border: 1px solid rgba(143,152,186,0.31);
+}
+.only-for-border-top{
+	width: 100%;	
+	background-color: #191C33;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.statistical-left {
+	margin-right: 30px;
+	background-image: -webkit-linear-gradient(left, #2379AE 20%,  #C96DD8 100%);   
+	padding-top: 2px;
+	padding-left: 0;
+	padding-right: 0;
+	min-width: 300px;
+	/*border: 1px solid #353854;
+	/*border-top: none;*/
+}
+
+.statistical-left .only-for-border-top > p {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #555769;
+}
+
+.statistical-left .only-for-border-top > p span {
+	font-size: 16px;
+	font-weight: 600;
+	color: #fff;
+}
+
+.statistical-left .only-for-border-top > p a {
+	float: right;
+	cursor: pointer;
+	color: #fff;
+}
+
+.left-div {
+	height: 685px;
+}
+
+.left-div-head {
+	cursor: pointer;
+}
+
+.left-div-head span {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 250px;
+	display: inline-block;
+	margin-left: 5px;
+	color: #fff;
+}
+
+.left-div [data-toggle="collapse"] i {
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid #9A9A9A;
+	position: relative;
+	top: 8px;
+}
+
+.left-div [data-toggle="collapse"].collapsed i {
+	position: relative;
+	display: inline-block;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+	border-left: 4px solid #D8D8D8;
+	top: -5px;
+}
+
+.left-div [data-toggle="collapse"].collapsed span {
+	margin-left: 1px;
+}
+
+.collapse-left-div {
+	max-height: 620px;
+	overflow: hidden;
+}
+
+.collapse-left-div  .mCustomScrollBox .mCSB_container {
+	/*margin-right: 0px;*/
+}
+
+.collapse-left-div .mCSB_scrollTools {
+	/*margin-right: 20px;
+	width: 10px;
+	margin: 0;
+	position: absolute;*/
+}
+
+.collapse-left-div  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	/*background: #DDDDDD;
+	width: 5px;*/
+}
+
+.collapse-left-div .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail {
+	background: #191c33;
+}
+
+.collapse-left ul {
+	padding: 0;
+	margin: 0;
+	margin-right: 5px;
+}
+
+.collapse-left ul li {
+	list-style: none;
+	height: 45px;
+	line-height: 45px;
+	cursor: pointer;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	max-width: 400px;
+	padding-left: 10px;
+	color: #fff;
+}
+
+.collapse-left ul li.active {
+	border-left: 6px solid #A78FBE;
+	color: #A78FBE;
+	padding-left: 7px;
+}
+
+.collapse-left ul li:hover {
+	border-left: 6px solid #A78FBE;
+	padding-left: 7px;
+}
+
+.collapse-left li:nth-of-type(even) {
+	background: #191c33;
+}
+
+.collapse-left li:nth-of-type(odd) {
+	background-color: #1D203B;
+}
+
+.statistical-right {
+	padding-left: 20px;
+	padding-right: 20px;
+	border: 1px solid #353854;
+	background-color: #1C203F;
+}
+
+p.right-head-p {
+	margin-top: 40px;
+	padding-left: 10px;
+	border-left: 3px solid #3E4687;
+	background-color: #1C203F;
+	color: #fff;
+}
+
+.div-have-tables {
+	max-height: 680px;
+	overflow: hidden;
+}
+
+.div-have-tables  .mCustomScrollBox .mCSB_container {
+	/*margin-right: 0px;*/
+}
+
+.div-have-tables .mCSB_scrollTools {
+	/*margin-right: 20px;*/
+	/*width: 10px;*/
+	/*margin: 0;*/
+}
+
+.div-have-tables  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	/*background: #DDDDDD;*/
+	/*width: 5px;*/
+}
+
+.div-have-tables .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail {
+	background: #1C203F;
+	/*margin-left: 7px;*/
+}
+/*#display-table{
+	background-color: #1C203F;
+}*/
+.tabels tbody tr td {
+	border-top: none !important;
+	height: 47px !important;
+	line-height: 30px;
+	color: #fff;
+	/*background-color: #1C203F;*/
+}
+.tabels thead{
+	border: 1px solid #3e4364;
+}
+.tabels thead tr th {
+	height: 48px;
+	font-size: 16px;
+	color: #fff;
+	padding-top: 4px !important;
+	padding-bottom: 10px !important;
+	/*background-color: #F9F9F9;*/
+	/*background-color: #1C203F;*/
+	background-color: #2E3554;
+	border-bottom: none !important;
+}
+
+.tabels tbody tr:nth-of-type(even) {
+	background: #262A50;
+}
+
+.tabels tbody tr:nth-of-type(odd) {
+	background-color: #1D2141;
+}
+
+/*编辑*/
+.collapse-left-edit ul li > div label {
+	padding-left: 0;
+	padding-right: 0;
+	font-weight: normal;
+}
+
+.collapse-left-edit ul li  div label a:last-child {
+	margin-left: 10px;
+}
+
+.collapse-left-edit ul li  div:first-child label:first-child {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.collapse-left-edit ul li  div:first-child label:last-child {
+	text-align: right;
+	display: none;
+}
+
+.collapse-left-edit ul li:hover  div:first-child label:last-child {
+	display: block;
+}
+
+#add_group_li:hover {
+	border: none;
+	padding-left: 10px;
+}
+
+.collapse-left-edit ul li  div:last-child label:last-child {
+	text-align: right;
+}
+
+/*添加*/
+#add_group_li div label {
+	display: block;
+}
+
+.right-head-btn {
+	margin-top: 20px;
+}
+
+/*.right-head-btn button:last-child{
+margin-left: 30px;
+}*/
+.div-have-tables-edit {
+	height: 634px;
+}
+
+.div-have-tables-edit table {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.hide-tag-span {
+	display: inline-block;
+	margin-left: 10px;
+	color: #fff;
+}
+#edit-btn-adddatalabel{
+	margin-right: 30px;
+}
+
+/*弹窗*/
+#search-datalabel {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+#search-datalabel .content-search {
+	float: left;
+	margin-top: 20px;
+}
+
+#search-datalabel form {
+	border: 1px solid #3C3F61;
+	width: 600px;
+	padding-left: 30px;
+	padding-right: 30px;
+	
+}
+/*修改-开始*/
+#search-datalabel form.search-form{
+	padding-left: 0;
+	padding-right: 0;
+	height: 410px;
+}
+#search_datalabel_tab.table-primary  tbody td{
+	height: 38px !important;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	vertical-align: baseline;
+	line-height: 38px !important;
+}
+#search_datalabel_tab.table-primary  tbody > tr:nth-of-type(odd) {  
+  background: #2B2E4B !important;
+}
+#search_datalabel_tab.table-primary  tbody > tr:nth-of-type(even) {  
+  background: #1D2141 !important;
+}
+
+
+/*修改-结束*/
+.search_no_datalabel {
+	margin-top: 30%;
+	margin-left: 47%;
+	font-size: 18px;
+}
+.already-add{
+	position: absolute;
+	top: -50px;
+	left: 0px;
+	color: #fff;
+}
+#search-datalabel form:last-child {
+	width: 400px;
+	margin-left: 15px;
+}
+
+.search-datalabel-left,
+.search-datalabel-right {
+	height: 393px;
+	overflow: auto;
+}
+
+.search-datalabel-right  .mCustomScrollBox .mCSB_container,
+.search-datalabel-left  .mCustomScrollBox .mCSB_container {
+}
+
+.search-datalabel-right .mCSB_scrollTools,
+.search-datalabel-left .mCSB_scrollTools {
+
+	margin: 0;
+}
+
+.search-datalabel-right  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+.search-datalabel-left  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+
+}
+
+.search-datalabel-right .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail,
+.search-datalabel-left .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail {
+
+	background-color: #2B2E4B;
+}
+
+#edit_delete_tree_li p {
+	padding-left: 30px;
+	margin-top: 20px;
+	font-size: 16px;
+	color: #fff;
+}
+#search_datalabel_tabright tbody > tr:nth-of-type(even),
+#search_datalabel_tab  tbody > tr:nth-of-type(even) {
+  background: #2B2E4B !important;
+}
+#search_datalabel_tabright tbody  tr td:first-child{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 180px;
+}
+#search_datalabel_tabright tbody  tr td:last-child{
+	min-width: 40px;
+}
+#search_datalabel_tabright tbody  tr select{
+	background: #1D2142;
+  	color: #fff;
+  	border: 1px solid rgba(143,152,186,0.31);
+}
+/*能耗统计设定-结束*/
+
+/*图形画面管理-开始*/
+#creatsys-btn + ul.dropdown-menu{
+	width: 112px;
+	min-width: 112px;
+	background: #3F446E;
+	margin-top: 6px;
+	color: #fff;
+}
+.open>.dropdown-toggle.btn-default {
+    background-color: #DEE2FF;
+}
+
+ul.dropdown-menu a{
+	color: #fff;
+}
+#creatsys-btn + ul.dropdown-menu::after {
+    top: -6px;
+    left: 90px;
+    content: '';
+    display: inline-block;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #3F446E;
+    border-top: 0;
+    position: absolute;
+}
+
+#creatsys-btn + ul.dropdown-menu::before {
+    content: '';
+    display: inline-block;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #3F446E;
+    border-top: 0;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: -7px;
+    left: 90px;
+}
+
+.div-graphicImages-tab,
+.div-sub-graphicImages {
+	height: 700px;
+	overflow: auto;
+	border-bottom: 1px solid #555769;
+}
+
+.div-sub-graphicImages {
+
+	/*border: */
+}
+
+.div-graphicImages-tab  .mCustomScrollBox .mCSB_container,
+.div-sub-graphicImages .mCustomScrollBox .mCSB_container {
+	/*margin-right: 0px;*/
+}
+
+.div-graphicImages-tab .mCSB_scrollTools,
+.div-sub-graphicImages .mCSB_scrollTools {
+	/*margin-right: 20px;*/
+	/*width: 10px;*/
+	/*margin: 0;*/
+}
+
+.div-graphicImages-tab .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+.div-sub-graphicImages .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	/*background: #DDDDDD;*/
+	/*width: 5px;*/
+}
+
+.div-graphicImages-tab .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail,
+.div-sub-graphicImages .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail {
+	background: #1C203F;
+	/*margin-left: 7px;*/
+}
+
+#graphicImages-tab thead th {
+	height: 54px !important;
+	padding-top: 20px !important;
+	padding-bottom: 20px;
+	font-size: 16px;
+	color: #666666;
+}
+
+#graphicImages-tab tbody tr {
+	cursor: pointer;
+}
+
+#graphicImages-tab tbody tr td:nth-child(3) a:last-child {
+	margin-left: 10px;
+}
+
+#graphicImages-tab {
+	margin-bottom: 10px;
+}
+
+#change-subsys-name {
+	padding-left: 30px;
+}
+
+#change-subsys-name div {
+	margin-top: 30px;
+}
+
+#change-subsys-name div label {
+	padding-top: 10px;
+	width: 100px;
+	padding-left: 0;
+	padding-right: 0;
+	color: #fff;
+	font-weight: normal;
+}
+
+#change-subsys-name div label:last-child {
+	color: red;
+	padding-left: 20px;
+	width: 200px;
+}
+#change-subsys-name input,
+#creat-subsystem-image input{
+	background: #1D2142;
+  	color: #fff;
+  	border: 1px solid rgba(143,152,186,0.31);
+}
+
+#delete-subsys {
+	padding-right: 50px;
+	padding-left: 35px;
+	padding-top: 30px;
+	font-size: 16px;
+	color: #fff;
+}
+
+/*图形画面管理-结束*/
+
+/*新建子系统-开始*/
+.graphic-main {
+	display: none;
+}
+
+@media screen and (max-width:768px) {
+	.subsystem-head {
+		margin-left: 150px;
+	}
+
+}
+
+.subsystem-head {
+	min-width: 1000px;
+	height: 66px;
+	background-color: #3E4687;
+	line-height: 66px;
+	padding-left: 35px;
+	display: none;
+}
+
+.subsystem-head  label {
+	font-weight: normal;
+}
+
+.subsystem-head > label span i {
+	display: inline-block;
+	width: 9px;
+	height: 9px;
+	border-left: 1px solid #FFFFFF;
+	border-top: 1px solid #FFFFFF;
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	margin-right: 7px;
+}
+
+.subsystem-head > label > span {
+	display: inline-block;
+	margin-right: 30px;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+
+.subsystem-head > label label {
+	color: #fff;
+}
+
+#sub-graphicImages-tab thead th {
+	height: 54px !important;
+	padding-top: 20px !important;
+	padding-bottom: 20px;
+	font-size: 16px;
+	color: #666666;
+}
+
+#sub-graphicImages-tab tbody tr td a {
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+#sub-graphicImages-tab tbody tr td:first-child {
+	width: 70%;
+}
+
+.content_head-subsystem {
+	padding-right: 20px;
+	text-align: left;
+	min-width: 900px;
+}
+
+#creat-subsystem-image form {
+
+	padding-right: 50px;
+	padding-left: 50px;
+	padding-top: 30px;
+}
+
+#creat-subsystem-image form div input.ckss {
+	margin-right: 10px;
+}
+
+#creat-subsystem-image form div label {
+	text-align: left;
+	padding-left: 0;
+	padding-right: 0;
+	width: 120px;
+	color: #fff;
+	font-weight: normal;
+}
+#creat-subsystem-image form div label.image-warn{
+	color: red;
+}
+.image-warn {
+	color: red;
+	margin-left: 20px;
+}
+
+/*#delete-system {
+padding-right:50px;
+padding-left: 35px;
+padding-top: 30px;
+font-size: 16px;
+}
+#change-system-name{
+padding-left: 30px;
+}
+#change-system-name div{
+margin-top: 30px;
+}
+#change-system-name div label{
+padding-top: 10px;
+width: 100px;
+padding-left: 0;
+padding-right: 0;
+font-weight: normal;
+}*/
+
+/*新建子系统-结束*/
+
+/*能耗统计分级-开始*/
+.grapar_node_tab{
+	padding-left: 0;
+    padding-right: 0;
+    padding-top: 2px;
+}
+.par_node_tab,
+.par_node_tabs .edit-par_node_tab{
+	background-color: #1C203F;
+	padding-top: 30px;
+	padding-left: 15px;
+	height: 100%;
+}
+.par_node_tabs{
+	background-color: #1C203F;
+	padding-top: 2px;
+	padding-left:0px;
+	padding-right: 0;
+	height: 100%;
+}
+.classification button.button-normal{
+	margin-right: 30px;
+}
+#classification-edit-form {
+	display: none;
+}
+
+#classification-edit-form > div:nth-child(1) {
+	margin-left: 0;
+}
+
+#classification_display .par_node_tab div.form-group:first-child{
+	margin-top: 30px;
+}
+
+.classification .panel-body {
+	overflow: hidden;
+}
+
+.classification .panel-default>.panel-heading {
+	color: #fff;
+}
+
+.classification .panel-heading [data-toggle="collapse"]:after {
+	font-family: 'fontAwesome';
+	content: "\f068";
+	float: right;
+	font-size: 14px;
+	line-height: 23px;
+	margin-right: 2%;
+}
+
+.classification .panel-heading [data-toggle="collapse"].collapsed:after {
+	/*color: #969696;*/
+	font-family: 'fontAwesome';
+	content: "\f067";
+}
+
+.classification .panel-heading.fang [data-toggle="collapse"].add:after {
+	font-family: 'fontAwesome';
+	content: "\f107";
+	float: right;
+	font-size: 20px;
+	line-height: 23px;
+	margin-right: 2%;
+}
+
+.classification .panel-heading.fang [data-toggle="collapse"]:after {
+	font-family: 'fontAwesome';
+	content: "\f107";
+	float: right;
+	font-size: 20px;
+	line-height: 23px;
+	margin-right: 2%;
+	margin-top: -3px;
+}
+
+.classification .panel-heading.fang [data-toggle="collapse"].collapsed:after {
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+	/*color: #969696;*/
+}
+
+.classification .panel-default {
+	border-color: #2D3452;
+	border: none;
+
+}
+
+.classification .panel-default>.panel-heading.fang {
+	background-color: #2D3452;
+}
+
+.classification .panel {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	margin-right: 8px;
+	margin-bottom: 5px;
+}
+
+.classification .panel a {
+	text-decoration: none;
+}
+
+.panel .panel-heading {
+	background: #3C4663;
+    border: none;
+
+	/*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);*/
+}
+
+.panel .panel-heading.fang {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+#trees-parent {
+	width: 500px;
+	max-height: 700px;
+	overflow-y: hidden;
+	text-align: center;
+}
+
+#tree {
+	width: 500px;
+	max-height: 650px;
+	overflow: hidden;
+	text-align: center;
+	/*border: 1px solid #DEDEDE;*/
+}
+
+.tree label {
+	margin-left: 5px;
+	font-weight: 500;
+	background-color: #2D3452;
+}
+
+.tree-msg {
+	margin-left: 25px;
+}
+
+.panel-heading {
+	height: 48px;
+	padding: 15px;
+}
+
+#trees span.classification-delete {
+	display: none;
+}
+
+#tree span.classification-delete {
+	color: red;
+	display: inline-block;
+	margin-right: 30px;
+	margin-top: 2px;
+	display: none;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+#trees label,
+#tree label {
+	padding-left: 5px;
+	width: 87%;
+	color: #fff;
+	text-align: left;
+}
+
+#tree label:hover span.classification-delete {
+	display: block;
+}
+
+#trees .icheckbox_square-green {
+	margin-top: -4px;
+}
+
+#tree .icheckbox_square-green {
+	margin-top: -4px;
+}
+
+#classification-groups-form .mCustomScrollBox .mCSB_container,
+#trees-parent  .mCustomScrollBox .mCSB_container,
+#tree  .mCustomScrollBox .mCSB_container {
+	margin-right: 0px;
+}
+
+#classification-groups-form .mCSB_scrollTools,
+#trees-parent   .mCSB_scrollTools,
+#tree   .mCSB_scrollTools {
+	width: 10px;	/*margin-right:-10px;*/
+}
+
+#classification-groups-form .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+#trees-parent  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+#tree  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	background: #DDDDDD;
+	width: 5px;
+}
+
+#classification-groups-form  .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail,
+#trees-parent .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail,
+#tree  .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail {
+	/*background: #FFFFFF;*/
+	background-color: #2D3452;
+}
+#classification-groups-form {
+	padding: 10px 10px;
+	height: 400px;
+	overflow: auto;
+	margin-left: 10px;
+	margin-right: 10px;
+	border: 1px solid #3C3F61;
+}
+
+
+#classification-groups-form .table td{
+	border: none !important;
+	color: #fff;
+}
+#classification-groups-form .table  tbody > tr:nth-of-type(even) {
+  background: #2B2E4B !important;
+}
+
+#classification-groups-form .table  tbody > tr:nth-of-type(odd) {
+  background-color: #1D2141 !important;
+}
+#classification-delete-group p {
+	padding-left: 30px;
+	margin-top: 20px;
+	font-size: 16px;
+	color: #fff;
+}
+
+
+.panel-collapse.collapse.in{
+	background-color: #2D3452;
+}
+.panel.panel-default{
+	background-color: #2D3452;
+	border: none;
+}
+/*能耗统计分级-结束*/

@@ -7,13 +7,24 @@
 	<meta content="" name="description" />
 	<meta content="" name="author" />
 	<link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/layer.css" />
+	<link rel="stylesheet" type="text/css" href="css/basic/layer.css" />
 	<link rel="stylesheet" type="text/css" href="css/bayax.css">
 	<link rel="stylesheet" type="text/css" href="css/systemConfiguration2.css">
+	
+	  <!--[if lt IE 9]>
+        <script src="js/basic/html5shiv.js"></script>
+        <script src="js/basic/respond.min.js"></script>
+    <![endif]-->
+
 	<script type="text/javascript" src="js/basic/jquery.min.js"></script>
 
 </head>
 <body>
+
+	<!--[if lt IE 9]>
+<p class="browserupgrade">您的浏览器版本过旧，请到<a href="http://browsehappy.com/">这里</a>更新，以获得最佳的体验</p>
+<![endif]-->
+
 	<div class="container-fluid">
 		<div class="row">
 			<div id="sidebar" class="col-sm-3 col-md-2 sidebar">
@@ -131,7 +142,7 @@
 							<div class="form-group">
 								<label class="col-sm-1 control-label" style="padding-top: 19px;">界面语言</label>
 								<label class="col-sm-3 control-label" >
-									<select class="select-language form-control" value="">
+									<select class="select-language form-control"  disabled="disabled">
 										<option value="1">中文</option>
 										<option value="2">英文</option>
 										<option value="3">日文</option>
@@ -154,7 +165,7 @@
 		<span></span>
 	</div>
 	<input type="file" id="imageFileField-logo" size="28" style="opacity: 0;display:none;" onchange="ProjectFun.showPreview(this)" />
-	<script type="text/javascript" src="js/basic/layer/layer.js"></script>
+	<script type="text/javascript" src="js/basic/layer.js"></script>
 	<script type="text/javascript" src="js/basic/api.js"></script>
 	<script type="text/javascript" src="js/systemSet/engineeringManagement.js"></script>
 </body>

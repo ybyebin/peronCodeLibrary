@@ -71,9 +71,8 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
 			
 		// 移动
 		this.on("move",function(){
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss)
+			
 		});
 		// 悬浮窗
 		this.onMouseEnter = function() {
@@ -136,117 +135,101 @@ function labeldisplayDiv(obj) {
 
 	$('.div-fill').show();
 	$('.div-font-size').show();
+	$('.div-title').show();
+	componentCaption(obj);//标题
 	setCustomLabelComponentStyleInEditFiled(obj)
 }
 
 // 设置 自定义图片控件在编辑框的属性值
-function setCustomLabelComponentStyleInEditFiled(thiss) {
-
+function setCustomLabelComponentStyleInEditFiled(com) {
 	checkComponentTagidIsNull(); //判断前一个控件是否正确绑定Tag
 	
 	/*
 	 * 暂存该控件的id
 	 * 用于刷新控件的属性
 	 */
-	$("#spanid").html(thiss.id);
-	checkThisComponentIsTrue(thiss); //检查本控件的Tag是否正确(如果已经绑定)
+	$canvas.compID.html(com.id);
+	checkThisComponentIsTrue(com); //检查本控件的Tag是否正确(如果已经绑定)
 	// =================================基本======================
-
-	console.log("ID:" + thiss.id)
-
 	// 组件名称   name(用户输入)
-	$('#comp-name').val(thiss.getUserData().name);
+	$canvas.compName.val(com.getUserData().name);
 	
 	//组件描述   Description
-	$('#comp-desc').val(thiss.getUserData().Description);
-
-	//组件宽度   width
-	$('#comp-width').val(thiss.getWidth());
-
-	// 组件高度   height
-	$('#comp-height').val(thiss.getHeight());
+	$canvas.compDesc.val(com.getUserData().Description);
 	
 	//组件位置 X轴位置   x
-	$('#comp-offsetx').val(thiss.getAbsoluteX());
+	$canvas.comOffsetX.val(com.getAbsoluteX());
 
 	//组件位置 Y轴位置   y
-	$('#comp-offsety').val(thiss.getAbsoluteY());
+	$canvas.comOffsetY.val(com.getAbsoluteY());
 
 	//组件旋转角度 Rotation  
-	$('#comp-rotation').val(thiss.getRotationAngle());
-	console.log('旋转角度:'+thiss.getRotationAngle())
-
-	// 是否显示标题 ShowCaption 
-	switch (thiss.getUserData().ShowCaption) {
-		case true:
-			$('#comp-title').iCheck('check');
-			$('#comp-title-val').removeAttr("readonly");
-			break;
-		case false:
-			$('#comp-title').iCheck('uncheck');
-			$('#comp-title-val').attr("readonly", "readonly");
-			break;
-	}
-
-	// 标题内容 Caption  			 
-	$('#comp-title-val').val(thiss.getUserData().Caption);
+	$canvas.comRotation.val(com.getRotationAngle());
+	console.log('旋转角度:'+com.getRotationAngle())
 
 	//隐藏组件 Visible  
-	console.log('隐藏组件:' + thiss.getUserData().Visible)
-	switch (thiss.getUserData().Visible) {
+	console.log('隐藏组件:' + com.getUserData().Visible)
+	switch (com.getUserData().Visible) {
 		case true:
-			$('#comp-hides').iCheck('uncheck');
+			$canvas.comHides.iCheck('uncheck');
 			break;
 		case false:
-			$('#comp-hides').iCheck('check');
+			$canvas.comHides.iCheck('check');
+			break;
+		default:
 			break;
 	}
+
 	//是否不可用 Enable  
-	switch (thiss.getUserData().Enable) {
+	switch (com.getUserData().Enable) {
 		case true:
-			$('#comp-unabel').iCheck('check');
+			$canvas.comEnable.iCheck('check');
 			break;
 		case false:
-			$('#comp-unabel').iCheck('uncheck');
+			$canvas.comEnable.iCheck('uncheck');
+		default:
+			break;
 	}
 	//访问等级  AccessLevel 
-	$('#comp-level').text(thiss.getUserData().AccessLevel);
+	$canvas.comLevel.text(com.getUserData().AccessLevel);
+
 	//是否显示hover  ShowHint 
-	switch (thiss.getUserData().ShowHint) {
+	switch (com.getUserData().ShowHint) {
 		case true:
-			$('#comp-hover').iCheck('check');
-			$('#comp-hover-val').removeAttr("readonly");
+			$canvas.comHover.iCheck('check');
+			//hover内容  Hint 
+			$canvas.comHoverVal.removeAttr("readonly").val(com.getUserData().Hint);
 			break;
 		case false:
-			$('#comp-hover').iCheck('uncheck');
-			$('#comp-hover-val').attr("readonly", "readonly");
+			$canvas.comHover.iCheck('uncheck');
+			//hover内容  Hint 
+			$canvas.comHoverVal.attr("readonly", "readonly").val(com.getUserData().Hint);
 			break;
 	}
 
-	//hover内容  Hint 
-	$('#comp-hover-val').val(thiss.getUserData().Hint);
-	// =============================Data=============================
+
 	//Tag内容  tag 
-	$('#comp-tagaddress').val(thiss.getUserData().Tag.tag_name);
+	$canvas.comTagadd.val(com.getUserData().Tag.tag_name);
 
 	//是否只读  Readonly 
-	switch (thiss.getUserData().Readonly) {
+	switch (com.getUserData().Readonly) {
 		case true:
-			$('#comp-readonly').iCheck('check');
+			$canvas.comReadonly.iCheck('check');
 			break;
 		case false:
-			$('#comp-readonly').iCheck('uncheck');
+			$canvas.comReadonly.iCheck('uncheck');
 			break;
 	}
 
 	// =============================style=========================
 	//边框宽度  LineWidth
-	$('#style-width').text(thiss.getStroke());
+	console.log('查看组件边框宽度：' + com.getStroke())
+	$canvas.styleWidth.text(com.getStroke());
 
 	//边框颜色  LineColor
-	$('.style-border-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.style-border-color ul li').each(function(index, element) {
-		if (thiss.getColor().hash() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+	$canvas.styleBorderColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.styleBorderColor.each(function(index, element) {
+		if (com.getColor().hash() == rgb2hex($(element).css("background-color")).toUpperCase()) {
 			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
 				$(element).addClass("colorBlackBorder");
 			} else {
@@ -256,21 +239,20 @@ function setCustomLabelComponentStyleInEditFiled(thiss) {
 	});
 
 	//边框样式  LineStyle
-	if (thiss.getDashArray() === null) {
-		$('#style-style').text("默认")
+	if (com.getDashArray() === null) {
+		$canvas.styleStyle.text("默认")
 	} else {
-		$('#style-style').text(thiss.getDashArray())
+		$canvas.styleStyle.text(com.getDashArray())
 	}
 
-
 	// 文本内容  Text
-	$('#style-text').val(thiss.getText());
-	$('#text-font-size').val(thiss.getFontSize());
+	$canvas.styleText.val(com.getText());
+	$canvas.styleFontSize.val(com.getFontSize());
 
 	// 文本颜色  TextColor
-	$('.style-text-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.style-text-color ul li').each(function(index, element) {
-		if (thiss.getFontColor().hash() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+	$canvas.styleFontColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.styleFontColor.each(function(index, element) {
+		if (com.getFontColor().hash() == rgb2hex($(element).css("background-color")).toUpperCase()) {
 			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
 				$(element).addClass("colorBlackBorder");
 			} else {
@@ -281,9 +263,9 @@ function setCustomLabelComponentStyleInEditFiled(thiss) {
 
 
 	//填充(背景)颜色  fillColor
-	$('.style-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-	$('.style-fill-color ul li').each(function(index, element) {
-		if (thiss.getBackgroundColor().hash() == rgb2hex($(element).css("background-color")).toUpperCase()) {
+	$canvas.styleFillColor.removeClass("colorWhiteBorder colorBlackBorder");
+	$canvas.styleFillColor.each(function(index, element) {
+		if (com.getBackgroundColor().hash() == rgb2hex($(element).css("background-color")).toUpperCase()) {
 			if (rgb2hex($(element).css("background-color")) == "#ffffff") {
 				$(element).addClass("colorBlackBorder");
 			} else {
@@ -293,12 +275,13 @@ function setCustomLabelComponentStyleInEditFiled(thiss) {
 	});
 
 	//style 闪烁  blinking  
-	switch (thiss.getUserData().Blinking) {
+	switch (com.getUserData().Blinking) {
 		case true:
-			$('#style-flashing').iCheck('check');
+			$canvas.styleFlash.iCheck('check');
 			break;
 		case false:
-			$('#style-flashing').iCheck('uncheck');
+			$canvas.styleFlash.iCheck('uncheck');
 	}
+
 
 }

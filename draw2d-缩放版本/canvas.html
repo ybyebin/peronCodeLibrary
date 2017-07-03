@@ -13,9 +13,9 @@
 	<link type="text/css" rel="stylesheet" href="css/basic/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" type="text/css" href="css/basic/colpick.css">	
 	<link rel="stylesheet" type="text/css" href="css/basic/check_black.css">	
-	<link rel="stylesheet" type="text/css" href="js/basic/layer/skin/layer.css">
+	<link rel="stylesheet" type="text/css" href="css/basic/layer.css">
 	<link rel="stylesheet" type="text/css" href="css/bayax.css">
-	<link rel="stylesheet" type="text/css" href="css/edit.css">
+	<link rel="stylesheet" type="text/css" href="css/canvas.css">
 
 	<!-- 必须导入的JS -->
 	<script type="text/javascript" src="js/edit/jquery-1.10.2.min.js"></script>
@@ -30,23 +30,16 @@
 	<script type="text/javascript" src="js/edit/rgbcolor.js"></script>
 	<script type="text/javascript" src="js/edit/shifty.js"></script>
 	<script type="text/javascript" src="js/edit/draw2d.js"></script>
-	<!-- <script type="text/javascript" src="js/edit/draw2d_core.js"></script> -->
 	<script type="text/javascript" src="js/edit/fraphael.js"></script>
-	<script type="text/javascript" src="js/actionJS/CopyInterceptorPolicy.js"></script>
 
 	<!-- 拖动效果 -->
-		<script type="text/javascript" src="js/edit/jquery.browser.js"></script>
+	<script type="text/javascript" src="js/edit/jquery.browser.js"></script>
 	<script type="text/javascript" src="js/edit/jquery-ui-1.8.23.custom.min.js"></script>
 	<script type="text/javascript" src="js/actionJS/view.js"></script>
 	<script type="text/javascript" src="js/basic/api.js"></script>
-
 	<script type="text/javascript" src="js/actionJS/pageToInitialize.js"></script>
-
 	<script type="text/javascript" src="js/edit/imgScroll.js"></script>
-	<script type="text/javascript" src="js/edit/icheck.min.js"></script>
-
-	<script type="text/javascript" src="js/basic/layer/layer.js"></script>
-	<!-- <script type="text/javascript" src="../js/basic/page.js"></script> -->
+	
 
 </head>
 <body>
@@ -64,7 +57,7 @@
 					</span>
 					<label>
 						当前您所在的位置:
-						<span class="group-name"></span>
+						<span class="group-name view-name"></span>
 					</label>
 				</a>
 					
@@ -335,6 +328,7 @@
 			<li class="li-canvas col-sm-1">
 				<div class="back-only">
 					<div id="canvas" class="canvas">
+					<!-- <img id="myBgimage" data-url="" src="images/logo-text.png"> -->
 					<img id="myBgimage" data-url="" src="images/logo-text.png">
 					<div id="tooltips"></div>
 				</div>			
@@ -388,7 +382,7 @@
 												</label>
 											</div>
 
-											<div class="form-group div-size div-line-only">
+											<div class="form-group div-size div-line-only div-label">
 												<label class="control-label col-sm-1">尺寸</label>
 												<label class="control-label col-sm-3">
 													<input id="comp-width" type="text" class="form-control"></label>
@@ -1585,7 +1579,7 @@
 			</label>
 			<input id="content-search-input" type="text" placeholder="请输入数据标签名称" required class="col-sm-9">
 			<label class="col-sm-1 label_img">
-				<img id="clearImage" src="images/delete.png" style="margin-left: -10px;">
+				<img id="clearImage"  src="images/delete.png" style="margin-left: -10px;">
 			</label>
 		</div>
 		<br>
@@ -1697,23 +1691,11 @@
 	</div>
 
 	<script type="text/javascript">
-	(function($) {
-			$(window).on("load", function() {
-				$(".component-attr").mCustomScrollbar({
-					autoHideScrollbar: true
-				});
-				// $(".search-datalabel-left").mCustomScrollbar({
-				// 	autoHideScrollbar: true
-				// });
-				$('.have-btn').mCustomScrollbar({
-					autoHideScrollbar: true
-				});
-					});
-				})(jQuery);
-
 			picrun_ini("List2_1", 'ISL_Cont_1', "List1_1");
 	</script>
 
+		<script type="text/javascript" src="js/edit/icheck.min.js"></script>
+		<script type="text/javascript" src="js/basic/layer.js"></script>
 		<script type="text/javascript" src="js/edit/bootstrap.min.js"></script>	
 		<script type="text/javascript" src="js/basic/jquery.mCustomScrollbar.concat.min.js"></script>
 		<script type="text/javascript" src="js/edit/colpick.js"></script>	

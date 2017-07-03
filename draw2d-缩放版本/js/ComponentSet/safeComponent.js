@@ -146,9 +146,7 @@ var switchComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -267,9 +265,7 @@ var pipingComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -387,9 +383,7 @@ var WarninglampComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -506,9 +500,7 @@ var blowerfanComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -627,9 +619,7 @@ var exhaustfanComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -747,9 +737,7 @@ var bengComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -869,9 +857,7 @@ var ElectricTwoWayValveComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -992,9 +978,7 @@ var SolenoidValveComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 
 		// 悬浮窗
@@ -1115,9 +1099,7 @@ var ElectricButterflyValvesComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -1239,9 +1221,7 @@ var AirFiltrationComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -1361,9 +1341,7 @@ var AirHeatingComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -1487,9 +1465,7 @@ var AirCoolerComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -1611,9 +1587,7 @@ var HumidifierComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -1735,9 +1709,7 @@ var controlPanelComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -1859,9 +1831,7 @@ var FluorescentLampComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -1982,9 +1952,7 @@ var LEDComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -2106,9 +2074,7 @@ var IncandescentComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -2229,9 +2195,7 @@ var MetalHalideComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -2371,9 +2335,7 @@ var temperatureComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide(); 
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -2505,9 +2467,7 @@ var humidityComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -2642,9 +2602,7 @@ var pressureComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -2780,9 +2738,7 @@ var differentialPressureComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 
 		// 悬浮窗
@@ -2916,9 +2872,7 @@ var liquidComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -3053,9 +3007,7 @@ var electricComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -3186,9 +3138,7 @@ var VoltageComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -3323,9 +3273,7 @@ var frequencyComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -3459,9 +3407,7 @@ var activePowerComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -3593,9 +3539,7 @@ var ElectricityConsumptionComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -3726,9 +3670,7 @@ var levelComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -3861,9 +3803,7 @@ var GasComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -3985,9 +3925,7 @@ var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+		componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -4111,9 +4049,7 @@ var monitoringComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -4234,9 +4170,7 @@ var qiujiComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -4358,9 +4292,7 @@ var highqiujiComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -4481,9 +4413,7 @@ var EntranceGuardComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {
@@ -4606,9 +4536,7 @@ var detectorComponent = draw2d.shape.basic.Rectangle.extend({
 		});
 		// 移动
 		this.on("move", function() {
-			$('#comp-offsetx').val(thiss.getAbsoluteX());
-			$('#comp-offsety').val(thiss.getAbsoluteY());
-			$('#tooltips').hide();
+			componentMove(thiss);
 		});
 		// 悬浮窗
 		this.image.onMouseEnter = function() {

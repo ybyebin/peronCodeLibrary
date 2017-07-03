@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>智能建筑管理系统</title>
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/basic/layer.css" />
+	<link rel="stylesheet" type="text/css" href="css/bayax.css">
+	<link rel="stylesheet" type="text/css" href="css/systemConfiguration2.css">
+	<script type="text/javascript" src="js/basic/jquery.min.js"></script>
+
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div id="sidebar" class="col-sm-3 col-md-2 sidebar">
+				<div id="treeview" class="treeview">
+					<ul>
+						<li>
+							<a id="logo-a" href="deviceControlCanvas.html">
+								<img id="logo" src="images/logo-text.png">
+							</a>
+						</li>
+						<li  class="active">
+							<a class="title_foursize" href="engineeringManagement.html">
+								<i></i>								
+								<span>工程管理</span>
+							</a>
+						</li>
+						<li>
+							<a class="title_foursize" href="nodeManagement.html">
+								<i></i>								
+								<span>节点管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="datalabelManagement.html">
+								<i></i>								
+								<span>数据标签管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="energyconsumptionStatisticDis.html">
+								<i></i>								
+								<span>能耗统计设定</span>
+							</a>
+						</li>
+						<li>
+							<a href="graphicImages.html">
+								<i></i>								
+								<span>图形画面管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="energyconsumptionStatisticClassification.html">
+								<i></i>						
+								<span>能耗统计分级</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<form id="project-main-management" class="form-horizontal content_head">
+					<div class="form-group project-main-btn">
+						<button onclick="ProjectFun.edit()" id="project-main-btn-edit" type="button" class="button-normal btn btn-primary">编辑</button>
+						<button id="" type="button" class="button-normal btn btn-primary">导入工程</button>
+						<button id="" type="button" class="button-normal btn btn-primary">导出工程</button>
+
+					</div>
+					
+					<div class="form-group div-content">
+						<div class="div-display div-display-pro form-group">
+							<div class="form-group">
+								<label class="col-sm-1 control-label">项目名称</label>
+								<label class="obj-name-text col-sm-3 control-label"></label>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-1 control-label">标志</label>
+								<label class="col-sm-3 control-label">
+									<img id="logo-main-img" class="project-logo-img" src="images/logo-text.png"></label>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-1 control-label">界面语言</label>
+								<label class="language-text col-sm-3 control-label"></label>
+							</div>
+						</div>
+					
+				</div>
+
+				</form>
+
+				<form id="project-edit-management" class="form-horizontal content_head">
+					<div class="form-group project-dis-btn">
+						<button id="project-btn-save" type="button" class="button-normal btn btn-primary" data-id="" onclick="ProjectFun.save()">保存</button>
+						<button id="project-btn-cancle" type="button" class="button-cancle btn btn-primary" onclick="ProjectFun.cancle()">取消</button>
+					</div>
+					<div class="form-group div-content">
+						<div class="div-display div-display-pro form-group">
+							<div class="form-group">
+								<label class="col-sm-1 control-label" style="padding-top: 12px;">项目名称</label>
+								<div class="div-pro-name col-sm-3">
+									<input type="text" class="obj-name-input form-control"></div>
+
+								<label  class="col-sm-5 control-label label-prompt">
+									<span  class="warn_span"></span>
+									<span class="instructions">
+										<span>*</span>
+										最大10文字或20字符，不能包含特殊字符
+									</span>
+								</label>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-1 control-label">标志</label>
+								<div class="div-pro-img col-sm-3">
+									<img data-url=""  id="logo-img" class="project-logo-img" src="images/logo-text.png"></div>
+								<div class="col-sm-5 div-upimage">
+									<button id="obj-btn-upLogo"  type="button" class="button-normal btn btn-primary col-sm-2" onclick="ProjectFun.upLogo()">上传图片</button>
+									<br>
+									<br>
+									<br>
+									<label style="color: #c9c9c9">请上传小于5MB的JPG、PNG等文件</label>
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-1 control-label" style="padding-top: 19px;">界面语言</label>
+								<label class="col-sm-3 control-label" >
+									<select class="select-language form-control"  disabled="disabled">
+										<option value="1">中文</option>
+										<option value="2">英文</option>
+										<option value="3">日文</option>
+									</select>
+								</label>
+							</div>					
+						</div>
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+	<div class="loading" style="display: none;">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+	<input type="file" id="imageFileField-logo" size="28" style="opacity: 0;display:none;" onchange="ProjectFun.showPreview(this)" />
+	<script type="text/javascript" src="js/basic/layer.js"></script>
+	<script type="text/javascript" src="js/basic/api.js"></script>
+	<script type="text/javascript" src="js/systemSet/engineeringManagement.js"></script>
+</body>
+</html>
