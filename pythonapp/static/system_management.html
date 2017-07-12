@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>系统管理</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="css/dashboard.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/layer/layer.css">
+	<script src="js/public/angular.min.js"></script>
+	<script src="js/public/jquery.min.js"></script>
+
+</head>
+
+<body ng-app="bayaxSysManage" ng-controller="myCtrl">
+
+	<nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">MewtocolSIG</a>
+			</div>
+
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- BEGIN left menu -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<div id="treeview1" class="treeview">
+					<ul class="list-group"></ul>
+				</div>
+				<script src="js/public_left_menu.js"></script>
+			</div>
+			<!-- END left menu -->
+
+			<div id="main"  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div class="panel panel-default ">
+					<div class="panel-heading">
+						<h3>系统管理</h3>
+					</div>
+					<div class="panel-body system-manage-panel">
+						<div class="form-group">
+							<button ng-click="btnClick('reset')" class="btn btn-primary" >重启</button>
+							<button ng-click="btnClick('sysInit')" class="btn-init btn btn-primary" >初始化</button>
+						</div>
+						<form class="form-horizontal" style="width: 60%">
+
+							<div class="panel panel-default ">
+								<div class="panel-body">
+									<div class="form-group">
+										<label class="col-sm-1  control-label">软件版本</label>
+										<label  class="col-sm-5  control-label">{{SoftwareVersion}}</label>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-1  control-label">时间</label>
+										<label  class="col-sm-2  control-label" >{{times}}</label>
+
+										<button type="button" class="btn btn-primary change-time-btn" ng-click="changeTime()">修改时间</button>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label">工程标识</label>
+										<input ng-model="ProIentification" ng-blur="validationName()" ng-focus="isRightName=false" ng-class="{'bordered': isRightName}" type="text" class="form-control" maxlength="20">
+										<label class="sysmanwarn col-sm-1 control-label" >
+											20位以内字母数字(
+											<span>修改前与管理员确认</span>
+											)
+										</label>
+									</div>
+
+								</div>
+							</div>
+							<div class="panel panel-default ">
+
+								<div class="panel-body">
+									<div class="form-group">
+										<label class="col-sm-1  control-label">修改密码</label>
+										<input ng-model="pasword" ng-blur="validationPas()" ng-focus="isRightPas=false" ng-class="{'bordered': isRightPas}" maxlength="10" type="password" class="pas_input form-control">
+										<label class="pas_warn col-sm-1 control-label">5-10位字母数字</label>
+
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-1  control-label">确认密码</label>
+										<input ng-model="MSpasword" ng-blur="validationMSPas()" ng-focus="isRightMSPas=false" ng-class="{'bordered': isRightMSPas}" maxlength="10" type="password" class="form-control"></div>
+								</div>
+							</div>
+
+						</form>
+
+						<div class="form-group">
+							<button class="btn btn-primary" ng-click="save()">保存设定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="restart" style="display: none;">
+		<span>{{warnContent}}</span>
+	</div>
+
+	<div id="change-time-layer">
+		<div class="form-group">
+			<input ng-model="t_year"  type="text" class="col-sm-1 form-control input-year" onkeyup="value=value.replace(/[^\d]/g,'') "  />
+			<label class="col-sm-1  control-label" style="">年</label>
+			<input ng-model="t_month" type="text" class="col-sm-1 form-control input-month" onkeyup="value=value.replace(/[^\d]/g,'') "  />
+			<label class="col-sm-1  control-label ">月</label>
+			<input ng-model="t_day" type="text" class="col-sm-1 form-control input-day" onkeyup="value=value.replace(/[^\d]/g,'') " />
+			<label class="col-sm-1  control-label ">日</label>
+			<input ng-model="t_hour" type="text" class="col-sm-1 form-control input-hour" onkeyup="value=value.replace(/[^\d]/g,'') " />
+			<label class="col-sm-1  control-label ">时</label>
+			<input ng-model="t_min" type="text" class="col-sm-1 form-control input-minutes" onkeyup="value=value.replace(/[^\d]/g,'') " />
+			<label class="col-sm-1  control-label ">分</label>
+			<input ng-model="t_second" type="text" class="col-sm-1 form-control input-seconds" onkeyup="value=value.replace(/[^\d]/g,'') " />
+			<label class="col-sm-1  control-label ">秒</label>
+
+		</div>
+	</div>
+	<script  src="js/public/layer.js"></script>
+	<script src="js/public/main.js"></script>
+	<script  src="js/system_management.js"></script>
+
+	<script type="text/javascript" src="js/public/bootstrap-datetimepicker.js"></script>
+
+
+
+</body>
+
+</html>

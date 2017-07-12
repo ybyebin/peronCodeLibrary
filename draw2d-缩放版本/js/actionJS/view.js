@@ -5,7 +5,6 @@
  * @Data 
  */
 
-
 // 画布
 var imageCanvas = '';
 
@@ -13,17 +12,9 @@ var imageCanvas = '';
 // 声明命名空间
 var example = {};
 
-/** 
- * The **GraphicalEditor** is responsible for layout and dialog handling.
- * @extends draw2d.ui.parts.GraphicalEditor
- */
 example.Application = Class.extend({
 	NAME: "example.Application",
 
-	/**
-	 * @constructor
-	 * @param {String} canvasId the id of the DOM element to use as paint container
-	 */
 	init: function() {
 		this.view = new example.View("canvas");
 		this.toolbar = new example.Toolbar("toolbar", this.view);
@@ -455,15 +446,10 @@ example.Toolbar = Class.extend({
 
 
 			var node = this.view.getPrimarySelection();
-
-			// var node = this.view.getCurrentSelection();
-			// console.log(this.view.getCurrentSelection())
-
 			if (node !== null) {
 				var command = new draw2d.command.CommandDelete(node);
 				this.view.getCommandStack().execute(command);
-				// var command = new draw2d.command.CommandDelete(node);
-				// this.view.getCommandStack().execute(command);
+
 			}
 
 		}, this)).button("option", "disabled", true);
@@ -528,7 +514,6 @@ example.Toolbar = Class.extend({
 	 */
 	onSelectionChanged: function(emitter, figure) {
 		this.deleteButton.button("option", "disabled", figure === null);
-		// this.saveButton.button("option", "disabled", figure === null);
 	},
 
 	/**
@@ -651,31 +636,73 @@ var HoverConnection = draw2d.Connection.extend({
 	}
 });
 
+
+
 /**
- * [打印 控件数据 ----------调试用]
- * @param  {[type]} canvas [description]
- * @return {[type]}        [description]
+ * [canvas 初始化]
+ * @param  {[type]} type [description]
+ * @return {[type]}      [description]
  */
-function displayJSON(canvas) {
-	var writer = new draw2d.io.json.Writer();
-	writer.marshal(canvas, function(json) {
-		console.log('画布数据:' + JSON.stringify(json, null, 2));
-	});
-}
-
-
-// 还原数据时,在画布找到 控件
-function getCanvasNode(id) {
-	var node = imageCanvas.getFigure(id);
-	var nodeLine = imageCanvas.getLine(id);
-	if (node !== null) {
-		return node;
-	} else if (nodeLine !== null) {
-		return nodeLine;
+function allCanvasinit(type) {
+	//选择框  样式
+	draw2d.Configuration.factory.createResizeHandle = function(forShape, type) {
+		var handle = new draw2d.ResizeHandle(forShape, type);
+		handle.attr({
+			width: 10,
+			height: 10,
+			radius: 0,
+			color: "#35C99D",
+			stroke: 1,
+			bgColor: "#35C99D"
+		});
+		return handle;
 	}
 
+	var app = new example.Application();
 
+
+	var canvas = app.view; //主画布
+	// 边框阴影
+	var filter = canvas.paper.createFilter();
+	filter.createShadow(0, 0, 3, 0.3, "#000000");
+	filter.element.setAttribute("x", "-35%");
+	filter.element.setAttribute("y", "-35%");
+
+	app.view.installEditPolicy(new draw2d.policy.connection.DragConnectionCreatePolicy({
+		createConnection: function() {
+			return new HoverConnection();
+		}
+	}));
+
+
+	canvas.on("figure:add", function(emitter, event) {
+		if (!(event.figure instanceof draw2d.Connection)) {
+			event.figure.shape.filter(filter);
+		}
+	});
+	canvas.installEditPolicy(new draw2d.policy.canvas.SnapToGeometryEditPolicy({
+		lineColor: "#35c99d"
+	}));
+	canvas.installEditPolicy(new draw2d.policy.canvas.SnapToInBetweenEditPolicy({
+		lineColor: "#35c99d"
+	}));
+	canvas.installEditPolicy(new draw2d.policy.canvas.SnapToCenterEditPolicy({
+		lineColor: "#35c99d"
+	}));
+
+	canvas.installEditPolicy(new draw2d.policy.canvas.CoronaDecorationPolicy());
+	// canvas.installEditPolicy(new draw2d.policy.canvas.BoundingboxSelectionPolicy());
+	imageCanvas = canvas;
+
+	canvas.installEditPolicy(new CopyInterceptorPolicy());
+	canvas.getCommandStack().addEventListener(function(e) {
+		if (e.isPostChangeEvent()) {
+			displayJSON(canvas);
+		}
+	});
+	getGroupNameAndViewData(sessionStorage.getItem("view_id"), canvas, type);
 }
+
 
 /**
  * [获取画面名称 和 画面所在组 edit]
@@ -702,7 +729,7 @@ function getGroupNameAndViewData(id, canvas, type) {
 			if (data.success) {
 				console.log("请求到的数据:" + JSON.stringify(data, null, 2))
 				switch (type) {
-					case 'new':				
+					case 'new':
 						if (data.data !== null) {
 							// 画面名字
 							viewName.text(data.data.name);
@@ -716,7 +743,7 @@ function getGroupNameAndViewData(id, canvas, type) {
 							if (bg_img_url === null || bg_img_url === '') {
 								layer.msg('无数据');
 							} else {
-								$('#myBgimage').css('background-image','url('+e.target.result+')').data("url", bg_img_url);							
+								$('#myBgimage').css('background-image', 'url(' + e.target.result + ')').data("url", bg_img_url);
 							}
 							if (data.data.background_color !== null) {
 								$("#canvas").css("background-color", data.data.background_color);
@@ -736,8 +763,8 @@ function getGroupNameAndViewData(id, canvas, type) {
 								var reader = new draw2d.io.json.Reader();
 								reader.unmarshal(canvas, canvasJson);
 								// 插件问题清空数据
-								$('#comp-offsetx').val('');
-								$('#comp-offsety').val('');
+								$canvas.comOffsetX.val('');
+								$canvas.comOffsetY.val('');
 
 								var writer = new draw2d.io.json.Writer();
 								writer.marshal(canvas, function(json) {
@@ -814,15 +841,33 @@ function getGroupNameAndViewData(id, canvas, type) {
 	});
 }
 
-// 滚动条
-(function($) {
-	$(window).on("load", function() {
-		$(".component-attr").mCustomScrollbar({
-			autoHideScrollbar: true
-		});
 
-		$('.have-btn').mCustomScrollbar({
-			autoHideScrollbar: true
-		});
+
+
+/**
+ * [打印 控件数据 ----------调试用]
+ * @param  {[type]} canvas [description]
+ * @return {[type]}        [description]
+ */
+function displayJSON(canvas) {
+	var writer = new draw2d.io.json.Writer();
+	writer.marshal(canvas, function(json) {
+		console.log('画布数据:' + JSON.stringify(json, null, 2));
 	});
-})(jQuery);
+}
+
+
+/**
+ *  还原数据时,在画布找到 控件]
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+function getCanvasNode(id) {
+	var node = imageCanvas.getFigure(id);
+	var nodeLine = imageCanvas.getLine(id);
+	if (node !== null) {
+		return node;
+	} else if (nodeLine !== null) {
+		return nodeLine;
+	}
+}

@@ -1,3 +1,16 @@
+// 滚动条
+(function($) {
+	$(window).on("load", function() {
+		$(".component-attr").mCustomScrollbar({
+			autoHideScrollbar: true
+		});
+
+		$('.have-btn').mCustomScrollbar({
+			autoHideScrollbar: true
+		});
+	});
+})(jQuery);
+
 $(function() {
 	//颜色初始化
 	var color_arr = ['#F5A623', '#7ED321', '#F57373', '#35C99D', '#000000', '#999999', '#FFFFFF', '#4A4A4A', '#03A3FC', '#DDDDDD'];
@@ -17,7 +30,7 @@ $(function() {
 });
 
 
-var loadings = $('.loading');
+
 
 // 直线 水平
 $('#horizontal').on('ifChecked', function(event) {
@@ -48,14 +61,13 @@ $('#vertical').on('ifChecked', function(event) {
 
 
 /**
- * [getNode 在画布中捕获控件]
+ * [在画布中捕获控件 用于处理选中的组件]
  * @return {[控件]} 
  */
 function getNode() {
 	if ($("#spanid").text() !== "") {
 		var node = imageCanvas.getFigure($("#spanid").text());
 		var nodeLine = imageCanvas.getLine($("#spanid").text());
-
 		if (node !== null) {
 			return node;
 		} else if (nodeLine !== null) {
@@ -100,14 +112,15 @@ $('#comp-desc').on('input', function() {
  * [控件宽度]
  */
 $('#comp-width').on('input', function() {
-	console.log("输入控件宽度:" + $("#comp-width").val());
+	var compwidth = $("#comp-width").val();
+	console.log("输入控件宽度:" + compwidth);
 	if (getNode()) {
 		var node = getNode();
-		if (Number($('#comp-width').val()) < 5) {
+		if (Number(compwidth) < 5) {
 			return;
 		}
 		if (node.isResizeable()) {
-			node.setWidth($('#comp-width').val());
+			node.setWidth(compwidth);
 			node.repaint();
 		} else {
 			layer.msg('该控件不支持缩放');
@@ -123,14 +136,15 @@ $('#comp-width').on('input', function() {
  * [控件高度]
  */
 $('#comp-height').on('input', function() {
-	console.log("输入控件高度:" + $("#comp-height").val());
+	var compheight = $("#comp-height").val();
+	console.log("输入控件高度:" + compheight);
 	if (getNode()) {
 		var node = getNode();
-		if (Number($('#comp-height').val()) < 5) {
+		if (Number(compheight) < 5) {
 			return;
 		}
 		if (node.isResizeable()) {
-			node.setHeight($('#comp-height').val());
+			node.setHeight(compheight);
 			node.repaint();
 		} else {
 			layer.msg('该控件不支持缩放');
@@ -144,15 +158,16 @@ $('#comp-height').on('input', function() {
  * [控件位置 X]
  */
 $('#comp-offsetx').on('input', function() {
-	console.log('控件位置X' + $('#comp-offsetx').val());
+	var compoffsetx = $('#comp-offsetx').val();
+	console.log('控件位置X' + compoffsetx);
 	if (getNode()) {
 		var node = getNode();
 		if (node.userData.types === 'LineComponent') {
 			var arr = node.getVertices();
-			arr.data[0].x = Number($('#comp-offsetx').val());
+			arr.data[0].x = Number(compoffsetx);
 			node.setVertices(arr);
 		} else {
-			node.setX($('#comp-offsetx').val());
+			node.setX(compoffsetx);
 		}
 
 		node.repaint();
@@ -164,15 +179,16 @@ $('#comp-offsetx').on('input', function() {
  * [控件位置 Y]
  */
 $('#comp-offsety').on("input", function() {
-	console.log('控件位置Y' + $('#comp-offsety').val());
+	var compoffsety = $('#comp-offsety').val();
+	console.log('控件位置Y' + compoffsety);
 	if (getNode()) {
 		var node = getNode();
 		if (node.userData.types === 'LineComponent') {
 			var arr = node.getVertices();
-			arr.data[0].y = Number($('#comp-offsety').val());
+			arr.data[0].y = Number(compoffsety);
 			node.setVertices(arr);
 		} else {
-			node.setY($('#comp-offsety').val());
+			node.setY(compoffsety);
 		}
 		node.repaint();
 
@@ -203,21 +219,21 @@ $('#comp-rotation').on("input", function() {
  * [是否显示标题 ]
  */
 $('#comp-title').on('ifChanged', function(event) {
-
+	var comptitleval = $('#comp-title-val');
 	if (getNode()) {
-		layer.msg('标题')
+		// layer.msg('标题')
 		var node = getNode();
 		if ($(this).is(':checked')) {
 			console.log('选中');
 			node.userData.ShowCaption = true;
 			node.label.setVisible(true);
-			$('#comp-title-val').removeAttr("readonly");
+			comptitleval.removeAttr("readonly");
 			node.label.setText(node.userData.Caption);
 		} else {
 			console.log('没');
 			node.userData.ShowCaption = false;
 			node.label.setVisible(false);
-			$('#comp-title-val').attr("readonly", "readonly");
+			comptitleval.attr("readonly", "readonly");
 		}
 		node.repaint();
 	}
@@ -229,8 +245,9 @@ $('#comp-title').on('ifChanged', function(event) {
 $('#comp-title-val').on('input', function() {
 	if (getNode()) {
 		var node = getNode();
-		node.label.setText($('#comp-title-val').val());
-		node.userData.Caption = $('#comp-title-val').val();
+		var value = $('#comp-title-val').val();
+		node.label.setText(value);
+		node.userData.Caption = value;
 		node.label.repaint();
 	}
 })
@@ -241,17 +258,16 @@ $('#comp-title-val').on('input', function() {
 $('#comp-hover').on('ifChanged', function(event) {
 	if (getNode()) {
 		var node = getNode();
-
+		var comphoverval = $('#comp-hover-val');
 		if ($(this).is(':checked')) {
 			node.userData.ShowHint = true;
-			$('#comp-hover-val').removeAttr("readonly");
-			$('#comp-hover-val').val(node.getUserData().Hint);
+			comphoverval.val(node.getUserData().Hint).removeAttr("readonly");
+
 		} else {
 			node.userData.ShowHint = false;
-			$('#comp-hover-val').attr("readonly", "readonly");
-			$('#comp-hover-val').val(node.getUserData().Hint);
+			comphoverval.val(node.getUserData().Hint).attr("readonly", "readonly");
 		}
-		// node.repaint();
+
 	}
 });
 
@@ -274,10 +290,10 @@ $('#comp-hides').on('ifChanged', function(event) {
 	if (getNode()) {
 		layer.msg('隐藏组件')
 		var node = getNode();
-		// console.log('ID:'+node.id)
+		var comptitle = $('#comp-title');
 		if ($(this).is(':checked')) {
 			node.setAlpha(0);
-			$('#comp-title').iCheck('disable');
+			comptitle.iCheck('disable');
 			if (node.image) {
 				// node.image.setVisible(false);
 				node.image.setAlpha(0);
@@ -295,7 +311,7 @@ $('#comp-hides').on('ifChanged', function(event) {
 		} else {
 			// node.setVisible(true);
 			node.setAlpha(1);
-			$('#comp-title').iCheck('enable');
+			comptitle.iCheck('enable');
 			if (node.image) {
 				// node.image.setVisible(true);
 				node.image.setAlpha(1);
@@ -366,32 +382,31 @@ $('#comp-tagaddress').on('input', function() {
 				name: $('#comp-tagaddress').val()
 			},
 			beforeSend: function() {
-				loadings.show();
+				$canvas.loadings.show();
 			},
 			complete: function() {
-				loadings.hide();
+				$canvas.loadings.hide();
 			},
 			success: function(data) {
-				loadings.hide();
+				$canvas.loadings.hide();
+				var tagimg = $("#tagWrongImg");
 				if (data.success) {
 					node.userData.Tag.tag_type = Number(data.data.tag_type);
 					node.userData.Tag.tag_id = data.data.tag_id;
 					node.userData.Tag.tag_name = data.data.tag_name;
 					node.userData.Tag.bingding_status = 1;
-					$("#tagWrongImg").show();
-					$("#tagWrongImg").attr("src", "../images/img/right.png");
+					tagimg.show().attr("src", "../images/img/right.png");
 				} else {
 					node.userData.Tag.tag_type = "";
 					node.userData.Tag.tag_id = "";
 					node.userData.Tag.tag_name = $('#comp-tagaddress').val();
 					node.userData.Tag.bingding_status = 2;
-					$("#tagWrongImg").show();
-					$("#tagWrongImg").attr("src", "../images/img/worry.png");
+					tagimg.show().attr("src", "../images/img/worry.png");
 					console.log("绑定tag失败------失败原因:" + JSON.stringify(data, null, 2))
 				}
 			},
 			error: function(data) {
-				loadings.hide();
+				$canvas.loadings.hide();
 				node.userData.Tag.tag_type = "";
 				node.userData.Tag.tag_id = "";
 				node.userData.Tag.tag_name = $('#comp-tagaddress').val();
@@ -424,17 +439,17 @@ $('#comp-tagaddress-btn').on('click', function() {
 		},
 		yes: function(index) {
 			// $('input[name="search_ckss"]:checked').data('id');
-			if ($('input[name="search_ckss"]:checked').data('id') === null) {
+			var tagchecks = $('input[name="search_ckss"]:checked');
+			if (tagchecks.data('id') === null) {
 				layer.msg('未选中任何标签')
 			} else {
 				var node = getNode();
-				node.userData.Tag.tag_type = Number($('input[name="search_ckss"]:checked').data('type'));
-				node.userData.Tag.tag_id = Number($('input[name="search_ckss"]:checked').data('id'));
-				node.userData.Tag.tag_name = String($('input[name="search_ckss"]:checked').data('name'));
+				node.userData.Tag.tag_type = Number(tagchecks.data('type'));
+				node.userData.Tag.tag_id = Number(tagchecks.data('id'));
+				node.userData.Tag.tag_name = String(tagchecks.data('name'));
 				node.userData.Tag.bingding_status = 1;
-				$('#comp-tagaddress').val($('input[name="search_ckss"]:checked').data('name'))
-				$("#tagWrongImg").show();
-				$("#tagWrongImg").attr("src", "../images/img/rights.png");
+				$('#comp-tagaddress').val(tagchecks.data('name'))
+				$("#tagWrongImg").show().attr("src", "../images/img/rights.png");
 				layer.close(index);
 			}
 
@@ -530,10 +545,11 @@ $('.style-border-color span').colpick({
 		node.userData.BlinkingColor = '#' + hex;
 		node.setColor("#" + hex);
 		node.repaint();
-		$('.style-border-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		var lis = $('.style-border-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.style-border-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -612,10 +628,11 @@ $('.style-text-color span').colpick({
 		var node = getNode();
 		node.setFontColor("#" + hex);
 		node.repaint();
-		$('.style-text-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		var lis = $('.style-text-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.style-text-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -645,9 +662,7 @@ $('.style-fill-color ul').on('click', 'li', function() {
 
 	if (getNode()) {
 		var node = getNode();
-
-		$('#text-alpha-style').iCheck('uncheck');
-		$('#text-alpha-style').iCheck('enable');
+		$('#text-alpha-style').iCheck('uncheck').iCheck('enable');
 		$('.style-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
 		if (rgb2hex($(this).css("background-color")) === "#ffffff") {
 			$(this).addClass("colorBlackBorder");
@@ -674,12 +689,12 @@ $('.style-fill-color span').colpick({
 		var node = getNode();
 		node.setBackgroundColor("#" + hex);
 		node.repaint();
-		$('#text-alpha-style').iCheck('uncheck');
-		$('#text-alpha-style').iCheck('enable');
-		$('.style-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		$('#text-alpha-style').iCheck('uncheck').iCheck('enable');
+		var lis = $('.style-fill-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.style-fill-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -820,11 +835,11 @@ $('.ontrue-border-color span').colpick({
 	onSubmit: function(hsb, hex, rgb, el) {
 		var node = getNode();
 		node.userData.onTrue.LineColor = "#" + hex;
-
-		$('.ontrue-border-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		var lis  = $('.ontrue-border-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.ontrue-border-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -883,10 +898,11 @@ $('.ontrue-text-color span').colpick({
 	onSubmit: function(hsb, hex, rgb, el) {
 		var node = getNode();
 		node.userData.onTrue.TextColor = "#" + hex;
-		$('.ontrue-text-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		var lis = $('.ontrue-text-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.ontrue-text-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -917,8 +933,7 @@ $('.ontrue-text-color span').colpick({
 $('.ontrue-fill-color ul').on('click', 'li', function() {
 	if (getNode()) {
 		var node = getNode();
-		$('#text-alpha-ontrue').iCheck('uncheck');
-		$('#text-alpha-ontrue').iCheck('enable');
+		$('#text-alpha-ontrue').iCheck('uncheck').iCheck('enable');
 		$('.ontrue-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
 		if (rgb2hex($(this).css("background-color")) === "#ffffff") {
 			$(this).addClass("colorBlackBorder");
@@ -939,12 +954,12 @@ $('.ontrue-fill-color span').colpick({
 	onSubmit: function(hsb, hex, rgb, el) {
 		var node = getNode();
 		node.userData.onTrue.FillColor = "#" + hex;
-		$('#text-alpha-ontrue').iCheck('uncheck');
-		$('#text-alpha-ontrue').iCheck('enable');
-		$('.ontrue-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		$('#text-alpha-ontrue').iCheck('uncheck').iCheck('enable');
+		var lis = $('.ontrue-fill-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.ontrue-fill-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -1086,10 +1101,11 @@ $('.onfalse-border-color span').colpick({
 	onSubmit: function(hsb, hex, rgb, el) {
 		var node = getNode();
 		node.userData.onFalse.LineColor = "#" + hex;
-		$('.onfalse-border-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		var lis = $('.onfalse-border-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.onfalse-border-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -1178,8 +1194,7 @@ $('.onfalse-text-color span').colpick({
 $('.onfalse-fill-color ul').on("click", 'li', function() {
 	if (getNode()) {
 		var node = getNode();
-		$('#text-alpha-onfalse').iCheck('uncheck');
-		$('#text-alpha-onfalse').iCheck('enable');
+		$('#text-alpha-onfalse').iCheck('uncheck').iCheck('enable');
 		$('.onfalse-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
 		if (rgb2hex($(this).css("background-color")) === "#ffffff") {
 			$(this).addClass("colorBlackBorder");
@@ -1200,8 +1215,7 @@ $('.onfalse-fill-color span').colpick({
 	onSubmit: function(hsb, hex, rgb, el) {
 		var node = getNode();
 		node.userData.onFalse.FillColor = "#" + hex;
-		$('#text-alpha-onfalse').iCheck('uncheck');
-		$('#text-alpha-onfalse').iCheck('enable');
+		$('#text-alpha-onfalse').iCheck('uncheck').iCheck('enable');
 		$('.onfalse-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
@@ -1350,10 +1364,11 @@ $('.onalarm-border-color span').colpick({
 	onSubmit: function(hsb, hex, rgb, el) {
 		var node = getNode();
 		node.userData.onAlarm.LineColor = "#" + hex;
-		$('.onalarm-border-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		var lis = $('.onalarm-border-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.onalarm-border-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -1410,10 +1425,11 @@ $('.onalarm-text-color span').colpick({
 	onSubmit: function(hsb, hex, rgb, el) {
 		var node = getNode();
 		node.userData.onAlarm.TextColor = "#" + hex;
-		$('.onalarm-text-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		var lis = $('.onalarm-text-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.onalarm-text-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -1444,8 +1460,7 @@ $('.onalarm-text-color span').colpick({
 $('.onalarm-fill-color ul').on('click', 'li', function() {
 	if (getNode()) {
 		var node = getNode();
-		$('#text-alpha-onalarm').iCheck('uncheck');
-		$('#text-alpha-onalarm').iCheck('enable');
+		$('#text-alpha-onalarm').iCheck('uncheck').iCheck('enable');
 		$('.onalarm-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
 		if (rgb2hex($(this).css("background-color")) === "#ffffff") {
 			$(this).addClass("colorBlackBorder");
@@ -1466,12 +1481,12 @@ $('.onalarm-fill-color span').colpick({
 	onSubmit: function(hsb, hex, rgb, el) {
 		var node = getNode();
 		node.userData.onAlarm.FillColor = "#" + hex;
-		$('#text-alpha-onalarm').iCheck('uncheck');
-		$('#text-alpha-onalarm').iCheck('enable');
-		$('.onalarm-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		$('#text-alpha-onalarm').iCheck('uncheck').iCheck('enable');
+		var lis = $('.onalarm-fill-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.onalarm-fill-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -1615,10 +1630,11 @@ $('.onDisc-border-color span').colpick({
 	onSubmit: function(hsb, hex, rgb, el) {
 		var node = getNode();
 		node.userData.onDisconnected.LineColor = "#" + hex;
-		$('.onDisc-border-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		var lis = $('.onDisc-border-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.onDisc-border-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -1676,10 +1692,11 @@ $('.onDisc-text-color span').colpick({
 	onSubmit: function(hsb, hex, rgb, el) {
 		var node = getNode();
 		node.userData.onDisconnected.TextColor = "#" + hex;
-		$('.onDisc-text-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		var lis = $('.onDisc-text-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.onDisc-text-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -1710,8 +1727,7 @@ $('.onDisc-text-color span').colpick({
 $('.onDisc-fill-color ul ').on('click', 'li', function() {
 	if (getNode()) {
 		var node = getNode();
-		$('#text-alpha-ondisc').iCheck('uncheck');
-		$('#text-alpha-ondisc').iCheck('enable');
+		$('#text-alpha-ondisc').iCheck('uncheck').iCheck('enable');
 		$('.onDisc-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
 		if (rgb2hex($(this).css("background-color")) === "#ffffff") {
 			$(this).addClass("colorBlackBorder");
@@ -1732,12 +1748,12 @@ $('.onDisc-fill-color span').colpick({
 	onSubmit: function(hsb, hex, rgb, el) {
 		var node = getNode();
 		node.userData.onDisconnected.FillColor = "#" + hex;
-		$('#text-alpha-ondisc').iCheck('uncheck');
-		$('#text-alpha-ondisc').iCheck('enable');
-		$('.onDisc-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
+		$('#text-alpha-ondisc').iCheck('uncheck').iCheck('enable');
+		var lis = $('.onDisc-fill-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
 		$(el).colpickHide();
 		var need_add_color = false;
-		$('.onDisc-fill-color ul li').each(function(index, element) {
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -1792,7 +1808,7 @@ $('#comp-alpha-ondisc').on('input', function() {
 		}
 	}
 });
-//onalarm 单位
+//ondisc 单位
 $('#comp-unit-ondis').on('input', function() {
 	if (getNode()) {
 		var node = getNode();
@@ -1849,8 +1865,9 @@ $('#canvas-attr span.add-color').colpick({
 		$(el).colpickHide();
 		$(el).colpickSetColor(rgb2hex($("#canvas").css("background-color")).substring(1));
 		var need_add_color = false;
-		$('.canvas-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-		$('.canvas-fill-color ul li').each(function(index, element) {
+		var lis = $('.canvas-fill-color ul li');
+		lis.removeClass("colorWhiteBorder colorBlackBorder");
+		lis.each(function(index, element) {
 			if (hex.toUpperCase() == rgb2hex($(element).css("background-color")).substring(1).toUpperCase()) {
 				need_add_color = false;
 				if (hex.toUpperCase() === "FFFFF") {
@@ -2037,13 +2054,13 @@ function showPreview(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					loadings.show();
+					$canvas.loadings.show();
 				},
 				complete: function() {
-					loadings.hide();
+					$canvas.loadings.hide();
 				},
 				success: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					if (data.success) {
 						console.log("上传图片成功:" + JSON.stringify(data, null, 2))
 						layer.msg('图片上传成功');
@@ -2057,7 +2074,7 @@ function showPreview(source) {
 					}
 				},
 				error: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			})
@@ -2090,16 +2107,16 @@ function imageShowPreviewStyle(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					loadings.show();
+					$canvas.loadings.show();
 				},
 				beforeSend: function() {
-					loadings.show();
+					$canvas.loadings.show();
 				},
 				complete: function() {
-					loadings.hide();
+					$canvas.loadings.hide();
 				},
 				success: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					if (data.success) {
 						// console.log("上传图片成功style:" + JSON.stringify(data, null, 2))
 						layer.msg('图片上传成功');
@@ -2112,7 +2129,7 @@ function imageShowPreviewStyle(source) {
 					}
 				},
 				error: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			})
@@ -2149,16 +2166,16 @@ function imageShowPreviewOnTrue(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					loadings.show();
+					$canvas.loadings.show();
 				},
 				beforeSend: function() {
-					loadings.show();
+					$canvas.loadings.show();
 				},
 				complete: function() {
-					loadings.hide();
+					$canvas.loadings.hide();
 				},
 				success: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					if (data.success) {
 						layer.msg('图片上传成功');
 						$('#ontrue-image').val(data.data);
@@ -2168,7 +2185,7 @@ function imageShowPreviewOnTrue(source) {
 					}
 				},
 				error: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			});
@@ -2203,16 +2220,16 @@ function imageShowPreviewOnFalse(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					loadings.show();
+					$canvas.loadings.show();
 				},
 				beforeSend: function() {
-					loadings.show();
+					$canvas.loadings.show();
 				},
 				complete: function() {
-					loadings.hide();
+					$canvas.loadings.hide();
 				},
 				success: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					if (data.success) {
 						layer.msg('图片上传成功');
 						$('#onfalse-image').val(data.data);
@@ -2222,7 +2239,7 @@ function imageShowPreviewOnFalse(source) {
 					}
 				},
 				error: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			})
@@ -2257,16 +2274,16 @@ function imageShowPreviewOnAlerm(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					loadings.show();
+					$canvas.loadings.show();
 				},
 				beforeSend: function() {
-					loadings.show();
+					$canvas.loadings.show();
 				},
 				complete: function() {
-					loadings.hide();
+					$canvas.loadings.hide();
 				},
 				success: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					if (data.success) {
 						console.log("上传图片成功onAlarm:" + JSON.stringify(data, null, 2))
 						layer.msg('图片上传成功');
@@ -2277,7 +2294,7 @@ function imageShowPreviewOnAlerm(source) {
 					}
 				},
 				error: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			})
@@ -2312,16 +2329,16 @@ function imageShowPreviewOnDisconnected(source) {
 					data: e.target.result
 				},
 				beforeSend: function() {
-					loadings.show();
+					$canvas.loadings.show();
 				},
 				beforeSend: function() {
-					loadings.show();
+					$canvas.loadings.show();
 				},
 				complete: function() {
-					loadings.hide();
+					$canvas.loadings.hide();
 				},
 				success: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					if (data.success) {
 						layer.msg('图片上传成功');
 						$('#onDisc-image').val(data.data);
@@ -2331,7 +2348,7 @@ function imageShowPreviewOnDisconnected(source) {
 					}
 				},
 				error: function(data) {
-					loadings.hide();
+					$canvas.loadings.hide();
 					layer.msg("上传图片失败:" + data.error_message);
 				}
 			})
@@ -2365,8 +2382,8 @@ $('.have-btn').on('click', 'img', function() {
 });
 // 全局按钮点击方法
 $('.have-btn').on('click', 'button', function() {
-	$('.first-attr').hide();
-	$('.second-attr').show();
+	$canvas.menuFirAttr.hide();
+	$canvas.menuSecAttr.show();
 	$('.have-btn p button').removeClass('active');
 	$(this).addClass('active');
 	$('#glo-title').data('id', $(this).attr('id'));
@@ -2424,13 +2441,13 @@ $('#glo-btn-tagname').on('input', function() {
 				})
 			},
 			beforeSend: function() {
-				loadings.show();
+				$canvas.loadings.show();
 			},
 			complete: function() {
-				loadings.hide();
+				$canvas.loadings.hide();
 			},
 			success: function(data) {
-				loadings.hide();
+				$canvas.loadings.hide();
 				if (data.success) {
 
 					obj.data('tag-type', data.data.tag_type);
@@ -2450,7 +2467,7 @@ $('#glo-btn-tagname').on('input', function() {
 				}
 			},
 			error: function(data) {
-				loadings.hide();
+				$canvas.loadings.hide();
 				obj.data('tag-type', '');
 				obj.data('tag-id', '');
 				obj.data('tag-name', '');
@@ -2575,18 +2592,18 @@ function componentResize(com){
 }
 // 控件移动
 function componentMove(com){
-	$canvas.comOffsetX.val(com.getAbsoluteX());
-	$canvas.comOffsetY.val(com.getAbsoluteY());
+	$canvas.comOffsetX.val(com.getAbsoluteX().toFixed(0));
+	$canvas.comOffsetY.val(com.getAbsoluteY().toFixed(0));
 	$canvas.comTooltips.hide();
 }
 
 $('#canvas').on('click', function() {
-	$('.first-attr').show();
-	$('.second-attr').hide();
+	$canvas.menuFirAttr.show();
+	$canvas.menuSecAttr.hide();
 });
 $('.have-btn').on('click', 'button', function() {
-	$('.first-attr').hide();
-	$('.second-attr').show();
+	$canvas.menuFirAttr.hide();
+	$canvas.menuSecAttr.show();
 });
 
 
@@ -2596,13 +2613,13 @@ $('.have-btn').on('click', 'button', function() {
  * @return {[type]} [description]
  */
 function resetAttributeMenu() {
-	$('.first-attr').show();
-	$('.second-attr').hide();
-	$('.div-alpha').hide();
-	$('.div-unit').hide();
-	$('.div-font-size').hide();
-	$('.div-text-alpha').hide();
-	$('.tab-ul li:first-child a').click();
+	$canvas.menuFirAttr.show();
+	$canvas.menuSecAttr.hide();
+	$canvas.menuDivAlpha.hide();
+	$canvas.menuDivUnit.hide();
+	$canvas.menuDivFontSize.hide();
+	$canvas.menuDivTextAlpha.hide();
+	$('#a-tocom').click();
 	$('p.p-show').each(function(index, element) {
 		if ($(element).hasClass('collapsed')) {
 			$(element).click();
@@ -2613,18 +2630,17 @@ function resetAttributeMenu() {
 			$(element).click();
 		}
 	});
-	$('.div-basic-hide').show();
-	$('.just-for-label').show();
-	$('.div-line-only').show();
-	$('.div-fill').hide();
-	$('.div-vlcurl').hide();
-	$('.div-line-check').hide();
+	$canvas.menuDivBasicHide.show();
+	$canvas.menuJustForLabel.show();
+	$canvas.menuDivLineOnly.show();
+	$canvas.menuDivFill.hide();
+	$canvas.menuVlcUrl.hide();
+	$canvas.menuDivLineCheck.hide();
 
 	// 边框宽度
-	$('.div-normal-width').show();
-	$('.div-line-conduit').hide();
-
-	$('.div-label').show();
+	$canvas.menuDivNormalWidth.show();
+	$canvas.menuDIvLineConduit.hide();
+	$canvas.menuDivLabel.show();
 
 	setTimeout(function() {
 		$(".component-attr").mCustomScrollbar('scrollTo', 'top');
@@ -2736,7 +2752,30 @@ function getColor(string) {
 
 
 window.$canvas = {
-		comTooltips:$('#tooltips'),
+		loadings:$('.loading'),//加载等待
+		// 菜单
+		menuFirAttr:$('.first-attr'),
+		menuSecAttr:$('.second-attr'),
+		menuDivAlpha:$('.div-alpha'),
+		menuDivUnit:$('.div-unit'),
+		menuDivTitle:$('.div-title'),
+		menuDivImage:$('.div-image'),
+		menuDivFontSize:$('.div-font-size'),
+		menuDivTextAlpha:$('.div-text-alpha'),
+		menuDivTextVal:$('.div-text-val'),
+		menuDivTextColor:$('.div-text-color'),
+		menuDivFontSize:$('.div-font-size'),
+		menuDivBasicHide:$('.div-basic-hide'),
+		menuJustForLabel:$('.just-for-label'),
+		menuDivLineOnly:$('.div-line-only'),
+		menuDivFill:$('.div-fill'),
+		menuVlcUrl:$('.div-vlcurl'),//摄像地址div
+		menuDivLineCheck:$('.div-line-check'),
+		menuDivNormalWidth:$('.div-normal-width'),
+		menuDIvLineConduit:$('.div-line-conduit'),
+		menuDivLabel:$('.div-label'),
+
+		comTooltips:$('#tooltips'),//控件提示框
 		compID: $("#spanid"), //ID
 		compName: $('#comp-name'), //名称
 		compDesc: $('#comp-desc'), //描述
@@ -2754,6 +2793,7 @@ window.$canvas = {
 		comHoverVal: $('#comp-hover-val'), //hover内容
 		comTagadd: $('#comp-tagaddress'), //tag
 		comReadonly: $('#comp-readonly'), //只读
+		comVlcUrlVal:$('#comp-vlc-val'),//摄像地址
 
 		styleWidth: $('#style-width'), //style 宽度
 		styleBorderColor: $('.style-border-color ul li'), // style 边框颜色
@@ -2765,6 +2805,8 @@ window.$canvas = {
 		styleText:$('#style-text'),//style 文本内容
 		styleFontSize:$('#text-font-size'),//style 字体大小
 		styleFontColor:$('.style-text-color ul li'),//style 字体颜色
+		styleTextUnit:$('#comp-unit-style'),//style 文本单位
+		styleBgAlpha:$('#text-alpha-style'),//style text背景透明
 
 		onTrueWidth: $('#ontrue-width'), // ontrue 宽度
 		onTrueBorderColor: $('.ontrue-border-color ul li'), //ontrue 边框颜色
@@ -2773,6 +2815,11 @@ window.$canvas = {
 		onTrueAlpha:$('#comp-alpha-ontrue'),//ontrue 透明度
 		onTrueFlash: $('#ontrue-flashing'), // ontrue 闪烁
 		onTruePicture:$('#ontrue-image'),//ontrue 图片地址
+		onTrueText:$('#ontrue-text'),//onTrue 文本内容
+		onTrueFontColor:$('.ontrue-text-color ul li'),//onTrue 字体颜色
+		onTrueTextUnit:$('#comp-unit-ontrue'),//ontrue 文本单位
+		onTrueBgAlpha:$('#text-alpha-ontrue'),//ontrue text背景透明
+
 
 		onFalseWidth: $('#onfalse-width'), // onfalse 宽度
 		onFalseBorderColor: $('.onfalse-border-color ul li'), // onfalse 边框颜色
@@ -2781,6 +2828,10 @@ window.$canvas = {
 		onFalseAlpha:$('#comp-alpha-onfalse'),//onfalse 透明度
 		onFalseFlash: $('#onfalse-flashing'), //onfalse 闪烁
 		onFalsePicture:$('#onfalse-image'),//onfalse 图片地址
+		onFalseText:$('#onfalse-text'),//onfalse 文本内容
+		onFalseFontColor:$('.onfalse-text-color ul li'),//onfalse  字体颜色
+		onFalseTextUnit:$('#comp-unit-onfalse'),//onfalse 文本单位
+		onFalseBgAlpha:$('#text-alpha-onfalse'),//onfalse text背景透明
 
 		onAlarmWidth: $('#onalarm-width'), //onalarm 宽度
 		onAlarmBorderColor: $('.onalarm-border-color ul li'), //onalarm 边框颜色
@@ -2789,6 +2840,10 @@ window.$canvas = {
 		onAlarmAlpha:$('#comp-alpha-onalarm'),//onalarm 透明度
 		onAlarmFlash: $('#onalarm-flashing'), //onalarm 闪烁
 		onAlarmPicture:$('#onalarm-image'),//onalarm 图片地址
+		onAlarmText:$('#onalarm-text'),//onalarm 文本内容
+		onAlarmFontColor:$('.onalarm-text-color ul li'),//onalarm 字体颜色
+		onAlarmTextUnit:$('#comp-unit-onalarm'),//onalarm 文本单位
+		onAlarmBgAlpha:$('#text-alpha-onalarm'),//onalarm text背景透明
 
 		onDiscWidth:$('#onDisc-width') , //ondisc 宽度
 		onDiscBorderColor:$('.onDisc-border-color ul li') , //ondisc 边框颜色
@@ -2797,18 +2852,22 @@ window.$canvas = {
 		onDiscAlpha:$('#comp-alpha-ondisc'),//ondisc 透明度
 		onDiscFlash:$('#onDisc-flashing'), //ondisc 闪烁
 		onDiscPicture:$('#onDisc-image'),//ondisc 图片地址
+		onDiscText:$('#onDisc-text'),//ondisc 文本内容
+		onDiscFontColor:$('.onDisc-text-color ul li'),//ondisc 字体颜色
+		onDiscTextUnit:$('#comp-unit-ondis'),//ondisc 文本单位
+		onDiscBgAlpha:$('#text-alpha-ondisc'),//ondisc text背景透明
 	}
-	// 补充 组件大小和位置 旋转角度
+// 补充 组件大小和位置 旋转角度
 function componentSizeAndoffset(com) {
 	$canvas.comWidth.val(com.getWidth());
 	$canvas.comHeight.val(com.getHeight());
-	$canvas.comOffsetX.val(com.getAbsoluteX());
+	$canvas.comOffsetX.val(com.getAbsoluteX().toFixed(0));
 	$canvas.comOffsetY.val(com.getAbsoluteY());
 	$canvas.comRotation.val(com.getRotationAngle());
 }
-
+// 是否显示标题 ShowCaption 
 function componentCaption(com){
-	// 是否显示标题 ShowCaption 
+	
 	switch (com.getUserData().ShowCaption) {
 		case true:
 			$canvas.comCaption.iCheck('check');

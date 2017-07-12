@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	<style type="text/css">
+		div{
+			width: 300px;
+			height: 300px;
+		}
+		.a{
+			background-color: red;
+		}
+		.b{
+			background-color: blue;
+		}
+
+	</style>
+</head>
+<body  ng-app="bayaxPointSet" ng-controller="myCtrl" >
+		<div class="a" ng-show="aa"></div>
+		<div class="b" ng-show="bb"></div>
+		<script type="text/javascript">
+			// alert('123')
+		</script>
+		<script type="text/javascript">
+			var app = angular.module('bayaxPointSet', []);
+			app.controller('myCtrl', function($scope) {
+				$scope.aa = true;
+				// $scope.bb = true;
+			});
+		</script>
+</body>
+</html>

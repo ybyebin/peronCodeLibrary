@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>数据监控</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="css/dashboard.css" rel="stylesheet">	
+	<link rel="stylesheet" type="text/css" href="css/layer/layer.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+	<script src="js/public/jquery.min.js"></script>
+	<script src="js/public/angular.min.js"></script>
+</head>
+
+<body>
+
+	<nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">MewtocolSIG</a>
+			</div>
+			
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- BEGIN left menu -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<div id="treeview1" class="treeview">
+					<ul class="list-group">
+					</ul>
+				</div>
+				<script src="js/public_left_menu.js"></script>
+			</div>
+			<!-- END left menu -->
+
+			<div   ng-app="bayaxDataMonitoring" ng-controller="myCtrl" id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div class="panel panel-default ">
+					<div class="panel-heading">
+						<h3>点监控列表</h3>
+					</div>
+					<div class="panel-body">
+						<ul class="nav nav-tabs data_monitoring_ul">
+							<li class="active">
+								<a ng-click="refreshType('point')" class="a-href"  href="#point_state" data-toggle="tab">点状态</a>
+							</li>
+							<li>
+								<a ng-click="refreshType('equipment')" class="a-href"  href="#equipment_state" data-toggle="tab">设备状态</a>
+							</li>
+							<li>
+								<button id="btn-refresh" class="btn btn-primary" ng-click='refresh()'>刷新</button>
+							</li>
+
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane fade in active" id="point_state">
+								<table class="table table-bordered" style="margin-top: 20px;">
+									<thead>
+										<tr>
+											<th>行号</th>
+											<th>点名称</th>
+											<th>点ID</th>
+											<th>数值</th>
+											<th>状态</th>
+										</tr>
+									</thead>
+									<tbody>
+											<tr ng-repeat="row in pointDatas">
+												<td>{{ $index + 1 }}</td>
+												<td>{{ row.name }}</td>
+												<td>{{ row.id}}</td>
+												<td>{{ row.number}}</td>
+												<td>{{ row.status}}</td>
+											</tr>
+									</tbody>
+								</table>
+								<!-- 分页 -->
+									<div id="pointStatusPage" class=" tcdPageCode"></div>							
+							</div>
+							<div class="tab-pane fade " id="equipment_state">							
+								<!-- TCP模式 -->
+								<form class="form-horizontal col-sm-12">									
+									<div class="form-group">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th>行号</th>
+													<th>设备IP地址</th>
+													<th>通信状态</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="rows in equipmentDatas">
+													<td>{{ $index + 1 }}</td>
+													<td>{{ rows.ip}}</td>
+													<td>{{ rows.status}}</td>
+												</tr>
+											</tbody>
+										</table>
+										<!-- 分页 -->
+										<div id="equipmentStatusPage" class=" tcdPageCode">
+											
+										</div>
+									</div>
+								</form>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="bool_change">
+		
+		<div class="form-group">
+			<input type="radio" name="bools"  class="ckss"> true
+		</div>
+		<div class="form-group">
+			<input type="radio" name="bools"  class="ckss"> false
+		</div>
+
+	</div>
+	<div id="integer_change">
+		<input type="text" class="form-control" placeholder="输入数值">
+	</div>
+
+	<script src="js/public/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/public/layer.js"></script>
+	<script type="text/javascript" src="js/public/main.js"></script>
+	<script type="text/javascript" src="js/data_monitoring.js"></script>
+
+	<script src="js/public/holder.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="js/public/ie10-viewport-bug-workaround.js"></script>
+
+</body>
+
+</html>

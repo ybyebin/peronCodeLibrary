@@ -1,0 +1,36 @@
+document.write("<ul class=\"return_top\">");
+document.write("   <li class=\"_erweima\">");
+document.write("      <img src=\"./img/return_top.png\">");
+document.write("   </li>");
+document.write("   <li class=\"_lxwm cp\">");
+document.write("      <a href=\"\">");
+document.write("         <img src=\"./img/lxwm.png\">");
+document.write("      </a>");
+document.write("   </li>");
+document.write("   <li class=\"_jiantou cp\">");
+document.write("      <img src=\"./img/jiantou.png\">");
+document.write("   </li>");
+document.write("</ul>");
+
+document.write("<ul class=\"_share\">");
+document.write("   <li class=\"_wx cp\">");
+document.write("      <img src=\"./img/wx.png\">");
+document.write("   </li>");
+document.write("   <li class=\"_wb cp\">");
+document.write("      <a href=\"\">");
+document.write("         <img src=\"./img/wb.png\">");
+document.write("      </a>");
+document.write("   </li>");
+document.write("   <li class=\"_pyq cp\">");
+document.write("      <img src=\"./img/pyq.png\">");
+document.write("   </li>");
+document.write("</ul>");
+
+document.write("<ul class=\"_attention\">");
+document.write("   <li class=\"_pinglun cp\">");
+document.write("      <img src=\"./img/pinglun.png\">");
+document.write("   </li>");
+document.write("   <li class=\"_zuozhe cp\">");
+document.write("      <img src=\"./img/zuozhe.png\">");
+document.write("   </li>");
+document.write("</ul>");

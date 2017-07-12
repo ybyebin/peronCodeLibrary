@@ -102,8 +102,7 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
 		// 缩放
 		this.on("resize", function() {
 			thiss.image.setHeight(thiss.getHeight());
-			thiss.image.setWidth(thiss.getWidth());
-			
+			thiss.image.setWidth(thiss.getWidth());		
 			componentResize(thiss);
 		});
 		// 移动
@@ -151,10 +150,10 @@ function imageDisplayDiv(obj) {
 	//重置属性框
 	resetAttributeMenu();
 	// 隐藏该控件没有的属性
-	$('.div-basic-hide').hide();
-	$('.div-title').show();
-	$('.div-image').show();
-	$('.div-fill').hide();
+	$canvas.menuDivBasicHide.hide();
+	$canvas.menuDivTitle.show();
+	$canvas.menuDivImage.show();
+	$canvas.menuDivFill.hide();
 	componentCaption(obj);//标题
 	componentSizeAndoffset(obj);
 	componentInitData(obj);

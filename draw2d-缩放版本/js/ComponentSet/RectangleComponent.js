@@ -108,7 +108,7 @@ var rectangleComponent = draw2d.shape.node.Between.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 	},
 	onTimer: function() {
@@ -225,7 +225,7 @@ var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 
 	},
@@ -343,7 +343,7 @@ var EllipseComponent = draw2d.shape.node.Between.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 	},
 	onTimer: function() {
@@ -455,7 +455,7 @@ var polygonComponent = draw2d.shape.basic.Polygon.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 
 	},
@@ -573,7 +573,7 @@ var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 	},
 
@@ -699,7 +699,7 @@ var BothArrowVComponent = draw2d.shape.icon.Icon.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 
 	},
@@ -824,7 +824,7 @@ var forRightComponent = draw2d.shape.icon.Icon.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 
 	},
@@ -951,7 +951,7 @@ var forLeftComponent = draw2d.shape.icon.Icon.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 
 	},
@@ -1077,7 +1077,7 @@ var forUpComponent = draw2d.shape.icon.Icon.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 
 	},
@@ -1205,7 +1205,7 @@ var forDownComponent = draw2d.shape.icon.Icon.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 	},
 
@@ -1327,7 +1327,7 @@ var conduitCompontent = draw2d.shape.node.HorizontalBus.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 	},
 	onTimer: function() {
@@ -1438,7 +1438,7 @@ var conduitCompontentV = draw2d.shape.node.VerticalBus.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 	},
 	onTimer: function() {
@@ -1462,9 +1462,9 @@ function basicdisplayDiv(obj) {
 	//重置属性框
 	resetAttributeMenu();
 	// 隐藏该控件没有的属性
-	$('.div-basic-hide').hide();
-	$('.div-fill').show();
-	$('.div-alpha').show();
+	$canvas.menuDivBasicHide.hide();
+	$canvas.menuDivFill.show();
+	$canvas.menuDivAlpha.show();
 
 
 	componentSizeAndoffset(obj);

@@ -3,6 +3,10 @@
 	padding: 0;
 }
 
+.nav>li>a:focus{
+	background-color: #3E4687;
+}
+
 body {
 	font-family: '微软雅黑';
 	background-color: #15182D;
@@ -391,7 +395,7 @@ a.a-Broadcast::after {
 	/*background: gray;*/
 	background-repeat:no-repeat;
 	background-size:contain;
-	background-image: url(../images/Hydrangeas.jpg);
+	/*background-image: url(../images/Hydrangeas.jpg);*/
 	background-position: center;
 }
 
@@ -684,8 +688,11 @@ a.a-Broadcast::after {
 	background-color: #2D3045;
 	border: none;
 	border-left: 1px solid #999;
+	margin-left: 0;
 }
-
+#canvas-img-btn:focus{
+	outline: none;
+}
 #canvas-attr form > div button {
 	height: 25px;
 	padding-top: 0;
@@ -893,6 +900,9 @@ a.a-Broadcast::after {
 	background-color: #2D3045;
 	border: none;
 	border-left: 1px solid #999;
+}
+#glo-btn-btn{
+	margin-left: 0;
 }
 
 input.input-img {

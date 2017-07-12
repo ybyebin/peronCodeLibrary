@@ -140,12 +140,12 @@ function LineDisplayDiv(obj){
 	//重置属性框
 	resetAttributeMenu();
 	// 隐藏该控件没有的属性
-	$('.div-basic-hide').hide();
-	$('.div-fill').hide();
-	$('.div-line-only').hide();
-	$('.div-line-check').show();
-	$('.div-normal-width').hide();
-	$('.div-line-conduit').show();
+	$canvas.menuDivBasicHide.hide();
+	$canvas.menuDivFill.hide();
+	$canvas.menuDivLineOnly.hide();
+	$canvas.menuDivLineCheck.show();
+	$canvas.menuDivNormalWidth.hide();
+	$canvas.menuDIvLineConduit.show();
 	componentInitData(obj);
 }
 

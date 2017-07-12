@@ -37,7 +37,7 @@
 	<script type="text/javascript" src="js/edit/jquery-ui-1.8.23.custom.min.js"></script>
 	<script type="text/javascript" src="js/actionJS/view.js"></script>
 	<script type="text/javascript" src="js/basic/api.js"></script>
-	<script type="text/javascript" src="js/actionJS/pageToInitialize.js"></script>
+	<!-- <script type="text/javascript" src="js/actionJS/pageToInitialize.js"></script> -->
 	<script type="text/javascript" src="js/edit/imgScroll.js"></script>
 	
 
@@ -353,10 +353,10 @@
 					<div id="first-attr" class="collapse in">
 						<ul class="nav nav-tabs tab-ul">
 							<li class="active">
-								<a href="#component-attr" data-toggle="tab">控件属性</a>
+								<a id="a-tocom" href="#component-attr" data-toggle="tab">控件属性</a>
 							</li>
 							<li>
-								<a href="#canvas-attr" data-toggle="tab">画布属性</a>
+								<a id="a-canvas" href="#canvas-attr" data-toggle="tab">画布属性</a>
 							</li>
 
 						</ul>
@@ -378,7 +378,7 @@
 											<div class="form-group">
 												<label class="control-label col-sm-1">描述</label>
 												<label class="control-label col-sm-8" >
-													<textarea id="comp-desc" class="form-control"></textarea>
+													<textarea id="comp-desc" class="form-control" style="resize: none"></textarea>
 												</label>
 											</div>
 
@@ -1692,6 +1692,10 @@
 
 	<script type="text/javascript">
 			picrun_ini("List2_1", 'ISL_Cont_1', "List1_1");
+
+			$(function(){
+				allCanvasinit('new');
+			})
 	</script>
 
 		<script type="text/javascript" src="js/edit/icheck.min.js"></script>

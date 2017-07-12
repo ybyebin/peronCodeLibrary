@@ -1,0 +1,56 @@
+.list_of_topics .box_left ._title{
+	font-size:22px;
+	border-bottom:1px solid  #DFDFDF;
+	line-height:40px;
+	width:700px;
+}
+.list_of_topics .box_left ._title b{
+	padding-bottom:5px;
+	border-bottom:2px solid #BC0909;
+	letter-spacing:2px;
+	color:#3E3E3E;
+}
+.list_of_topics .box_left .li_author a{
+	color:#717171;
+}
+.list_of_topics .box_left .li_author{
+	width:180px;
+	background-color:#F1F1F1;
+	margin:20px 10px 0;
+	font-size:14px;
+	padding:20px 20px 10px;
+	line-height:28px;
+}
+.list_of_topics .box_left .div_author img{
+	border-radius:50%;
+	margin:0px auto 5px;
+	width:65px;
+	display: block
+}
+.list_of_topics .box_left .about_author{
+	overflow:hidden;
+	margin:0 0 20px -10px;
+}
+.list_of_topics  .box_left{
+	width:720px;
+}
+.list_of_topics .box_left .div_author p{
+	font-size:16px;
+	color:#4C4C4C;
+	text-align:center;
+}
+.list_of_topics .A_Z p{
+	color:#F6840B;
+	font-size:22px;
+	line-height:50px;
+}
+.list_of_topics .A_Z li{
+	overflow:hidden;
+}
+.list_of_topics .search_content a{
+	font-size:20px;
+	float: left;
+	line-height:20px;
+	margin:0 40px 10px 0;
+	color:#414141;
+}

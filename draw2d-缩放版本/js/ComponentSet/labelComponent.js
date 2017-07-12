@@ -81,7 +81,7 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
 			}
 		};
 		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
+			$canvas.comTooltips.hide();
 		};
 
 		// =========更改文本===================
@@ -128,14 +128,14 @@ function labeldisplayDiv(obj) {
 	//重置属性框
 	resetAttributeMenu();
 	// 隐藏该控件没有的属性
-	$('.div-basic-hide').hide();
-	$('.div-text-val').show();
-	$('.div-text-color').show();
-	$('.just-for-label').hide();
+	$canvas.menuDivBasicHide.hide();
+	$canvas.menuDivTextVal.show();
+	$canvas.menuDivTextColor.show();
+	$canvas.menuJustForLabel.hide();
 
-	$('.div-fill').show();
-	$('.div-font-size').show();
-	$('.div-title').show();
+	$canvas.menuDivFill.show();
+	$canvas.menuDivFontSize.show();
+	$canvas.menuDivTitle.show();
 	componentCaption(obj);//标题
 	setCustomLabelComponentStyleInEditFiled(obj)
 }
