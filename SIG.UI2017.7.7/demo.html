@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- <script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script> -->
+    <script type="text/javascript" src="js/public/angular.min.js"></script>
+    <style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+</head>
+<!-- <body>
+
+    <div ng-app="myApp" ng-controller="customersCtrl">
+        <button ng-click="save()">按钮</button>
+        <table>
+            <tr ng-repeat="x in names">
+                <td>
+                    <input type="checkbox"   ng-checked="isSelected(x.id)"  id="{{x.id}}"></td>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ x.Name }}</td>
+                <td>{{ x.Country }}</td>
+            </tr>
+        </table>
+
+    </div>
+
+
+
+
+    <script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+    $scope.save = function(){
+        console.log(JSON.stringify($scope.names,null,2))
+        console.log($scope.names[0].check)
+
+    };
+
+    $scope.isSelected = function(id){  
+        console.log(id)
+        // console.log($scope.selected.indexOf(id));
+         // return $scope.selected.indexOf(id)>=0;  
+    }  
+
+
+
+    $scope.names = [
+  {
+      "check":"checks",
+      "id": "1",
+    "Name": "Alfreds Futterkiste",
+    "City": "Berlin",
+    "Country": "Germany"
+  },
+  {
+       "check":"checks",
+        "id": "2",
+    "Name": "Ana Trujillo Emparedados y helados",
+    "City": "México D.F.",
+    "Country": "Mexico"
+  } 
+];
+    
+});
+</script>
+
+</body> -->
+
+ <body ng-app="routerApp">
+   <div ng-controller="zdTable">
+
+    <table class="table table-bordered" >
+        <thead>
+          <tr>
+                <th>
+                    <input type="checkbox" ng-model="selectAll"  ng-change="changeAll()" />  选择</th>
+                <th>序号</th>
+                <th>用户</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in datas" ng-init="outerIndex = $index" ng-click="changeCurrents(row, $event)">
+                <td><input type="checkbox" ng-model="row.checked" ng-click="changeCurrent(row, $event)" /></td>
+                <td ng-bind="outerIndex+1"></td>
+                <td ng-repeat="tddata in row | filterTable">
+                        {{tddata}}
+                </td>
+                <td>
+                     <button type="button" class="btn btn-info" ng-click="zdTableEdit(row, $event)">编辑</button>
+                     <button type="button" class="btn btn-danger" ng-click="zdTableRemove(row, $event)">删除</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+  <div>已选数量：{{count}}</div>
+  <div>已选对象：{{selectData}}</div>
+</div>
+<script type="text/javascript">
+    
+    var routerApp = angular.module('routerApp',[]);
+
+
+
+routerApp.controller('zdTable', [
+        '$scope',
+        function(scope) {
+            console.log('controller');
+          //初始化数据
+            scope.datas = [
+                {id:1,name:'admin1', rem:'备注'}, 
+                { id:2,name:'admin2', rem:'备注'}, 
+                { id:3,name:'admin3', rem:'备注'}
+                ];
+
+            scope.count = 0;//已选择数量 
+            scope.selectData = [];//已选对象
+
+
+            //选择单个（取消选择单个
+            scope.changeCurrent = function(current, $event) {
+              //计算已选数量 true加， false减
+                scope.count += current.checked ? 1 : -1;
+                //判断是否全选，选数量等于数据长度为true
+        scope.selectAll = scope.count === scope.datas.length;
+                //统计已选对象
+                scope.selectData = [];
+                angular.forEach(scope.datas, function(item) {
+                    if(item.checked){
+                        scope.selectData[scope.selectData.length] = item;
+                    }
+                });
+
+
+              $event.stopPropagation();//阻止冒泡
+
+            };
+
+            //单击行选中
+            scope.changeCurrents = function(current, $event) {
+                if(current.checked == undefined){
+                    current.checked = true;
+                }else{
+                    current.checked = !current.checked;
+                }
+                scope.changeCurrent(current, $event);
+            };
+
+       //全选（取消全选
+            scope.changeAll = function() {
+                //console.log(scope.selectAll);
+                angular.forEach(scope.datas, function(item) {
+                    item.checked = scope.selectAll;
+                });
+                scope.count = scope.selectAll ? scope.datas.length : 0;
+                if (scope.selectAll) {
+
+                    scope.selectData = scope.datas;
+                } else {
+                    scope.selectData = [];
+
+                }
+
+            };
+            //编辑事件
+            scope.zdTableEdit = function(item, $event){
+                console.log(item);
+                $event.stopPropagation();//阻止冒泡
+            };
+            //删除事件
+            scope.zdTableRemove = function(item, $event){
+                console.log(item);
+                $event.stopPropagation();//阻止冒泡
+            };
+
+        } ]);
+
+//去掉不需要显示的字段    
+routerApp.filter('filterTable', function() {
+    return function(obj) {
+        var newObj = {};
+        for ( var i in obj) {
+            var property = obj[i];
+            if(i != 'checked'){
+               newObj[i] = property;
+            }
+        }
+        //console.log(newObj);
+        return newObj;
+    };
+});
+
+
+
+
+
+
+
+
+</script>
+
+  </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

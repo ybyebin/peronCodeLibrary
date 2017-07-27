@@ -13,21 +13,16 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<!-- <link href="css/bootstrap-treeview.min.css" rel="stylesheet"> -->
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	
 	<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
 	<link href="css/dashboard.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/layer/layer.css">
-	<!-- <link rel="stylesheet" type="text/css" href="css/layer/mylayerskin/style.css">
-	-->
-	<link rel="stylesheet" type="text/css" href="css/main.css">
 
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script src="js/public/jquery.min.js"></script>
-	<script src="js/public/bootstrap.min.js"></script>
-	<!-- <script src="js/public/bootstrap-treeview.min.js"></script> -->
-	<script type="text/javascript" src="js/public/icheck.min.js"></script>
+	<script src="js/public/angular.min.js"></script>
 
 </head>
 
@@ -35,39 +30,10 @@
 
 	<nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#example-navbar-collapse">
-					<span class="sr-only">切换导航</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
+			<div class="navbar-header">				
 				<a class="navbar-brand" href="#">MewtocolSIG</a>
 			</div>
-			<div id="example-navbar-collapse" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-
-					<!-- <li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-							帐户
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li>
-								<a href="#" onclick="changePas() ">修改密码</a>
-							</li>
-							<li>
-								<a href="login.html">退出登录</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="#">帮助</a>
-					</li> -->
-				</ul>
-
-			</div>
+			
 		</div>
 	</nav>
 
@@ -76,14 +42,14 @@
 			<!-- BEGIN left menu -->
 			<div class="col-sm-3 col-md-2 sidebar">
 				<div id="treeview1" class="treeview">
-					<ul class="list-group">
+					<ul id="list-group" class="list-group">
 					</ul>
 				</div>
 				<script src="js/public_left_menu.js"></script>
 			</div>
 			<!-- END left menu -->
 
-			<div id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main server-main">
+			<div ng-app="bayaxServrSet" ng-controller="myCtrl"  id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main server-main">
 				<div class="panel panel-default ">
 					<div class="panel-heading" >
 						<h3>服务器设定</h3>
@@ -92,14 +58,14 @@
 						<form class="form-horizontal" >
 							<div class="form-group server_states">
 								<label class="col-sm-1 control-label">服务器状态</label>
-								<label class="control-label">已连接,未连接</label>
+								<label class="control-label">{{severstatus}}</label>
 
 							</div>
 							<div class="form-group serverset">
 								<label class="col-sm-1 control-label">服务器设定</label>
 								<div class="col-sm-6">
 									<label class="col-sm-2 control-label">地址</label>
-									<input type="text" class="form-control">
+									<input ng-model="serve_address" type="text" class="form-control">
 									<label class="col-sm-2 control-label">例:http://www.bayax.cn</label>								
 								</div>								
 							</div>
@@ -107,13 +73,13 @@
 								<label class="col-sm-1 control-label"></label>		
 								<div class="col-sm-6">
 									<label class="col-sm-2 control-label">端口</label>
-									<input type="number" class=" form-control">							
+									<input ng-model="serve_ports" type="number" class=" form-control">							
 								</div>								
 							</div>
 							
 						</form>
 						<div class="form-group server_btn">
-							<button class="btn btn-primary" onclick="save()">保存设定</button>
+							<button class="btn btn-primary" ng-click="save()">保存设定</button>
 							<!-- <button class="btn btn-primary">不保存</button> -->
 						</div>
 					</div>
@@ -122,15 +88,10 @@
 		</div>
 	</div>
 
-	<div class="server_set_alert" style="display: none;">
-		<p>保存成功</p>
-	</div>
+	
 
-	<script type="text/javascript" src="js/server_set.js"></script>
 	<script type="text/javascript" src="js/public/layer.js"></script>
-	<script src="js/public/holder.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="js/public/ie10-viewport-bug-workaround.js"></script>
+	<script type="text/javascript" src="js/server_set.js"></script>
 
 </body>
 

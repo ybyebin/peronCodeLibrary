@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>系统管理</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="css/dashboard.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/layer/layer.css">
+
+	<script src="js/public/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+	<nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#example-navbar-collapse">
+					<span class="sr-only">切换导航</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Mewtocol网关</a>
+			</div>
+			<div id="example-navbar-collapse" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							帐户
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#" onclick="changePas() ">修改密码</a>
+							</li>
+							<li>
+								<a href="login.html">退出登录</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">帮助</a>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- BEGIN left menu -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<div id="treeview1" class="treeview">
+					<ul class="list-group"></ul>
+				</div>
+				<script src="js/public_left_menu.js"></script>
+			</div>
+			<!-- END left menu -->
+
+			<div id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div class="panel panel-default ">
+					<div class="panel-heading">
+						<h3>系统管理</h3>
+					</div>
+					<div class="panel-body system-manage-panel">
+						<div class="form-group">
+							<button class="btn btn-primary" onclick="sys_manage_alert(1)">重启</button>
+							<button class="btn btn-primary" onclick="sys_manage_alert(2)">初始化</button>
+						</div>
+						<form class="form-horizontal" style="width: 60%">
+
+							<div class="panel panel-default ">
+								<div class="panel-body">
+									<div class="form-group">
+										<label class="col-sm-1  control-label">软件版本</label>
+										<label class="col-sm-5  control-label">1212354123541235412354354</label>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-1  control-label">时间</label>
+										<label id="time_set" class="col-sm-2  control-label" style="">2016-11-22 15:59:38</label>
+										<!-- <div class="btn-group">
+										-->
+										<button type="button" class="btn btn-primary change-time-btn" onclick="changeTime()">修改时间</button>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label">模块名称</label>
+										<input type="text" class="form-control">
+										<label class="col-sm-1 control-label" style="width: 200px;margin-left: 40px;">20位以内字母数字</label>
+									</div>
+
+								</div>
+							</div>
+							<div class="panel panel-default ">
+
+								<div class="panel-body">
+									<div class="form-group">
+										<label class="col-sm-1  control-label">修改密码</label>
+										<input type="password" class="form-control" style="float: left;">
+										<label class="col-sm-1 control-label" style="float: left; width: 150px;">5-10位字母数字</label>
+
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-1  control-label">确认密码</label>
+										<input type="password" class="form-control"></div>
+								</div>
+							</div>
+
+						</form>
+
+						<div class="form-group">
+							<button class="btn btn-primary" onclick="save()">保存设定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="restart" style="display: none;">
+		<span></span>
+	</div>
+
+	<div id="change-time-layer">
+		<div class="form-group">
+			<input type="text" class="col-sm-1 form-control input-year" onkeyup="value=value.replace(/[^\d]/g,'') "  />
+			<label class="col-sm-1  control-label" style="">年</label>
+			<input type="text" class="col-sm-1 form-control input-month" onkeyup="value=value.replace(/[^\d]/g,'') "  />
+			<label class="col-sm-1  control-label ">月</label>
+			<input type="text" class="col-sm-1 form-control input-day" onkeyup="value=value.replace(/[^\d]/g,'') " />
+			<label class="col-sm-1  control-label ">日</label>
+			<input type="text" class="col-sm-1 form-control input-hour" onkeyup="value=value.replace(/[^\d]/g,'') " />
+			<label class="col-sm-1  control-label ">时</label>
+			<input type="text" class="col-sm-1 form-control input-minutes" onkeyup="value=value.replace(/[^\d]/g,'') " />
+			<label class="col-sm-1  control-label ">分</label>
+			<input type="text" class="col-sm-1 form-control input-seconds" onkeyup="value=value.replace(/[^\d]/g,'') " />
+			<label class="col-sm-1  control-label ">秒</label>
+
+		</div>
+	</div>
+	<script src="js/public/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/public/layer.js"></script>
+	<script type="text/javascript" src="js/system_management.js"></script>
+
+	<script type="text/javascript" src="js/public/bootstrap-datetimepicker.js"></script>
+	<script src="js/public/holder.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="js/public/ie10-viewport-bug-workaround.js"></script>
+
+</body>
+
+</html>

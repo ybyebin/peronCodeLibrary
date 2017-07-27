@@ -1,6 +1,5 @@
-$(function(){
-	$('#treeview1 .list-group li:nth-child(6)').addClass('list-group-active');	
-});
+var lis = document.getElementById('systemlogblue');
+addClass(lis,'list-group-active');
 
 var app = angular.module('bayaxSystemLog', []);
 app.controller('myCtrl', function($scope, $http) {

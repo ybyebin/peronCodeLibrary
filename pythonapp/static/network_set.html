@@ -23,11 +23,10 @@
 	<!-- <link rel="stylesheet" type="text/css" href="css/layer/mylayerskin/style.css">
 	-->
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-
 	<script src="js/public/jquery.min.js"></script>
-	<script src="js/public/bootstrap.min.js"></script>
-	<!-- <script src="js/public/bootstrap-treeview.min.js"></script> -->
-	<script type="text/javascript" src="js/public/icheck.min.js"></script>
+		<script src="js/public/angular.min.js"></script>
+
+
 
 </head>
 
@@ -47,14 +46,14 @@
 			<!-- BEGIN left menu -->
 			<div class="col-sm-3 col-md-2 sidebar" >
 				<div id="treeview1" class="treeview">
-					<ul class="list-group">
+					<ul id="list-group" class="list-group">
 					</ul>
 				</div>
 				<script src="js/public_left_menu.js"></script>
 			</div>
 			<!-- END left menu -->
 
-			<div id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div ng-app="bayaxNetworkSet" ng-controller="myCtrl" id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="panel panel-default ">
 					<div class="panel-heading">
 						<h3>网络设定</h3>
@@ -63,42 +62,42 @@
 						<form class="form-horizontal">
 							<div class="form-group style-first">
 								<label class="col-sm-1 control-label">IP地址获取方式</label>
-								<label class="col-sm-6  control-label">
-									<input id="custom" type="radio" name="network"   checked="checked"class="ckss">
+								<label class="col-sm-6  control-label">								 	
+									<input  type="radio" name="network" ng-value="1"  ng-model="cip" >
 									手动设定
 									<br>								
-									<input id="dhcp" type="radio" name="network"   class="ckss"> DHCP
+									<input  type="radio" name="network" ng-value="2"  ng-model="cip"> DHCP
 								</label>
 								
 
 							</div>
 							<div class="form-group">
 								<label class="col-sm-1 control-label">IP地址</label>
-								<input type="text" class="form-control network_input">
+								<input ng-model='ipaddress' type="text" class="form-control network_input">
 							</div>
 							<div class="form-group">
 								<label class="col-sm-1 control-label">子网掩码</label>
-								<input type="text" class="form-control network_input">
+								<input ng-model='zwym' type="text" class="form-control network_input">
 							</div>
 							<div class="form-group">
 								<label class="col-sm-1 control-label">网关</label>
-								<input type="text" class=" form-control network_input">
+								<input ng-model='gateway' type="text" class=" form-control network_input">
 							</div>
 							<div class="form-group">
 								<label class="col-sm-1 control-label">DNS</label>
-								<input type="text" class=" form-control network_input" style="">
+								<input ng-model="dns" type="text" class=" form-control network_input">
 							</div>
 
 							<div class="form-group">
 								<label class="col-sm-1 control-label">MAC地址</label>
-								<label class="control-label">ABC1234DJHDNVBFHh</label>
+								<label class="control-label">{{macAddress}}</label>
 								<!-- <input type="text" class="form-control network_input" > -->
 							</div>
 							
 							
 						</form>
 						<div class="form-group">
-							<button class="btn btn-primary" onclick="saveSet()">保存设定</button>
+							<button class="btn btn-primary" ng-click="saveSet()">保存设定</button>
 							<!-- <button class="btn btn-primary">不保存</button> -->
 						</div>
 					</div>
@@ -114,9 +113,7 @@
 	
 	<script type="text/javascript" src="js/network_set.js"></script>
 	<script type="text/javascript" src="js/public/layer.js"></script>
-	<script src="js/public/holder.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="js/public/ie10-viewport-bug-workaround.js"></script>
+
 
 </body>
 

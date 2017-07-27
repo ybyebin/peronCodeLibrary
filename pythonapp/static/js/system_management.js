@@ -1,6 +1,6 @@
-$(function() {
-	$('#treeview1 .list-group li:nth-child(7)').addClass('list-group-active');
-})
+var lis = document.getElementById('systemblue');
+addClass(lis,'list-group-active');
+
 
 function isLeapYear(year) {
 	return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);

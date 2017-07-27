@@ -297,8 +297,15 @@ a.a-edit{
 }
 
 
-
-
+/*通信设定*/
+.timeout_unit{
+    text-align: left;
+    width: 50px;
+}
+.timeout_des{
+    text-align: left;
+    width: 113px;
+}
 
 /*修复选择框*/
 

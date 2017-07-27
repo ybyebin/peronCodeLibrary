@@ -1,6 +1,22 @@
-$(function(){
-	$('#treeview1 .list-group li:nth-child(4)').addClass('list-group-active');	
-})
-function save(str){
-	layer.msg('保存成功')
-}
+
+ 
+var lis = document.getElementById('serverblue');
+addClass(lis,'list-group-active');
+
+var app = angular.module('bayaxServrSet', []);
+app.controller('myCtrl', function($scope, $http) {
+
+	$scope.serve_address = '';
+	$scope.serve_ports = '';
+
+	// 保存
+	$scope.save = function(){
+
+	};
+
+	// 获取服务器状态
+	$scope.getServerStatus =function(){
+		// 已连接 未连接
+		$scope.severstatus = '';
+	};
+});

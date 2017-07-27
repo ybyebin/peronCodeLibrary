@@ -1,16 +1,21 @@
-$(function(){
-	$('#treeview1 .list-group li:nth-child(5)').addClass('list-group-active');	
-})
+var lis = document.getElementById('networkblue');
+addClass(lis,'list-group-active');
 
-function saveSet() {
-	layer.msg('保存成功')
-}
+var app = angular.module('bayaxNetworkSet', []);
+app.controller('myCtrl', function($scope, $http) {
 
-$("input[name='network']").on('change', function() {
-	if ($('#custom').is(':checked')) {
-		$('.network_input').removeAttr('disabled');
-	}
-	if ($('#dhcp').is(':checked')) {
-		$('.network_input').attr('disabled', 'disabled');
-	}
-})
+	$scope.cip = '1';
+
+	$scope.ipaddress='';
+	$scope.zwym='';
+	$scope.gateway='';
+	$scope.dns='';
+
+	$scope.macAddress='';
+
+
+	// 保存设定
+	$scope.saveSet = function(){
+		console.log('查看：'+$scope.cip)
+	};
+});
