@@ -1,0 +1,119 @@
+.carts{
+	
+}
+.container table{
+	width: 100%;
+	min-width: 1200px;
+}
+.container table th{
+	text-align: center;
+}
+.container table td{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	border-bottom: 1px solid #999;
+}
+
+.container table tr td:first-child{
+
+
+}
+
+
+.checkbox-i {
+    background: url(green1.png) no-repeat;
+    background-repeat: no-repeat;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    position: relative;
+    /*top: 0;*/
+    background-position: 0 0
+}
+
+.checkbox-i.checked{
+    background-position: -48px 0
+}
+
+
+
+
+
+
+.cart-item-pname{
+	width: 50%;
+}
+.cart-item-pname div{
+	float: left;
+}
+.cart-item-pname div.cart-item-image{
+	width: 80px;
+	height: 72px;
+	border:1px solid #eee;
+	position: relative;
+}
+.cart-item-pname div.cart-item-image img{
+	width: 100%;
+	height: 100%;
+	/*position: absolute;*/
+}
+.cart-item-productName{
+	padding-left: 20px;
+	padding-bottom: 30px;
+	/*background-color: red;*/
+	text-align: left;
+
+}
+.zengpin{
+	padding-left: 10px;
+	background-color: red;
+}
+.zengpin-title{
+	padding-left: 23px;
+	padding-right: 20px;
+}
+.zengpin-name{
+	color: #999;
+}
+
+.sp-number span a{
+	display: inline-block;
+	background-color: red;
+	width: 30px;
+	height: 30px;
+	padding-top: 5px;
+}
+.sp-number span:nth-child(2){
+	padding-top: 0;
+}
+.sp-number  input{
+	width: 30%;
+
+}
+.sp-delete{
+	color: #35c99d;
+}
+.footssss div{
+	float: left;
+}
+.footssss .numberall{
+	float: right;
+}
+.numberall label:first-child{
+	width: 70px;
+	display: inline-block;
+	/*background-color: red;*/
+
+}
+.numberall button{
+	margin-left: 100px;
+	width: 200px;
+	height: 45px;
+	background-color: #D1434A;
+	color: #fff;
+}
+
+
+
+

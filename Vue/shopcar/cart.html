@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta content="IE=dege,chrom=1" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+  <title>Cart</title>
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/checkout.css" rel="stylesheet">
+  <link href="css/modal.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <style type="text/css">
+        .quentity input {
+            width: 40px;
+            padding: 5px 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+  <div class="checkout">
+    <div id="app">
+      <div class="container">
+        <div class="cart">
+          <div class="checkout-title">
+            <span>购物车</span>
+          </div>
+
+          <!-- table -->
+          <table>
+            <thead>
+              <tr>
+                <th>选中</th>
+                <th>商品信息</th>
+                <th>商品金额</th>
+                <th>商品数量</th>
+                <th>总金额</th>
+                <th>编辑</th>
+              </tr>
+              <tbody>
+                <tr v-for="(item,index) in productList">
+                  <td>
+                    <label class="checkbox-i" v-bind:class="{'checked': item.checked}" @click="selectedProduct(item)"></label>
+                  </td>
+                  <td class="cart-item-pname">
+                    <div class="cart-item-image">
+                      <img v-bind:src="item.productImage">
+                    </div>
+                    <div>
+                      <p class="cart-item-productName">
+                        <span>{{item.productName }}</span>
+                      </p>
+                      <p class="zengpin">
+                        <div class="zengpin-title">赠品:</div>
+                        <div class="zengpin-name">
+                            <p v-for="part in item.parts" v-text="part.partsName"></p>
+                        </div>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>{{item.productPrice | addDanwei('元')}}</div>
+                  </td>
+                  <td class="sp-number">
+                    <span><a href="javascript:;" @click="changeSPNumber(item,-1)">-</a></span>
+                    <span><input type="text" readonly="readonly" :value="item.productQuantity"  ></span>
+                    <span><a href="javascript:;"  @click="changeSPNumber(item,1)">+</a></span>
+                  </td>
+                  <td>{{ item.productPrice*item.productQuantity | addDanwei('元')}}</td>
+                  <td><a class="sp-delete" href="javascript:;" @click="delConfirm(item)">删除</a></td>
+                </tr>
+              </tbody>
+            </thead>
+          </table>
+          <div class="footssss">
+            <div class="checkall">
+             <label class="checkbox-i" v-bind:class="{'checked': checkedAll}" @click="checkAllProduct()"></label>
+              <!-- <input type="checkbox" @click="checkAllProduct()"> -->
+              <span v-show="!checkedAll">全选</span>
+              <span v-show="checkedAll">取消全选</span>
+            </div>
+            <div class="numberall">
+              <label>总金额:</label><label>{{totaleMoney | addDanwei('元')}}</label>
+              <button>结账</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="md-modal modal-msg md-modal-transition" id="showModal" v-bind:class="{'md-show':delFlag}">
+        <div class="md-modal-inner">
+          <div class="md-top">
+            <button class="md-close" @click="delFlag = false">关闭</button>
+          </div>
+          <div class="md-content">
+            <div class="confirm-tips">
+              <p id="cusLanInfo">你确认删除此订单信息吗?</p>
+            </div>
+            <div class="btn-wrap col-2">
+              <button class="btn btn--m" id="btnModalConfirm" @click="delProduct()">Yes</button>
+              <button class="btn btn--m btn--red" id="btnModalCancel" @click="delFlag=false">>No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md-overlay" v-if="delFlag"></div>
+
+    </div>
+  </div>
+
+  <script src="js/lib/vue.min.js"></script>
+  <!-- <script src="js/lib/vue-resource.js"></script>
+-->
+<script src="myjs/cart.js"></script>
+</body>
+</html>
