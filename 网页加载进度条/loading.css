@@ -1,0 +1,134 @@
+/*div.progress {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	float: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis
+}
+div.progress {
+	margin: -.1rem;
+	padding: .3rem;
+	border-radius: 1.5rem;
+	background-color: #fff;
+	height: 2.1rem;
+	width: 9.8rem;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+div.progress div.bar {
+	width: 100%;
+	height: 100%;
+	border-radius: 1.1rem;
+	-webkit-animation: progress 1.5s linear 0s infinite;
+	background: -webkit-linear-gradient(315deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 31%, rgba(0, 0, 0, 0.05) 33%, rgba(0, 0, 0, 0.05) 67%, rgba(0, 0, 0, 0) 69%);
+
+	-webkit-background-size: 3.8rem 2.2rem;
+	background: -webkit-linear-gradient(315deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 31%, rgba(236, 159, 16, 0.8) 33%, rgba(236, 159, 16, 0.8) 67%, rgba(0, 0, 0, 0) 69%);
+
+	background-size: 3rem 2.2rem;
+	background-size: 4.8rem 2.2rem;
+}*/
+
+div.progress div.bar {
+	width: 100%;
+	background-color: #efba17;
+}
+
+
+@-webkit-keyframes progress {
+	from {
+		background-position: 0
+	}
+
+	to {
+		background-position: 4.8rem
+	}
+
+}
+
+
+
+
+ div.progress div.bar:after {
+	position: absolute;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	padding: .5rem 0;
+	font-size: 1.3rem;
+	font-weight: normal;
+	text-align: center;
+	opacity: .9;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	filter: alpha(opacity=90);
+	line-height: 1em
+}
+
+
+ div.progress
+{
+	width: 33.33%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	float: left;
+	white-space: nowrap;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis
+}
+
+
+
+ div.progress {
+	margin: -.1rem;
+	padding: .3rem;
+	border: .1rem solid #cfdbde;
+	border-radius: 1.5rem;
+	background-color: #fff;
+	height: 3rem;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+ div.progress div.bar {
+	min-width: 2.2rem;
+	width: 100%;
+	height: 100%;
+	border-radius: 1.1rem;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.08) 0 -.96rem 1.6rem 0 inset;
+	box-shadow: rgba(0, 0, 0, 0.08) 0 -.96rem 1.6rem 0 inset;
+	-webkit-animation: progress 1.5s linear 0s infinite;
+	-moz-animation: progress 1.5s linear 0s infinite;
+	-o-animation: progress 1.5s linear 0s infinite;
+	-ms-animation: progress 1.5s linear 0s infinite;
+	animation: progress 1.5s linear 0s infinite;
+	background: -webkit-linear-gradient(315deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 31%, rgba(0, 0, 0, 0.05) 33%, rgba(0, 0, 0, 0.05) 67%, rgba(0, 0, 0, 0) 69%);
+	background: -moz-linear-gradient(315deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 31%, rgba(0, 0, 0, 0.05) 33%, rgba(0, 0, 0, 0.05) 67%, rgba(0, 0, 0, 0) 69%);
+	background: -o-linear-gradient(315deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 31%, rgba(0, 0, 0, 0.05) 33%, rgba(0, 0, 0, 0.05) 67%, rgba(0, 0, 0, 0) 69%);
+	background: -ms-linear-gradient(315deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 31%, rgba(0, 0, 0, 0.05) 33%, rgba(0, 0, 0, 0.05) 67%, rgba(0, 0, 0, 0) 69%);
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 31%, rgba(0, 0, 0, 0.05) 33%, rgba(0, 0, 0, 0.05) 67%, rgba(0, 0, 0, 0) 69%);
+	-webkit-background-size: 4.8rem 2.2rem;
+	-moz-background-size: 4.8rem 2.2rem;
+	background-size: 4.8rem 2.2rem;
+}
+
+ div.progress div.bar:after {
+	position: absolute;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	padding: .5rem 0;
+	font-size: 1.3rem;
+	font-weight: normal;
+	text-align: center;
+	opacity: .9;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	filter: alpha(opacity=90);
+	line-height: 1em
+}
