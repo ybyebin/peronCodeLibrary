@@ -128,23 +128,46 @@ body {
 	position: relative;
 }
 
-/*.loading{
+.div-bg{
+	position: absolute;
+	/*margin-top: 100%;*/
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	/*display: inline-block;*/
+	margin: auto;
+	height: 59px;
+	border: 1px red solid;
+}
+
+.loading{
 	width: 100%;
 	position: absolute;
 	z-index: 0;
-}*/
+}
 
-/*.loadbg{
+.loadbg{
 	position: absolute;
-	margin-top: 124%;
-	margin-left: 24%;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
 	width: 54%;
+	z-index: 2;
+	margin: auto;
+
 }
 .load{
-	position: relative;
-	margin-top: 125.9%;
-	margin-left: 27%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
 	width: 47%;
+	z-index: 1;
+	margin: auto;
+
 }
 .bgload{
 	position: absolute;
@@ -156,7 +179,7 @@ body {
 	background-image: url(../images/1.jpg);
 	background-size: cover;
 }
-*/
+
 .section .bg {
 	width: 100%;
 	position: absolute;

@@ -6,8 +6,8 @@ $(function() {
 				var widths = 3.1 * (i+1+Math.random()) + 'rem';
 				loading.css('width', widths)
 				if (i === 2) {
-					$('.section').hide();
-					$('.first').show();
+					// $('.section').hide();
+					// $('.first').show();
 				}
 
 			}, i * 1000);

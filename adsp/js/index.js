@@ -18,6 +18,15 @@
 // 
 // 
 // 
+// 
+
+var h = $('.loadbg').height();
+// alert(h)
+// 
+
+$('.load').css('height',h+'px');
+
+// $('.load').css('height','300px');
 
 var data = [
 	'ws01.png',
