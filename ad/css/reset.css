@@ -107,14 +107,35 @@ section.step-section{
 
 
 
-.second img.pulse{
-	margin-top: 132%;
-	margin-left: -8%;
+.second img.pulse1{
+	margin-top: 127%;
+	margin-left: -9%;
 	width: 1.86rem;
     height: 2.26rem;
-    z-index:8; 
+    z-index:88888; 
     position: absolute;
 }
+
+
+/*小手动画*/
+@keyframes pulsehand1 {
+  from {
+    margin-left: -9%;
+  }
+
+  to {
+   margin-left: 0;
+  }
+}
+img.pulse1 {
+	animation: pulsehand1 1.2s infinite;
+	animation-direction: normal;		/* Safari and Chrome */
+	-webkit-animation: pulsehand1 1.2s infinite;
+	-webkit-animation-direction: normal;		/* Opera */
+	-o-animation: pulsehand1 1.2s infinite;
+	-o-animation-direction: normal;
+}
+
 .f-move{
 	width: 1.42rem;
 	height: 1.42rem;
@@ -222,13 +243,37 @@ section.step-section{
 }
 
 img.pulse2{
-	margin-left: 20%;
-	margin-top: 120%;
+	margin-left: 12%;
+	margin-top: 115%;
 	width: 1.86rem;
     height: 2.26rem;
-    z-index:8; 
+    z-index:8888; 
     position: absolute;
 }
+
+/*小手动画*/
+@keyframes pulsehand {
+  from {
+    margin-top: 115%;
+  }
+  to {
+   margin-top: 125%;
+  }
+}
+img.pulse2 {
+	animation: pulsehand 1.2s infinite;
+	animation-direction: normal;		/* Safari and Chrome */
+	-webkit-animation: pulsehand 1.2s infinite;
+	-webkit-animation-direction: normal;		/* Opera */
+	-o-animation: pulsehand 1.2s infinite;
+	-o-animation-direction: normal;
+}
+
+
+
+
+
+
 .ff-move-2{
 	margin-top: 124.6%;
 	margin-left: 11.7%;
@@ -288,13 +333,33 @@ img.pulse2{
 }
 
 img.pulse3{
-	margin-left: 20%;
-	margin-top: 120%;
+	margin-left: 12%;
+	margin-top: 116%;
 	width: 1.86rem;
     height: 2.26rem;
-    z-index:8; 
+    z-index:88888; 
     position: absolute;
 }
+
+
+/*小手动画*/
+@keyframes pulsehand3 {
+  from {
+    margin-top: 116%;
+  }
+  to {
+   margin-top: 127%;
+  }
+}
+img.pulse3 {
+	animation: pulsehand3 1.2s infinite;
+	animation-direction: normal;		/* Safari and Chrome */
+	-webkit-animation: pulsehand3 1.2s infinite;
+	-webkit-animation-direction: normal;		/* Opera */
+	-o-animation: pulsehand3 1.2s infinite;
+	-o-animation-direction: normal;
+}
+
 
 .fs-move-1{
 	margin-top: 124.5%;
@@ -516,6 +581,12 @@ img.pulse3{
 	height: 1.56rem;
 	position: absolute;
 }
+.btn-down a{
+	width: 4rem;
+	height: 1.56rem;
+	position: absolute;
+	display: block;
+}
 
 /*loading*/
 .loading-div{
@@ -592,38 +663,6 @@ div.progress div.bar {
 
 
 
-
-
-/*.img {
-	background: url(../images/img.png) no-repeat;
-}
-
-.logo {
-	height: 124px;
-	width: 239px;
-	background-position: 0 0;
-}
-
-.djry {
-	height: 34px;
-	width: 249px;
-	background-position: 0 -125px;
-}
-*/
-
-#first-img {
-	position: absolute;
-	margin-left: 6%;
-	margin-top: 101%;
-	background: url(../images/bg/img.png) no-repeat;
-	width: 4.98rem;
-	height: 0.68rem;
-
-	/*height: 34px;*/
-	/*width: 249px;*/
-	background-position: 0 -125px;
-	/*animation: pulse 1.2s infinite;*/
-}
 
 
 
