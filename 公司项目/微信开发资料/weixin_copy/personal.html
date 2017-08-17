@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css_js/regists.css">
+	<script type="text/javascript" src="css_js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="css_js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="css_js/city.js"></script>
+    <script>
+    (function () {
+        function o() {
+            document.documentElement.style.fontSize = (document.documentElement.clientWidth > 640 ? 640 : document.documentElement.clientWidth) / 16 + "px"
+        }
+        var e = null;
+        window.addEventListener("resize", function () {
+            clearTimeout(e), e = setTimeout(o, 300)
+        }, !1), o()
+    })(window);
+</script>
+</head>
+
+<body>
+    <div class="wrap">
+       
+    	<form class="regist">
+            <div>
+                注册
+            </div>
+            <p>
+                <span>工作站编号:</span>
+                <input id="station_no" type="number">
+            </p>
+            <p>
+                <span>工作站名称:</span>
+                <input id="station_name" type="text">
+            </p>
+            <p>
+                <span>调查仪类型:</span>
+                <input id="sn_type" type="number">
+            </p>
+            <p>
+                <span>调查仪编号:</span>
+                <input id="sn_no" type="number">
+            </p>
+            <p>
+                <span>样本户编号:</span>
+                <input id="sample_num" type="number">
+            </p>
+            <p>
+                <span>样本户姓名:</span>
+                <input id="sample_name" type="number">
+            </p>
+            <p>
+                <span>成员编号:</span>
+                <input id="member_no" type="number">
+            </p>
+            <p>
+                <span>成员姓名:</span>
+                <input id="member_name" type="text">
+            </p>
+            <p>
+                <span>成员职业:</span>
+                <input id="member_occupation" type="text">
+            </p>
+             <p>
+                <span>成员年龄:</span>
+                <input id="member_age" type="number">
+            </p>
+            <p>
+                <span>成员收入:</span>
+                <input id="member_income" type="number">
+            </p>
+            <p>
+                <span>成员性别:</span>
+                <label class="sex_label">
+                    <label>
+                        <input class="sex" type="radio" name="member_sex" checked="checked" value="1" >男</label>
+                    <label>
+                        <input class="sex" type="radio" name="member_sex" value="2">女</label>
+                </label>         
+            </p>    
+            <p id="city">
+                <select class="prov"></select>
+                <select class="city" disabled="disabled"></select>
+                <select class="dist" disabled="disabled"></select>
+            </p>
+            <p>
+                <span>频道名称:</span>
+                <input id="channel_name" type="text">
+            </p>
+            <p>
+                <span>频道编码:</span>
+                <input id="channel_num" type="text">
+            </p>
+            <p>
+                <span>收听频率:</span>
+                <input id="listen_rate" type="text">
+            </p>
+            <p>
+                <span>开始时间:</span>
+                <input id="begin_time" type="date">
+            </p>
+            <p>
+                <span>结束时间:</span>
+                <input id="end_time" type="date">
+            </p>
+           
+            <p>
+                <button type="button" id="btn_submit" onclick="regist()">提交</button>
+            </p>
+        </form>
+    </div>
+    <script type="text/javascript" src="css_js/regist.js"></script>
+</body>
+</html>

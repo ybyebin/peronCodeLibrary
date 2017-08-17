@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>智能建筑管理系统</title>
+	<meta content="" name="description">
+	<meta content="" name="author">
+	<link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/basic/jquery.mCustomScrollbar.css">
+	<link rel="stylesheet" type="text/css" href="css/basic/check_black.css">
+	<link rel="stylesheet" type="text/css" href="css/basic/layer.css">
+	<link rel="stylesheet" type="text/css" href="css/bayax.css">
+	<link rel="stylesheet" type="text/css" href="css/systemConfiguration2.css">
+	<link rel="stylesheet" type="text/css" href="css/datashow_black.css">
+	<script type="text/javascript" src="js/basic/jquery.min.js"></script>
+
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div id="sidebar" class="col-sm-3 col-md-2 sidebar">
+				<div id="treeview" class="treeview">
+					<ul>
+						<li>
+							<a id="logo-a" href="deviceControlCanvas.html">
+								<img id="logo" src="images/logo-text.png">
+							</a>
+						</li>
+						<li>
+							<a class="title_foursize" href="engineeringManagement.html">
+								<i></i>								
+								<span>工程管理</span>
+							</a>
+						</li>
+
+						<li>
+							<a class="title_foursize" href="nodeManagement.html">
+								<i></i>								
+								<span>节点管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="datalabelManagement.html">
+								<i></i>								
+								<span>数据标签管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="energyconsumptionStatisticDis.html">
+								<i></i>								
+								<span>能耗统计设定</span>
+							</a>
+						</li>
+						<li>
+							<a href="graphicImages.html">
+								<i></i>								
+								<span>图形画面管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="energyconsumptionStatisticClassification.html">
+								<i></i>						
+								<span>能耗统计分级</span>
+							</a>
+						</li>
+						<li class="active">
+							<a href="userManagements.html">
+								<i></i>						
+								<span>用户权限管理</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="sys-main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" style="top: 26px;margin-bottom: 30px">
+				<div class="form-group">
+					<button id="btn-adduser" class="btn button-normal btn-primary">添加</button>
+				</div>
+				<form class="form-horizontal user-message-form">
+					<div class="col-sm-7" style="padding-left: 0">
+						<div class="message-div">
+							<div class="user-message-div">
+
+								<table class="table table-stripeds table-primary">
+									<thead>
+										<tr>
+											<th>用户名</th>
+											<th>角色</th>
+											<th>姓名</th>
+											<th>员工号</th>
+											<th>最后登录时间</th>
+										</tr>
+									</thead>
+									<tbody id="user-message-tbody">
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+
+					</div>
+					<div class="col-sm-5">
+						<div class="message-div message-div-detailed message-div-display">
+							<div class="form-group head">
+								<label class="col-sm-7 control-label">
+									<span>用户信息</span>
+								</label>
+								<label class="col-sm-5 control-label edit_del">
+									<a href="#" class="display-edit-user">编辑</a>
+									<a href="#" class="display-cancel-user">删除</a>
+								</label>
+							</div>
+							<div class="form-group center">
+								<div class="form-group">
+									<label class="col-sm-1 control-label">用户名</label>
+									<label class="col-sm-10 control-label display-user-name"></label>
+
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label">角色</label>
+									<label class="col-sm-10 control-label display-role"></label>
+
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label">姓名</label>
+									<label class="col-sm-10 control-label display-name"></label>
+
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label">员工号</label>
+									<label class="col-sm-10 control-label display-staff-number"></label>
+								</div>
+							</div>
+
+							<div class="form-group title">子系统权限</div>
+
+							<div class="form-group foot-user display-user-ul">
+								<ul></ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-5">
+						<div class="message-div message-div-detailed message-div-edit" style="display: none">
+							<div class="form-group head">
+								<label class="col-sm-7 control-label">
+									<span>编辑用户信息</span>
+								</label>
+								<label class="col-sm-5 control-label edit_del">
+									<a href="#" class="edit-save-user">保存</a>
+									<a href="#" class="edit-save-cancel">取消</a>
+								</label>
+							</div>
+							<div class="form-group center">
+								<div class="form-group">
+									<label class="col-sm-1 control-label">用户名</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control edit-name" maxlength="30"></div>
+
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">密码</label>
+									<div class="col-sm-8">
+										<input type="password" class="form-control edit-psw" maxlength="10"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">确认密码</label>
+									<div class="col-sm-8">
+										<input type="password" class="form-control eidt-surepsw" maxlength="10"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">角色</label>
+									<div class="col-sm-8">
+										<select class="edituserjaose form-control">
+											<option value="2">普通</option>
+											<option value="1">管理员</option>
+											
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">姓名</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control edit-fullname" maxlength="30"></div>
+								</div>
+								<div class="form-group edit_message_last">
+									<label class="col-sm-2 control-label">员工号</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control edit-ygnumber" maxlength="10"></div>
+								</div>
+							</div>
+
+							<div class="form-group title">子系统权限</div>
+
+							<div class="form-group foot-user edit-user-ul">
+								<ul></ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-5">
+						<div class="message-div message-div-detailed message-div-add" style="display: none">
+							<div class="form-group head">
+								<label class="col-sm-7 control-label">
+									<span>添加用户</span>
+								</label>
+								<label class="col-sm-5 control-label">
+									<a href="#" class="add-save-user">保存</a>
+									<a href="#" class="add-save-cancel">取消</a>
+								</label>
+							</div>
+							<div class="form-group center">
+								 <div class="form-group edit_message_fir">
+							 	<label class="col-sm-2 control-label">用户名</label>
+							 	<div class="col-sm-8">
+							 		<input type="text" class="form-control add-name" maxlength="30">
+
+							 	</div>
+							 </div>
+							  <div class="form-group">
+							 	<label class="col-sm-2 control-label">密码</label>
+							 	<div class="col-sm-8">
+							 		<input type="password" class="form-control add-psw" maxlength="10">
+
+							 	</div>
+							 </div>
+							<div class="form-group">
+							 	<label class="col-sm-2 control-label">确认密码</label>
+							 	<div class="col-sm-8">
+							 		<input type="password" class="form-control add-surepsw" maxlength="10">
+
+							 	</div>
+							 </div>
+							 <div class="form-group">
+							 	<label class="col-sm-2 control-label">角色</label>
+							 	<div class="col-sm-8">
+							 		<select class="adduserjaose form-control" value="2">
+							 				<option value="2">普通</option>
+											<option value="1">管理员</option>
+											
+									</select>
+							 	</div>
+							 </div>		
+							 <div class="form-group">
+							 	<label class="col-sm-2 control-label">姓名</label>
+							 	<div class="col-sm-8">
+							 		<input type="text" class="form-control add-fullname" maxlength="30">
+
+							 	</div>
+							 </div>		
+							 <div class="form-group edit_message_last">
+							 	<label class="col-sm-2 control-label">员工号</label>
+							 	<div class="col-sm-8">
+							 		<input type="text" class="form-control add-ygnumber" maxlength="10">
+
+							 	</div>
+							 </div>			
+							</div>
+
+							<div class="form-group title">子系统权限</div>
+
+							<div class="form-group foot-user add-user-ul">
+								<ul></ul>
+							</div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+	<div class="loading" style="display: none">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+	<input type="file" id="imageFileField-logo" size="28" style="opacity: 0;display:none" onchange="ProjectFun.showPreview(this)">
+	<script type="text/javascript" src="js/basic/layer.js"></script>
+	<script type="text/javascript" src="js/basic/api.js"></script>
+	<script type="text/javascript" src="js/basic/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script type="text/javascript" src="js/basic/icheck.min.js"></script>
+		<script type="text/javascript" src="js/basic/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/basic/icheck.min.js"></script>
+	<script type="text/javascript" src="js/basic/api.js"></script>
+	<script type="text/javascript" src="js/basic/layer.js"></script>
+	<script type="text/javascript" src="js/systemSet/userManagement.js"></script>
+	<!-- <script type="text/javascript" src="js/systemSet/engineeringManagement.js"></script> -->
+</body>
+</html>

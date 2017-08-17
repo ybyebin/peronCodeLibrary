@@ -1,0 +1,563 @@
+/*公共部分*/
+@font-face {
+    font-family: "fzqtft";
+    /*src: url(assets/font.ttf);*/
+}
+
+html {
+	/*height:100%;*/
+    font-family: "FangSong";
+    font-weight: lighter;
+    /*display: none;*/
+}
+body{
+    max-width: 520px;
+	 width:100%;
+    margin: 0 auto !important
+}
+.first{
+	width:100%;
+	height:100%;
+}
+.section{
+	min-height:550px;
+	display: inline-block;
+  width: 100%;
+	height:100%;
+	position: relative;
+}
+.section img{
+	/*display: inline;*/
+	position: absolute;
+
+}
+/*音乐按钮对应样式*/
+.music_btn{
+	position: fixed;
+	top:2%;
+	right:2%;
+	width:35px;
+}
+
+.Animate{
+    -webkit-animation:rotateIn 1s .2s linear both infinite;
+    -moz-animation:rotateIn 1s .2s linear both infinite;
+}
+
+@-webkit-keyframes rotateIn{
+    0%{-webkit-transform-origin:center center;
+    -webkit-transform:rotate(-360deg);
+    }
+    100%{-webkit-transform-origin:center center;
+    -webkit-transform:rotate(360);
+    }
+}
+@-moz-keyframes rotateIn{
+    0%{-moz-transform-origin:center center;
+    -moz-transform:rotate(-360deg);
+    }
+    100%{-moz-transform-origin:center center;
+    -moz-transform:rotate(360);
+    }
+}
+
+/*向上滑动*/
+.section .wipeup{
+	opacity:1 !important;
+   width: 8.6%;
+   height: auto;
+   right: 0;
+   left: 0;
+   bottom: 2%;
+   margin: auto;
+}
+
+/*loading页面*/
+#loading{
+	display:inline-block;
+	width:100%;
+    max-width: 520px;
+	height:100%;
+	background:#ffffff;
+	position: fixed;
+	z-index: 10;
+}
+#loading .xiaobai{
+	width:20%;
+	position:absolute;
+	top:-140%;
+	left:92.5%;
+	opacity: 0;
+}
+#loading .xiaobaimove{
+	opacity: 1;
+	animation: move 4s linear 1 alternate;
+	-moz-animation: move 4s linear  1 alternate;/* Firefox: */
+	-webkit-animation: move 4s linear  1 alternate;/* Safari 和 Chrome: */
+	-o-animation: move 4s linear  1 alternate;/* Opera: */
+}
+#loading .loadingbox{
+	background-color: #fff002;
+	width:50%;
+	height:5%;
+	position:absolute;
+	left:25%;
+	top:45.5%;
+}
+#loading .num_type{
+	position:relative;
+	top:16%;
+	float: left;
+	height:67.7%;
+	margin:0;
+}
+#loading .num_first{
+	padding-left:3.25%;
+}
+#loading .num_last{
+	padding-right:3.25%;
+}
+#loading .num_type2{
+	position:relative;
+	top:16%;
+	float: right;
+	height:67.7%;
+	margin:0;
+}
+#loading .num_hundreds{
+	display:none;
+}
+
+@keyframes move
+{
+from {left:-7.5%;}
+to {left:92.5%;}
+}
+
+@-moz-keyframes move /* Firefox */
+{
+from {left:-7.5%;}
+to {left:92.5%;}
+}
+
+@-webkit-keyframes move /* Safari 和 Chrome */
+{
+from {left:-7.5%;}
+to {left:92.5%;}
+}
+
+@-o-keyframes move /* Opera */
+{
+from {left:-7.5%;}
+to {left:92.5%;}
+}
+/*loading页面end*/
+
+/*首页*/
+.homepage .index_logo{
+   width: 40.4%;
+   height: auto;
+   top: 7%;
+   right: 0;
+   left: 0;
+   margin: auto;
+}
+.homepage .index_zqt{
+   width: 7.06%;
+   height: auto;
+   top: 10%;
+   right:12%;
+}
+.homepage .index_text{
+   width: 78.4%;
+   height: auto;
+   top: 17%;
+   right: 0;
+   left: 0;
+   margin: auto;
+}
+.homepage .index_qingwa{
+   width: 17.73%;
+   height: auto;
+   top: 17%;
+   right:17%;
+}
+.homepage .index_wawa{
+   width: 15.6%;
+   height: auto;
+   top: 22%;
+   left:7%;
+}
+.homepage .index_shouqiang{
+   width: 20.93%;
+   height: auto;
+   top: 45%;
+   left:13%;
+}
+.homepage .index_tishi{
+   width: 59.06%;
+   height: auto;
+   top: 53%;
+   left:28%;
+}
+.homepage .index_mf{
+   width: 10.4%;
+   height: auto;
+   top: 57%;
+   right:9%;
+}
+.homepage .index_xiaobai{
+   width: 52.93%;
+   height: auto;
+   top: 58%;
+   left:18%;
+}
+/*第一屏*/
+.first .first_bg,.homepage .index_bg{
+	width:100%;
+	height:100%;
+}
+.first .first_text{
+	top:3.8%;
+	right:5.6%;
+	width:53.5%;
+	/*opacity: 0;*/
+	/*height:26%;*/
+}
+/*第二屏*/
+.second .second_bg{
+	width:100%;
+	height:100%;
+}
+.second .second_text{
+	top:4.7%;
+	right:8.5%;
+	width:41.6%;
+	/*opacity: 0;*/
+	/*height:26%;*/
+}
+/*第三屏*/
+.third .third_bg{
+	width:100%;
+	height:100%;
+}
+.third .third_text{
+	top:3.7%;
+	left:8.8%;
+	width:59.47%;
+	/*opacity: 0;*/
+	/*height:26%;*/
+}
+/*第四屏*/
+.fourth .fourth_bg{
+	width:100%;
+	height:100%;
+}
+.fourth .fourth_text{
+	top:2.9%;
+	left:5.35%;
+	width:60.4%;
+	/*opacity: 0;*/
+	/*height:26%;*/
+}
+/*第五屏*/
+.fifth .fifth_bg{
+	width:100%;
+	height:100%;
+}
+.fifth .fifth_text{
+	bottom:4.13%;
+	left:4.27%;
+	width:48%;
+	/*opacity: 0;*/
+	/*height:26%;*/
+}
+/*第六屏*/
+.sixth .sixth_bg{
+	width:100%;
+	height:100%;
+}
+.sixth .sixth_text{
+	bottom:5.29%;
+	left:5.87%;
+	width:51.33%;
+	/*opacity: 0;*/
+	/*height:26%;*/
+}
+/*第七屏*/
+.seventh .seventh_bg{
+	width:100%;
+	height:100%;
+}
+.seventh .seventh_text{
+	top:3.22%;
+	left:8.67%;
+	width:84%;
+	/*opacity: 0;*/
+	/*height:26%;*/
+}
+/*第八屏*/
+.eighth .eighth_bg{
+	width:100%;
+	height:100%;
+}
+.eighth .eighth_text{
+	top:6.61%;
+	left:3.6%;
+	width:40.27%;
+	/*opacity: 0;*/
+	/*height:26%;*/
+}
+/*结束页*/
+.end .end_bg{
+   width: 100%;
+   height: 100%;
+}
+.end .end_yuncai{
+   width: 91.06%;
+   height: auto;
+   top: 3%;
+   right: 0;
+   left: 0;
+   margin: auto;
+}
+.end .end_text{
+   width: 57.6%;
+   height: auto;
+   top: 12%;
+   right: 0;
+   left: 0;
+   margin: auto;
+}
+.end .end_anniu{
+   width: 55.33%;
+   height: auto;
+   top: 36.5%;
+   right: 0;
+   left: 0;
+   margin: auto;
+}
+.end .end_bottom{
+   width: 100%;
+   height: auto;
+   bottom: 0;
+}
+.end .end_btn{
+   width: 67.06%;
+   height: auto;
+   right: 12%;
+   bottom: 0%;
+}
+.end .end_t{
+   width: 30.1%;
+   opacity: 1;
+   height: auto;
+   right: 3%;
+   bottom: 7.5%;
+}
+.end .end_dw{
+   width: 100%;
+   height: auto;
+}
+.end .end_logo{
+   bottom: 1%;
+   right: 0;
+   width: 55.6%;
+}
+.end .end_cj{
+   width: 27.06%;
+   bottom: 22%;
+   right: 35%;
+}
+/*首页的动画*/
+.current .index_qingwa{
+   animation:rotateNozzle 1.2s ease-in-out infinite;
+}
+.current .index_shouqiang{
+   animation:rotateNozzle1 1.2s ease-in-out infinite;
+}
+.current .end_yuncai{
+   animation-duration: .5s;
+   animation-delay: 0s;
+   animation-iteration-count: 1;
+}
+.current .end_text{
+   animation-duration: .5s;
+   animation-delay: 0s;
+   animation-iteration-count: 1;
+}
+.current .end_anniu{
+   animation-duration: .5s;
+   animation-delay: 0s;
+   animation-iteration-count: 1;
+}
+.current .end_logo{
+   animation-duration: .5s;
+   animation-delay: 0s;
+   animation-iteration-count: 1;
+}
+.current .end_dw{
+   animation:heartBeat 1.48s ease-in-out infinite;
+}
+.current .end_btn{
+   animation-duration: .5s;
+   animation-delay: 0s;
+   animation-iteration-count: 1;
+}
+.current .end_bottom{
+   animation-duration: .5s;
+   animation-delay: 0s;
+   animation-iteration-count: 1;
+}
+.current .tada {
+  -webkit-animation-name: tada 3s 1s linear both infinite;
+  animation: tada 3s 1s linear both infinite;
+}
+.current .first_bg,.current .index_bg{
+	animation-duration: 2s;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+}
+.current .first_text{
+	animation-duration: 1s;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+}
+.current .second_bg{
+	animation-duration: 2s;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+}
+.current .second_text{
+	animation-duration: 1s;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+}
+.current .third_bg{
+	animation-duration: 2s;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+}
+.current .third_text{
+	animation-duration: 1s;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+}
+.current .fourth_bg{
+	animation-duration: 2s;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+}
+.current .fourth_text{
+	animation-duration: 1s;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+}
+.current .fifth_bg{
+	animation-duration: 2s;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+}
+.current .fifth_text{
+	animation-duration: 1s;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+}
+.current .sixth_bg{
+	animation-duration: 2s;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+}
+.current .sixth_text{
+	animation-duration: 1s;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+}
+.current .seventh_bg{
+	animation-duration: 2s;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+}
+.current .seventh_text{
+	animation-duration: 1s;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+}
+.current .eighth_bg{
+	animation-duration: 2s;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+}
+.current .eighth_text{
+	animation-duration: 1s;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+}
+.href_a{
+   position:absolute;
+   display: block;
+   width: 15.87%;
+   height: 7%;
+   right: 40%;
+   bottom: 5.5%;
+}
+._music {
+    width: 5.6%;
+    height: auto;
+    position: absolute;
+    top: 2%;
+    right: 3.5%;
+    z-index: 9999;
+}
+._Animate {
+    -webkit-animation: _music 2s .2s linear both infinite;
+    animation: _music 2s .2s linear both infinite;
+}
+@-webkit-keyframes _music{
+    0%{-webkit-transform-origin:center center;
+    -webkit-transform:rotate(-360deg);
+    }
+    100%{-webkit-transform-origin:center center;
+    -webkit-transform:rotate(0deg);
+    }
+}
+@keyframes _music{
+    0%{transform-origin:center center;
+    transform:rotate(-360deg);
+    }
+    100%{transform-origin:center center;
+    transform:rotate(0deg);
+    }
+}
+.wipeup {
+   -webkit-animation: jiantou 2s .2s linear both infinite;
+   animation: jiantou 2s .2s linear both infinite;
+}
+@keyframes jiantou {
+   0%, 100%, 20%, 53%, 80% {
+       -webkit-transition-timing-function: cubic-bezier(0.215,.61,.355,1);
+       transition-timing-function: cubic-bezier(0.215,.61,.355,1);
+       -webkit-transform: translate3d(0,0,0);
+       -ms-transform: translate3d(0,0,0);
+       transform: translate3d(0,0,0);
+      }
+   40%, 43% {
+       -webkit-transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+       transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+       -webkit-transform: translate3d(0,-30px,0);
+       -ms-transform: translate3d(0,-30px,0);
+       transform: translate3d(0,-30px,0);
+      }
+   70% {
+       -webkit-transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+       transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+       -webkit-transform: translate3d(0,-15px,0);
+       -ms-transform: translate3d(0,-15px,0);
+       transform: translate3d(0,-15px,0);
+      }
+   90% {
+       -webkit-transform: translate3d(0,-4px,0);
+       -ms-transform: translate3d(0,-4px,0);
+       transform: translate3d(0,-4px,0);
+      }
+}

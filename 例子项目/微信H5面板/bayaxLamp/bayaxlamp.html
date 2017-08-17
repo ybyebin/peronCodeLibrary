@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>我的灯泡</title>
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link rel="stylesheet" type="text/css" href="./css/light_switch.css"></head>
+
+<body>
+    <div>
+        <div class="body">
+            <div class="inner">
+                <div id="switchBtn" class="status_button off">
+                    <div class="button_wrp">
+                        <div class="button_mask">
+                            <div class="alerter_button" id="powerBtn"> <i class="status_pot"></i>
+                                <span class="on">ON</span>
+                                <span class="off">OFF</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="on">
+                        <h2>灯已开</h2>
+                    </div>
+                    <div class="off">
+                        <h2>灯已关</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="foot">
+            <div class="slider_box J_slider_box"> <i class="slider_box_icon icon dark"></i>
+                <div id="lightBar" class="slider_box_bar">
+                    <div class="slider_box_slider J_slider" style="left:0%">
+                        <p class="slider_box_slider_label J_value"></p>
+                        <i class="slider_box_slider_touch"></i>
+                    </div>
+                    <div class="slider_box_line">
+                        <span class="slider_box_line_fill J_fill" style="width:0%"></span>
+                    </div>
+                </div>
+                <i class="slider_box_icon icon light"></i>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="sea.js"></script>
+    <script type="text/javascript">
+        seajs.use("lamp");
+    </script>
+
+</body>
+</html>

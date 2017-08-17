@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>智能建筑管理系统</title>
+	<meta content="" name="description">
+	<meta content="" name="author">
+	<link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">	
+	<link rel="stylesheet" type="text/css" href="css/basic/check_black.css">
+	<link rel="stylesheet" type="text/css" href="css/basic/jquery.mCustomScrollbar.css">
+	<link rel="stylesheet" type="text/css" href="css/bayax.css">
+	<link rel="stylesheet" type="text/css" href="css/systemConfiguration2.css">
+
+	<link rel="stylesheet" type="text/css" href="css/basic/layer.css">
+	
+	<script type="text/javascript" src="js/basic/jquery.min.js"></script>
+	<script type="text/javascript" src="js/basic/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script type="text/javascript" src="js/basic/icheck.min.js"></script>
+
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div id="sidebar" class="col-sm-3 col-md-2 sidebar">
+				<div id="treeview" class="treeview">
+					<ul>
+						<li>
+							<a id="logo-a" href="deviceControlCanvas.html">
+								<img id="logo" src="images/logo-text.png"></a>
+						</li>
+						<li>
+							<a class="title_foursize" href="engineeringManagement.html">
+								<i></i>
+								<span>工程管理</span>
+							</a>
+						</li>
+						<li>
+							<a class="title_foursize" href="nodeManagement.html">
+								<i></i>
+								<span>节点管理</span>
+							</a>
+						</li>
+						<li class="active">
+							<a href="datalabelManagement.html">
+
+								<i></i>
+								<span>数据标签管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="energyconsumptionStatisticDis.html">
+								<i></i>
+								<span>能耗统计设定</span>
+							</a>
+						</li>
+						<li>
+							<a href="graphicImages.html">
+								<i></i>
+								<span>图形画面管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="energyconsumptionStatisticClassification.html">
+								<i></i>
+								<span>能耗统计分级</span>
+							</a>
+						</li>
+						<li>
+							<a href="userManagements.html">
+								<i></i>						
+								<span>用户权限管理</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<form class="datalabel-dis form-horizontal content_head">
+					<div class="form-group">
+						<div class="div-datalabel-btn col-sm-1">
+							<button id="datalabel_creat" type="button" class="button-normal btn btn-primary">新建标签</button>
+							<button id="datalabel_delete" type="button" class="button-cancle btn btn-primary" onclick="">批量删除</button>
+						</div>
+
+						<div class="col-sm-1 div-content-search">
+
+							<div class="col-sm-3 content-search">
+								<label class="col-sm-1">
+									<span id="search-span" class="glyphicon glyphicon-search"></span>
+								</label>
+
+								<input id="content-search-input" type="text" placeholder="请输入标签名称" required class="col-sm-9">
+								<label class="col-sm-1 label_img">
+									<img id="clearImage" src="images/delete.png"></label>
+							</div>
+						</div>
+
+					</div>
+					<div class="form-group div-content">
+						<div class="div-display form-group">
+							<table id="datalabel_tab" class="table table-striped table-primary">
+								<thead>
+									<tr>
+										<th>选择</th>
+										<th>数据标签</th>
+										<th>描述</th>
+										<th>类型</th>
+										<th>节点</th>
+										<th>寄存器</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody id="datalabel-tbodys">
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div id="table-boths" class="form-group">
+								<div class="tcdPageCode"></div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="loading" style="display: none">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+	<div style="display: none">
+		<button id="btn-save" data-id="" data-type="" type="button">保存</button>
+	</div>
+	<div id="layer-new-datalabel" style="display: none">
+		<form class="datalabel-edit form-horizontal">
+			<!-- <div class="form-group">
+			-->
+			<div id="datalabel-edit" class="form-group">
+				<div class="form-group">
+					<label class="col-sm-1 control-label label-title">数据标签名称</label>
+					<label class="col-sm-3">
+						<input id="datalab-name" type="text" class="form-control clean-input input-must-fill"></label>
+					<label class="col-sm-1 label-mustfill">*</label>
+					<label class="col-sm-1 control-label label-title">数据类型</label>
+					<label class="col-sm-3">
+						<select id="datalab-type" class="form-control">
+							<option value="1" selected="selected">开关型</option>
+							<option value="2">整数型</option>
+							<option value="3">实数型</option>
+							<option value="4">字符型</option>
+						</select>
+					</label>
+
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-1 control-label label-title">描述</label>
+					<label class="col-sm-3">
+						<input id="datalab-des" class="form-control clean-input" maxlength="128"></label>
+					<label class="col-sm-2 control-label label-title"></label>
+					<label class="col-sm-3 control-label lab-checkbox">
+						<input type="checkbox" id="datalab-nenghao" class="ckss-edit">
+						能耗数据
+					</label>
+				</div>
+
+				<div class="basic-parts form-group">
+					<p>
+						<span></span>
+						基本
+					</p>
+					<div class="detailed-content">
+						<div class="form-group">
+							<label class="col-sm-1 control-label label-title">节点</label>
+							<label class="col-sm-3">
+								<select id="datalab-node" class="form-control" value=""></select>
+							</label>
+							<label class="col-sm-1 control-label"></label>
+							<!-- <label class="col-sm-1 control-label label-title">默认值</label>
+							<label class="col-sm-3">
+								<input id="datalab-defaultvalue" type="text" class="form-control clean-input" style="display: none;">
+								<select id="datalab-defaultvalue-switch" class="form-control" value="" >
+									<option value="1">开</option>
+									<option value="0">关</option>
+								</select>
+							</label>
+							<label class="col-sm-1 label-mustfill">*</label> -->
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-1 control-label label-title">寄存器</label>
+							<label class="col-sm-3">
+								<input id="datalab-register" type="text" class="form-control clean-input input-must-fill" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="5"></label>
+							<label class="col-sm-1 label-mustfill">*</label>
+
+							<div class="lab-checkbox">
+								<label class="col-sm-1 control-label label-title">最大值</label>
+								<label class="col-sm-1">
+									<input id="datalab-maxval" type="number" class="form-control clean-input" class="form-control clean-input"></label>
+								<label class="col-sm-1 control-label label-title" style="text-align: center">最小值</label>
+
+								<label class="col-sm-1">
+									<input id="datalab-minval" type="number" class="form-control clean-input" class="form-control clean-input"></label>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-1 control-label"></label>
+							<label class="col-sm-3" style="padding-top: 0">
+								<input id="datalab-readonly" type="checkbox" class="ckss-edit">只读</label>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-1 control-label label-title">采集方式</label>
+							<label class="col-sm-3">
+								<select id="datalab-acquisition-style" class="form-control" value="">
+									<option value="1">主动上发</option>
+									<option value="2">定时采集</option>
+									<option value="3">主动上发且定时采集</option>
+								</select>
+							</label>
+
+							<label class="col-sm-1 control-label"></label>
+							<label class="col-sm-1 control-label label-title">采集频率</label>
+							<label class="col-sm-1">
+								<input id="datalab-acquisition-frequency" type="text" class="form-control clean-input" disabled="disabled" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="5"></label>
+							<label class="col-sm-1" style="width: 18px;padding-top: 7px;text-align: right">秒</label>
+
+							<label class="col-sm-1 control-label label-title lab-checkbox" style="text-align: right;padding-left: 10px;width: 100px">
+								数据处理
+								<span id="chengyi">乘以</span>
+							</label>
+							<label class="col-sm-1 lab-checkbox">
+								<input id="datalab-chengyival" type="number" class="form-control clean-input"></label>
+						</div>
+					</div>
+				</div>
+				<div class="warn-parts form-group">
+					<p>
+						<span></span>
+						报警
+					</p>
+					<div class="detailed-content">
+						<div class="div-switch-warn">
+							<div class="form-group" style="">
+								<label class="control-label">
+									<input id="datalab-warn" type="checkbox" class="ckss-edit" data-id="">
+									启用报警
+								</label>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-1 control-label label-title">报警值</label>
+								<label class="col-sm-3">
+									<select id="datalab-warn-val" class="form-control" value="">
+										<option value="1">true</option>
+										<option value="0">false</option>
+									</select>
+								</label>
+								<label class="col-sm-1 control-label"></label>
+								<label class="col-sm-1 control-label label-title">描述</label>
+								<label class="col-sm-3">
+									<input id="datalab-warn-des" class="form-control clean-input" maxlength="128"></label>
+
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-1 control-label label-title">级别</label>
+								<label class="col-sm-3">
+									<select id="datalab-warn-level" class="form-control" value="2">
+										<option value="1">高</option>
+										<option value="2" selected="selected">中</option>
+										<option value="3">低</option>
+									</select>
+								</label>
+							</div>
+						</div>
+						<div class="div-other-warn">
+							<div class="form-group" style="margin-bottom: 0">
+								<label id="datalab-addlimit" class="col-sm-1 control-label label-title">+添加界限值</label>
+							</div>
+							<div class="form-group div-table-warn">
+								<label class="col-sm-12 control-label">
+									<table id="table-warn" class="table table-striped">
+										<thead>
+											<tr>
+												<th></th>
+												<th>界限值</th>
+												<th>级别</th>
+												<th>报警描述</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</label>
+							</div>
+
+							<div class="form-group div-siqu">
+								<label class="col-sm-1 control-label label-title" style="padding-top: 15px">
+									<input id="datalab-siqu" type="checkbox" class="ckss-edit">
+									死区
+								</label>
+								<label class="col-sm-3 control-label label-title">
+									<input id="datalab-siquval" type="text" class="form-control clean-input" disabled="disabled" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="9" class="form-control clean-input">
+								</label>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="history-parts form-group">
+					<p>
+						<span></span>
+						历史数据
+					</p>
+
+					<div class="detailed-content">
+						<div class="form-group">
+							<label class="col-sm-3 control-label label-title" style="width: 140px">
+								<input id="datalab-change-storage" type="checkbox" class="ckss-edit">
+								当数据改变时存储
+							</label>
+							<label class="col-sm-1 control-label label-title lab-checkbox" style="width: 50px;padding-top: 10px;text-align: center">死区</label>
+							<label class="col-sm-3 control-label lab-checkbox">
+								<input id="datalab-his-siquval" type="text" class="form-control clean-input" disabled="disabled" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="9" class="form-control clean-input">
+							</label>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label label-title" style="width: 140px;padding-top: 12px">
+								<input id="datalab-fixed-storage" type="checkbox" class="ckss-edit">
+								固定时间间隔存储
+							</label>
+							<label class="col-sm-1 control-label label-title" style="width: 50px;padding-top: 15px;text-align: center">每</label>
+							<label class="col-sm-2 control-label">
+								<input type="text" id="datalab-fixed-val" class="form-control clean-input" disabled="disabled" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="9" class="form-control clean-input">
+							</label>
+							<label class="col-sm-1" style="padding-top: 15px;width: 65px">
+								<select id="datalab-sec-min" disabled="disabled">
+									<option value="1">秒</option>
+									<option value="2">分</option>
+								</select>
+							</label>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			</form>
+	</div>
+
+	<div id="layer-delete-node" style="display: none">
+		<p></p>
+	</div>
+	<script type="text/javascript" src="js/basic/layer.js"></script>
+	<script type="text/javascript" src="js/basic/api.js"></script>
+	<script type="text/javascript" src="js/systemSet/datalabelManagement.js"></script>
+
+</body>
+</html>

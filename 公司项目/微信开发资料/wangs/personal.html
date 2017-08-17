@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="utf-8">
+</head>
+<link rel="stylesheet" href="index.css">
+<script>
+    (function () {
+        function o() {
+            document.documentElement.style.fontSize = (document.documentElement.clientWidth > 640 ? 640 : document.documentElement.clientWidth) / 16 + "px"
+        }
+        var e = null;
+        window.addEventListener("resize", function () {
+            clearTimeout(e), e = setTimeout(o, 300)
+        }, !1), o()
+    })(window);
+</script>
+<body>
+    <!-- 表单域 -->
+    <div >
+    <form  id="myform">
+            <div class="m_l1">注册</div>
+
+            <span>工作站编号:</span>
+            <input type="number" name="station_no" id="n1">
+            <br>
+            <br>
+             <span>工作站名称:</span>
+            <input type="name " name="station_name" id="n2">
+            <br>
+            <br> 
+            <span>调查仪类型:</span>
+            <input type="text" name="sn_type" id="n3">
+            <br>
+            <br> 
+            <span>调查仪编号:</span>
+            <input type="number" name="sn_no" id="n4">
+            <br>
+            <br>
+            <span>样本户编号:</span> 
+            <input type="number" name="sample_num" id="n5">
+            <br>
+            <br> 
+            <span>样本户姓名:</span>
+            <input type="text" name="sample_name" id="n6">
+            <br>
+            <br> 
+            <span>成员编号:</span>
+            <input type="number" name="member_no" class="m_l2" id="n7">
+            <br>
+            <br>
+            <span>成员姓名:</span> 
+            <input type="text" name="member_name" class="m_l2" id="n8">
+            <br>
+            <br> 
+            <span>成员职业:</span>
+            <input type="text" name="member_occupation" class="m_l2" id="n9">
+            <br>
+            <br>            
+            <span>频道名称:</span>
+            <input type="text" name="channel_name" class="m_l2" id="n10">
+            <br>
+            <br>            
+            <span>频道编码:</span>
+            <input type="text" name="channel_num" class="m_l2" id="n11">
+            <br>
+            <br>             
+            <span>收听频率:</span>
+            <input type="text" name="listen_rate" class="m_l2" id="n11">
+            <br>
+            <br>             
+            <span>开始时间:</span>
+            <input type="date" name="begin_time" class="m_l2" id="n11">
+            <br>
+            <br>   
+            <span>结束时间:</span>
+            <input type="date" name="end_time" class="m_l2" id="n11">
+            <br>
+            <br> 
+            <span>成员年龄:</span>
+            <input type="number" name="member_age" class="m_l2" id="n12">
+            <br>
+            <br>   
+            <span>成员收入:</span>         
+            <input type="text" name="member_income" class="m_l2" id="n12">
+            <br>
+            <br> 
+            <span>密码：</span>
+            <input type="password" name="pwd" class="m_l3" id="n13">
+            <br>
+            <br> 
+            <span>成员性别：</span>
+            <input type="radio" name="member_sex" checked="checked" value="1" > 男
+            <input type="radio" name="member_sex" checked="" value="2"> 女
+            <br>
+            <br>
+            <span>所在城市：</span>
+            <select name="province">
+                <option>北京</option>
+                <option>河北</option>
+                <option>河南</option>
+                <option>山东</option>
+                <option selected="selected">山西</option>
+            </select>
+            <select name="city">
+                <option>北京</option>
+                <option>河北</option>
+                <option>河南</option>
+                <option>山东</option>
+                <option>山西</option>
+            </select>
+            <select name="county">
+                <optgroup label="河北">
+                    <option>保定</option>
+                    <option>石家庄</option>
+                    <option>张家口</option>
+                </optgroup>
+            </select>
+            <br>
+            <br>
+            <!-- 提交按钮 -->
+            <!-- <input type="submit"  class="m_l4"> -->
+            <!-- <input type="button" class="m_l4" name="提交"> -->
+            <!-- <button class="m_l4" id="btn">提交</button> -->
+            <!-- 普通按钮 -->
+            <input type="button" value="提交" class="m_l4" id="btn">
+            <!-- 重置按钮 -->
+            <!-- <input type="reset"> -->
+            <!-- 隐藏控件 -->
+            <!-- <input type="hidden" value="123"> -->
+    </form>
+    </div>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="jquery.form.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

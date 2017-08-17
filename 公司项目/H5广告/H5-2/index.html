@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>消消乐</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+
+<body>
+
+    <section class="step-section">
+        <div class="section loading-div" style="display: block">
+            <div class="content">
+                 <div class="progress">
+                <div class="bar"></div>
+            </div>
+            </div>
+           
+        </div>
+
+        <div class="section first" >
+            <img class="pulse" src="images/bg/djry.png"></div>
+        <div class="section second ">
+
+            <div id="hand-click" class="click-div">
+                <img class="pulse" src="images/bg/hand.png"></div>
+        </div>
+        <div class="section third ">
+            <div class="btn-down"></div>
+            <div class="hm-div hm-divs ">
+                <img id="hm-wash" src="images/wash01/ws39.png"></div>
+            <div class="change-div change-div2">
+                <img class="f-flash" src="images/hong/16.png">
+                <img class="f-flash" src="images/hong/16.png">
+                <img class="f-flash" src="images/hong/16.png"></div>
+            <div class="change-div">
+                <img id="change-f-2" class="change-f-2" src="images/bg/step3-fruit-2.png">
+                <img id="change-f-1" class="change-f-1" src="images/bg/step3-fruit-1.png">
+            </div>
+
+    </div>
+    <div class="section fourth ">
+        <div id="four-hand-click" class="click-div">
+            <img class="pulse" src="images/bg/hand.png"></div>
+    </div>
+
+    <div class="section five ">
+        <div class="btn-down"></div>
+        <div class="hm-div hm-divs">
+            <img id="hm-wash-five" src="images/wash01/ws39.png"></div>
+        <div class="change-div change-div3">
+            <img class="f-flash3" src="images/zi/17.png">
+            <img class="f-flash3" src="images/zi/17.png">
+            <img class="f-flash3" src="images/zi/17.png">
+            <img class="f-flash3" src="images/zi/17.png">
+            <img class="f-flash3" src="images/zi/17.png"></div>
+
+        <div class="change-div">
+            <img id="change-five-2" class="change-f-2" src="images/bg/step4-fruit-1.png">
+            <img id="change-five-1" class="change-f-1" src=" images/bg/step3-fruit-2.png"></div>
+    </div>
+    <div class="section six ">
+        <div id="six-hand-click" class="click-div">
+            <img class="pulse" src="images/bg/hand.png"></div>
+    </div>
+    <div class="section seven ">
+        <div class="btn-down"></div>
+        <div class="logo-dev">
+            <img  src="images/bg/logo.png"></div>
+
+        <div class="hm-div washly-dev">
+            <img id="hm-wash-seven" src="images/shower/0.png"></div>
+
+        <div class="change-div change-div7">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png"></div>
+
+        <div class="change-div change-div7-2">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png">
+            <img class="f-flash7 f-flash7-h" src="images/hong/16.png">
+            <img class="f-flash7 f-flash7-h" src="images/hong/16.png">
+            <img class="f-flash7 f-flash7-h" src="images/hong/16.png">
+            <img class="f-flash7 f-flash7-h" src="images/hong/16.png"></div>
+
+        <div class="change-div change-div7-3">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png"></div>
+        <div class="change-div change-div7-4">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png"></div>
+        <div class="change-div change-div7-5">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png"></div>
+        <div class="change-div change-div7-6">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png"></div>
+        <div class="change-div change-div7-7">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png">
+            <img class="f-flash7 f-flash7" src="images/huang/17.png"></div>
+
+        <div class="change-div">
+            <img id="change-seven-2" class="change-f-2 slideInUp" src="images/bg/step7-fruit-1.png">
+            <img id="change-seven-1" class="change-f-1 slideInUps" src=" images/bg/step7-fruit-2.png"></div>
+        <div class="change-div fruit-div">
+            <img src="images/bg/fruit.jpg"></div>
+        <div class="mengban-div">
+            <img id="mengban-img" src="images/bg/success.png">
+            <div class="btn-div play-again"></div>
+            <div class="btn-div download-game"></div>
+        </div>
+    </div>
+    <div style="display: none;"></div>
+
+    <div style="display: none;">
+        <img id="huang-load" src="images/huang/0.png">
+        <img id="hongs-load" src="images/hong/0.png">
+        <img id="zi-load" src="images/zi/0.png"></div>
+</section>
+
+<script type="text/javascript">
+        (function () {
+            function o() {
+                document.documentElement.style.fontSize = (document.documentElement.clientWidth > 750 ? 750 : document.documentElement.clientWidth) / 15 + "px"
+            }
+            var e = null;
+            window.addEventListener("resize", function () {
+                clearTimeout(e), e = setTimeout(o, 300)
+            }, !1), o()
+        })(window);
+    </script>
+<script src="js/zepto.js"></script>
+<script type="js/touch.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
