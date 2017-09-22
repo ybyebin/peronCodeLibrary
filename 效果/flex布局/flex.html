@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="flxe.css">
+</head>
+<body>
+	<div class="box box-1">
+		<div class="box-item">1</div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+	</div>
+
+
+	<h3>2、flex-wrap属性</h3>
+	<p>默认情况下，项目都排在一条线（又称"轴线"）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。</p>
+	<p>
+		.box{
+		    flex-wrap: nowrap | wrap | wrap-reverse;
+		}
+	</p>
+	<p>nowrap（默认）：不换行。</p>
+	<div class="box box-2">
+		<div class="box-item">1</div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+		<div class="box-item">4</div>
+		<div class="box-item">5</div>
+		<div class="box-item">6</div>
+		<div class="box-item">7</div>
+	</div>
+
+
+	<p>wrap：换行，第一行在上方。</p>
+	<div class="box box-3">
+		<div class="box-item">1</div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+		<div class="box-item">4</div>
+		<div class="box-item">5</div>
+		<div class="box-item">6</div>
+		<div class="box-item">7</div>
+	</div>
+
+
+	<p>wrap-reverse：换行，第一行在下方。</p>
+	<div class="box box-4">
+		<div class="box-item">1</div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+		<div class="box-item">4</div>
+		<div class="box-item">5</div>
+		<div class="box-item">6</div>
+		<div class="box-item">7</div>
+	</div>
+
+
+	<h3>4、justify-content属性</h3>
+	<p>justify-content属性定义了项目在主轴上的对齐方式。</p>
+	<p>
+		.box {
+		    justify-content: flex-start | flex-end | center | space-between | space-around;
+		}
+	</p>
+	<p>flex-start（默认值）：左对齐</p>
+	<div class="box box-6">
+		<div class="box-item">1</div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+		<div class="box-item">4</div>
+	</div>
+	
+	<p>flex-end：右对齐</p>
+	<div class="box box-7">
+		<div class="box-item">1</div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+		<div class="box-item">4</div>
+	</div>
+	
+
+	<p>center： 居中</p>
+	<div class="box box-8">
+		<div class="box-item">1</div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+		<div class="box-item">4</div>
+	</div>
+
+
+	<p>space-between：两端对齐，项目之间的间隔都相等。</p>
+	<!-- <div style="width: 800px;background: blue;margin-right: auto;margin-left: auto;"> -->
+		<div class="box box-9">
+		<div class="box-item">1</div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+		<div class="box-item">4</div>
+
+		<div class="box-item">5</div>
+		<div class="box-item">6</div>
+	</div>
+	<!-- </div> -->
+
+
+	<p>space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</p>
+	<div class="box box-10">
+		<div class="box-item">1</div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+		<div class="box-item">4</div>
+	</div>
+
+
+
+	<h3>2、flex-grow属性</h3>
+	<p>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</p>
+	<p>如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
+	<p>
+		.item {
+		  flex-grow: &lt;number&gt;; /* default 0 */
+		}
+	</p>
+	<div class="box box-23">
+		<!-- <div class="box-item grow">1 <div>flex-grow: 1</div></div> -->
+		<div class="box-item grow grow-2">2 <div>flex-grow: 2</div></div>
+		<!-- <div class="box-item grow">3 <div>flex-grow: 1</div></div> -->
+		<div><button>按钮</button></div>
+	</div>
+	
+
+	<h3>3、flex-shrink</h3>
+	<p>flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
+	<p>如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。<br>负值对该属性无效。</p>
+	<p>
+		.item {
+		    flex-shrink: &lt;number&gt;; /* default 1 */
+		}
+	</p>
+	<div class="box box-24">
+		<div class="box-item shrink">1 <div>flex-shrink: 0</div></div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+	</div>
+
+
+</body>
+</html>

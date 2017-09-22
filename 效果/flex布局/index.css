@@ -1,45 +1,116 @@
-/*.content{
+
+
+html,
+body {
+	height: 100%;
+	overflow: hidden;
+}
+
+ul {
+	margin-top: 0;
+}
+
+.admin-main {
+	height: 100%;
+	background: #f3f3f3;
+}
+
+
+.admin-sidebar {
+	width: 230px;
+	min-height: 100%;
+	float: left;
+	border-right: 1px solid #cecece;
+}
+
+.admin-content {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
-	flex-flow: row wrap;
-	background-color: red;
-	height: 500px;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	background: #fff;
 }
-.left,
-.right,
-.center{
-	flex: 1;
-	background-color: blue;
-	border:1px solid #eee;
-	text-align: center;
+
+.admin-content,
+.admin-sidebar {
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
 }
-{
-	flex: 1;
-}*/
-*{
-	margin: 0;
-	padding: 0;
+
+@media only screen and (min-width:641px) {
+	.admin-sidebar {
+		display: block;
+		position: static;
+		background: none;
+	}
+
+}
+
+@media only screen and (max-width:640px) {
+	.admin-sidebar {
+		width: inherit;
+	}
+
+}
+
+.main{
+	height: 100%;
+	background: yellow;
+}
+.slide{
+	width: 200px;
+	background: red;
+	height: 100%;
+	min-height: 100%;
+	float: left;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 .content{
-	
-	height: 500px;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+/*   display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;*/
+	background: blue;
 }
-.left,
-.right,
-.center{
-float: left;
-width: 33.33333333333333333333%;
-background-color: red;
-/*border:1px solid #eee;*/
+.slide p{
+	height: 200px;
 }
-.left div,
-.right div,
-.center div{
-	margin-right: 100px;
-	border-left:1px solid #eee;
-	text-align: center;
-	background-color: #eee;
-}
-.left div{
-	border-left: none;
 
+.a{
+	/*height: 100%;*/
+	background: green;
+}
+.b{
+	/*width: 100px;*/
+	float: left;
+	/*display: inline-block;*/
+	height: 5px;
+
+	background: gray;
+}
+.c{
+	background: red;
+	height: 20px;
+	/*height: 100px;*/
+}
+.d{
+	height: 10px;
+	background: yellow;
 }

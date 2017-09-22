@@ -1,0 +1,81 @@
+.box {
+	display: flex;
+	background: red;
+}
+
+.box-item {
+	width: 200px;
+	height: 200px;
+	line-height: 200px;
+	vertical-align: middle;
+	margin: 5px;
+	background-color: #ffd200;
+	font-size: 100px;
+	color: white;
+	text-align: center;
+}
+
+.box-1 {
+	flex-direction: row;	/*flex-direction: row-reverse;*/
+
+	/*flex-direction: column ;*/
+
+	/*flex-direction: column-reverse;*/
+}
+
+.box-2 {
+	flex-direction: row;	/*一排放不下 如何换行*/
+	flex-wrap: nowrap;	/*flex-wrap:  wrap ;*/
+
+	/*flex-wrap:  wrap-reverse;*/
+}
+
+.box-3 {
+	flex-direction: row;	/*一排放不下 如何换行*/
+	flex-wrap: wrap;	/*flex-wrap:  wrap-reverse;*/
+}
+
+.box-4 {
+	flex-direction: row;	/*一排放不下 如何换行*/
+	flex-wrap: wrap-reverse;
+}
+
+.box-6 {
+	justify-content: flex-start;
+}
+
+.box-7 {
+	flex-wrap: row-reverse;
+	justify-content: flex-end;;
+}
+.box-8 {
+	/*flex-wrap: row-reverse;*/
+	justify-content: center;
+}
+
+
+.box-9 {
+	justify-content: space-between;
+}
+
+.box-10 {
+	justify-content: space-around;
+}
+
+
+
+.box-23 .box-item{
+	flex-grow: 1;
+	/*width: auto;*/
+}
+.box-23 .grow-2{
+	flex-grow: 3;
+}
+
+
+.box-24 .box-item {
+	width: 400px;
+}
+.box-24 .shrink{
+	flex-shrink: 1;
+}
