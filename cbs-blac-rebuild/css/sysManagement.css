@@ -1,46 +1,197 @@
 .bayax-bg-black{
-	background-image: -webkit-linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%);
-	background-image: -o-linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%);
-	background-image: linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%);
+	background: #2D3057;
+
+    background-image: -webkit-linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%);
+    background-image: -o-linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%);
+    background-image: linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%);
 }
 
 
+/*侧边栏*/
 
-.treeview ul li a i {
+.layui-layout-admin .layui-side {
+    top: 80px;
+}
+
+.icon-handler{
+  color: #fff;
+  font-size: 20px;
+}
+
+
+/*侧边栏*/
+
+.layui-side-scroll .layui-nav {
+    background: transparent !important;
+    /*background-image: -webkit-linear-gradient(270deg, #201c25, #1c1a25) !important;*/
+    /*background-image: linear-gradient(270deg, #201c25, #1c1a25) !important;*/
+}
+
+.layui-bg-black {
+    background: transparent!important;
+}
+
+.layui-nav-tree .layui-nav-item{
+    margin-bottom: 1px;
+}
+.layui-nav-tree .layui-nav-item a{
+	height: 66px !important;
+    line-height: 66px;
+    text-align: left;
+    padding-left: 35px;
+}
+.layui-side-scroll ul li a {
+    font-size: 16px !important;
+}
+.layui-nav-tree .layui-nav-item a:hover{
+	background: #3E4687!important;
+}
+.layui-nav-tree .layui-nav-item.bayax-li-item-img a,
+.layui-nav-tree .layui-nav-item.bayax-li-item-img a:hover{
+    background: #1C203F !important;
+}
+.layui-nav-tree .layui-nav-item.active a{
+    background: #3E4687!important;
+}
+
+.layui-side a i{
 	display: inline-block;	
 	position: relative;
 	top: 4px;
-	margin-right: 5px;
+	margin-right: 1px;
 	width: 20px;
 	height: 20px;
-}
-
-.treeview ul li:nth-child(2) a i{
 	background:url(../images/syssettitle.png)  no-repeat;
+}
+.layui-side a i.gcgl{
 	background-position:-120px 0;
 }
-.treeview ul li:nth-child(3) a i{
-	background:url(../images/syssettitle.png)  no-repeat;
+.layui-side a i.jdgl{
 	background-position:-140px 0;
 }
-.treeview ul li:nth-child(4) a i{
-	background:url(../images/syssettitle.png)  no-repeat;
+.layui-side a i.sjbqgl{
 	background-position:0 0;
 }
-.treeview ul li:nth-child(5) a i{
-	background:url(../images/syssettitle.png)  no-repeat;
-	background-position:-160px 0;
-}
-.treeview ul li:nth-child(6) a i{
-	background:url(../images/syssettitle.png)  no-repeat;
-	background-position:-80px 0;
-}
-.treeview ul li:nth-child(7) a i{
-	background:url(../images/syssettitle.png)  no-repeat;
+.layui-side a i.nhtjsd{
 	background-position:-160px 0;
 }
 
-.treeview ul li:nth-child(8) a i{
+.layui-side a i.txhmgl{
+	background-position:-80px 0;
+}
+.layui-side a i.nhtjfj{
+	background-position:-160px 0;
+}
+.layui-side a i.yhqxgl{
 	background: url(../images/system.png) no-repeat;
   background-position: 0 0;
 }
+.layui-nav-tree .layui-nav-bar {
+    background: none;
+    opacity: 0 !important;
+    height: 0!important;
+}
+
+.layui-body{
+    left: 200px;
+    color: #fff;
+    padding-top: 88px;
+    padding-left: 20px;
+    /*min-width: 900px;*/
+    overflow: auto!important;
+}
+.bayax-content{
+    min-width: 900px;
+}
+
+
+/*工程管理*/
+.content-main{
+}
+.enginM-div{
+    width: 400px!important;
+}
+.bayax-inline{
+    float: left;
+    padding-left: 25px;
+}
+.bayax-inline-img{
+    height: 90px;
+    width:400px;
+    background: #999999;
+}
+.layui-form-label{
+    text-align: left;   
+}
+.bayax-label-input-warn,
+.bayax-label-input-des{
+    display: inline-block;
+    padding-top: 10px;
+}
+.bayax-label-input-warn{
+    color: red;
+}
+.bayax-label-input-des span{
+    color: red;
+    display: inline-block;
+    position: relative;
+    margin-right: 6px;
+    top: 2px;
+}
+.rightName{
+    display: none;
+}
+.editshow{
+    display: none;
+}
+
+/*节点管理*/
+    /*搜索框-*/
+.content-search {
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-right: 20px;
+    background: #FFFFFF;
+    float: right;
+    width: 265px;
+    background: #1D2142;
+    color: #fff;
+    border: 1px solid rgba(143,152,186,0.31);
+}
+
+
+.search-span {
+    font-size: 20px;
+    position: relative;
+    display: inline-block;
+    top: 5px;
+}
+.content-search input {
+    height: 44px;
+    width: 210px;
+    border: none;
+    background: #1D2142;
+    color: #fff;
+}
+
+.span-del{
+    cursor: pointer;
+    font-size: 20px;
+    display: inline-block;
+    position: relative;top: 5px;
+     display: none;
+}
+
+.content-search input::-ms-clear {
+    display: none;
+}
+
+.content-search input:valid +.span-del {
+    display: inline;
+}
+
+/*搜索框-*/
+
+
+
+
