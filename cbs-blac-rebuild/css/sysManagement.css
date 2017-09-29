@@ -91,6 +91,12 @@
     opacity: 0 !important;
     height: 0!important;
 }
+.logo{
+    width: 129px;
+    height: 27px;
+    display: inline-block;
+    position: relative;
+}
 
 .layui-body{
     left: 200px;
@@ -120,6 +126,10 @@
     width:400px;
     background: #999999;
 }
+.logo-content{
+    width: 100%;
+    height: 100%;
+}
 .layui-form-label{
     text-align: left;   
 }
@@ -141,12 +151,22 @@
 .rightName{
     display: none;
 }
-.editshow{
+.displayShow{
     display: none;
+}
+.edithide{
+    display: none;
+}
+.editshow{
+    display: block;
 }
 
 /*节点管理*/
+.node-content-main{
+    /*padding-bottom: 0;*/
+}
     /*搜索框-*/
+
 .content-search {
     border-radius: 5px;
     padding-left: 10px;
@@ -190,7 +210,70 @@
     display: inline;
 }
 
-/*搜索框-*/
+  /*搜索框-*/
+.bayax-table{
+    border-bottom: 1px solid #555769;
+}
+.tdshow{
+    display: none;
+}
+ /*node-弹窗*/
+ .node-layer-content{
+    height: 332px;
+    padding-top: 30px;
+    border-bottom: 1px solid #606277;
+ }
+  .node-layer-content .layui-form-label{
+    padding-bottom: 0;
+    padding-top: 0;
+    position: relative;
+  }
+ .node-label-title {
+    text-align: right;
+    padding-left: 0;
+ }
+ .node-layer-content .layui-input-inline{
+    width: 250px;
+ }
+ .node-layer-content input{
+    width: 250px;
+ }
+ .node-textarea{
+    width: 228px;
+    height: 80px;
+ }
+ .node-layer-content .bayax-label-input-des{
+    width: 274px;
+    padding-right: 0;
+    top: 10px;
+ }
+ .node-layer-content .bayax-label-input-warn{
+    padding-left: 10px;
+    display: inline-block;
+    top: 10px;
+    width: 200px;
+ }
+.rightinput{
+    display: none!important;
+}
+.del-node-content{
+    font-size: 16px;
+}
+  /*node-弹窗*/
+
+
+/*用户权限管理*/
+.userManage-main{
+padding-right: 20px;
+}
+.user-div-l{
+    border: 1px solid rgba(143,152,186,.2);
+    height: 300px;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*background-color: blue;*/
+}
+/*用户权限管理*/
 
 
 

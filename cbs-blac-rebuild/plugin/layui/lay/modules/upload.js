@@ -89,9 +89,12 @@ layui.define("layer", function(e) {
 			u = function() {
 				layui.each(e || o.files || o.chooseFiles || r.files, function(e, t) {
 					var n = new FormData;
-					n.append(l.field, t), layui.each(l.data, function(e, i) {
+					n.append(l.field, t), 
+					layui.each(l.data, function(e, i) {
 						n.append(e, i)
-					}), i.ajax({
+					}),
+					console.log(n)
+					 i.ajax({
 						url: l.url,
 						type: l.method,
 						data: n,

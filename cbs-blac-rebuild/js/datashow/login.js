@@ -1,8 +1,3 @@
-
-setInterval(function(){
-	// layer.msg(11)
-},10)
-
 new Vue({
 	el: '#app',
 	data: {
@@ -10,10 +5,9 @@ new Vue({
 		pasword: '',
 		namefocus: false,
 		paswfocus: false,
-		loading:false
+		loading: false
 	},
-	mounted: function() {
-	},
+	mounted: function() {},
 	methods: {
 		logIn: function() {
 			if (this.username === '') {
@@ -47,7 +41,7 @@ new Vue({
 									sessionStorage.setItem("isadmin", '1');
 									break;
 							}
-							location.href = "deviceControlCanvas.html";
+							location.href = "engineeringManagement.html";
 						} else {
 							layer.msg(data.error_message);
 						}
@@ -59,25 +53,17 @@ new Vue({
 				});
 			}
 		},
-		forgetpas:function(){
+		forgetpas: function() {
 			layer.open({
-			title: ['提示', 'font-size:18px;color:#fff;background:#3E4687;height:50px;font-weight:bold;line-height:50px;padding-left:30px;border:none;'],
-			type: 1,
-			skin: 'layui-primary', //加上边框
-			area: ['540px', '225px'], //宽高
-			content: $("#forget-pas"), //捕获的元素,
-			shift: 2,
-			move: false,
-		});
+				title: ['提示', 'font-size:18px;color:#fff;background:#3E4687;height:50px;font-weight:bold;line-height:50px;padding-left:30px;border:none;'],
+				type: 1,
+				skin: 'layui-primary', //加上边框
+				area: ['540px', '225px'], //宽高
+				content: $("#forget-pas"), //捕获的元素,
+				shift: 2,
+				move: false,
+			});
 		}
 
 	}
 });
-
-
-$(function(){
-	setTimeout(function(){
-		layer.msg('123')
-	},2000)
-	
-})

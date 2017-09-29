@@ -10,7 +10,7 @@
 
 </head>
 <body class="layui-layout-body">
-  <div class="layui-layout ">
+  <div id="app" class="layui-layout ">
     <div class="layui-side bayax-bg-black">
       <div class="layui-side-scroll">
 
@@ -18,8 +18,8 @@
 
 
           <li class="layui-nav-item bayax-li-item-img">
-              <a id="logo-a" href="deviceControlCanvas.html">
-                <img id="logo" src="images/logo-text.png"></a>
+              <a  href="deviceControlCanvas.html">
+                <img class="logo" v-bind:src="proLogo"></a>
             </li>
 
           <li class="layui-nav-item active">
@@ -28,7 +28,7 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:;"> <i class="jdgl"></i>
+            <a href="nodeManagement.html"> <i class="jdgl"></i>
               节点管理
             </a>
           </li>
@@ -69,7 +69,7 @@
     <div id="app" class="layui-body">
       <!-- 内容主体区域 -->
       <!-- show -->
-      <div v-bind:class="{ editshow: isEdit}" class="bayax-content">
+      <div v-bind:class="{ displayShow: isDisplayShow}" class="bayax-content">
           <div class="content-head">
             <button @click="edit" class="layui-btn bayax-btn">编辑</button>
             <button class="layui-btn bayax-btn">导入工程</button>
@@ -88,7 +88,9 @@
                   <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">标志</label>
                     <div class="layui-input-inline ">
-                      <div class="bayax-inline-img"></div>
+                      <div class="bayax-inline-img">
+                         <img class="logo-content" v-bind:src="proLogoShow">
+                      </div>
                     </div>
                    
                   </div>
@@ -103,7 +105,7 @@
           </div>
       </div>
       <!-- edit -->
-      <div v-bind:class="{ editshow: !isEdit}" class="bayax-content">
+      <div v-bind:class="{ editshow: isEditShow}" class="bayax-content edithide">
           <div class="content-head">
             <button @click="saveProMsg"  class="layui-btn bayax-btn">保存</button>
             <button @click="cancelEdit" class="layui-btn bayax-btn-cancel">取消</button>
@@ -127,10 +129,12 @@
                   <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">标志</label>
                     <div class="layui-input-inline ">
-                      <div class="bayax-inline-img"></div>
+                      <div class="bayax-inline-img">
+                        <img class="logo-content" v-bind:src="proLogoEdit">
+                      </div>
                     </div>
                     <div  class="bayax-inline">
-                        <button id="upLoadImg" class="layui-btn bayax-btn" type="button">上传图片</button><br>
+                        <button @click="upImg" class="layui-btn bayax-btn" type="button">上传图片</button><br>
                          <label class="bayax-label-input-des">请上传小于5MB的JPG、PNG等文件</label>
                     </div>
                   </div>
@@ -148,15 +152,26 @@
 
                     </div>
                   </div>
+
+                  <input type="file" id="imageFileField-logo" style="opacity: 0;display:none;" onchange="showPreview(this)" />
               </form>
             </div>
           </div>
+           <div v-bind:class="{ loadingShow:loadingShow }"  class="loading" >
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+       </div>
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="plugin/vue.js"></script>
+  <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
+  <script src="js/basic/api.js"></script>
+  <script src="plugin/vue.js"></script>
   <script src="plugin/layui/layui.js"></script>
-  <script type="text/javascript" src="js/sysSet/engineeringManagement.js"></script>
+  <script src="js/sysSet/engineeringManagement.js"></script>
   <script>
 //JavaScript代码区域
 
