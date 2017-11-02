@@ -423,6 +423,29 @@ body {
 /*表格 bayax-table */
 
 
+/* ul  li */
+
+.bayax-ul li {
+    height: 45px;
+    line-height: 45px;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 10px;
+}
+
+.bayax-ul li:nth-of-type(even) {
+    background: #191c33;
+}
+
+.bayax-ul li:nth-of-type(odd) {
+    background-color: #262A50;
+}
+
+
+/* ul  li */
+
+
 /*checkbox*/
 
 .layui-form-checkbox i {

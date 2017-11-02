@@ -497,6 +497,131 @@
 
 /* 能耗统计设定 */
 
+.energyStatistics {
+    padding-right: 20px;
+}
+
+.energyStatistics .content-main {
+    background-color: #191C33;
+}
+
+.energyStatistics-head {
+    border-bottom: 1px solid #555769;
+    padding-bottom: 15px;
+}
+
+.energyStatistics-head span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.energyStatistics-head a {
+    float: right;
+}
+
+.energyStatistics-content {
+    padding-top: 10px;
+}
+
+.energyStatistics-content-head {
+    padding-bottom: 10px;
+}
+
+.energyStatistics-content-head label {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    min-width: 35px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.energyStatistics-content-head i {
+    font-size: 16px;
+    display: inline-block;
+}
+
+.energyStatistics-content-head.clicks i {
+    transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    top: 1px;
+    position: relative;
+}
+
+.energyStatistics-content-body {
+    max-height: 645px;
+    overflow: hidden;
+}
+
+.energyStatistics-content-body .bayax-ul li {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    min-width: 35px;
+    display: inline-block;
+}
+
+.energyStatistics-content-body .bayax-ul li.active {
+    border-left: 6px solid #A78FBE;
+    color: #A78FBE;
+    padding-left: 7px;
+}
+
+.energyStatistics-content-body .bayax-ul li:hover {
+    border-left: 6px solid #A78FBE;
+    color: #A78FBE;
+    padding-left: 7px;
+}
+
+.energyStatistics-content-body .bayax-ul li:nth-of-type(even) {
+    background-color: #191C33;
+}
+
+.energyStatistics-content-body .bayax-ul li:nth-of-type(odd) {
+    background-color: #1D203B;
+}
+
+.energyStatistics-right {
+    padding-top: 30px;
+    padding-right: 15px;
+}
+
+.energyStatistics-right-head span {
+    padding-left: 10px;
+    border-left: 3px solid #3E4687;
+}
+
+.energyStatistics-right-content {
+    padding-top: 20px;
+}
+
+.energyStatistics-right-content table {
+    border-bottom: none;
+}
+
+.energyStatistics-right-content {
+    max-height: 680px;
+    overflow: hidden;
+}
+
+.energyStatistics-right-content table thead {
+    border: 1px solid #3e4364;
+}
+
+.energyStatistics-right-content table thead tr th {
+    height: 40px;
+    line-height: 40px;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #2E3554;
+    border-bottom: none !important;
+}
+
 
 /* 能耗统计设定 */
 

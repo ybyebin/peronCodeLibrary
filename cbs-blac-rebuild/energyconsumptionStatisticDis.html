@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>用户权限管理</title>
+    <title>能耗统计设定</title>
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
     <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/base.css">
@@ -28,7 +28,7 @@
                         <a class="" href="engineeringManagement.html"> <i class="gcgl"></i> 工程管理
                         </a>
                     </li>
-                    <li class="layui-nav-item active">
+                    <li class="layui-nav-item">
                         <a href="nodeManagement.html"> <i class="jdgl"></i> 节点管理
                         </a>
                     </li>
@@ -37,7 +37,7 @@
                             <i class="sjbqgl"></i> 数据标签管理
                         </a>
                     </li>
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item active">
                         <a href="javascript:;">
                             <i class="nhtjsd"></i> 能耗统计设定
                         </a>
@@ -69,32 +69,60 @@
                 </div>
                 <div class="content-body">
                     <div class="layui-row">
-                        <div class="userManage-main layui-col-xs3">
+                        <div class="energyStatistics layui-col-xs3">
+                            <div class="content-body-border-top"></div>
                             <div class=" bayaxMscroll content-main">
+                                <div class="energyStatistics-head">
+                                    <span>能耗统计</span>
+                                    <a href="#">添加</a>
+                                </div>
+                                <div class="energyStatistics-content">
+                                    <div @click="leftUlShowHide" :class="{clicks:ulhide}" class="energyStatistics-content-head ">
+                                        <label>
+											<i class="icon-arrow_drop_down"></i>
+											<span>智能建筑系统智能建筑系统智能建筑系统智能建筑系统智能建筑系统智能建筑系统</span>
+										</label>
+                                    </div>
+                                    <div class="energyStatistics-content-body">
+                                        <ul class="bayax-ul">
+                                            <li @click="gettags(item)" :class="{active:item.active}" v-for="(item,index) in statisticsGroupData" v-text="item.name"></li>
 
 
+
+                                        </ul>
+                                    </div>
+
+                                </div>
                             </div>
 
                         </div>
                         <div class="layui-col-xs9">
-                            <div class="user-div-l bayaxMscroll content-main">
-                                <table class="bayax-table">
-                                    <thead>
-                                        <tr>
-                                            <th>对象数据标签</th>
-                                            <th>计算</th>
-                                            <th>节点</th>
-                                            <th>寄存器</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <div class="energyStatistics-right bayaxMscroll content-main">
+                                <div class="energyStatistics-right-head">
+                                    <span v-text="groupsName">能耗02</span>
+                                </div>
+                                <div class="energyStatistics-right-content">
+                                    <table class="bayax-table">
+                                        <thead>
+                                            <tr>
+                                                <th>对象数据标签</th>
+                                                <th>计算</th>
+                                                <th>节点</th>
+                                                <th>寄存器</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="item in statisticsGroupTagsData">
+                                                <td v-text="item.name"></td>
+                                                <td v-text="item.opratestr"></td>
+                                                <td v-text="item.node_name"></td>
+                                                <td><span v-bind:class="{ tdshow: item.ishide }" v-text="item.point_id"></span></td>
+                                            </tr>
 
-                                    </tbody>
-                                </table>
-
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -117,8 +145,8 @@
     <script>
         (function($) {
             $(window).load(function() {
-                $(".user-set-ul-scroll").mCustomScrollbar();
-                $(".user-div-l").mCustomScrollbar();
+                $(".energyStatistics-content-body").mCustomScrollbar();
+                $(".energyStatistics-right-content").mCustomScrollbar();
             });
         })(jQuery);
     </script>
@@ -127,7 +155,7 @@
     <script src="plugin/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="plugin/vue.js"></script>
     <script src="plugin/layui/layui.js"></script>
-    <script src="js/sysSet/userManagement.js"></script>
+    <script src="js/sysSet/energyconsumptionStatisticDis.js"></script>
 
 </body>
 
