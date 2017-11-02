@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<HTML>
+
+<HEAD>
+    <TITLE> ZTREE DEMO - multiTree</TITLE>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- <link rel="stylesheet" href="../../../css/demo.css" type="text/css"> -->
+    <!-- <link rel="stylesheet" href="../../../css/zTreeStyle/zTreeStyle.css" type="text/css"> -->
+    <link rel="stylesheet" href="../../../css/metroStyle/metroStyle.css" type="text/css">
+    <script type="text/javascript" src="../../../js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="../../../js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="../../../js/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="../../../js/jquery.ztree.exedit.js"></script>
+    <style>
+        div.bayaxTree {
+            /* height: 500px; */
+            /* max-height: 500px; */
+            text-align: center;
+            border: none;
+            color: #fff;
+            float: left;
+            padding-left: 20px;
+        }
+        
+        .ztree li a.curSelectedNode {
+            padding-top: 0px;
+            background-color: transparent;
+            height: 16px;
+            border: none;
+            opacity: 1;
+        }
+        
+        div.bayaxTree ul {
+            width: 300px;
+            max-width: 400px;
+            /* overflow: hidden; */
+            background-color: #2D3452;
+        }
+        
+        div.bayaxTree ul li {
+            padding: 5px 0;
+        }
+        
+        div.bayaxTree ul li a {
+            /* width: 100%; */
+        }
+        
+        div.bayaxTree ul li a span {
+            color: #fff;
+            font-size: 16px;
+            /* width: 50%; */
+            display: inline-block;
+            overflow: hidden;
+        }
+        
+        ul.ztree {
+            margin-top: 10px;
+            border: 1px solid #617775;
+            background: #f0f6e4;
+            width: 220px;
+            height: 500px;
+            max-height: 500px;
+            overflow: auto;
+            overflow-x: hidden;
+            overflow-y: auto;
+           
+        }
+    </style>
+</HEAD>
+
+<BODY>
+    <h1>多棵树之间 的 数据交互</h1>
+    <div class="content_wrap">
+        <div>
+            <button onclick="getallnodesdata()">获取全部node数据</button>
+        </div>
+
+
+        <div class="bayaxTree dragtree">
+            <ul id="dragtree" class="ztree"></ul>
+        </div>
+        <div class="bayaxTree droptree">
+            <ul id="droptree" class="ztree"></ul>
+        </div>
+
+    </div>
+    <script src=" multiTree.js"></script>
+</BODY>
+
+</HTML>

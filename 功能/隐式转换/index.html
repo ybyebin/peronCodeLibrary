@@ -66,10 +66,13 @@ console.log(add(1)(2));
 
 function add(){
 	var _args = [].slice.call(arguments);
+	console.log(_args)
 	var adder = function(){
 		var _adder = function(){
 			[].push.apply(_args,[].slice.call(arguments));
+			 console.log(_args)
 			return _adder;
+			console.log(_adder);
 		}
 		_adder.toString = function(){
 			return _args.reduce(function(a,b){

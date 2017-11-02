@@ -1,172 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>智能建筑管理系统</title>
-	<meta content="" name="description" />
-	<meta content="" name="author" />
-
-	<link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/basic/layer.css" />
-	<!-- <link rel="stylesheet" type="text/css" href="js/basic/layer/skin/mylayerskin/style.css" /> -->
-	<link rel="stylesheet" type="text/css" href="css/basic/jquery.mCustomScrollbar.css">
-	<link rel="stylesheet" type="text/css" href="css/basic/check_black.css">
-	<link rel="stylesheet" type="text/css" href="css/bayax.css">
-	<link rel="stylesheet" type="text/css" href="css/systemConfiguration2.css">
-	<script type="text/javascript" src="js/basic/jquery.min.js"></script>
-	<script type="text/javascript" src="js/basic/jquery.mCustomScrollbar.concat.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>图形画面管理</title>
+    <link rel="stylesheet" href="plugin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/sysManagement.css">
+    <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
 </head>
-<body>
 
-	<div class="container-fluid">
-		<div class="row">
-			<div id="sidebar" class="col-sm-3 col-md-2 sidebar">
-				<div id="treeview" class="treeview">
-					<ul>
-						<li>
-							<a id="logo-a" href="deviceControlCanvas.html">
-								<img id="logo" src="images/logo-text.png"></a>
-						</li>
-						<li>
-							<a class="title_foursize" href="engineeringManagement.html">
-								<i></i>
-								<span>工程管理</span>
-							</a>
-						</li>
-						<li>
-							<a class="title_foursize" href="nodeManagement.html">
-								<i></i>
-								<span>节点管理</span>
-							</a>
-						</li>
-						<li>
-							<a href="datalabelManagement.html">
+<body class="layui-layout-body">
+    <div id="app" class="layui-layout ">
+        <div class="layui-side bayax-bg-black">
+            <div class="layui-side-scroll">
 
-								<i></i>
-								<span>数据标签管理</span>
-							</a>
-						</li>
-						<li>
-							<a href="energyconsumptionStatisticDis.html">
-								<i></i>
-								<span>能耗统计设定</span>
-							</a>
-						</li>
-						<li class="active">
-							<a href="graphicImages.html">
-								<i></i>
-								<span>图形画面管理</span>
-							</a>
-						</li>
-						<li>
-							<a href="energyconsumptionStatisticClassification.html">
-								<i></i>
-								<span>能耗统计分级</span>
-							</a>
-						</li>
-						<li>
-							<a href="userManagements.html">
-								<i></i>						
-								<span>用户权限管理</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			
-			<div class="subsystem-head form-group col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" style="display: block">
-			
-				<label>
-					<span class="go-subsys"><i></i>子系统列表</span>
-					<label>当前您所在的位置: <span class="group-name">空调机组</span>
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+
+                    <li class="layui-nav-item bayax-li-item-img">
+                        <a href="deviceControlCanvas.html">
+                            <img class="logo" v-bind:src="proLogo"></a>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a class="" href="engineeringManagement.html"> <i class="gcgl"></i> 工程管理
+                        </a>
+                    </li>
+                    <li class="layui-nav-item ">
+                        <a href="nodeManagement.html"> <i class="jdgl"></i> 节点管理
+                        </a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="datalabelManagement.html">
+                            <i class="sjbqgl"></i> 数据标签管理
+                        </a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="nhtjsd"></i> 能耗统计设定
+                        </a>
+                    </li>
+                    <li class="layui-nav-item active">
+                        <a href="javascript:;">
+                            <i class="txhmgl"></i> 图形画面管理
+                        </a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="energyconsumptionStatisticClassification.html">
+                            <i class="nhtjfj"></i> 能耗统计分级
+                        </a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="userManagement.html">
+                            <i class="yhqxgl"></i> 用户权限管理
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="subsystem-head">
+
+            <span @click="goSubsys" class="go-subsys"><i class="icon-keyboard_arrow_left"></i>子系统列表</span>
+            <label>当前您所在的位置: <span v-text="headData.name"></span>
 					</label>
-				</label>
-			</div>					
-			<div id="main" class="graphic-main col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="display: block;">
-				<form class="form-horizontal content_head-subsystem">
-					
-					<div class="form-group">
-						<button  type="button" class="graphic-main-btn button-normal btn btn-primary">新建画布</button>
-					</div>
-					<div class="form-group div-content">
-						<div class="div-display form-group">
-							<div class="div-sub-graphicImages">
-							<table id="sub-graphicImages-tab"  class="table table-striped table-primary" style="margin-bottom: 10px;">
-								<thead>
-									<tr>
-										<th>名称</th>
-										<th>操作</th>
-									</tr>
-								</thead>
-								<tbody>	
-										
-								</tbody>
-							</table>
-						</div>
-						</div>
-					</div>
+        </div>
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div class="bayax-content">
+                <div class="content-head">
+                    <button @click="creatNewViews" class="layui-btn bayax-btn">新建画布</button>
 
-				</form>				
-			</div>
+                </div>
+                <div class="content-body">
+                    <div class="content-body-border-top"></div>
+                    <div class="content-main node-content-main bayaxMscroll">
+                        <div class="graphi-div graphi-div-view">
 
-		</div>
-	</div>
+                            <table class="bayax-table">
+                                <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th style="width:180px;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item in sysGroupsData">
+                                        <td v-text="item.name"></td>
 
-	<div class="loading" style="display: none;">
-		<span></span>
-		<span></span>
-		<span></span>
-		<span></span>
-		<span></span>
-	</div>
-
-	<!-- layer弹窗  子系统重命名 重命名-->
-	<div id = "change-subsys-name" style="display: none;">
-		<div class="form-group">
-			<label class="control-label col-sm-1">系统名称</label>
-			<input type="text" class="subsys-input form-control col-sm-3" style="width: 30%;">
-			<label class="subsys-warn control-label col-sm-2"></label>
-		</div>
-	</div>
-
-	<!-- layer弹窗    删除子系统-->
-	<div id="delete-subsys" style="display: none;">
-		<span>
-			你确认要删除[<strong></strong>]吗
-		</span>
-	</div>
-
-		<!-- layer弹窗  for 图形画面管理 新建画面 -->
-		<div id="creat-subsystem-image" style="display: none;">
-			<form class="form-horizontal">
-				<div class="form-group">
-					<label class="control-label col-sm-2">画面名称</label>
-					<input type="text" class="scadaimages-name form-control col-sm-4" style="width: 30%;">
-					<label class="image-warn control-label col-sm-2">画面名称</label>
-					</div>
-				<div class="form-group">
-									
-					<label class="control-label col-sm-1"><input type="checkbox" class="ckss" name="ckss">  使用外部链接</label>
-					<input type="text" class="href-other form-control col-sm-4" style="width: 30%;" disabled="disabled"></div>
-			</form>			
-		</div>
-
-		<script>
-		(function($) {
-		  $(window).load(function() {		  		
-		    $(".div-sub-graphicImages").mCustomScrollbar();		   
-		  });
-		})(jQuery);
-		</script>	
+                                        <td>
+                                            <a v-bind:class="{ tdshow: item.ishide }" @click.stop="viewReName(item)" href="javascript:;">重命名</a>
+                                            <a v-bind:class="{ tdshow: item.ishide }" @click.stop="viewDelete(item)" href="javascript:;">删除</a>
+                                            <a v-bind:class="{ tdshow: item.ishide }" @click.stop="sysEditViews(item)" href="javascript:;">编辑画面</a>
+                                        </td>
+                                    </tr>
 
 
-	<script type="text/javascript" src="js/basic/bootstrap.min.js"></script>
-	<!-- <script type="text/javascript" src="js/basic/page.js"></script> -->
-	<script type="text/javascript" src="js/basic/layer.js"></script>
-	<script type="text/javascript" src="js/basic/icheck.min.js"></script>
-	<script type="text/javascript" src="js/basic/api.js"></script>
-	<script type="text/javascript" src="js/systemSet/graphicImagesView.js"></script>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <!-- <div class="relode-data tcdPageCode"></div> -->
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- 重命名弹窗 -->
+        <div id="creatsys" class="layer-default">
+            <div class="bayax-layer-content">
+                <div class="layui-inline">
+                    <label class=" layui-form-label">画面名称</label>
+                    <div class="layui-input-inline" style="width:230px">
+                        <input v-model="changeViewNameData.sysName" v-on:input="sysNameOnInput" v-on:blur="sysNameOnInput" type="text" autocomplete="off" class="layui-input" maxlength="20">
+                    </div>
+                    <label v-text="changeViewNameData.nameWarnStr" v-bind:class="{ rightinput: changeViewNameData.isRightName }" class="graphicimg-warn-label layui-form-label"></label>
+                </div>
+            </div>
+        </div>
+        <!-- 新建画面弹窗 -->
+        <div id="creatViews" class="layer-default">
+            <div class="bayax-layer-content creatViews">
+
+                <div class="layui-inline">
+                    <label class="layui-form-label layui-form-label-head">画面名称</label>
+                    <div class="layui-input-inline" style="width:230px">
+                        <input v-model="creatViewData.viewName" v-on:input="sysViewNameOnInput" v-on:blur="sysViewNameOnInput" type="text" autocomplete="off" class="layui-input" maxlength="20">
+                    </div>
+                    <label v-text="creatViewData.nameWarnStr" v-bind:class="{ rightinput: creatViewData.isRightName }" class="graphicimg-warn-label layui-form-label"></label>
+                </div>
+                <div class="layui-inline layui-form">
+                    <div class="layui-form-label layui-form-label-head">
+                        <input class="view-linkcheck" v-model='creatViewData.otherLinkCheck' lay-filter="useOtherLinkCheck" type="checkbox" lay-skin="primary" title="使用外部链接">
+
+                    </div>
+
+                    <div class="layui-input-inline" style="width:230px">
+                        <input v-model="creatViewData.linkval" :disabled="creatViewData.linkvalDisabled" type="text" autocomplete="off" class="layui-input" maxlength="20">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 弹窗 -->
+        <div id="delsys" class="layer-default">
+            <div class="bayax-layer-content">
+                <div class="layui-inline">
+                    <label class=" layui-form-label" style="width:200px;">确认删除该系统吗</label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <script>
+        (function($) {
+            $(window).load(function() {
+                $(".graphi-div").mCustomScrollbar();
+
+            });
+        })(jQuery);
+    </script>
+
+    <script src="plugin/vue.js"></script>
+    <script src="plugin/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="plugin/layui/layui.js"></script>
+    <script src="js/basic/api.js"></script>
+    <script src="js/sysSet/graphicImgesView.js"></script>
 
 </body>
+
 </html>

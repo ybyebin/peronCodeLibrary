@@ -4,48 +4,68 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="css/a.css">
+	<script type="text/javascript" src="plugin/jQuery/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-	<table class="table-box table-sort dataTable" >
-		<thead>
-			<tr role="row">
-				<th class="sorting_disabled" rowspan="1" colspan="1" aria-label="">
-					<input type="checkbox" class="btn-checkall fly-checkbox"></th>
-				<th class="sorting_desc">ID</th>
-				<th class="sorting">分类栏目</th>
-				<th class="sorting" >产品名称</th>
-				<th class="sorting_disabled" >缩略图</th>
-				<th class="oneline sorting" >产品描述</th>
-				<th class="sorting" >单价</th>
-				<th class="td-status sorting" >状态</th>
-				<th class="td-handle sorting_disabled">操作</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr  class="odd">
-				<td>
-					<input type="checkbox" name="sublist" class="fly-checkbox" data-id="28"></td>
-				<td class="sorting_1">28</td>
-				<td  class=" oneline">品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述</td>
-				<td> <u class="btn-showarticle">第3条新闻</u>
-				</td>
-				<td>
-					123123412341234</td>
-				<td class=" oneline">
-					产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述
-				</td>
-				<td>888元</td>
-				<td class=" td-status">
-					<span class="label label-default radius">暂停销售</span>
-				</td>
-				<td class=" td-handle">
-				
-				</td>
-			</tr>
 
+	<input id="ad" type="text" >
 
-		</tbody>
-		
-	</table>
+	<script type="text/javascript">
+
+window.addEventListener("resize", debounce(callback, 300, {leading:false}));
+window.addEventListener("resize", callback2);
+function callback ()  { console.log("Throttled"); }
+function callback2 () { console.log("Not Throttled"); }
+/**
+ * 空闲控制函数， fn仅执行一次
+ * @param fn{Function}     传入的函数
+ * @param delay{Number}    时间间隔
+ * @param options{Object}  如果想忽略开始边界上的调用则传入 {leading:false},
+ *                         如果想忽略结束边界上的调用则传入 {trailing:false},
+ * @returns {Function}     返回调用函数
+ */
+
+    var timeoutId;
+function debounce(fn, delay, options) {
+
+    if (!options)
+    {
+    	options = {};
+    } 
+    var leadingExc = false;
+
+    return function() {
+        var that = this,
+            args = arguments;
+        if (!leadingExc&&!(options.leading === false)) {
+            fn.apply(that, args);
+        }
+        leadingExc=true;
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+        timeoutId = setTimeout(function() {
+            if (!(options.trailing === false)) {
+                fn.apply(that, args);
+            }
+            leadingExc=false;
+        }, delay);
+    }
+}
+
+$(function(){
+	$('#ad').on('input',function(){
+
+			debounce(function(){
+				console.log($('#ad').val())
+								}, 300, {leading:false})()
+			})
+
+})
+
+	
+			
+
+	</script>
 </body>
 </html>

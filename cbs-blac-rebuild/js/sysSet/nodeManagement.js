@@ -1,11 +1,10 @@
-var layuiForm;
-layui.use(['layer', 'form', 'jquery'], function() {
+layui.use(['layer', 'form'], function() {
 	var layer = layui.layer;
 	var form = layui.form;
-	layuiForm = layui.form;
 	var layerHeader = 'font-size:18px;color:#fff;background:#3E4687;border:none;height:50px;font-weight:bold;line-height:50px;padding-left:10px'
 		// var upload = layui.upload;
 		// var $ = layui.jquery;
+	var timeoutId; //搜索延时操作标志
 	form.on('checkbox(nodecheck)', function(data) {
 		var node_id = Number(data.value);
 		if (data.elem.checked) {
@@ -13,6 +12,22 @@ layui.use(['layer', 'form', 'jquery'], function() {
 		} else {
 			var indexs = nodeVue.arrDelNode.indexOf(node_id);
 			nodeVue.arrDelNode.splice(indexs, 1);
+		}
+		console.log(JSON.stringify(nodeVue.arrDelNode, null, 2))
+	});
+	form.on('checkbox(allcheck)', function(data) {
+		nodeVue.arrDelNode = [];
+		if (data.elem.checked) {
+			console.log('选中')
+			$('input[name="nodecheck"]').prop("checked", 'true');
+			form.render('checkbox');
+			nodeVue.nodes.forEach(function(item) {
+				nodeVue.arrDelNode.push(item.id);
+			});
+
+		} else {
+			$('input[name="nodecheck"]').removeAttr("checked");
+			form.render();
 		}
 		console.log(JSON.stringify(nodeVue.arrDelNode, null, 2))
 	});
@@ -46,6 +61,7 @@ layui.use(['layer', 'form', 'jquery'], function() {
 		mounted: function() {
 			var _this = this;
 			this.$nextTick(function() {
+				form.render('checkbox');
 				this.projectInfo();
 				this.getNodeData(false, 1);
 				// 
@@ -80,6 +96,7 @@ layui.use(['layer', 'form', 'jquery'], function() {
 			},
 			// 获取node
 			getNodeData: function(Issearch, page) {
+				var onePageNum = 13;
 				var _this = this;
 				var dataUp;
 				if (Issearch) {
@@ -87,13 +104,13 @@ layui.use(['layer', 'form', 'jquery'], function() {
 						name: _this.searchText,
 						project_id: _this.proID,
 						page: page,
-						page_item_count: 13,
+						page_item_count: onePageNum,
 					}
 				} else {
 					dataUp = {
 						project_id: _this.proID,
 						page: page,
-						page_item_count: 13,
+						page_item_count: onePageNum,
 					}
 				};
 				$.ajax({
@@ -120,7 +137,7 @@ layui.use(['layer', 'form', 'jquery'], function() {
 						}
 						if (data.data == null || !Array.isArray(datas)) {
 							_this.nodes = [];
-							for (var i = 0; i < 13; i++) {
+							for (var i = 0; i < onePageNum; i++) {
 								_this.nodes.push(nullData);
 							}
 							$(".tcdPageCode").hide();
@@ -130,8 +147,8 @@ layui.use(['layer', 'form', 'jquery'], function() {
 								return item;
 							});
 
-							if (nodeDatas.length < 13) {
-								var num = 13 - nodeDatas.length;
+							if (nodeDatas.length < onePageNum) {
+								var num = onePageNum - nodeDatas.length;
 								for (var i = 0; i < num; i++) {
 									nodeDatas.push(nullData);
 								}
@@ -139,8 +156,8 @@ layui.use(['layer', 'form', 'jquery'], function() {
 							_this.nodes = nodeDatas;
 							_this.$nextTick(function() {
 								$('input[name="nodecheck"]').removeAttr("checked");
+								$('input[name="nodecheckall"]').removeAttr("checked");
 								form.render();
-								// layuiForm.render();
 							})
 							$(".tcdPageCode").show().createPage({
 								pageCount: data.data.pageCount,
@@ -416,7 +433,14 @@ layui.use(['layer', 'form', 'jquery'], function() {
 			},
 			// 搜索 node
 			searchNode: function() {
-				this.getNodeData(true, 1);
+				var _this = this;
+				this.debounce(function() {
+					_this.getNodeData(true, 1);
+				}, 300, {
+					leading: false
+				})();
+
+				
 			},
 			// 清空搜索
 			clearSearch: function() {
@@ -591,126 +615,35 @@ layui.use(['layer', 'form', 'jquery'], function() {
 			nodeDesOnBlur: function() {
 				this.nodeDesOnInput();
 			},
+			// 搜索延时
+			debounce: function(fn, delay, options) {
+
+				if (!options) {
+					options = {};
+				}
+				var leadingExc = false;
+
+				return function() {
+					var that = this,
+						args = arguments;
+					if (!leadingExc && !(options.leading === false)) {
+						fn.apply(that, args);
+					}
+					leadingExc = true;
+					if (timeoutId) {
+						clearTimeout(timeoutId);
+					}
+					timeoutId = setTimeout(function() {
+						if (!(options.trailing === false)) {
+							fn.apply(that, args);
+						}
+						leadingExc = false;
+					}, delay);
+				}
+			}
 		}
 	});
 
 });
 
 
-// 分页
-(function($) {
-	var ms = {
-		init: function(obj, args) {
-			return (function() {
-				ms.fillHtml(obj, args);
-				ms.bindEvent(obj, args);
-			})();
-		},
-		//填充html
-		fillHtml: function(obj, args) {
-			return (function() {
-
-				obj.empty();
-				if (args.pageCount === 0) {
-					return false;
-				}
-				//上一页
-				if (args.current > 1) {
-					obj.append('<a href="javascript:;" class="prevPage"></a>');
-				} else {
-					obj.remove('.prevPage');
-					obj.append('<span class="disabled disabled-prve"></span>');
-				}
-				//中间页码
-				if (args.current != 1 && args.current >= 4 && args.pageCount != 4) {
-					obj.append('<a href="javascript:;" class="tcdNumber">' + 1 + '</a>');
-				}
-				if (args.current - 2 > 2 && args.current <= args.pageCount && args.pageCount > 5) {
-					obj.append('<a class="page-omit"><span>...</span></a>');
-				}
-				var start = args.current - 2,
-					end = args.current + 2;
-				if ((start > 1 && args.current < 4) || args.current == 1) {
-					end++;
-				}
-				if (args.current > args.pageCount - 4 && args.current >= args.pageCount) {
-					start--;
-				}
-				for (; start <= end; start++) {
-					if (start <= args.pageCount && start >= 1) {
-						if (start != args.current) {
-							obj.append('<a href="javascript:;" class="tcdNumber">' + start + '</a>');
-						} else {
-							obj.append('<span class="current">' + start + '</span>');
-						}
-					}
-				}
-				if (args.current + 2 < args.pageCount - 1 && args.current >= 1 && args.pageCount > 5) {
-					obj.append('<a class="page-omit"><span>...</span></a>');
-				}
-				if (args.current != args.pageCount && args.current < args.pageCount - 2 && args.pageCount != 4) {
-					obj.append('<a href="javascript:;" class="tcdNumber">' + args.pageCount + '</a>');
-				}
-				//下一页
-				if (args.current < args.pageCount) {
-					obj.append('<a href="javascript:;" class="nextPage"></a>');
-				} else {
-					obj.remove('.nextPage');
-					obj.append('<span class="disabled disabled-next"></span>');
-				}
-			})();
-		},
-		//绑定事件
-		bindEvent: function(obj, args) {
-			return (function() {
-				obj.off("click", "a.tcdNumber");
-				obj.off("click", "a.prevPage");
-				obj.off("click", "a.nextPage");
-				if (args.pageCount === 0) {
-					return false;
-				}
-				obj.on("click", "a.tcdNumber", function() {
-					var current = parseInt($(this).text());
-					ms.fillHtml(obj, {
-						"current": current,
-						"pageCount": args.pageCount
-					});
-					if (typeof(args.backFn) == "function") {
-						args.backFn(current);
-					}
-				});
-				//上一页
-				obj.on("click", "a.prevPage", function() {
-					var current = parseInt(obj.children("span.current").text());
-					ms.fillHtml(obj, {
-						"current": current - 1,
-						"pageCount": args.pageCount
-					});
-					if (typeof(args.backFn) == "function") {
-						args.backFn(current - 1);
-					}
-				});
-				//下一页
-				obj.on("click", "a.nextPage", function() {
-					var current = parseInt(obj.children("span.current").text());
-					ms.fillHtml(obj, {
-						"current": current + 1,
-						"pageCount": args.pageCount
-					});
-					if (typeof(args.backFn) == "function") {
-						args.backFn(current + 1);
-					}
-				});
-
-			})();
-		}
-	}
-	$.fn.createPage = function(options) {
-		var args = $.extend({
-			pageCount: 10,
-			current: 1,
-			backFn: function() {}
-		}, options);
-		ms.init(this, args);
-	}
-})(jQuery);

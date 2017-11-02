@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>demo3</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+    ul{
+        padding:0px;
+        margin:0px;
+    }
+    #slider{
+        width:400px;
+        height:200px;
+        position: relative;
+        margin:400px auto;
+        overflow: hidden;
+        border:1px solid #eee;
+    }
+    #prev{
+        width:50px;
+        height:30px;
+        line-height: 30px;
+        color:#fff;
+        background:#000;
+        text-align: center;
+        position: absolute;
+        opacity:0.5;
+        left:-200px;
+        text-decoration: none;
+        top:50%;
+        z-index:100;
+        margin-top:-15px;
+    }
+    #next{
+        opacity:0.5;
+        text-decoration: none;
+        z-index:100;
+        width:50px;
+        height:30px;
+        line-height: 30px;
+        color:#fff;
+        background:#000;
+        text-align: center;
+        position: absolute;
+        right:-200px;
+        top:50%;
+        margin-top:-15px;
+    }
+    #slider ul{
+        height:200px;
+        position: absolute;
+        left:0px;
+        top:0px;
+    }
+    #slider ul li{
+        width:400px;
+        height:200px;
+        background:orange;
+        list-style: none;
+        text-align: center;
+        line-height: 200px;
+        font-size:100px;
+        font-weight:bold;
+        color:#fff;
+        float:left;
+ 
+    }
+    #slider ol{
+        list-style-type: none;
+        position: absolute;
+        bottom:10px;
+        padding:0;
+        margin:0;
+        width:100%;
+        text-align: center;
+    }
+    #slider ol li{
+        width:10px;
+        height:10px;
+        display: inline-block;
+        background: #000;
+        opacity: 0.3;
+        cursor:pointer;
+        margin:5px;
+        border-radius: 50%;
+ 
+    }
+    #slider ol li.on{
+        opacity: 0.8;
+    }
+</style>
+</head>
+<body>
+    <div id="slider">
+        <a href="javascript:;" id="prev">prev</a>
+        <a href="javascript:;" id="next">next</a>
+        <ul>
+            <li>
+                1
+            </li>
+            <li>
+                2
+            </li>
+            <li>
+                3
+            </li>
+        </ul>
+        <ol>
+        </ol>
+    </div>
+</body>
+
+<script type="text/javascript">
+   window.onload = function (){
+        var slider = document.getElementById('slider');
+        var oUl = slider.getElementsByTagName('ul')[0];
+        var oLi = oUl.getElementsByTagName('li');
+        var liWidth = parseInt(getStyle(oLi[0] , 'width'));
+        var aNext = document.getElementById('next');
+        var aPrev = document.getElementById('prev');
+        var timer = null;
+        var inter = 3000;
+        var index = 0;
+        var oOl = slider.getElementsByTagName('ol')[0];
+        var pLi = oOl.getElementsByTagName('li');
+        var b = false;
+         
+        //初始化
+        function intSlider(){
+            for(var i = 0 ; i < oLi.length ; i++){
+                oLi[i].setAttribute('data-index',i);
+            }
+            for( var i = 0 ; i < oLi.length; i++){
+                var iLi = document.createElement('li');
+                oOl.appendChild(iLi);
+            }
+            for(var i = 0 ; i < pLi.length ; i++){
+                pLi[i].setAttribute('data-index',i)
+            }
+            pLi[0].className = 'on';
+            var cloneLastLi = oLi[oLi.length-1].cloneNode(true);
+            var cloneFirstLi = oLi[0].cloneNode(true);
+            oUl.insertBefore(cloneLastLi,oUl.childNodes[0]);
+            oUl.appendChild(cloneFirstLi);
+            oUl.style.left = -parseInt(getStyle(oLi[0] , 'width')) + 'px';
+        };
+        intSlider();
+         
+        //重新设定ul宽度
+        function getWidth(){
+            var liWidth = parseInt(getStyle(oLi[0] , 'width'));
+            oUl.style.width = oLi.length * liWidth + 'px';
+ 
+        };
+        getWidth();
+         
+        //鼠标移入移除直接清除了timer，就省了很多清除定时器的麻烦
+        slider.onmouseover = function() {
+            if(timer){
+                clearInterval(timer);
+            }
+            startMove(aNext,{right : 20});
+            startMove(aPrev,{left : 20});
+             
+        };
+        slider.onmouseout = function() {
+            timer = setInterval(nextSlider , inter);
+            startMove(aNext,{right : -100});
+            startMove(aPrev,{left : -100});
+             
+        };
+ 
+        //核心函数
+        function sliderOffset(offset){
+            b = true;
+            //当前left和滚动之后的left
+            var currentLeft = oUl.offsetLeft;
+            var afterLeft = currentLeft + offset;
+ 
+            startMove(oUl , {left : afterLeft},function(){
+                if (oUl.offsetLeft <= -(oUl.offsetWidth) + liWidth) {
+                        oUl.style.left= -liWidth + 'px';
+                } else if (oUl.offsetLeft >= 0) {
+                        oUl.style.left= -(oLi.length - 2) * liWidth  + 'px';
+                };
+ 
+                b = false;
+            });
+        };
+ 
+        //当前分页函数
+        function pageSlider(index){
+            for(var i = 0; i < pLi.length ; i++){
+                if(pLi[i].className == 'on'){
+                    pLi[i].className = '';
+                }
+ 
+            }
+            pLi[index].className = 'on';
+ 
+        };
+ 
+        //分页点击函数
+        for(var i = 0 ; i< pLi.length ; i++){
+            pLi[i].onclick = function (){
+                var index1 = this.getAttribute('data-index');
+                var offset = (index - index1) * liWidth;
+                sliderOffset(offset)
+                index = index1;
+                pageSlider(index);
+            }
+        };
+         
+        //上一张函数
+        function nextSlider(){
+            if(b){
+                return;
+            }
+            sliderOffset(-liWidth)
+            if(index >= pLi.length-1){
+                index = 0;
+            }else{
+                index++
+            }
+            pageSlider(index)
+        };
+         
+        //下一张函数
+        function prevSlider(){
+            if(b){
+                return;
+            }
+            sliderOffset(liWidth);
+            if(index <= 0){
+                index = pLi.length-1;
+            }else{
+                index--
+            }
+            pageSlider(index);
+        };
+         
+        //事件绑定兼容函数
+        function addEvent(element,event,listener){
+            if(element.addEventListener){
+                element.addEventListener(event,listener,false);
+            }else{
+                element.attachEvent('on' + event , listener);
+            }
+        };
+          
+        //绑定事件
+        addEvent(aNext,'click',nextSlider);
+        addEvent(aPrev,'click',prevSlider);
+ 
+        //样式获取
+        function getStyle(obj, attr){
+            if(obj.currentStyle){
+                return obj.currentStyle[attr]
+            }else{
+                return getComputedStyle(obj,false)[attr]
+            }
+        };
+ 
+        //自动轮播
+        timer = setInterval(nextSlider, inter);
+    }
+</script>
+</html>
