@@ -49,15 +49,13 @@ layui.use(['layer', 'form'], function() {
         data: {
             proID: 1,
             proLogo: '',
+            proName: '',
             loadingShow: false,
-
             divHideShow: {
                 showDiv: true,
                 editDiv: false,
                 addDiv: false
             },
-
-
             quanxianNumbers: 10, //权限数量
             graphicImage: [], //子系统列表数据
             userData: [], //全部用户信息
@@ -95,6 +93,9 @@ layui.use(['layer', 'form'], function() {
                 form.render();
                 this.getGraphicImageGetData();
                 this.getUserMessage(0);
+                this.proID = sessionStorage.getItem('bayax_proID');
+                this.proLogo = sessionStorage.getItem('bayax_logo');
+                // this.proName = sessionStorage.getItem('bayax_proName');
             });
 
         },
@@ -298,7 +299,36 @@ layui.use(['layer', 'form'], function() {
             },
             // 删除用户
             userMsgEdl: function() {
+                var _this = this;
+                layer.confirm('确认删除该用户', {
+                    title: '删除用户',
+                    success: function() {
+                        $('.layui-layer-btn a').addClass('confirm');
+                    },
+                    btn: ['确定', '取消']
+                }, function() {
+                    $.ajax({
+                        url: apiurl + 'usermanage/' + _this.personData.id,
+                        type: 'DELETE',
+                        beforeSend: function() {
+                            _this.loadingShow = true;
+                        },
+                        success: function(data) {
+                            _this.loadingShow = false;
+                            if (data.success) {
+                                layer.msg("删除成功");
+                                _this.getUserMessage(0);
+                            } else {
+                                layer.msg(data.error_message);
+                            }
+                        },
+                        error: function(data) {
+                            publicAjaxError(data);
+                        }
+                    });
+                }, function() {
 
+                });
             },
             //编辑保存用户
             editSaveUser: function() {

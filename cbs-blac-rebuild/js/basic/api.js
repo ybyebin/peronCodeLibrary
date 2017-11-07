@@ -14,11 +14,15 @@ function projectInfo() {
             if (data.success) {
                 var data = data.data;
                 $('#logo').attr('src', data.logo_path).data('proid', data.id);
-                // $('#logo');
                 $('#logo-name').text(data.name);
                 $('#navbar-brandImg').attr('src', data.logo_path).data('proid', data.id);
                 $('.projectName').text(data.name);
                 // $('#navbar-brandImg');
+
+                sessionStorage.setItem('bayax_proID', data.id);
+                sessionStorage.setItem('bayax_proName', data.name);
+                sessionStorage.setItem('bayax_logo', data.logo_path);
+
 
             } else {
                 layer.msg(data.error_message);

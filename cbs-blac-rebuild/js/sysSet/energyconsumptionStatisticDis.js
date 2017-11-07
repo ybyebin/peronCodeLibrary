@@ -2,11 +2,12 @@ layui.use(['layer'], function() {
     var layer = layui.layer;
     var layerHeader = 'font-size:18px;color:#fff;background:#3E4687;border:none;height:50px;font-weight:bold;line-height:50px;padding-left:10px'
 
-    var nodeVue = new Vue({
+    var statisticDisVue = new Vue({
         el: '#app',
         data: {
             proID: 1,
             proLogo: '',
+            proName: '',
             loadingShow: false,
             ulhide: false,
             statisticsGroupData: [], //能耗统计组
@@ -16,6 +17,12 @@ layui.use(['layer'], function() {
         mounted: function() {
             var _this = this;
             this.$nextTick(function() {
+
+                this.proID = sessionStorage.getItem('bayax_proID');
+                this.proLogo = sessionStorage.getItem('bayax_logo');
+                this.proName = sessionStorage.getItem('bayax_proName');
+
+
                 this.getStatisticsGroupData();
 
             });
@@ -44,9 +51,7 @@ layui.use(['layer'], function() {
                         if (data.success) {
                             if (data.data.items !== null) {
                                 var arr = data.data.items.map(function(ele) {
-                                    if (ele.hasOwnProperty('active')) {
-
-                                    } else {
+                                    if (ele.hasOwnProperty('active')) {} else {
                                         ele.active = false
                                     }
                                     return ele;

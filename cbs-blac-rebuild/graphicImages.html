@@ -7,6 +7,7 @@
     <title>图形画面管理</title>
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="css/base.css">
+    <!-- <link rel="stylesheet" href="./css/basegreen.css"> -->
     <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/sysManagement.css">
     <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
@@ -38,12 +39,12 @@
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;">
+                        <a href="energyconsumptionStatisticDis.html">
                             <i class="nhtjsd"></i> 能耗统计设定
                         </a>
                     </li>
                     <li class="layui-nav-item active">
-                        <a href="javascript:;">
+                        <a href="graphicImages.html">
                             <i class="txhmgl"></i> 图形画面管理
                         </a>
                     </li>
@@ -95,8 +96,8 @@
                                         <td v-text="item.name"></td>
                                         <td v-text="item.view_count"></td>
                                         <td>
-                                            <a v-bind:class="{ tdshow: item.ishide }" @click="sysReName(item)" href="javascript:;">重命名</a>
-                                            <a v-bind:class="{ tdshow: item.ishide }" @click="sysDelete(item)" href="javascript:;">删除</a>
+                                            <a v-bind:class="{ tdshow: item.ishide }" @click.stop="sysReName(item)" href="javascript:;" class="bayax-a">重命名</a>
+                                            <a v-bind:class="{ tdshow: item.ishide }" @click.stop="sysDelete(item)" href="javascript:;" class="bayax-a">删除</a>
                                         </td>
                                     </tr>
 
@@ -129,13 +130,13 @@
         </div>
 
         <!-- 弹窗 -->
-        <div id="delsys" class="layer-default">
+        <!-- <div id="delsys" class="layer-default">
             <div class="bayax-layer-content">
                 <div class="layui-inline">
                     <label class=" layui-form-label" style="width:200px;">确认删除该系统吗</label>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
 

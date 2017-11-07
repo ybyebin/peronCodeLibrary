@@ -1,415 +1,417 @@
 <!DOCTYPE html>
 <html class="en">
+
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-	<meta charset="utf-8" />
-	<title>智能建筑管理系统</title>
-	<meta content="" name="description" />
-	<meta content="" name="author" />
-	<link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
-	<link rel="stylesheet" href="css/basic/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="css/basic/datepicker3.css">
-	<link rel="stylesheet" type="text/css" href="css/basic/check_black.css">
-	<link rel="stylesheet" type="text/css" href="css/basic/layer.css"/>
-	<!-- <link rel="stylesheet" type="text/css" href="js/basic/layer/skin/mylayerskin/style.css"/> -->
-	<link rel="stylesheet" type="text/css" href="css/basic/jquery.mCustomScrollbar.css">
-	<link rel="stylesheet" type="text/css" href="css/bayax.css">
-	<link rel="stylesheet" type="text/css" href="css/datashow_black.css">
-	<script type="text/javascript" src="js/basic/jquery.min.js"></script>
-	<style type="text/css">
-	.highcharts-pie-series .highcharts-data-label-connector {
-	stroke-width: 1;
-	}
-	</style>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>智能建筑管理系统</title>
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="stylesheet" type="text/css" href="css/basic/bootstrap.min.css">
+    <link rel="stylesheet" href="css/basic/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/basic/datepicker3.css">
+    <link rel="stylesheet" type="text/css" href="css/basic/check_black.css">
+    <link rel="stylesheet" type="text/css" href="css/basic/layer.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="js/basic/layer/skin/mylayerskin/style.css"/> -->
+    <link rel="stylesheet" type="text/css" href="css/basic/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="css/bayax.css">
+    <link rel="stylesheet" type="text/css" href="css/datashow_black.css">
+    <script type="text/javascript" src="js/basic/jquery.min.js"></script>
+    <style type="text/css">
+        .highcharts-pie-series .highcharts-data-label-connector {
+            stroke-width: 1;
+        }
+    </style>
 </head>
 
 <body id="energy-view">
 
-	<div class='page-topbar navbar-fixed-top'>
-		<nav class="navbar navbar-inverse" style=" ">
-			<div class="row" style=" ">
-				<div class="navbar-header">
-					<img src="images/logo-text.png"  class="navbar-brand" id="navbar-brandImg"/>
-					<span class="projectName"></span>
-				</div>
-				<div class="navbar-collapse collapse " id="navbar">
-					<ul class="nav navbar-nav nav_padding">
-						<!-- <li>
+    <div class='page-topbar navbar-fixed-top'>
+        <nav class="navbar navbar-inverse">
+            <div class="row">
+                <div class="navbar-header">
+                    <img src="images/logo-text.png" class="navbar-brand" id="navbar-brandImg" />
+                    <span class="projectName"></span>
+                </div>
+                <div class="navbar-collapse collapse " id="navbar">
+                    <ul class="nav navbar-nav nav_padding">
+                        <!-- <li>
 							<a href="homepage.html">概览</a>
 						</li> -->
-						<li>
-							<a href="deviceControlCanvas.html">设备监控</a>
-						</li>
-						<li>
-							<a href="warn.html">
+                        <li>
+                            <a href="deviceControlCanvas.html">设备监控</a>
+                        </li>
+                        <li>
+                            <a href="warn.html">
 								报警
 								<span id="header_alarm_count" class="badge badge-warn"></span>
 							</a>
-						</li>
-						<li  class="active">
-							<a href="energyView.html">能源管理</a>
-						</li>
-						<li>
-							<a href="communicationException.html">系统管理</a>
-						</li>
+                        </li>
+                        <li class="active">
+                            <a href="energyView.html">能源管理</a>
+                        </li>
+                        <li>
+                            <a href="communicationException.html">系统管理</a>
+                        </li>
 
-					</ul>
+                    </ul>
 
-					<div class="navbar-right">
-						<ul class="nav navbar-nav">
-							<li id="CurrentTime">
-								<a></a>
-							</li>
+                    <div class="navbar-right">
+                        <ul class="nav navbar-nav">
+                            <li id="CurrentTime">
+                                <a></a>
+                            </li>
 
-							<li  class="time">
-								<span>|</span>
-							</li>
-							<li class="tosystemSet">
-								<a href="engineeringManagement.html">系统设置</a>
-							</li>
-							<li id="main-user" class="main-user dropdown" >
+                            <li class="time">
+                                <span>|</span>
+                            </li>
+                            <li class="tosystemSet">
+                                <a href="engineeringManagement.html">系统设置</a>
+                            </li>
+                            <li id="main-user" class="main-user dropdown">
 
-								<img src="images/People.png" title=""  class="dropdown-toggle" data-toggle="dropdown"/>
-								<ul class="dropdown-menu logout-changepsw">
-									<li>
-										<a href="#"  class="user-changePassword">修改密码</a>
-									</li>
-									<li>
-										<a href="#" class="user-logout">退出登录</a>
-									</li>
+                                <img src="images/People.png" title="" class="dropdown-toggle" data-toggle="dropdown" />
+                                <ul class="dropdown-menu logout-changepsw">
+                                    <li>
+                                        <a href="#" class="user-changePassword">修改密码</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="user-logout">退出登录</a>
+                                    </li>
 
-								</ul>
+                                </ul>
 
-							</li>
+                            </li>
 
-						</ul>
-					</div>
-					<div class="head-warn" >
-						<p>
-							<a href="warn.html">
-								<img src="images/warn.png"></a>
-						</p>
-				</div>
-			</div>
+                        </ul>
+                    </div>
+                    <div class="head-warn">
+                        <p>
+                            <a href="warn.html">
+                                <img src="images/warn.png"></a>
+                        </p>
+                    </div>
+                </div>
 
-		</div>
-	</nav>
-</div>
+            </div>
+        </nav>
+    </div>
 
-	<div  class="page-container row-fluid" style="margin-top: 86px;">
+    <div class="page-container row-fluid" style="margin-top: 86px;">
 
-		<section id="main-content" class=" ">
-			<section class="wrapper" style='display:inline-block;width:100%;padding:26px 21px 0 21px;'>
-				<div class="col-lg-12" id="tab">
+        <section id="main-content" class=" ">
+            <section class="wrapper" style='display:inline-block;width:100%;padding:26px 21px 0 21px;'>
+                <div class="col-lg-12" id="tab">
 
-					<ul class="nav nav-tabs primary">
-						<li class="active">
-							<a href="#fen" data-toggle="tab"  class="tab-style">能耗分析</a>
-						</li>
+                    <ul class="nav nav-tabs primary">
+                        <li class="active">
+                            <a href="#fen" data-toggle="tab" class="tab-style">能耗分析</a>
+                        </li>
 
-						<li>
-							<a href="#bao" data-toggle="tab" class="tab-style" onclick="initData(2)">能耗报表</a>
-						</li>
+                        <li>
+                            <a href="#bao" data-toggle="tab" class="tab-style" onclick="initData(2)">能耗报表</a>
+                        </li>
 
-					</ul>
+                    </ul>
 
-					<div class="tab-content primary">
-						<div class="tab-pane fade in active" id="fen">
-							<div class="row">
-								<div class="col-xs-2 content-style auto" id="leftNames" style="width: 20%"></div>
+                    <div class="tab-content primary">
+                        <div class="tab-pane fade in active" id="fen">
+                            <div class="row">
+                                <div class="col-xs-2 content-style auto" id="leftNames" style="width: 20%"></div>
 
-								<section class="col-xs-10 content content1-style" style="width: 80%">
-									<header>
-										<div class="btn-group bottom15 right15 selectTypes" style="display:block;" id="slectFen">
-											<button aria-expanded="false" data-toggle="dropdown" class="btn select btn-border dropdown-toggle button-cancle" type="button" id="selectType" style="margin-right: 0;margin-left: 20px;">
+                                <section class="col-xs-10 content content1-style" style="width: 80%">
+                                    <header>
+                                        <div class="btn-group bottom15 right15 selectTypes" style="display:block;" id="slectFen">
+                                            <button aria-expanded="false" data-toggle="dropdown" class="btn select btn-border dropdown-toggle button-cancle" type="button" id="selectType" style="margin-right: 0;margin-left: 20px;">
 												<span class="txt" rel="4">最近7天</span>
 												<span class="caret sarrow"></span>
 												<span class="sr-only">最近7天</span>
 											</button>
-											<ul role="menu" class="dropdown-menu  selectType dropdown-menus" style="left: 20px;">
-												<li>
-													<a href="#" rel="1" >今天</a>
-												</li>
-												<li>
-													<a href="#" rel="2">昨天</a>
-												</li>
-												<li>
-													<a href="#" rel="3">最近3天</a>
-												</li>
-												<li>
-													<a href="#" rel="4">最近7天</a>
-												</li>
-												<li>
-													<a href="#" rel="5">最近30天</a>
-												</li>
-												<li>
-													<a href="#" rel="6">5月</a>
-												</li>
-												<li>
-													<a href="#" rel="7">4月</a>
-												</li>
-												<li>
-													<a href="#" rel="8">3月</a>
-												</li>
-												<li class="9">
-													<a href="#" rel="9">自定义</a>
-												</li>
-											</ul>
-										</div>
-										<div class="form-group selectTime full-lefts" >
-											<input type="text" data-format="yyyy-mm-dd" class="form-control" id="selectTime"     onclick="showValue(2)" />
-										</div>
-										<div class="full-left timespaild" style="padding-top:5px;color: #fff;">至</div>
-										<div class="form-group selectTime full-lefts">
-											<input type="text" data-format="yyyy-mm-dd" class="form-control" id="endTime" onclick="showValue(2)"   />
-										</div>
-										<div class="form-group selectTime full-lefts">
-											<button aria-expanded="false" data-toggle="dropdown" class="btn select btn-border button-normal" type="button" onclick="compares()" id="history" style="margin-right: 0;margin-left: 0;">对比历史数据</button>
-										</div>
-										
-										<div class="full-right">
-											<div class="btn-group bottom15 right15 selcts" id="fen_select">
-												<button aria-expanded="false" data-toggle="dropdown" class="btn select button-normal btn-border dropdown-toggle save-btn" type="button" id="btnSave" style="margin-right: 20px;">
+                                            <ul role="menu" class="dropdown-menu  selectType dropdown-menus" style="left: 20px;">
+                                                <li>
+                                                    <a href="#" rel="1">今天</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" rel="2">昨天</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" rel="3">最近3天</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" rel="4">最近7天</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" rel="5">最近30天</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" rel="6">5月</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" rel="7">4月</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" rel="8">3月</a>
+                                                </li>
+                                                <li class="9">
+                                                    <a href="#" rel="9">自定义</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group selectTime full-lefts">
+                                            <input type="text" data-format="yyyy-mm-dd" class="form-control" id="selectTime" onclick="showValue(2)" />
+                                        </div>
+                                        <div class="full-left timespaild" style="padding-top:5px;color: #fff;">至</div>
+                                        <div class="form-group selectTime full-lefts">
+                                            <input type="text" data-format="yyyy-mm-dd" class="form-control" id="endTime" onclick="showValue(2)" />
+                                        </div>
+                                        <div class="form-group selectTime full-lefts">
+                                            <button aria-expanded="false" data-toggle="dropdown" class="btn select btn-border button-normal" type="button" onclick="compares()" id="history" style="margin-right: 0;margin-left: 0;">对比历史数据</button>
+                                        </div>
+
+                                        <div class="full-right">
+                                            <div class="btn-group bottom15 right15 selcts" id="fen_select">
+                                                <button aria-expanded="false" data-toggle="dropdown" class="btn select button-normal btn-border dropdown-toggle save-btn" type="button" id="btnSave" style="margin-right: 20px;">
 													<span class="txt" rel="1">保存</span>
 													<span class="caret sarrow"></span>
 													<span class="sr-only">保存</span>
 												</button>
-												<ul role="menu" class="dropdown-menu save-dropdown" style="margin-top:5px;">
-													<li>
-														<a href="#" onclick="save(1)">保存</a>
-													</li>
-													<li>
-														<a href="#" onclick="otherSave(1,'fieldName','另存为')" rel="1">另存为</a>
-													</li>
-													<li>
-														<a href="#" onclick="del(1)" rel="2">删除</a>
+                                                <ul role="menu" class="dropdown-menu save-dropdown" style="margin-top:5px;">
+                                                    <li>
+                                                        <a href="#" onclick="save(1)">保存</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" onclick="otherSave(1,'fieldName','另存为')" rel="1">另存为</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" onclick="del(1)" rel="2">删除</a>
 
-													</li>
+                                                    </li>
 
-												</ul>
-											</div>
-											<div class="btn-group bottom15 right15" >
-												<button aria-expanded="false" data-toggle="dropdown" class="btn button-normal" type="button" id="selectObj" onclick="showObj(1)" style="margin-right: 0;">选择统计对象</button>
-											</div>
-										</div>
-									</header>
-									<aside id="tool">
-										<div class="getshi">
-											<a class="btn active" onclick="selectDate(this)" id="hour">时</a>
-											<a  class="btn" onclick="selectDate(this)" id="day">天</a>
-											<a  class="btn hide" onclick="selectDate(this)" id="month">月</a>
-											<a  class="btn hide" onclick="selectDate(this)" id="year">年</a>
-										</div>
-										<div class="getpic">
-											<a class="btn" onclick="selectCharts(this)" id="column">柱状图</a>
-											<a  class="btn" onclick="selectCharts(this)" id="spline" >折线图</a>
-											<a  class="btn" onclick="selectCharts(this)" id="pie">饼图</a>
-											<a  class="btn" onclick="selectCharts(this)" id="area">堆积图</a>
-										</div>
-									</aside>
-									<div class="content chart">
-										<div class="msg" id="lineCharts" style="height:700px;">
-											<span id="sTitle" class="sTitle">请选择统计对象绘制图表</span>
-										</div>
-									</div>
-									<div class="tongji" id="tongji">
+                                                </ul>
+                                            </div>
+                                            <div class="btn-group bottom15 right15">
+                                                <button aria-expanded="false" data-toggle="dropdown" class="btn button-normal" type="button" id="selectObj" onclick="showObj(1)" style="margin-right: 0;">选择统计对象</button>
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <aside id="tool">
+                                        <div class="getshi">
+                                            <a class="btn active" onclick="selectDate(this)" id="hour">时</a>
+                                            <a class="btn" onclick="selectDate(this)" id="day">天</a>
+                                            <a class="btn hide" onclick="selectDate(this)" id="month">月</a>
+                                            <a class="btn hide" onclick="selectDate(this)" id="year">年</a>
+                                        </div>
+                                        <div class="getpic">
+                                            <a class="btn" onclick="selectCharts(this)" id="column">柱状图</a>
+                                            <a class="btn" onclick="selectCharts(this)" id="spline">折线图</a>
+                                            <a class="btn" onclick="selectCharts(this)" id="pie">饼图</a>
+                                            <a class="btn" onclick="selectCharts(this)" id="area">堆积图</a>
+                                        </div>
+                                    </aside>
+                                    <div class="content chart">
+                                        <div class="msg" id="lineCharts" style="height:700px;">
+                                            <span id="sTitle" class="sTitle">请选择统计对象绘制图表</span>
+                                        </div>
+                                    </div>
+                                    <div class="tongji" id="tongji">
 
-										<header>
-											<div class="input-group search ">
-												<span class="input-group-addon btn" onclick="getTree('search','tree')" > <i class="fa fa-search"></i>
+                                        <header>
+                                            <div class="input-group search ">
+                                                <span class="input-group-addon btn" onclick="getTree('search','tree')"> <i class="fa fa-search"></i>
 												</span>
-												<input type="text" class="form-control input-lg" style="border-left: none;" placeholder="请输入点名称" id="search"  onblur="getTree('search','tree')"></div>
-											<span class="form-control-feedback cha" aria-hidden="true" style="z-index: 999" onclick="clearInput('search')"></span>
+                                                <input type="text" class="form-control input-lg" style="border-left: none;" placeholder="请输入点名称" id="search" onblur="getTree('search','tree')"></div>
+                                            <span class="form-control-feedback cha" aria-hidden="true" style="z-index: 999" onclick="clearInput('search')"></span>
 
-										</header>
-										<div class="tree" id="tree"></div>
-										<footer class="foot">
-											<button class="btn btn-primary btn-sha" onclick="SelectData(1)">筛选</button>
-											<button class="btn btn-primary btn-border btn-clear" onclick="clearCheck(1)">清空筛选条件</button>
+                                        </header>
+                                        <div class="tree" id="tree"></div>
+                                        <footer class="foot">
+                                            <button class="btn btn-primary btn-sha" onclick="SelectData(1)">筛选</button>
+                                            <button class="btn btn-primary btn-border btn-clear" onclick="clearCheck(1)">清空筛选条件</button>
 
-										</footer>
+                                        </footer>
 
-									</div>
-								</section>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="bao">
-							<div class="row">
-								<div class="col-xs-3 content-style auto" id="bao_leftNames" style="width: 20%"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="bao">
+                            <div class="row">
+                                <div class="col-xs-3 content-style auto" id="bao_leftNames" style="width: 20%"></div>
 
-								<section class="col-xs-9 content" style="width: 80%">
-									<header>
-										<div class="btn-group bottom15 right15 selectTypes" style="display:block;" id="selectBao">
-											<button aria-expanded="false" data-toggle="dropdown" class="btn select btn-border dropdown-toggle button-cancle" type="button" id="selectTypes">
+                                <section class="col-xs-9 content" style="width: 80%">
+                                    <header>
+                                        <div class="btn-group bottom15 right15 selectTypes" style="display:block;" id="selectBao">
+                                            <button aria-expanded="false" data-toggle="dropdown" class="btn select btn-border dropdown-toggle button-cancle" type="button" id="selectTypes">
 												<span class="txt" rel="1">日报</span>
 												<span class="caret sarrow"></span>
 												<span class="sr-only">日报</span>
 											</button>
-											<ul role="menu" class="dropdown-menu  selectType dropdown-menus">
-												<li>
-													<a href="#" rel="1" >日报</a>
-												</li>
-												<li>
-													<a href="#" rel="2">月报</a>
-												</li>
-												<li>
-													<a href="#" rel="3">年报</a>
-												</li>
-											</ul>
-										</div>
-										<div class="form-group selectTime full-lefts" id="selectInput">
-											<input type="text" data-format="yyyy-mm-dd"  class="form-control datepicker" id="bao_day" onclick="changeTime()" />
-											<input type="text" data-format="yyyy-mm" class="form-control datepicker" id="bao_month" data-min-view-mode="months" data-start-view="1"  style="display:none" onclick="changeTime()" />
-											<input type="text" data-format="yyyy" class="form-control datepicker" id="bao_year" data-min-view-mode="years" data-start-view="2" style="display:none" onclick="changeTime()"  />
+                                            <ul role="menu" class="dropdown-menu  selectType dropdown-menus">
+                                                <li>
+                                                    <a href="#" rel="1">日报</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" rel="2">月报</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" rel="3">年报</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group selectTime full-lefts" id="selectInput">
+                                            <input type="text" data-format="yyyy-mm-dd" class="form-control datepicker" id="bao_day" onclick="changeTime()" />
+                                            <input type="text" data-format="yyyy-mm" class="form-control datepicker" id="bao_month" data-min-view-mode="months" data-start-view="1" style="display:none" onclick="changeTime()" />
+                                            <input type="text" data-format="yyyy" class="form-control datepicker" id="bao_year" data-min-view-mode="years" data-start-view="2" style="display:none" onclick="changeTime()" />
 
-										</div>
+                                        </div>
 
-										<div class="full-right">
-											<div class="btn-group bottom15 right15 selcts" id="bao_select">
-												<!--    <button class="btn btn-primary  btn-border " type="button" id="Save">保存</button>
+                                        <div class="full-right">
+                                            <div class="btn-group bottom15 right15 selcts" id="bao_select">
+                                                <!--    <button class="btn btn-primary  btn-border " type="button" id="Save">保存</button>
 											-->
-											<button aria-expanded="false" data-toggle="dropdown" class="btn select button-normal btn-border dropdown-toggle save-btn" type="button" id="btnSave" style="margin-right: 20px;">
+                                                <button aria-expanded="false" data-toggle="dropdown" class="btn select button-normal btn-border dropdown-toggle save-btn" type="button" id="btnSave" style="margin-right: 20px;">
 												<span class="txt" rel="1">保存</span>
 												<span class="caret sarrow"></span>
 												<span class="sr-only">保存</span>
 											</button>
-											<ul role="menu" class="dropdown-menu save-dropdown" style="margin-top:5px;">
-												<li>
-													<a href="#" onclick="save(2)">保存</a>
-												</li>
-												<li>
-													<a href="#" onclick="otherSave(2,'fieldName','另存为')" rel="1">另存为</a>
-												</li>
-												<li>
-													<a href="#" onclick="del(2)" rel="2">删除</a>
+                                                <ul role="menu" class="dropdown-menu save-dropdown" style="margin-top:5px;">
+                                                    <li>
+                                                        <a href="#" onclick="save(2)">保存</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" onclick="otherSave(2,'fieldName','另存为')" rel="1">另存为</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" onclick="del(2)" rel="2">删除</a>
 
-												</li>
+                                                    </li>
 
-											</ul>
-										</div>
-										<div class="btn-group bottom15 right15" >
-											<button aria-expanded="false" data-toggle="dropdown" class="btn button-normal" type="button" id="selectObj" onclick="showObj(2)" style="margin-right: 0;">选择统计对象</button>
-										</div>
-									</div>
-								</header>
-								<div class="content bao_table">
-									<div class="msg" id="bao_table" style="height:700px;">
-										<aside >
-											<div class="txt-right mar-right">
-												<span class="unit">用电量(单位:KWh)</span> <i class="fa fa-arrows-alt all_screen" onclick="All()">&nbsp;&nbsp;全屏</i>
-											</div>
-										</aside>
-										<div id="noloud">
-											<span class='kong'>请选择统计对象生成报表</span>
-										</div>
-										<div class="tab_border  tab_border_yb" id="tab_border">
-											<header style="display:none">
-												<span class="unit units">用电量(单位:KWh)</span>
-												<span class="all_right">
+                                                </ul>
+                                            </div>
+                                            <div class="btn-group bottom15 right15">
+                                                <button aria-expanded="false" data-toggle="dropdown" class="btn button-normal" type="button" id="selectObj" onclick="showObj(2)" style="margin-right: 0;">选择统计对象</button>
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <div class="content bao_table">
+                                        <div class="msg" id="bao_table" style="height:700px;">
+                                            <aside>
+                                                <div class="txt-right mar-right">
+                                                    <span class="unit">用电量(单位:KWh)</span> <i class="fa fa-arrows-alt all_screen" onclick="All()">&nbsp;&nbsp;全屏</i>
+                                                </div>
+                                            </aside>
+                                            <div id="noloud">
+                                                <span class='kong'>请选择统计对象生成报表</span>
+                                            </div>
+                                            <div class="tab_border  tab_border_yb" id="tab_border">
+                                                <header style="display:none">
+                                                    <span class="unit units">用电量(单位:KWh)</span>
+                                                    <span class="all_right">
 													<button class="btn button-normal btn-border all_btn"  onclick ="exportss()" id="exprot">导出文件</button>
 													<button class="btn button-cancle all_btns" onclick="exitFullscreen()">退出全屏</button>
 												</span>
-											</header>
-											<table id="baoList" class="table  table-striped" >
-												<thead></thead>
-												<tbody></tbody>
-											</table>
-										</div>
+                                                </header>
+                                                <table id="baoList" class="table  table-striped">
+                                                    <thead></thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
 
-									</div>
-								</div>
+                                        </div>
+                                    </div>
 
-								<div class="tongji" id="tongjis" >
+                                    <div class="tongji" id="tongjis">
 
-									<header>
-										<div class="input-group search ">
-											<span class="input-group-addon btn" onclick="getTree('searchs','trees')" >
+                                        <header>
+                                            <div class="input-group search ">
+                                                <span class="input-group-addon btn" onclick="getTree('searchs','trees')">
 												<i class="fa fa-search"></i>
 											</span>
-											<input type="text" class="form-control input-lg" style="border-left: none;" placeholder="请输入点名称" id="searchs"  onblur="getTree('searchs','trees')"></div>
-										<span class="form-control-feedback cha" aria-hidden="true" style="z-index: 999" onclick="clearInput('searchs')"></span>
+                                                <input type="text" class="form-control input-lg" style="border-left: none;" placeholder="请输入点名称" id="searchs" onblur="getTree('searchs','trees')"></div>
+                                            <span class="form-control-feedback cha" aria-hidden="true" style="z-index: 999" onclick="clearInput('searchs')"></span>
 
-									</header>
-									<div class="tree" id="trees"></div>
-									<footer class="foot">
-										<button class="btn btn-primary btn-sha" onclick="SelectData(2)">筛选</button>
-										<button class="btn btn-primary btn-border btn-clear" onclick="clearCheck(2)">清空筛选条件</button>
-									</footer>
-								</div>
-							</section>
-						</div>
-					</div>
-				</div>
+                                        </header>
+                                        <div class="tree" id="trees"></div>
+                                        <footer class="foot">
+                                            <button class="btn btn-primary btn-sha" onclick="SelectData(2)">筛选</button>
+                                            <button class="btn btn-primary btn-border btn-clear" onclick="clearCheck(2)">清空筛选条件</button>
+                                        </footer>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
 
-			</div>
+                </div>
 
-		</section>
-	</section>
+            </section>
+        </section>
 
-</div>
+    </div>
 
-<div id="compare" style="display: none;">
-	<div>
-		<span class="timetext">原始时间段</span>
-		<span class="times" id="zi_start">2016-12-12</span>
-		<lable class="spare">至</lable>
-		<span class="times" id="zi_end">2016-12-21</span>
-	</div>
-	<div class="add">
-		<a class="green" href="javascript:void(0)" onclick="creatediv()">+添加时间段</a>
-	</div>
-	<div class="addTime"></div>
-</div>
-<!-- 绝对 -->
-<div id="compare1" style="display: none;">
-	<div>
-		<span class="timetext">原始时间段</span>
-		<span class="spaild" id="time_txt">昨天</span>
-		<span class="spaild">|</span>
-		<span class="times" id="time_start">2016-12-12</span>
-		<lable class="spare">至</lable>
-		<span class="times" id="time_end">2016-12-21</span>
-	</div>
-	<div class="add">
-		<a class="green" href="javascript:void(0)" onclick="creatediv()">+添加时间段</a>
-	</div>
-	<div class="addTime"></div>
-</div>
+    <div id="compare" style="display: none;">
+        <div>
+            <span class="timetext">原始时间段</span>
+            <span class="times" id="zi_start">2016-12-12</span>
+            <lable class="spare">至</lable>
+            <span class="times" id="zi_end">2016-12-21</span>
+        </div>
+        <div class="add">
+            <a class="green" href="javascript:void(0)" onclick="creatediv()">+添加时间段</a>
+        </div>
+        <div class="addTime"></div>
+    </div>
+    <!-- 绝对 -->
+    <div id="compare1" style="display: none;">
+        <div>
+            <span class="timetext">原始时间段</span>
+            <span class="spaild" id="time_txt">昨天</span>
+            <span class="spaild">|</span>
+            <span class="times" id="time_start">2016-12-12</span>
+            <lable class="spare">至</lable>
+            <span class="times" id="time_end">2016-12-21</span>
+        </div>
+        <div class="add">
+            <a class="green" href="javascript:void(0)" onclick="creatediv()">+添加时间段</a>
+        </div>
+        <div class="addTime"></div>
+    </div>
 
-<div id="otherSave" style="display: none;">
-	<span>报表名称</span>
-	<div class="controls">
-		<input type="text" id="fieldName" class="form-control">
-		 <span style="display:none">错误提醒：</span>
-	
-</div>
-</div>
+    <div id="otherSave" style="display: none;">
+        <span>报表名称</span>
+        <div class="controls">
+            <input type="text" id="fieldName" class="form-control">
+            <span style="display:none">错误提醒：</span>
 
-<div class="loading">
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
+        </div>
+    </div>
+
+    <div class="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
 
 
-<div id="foot"></div>
+    <div id="foot"></div>
 
-	<script type="text/javascript" src="js/basic/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/basic/common.js"></script>
-<script type="text/javascript" src="js/basic/datetimepicker.min.js"></script>
-<script type="text/javascript" src="js/basic/onlyforenergy.js"></script>
-<script type="text/javascript" src="js/basic/icheck.min.js"></script>
+    <script type="text/javascript" src="js/basic/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/basic/common.js"></script>
+    <script type="text/javascript" src="js/basic/datetimepicker.min.js"></script>
+    <script type="text/javascript" src="js/basic/onlyforenergy.js"></script>
+    <script type="text/javascript" src="js/basic/icheck.min.js"></script>
 
-<script type="text/javascript" src="js/basic/highstock.js"></script>
-<script type="text/javascript" src="js/basic/exporting.js"></script>
-<script type="text/javascript" src="js/basic/layer.js"></script>
-<script type="text/javascript" src="js/basic/jquery.mCustomScrollbar.concat.min.js"></script>
-<script type="text/javascript" src="js/basic/api.js"></script>
-<!-- <script type="text/javascript" src="js/basic/FileSaver.js"></script> -->
-<script type="text/javascript" src="js/basic/tableExport.js"></script>
-<script type="text/javascript" src="js/datashow/energyView.js"></script>
+    <script type="text/javascript" src="js/basic/highstock.js"></script>
+    <script type="text/javascript" src="js/basic/exporting.js"></script>
+    <script type="text/javascript" src="js/basic/layer.js"></script>
+    <script type="text/javascript" src="js/basic/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="js/basic/api.js"></script>
+    <!-- <script type="text/javascript" src="js/basic/FileSaver.js"></script> -->
+    <script type="text/javascript" src="js/basic/tableExport.js"></script>
+    <script type="text/javascript" src="js/datashow/energyView.js"></script>
 </body>
+
 </html>

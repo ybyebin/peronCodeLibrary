@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>图形画面管理</title>
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/base.css"> -->
+    <link rel="stylesheet" href="./css/basegreen.css">
     <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/sysManagement.css">
     <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
@@ -90,9 +91,9 @@
                                         <td v-text="item.name"></td>
 
                                         <td>
-                                            <a v-bind:class="{ tdshow: item.ishide }" @click.stop="viewReName(item)" href="javascript:;">重命名</a>
-                                            <a v-bind:class="{ tdshow: item.ishide }" @click.stop="viewDelete(item)" href="javascript:;">删除</a>
-                                            <a v-bind:class="{ tdshow: item.ishide }" @click.stop="sysEditViews(item)" href="javascript:;">编辑画面</a>
+                                            <a v-bind:class="{ tdshow: item.ishide }" @click.stop="viewReName(item)" href="javascript:;" class="bayax-a">重命名</a>
+                                            <a v-bind:class="{ tdshow: item.ishide }" @click.stop="viewDelete(item)" href="javascript:;" class="bayax-a">删除</a>
+                                            <a v-bind:class="{ tdshow: item.ishide }" @click.stop="sysEditViews(item)" href="javascript:;" class="bayax-a">编辑画面</a>
                                         </td>
                                     </tr>
 
@@ -102,7 +103,6 @@
                         </div>
 
 
-                        <!-- <div class="relode-data tcdPageCode"></div> -->
 
                     </div>
                 </div>
@@ -148,16 +148,13 @@
         </div>
 
         <!-- 弹窗 -->
-        <div id="delsys" class="layer-default">
+        <!-- <div id="delsys" class="layer-default">
             <div class="bayax-layer-content">
                 <div class="layui-inline">
                     <label class=" layui-form-label" style="width:200px;">确认删除该系统吗</label>
                 </div>
             </div>
-        </div>
-
-
-
+        </div> -->
 
         <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
             <span></span>
@@ -166,11 +163,6 @@
             <span></span>
             <span></span>
         </div>
-
-
-
-
-
 
     </div>
 

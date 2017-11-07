@@ -1,3 +1,20 @@
+// 工程信息
+var proMessage = {
+    proID: '',
+    proName: '',
+    proLogo: '',
+}
+
+$(function() {
+    proMessage.proID = sessionStorage.getItem('bayax_proID');
+    proMessage.proLogo = sessionStorage.getItem('bayax_logo');
+    proMessage.proName = sessionStorage.getItem('bayax_proName');
+    $('.logo').attr('src', proMessage.proLogo);
+    $('.projectName').text(proMessage.proName);
+
+});
+
+
 var deleteGroupsData = {}; //保存 删除的已编辑的组
 
 var showTreeData = []; //展示 树 数据
@@ -57,7 +74,7 @@ var allTreesetting = {
         beforeDrop: allTreebeforeDrop
     }
 };
-projectInfo();
+// projectInfo();
 energyConsumptionDisplayLoadData();
 
 

@@ -1,12 +1,12 @@
 layui.use(['layer'], function() {
     var layer = layui.layer;
-    var layerHeader = 'font-size:18px;color:#fff;background:#3E4687;border:none;height:50px;font-weight:bold;line-height:50px;padding-left:10px'
 
     var nodeVue = new Vue({
         el: '#app',
         data: {
             proID: 1,
             proLogo: '',
+            proName: '',
             loadingShow: false,
             sysGroups: [{ //新建子系统数据
                     name: '空调机组',
@@ -45,6 +45,9 @@ layui.use(['layer'], function() {
         mounted: function() {
             var _this = this;
             this.$nextTick(function() {
+                this.proID = sessionStorage.getItem('bayax_proID');
+                this.proLogo = sessionStorage.getItem('bayax_logo');
+                // this.proName = sessionStorage.getItem('bayax_proName');
                 $('.bayax-btn').on('click', function(e) {
                     console.log()
                     var str = '.' + $(this).data('for')
@@ -118,7 +121,7 @@ layui.use(['layer'], function() {
                 if (item.type) {
                     console.log('自定义');
                     var layer_open = layer.open({
-                        title: ['新建子系统', layerHeader],
+                        title: ['新建子系统'],
                         type: 1,
                         skin: 'layui-primary', //加上边框
                         area: ['500px', '200px'], //宽高
@@ -188,7 +191,7 @@ layui.use(['layer'], function() {
                 var _this = this;
 
                 var layer_open = layer.open({
-                    title: ['重命名', layerHeader],
+                    title: ['重命名'],
                     type: 1,
                     skin: 'layui-primary', //加上边框
                     area: ['500px', '200px'], //宽高
@@ -253,46 +256,46 @@ layui.use(['layer'], function() {
                 if (item.view_count > 0) {
                     layer.msg('画面个数不为零，不能删除')
                 } else {
-                    var layer_open = layer.open({
-                        title: ['确认删除', 'font-size:18px;color:#fff;background:#3E4687;height:50px;font-weight:bold;line-height:50px;padding-left:30px;border:none;'],
-                        type: 1,
-                        skin: 'layui-primary', //加上边框
-                        area: ['300px', '180px'], //宽高
-                        content: $("#delsys"), //捕获的元素,
-                        shift: 2,
-                        btn: ['确认', '取消'],
 
-                        yes: function(index) {
-                            $.ajax({
-                                url: apiurl + 'subsystem/' + item.id,
-                                type: 'DELETE',
-                                beforeSend: function() {
-                                    _this.loadingShow = true;
-                                },
-                                complete: function() {
-                                    _this.loadingShow = false;
-                                },
-                                success: function(data) {
-                                    _this.loadingShow = false;
-                                    if (data.success) {
-                                        layer.msg('删除成功');
-                                        _this.graphicImageGetData();
-                                        layer.close(layer_open);
-                                    } else {
-                                        layer.msg(data.error_message);
 
-                                    }
-                                },
-                                error: function(data) {
-                                    publicAjaxError(data);
-                                }
-                            });
-
+                    layer.confirm('确认删除该系统吗', {
+                        title: '确认删除',
+                        success: function() {
+                            $('.layui-layer-btn a').addClass('confirm');
                         },
-                        btn2: function(index) {
-                            layer.close(index);
-                        }
+                        btn: ['确定', '取消']
+                    }, function(index) {
+                        $.ajax({
+                            url: apiurl + 'subsystem/' + item.id,
+                            type: 'DELETE',
+                            beforeSend: function() {
+                                _this.loadingShow = true;
+                            },
+                            complete: function() {
+                                _this.loadingShow = false;
+                            },
+                            success: function(data) {
+                                _this.loadingShow = false;
+                                if (data.success) {
+                                    layer.msg('删除成功');
+                                    _this.graphicImageGetData();
+                                    layer.close(index);
+                                } else {
+                                    layer.msg(data.error_message);
+
+                                }
+                            },
+                            error: function(data) {
+                                publicAjaxError(data);
+                            }
+                        });
+                    }, function() {
+
                     });
+
+
+
+
                 }
             },
 

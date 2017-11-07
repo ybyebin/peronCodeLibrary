@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>工程管理</title>
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/base.css"> -->
+    <link rel="stylesheet" href="./css/basegreen.css">
     <link rel="stylesheet" type="text/css" href="css/sysManagement.css">
 
 </head>
@@ -38,12 +39,12 @@
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;">
+                        <a href="energyconsumptionStatisticDis.html">
                             <i class="nhtjsd"></i> 能耗统计设定
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;">
+                        <a href="graphicImages.html">
                             <i class="txhmgl"></i> 图形画面管理
                         </a>
                     </li>
@@ -67,8 +68,8 @@
             <div v-bind:class="{ displayShow: isDisplayShow}" class="bayax-content">
                 <div class="content-head">
                     <button @click="edit" class="layui-btn bayax-btn">编辑</button>
-                    <button class="layui-btn bayax-btn">导入工程</button>
-                    <button class="layui-btn bayax-btn">导出工程</button>
+                    <button class="layui-btn bayax-btn bayax-btn-other">导入工程</button>
+                    <button class="layui-btn bayax-btn bayax-btn-other">导出工程</button>
                 </div>
                 <div class="content-body">
                     <div class="content-body-border-top"></div>

@@ -1,7 +1,6 @@
 layui.use(['layer', 'form'], function() {
     var layer = layui.layer;
     var form = layui.form;
-    var layerHeader = 'font-size:18px;color:#fff;background:#3E4687;border:none;height:50px;font-weight:bold;line-height:50px;padding-left:10px'
 
     // 是否启用外链
     form.on('checkbox(useOtherLinkCheck)', function(data) {
@@ -21,6 +20,7 @@ layui.use(['layer', 'form'], function() {
         data: {
             proID: 1,
             proLogo: '',
+            proName: '',
             loadingShow: false,
             headData: {
                 id: '',
@@ -47,7 +47,9 @@ layui.use(['layer', 'form'], function() {
         mounted: function() {
             var _this = this;
             this.$nextTick(function() {
-
+                this.proID = sessionStorage.getItem('bayax_proID');
+                this.proLogo = sessionStorage.getItem('bayax_logo');
+                // this.proName = sessionStorage.getItem('bayax_proName');
                 this.headData.name = sessionStorage.getItem("viewGroupeName");
                 this.headData.id = sessionStorage.getItem("viewGroupeId");
                 this.graphicImageViewsGetData();
@@ -120,7 +122,7 @@ layui.use(['layer', 'form'], function() {
                 var _this = this;
                 console.log('自定义');
                 var layer_open = layer.open({
-                    title: ['新建画面', layerHeader],
+                    title: ['新建画面'],
                     type: 1,
                     skin: 'layui-primary', //加上边框
                     area: ['550px', '250px'], //宽高
@@ -225,7 +227,7 @@ layui.use(['layer', 'form'], function() {
                 var _this = this;
 
                 var layer_open = layer.open({
-                    title: ['重命名', layerHeader],
+                    title: ['重命名'],
                     type: 1,
                     skin: 'layui-primary', //加上边框
                     area: ['500px', '200px'], //宽高
@@ -291,46 +293,44 @@ layui.use(['layer', 'form'], function() {
             // 删除画面
             viewDelete: function(item) {
                 var _this = this;
-                console.log(123123123)
+                // console.log(123123123)
 
-                var layer_open = layer.open({
-                    title: ['确认删除', 'font-size:18px;color:#fff;background:#3E4687;height:50px;font-weight:bold;line-height:50px;padding-left:30px;border:none;'],
-                    type: 1,
-                    skin: 'layui-primary', //加上边框
-                    area: ['300px', '180px'], //宽高
-                    content: $("#delsys"), //捕获的元素,
-                    shift: 2,
-                    btn: ['确认', '取消'],
-                    yes: function(index) {
-                        $.ajax({
-                            url: apiurl + 'view/' + item.id,
-                            type: 'DELETE',
-                            beforeSend: function() {
-                                _this.loadingShow = true;
-                            },
-                            complete: function() {
-                                _this.loadingShow = false;
-                            },
-                            success: function(data) {
-                                _this.loadingShow = false;
-                                if (data.success) {
-                                    layer.msg('删除成功');
-                                    _this.graphicImageViewsGetData();
-                                    layer.close(index);
-                                } else {
-                                    layer.msg(data.error_message);
-                                }
-                            },
-                            error: function(data) {
-                                publicAjaxError(data);
-                            }
-                        });
-
+                layer.confirm('确认删除该画面吗？', {
+                    title: '确认删除',
+                    success: function() {
+                        $('.layui-layer-btn a').addClass('confirm');
                     },
-                    btn2: function(index) {
-                        layer.close(index);
-                    }
+                    btn: ['确定', '取消']
+                }, function(index) {
+                    $.ajax({
+                        url: apiurl + 'view/' + item.id,
+                        type: 'DELETE',
+                        beforeSend: function() {
+                            _this.loadingShow = true;
+                        },
+                        complete: function() {
+                            _this.loadingShow = false;
+                        },
+                        success: function(data) {
+                            _this.loadingShow = false;
+                            if (data.success) {
+                                layer.msg('删除成功');
+                                _this.graphicImageViewsGetData();
+                                layer.close(index);
+                            } else {
+                                layer.msg(data.error_message);
+                            }
+                        },
+                        error: function(data) {
+                            publicAjaxError(data);
+                        }
+                    });
+
+                }, function() {
+
                 });
+
+
 
             },
             // 编辑画面

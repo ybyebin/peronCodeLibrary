@@ -72,16 +72,15 @@ h6 {
 }
 
 html {
-    background-color: #15182D;
+    background: #fff;
 }
 
 body {
     font-family: "微软雅黑";
-    background-color: #15182D;
 }
 
 .layui-body {
-    color: #fff;
+    color: #666;
 }
 
 @font-face {
@@ -189,27 +188,38 @@ body {
 
 .bayax-btn,
 .bayax-btn-cancel {
-    background: #DEE2FF;
-    color: #000;
+    background: #35C99D;
+    color: #fff;
+    width: 112px;
+    border-radius: 5px;
     height: 44px;
     line-height: 44px;
     padding: 0;
-    width: 112px;
-    border-radius: 5px;
 }
 
 .bayax-btn:hover {
-    color: #000;
-    background: #C4CAFA;
+    background: #2AB38B;
 }
 
 .bayax-btn-cancel {
-    color: #fff;
-    background: #3F446E;
+    background-color: #ff5555;
+    color: #ffffff;
 }
 
 .bayax-btn-cancel:hover {
-    background: #30366A;
+    background: #EA4646;
+}
+
+.bayax-btn-other {
+    background-color: #FFFFFF;
+    border: 1px solid #35c99d;
+    color: #35C99D;
+}
+
+.bayax-btn-other:hover {
+    border: 1px solid #2AB38B;
+    background-color: #FFFFFF;
+    color: #35C99D;
 }
 
 
@@ -231,16 +241,16 @@ body {
     padding: 5px 0;
     z-index: 999;
     min-width: 100%;
-    border: 1px solid #d2d2d2;
     max-height: 300px;
     overflow-y: auto;
-    background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
     box-sizing: border-box;
-    background: #3F446E;
     border: 1px solid rgba(143, 152, 186, 0.31);
     color: #fff;
+    background: #fff;
+    border: 1px solid rgba(143, 152, 186, 0.31);
+    color: #c6c6c6;
 }
 
 .bayax-anim-upbit {
@@ -257,17 +267,19 @@ body {
 
 .bayax-select-group ul li {
     margin-bottom: 1px;
-    color: #fff;
     cursor: pointer;
     padding: 0 10px;
     line-height: 36px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 1px;
+    color: #c6c6c6;
 }
 
 .bayax-select-group ul li:hover {
-    background: #1C1F38;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
 
@@ -285,21 +297,23 @@ body {
 }
 
 .content-body-border-top {
-    background-image: -webkit-linear-gradient(left, #C96DD8 20%, #3023AE 100%);
+    background: #35c99d;
     height: 2px;
 }
 
 .content-main {
-    background: #1C203F;
+    background: #fff;
     padding: 20px 20px;
+    box-shadow: -5px 0 10px #E6E6E6, 5px 5px 10px #E6E6E6, 0 0 0 #FFFFFF, 5px 5px 25px #E6E6E6;
+    -webkit-box-shadow: -5px 0 10px #E6E6E6, 5px 5px 10px #E6E6E6, 0 0 0 #FFFFFF, 5px 5px 25px #E6E6E6;
 }
 
 
 /*select input textarea*/
 
 .bayax-select {
-    background: #1D2142;
-    color: #fff;
+    /* background: #1D2142; */
+    color: #999;
     border: 1px solid rgba(143, 152, 186, 0.31);
     height: 34px;
     padding: 6px 12px;
@@ -312,14 +326,14 @@ body {
 
 .layui-input {
     background: transparent;
-    color: #fff;
+    color: #666;
 }
 
 .layui-input,
 .layui-select,
 .layui-textarea {
     border: 1px solid rgba(143, 152, 186, 0.31);
-    color: #fff;
+    color: #666;
 }
 
 .layui-input:disabled {
@@ -334,38 +348,40 @@ body {
 .layui-select:hover,
 .layui-textarea:hover {
     border: 1px solid rgba(143, 152, 186, 0.31) !important;
-    color: #fff;
+    border: 1px solid #ccc;
 }
 
 .layui-input:focus,
 .layui-select:focus,
 .layui-textarea:focus {
     border: 1px solid rgba(143, 152, 186, 0.31) !important;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    border-color: #66afe9;
+    /* outline: 0; */
+    /* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6); */
+    /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6); */
 }
 
 .layui-form-select dl {
-    background: #3F446E;
+    background: #fff;
     border: 1px solid rgba(143, 152, 186, 0.31);
-    color: #fff;
+    color: #c6c6c6;
 }
 
 .layui-form-select dl dd {
     margin-bottom: 1px;
-    color: #fff;
+    color: #c6c6c6;
 }
 
 .layui-form-select dl dd:hover,
 .layui-form-select dl dt:hover,
 .layui-form-select dl dd.layui-this {
-    background: #1C1F38!important;
-    color: #fff;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
 .bayax-textarea {
     background: transparent;
-    color: #fff;
+    color: #666;
     border: 1px solid rgba(143, 152, 186, 0.31);
     padding: 5px 10px;
     border-radius: 2px;
@@ -374,8 +390,8 @@ body {
 
 .bayax-textarea:focus {
     border: 1px solid rgba(143, 152, 186, 0.31) !important;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    /* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6); */
+    /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6); */
 }
 
 
@@ -383,7 +399,7 @@ body {
 
 .bayax-table {
     width: 100%;
-    border-bottom: 1px solid #555769;
+    border-bottom: 1px solid #eee;
 }
 
 .bayax-table td {
@@ -391,7 +407,7 @@ body {
     min-width: 35px;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
 }
 
 .bayax-table .td-check {
@@ -399,13 +415,10 @@ body {
 }
 
 .bayax-table>thead>tr>th {
-    color: #fff;
     border: none;
-    border-bottom: 2px solid #555769;
+    border-bottom: 2px solid #ddd;
     vertical-align: bottom;
-    background: #1C203F;
     font-size: 16px;
-    color: #fff;
     text-align: left;
     padding: 9px 10px;
     padding-bottom: 15px;
@@ -415,7 +428,6 @@ body {
     border-top: none;
     height: 48px;
     line-height: 30px;
-    color: #fff;
     border: none;
     padding-top: 0;
     padding-bottom: 0;
@@ -431,11 +443,11 @@ body {
 }
 
 .bayax-table tbody>tr:nth-of-type(even) {
-    background: #262A50;
+    background-color: #f8fbfa;
 }
 
 .bayax-table tbody>tr:nth-of-type(odd) {
-    background-color: #1D2141;
+    background-color: #FFFFFF;
 }
 
 
@@ -480,18 +492,17 @@ body {
 }
 
 .layui-form-checked[lay-skin=primary] i {
-    border-color: #A78FBD;
-    background-color: #A78FBD;
+    border-color: #35c99d;
+    background-color: #35c99d;
 }
 
 .layui-form-checkbox[lay-skin=primary]:hover i {
-    border-color: #A78FBD;
+    border-color: #35c99d;
     color: transparent;
 }
 
 .layui-checkbox-disbaled[lay-skin=primary]:hover i {
     color: transparent!important;
-    border-color: #fff;
 }
 
 .layui-form-checked.layui-checkbox-disbaled[lay-skin=primary] i {
@@ -511,12 +522,12 @@ body {
 .layui-form-checkbox[lay-skin=primary] span {
     float: right;
     line-height: 20px;
-    /* font-size: 16px; */
-    color: #fff;
+    font-size: 16px;
+    color: #666;
 }
 
 .layui-form-checkbox[lay-skin=primary] span {
-    color: #fff;
+    color: #666;
     line-height: 20px;
 }
 
@@ -571,7 +582,7 @@ a.nextPage {
     height: 25px;
     line-height: 25px;
     padding: 0 10px;
-    color: #fff;
+    color: #35C99D;
 }
 
 .tcdPageCode a.page-omit span {
@@ -641,7 +652,7 @@ a.nextPage {
     height: 100%;
     margin-right: 5px;
     border-radius: 50%;
-    background: #354078;
+    background: #35c99d;
     -webkit-animation: load 1.04s ease infinite;
 }
 
@@ -692,29 +703,18 @@ a.nextPage {
 
 div.layui-layer-title {
     font-size: 16px;
-    color: #fff;
-    background: #3E4687;
+    color: #333;
     border: none;
     height: 50px;
     font-weight: bold;
     line-height: 50px;
-    padding-left: 10px
+    padding-left: 10px;
+    border-bottom: 1px solid #eee;
+    background: #fff;
 }
 
 .bayax-layer-content-border {
-    border-bottom: 1px solid #606277;
-}
-
-.layui-layer.layui-layer-dialog.layui-layer-border.layui-layer-msg .layui-layer-content {
-    background: #3E4687;
-}
-
-.layui-layer-page .layui-layer-content {
-    background-color: #2B2E4B;
-}
-
-.layui-layer-btn {
-    background-color: #2B2E4B;
+    border-bottom: 1px solid #dedede;
 }
 
 body .layui-layer-btn a,
@@ -723,10 +723,10 @@ body .layui-layer-btn a.layui-layer-btn0 {
     line-height: 40px;
     padding: 0 30px;
     border-radius: 2px;
-    background: #DEE2FF;
+    background: #35c99d;
     border: none;
     outline: 0;
-    color: #000;
+    color: #fff;
 }
 
 body .layui-layer-btn a.confirm,
@@ -738,8 +738,9 @@ body .layui-layer-btn a.layui-layer-btn0.confirm {
 }
 
 body .layui-layer-btn a:last-child {
-    color: #fff;
-    background: #3F446E;
+    color: #a8a8a8;
+    background: #fff;
+    border: 1px solid #dedede;
 }
 
 .layui-layer-page .layui-layer-content {
@@ -749,17 +750,11 @@ body .layui-layer-btn a:last-child {
 
 /*自定义*/
 
-.layui-layer-content {
-    background: #2B2E4B;
-    color: #fff;
-}
-
 .bayax-layer-content {
     padding: 20px 0;
     margin-left: 20px;
     margin-right: 20px;
-    /*border-bottom: 1px solid #606277;*/
-    color: #fff;
+    color: #666;
 }
 
 
@@ -786,6 +781,15 @@ body .layui-layer-btn a:last-child {
     background: transparent;
 }
 
+.bayaxMscroll .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    background: #DDDDDD;
+    width: 5px;
+}
+
+.bayaxMscroll .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
+    background-color: #dddddd;
+}
+
 .bayaxMscroll .mCustomScrollBox .mCSB_container {
     margin-right: 10px;
 }
@@ -802,60 +806,87 @@ body .layui-layer-btn a:last-child {
 /*1 工程配置  */
 
 .bayax-bg-black {
-    background: #2D3057;
-    /* background-image: -webkit-linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%); */
-    /* background-image: -o-linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%); */
-    /* background-image: linear-gradient(top, rgba(48, 35, 174, 0.3) 20%, #2B224E 63%, #2D3057 100%); */
+    background-color: #f5f5f5;
+    border-right: 1px solid #E2E2E2;
 }
 
-
-/* .layui-nav-tree .layui-nav-item a {
+.layui-nav-tree .layui-nav-item a {
     color: #9CA5A9;
-} */
+}
 
 .layui-nav-tree .layui-nav-item a:hover {
-    background: #3E4687!important;
+    background-color: #EEEEEE;
+    color: #9CA5A9;
 }
 
 .layui-nav-tree .layui-nav-item.bayax-li-item-img a,
 .layui-nav-tree .layui-nav-item.bayax-li-item-img a:hover {
-    background: #1C203F !important;
+    background: #35c99d;
 }
 
 .layui-nav-tree .layui-nav-item.active a {
-    background: #3E4687!important;
+    background-color: #EEEEEE;
+    color: #35c99d;
 }
 
 .layui-side a i {
-    background: url(../images/syssettitle.png) no-repeat;
+    background: url(../images/systemSet.png) no-repeat;
 }
 
-.layui-side a i.gcgl {
+.layui-side li.active a i.gcgl {
     background-position: -120px 0;
 }
 
-.layui-side a i.jdgl {
+.layui-side li.active a i.jdgl {
     background-position: -140px 0;
 }
 
-.layui-side a i.sjbqgl {
+.layui-side li.active a i.sjbqgl {
+    background-position: -160px 0;
+}
+
+.layui-side li.active a i.nhtjsd {
     background-position: 0 0;
 }
 
-.layui-side a i.nhtjsd {
-    background-position: -160px 0;
-}
-
-.layui-side a i.txhmgl {
+.layui-side li.active a i.txhmgl {
     background-position: -80px 0;
 }
 
+.layui-side li.active a i.nhtjfj {
+    background-position: 0 0;
+}
+
+.layui-side li.active a i.yhqxgl {
+    background-position: -40px 0;
+}
+
+.layui-side a i.gcgl {
+    background-position: -100px 0;
+}
+
+.layui-side a i.jdgl {
+    background-position: -180px 0;
+}
+
+.layui-side a i.sjbqgl {
+    background-position: -20px 0;
+}
+
+.layui-side a i.nhtjsd {
+    background-position: -40px 0;
+}
+
+.layui-side a i.txhmgl {
+    background-position: -60px 0;
+}
+
 .layui-side a i.nhtjfj {
-    background-position: -160px 0;
+    background-position: -40px 0;
 }
 
 .layui-side a i.yhqxgl {
-    background: url(../images/system.png) no-repeat;
+    background: url(../images/systemgreen.png) no-repeat;
     background-position: 0 0;
 }
 
@@ -869,8 +900,6 @@ body .layui-layer-btn a:last-child {
     background: #FFFFFF;
     float: right;
     width: 265px;
-    background: #1D2142;
-    color: #fff;
     border: 1px solid rgba(143, 152, 186, 0.31);
 }
 
@@ -885,8 +914,6 @@ body .layui-layer-btn a:last-child {
     height: 44px;
     width: 210px;
     border: none;
-    background: #1D2142;
-    color: #fff;
 }
 
 .span-del {
@@ -913,139 +940,130 @@ body .layui-layer-btn a:last-child {
 /* 数据标签弹窗 */
 
 .label-content-base .base-title label {
-    border-left: 5px solid #3E4687;
+    border-left: 5px solid #35c99d;
 }
 
 .label-check-div span {
-    color: #fff!important;
+    color: #666!important;
 }
 
 .other-warn-content .table-ul-body-bg li:nth-of-type(even) {
-    background: #262A50;
+    background-color: #f8fbfa;
 }
 
 .other-warn-content .table-ul-body-bg li:nth-of-type(odd) {
-    background-color: #1D2141;
+    background-color: #FFFFFF;
 }
 
 .table-ul-head {
-    border-bottom: 2px solid #555769;
+    border-bottom: 2px solid #eee;
 }
 
 
 /* 能耗统计设定 */
 
 .energyStatistics-head {
-    border-bottom: 1px solid #555769;
+    border-bottom: 1px solid #dedede;
 }
 
 .energyStatistics-content-body .bayax-ul li.active {
-    border-left: 6px solid #A78FBE;
-    color: #A78FBE;
-    /* padding-left: 7px; */
+    border-left: 6px solid #35c99d;
+    color: #35c99d;
 }
 
 .energyStatistics-content-body .bayax-ul li:hover {
-    border-left: 6px solid #A78FBE;
-    color: #A78FBE;
-    /* padding-left: 7px; */
+    border-left: 6px solid #35c99d;
+    color: #35c99d;
 }
 
 .energyStatistics-content-body .bayax-ul li:nth-of-type(even) {
-    background-color: #191C33;
+    background-color: #f8fbfa;
 }
 
 .energyStatistics-content-body .bayax-ul li:nth-of-type(odd) {
-    background-color: #1D203B;
+    background-color: #FFFFFF;
 }
 
 .energyStatistics-right-head span.head-title {
-    border-left: 3px solid #3E4687;
+    border-left: 3px solid #35c99d;
 }
 
 .energyStatistics-right-content table thead {
-    border: 1px solid #3e4364;
+    border: 1px solid #fff;
 }
 
 .energyStatistics-right-content table thead tr th {
-    background-color: #2E3554;
+    background-color: #f9f9f9;
 }
 
 .statistic-layer-left-div div.content,
 .statistic-layer-right-div div.content {
-    border: 1px solid #3C3F61;
+    border: 1px solid #ddd;
 }
 
 .statistic-layer .bayax-table>thead>tr>th {
-    background: #2C2F4C;
+    background: #fff;
 }
 
-.statistic-layer .bayax-table tbody>tr:nth-of-type(odd) {
-    background: #2C2F4C;
+
+/* .statistic-layer .bayax-table tbody>tr:nth-of-type(odd) {
+    background-color: #f8fbfa;
 }
 
 .statistic-layer .bayax-table tbody>tr:nth-of-type(even) {
-    background: #1D2241;
-}
+    background-color: #FFFFFF;
+} */
 
 
 /* 图形画面管理 */
 
 .graphi-div {
-    border-bottom: 1px solid #555769;
+    border-bottom: 1px solid #dedede;
 }
 
 .subsystem-head {
     color: #fff;
-    background: #3E4687;
+    background: #6C6C6C;
 }
 
 
 /* 能耗统计分级 */
 
 .panel-heading {
-    background: #3C4663;
+    background: #F7F7F7;
 }
 
-.panel-heading a {
-    color: #fff;
+.icon-tree {
+    color: #A8A8A8;
 }
 
 div.bayaxtree-div {
-    background-color: #2D3452;
+    box-shadow: -5px 0 10px #E6E6E6, 5px 5px 10px #E6E6E6, 0 0 0 #FFFFFF, 5px 5px 25px #E6E6E6;
+    -webkit-box-shadow: -5px 0 10px #E6E6E6, 5px 5px 10px #E6E6E6, 0 0 0 #FFFFFF, 5px 5px 25px #E6E6E6;
 }
 
 div.bayaxTree ul li a span {
-    color: #fff;
+    color: #666;
 }
 
 
 /*用户权限管理*/
 
 .user-div-l table tbody tr.sele {
-    border-left: 5px solid #A78FBE
+    border-left: 5px solid #35c99d
 }
 
 .user-set-head span.user-set-head-title {
-    border-left: 4px solid #3E4687;
+    border-left: 4px solid #35c99d;
 }
 
 .user-set-ul-scroll li:nth-of-type(even) {
-    background: #262A50;
+    background-color: #f8fbfa;
 }
 
 .user-set-ul-scroll li:nth-of-type(odd) {
-    background-color: #1D2141;
+    background-color: #FFFFFF;
 }
 
 
 /* 数据展示块  布局 */
-
-.bayax-layout-admin .bayax-layout-header {
-    background-color: #15182D;
-    border-bottom: 1px solid #3E4687;
-}
-
-.bayax-layout-header .layui-nav-bar {
-    background: #3E4687;
-}

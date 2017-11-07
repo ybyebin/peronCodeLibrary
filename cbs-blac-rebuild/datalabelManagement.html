@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>数据标签管理</title>
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/base.css"> -->
+    <link rel="stylesheet" href="./css/basegreen.css">
     <link rel="stylesheet" type="text/css" href="plugin/jQuery/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" type="text/css" href="css/sysManagement.css">
 </head>
@@ -37,12 +38,12 @@
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;">
+                        <a href="energyconsumptionStatisticDis.html">
                             <i class="nhtjsd"></i> 能耗统计设定
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;">
+                        <a href="graphicImages.html">
                             <i class="txhmgl"></i> 图形画面管理
                         </a>
                     </li>
@@ -103,8 +104,8 @@
                                     <td v-text="item.node_name"></td>
                                     <td v-text="item.point_id"></td>
                                     <td>
-                                        <a v-bind:class="{ tdshow: item.ishide }" @click="labelEdit(item.id)" href="javascript:;">编辑</a>
-                                        <a v-bind:class="{ tdshow:  item.ishide }" @click="labelDel(item.id)" href="javascript:;">删除</a>
+                                        <a v-bind:class="{ tdshow: item.ishide }" @click="labelEdit(item.id)" href="javascript:;" class="bayax-a">编辑</a>
+                                        <a v-bind:class="{ tdshow:  item.ishide }" @click="labelDel(item.id)" href="javascript:;" class="bayax-a">删除</a>
                                     </td>
 
                                 </tr>
@@ -119,8 +120,8 @@
 
         </div>
         <!-- 新建-编辑数据标签 -->
-        <div id="creatEditLabel" class="layer-default mCustomScrollBoxdiv">
-            <div class="labels-layer-content bayax-layer-content">
+        <div id="creatEditLabel" class="layer-default bayaxMscroll">
+            <div class="labels-layer-content  bayax-layer-content bayax-layer-content-border">
                 <form>
                     <div class="layui-form">
                         <div class="layui-form-item">
@@ -324,7 +325,7 @@
                                             <input v-model="item.message" type="text" autocomplete="off" class="layui-input"></div>
 
                                         <div class=" li-sort li-text-center li-text-center-a">
-                                            <a @click="alarmAttributesDel(item)" href="javascript:;">删除</a>
+                                            <a @click="alarmAttributesDel(item)" href="javascript:;" class="bayax-a">删除</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -389,13 +390,13 @@
 
         </div>
         <!-- 批量删除 询问 -->
-        <div id="delLabelGroup" class="layer-default">
+        <!-- <div id="delLabelGroup" class="layer-default">
             <div class="bayax-layer-content">确认删除所有选中的标签吗</div>
-        </div>
+        </div> -->
 
-        <div id="delOneLabel" class="layer-default">
+        <!-- <div id="delOneLabel" class="layer-default">
             <div class="bayax-layer-content del-node-content">确认删除该标签吗</div>
-        </div>
+        </div> -->
         <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
             <span></span>
             <span></span>

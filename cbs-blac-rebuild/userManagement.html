@@ -7,7 +7,8 @@
     <title>用户权限管理</title>
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
     <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/base.css"> -->
+    <link rel="stylesheet" href="./css/basegreen.css">
     <link rel="stylesheet" type="text/css" href="css/sysManagement.css">
     <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
 </head>
@@ -25,11 +26,13 @@
                     </li>
 
                     <li class="layui-nav-item">
-                        <a class="" href="engineeringManagement.html"> <i class="gcgl"></i> 工程管理
+                        <a class="" href="engineeringManagement.html">
+                            <i class="gcgl"></i> 工程管理
                         </a>
                     </li>
-                    <li class="layui-nav-item active">
-                        <a href="nodeManagement.html"> <i class="jdgl"></i> 节点管理
+                    <li class="layui-nav-item">
+                        <a href="nodeManagement.html">
+                            <i class="jdgl"></i> 节点管理
                         </a>
                     </li>
                     <li class="layui-nav-item">
@@ -38,12 +41,12 @@
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;">
+                        <a href="energyconsumptionStatisticDis.html">
                             <i class="nhtjsd"></i> 能耗统计设定
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;">
+                        <a href="graphicImages.html">
                             <i class="txhmgl"></i> 图形画面管理
                         </a>
                     </li>
@@ -102,8 +105,8 @@
                                 <div class="user-set-conten1">
                                     <div class="user-set-head">
                                         <span class="user-set-head-title">用户信息</span>
-                                        <a @click="userMsgEdl" href="javascript:;">删除</a>
-                                        <a @click="userMsgEdit" href="javascript:;">编辑</a>
+                                        <a @click="userMsgEdl" href="javascript:;" class="bayax-a">删除</a>
+                                        <a @click="userMsgEdit" href="javascript:;" class="bayax-a">编辑</a>
                                     </div>
                                     <div class="user-set-content">
                                         <ul class="user-content-ul user-content-ul-head">
@@ -151,8 +154,8 @@
                                 <div class="user-set-conten1">
                                     <div class="user-set-head">
                                         <span class="user-set-head-title">编辑用户信息</span>
-                                        <a @click="editCancel" href="javascript:;">取消</a>
-                                        <a @click="editSaveUser" href="javascript:;">保存</a>
+                                        <a @click="editCancel" href="javascript:;" class="bayax-a">取消</a>
+                                        <a @click="editSaveUser" href="javascript:;" class="bayax-a">保存</a>
                                     </div>
                                     <div class="user-set-content">
                                         <ul class="user-content-ul user-content-ul-edit user-content-ul-head">
@@ -251,8 +254,8 @@
                                 <div class="user-set-conten1">
                                     <div class="user-set-head">
                                         <span class="user-set-head-title">添加用户</span>
-                                        <a @click="addCancel" href="javascript:;">取消</a>
-                                        <a @click="addSaveUser" href="javascript:;">保存</a>
+                                        <a @click="addCancel" href="javascript:;" class="bayax-a">取消</a>
+                                        <a @click="addSaveUser" href="javascript:;" class="bayax-a">保存</a>
                                     </div>
                                     <div class="user-set-content">
                                         <ul class="user-content-ul user-content-ul-edit user-content-ul-head">

@@ -2,7 +2,6 @@ layui.use(['layer', 'form'], function() {
     var layer = layui.layer;
     var form = layui.form;
     var timeoutId; //搜索延时操作标志
-    var layerHeader = 'font-size:18px;color:#fff;background:#3E4687;border:none;height:50px;font-weight:bold;line-height:50px;padding-left:10px';
 
     $(window).load(function() {
 
@@ -297,7 +296,10 @@ layui.use(['layer', 'form'], function() {
                 // form初始化
                 form.render();
                 this.selscroll();
-                this.projectInfo();
+                // this.projectInfo();
+
+                this.proID = sessionStorage.getItem('bayax_proID');
+                this.proLogo = sessionStorage.getItem('bayax_logo');
                 this.getAllNode();
                 this.getLabelData(false, 1);
                 // _this.labelEdit(1);
@@ -309,28 +311,28 @@ layui.use(['layer', 'form'], function() {
         },
         methods: {
             // 工程信息
-            projectInfo: function() {
-                var _this = this;
-                $.ajax({
-                    url: apiurl + 'project',
-                    type: 'get',
-                    dataType: 'json',
-                    success: function(data) {
-                        if (data.success) {
-                            var data = data.data;
-                            console.log(JSON.stringify(data, null, 2));
-                            _this.proID = data.id;
-                            _this.proLogo = data.logo_path;
-                        } else {
-                            layer.msg(data.error_message);
-                        }
-                    },
-                    error: function(data) {
-                        layer.msg(data.error_message);
-                        returnLogIn(data);
-                    }
-                });
-            },
+            // projectInfo: function() {
+            //     var _this = this;
+            //     $.ajax({
+            //         url: apiurl + 'project',
+            //         type: 'get',
+            //         dataType: 'json',
+            //         success: function(data) {
+            //             if (data.success) {
+            //                 var data = data.data;
+            //                 console.log(JSON.stringify(data, null, 2));
+            //                 _this.proID = data.id;
+            //                 _this.proLogo = data.logo_path;
+            //             } else {
+            //                 layer.msg(data.error_message);
+            //             }
+            //         },
+            //         error: function(data) {
+            //             layer.msg(data.error_message);
+            //             returnLogIn(data);
+            //         }
+            //     });
+            // },
             // 获取node信息
             getAllNode: function() {
                 var _this = this;
@@ -477,7 +479,7 @@ layui.use(['layer', 'form'], function() {
             creatEditLabel: function() {
                 var _this = this;
                 var layer_open = layer.open({
-                    title: ['新建标签', layerHeader],
+                    title: ['新建标签'],
                     type: 1,
                     skin: 'layui-primary', //加上边框
                     area: ['800px', '600px'], //宽高
@@ -606,51 +608,44 @@ layui.use(['layer', 'form'], function() {
                 if (_this.arrDelLabel.length === 0) {
                     layer.msg('至少选择一个标签');
                 } else {
-                    layer.open({
-                        title: ['批量删除数据标签', layerHeader],
-                        type: 1,
-                        skin: 'layui-primary', //加上边框
-                        area: ['280px', '180px'], //宽高
-                        content: $("#delLabelGroup"), //捕获的元素,
-                        shift: 2,
-                        resize: false,
-                        btn: ['确定'],
+
+
+
+                    layer.confirm('确认删除所有选中的标签吗？', {
+                        title: '批量删除数据标签',
                         success: function() {
-                            // form.render();
+                            $('.layui-layer-btn a').addClass('confirm');
                         },
-                        yes: function(index) {
-                            layer.close(index);
-                            $.ajax({
-                                url: apiurl + 'tag/?ids=' + _this.arrDelLabel.join(','),
-                                type: "DELETE",
-                                beforeSend: function() {
-                                    _this.loadingShow = true;
-                                },
-                                success: function(data) {
+                        btn: ['确定', '取消']
+                    }, function() {
+                        $.ajax({
+                            url: apiurl + 'tag/?ids=' + _this.arrDelLabel.join(','),
+                            type: "DELETE",
+                            beforeSend: function() {
+                                _this.loadingShow = true;
+                            },
+                            success: function(data) {
 
-                                    _this.loadingShow = false;
-                                    _this.arrDelLabel = [];
-                                    if (data.success) {
-                                        // layer.close(layers);
-                                        layer.msg("删除成功");
-                                        if (_this.searchText === '') {
-                                            _this.getLabelData(false, _this.savePage);
-                                        } else {
-                                            _this.getLabelData(true, _this.savePage);
-                                        }
+                                _this.loadingShow = false;
+                                _this.arrDelLabel = [];
+                                if (data.success) {
+                                    // layer.close(layers);
+                                    layer.msg("删除成功");
+                                    if (_this.searchText === '') {
+                                        _this.getLabelData(false, _this.savePage);
                                     } else {
-                                        layer.msg(data.error_message);
+                                        _this.getLabelData(true, _this.savePage);
                                     }
-                                },
-                                error: function(data) {
-                                    returnLogIn(data);
+                                } else {
+                                    layer.msg(data.error_message);
                                 }
-                            });
+                            },
+                            error: function(data) {
+                                returnLogIn(data);
+                            }
+                        });
+                    }, function() {
 
-                        },
-                        btn2: function(index) {
-
-                        }
                     });
                 }
 
@@ -674,7 +669,7 @@ layui.use(['layer', 'form'], function() {
                             console.log('标签信息:' + JSON.stringify(data, null, 2));
                             var item = data.data;
                             var layer_open = layer.open({
-                                title: ['编辑标签', layerHeader],
+                                title: ['编辑标签'],
                                 type: 1,
                                 skin: 'layui-primary', //加上边框
                                 area: ['800px', '700px'], //宽高
@@ -1155,47 +1150,43 @@ layui.use(['layer', 'form'], function() {
             // a-删除
             labelDel: function(id) {
                 var _this = this;
-                layer.open({
-                    title: ['删除标签', layerHeader],
-                    type: 1,
-                    skin: 'layui-primary', //加上边框
-                    area: ['280px', '180px'], //宽高
-                    content: $("#delOneLabel"), //捕获的元素,
-                    shift: 2,
-                    resize: false,
-                    btn: ['确定'],
-                    yes: function(index) {
-                        layer.close(index);
-                        $.ajax({
-                            url: apiurl + 'tag/?ids=' + id,
-                            type: "DELETE",
-                            beforeSend: function() {
-                                _this.loadingShow = true;
-                            },
-                            success: function(data) {
-                                _this.loadingShow = false;
-                                if (data.success) {
-                                    // layer.close(layers);
-                                    layer.msg("删除成功");
-                                    if (_this.searchText === '') {
-                                        _this.getLabelData(false, _this.savePage);
-                                    } else {
-                                        _this.getLabelData(true, _this.savePage);
-                                    }
-                                } else {
-                                    layer.msg(data.error_message);
-                                }
-                            },
-                            error: function(data) {
-                                returnLogIn(data);
-                            }
-                        });
 
+                layer.confirm('确认删除该标签吗', {
+                    title: '删除标签',
+                    success: function() {
+                        $('.layui-layer-btn a').addClass('confirm');
                     },
-                    btn2: function(index) {
+                    btn: ['确定', '取消']
+                }, function() {
+                    $.ajax({
+                        url: apiurl + 'tag/?ids=' + id,
+                        type: "DELETE",
+                        beforeSend: function() {
+                            _this.loadingShow = true;
+                        },
+                        success: function(data) {
+                            _this.loadingShow = false;
+                            if (data.success) {
+                                // layer.close(layers);
+                                layer.msg("删除成功");
+                                if (_this.searchText === '') {
+                                    _this.getLabelData(false, _this.savePage);
+                                } else {
+                                    _this.getLabelData(true, _this.savePage);
+                                }
+                            } else {
+                                layer.msg(data.error_message);
+                            }
+                        },
+                        error: function(data) {
+                            returnLogIn(data);
+                        }
+                    });
 
-                    }
+                }, function() {
+
                 });
+
             },
             // 搜索 标签
             searchlabels: function() {

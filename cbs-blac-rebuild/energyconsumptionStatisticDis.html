@@ -7,7 +7,8 @@
     <title>能耗统计设定</title>
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
     <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/base.css"> -->
+    <link rel="stylesheet" href="./css/basegreen.css">
     <link rel="stylesheet" type="text/css" href="css/sysManagement.css">
     <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
 </head>
@@ -38,12 +39,12 @@
                         </a>
                     </li>
                     <li class="layui-nav-item active">
-                        <a href="javascript:;">
+                        <a href="energyconsumptionStatisticDis.html">
                             <i class="nhtjsd"></i> 能耗统计设定
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;">
+                        <a href="graphicImages.html">
                             <i class="txhmgl"></i> 图形画面管理
                         </a>
                     </li>
@@ -65,7 +66,7 @@
             <!-- 内容主体区域 -->
             <div class="bayax-content">
                 <div class="content-head">
-                    <button class="layui-btn bayax-btn">编辑</button>
+                    <a href="energyconsumptionStatisticEdit.html" class="layui-btn bayax-btn">编辑</a>
                 </div>
                 <div class="content-body">
                     <div class="layui-row">
@@ -74,13 +75,13 @@
                             <div class=" bayaxMscroll content-main">
                                 <div class="energyStatistics-head">
                                     <span>能耗统计</span>
-                                    <a href="#">添加</a>
+
                                 </div>
                                 <div class="energyStatistics-content">
                                     <div @click="leftUlShowHide" :class="{clicks:ulhide}" class="energyStatistics-content-head ">
                                         <label>
 											<i class="icon-arrow_drop_down"></i>
-											<span>智能建筑系统智能建筑系统智能建筑系统智能建筑系统智能建筑系统智能建筑系统</span>
+											<span v-text="proName"></span>
 										</label>
                                     </div>
                                     <div class="energyStatistics-content-body">
@@ -99,7 +100,7 @@
                         <div class="layui-col-xs9">
                             <div class="energyStatistics-right bayaxMscroll content-main">
                                 <div class="energyStatistics-right-head">
-                                    <span v-text="groupsName">能耗02</span>
+                                    <span class="head-title" v-text="groupsName">能耗02</span>
                                 </div>
                                 <div class="energyStatistics-right-content">
                                     <table class="bayax-table">

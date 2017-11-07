@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>节点管理</title>
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/base.css"> -->
+    <link rel="stylesheet" href="./css/basegreen.css">
     <link rel="stylesheet" type="text/css" href="css/sysManagement.css">
 </head>
 
@@ -23,11 +24,13 @@
                     </li>
 
                     <li class="layui-nav-item">
-                        <a class="" href="engineeringManagement.html"> <i class="gcgl"></i> 工程管理
+                        <a class="" href="engineeringManagement.html">
+                            <i class="gcgl"></i> 工程管理
                         </a>
                     </li>
                     <li class="layui-nav-item active">
-                        <a href="javascript:;"> <i class="jdgl"></i> 节点管理
+                        <a href="./nodeManagement.html">
+                            <i class="jdgl"></i> 节点管理
                         </a>
                     </li>
                     <li class="layui-nav-item">
@@ -36,12 +39,12 @@
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;">
+                        <a href="energyconsumptionStatisticDis.html">
                             <i class="nhtjsd"></i> 能耗统计设定
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;">
+                        <a href="graphicImages.html">
                             <i class="txhmgl"></i> 图形画面管理
                         </a>
                     </li>
@@ -100,8 +103,8 @@
                                     <td v-text="item.timeout"></td>
                                     <td v-text="item.description"></td>
                                     <td>
-                                        <a v-bind:class="{ tdshow: item.ishide }" @click="nodeEdit(item)" href="javascript:;">编辑</a>
-                                        <a v-bind:class="{ tdshow:  item.ishide }" @click="nodeDel(item.id)" href="javascript:;">删除</a>
+                                        <a v-bind:class="{ tdshow: item.ishide }" @click="nodeEdit(item)" href="javascript:;" class="bayax-a">编辑</a>
+                                        <a v-bind:class="{ tdshow:  item.ishide }" @click="nodeDel(item.id)" href="javascript:;" class="bayax-a">删除</a>
                                     </td>
 
                                 </tr>
@@ -118,7 +121,7 @@
         </div>
         <!-- 新建-编辑节点 -->
         <div id="creatEditNode" class="layer-default">
-            <div class="node-layer-content bayax-layer-content">
+            <div class="node-layer-content bayax-layer-content-border bayax-layer-content">
                 <form class="layui-form">
                     <div class="layui-form-item">
                         <div class="layui-inline">
@@ -171,17 +174,17 @@
 
         </div>
         <!-- 批量删除 询问 -->
-        <div id="delNodeGroup" class="layer-default">
+        <!-- <div id="delNodeGroup" class="layer-default">
             <div class="bayax-layer-content">
                 确认删除所有选中的节点吗
             </div>
-        </div>
+        </div> -->
 
-        <div id="delOneNode" class="layer-default">
+        <!-- <div id="delOneNode" class="layer-default">
             <div class="bayax-layer-content del-node-content">
                 确认删除该节点吗
             </div>
-        </div>
+        </div> -->
         <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
             <span></span>
             <span></span>
