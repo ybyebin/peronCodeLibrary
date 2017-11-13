@@ -40,16 +40,10 @@ layui.use(['layer', 'form'], function() {
         console.log('查看编辑角色：' + userSetVue.addPersonData.system_role_id);
     });
 
-
-
-
-
     var userSetVue = new Vue({
         el: '#app',
         data: {
-            proID: 1,
-            proLogo: '',
-            proName: '',
+            project: {},
             loadingShow: false,
             divHideShow: {
                 showDiv: true,
@@ -93,9 +87,7 @@ layui.use(['layer', 'form'], function() {
                 form.render();
                 this.getGraphicImageGetData();
                 this.getUserMessage(0);
-                this.proID = sessionStorage.getItem('bayax_proID');
-                this.proLogo = sessionStorage.getItem('bayax_logo');
-                // this.proName = sessionStorage.getItem('bayax_proName');
+                this.project = JSON.parse(sessionStorage.getItem('bayax_proMsg'));
             });
 
         },
@@ -302,6 +294,7 @@ layui.use(['layer', 'form'], function() {
                 var _this = this;
                 layer.confirm('确认删除该用户', {
                     title: '删除用户',
+                    skin: 'bayax-layer-skin',
                     success: function() {
                         $('.layui-layer-btn a').addClass('confirm');
                     },

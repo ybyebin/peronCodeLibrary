@@ -225,8 +225,9 @@ layui.use(['layer', 'form'], function() {
     var labelVue = new Vue({
         el: '#app',
         data: {
-            proID: 1, //工程id
-            proLogo: '', //工程logo
+            project: {},
+            // proID: 1, //工程id
+            // proLogo: '', //工程logo
             allNode: [], //所有node
             editID: '', //当前编辑标签
             arrDelLabel: [], // 批量删标签id
@@ -298,8 +299,8 @@ layui.use(['layer', 'form'], function() {
                 this.selscroll();
                 // this.projectInfo();
 
-                this.proID = sessionStorage.getItem('bayax_proID');
-                this.proLogo = sessionStorage.getItem('bayax_logo');
+                this.project = JSON.parse(sessionStorage.getItem('bayax_proMsg'));
+
                 this.getAllNode();
                 this.getLabelData(false, 1);
                 // _this.labelEdit(1);
@@ -369,13 +370,13 @@ layui.use(['layer', 'form'], function() {
                 if (Issearch) {
                     dataUp = {
                         name: _this.searchText,
-                        project_id: _this.proID,
+                        project_id: _this.project.id,
                         page: page,
                         page_item_count: onePageNum,
                     }
                 } else {
                     dataUp = {
-                        project_id: _this.proID,
+                        project_id: _this.project.id,
                         page: page,
                         page_item_count: onePageNum,
                     }
@@ -481,7 +482,7 @@ layui.use(['layer', 'form'], function() {
                 var layer_open = layer.open({
                     title: ['新建标签'],
                     type: 1,
-                    skin: 'layui-primary', //加上边框
+                    skin: 'bayax-layer-skin', //加上边框
                     area: ['800px', '600px'], //宽高
                     content: $("#creatEditLabel"), //捕获的元素,
                     shift: 2,
@@ -613,6 +614,7 @@ layui.use(['layer', 'form'], function() {
 
                     layer.confirm('确认删除所有选中的标签吗？', {
                         title: '批量删除数据标签',
+                        skin: 'bayax-layer-skin',
                         success: function() {
                             $('.layui-layer-btn a').addClass('confirm');
                         },
@@ -671,8 +673,8 @@ layui.use(['layer', 'form'], function() {
                             var layer_open = layer.open({
                                 title: ['编辑标签'],
                                 type: 1,
-                                skin: 'layui-primary', //加上边框
-                                area: ['800px', '700px'], //宽高
+                                skin: 'bayax-layer-skin',
+                                area: ['800px', '600px'], //宽高
                                 content: $("#creatEditLabel"), //捕获的元素,
                                 shift: 2,
                                 // maxmin: true,
@@ -1153,6 +1155,7 @@ layui.use(['layer', 'form'], function() {
 
                 layer.confirm('确认删除该标签吗', {
                     title: '删除标签',
+                    skin: 'bayax-layer-skin',
                     success: function() {
                         $('.layui-layer-btn a').addClass('confirm');
                     },

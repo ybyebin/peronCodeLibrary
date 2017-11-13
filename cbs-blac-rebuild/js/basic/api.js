@@ -222,6 +222,29 @@ $('body').on('click', function() {
 });
 
 
+function bayaxInit() {
+    $('body').on('click', function() {
+        $('.bayax-select-click').removeClass('bayax-select-clicked');
+    });
+    $('.bayax-select-title').on('click', function(e) {
+        window.event ? window.event.cancelBubble = true : e.stopPropagation();
+        var parents = $(this).parent();
+        if (parents.hasClass('bayax-select-clicked')) {
+            parents.removeClass('bayax-select-clicked');
+        } else {
+            parents.addClass('bayax-select-clicked');
+        }
+    });
+
+    // $('.bayax-btn-dl').on('click', 'dd', function() {
+    //     var _this = $(this);
+    //     _this.parent().prev().find('span.bayax-select-span').text(_this.text());
+    // });
+}
+
+
+
+
 // 分页
 (function($) {
     var ms = {

@@ -1,6 +1,7 @@
 layui.use(['layer', 'form'], function() {
     var layer = layui.layer;
     var form = layui.form;
+
     // var upload = layui.upload;
     // var $ = layui.jquery;
     var timeoutId; //搜索延时操作标志
@@ -36,8 +37,9 @@ layui.use(['layer', 'form'], function() {
     var nodeVue = new Vue({
         el: '#app',
         data: {
-            proID: 1,
-            proLogo: '',
+            project: {},
+            // proID: 1,
+            // proLogo: '',
             editID: 1, //当前编辑节点
             arrDelNode: [], // 批量删除节点id
             nodes: [], //所有node
@@ -62,8 +64,8 @@ layui.use(['layer', 'form'], function() {
             this.$nextTick(function() {
                 form.render('checkbox');
                 // this.projectInfo();
-                this.proID = sessionStorage.getItem('bayax_proID');
-                this.proLogo = sessionStorage.getItem('bayax_logo');
+                this.project = JSON.parse(sessionStorage.getItem('bayax_proMsg'));
+
                 this.getNodeData(false, 1);
 
 
@@ -104,13 +106,13 @@ layui.use(['layer', 'form'], function() {
                 if (Issearch) {
                     dataUp = {
                         name: _this.searchText,
-                        project_id: _this.proID,
+                        project_id: _this.project.proID,
                         page: page,
                         page_item_count: onePageNum,
                     }
                 } else {
                     dataUp = {
-                        project_id: _this.proID,
+                        project_id: _this.project.proID,
                         page: page,
                         page_item_count: onePageNum,
                     }
@@ -190,7 +192,7 @@ layui.use(['layer', 'form'], function() {
                 var layer_open = layer.open({
                     title: ['新建节点'],
                     type: 1,
-                    skin: 'layui-primary', //加上边框
+                    skin: 'bayax-layer-skin',
                     area: ['700px', '500px'], //宽高
                     content: $("#creatEditNode"), //捕获的元素,
                     shift: 2,
@@ -214,7 +216,7 @@ layui.use(['layer', 'form'], function() {
                                 type: 'post',
                                 dataType: 'json',
                                 data: {
-                                    project_id: _this.proID,
+                                    project_id: _this.project.proID,
                                     name: _this.nodeName,
                                     address: _this.nodeMac,
                                     timeout: Number(_this.nodeTime),
@@ -263,6 +265,7 @@ layui.use(['layer', 'form'], function() {
 
                     layer.confirm('确认删除所有选中的节点吗', {
                         title: '删除节点',
+                        skin: 'bayax-layer-skin',
                         success: function() {
                             $('.layui-layer-btn a').addClass('confirm');
                         },
@@ -305,7 +308,7 @@ layui.use(['layer', 'form'], function() {
                 var layer_open = layer.open({
                     title: ['编辑节点'],
                     type: 1,
-                    skin: 'layui-primary', //加上边框
+                    skin: 'bayax-layer-skin', //加上边框
                     area: ['700px', '500px'], //宽高
                     content: $("#creatEditNode"), //捕获的元素,
                     shift: 2,
@@ -334,7 +337,7 @@ layui.use(['layer', 'form'], function() {
                                 type: 'PUT',
                                 dataType: 'json',
                                 data: {
-                                    project_id: _this.proID,
+                                    project_id: _this.project.proID,
                                     id: _this.editID,
                                     name: _this.nodeName,
                                     address: _this.nodeMac,
@@ -383,6 +386,7 @@ layui.use(['layer', 'form'], function() {
 
                 layer.confirm('确认删除该节点吗', {
                     title: '删除节点',
+                    skin: 'bayax-layer-skin',
                     success: function(index) {
                         console.log(index);
                         $('.layui-layer-btn a').addClass('confirm');

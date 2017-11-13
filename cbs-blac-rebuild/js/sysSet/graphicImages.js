@@ -4,9 +4,8 @@ layui.use(['layer'], function() {
     var nodeVue = new Vue({
         el: '#app',
         data: {
-            proID: 1,
-            proLogo: '',
-            proName: '',
+            project: {},
+
             loadingShow: false,
             sysGroups: [{ //新建子系统数据
                     name: '空调机组',
@@ -45,9 +44,9 @@ layui.use(['layer'], function() {
         mounted: function() {
             var _this = this;
             this.$nextTick(function() {
-                this.proID = sessionStorage.getItem('bayax_proID');
-                this.proLogo = sessionStorage.getItem('bayax_logo');
-                // this.proName = sessionStorage.getItem('bayax_proName');
+
+                this.project = JSON.parse(sessionStorage.getItem('bayax_proMsg'));
+
                 $('.bayax-btn').on('click', function(e) {
                     console.log()
                     var str = '.' + $(this).data('for')
@@ -123,7 +122,7 @@ layui.use(['layer'], function() {
                     var layer_open = layer.open({
                         title: ['新建子系统'],
                         type: 1,
-                        skin: 'layui-primary', //加上边框
+                        skin: 'bayax-layer-skin',
                         area: ['500px', '200px'], //宽高
                         content: $("#creatsys"), //捕获的元素,
                         shift: 2,
@@ -193,7 +192,7 @@ layui.use(['layer'], function() {
                 var layer_open = layer.open({
                     title: ['重命名'],
                     type: 1,
-                    skin: 'layui-primary', //加上边框
+                    skin: 'bayax-layer-skin',
                     area: ['500px', '200px'], //宽高
                     content: $("#creatsys"), //捕获的元素,
                     shift: 2,
@@ -260,6 +259,7 @@ layui.use(['layer'], function() {
 
                     layer.confirm('确认删除该系统吗', {
                         title: '确认删除',
+                        skin: 'bayax-layer-skin',
                         success: function() {
                             $('.layui-layer-btn a').addClass('confirm');
                         },

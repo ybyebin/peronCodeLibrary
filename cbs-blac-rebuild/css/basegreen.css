@@ -1,186 +1,9 @@
-html,
-body,
-div,
-dl,
-dt,
-dd,
-ul,
-ol,
-li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-pre,
-code,
-form,
-fieldset,
-legend,
-input,
-textarea,
-p,
-blockquote,
-th,
-td {
-    margin: 0;
-    padding: 0;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-fieldset,
-img {
-    border: 0;
-}
-
-address,
-caption,
-cite,
-code,
-dfn,
-em,
-strong,
-th,
-var {
-    font-style: normal;
-    font-weight: normal;
-}
-
-ol,
-ul {
-    list-style: none;
-}
-
-caption,
-th {
-    text-align: left;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-size: 100%;
-    font-weight: normal;
-}
-
-html {
-    background: #fff;
-}
-
-body {
-    font-family: "微软雅黑";
-}
-
 .layui-body {
     color: #666;
 }
 
-@font-face {
-    font-family: 'icomoon';
-    src: url('../fonts/icomoon.eot?40uluf');
-    src: url('../fonts/icomoon.eot?40uluf#iefix') format('embedded-opentype'), url('../fonts/icomoon.ttf?40uluf') format('truetype'), url('../fonts/icomoon.woff?40uluf') format('woff'), url('../fonts/icomoon.svg?40uluf#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-[class^="icon-"],
-[class*=" icon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-add:before {
-    content: "\e145";
-}
-
-.icon-arrow_drop_down:before {
-    content: "\e5c5";
-}
-
-.icon-arrow_drop_up:before {
-    content: "\e5c7";
-}
-
-.icon-cancel:before {
-    content: "\e5c9";
-}
-
-.icon-format_list_bulleted:before {
-    content: "\e241";
-}
-
-.icon-highlight_off:before {
-    content: "\e888";
-}
-
-.icon-keyboard_arrow_down:before {
-    content: "\e313";
-}
-
-.icon-keyboard_arrow_left:before {
-    content: "\e314";
-}
-
-.icon-keyboard_arrow_right:before {
-    content: "\e315";
-}
-
-.icon-keyboard_arrow_up:before {
-    content: "\e316";
-}
-
-.icon-remove:before {
-    content: "\e15b";
-}
-
-.icon-search:before {
-    content: "\e8b6";
-}
-
-
-/*清浮动*/
-
-.clearfix:after {
-    content: ".";
-    /*加一段内容*/
-    display: block;
-    /*让生成的元素以块级元素显示，占满剩余空间*/
-    height: 0;
-    /*避免生成的内容破坏原有布局高度*/
-    clear: both;
-    /*清除浮动*/
-    visibility: hidden;
-    /*让生成的内容不可见*/
-}
-
-
-/* a标签 */
-
-.bayax-a {
-    color: #428bca;
-    text-decoration: none;
-}
-
-.bayax-a:hover {
-    color: #2a6496;
-    text-decoration: underline;
+html {
+    background: #fff;
 }
 
 
@@ -222,13 +45,140 @@ body {
     color: #35C99D;
 }
 
+.bayax-btn-export {
+    height: 38px;
+    line-height: 38px;
+    width: 105px;
+    border: none;
+    background: #fff;
+    border: 1px solid #35c99d;
+    color: #35c99d;
+    cursor: pointer;
+}
+
+.bayax-btn-export:hover {
+    background: #fff;
+    color: #35c99d;
+}
+
 
 /* 按钮 */
 
 
-/* 下拉按钮组 */
+/* 下拉按钮组 公共-begin */
 
-.bayax-select-group {
+.bayax-select-click {
+    position: relative;
+    width: 112px;
+}
+
+.bayax-select-title {}
+
+.bayax-select-title span {
+    display: block;
+    width: 100%;
+    height: 38px;
+    padding-left: 10px;
+    padding-top: 8px;
+    -webkit-appearance: none;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    box-sizing: border-box;
+    border-radius: 2px;
+    background: transparent;
+    cursor: pointer;
+    border: 1px solid rgba(143, 152, 186, 0.31);
+}
+
+.bayax-select-click .bayax-edge {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -3px;
+    cursor: pointer;
+    border-width: 6px;
+    border-top-style: solid;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    border-top-color: #c2c2c2;
+}
+
+.bayax-select-clicked .bayax-edge {
+    margin-top: -9px;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    margin-top: -3px\9;
+}
+
+.bayax-edge {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: dashed;
+    border-color: transparent;
+    overflow: hidden;
+}
+
+.bayax-select-ul {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 42px;
+    padding: 5px 0;
+    z-index: 999;
+    min-width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+    box-sizing: border-box;
+    border: 1px solid rgba(143, 152, 186, 0.31);
+    cursor: pointer;
+    background: #fff;
+}
+
+.bayax-select-clicked ul.bayax-select-ul {
+    display: block;
+}
+
+.bayax-select-ul li {
+    margin-bottom: 1px;
+    padding: 0 10px;
+    line-height: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bayax-select-ul li:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.bayax-anim-upbit {
+    -webkit-animation-name: layui-upbit;
+    animation-name: layui-upbit;
+}
+
+.bayax-anim {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+
+/* 下拉按钮组 公共end */
+
+
+/* 下拉按钮组-1  begin */
+
+.bayax-select-group ul {
+    top: 50px;
+}
+
+
+/* .bayax-select-group {
     position: relative;
     width: 112px;
 }
@@ -250,19 +200,6 @@ body {
     color: #fff;
     background: #fff;
     border: 1px solid rgba(143, 152, 186, 0.31);
-    color: #c6c6c6;
-}
-
-.bayax-anim-upbit {
-    -webkit-animation-name: layui-upbit;
-    animation-name: layui-upbit;
-}
-
-.bayax-anim {
-    -webkit-animation-duration: .3s;
-    animation-duration: .3s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
 }
 
 .bayax-select-group ul li {
@@ -274,16 +211,171 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 1px;
-    color: #c6c6c6;
+    color: #666666;
 }
 
 .bayax-select-group ul li:hover {
     background-color: #f5f5f5;
     color: #333;
+} */
+
+
+/* 下拉按钮组-1  end */
+
+
+/* 下拉按钮组-2  begin */
+
+
+/* .bayax-btn-select {
+    position: relative;
+    width: 112px;
+    background: #fff;
+}
+
+.bayax-select-span {
+    display: block;
+    width: 100%;
+    height: 38px;
+    padding-left: 10px;
+    padding-top: 8px;
+    -webkit-appearance: none;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    box-sizing: border-box;
+    border-radius: 2px;
+    background: transparent;
+    cursor: pointer;
+    border: 1px solid rgba(143, 152, 186, 0.31);
+}
+
+.bayax-btn-select .bayax-edge {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -3px;
+    cursor: pointer;
+    border-width: 6px;
+    border-top-style: solid;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    border-top-color: #c2c2c2;
+}
+
+.bayax-btn-selected .bayax-edge {
+    margin-top: -9px;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    margin-top: -3px\9;
+}
+
+.bayax-edge {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: dashed;
+    border-color: transparent;
+    overflow: hidden;
+}
+
+.bayax-btn-select ul {
+    background: #fff;
+    border: 1px solid rgba(143, 152, 186, 0.31);
+    color: #666;
+}
+
+.bayax-btn-selected ul {
+    display: block;
+}
+
+.bayax-btn-select ul {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 42px;
+    padding: 5px 0;
+    z-index: 999;
+    min-width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+    box-sizing: border-box;
+    border: 1px solid rgba(143, 152, 186, 0.31);
+    cursor: pointer;
+}
+
+.bayax-btn-selected ul {
+    display: block;
+}
+
+.bayax-btn-select ul li {
+    margin-bottom: 1px;
+    padding: 0 10px;
+    line-height: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bayax-btn-select ul li:hover {
+    background: #f5f5f5;
+    color: #333;
+} */
+
+
+/* 下拉按钮组-2  end */
+
+
+/* hover 按钮组 */
+
+.bayax-sel-ul {
+    position: absolute;
+    display: none;
+    width: 80px;
+    top: 60px;
+    left: -20px;
+    padding: 5px 0;
+    z-index: 999;
+    min-width: 100%;
+    max-height: 300px;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid rgba(143, 152, 186, 0.31);
+    color: #c6c6c6;
+}
+
+.bayax-sel-ul::after {
+    border: 7px solid transparent;
+    border-bottom-color: #fff;
+    top: -14px;
+}
+
+.bayax-sel-ul::after,
+.bayax-sel-ul::before {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 45px;
+    content: "";
+}
+
+.bayax-sel-ul li {
+    line-height: 40px;
+}
+
+.bayax-sel-ul li:hover {
+    background-color: #f5f5f5;
+}
+
+.bayax-sel-ul li a {
+    padding: 0 10px !important;
+    color: #666;
 }
 
 
-/* 下拉按钮组 */
+/* hover 按钮组 */
 
 
 /*content-body*/
@@ -395,65 +487,6 @@ body {
 }
 
 
-/*表格 bayax-table */
-
-.bayax-table {
-    width: 100%;
-    border-bottom: 1px solid #eee;
-}
-
-.bayax-table td {
-    max-width: 200px;
-    min-width: 35px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.bayax-table .td-check {
-    width: 90px;
-}
-
-.bayax-table>thead>tr>th {
-    border: none;
-    border-bottom: 2px solid #ddd;
-    vertical-align: bottom;
-    font-size: 16px;
-    text-align: left;
-    padding: 9px 10px;
-    padding-bottom: 15px;
-}
-
-.bayax-table tbody td {
-    border-top: none;
-    height: 48px;
-    line-height: 30px;
-    border: none;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 10px;
-}
-
-.bayax-table tbody td a {
-    margin-right: 10px;
-}
-
-.bayax-table tbody td:last-child a:last-child {
-    margin-right: 0;
-}
-
-.bayax-table tbody>tr:nth-of-type(even) {
-    background-color: #f8fbfa;
-}
-
-.bayax-table tbody>tr:nth-of-type(odd) {
-    background-color: #FFFFFF;
-}
-
-
-/*表格 bayax-table */
-
-
 /* ul  li */
 
 .bayax-ul li {
@@ -533,99 +566,6 @@ body {
 
 
 /*checkbox*/
-
-
-/*分页-开始*/
-
-a.tcdNumber,
-a.prevPage,
-a.nextPage {
-    text-decoration: none;
-}
-
-.tcdPageCode {
-    padding: 15px 10px;
-    color: #ccc;
-    text-align: center;
-    padding-bottom: 0;
-}
-
-.tcdPageCode a.tcdNumber {
-    display: inline-block;
-    color: #838383;
-    height: 25px;
-    line-height: 25px;
-    padding: 0 10px;
-}
-
-.tcdPageCode a.page-omit {
-    color: #ccc;
-    text-decoration: none;
-}
-
-.tcdPageCode a.prevPage,
-.tcdPageCode a.nextPage,
-.tcdPageCode span.disabled {
-    display: inline-block;
-    color: #9FA2A8;
-    width: 28px!important;
-    height: 28px!important;
-    line-height: 25px;
-    border: 1px solid #ddd;
-    margin: 0 2px;
-    border-radius: 15px;
-    text-align: center;
-}
-
-.tcdPageCode span.current {
-    display: inline-block;
-    height: 25px;
-    line-height: 25px;
-    padding: 0 10px;
-    color: #35C99D;
-}
-
-.tcdPageCode a.page-omit span {
-    position: relative;
-    top: -5px;
-}
-
-.tcdPageCode a.prevPage:after,
-.tcdPageCode span.disabled-prve:after {
-    font-family: 'fontAwesome';
-    content: "";
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-top: 1px solid #9FA2A8;
-    border-left: 1px solid #9FA2A8;
-    margin-left: 3px;
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    transform: rotate(-45deg);
-}
-
-.tcdPageCode a.nextPage:after,
-.tcdPageCode span.disabled-next:after {
-    font-family: 'fontAwesome';
-    content: "";
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    margin-left: -4px;
-    border-top: 1px solid #9FA2A8;
-    border-right: 1px solid #9FA2A8;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    transform: rotate(45deg);
-}
-
-
-/*分页-结束*/
 
 
 /* 加载动画开始 */
@@ -1067,3 +1007,64 @@ div.bayaxTree ul li a span {
 
 
 /* 数据展示块  布局 */
+
+.bayax-layout-admin .bayax-layout-header {
+    background-color: #35c99d;
+    border-bottom: 1px solid #35c99d;
+}
+
+.bayax-layout-header .active {
+    border-bottom: 5px solid #fff;
+}
+
+.bayax-proname {
+    color: #fff;
+}
+
+.bayax-proname:before {
+    background-color: #fff;
+}
+
+.bayax-layout-header .layui-nav-item>a,
+.bayax-nav .layui-nav-item>a {
+    color: #fff;
+}
+
+.bayax-nav {
+    background-color: #393D49;
+}
+
+.bayax-body {
+    color: #666;
+}
+
+.bayax-tab-title {
+    border-bottom: 1px solid #35c99d;
+}
+
+.bayax-tab-title li {
+    border: 1px solid #35c99d;
+}
+
+.bayax-tab-title li.layui-this {
+    background: #35c99d;
+    color: #fff;
+}
+
+
+/* .bayax-tab-item {
+    border: 1px solid #3B3E5F;
+} */
+
+.bayax-tab-item a.btn-sure {
+    background: #35c99d;
+    color: #fff;
+}
+
+.bayax-tab-item a.btn-sure:hover {
+    background: #2AB38B;
+}
+
+.tab-warn-div input {
+    background: #fff;
+}

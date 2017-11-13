@@ -5,6 +5,11 @@ layui.use(['layer', 'form'], function() {
     enManagementVue = new Vue({
         el: '#app',
         data: {
+            project: {
+                proID: 1,
+                proLogo: '',
+                proName: ''
+            },
             isDisplayShow: false,
             isEditShow: false,
             proID: '',
@@ -40,9 +45,10 @@ layui.use(['layer', 'form'], function() {
                             var data = data.data;
 
                             // 工程信息统一存储
-                            sessionStorage.setItem('bayax_proID', data.id);
-                            sessionStorage.setItem('bayax_proName', data.name);
-                            sessionStorage.setItem('bayax_logo', data.logo_path);
+                            sessionStorage.setItem('bayax_proMsg', JSON.stringify(data));
+                            // sessionStorage.setItem('bayax_proID', data.id);
+                            // sessionStorage.setItem('bayax_proName', data.name);
+                            // sessionStorage.setItem('bayax_logo', data.logo_path);
 
 
                             console.log(JSON.stringify(data, null, 2));

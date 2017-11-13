@@ -1,16 +1,8 @@
 // 工程信息
-var proMessage = {
-    proID: '',
-    proName: '',
-    proLogo: '',
-}
-
+var proMessage = JSON.parse(sessionStorage.getItem('bayax_proMsg'));
 $(function() {
-    proMessage.proID = sessionStorage.getItem('bayax_proID');
-    proMessage.proLogo = sessionStorage.getItem('bayax_logo');
-    proMessage.proName = sessionStorage.getItem('bayax_proName');
-    $('.logo').attr('src', proMessage.proLogo);
-    $('.projectName').text(proMessage.proName);
+    $('.logo').attr('src', proMessage.logo_path);
+    $('.projectName').text(proMessage.name);
 
 });
 

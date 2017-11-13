@@ -1,279 +1,167 @@
-$('#foot').load('public.html');
+layui.use(['layer', 'element'], function() {
+    var layer = layui.layer;
+    var element = layui.element;
 
-(function($) {
-	$(window).load(function() {
-		$(".commexc-div").mCustomScrollbar();
-	});
-})(jQuery);
-
-
-
-$(function() {
-	publicHeadfun();
-
+    var warnVue = new Vue({
+        el: '#app',
+        data: {
+            project: {},
+            loadingShow: false,
+            showSecondDiv: false, //设备 子设备切换
+            allEquipment: [], //所有设备
 
 
-	getCommunicationError(true);
+        },
+        mounted: function() {
+            var _this = this;
+            this.$nextTick(function() {
+                element.init();
+                this.getAllEquipmentData();
+            });
 
-	// 此处效率存在问题需要联调
+        },
+        methods: {
+            getAllEquipmentData: function() {
+                var _this = this;
+                var data = {
+                    "success": true,
+                    "data": {
+                        "pageCount": 0,
+                        "items": [{
+                                "name": "333",
+                                "ip": "333333333333",
+                                "status": 2,
+                                "id": 20,
+                                "create_time": "2017-11-01 15:10:27"
+                            },
+                            {
+                                "name": "99",
+                                "ip": "999999999999",
+                                "status": 2,
+                                "id": 24,
+                                "create_time": "2017-11-01 15:10:27"
+                            },
+                            {
+                                "name": "能耗01",
+                                "ip": "f01fafd74162",
+                                "status": 2,
+                                "id": 3,
+                                "create_time": "2017-11-01 15:10:27"
+                            },
+                            {
+                                "name": "电梯01",
+                                "ip": "001122334455",
+                                "status": 2,
+                                "id": 6,
+                                "create_time": "2017-11-01 15:10:27"
+                            },
+                            {
+                                "name": "test",
+                                "ip": "222222222222",
+                                "status": 2,
+                                "id": 7,
+                                "create_time": "2017-11-01 15:10:27"
+                            },
+                            {
+                                "name": "能耗02",
+                                "ip": "123456789000",
+                                "status": 2,
+                                "id": 4,
+                                "create_time": "2017-11-01 15:10:27"
+                            },
+                            {
+                                "name": "给排水02",
+                                "ip": "14cf92f95d01",
+                                "status": 2,
+                                "id": 2,
+                                "create_time": "2017-11-01 15:10:27"
+                            },
+                            {
+                                "name": "给排水01",
+                                "ip": "123456789011~",
+                                "status": 1,
+                                "id": 15,
+                                "create_time": "2017-11-01 15:10:27"
+                            },
+                            {
+                                "name": "测试点453452345234",
+                                "ip": "097654563456345",
+                                "status": 2,
+                                "id": 19,
+                                "create_time": "2017-11-01 15:10:27"
+                            },
+                            {
+                                "name": "报警01",
+                                "ip": "14cf92f96e46",
+                                "status": 1,
+                                "id": 5,
+                                "create_time": "2017-11-01 14:12:06"
+                            },
+                            {
+                                "name": null,
+                                "ip": null,
+                                "status": 1,
+                                "id": 1,
+                                "create_time": "2017-09-29 16:04:04"
+                            }
+                        ]
+                    },
+                    "error_message": null
+                }
 
+                if (data.success) {
 
-	setInterval(function() {
-		var btn = $('#commexc-btn');
-		var btn_status = btn.data('status');
-		switch (btn_status) {
-			case 'show':
-				commexcSonGetData(btn.data('id'));
-				break;
-			case 'hide':
-				getCommunicationError(false)
-				break;
-			default:
-				break;
-		}
-	}, 10000);
-});
+                    var datas = data.data.items;
+                    var arr = [];
+                    var length = 14;
+                    var nullData = {
+                        ip: '',
+                        name: '',
+                        status: '',
+                        create_time: '',
+                        iswarn: false,
+                        ishide: true
+                    }
+                    if (data.data == null || !Array.isArray(datas)) {
+                        layer.msg("无通讯状态信息");
+                        _this.allEquipment = [];
+                        for (var i = 0; i < length; i++) {
+                            _this.allEquipment.push(nullData);
+                        }
+                    } else {
+                        var equDatas = datas.map(function(item) {
+                            switch (Number(item.status)) {
+                                case 1:
+                                    item.status = "正常";
+                                    item.iswarn = false;
+                                    break;
+                                case 2:
+                                    item.status = "异常";
+                                    item.iswarn = true;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            item.ishide = false;
+                            return item;
+                        });
 
-/**
- * [获取通信状态数据]
- * @return {[type]}            [json]
- */
-function getCommunicationError(flag) {
-	$.ajax({
-		url: apiurl + 'nodelog/0',
-		type: 'GET',
-		beforeSend: function() {
-			$(".loading").show();
-		},
-		complete: function() {
-			$(".loading").hide();
-		},
-		success: function(data) {
-			$(".loading").hide();
-			if (data.success) {
-				if (flag) {
-					comErrorjqaddRow($('#commexc-tbody'), data.data.items);
-				} else {
-					comErrorjqaddRowRefresh($('#commexc-tbody'), data.data.items);
-				}
+                        if (equDatas.length < length) {
+                            var num = length - equDatas.length;
+                            for (var i = 0; i < num; i++) {
+                                equDatas.push(nullData);
+                            }
+                        }
+                        _this.allEquipment = equDatas;
+                    }
+                } else {
+                    layer.msg(data.error_message)
+                }
 
-			} else {
-				layer.msg(data.error_message);
-			}
-
-		},
-		error: function(data) {
-			publicAjaxError(data);
-		}
-	});
-}
-
-// 初始化
-function comErrorjqaddRow(obj, obj2) {
-	console.log(JSON.stringify(obj2, null, 2))
-
-	if (obj2 == null) {
-		obj2 = [{
-			"commec": "commec",
-		}]
-		layer.msg("无通讯状态信息")
-	} else if (obj2.length == 0) {
-		layer.msg("无通讯状态信息");
-	}
-	var obj2Length = obj2.length;
-
-	for (var i in obj2) {
-		switch (Number(obj2[i].status)) {
-			case 1:
-				obj2[i].status = "正常";
-				break;
-			case 2:
-				obj2[i].status = "异常";
-				break;
-		}
-	}
-
-	if (Number(obj2Length) < 14) {
-		var num = 14 - obj2Length;
-		var falseData = {
-			"commec": "commec",
-		};
-		for (var i = 0; i < num; i++) {
-			obj2.push(falseData);
-		}
-	}
-	obj.html('');
-
-
-	console.log(JSON.stringify(obj2, null, 2))
-	var rowTemplate = '';
-	for (var key in obj2) {
-		if (obj2[key].commec) {
-			rowTemplate += '<tr"><td></td><td></td><td></td><td></td><td></td></tr>';
-		} else {
-			var stats = '';
-			if (obj2[key].status === '异常') {
-				stats = '</td><td class="commec-status"><span style="color:red">' + obj2[key].status + '</span>';
-			} else {
-				stats = '</td><td class="commec-status">' + obj2[key].status
-			}
-			rowTemplate += '<tr id="tr' + obj2[key].id + '">' +
-				'<td>' + obj2[key].name +
-				'</td><td >' + obj2[key].ip + stats +
-				'</td><td class="commec-time">' + obj2[key].create_time + '</td>' +
-				'</td><td><a style="color:#428bca;cursor: pointer;" data-id="' + obj2[key].id + '" class="check-soncmmmec">查看子设备</a></td>' +
-				'</tr>';
-		}
-	}
-	obj.append(rowTemplate);
-
-};
-// 刷新
-function comErrorjqaddRowRefresh(obj, obj2) {
-	if (obj2 == null) {
-		layer.msg("无通讯状态信息");
-		return false;
-	} else if (obj2.length == 0) {
-		layer.msg("无通讯状态信息");
-		return false;
-	}
-	var obj2Length = obj2.length;
-
-	for (var i in obj2) {
-		switch (Number(obj2[i].status)) {
-			case 1:
-				obj2[i].status = "正常";
-				$('#tr' + obj2[i].id).find('td.commec-status').each(function(index, ele) {
-					$(ele).html(obj2[i].status)
-				});
-				break;
-			case 2:
-				obj2[i].status = "异常";
-				var spans = '<span style="color:red">' + obj2[i].status + '</span>'
-				$('#tr' + obj2[i].id).find('td.commec-status').each(function(index, ele) {
-					$(ele).html(spans)
-				});
-				break;
-			default:
-				break;
-		}
-		$('#tr' + obj2[i].id).find('td.commec-time').each(function(index, ele) {
-			$(ele).html(obj2[i].create_time)
-		});
-	}
-
-
-};
-
-$('#commexc-tbody').on('click', 'a.check-soncmmmec', function() {
-	$('.commexc-father').hide();
-	$('.commexc-son').show();
-	var elem = $('#commexc-btn');　　
-	var ids = $(this).data('id');
-	$.data(elem[0], 'id', ids);
-	$.data(elem[0], 'status', 'show');
-	commexcSonGetData(ids);
-
-});
-// 子设备通信状态获取
-function commexcSonGetData(id) {
-	// var special = 0;
-	// if (Number(id) > 60000) {
-	// 	special = 1;
-	// }
-	$.ajax({
-		url: apiurl + 'taglog/1' + '?node_id=' + Number(id),
-		type: 'GET',
-		beforeSend: function() {
-			$(".loading").show();
-		},
-		complete: function() {
-			$(".loading").hide();
-		},
-		success: function(data) {
-			$(".loading").hide();
-			if (data.success) {
-				var result = data.data;
-
-				if (result == null) {
-					result = [{
-						"commectag": "commectag",
-					}]
-					layer.msg("无通讯状态信息")
-				} else if (result.length == 0) {
-					layer.msg("无通讯状态信息");
-				}
-				var obj2Length = result.length;
-
-				for (var i in result) {
-					switch (result[i].status) {
-						case 1:
-							result[i].status = "异常";
-							break;
-						case 0:
-							result[i].status = "正常";
-							break;
-						case true:
-							result[i].status = "异常";
-							break;
-						case false:
-							result[i].status = "正常";
-							break;
-						default:
-							result[i].status = "--";
-							break;
-					}
-
-				}
-
-				if (Number(obj2Length) < 14) {
-					var num = 14 - obj2Length;
-					var falseData = {
-						"commectag": "commectag",
-					};
-					for (var i = 0; i < num; i++) {
-						result.push(falseData);
-					}
-				}
-				var obj = $('#commexc-tbody-second');
-				obj.html('');
-				var rowTemplate = '';
-				for (var key in result) {
-
-					if (result[key].commectag) {
-						rowTemplate += '<tr"><td></td><td></td><td></td></tr>';
-					} else {
-						var stats = '';
-						if (result[key].status === '异常') {
-							stats = '</td><td class="commec-status"><span style="color:red">' + result[key].status + '</span>';
-						} else {
-							stats = '</td><td class="commec-status">' + result[key].status
-						}
-						rowTemplate += '<tr id="tr' + result[key].id + '">' +
-							'<td>' + result[key].name + stats +
-							'</td><td class="commec-time">' + result[key].create_time + '</td>' +
-							'</tr>';
-					}
-				}
-				obj.append(rowTemplate);
-
-			} else {
-				layer.msg(data.error_message);
-			}
-
-		},
-		error: function(data) {
-			publicAjaxError(data);
-		}
-	});
-}
+            }
 
 
+        }
+    });
 
-$('#commexc-btn').click(function() {
-	$('.commexc-father').show();
-	$('.commexc-son').hide();
-	var elem = $('#commexc-btn');　　
-	$.data(elem[0], 'id', '');
-	$.data(elem[0], 'status', 'hide');
 });

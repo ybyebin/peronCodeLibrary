@@ -1,21 +1,15 @@
-/*侧边栏*/
+/*侧边栏    -begin*/
 
 .layui-layout-admin .layui-side {
     top: 80px;
 }
 
 .icon-handler {
-    color: #fff;
     font-size: 20px;
 }
 
-
-/*侧边栏*/
-
 .layui-side-scroll .layui-nav {
     background: transparent !important;
-    /*background-image: -webkit-linear-gradient(270deg, #201c25, #1c1a25) !important;*/
-    /*background-image: linear-gradient(270deg, #201c25, #1c1a25) !important;*/
 }
 
 .layui-bg-black {
@@ -44,7 +38,6 @@
     margin-right: 1px;
     width: 20px;
     height: 20px;
-    /* background: url(../images/syssettitle.png) no-repeat; */
 }
 
 .layui-nav-tree .layui-nav-bar {
@@ -60,9 +53,11 @@
     position: relative;
 }
 
+
+/*侧边栏  -end*/
+
 .layui-body {
     left: 200px;
-    /* color: #fff; */
     padding-top: 88px;
     padding-left: 20px;
     overflow: auto!important;
@@ -134,7 +129,7 @@
 }
 
 
-/*节点管理*/
+/*节点管理    -begin*/
 
 .node-content-main {
     /*padding-bottom: 0;*/
@@ -201,10 +196,10 @@
 /*node-弹窗*/
 
 
-/*节点管理*/
+/*节点管理   -end*/
 
 
-/*数据标签管理*/
+/*数据标签管理   -begin*/
 
 
 /*弹窗*/
@@ -271,7 +266,6 @@
 }
 
 .label-check-div span {
-    /* color: #fff!important; */
     position: relative;
     top: 2px;
 }
@@ -321,11 +315,6 @@
     padding-left: 3px;
 }
 
-
-/* .other-warn-content .li-text-center-a.li-sort a {
-    color: #428bca;
-} */
-
 .other-warn-content .li-sort {
     width: 60px;
     padding: 5px 5px;
@@ -353,15 +342,6 @@
     top: auto;
 }
 
-
-/* .bayaxMscroll .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail {
-    background: #2C2F4C;
-}
-
-.bayaxMscroll .layui-anim-upbit .mCustomScrollBox .mCSB_draggerContainer .mCSB_draggerRail {
-    background: #3F446E;
-} */
-
 .bayaxMscroll .mCustomScrollBox .mCSB_container,
 .layui-anim-upbit .mCustomScrollBox .mCSB_container {
     margin-right: 10px;
@@ -372,7 +352,7 @@
 }
 
 
-/*数据标签管理*/
+/*数据标签管理    -end*/
 
 
 /* 能耗统计设定 */
@@ -381,12 +361,11 @@
     padding-right: 20px;
 }
 
-.energyStatistics .content-main {
-    /* background-color: #191C33; */
+.energyStatistics .content-main-statis {
+    background-color: #191C33;
 }
 
 .energyStatistics-head {
-    /* border-bottom: 1px solid #555769; */
     padding-bottom: 15px;
 }
 
@@ -447,23 +426,11 @@
 }
 
 .energyStatistics-content-body .bayax-ul li.active {
-    /* border-left: 6px solid #A78FBE; */
-    /* color: #A78FBE; */
     padding-left: 7px;
 }
 
 .energyStatistics-content-body .bayax-ul li:hover {
-    /* border-left: 6px solid #A78FBE; */
-    /* color: #A78FBE; */
     padding-left: 7px;
-}
-
-.energyStatistics-content-body .bayax-ul li:nth-of-type(even) {
-    /* background-color: #191C33; */
-}
-
-.energyStatistics-content-body .bayax-ul li:nth-of-type(odd) {
-    /* background-color: #1D203B; */
 }
 
 .energyStatistics-right {
@@ -473,7 +440,6 @@
 
 .energyStatistics-right-head span.head-title {
     padding-left: 10px;
-    /* border-left: 3px solid #3E4687; */
 }
 
 .energyStatistics-right-content {
@@ -487,10 +453,6 @@
 .energyStatistics-right-content {
     max-height: 680px;
     overflow: hidden;
-}
-
-.energyStatistics-right-content table thead {
-    /* border: 1px solid #3e4364; */
 }
 
 .energyStatistics-right-content table thead tr th {
@@ -571,7 +533,6 @@ label.group-input-label {
 
 .statistic-layer-left-div div.content,
 .statistic-layer-right-div div.content {
-    /* border: 1px solid #3C3F61; */
     height: 405px;
 }
 
@@ -619,7 +580,6 @@ label.group-input-label {
 .graphi-div {
     height: 675px;
     overflow: hidden;
-    /* border-bottom: 1px solid #555769; */
 }
 
 .graphi-div table {
@@ -708,13 +668,11 @@ label.group-input-label {
 }
 
 .panel-heading a {
-    /* color: #fff; */
     display: inline-block;
     padding-top: 12px;
     width: 330px;
     max-height: 25px;
     overflow: hidden;
-    /* background: red; */
 }
 
 .icon-tree {
@@ -798,11 +756,6 @@ ul.ztree {
 .user-div-l table tbody tr {
     cursor: pointer;
 }
-
-
-/* .user-div-l table tbody tr.sele {
-    border-left: 5px solid #A78FBE
-} */
 
 .user-set-head {
     padding-top: 5px;

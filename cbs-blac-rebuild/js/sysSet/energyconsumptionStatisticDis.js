@@ -5,9 +5,7 @@ layui.use(['layer'], function() {
     var statisticDisVue = new Vue({
         el: '#app',
         data: {
-            proID: 1,
-            proLogo: '',
-            proName: '',
+            project: {},
             loadingShow: false,
             ulhide: false,
             statisticsGroupData: [], //能耗统计组
@@ -17,10 +15,9 @@ layui.use(['layer'], function() {
         mounted: function() {
             var _this = this;
             this.$nextTick(function() {
+                this.project = JSON.parse(sessionStorage.getItem('bayax_proMsg'));
 
-                this.proID = sessionStorage.getItem('bayax_proID');
-                this.proLogo = sessionStorage.getItem('bayax_logo');
-                this.proName = sessionStorage.getItem('bayax_proName');
+
 
 
                 this.getStatisticsGroupData();

@@ -45,9 +45,7 @@ layui.use(['layer', 'form'], function() {
     var statisticEditVue = new Vue({
         el: '#app',
         data: {
-            proID: 1,
-            proLogo: '',
-            proName: '',
+            project: {},
             loadingShow: false,
             ulhide: false,
             newGroups: {
@@ -81,9 +79,7 @@ layui.use(['layer', 'form'], function() {
 
                 form.render();
                 this.getStatisticsGroupData();
-                this.proID = sessionStorage.getItem('bayax_proID');
-                this.proLogo = sessionStorage.getItem('bayax_logo');
-                this.proName = sessionStorage.getItem('bayax_proName');
+                this.project = JSON.parse(sessionStorage.getItem('bayax_proMsg'));
                 // this.addtagsMethod();
 
 
@@ -234,6 +230,7 @@ layui.use(['layer', 'form'], function() {
                 var _this = this;
                 layer.confirm('确认删除该组吗？', {
                     title: '提示',
+                    skin: 'bayax-layer-skin',
                     success: function() {
                         $('.layui-layer-btn a').addClass('confirm');
                     },
@@ -537,7 +534,7 @@ layui.use(['layer', 'form'], function() {
                 layer.open({
                     title: ['添加数据标签'],
                     type: 1,
-                    skin: 'layui-primary', //加上边框
+                    skin: 'bayax-layer-skin',
                     area: ['1080px', '625px'], //宽高
                     content: $("#layer-add-tags"), //捕获的元素,
                     shift: 2,
