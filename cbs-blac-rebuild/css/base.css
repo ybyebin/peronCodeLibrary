@@ -696,7 +696,7 @@ div.bayaxTree ul li a span {
 /*  tab切换  -end */
 
 
-/* 系统管理 */
+/* 系统管理 -begin */
 
 .sys-management .layui-nav-tree .layui-nav-item,
 .sys-management .layui-nav-tree .layui-nav-item.layui-this>a {
@@ -748,3 +748,60 @@ div.bayaxTree ul li a span {
 .layui-side li.active a i.gyxt {
     background-position: 0 0;
 }
+
+.sys-management-body td.warn {
+    color: red;
+}
+
+
+/* 系统管理 -end */
+
+
+/* draw2d-canvas   -begin */
+
+.draw2d-canvas {
+    color: #fff;
+}
+
+.draw2d-canvas.bayax-layout-admin .bayax-layout-header {
+    background-color: #3E4687;
+}
+
+.draw2d-canvas .bayax-layout-header .bayax-logo {
+    background-color: #15182D;
+}
+
+.draw2d-canvas.bayax-layout-admin .bayax-layout-header2,
+.draw2d-canvas.bayax-layout-admin .bayax-layout-header2 .bayax-logo {
+    background: #1C1F38;
+}
+
+.draw2d-canvas.bayax-layout-admin .bayax-layout-header2 .bayax-logo {
+    border-right: 1px solid #2B2F4C;
+}
+
+.bayax-layout-header2 .bayax-logo .toolbar li:hover span {
+    border-color: #BBBBBB;
+    background-color: #DADADA;
+}
+
+.bayax-layout-header2 .bayax-logo .toolbar li:hover {
+    color: #A78FBE;
+}
+
+.bayax-layout-lefttwo .layui-tab-title {
+    border-bottom: 1px solid #2B2F4C;
+}
+
+.bayax-layout-lefttwo .layui-tab-title .layui-this {
+    color: #A78FBE;
+    border-bottom: 2px solid #A78FBE;
+}
+
+.componentImg:hover {
+    border-color: #BBBBBB;
+    background-color: #DADADA;
+}
+
+
+/* draw2d-canvas   -end */

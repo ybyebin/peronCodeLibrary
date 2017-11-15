@@ -4,96 +4,112 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>节点管理</title>
+    <title>canvas</title>
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
-    <link rel="stylesheet" href="css/bayax.css">
+    <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
+    <link rel="stylesheet" href="./css/bayax.css">
     <link rel="stylesheet" type="text/css" href="css/base.css">
-
-    <link rel="stylesheet" type="text/css" href="css/sysManagement.css">
-
+    <!-- <link rel="stylesheet" href="./css/basegreen.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/canvas.css">
 </head>
 
 <body class="layui-layout-body">
-    <div id="app" class="layui-layout ">
+    <div class="draw2d-canvas bayax-layout-admin  layui-layout">
+        <div class="bayax-layout-header  layui-header clearfix">
+            <div class="bayax-logo">
+                <img src="./images/logo.png" alt="">
+            </div>
+            <ul class="bayax-nav  bayax-layout-left  bayax-layout-leftone">
+                <li class="layui-nav-item head">
+                    <a class="go-subsys" href="javascript:;">
+                        <span><i class="icon-keyboard_arrow_left"></i></span>
+                        <span class="group-name">子系统列表子系统列表子系统列表子系统列表子系统列表</span>
+                        </span>
+                    </a>
+                    <label>
+                         <span class="title"> 当前您所在的位置:</span>  
+                         <span class="image-name">123123123</span>
+                    </label>
+                </li>
+            </ul>
 
-        <div class="layui-body">
-            <!-- 内容主体区域 -->
-            <div class="bayax-content">
+        </div>
+        <div class="bayax-layout-header bayax-layout-header2  layui-header clearfix">
 
-                <div class="content-body">
-                    <div class="content-body-border-top"></div>
 
+            <div class="components-num4">
+                <a class="LeftBotton" onmousedown='GoUp("ScrUp(\"ISL_Cont_1\");")' onmouseup="StopUp('ISL_Cont_1')" onmouseout="StopUp('ISL_Cont_1')" href="javascript:void(0);" target="_self"></a>
+                <div class="pcont" id="ISL_Cont_1">
+                    <div class="ScrCont">
+                        <ul id="List1_1" class="comportant-ul tt">
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+                            <li>
+                                <span class="duobianxing componentImg"></span>
+                                <p>多边形</p>
+                            </li>
+
+
+
+
+                        </ul>
+                        <div id="List2_1" class="comportant-ul tt"></div>
+                    </div>
                 </div>
-            </div>
-
-
-        </div>
-        <!-- 新建-编辑节点 -->
-        <div id="creatEditNode" class="layer-default">
-            <div class="node-layer-content bayax-layer-content-border bayax-layer-content">
-                <form class="layui-form">
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="node-label-title layui-form-label">节点名称</label>
-                            <div class="layui-input-inline">
-                                <input v-model="nodeName" v-on:input="nodeNameOnInput" v-on:blur="nodeNameOnBlur" type="text" autocomplete="off" class="layui-input"></div>
-                            <label v-bind:class="{rightinput:!isRightName}" class="bayax-label-input-des layui-form-label"><span>*</span>
-                    最大30文字或60字符，不能包含特殊字符</label>
-
-                            <label v-text="nameWarnStr" v-bind:class="{ rightinput: isRightName }" class="bayax-label-input-warn layui-form-label"></label>
-                        </div>
-
-
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="node-label-title  layui-form-label">Mac地址</label>
-                            <div class="layui-input-inline">
-                                <input v-model="nodeMac" v-on:input="nodeMacOnInput" v-on:blur="nodeMacOnBlur" type="text" autocomplete="off" class="layui-input"></div>
-                            <label v-bind:class="{ rightinput: !isRightMac }" class="bayax-label-input-des layui-form-label"><span>*</span>
-                   字母或数字，不能包含特殊字符</label>
-
-                            <label v-text="macWarnStr" v-bind:class="{ rightinput: isRightMac }" class="bayax-label-input-warn layui-form-label"></label>
-
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="node-label-title  layui-form-label">超时时间</label>
-                            <div class="layui-input-inline">
-                                <input v-model="nodeTime" v-on:input="nodeTimeOnInput" v-on:blur="nodeTimeOnBlur" type="number" autocomplete="off" class="layui-input"></div>
-                            <label v-bind:class="{ rightinput: !isRightTime }" class="bayax-label-input-des layui-form-label"><span>*</span>
-                   1~3600,不能包含特殊字符</label>
-                            <label v-text="timeWarnStr" v-bind:class="{ rightinput: isRightTime }" class="bayax-label-input-warn layui-form-label"></label>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="node-label-title  layui-form-label">描述</label>
-                            <div class="layui-input-inline">
-                                <textarea v-model="nodeDes" v-on:input="nodeDesOnInput" v-on:blur="nodeDesOnBlur" class="node-textarea bayax-textarea"></textarea>
-                            </div>
-                            <label v-bind:class="{ rightinput: !isRightDes }" class="bayax-label-input-des layui-form-label">
-                   最大30文字或60字符，不能包含特殊字符</label>
-                            <label v-text="desWarnStr" v-bind:class="{ rightinput: isRightDes }" class="bayax-label-input-warn layui-form-label"></label>
-                        </div>
-                    </div>
-                </form>
+                <a class="RightBotton" onmousedown='GoDown("ISL_Cont_1","List1_1","ScrDown(\"ISL_Cont_1\",\"List1_1\")")' onmouseup='StopDown("ISL_Cont_1")' onmouseout='StopDown("ISL_Cont_1")' href="javascript:void(0);" target="_self"></a>
             </div>
 
         </div>
-        <!-- 批量删除 询问 -->
-        <!-- <div id="delNodeGroup" class="layer-default">
-            <div class="bayax-layer-content">
-                确认删除所有选中的节点吗
-            </div>
-        </div> -->
 
-        <!-- <div id="delOneNode" class="layer-default">
-            <div class="bayax-layer-content del-node-content">
-                确认删除该节点吗
-            </div>
-        </div> -->
+
+        <div class="bayax-body">
+            123123
+        </div>
+
         <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
             <span></span>
             <span></span>
@@ -105,10 +121,11 @@
 
 
     <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
-    <script src="plugin/vue.js"></script>
-    <script src="plugin/layui/layui.js"></script>
-    <script src="js/basic/api.js"></script>
-    <script src="js/sysSet/nodeManagement.js"></script>
+    <script src="js/basic/api.js "></script>
+    <!-- <script src="./js/basic/common.js"></script> -->
+    <!-- <script src="plugin/vue.js "></script> -->
+    <script src="plugin/layui/layui.js "></script>
+    <script src="./js/datashow/canvas.js"></script>
 
 </body>
 

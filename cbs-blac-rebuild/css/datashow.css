@@ -212,7 +212,7 @@
 
 .sys-management .layui-nav-tree .layui-nav-item {
     margin-bottom: 1px;
-    background-color: #2D3057;
+    /* background-color: #2D3057; */
 }
 
 .layui-nav-tree .layui-nav-item a {
@@ -278,10 +278,6 @@
 .div-sonequipment {
     height: 700px;
     overflow: hidden;
-}
-
-.sys-management-body td.warn {
-    color: red;
 }
 
 
