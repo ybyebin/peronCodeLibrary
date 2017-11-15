@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <!-- <link rel="stylesheet" href="./css/basegreen.css"> -->
     <link rel="stylesheet" type="text/css" href="css/datashow.css">
-    <!-- <link rel="stylesheet" type="text/css" href="css/sysManagement.css"> -->
+    <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
 </head>
 
 <body class="layui-layout-body">
@@ -100,54 +100,60 @@
                 <div class="sys-management-body">
 
                     <div v-bind:class="{basehide:showSecondDiv}" class="bayaxMscroll content-main content-main-border">
+                        <div class="div-equipment">
+                            <table class="bayax-table">
+                                <thead>
+                                    <tr>
+                                        <th>设备名称</th>
+                                        <th>IP地址</th>
+                                        <th>设备状态</th>
+                                        <th>发生时间</th>
+                                        <th>查看子设备</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item in allEquipment">
+                                        <td v-text="item.name"></td>
+                                        <td v-text="item.ip"></td>
+                                        <td v-text="item.status" v-bind:class="{warn:item.iswarn}"></td>
+                                        <td v-text="item.create_time"></td>
+                                        <td>
+                                            <a @click="commexcSonGetData(item.id)" v-bind:class="{ basehide: item.ishide }" class="bayax-a" href="javascript:;">查询子设备</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                        <table class="bayax-table">
-                            <thead>
-                                <tr>
-                                    <th>设备名称</th>
-                                    <th>IP地址</th>
-                                    <th>设备状态</th>
-                                    <th>发生时间</th>
-                                    <th>查看子设备</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="item in allEquipment">
-                                    <td v-text="item.name"></td>
-                                    <td v-text="item.ip"></td>
-                                    <td v-text="item.status" v-bind:class="{warn:item.iswarn}"></td>
-                                    <td v-text="item.create_time"></td>
-                                    <td>
-                                        <a v-bind:class="{ basehide: item.ishide }" class="bayax-a" href="javascript:;">查询子设备</a>
-                                    </td>
-                                </tr>
-
-
-
-                            </tbody>
-                        </table>
 
 
                     </div>
                     <div v-bind:class="{baseshow:showSecondDiv}" class="basehide bayaxMscroll content-main content-main-border">
                         <div>
-                            <button class="bayax-btn">返回</button>
+                            <button @click="btnGoBack" class="bayax-btn">返回</button>
                         </div>
-                        <table class="bayax-table">
-                            <thead>
-                                <tr>
-                                    <th>设备名称</th>
-                                    <th>IP地址</th>
-                                    <th>设备状态</th>
-                                    <th>发生时间</th>
-                                    <th>查看子设备</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <div class="div-sonequipment">
+                            <table class="bayax-table">
+                                <thead>
+                                    <tr>
+                                        <th>设备名称</th>
+                                        <th>设备状态</th>
+                                        <th>发生时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item in allSonEquipment">
+                                        <td v-text="item.name"></td>
+                                        <!-- <td v-text="item.ip"></td> -->
+                                        <td v-text="item.status" v-bind:class="{warn:item.iswarn}"></td>
+                                        <td v-text="item.create_time"></td>
 
+                                    </tr>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+
+                        </div>
 
 
                     </div>
@@ -172,6 +178,7 @@
     <!-- <script src="./js/basic/common.js"></script> -->
     <script src="plugin/vue.js "></script>
     <script src="plugin/layui/layui.js "></script>
+    <script src="plugin/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="./js/datashow/communicationException.js"></script>
 
 </body>

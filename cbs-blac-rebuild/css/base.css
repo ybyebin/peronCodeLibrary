@@ -698,8 +698,27 @@ div.bayaxTree ul li a span {
 
 /* 系统管理 */
 
-.sys-management .layui-nav-tree .layui-nav-item {
-    background: #2D3057;
+.sys-management .layui-nav-tree .layui-nav-item,
+.sys-management .layui-nav-tree .layui-nav-item.layui-this>a {
+    background-color: #2D3057;
+}
+
+.sys-management .layui-nav-tree li.no-hover a:hover {
+    background: #2D3057 !important;
+}
+
+.sys-management .layui-nav-tree li.no-hover dl.layui-nav-child,
+.sys-management .layui-nav-tree li.no-hover dl.layui-nav-child a:hover {
+    background: #3E4687!important;
+}
+
+.sys-management .layui-nav-tree dl dd.active.layui-this a,
+.sys-management .layui-nav-tree dl dd.active {
+    background: #3E4687!important;
+}
+
+.sys-management .layui-nav-tree dl dd.active a {
+    color: #fff;
 }
 
 .layui-side a i {
