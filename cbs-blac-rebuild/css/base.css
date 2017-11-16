@@ -780,7 +780,7 @@ div.bayaxTree ul li a span {
     border-right: 1px solid #2B2F4C;
 }
 
-.bayax-layout-header2 .bayax-logo .toolbar li:hover span {
+.bayax-layout-header2 .bayax-logo .toolbar li:hover span span {
     border-color: #BBBBBB;
     background-color: #DADADA;
 }

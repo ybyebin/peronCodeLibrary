@@ -3,17 +3,17 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> -->
     <title>canvas</title>
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
-    <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
+    <!-- <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css"> -->
     <link rel="stylesheet" href="./css/bayax.css">
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <!-- <link rel="stylesheet" href="./css/basegreen.css"> -->
     <link rel="stylesheet" type="text/css" href="css/canvas.css">
 </head>
 
-<body class="layui-layout-body">
+<body>
     <div class="draw2d-canvas bayax-layout-admin  layui-layout">
         <div class="bayax-layout-header  layui-header clearfix">
             <div class="bayax-logo">
@@ -165,7 +165,8 @@
                         </div>
                         <div class="layui-tab-item ">
                             <div class="components-num4">
-                                <a class="LeftBotton" onmousedown='GoUp("ScrUp(\"scroll_div\");")' onmouseup="StopUp('scroll_div')" onmouseout="StopUp('scroll_div')" href="javascript:void(0);" target="_self"></a>
+                                <a class="LeftBotton" onmousedown='Comscroll.GoUp()' onmouseup="Comscroll.StopUp()" onmouseout="Comscroll.StopUp()" href="javascript:void(0);" target="_self"></a>
+
                                 <div class="pcont" id="scroll_div">
                                     <div class="ScrCont">
                                         <ul id="scroll_ul_1" class="comportant-ul scroll-ul">
@@ -174,11 +175,11 @@
                                                 <p>送风机</p>
                                             </li>
 
-                                            <li>
+                                            <li class="space-border">
                                                 <span class="Exhaustfan componentImg"></span>
                                                 <p>排风机</p>
                                             </li>
-                                            <li>
+                                            <li class="space-border">
                                                 <span class="beng componentImg"></span>
                                                 <p>泵</p>
                                             </li>
@@ -190,7 +191,7 @@
                                                 <span class="SolenoidValve componentImg"></span>
                                                 <p>电磁阀</p>
                                             </li>
-                                            <li>
+                                            <li class="space-border">
                                                 <span class="ElectricButterflyValves componentImg"></span>
                                                 <p>电动蝶阀</p>
                                             </li>
@@ -211,7 +212,7 @@
                                                 <span class="Humidifier componentImg"></span>
                                                 <p>加湿器</p>
                                             </li>
-                                            <li>
+                                            <li class="space-border">
                                                 <span class="controlPanel componentImg"></span>
                                                 <p>温控面板</p>
                                             </li>
@@ -228,7 +229,7 @@
                                                 <span class="Incandescent componentImg"></span>
                                                 <p>白炽灯</p>
                                             </li>
-                                            <li>
+                                            <li class="space-border">
                                                 <span class="MetalHalide componentImg"></span>
                                                 <p>金卤灯</p>
                                             </li>
@@ -248,7 +249,7 @@
                                                 <span class="differentialPressure componentImg"></span>
                                                 <p>压差</p>
                                             </li>
-                                            <li>
+                                            <li class="space-border">
                                                 <span class="liquid componentImg"></span>
                                                 <p>液位</p>
                                             </li>
@@ -281,7 +282,7 @@
                                                 <span class="Gas componentImg"></span>
                                                 <p>气体流量</p>
                                             </li>
-                                            <li>
+                                            <li class="space-border ">
                                                 <span class="Broadcast componentImg"></span>
                                                 <p>广播</p>
                                             </li>
@@ -294,7 +295,8 @@
                                         <ul id="scroll_ul_2" class="comportant-ul scroll-ul"></ul>
                                     </div>
                                 </div>
-                                <a class="RightBotton" onmousedown='GoDown("scroll_div","scroll_ul_1","ScrDown(\"scroll_div\",\"scroll_ul_1\")")' onmouseup='StopDown("scroll_div")' onmouseout='StopDown("scroll_div")' href="javascript:void(0);" target="_self"></a>
+                                <a class="RightBotton" onmousedown='Comscroll.GoDown()' onmouseup='Comscroll.StopDown()' onmouseout='Comscroll.StopDown()' href="javascript:void(0);" target="_self"></a>
+
                             </div>
                         </div>
                         <div class="layui-tab-item">
@@ -330,7 +332,21 @@
 
 
         <div class="bayax-body">
-            123123
+            <div class="draw2d-body">
+                <div class="content-body-border-top"></div>
+                <div class="draw2d-body-content">
+                    <div class="global-btn-div">
+
+                    </div>
+                    <div class="canvas-div">
+                        <div class="canvas">
+                            123123123
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="attribute-div">123</div>
+
         </div>
 
         <div v-bind:class="{ loadingShow:loadingShow }" class="loading">

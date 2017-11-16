@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能建筑管理系统</title>
+
+    <meta charset="utf-8" />
+    <meta name="description" content="webscada" />  
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <!-- <link type="text/css" rel="stylesheet" href="css/basic/bootstrap.min.css"/> -->
+    <!-- <link type="text/css" rel="stylesheet" href="css/basic/jquery.mCustomScrollbar.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/basic/colpick.css">     -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/basic/check_black.css">     -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/basic/layer.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bayax.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/canvas.css"> -->
+
+        <link rel="stylesheet" href="plugin/layui/css/layui.css">
+    <!-- <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css"> -->
+    <link rel="stylesheet" href="./css2/bayax.css">
+    <link rel="stylesheet" type="text/css" href="css2/base.css">
+    <!-- <link rel="stylesheet" href="./css/basegreen.css"> -->
+    <link rel="stylesheet" type="text/css" href="css2/canvas.css">
+
+
+
+
+    <!-- 必须导入的JS -->
+    <script type="text/javascript" src="js/edit/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="js/edit/canvg.js"></script>
+    <script type="text/javascript" src="js/edit/Class.js"></script>
+    <script type="text/javascript" src="js/edit/jquery.autoresize.js"></script>
+    <script type="text/javascript" src="js/edit/jquery.contextmenu.js"></script>
+    <script type="text/javascript" src="js/edit/jquery-touch_punch.js"></script>
+    <script type="text/javascript" src="js/edit/json2.js"></script>
+    <script type="text/javascript" src="js/edit/pathfinding-browser.min.js"></script>
+    <script type="text/javascript" src="js/edit/raphael.js"></script>
+    <script type="text/javascript" src="js/edit/rgbcolor.js"></script>
+    <script type="text/javascript" src="js/edit/shifty.js"></script>
+    <script type="text/javascript" src="js/edit/draw2d.js"></script>
+    <script type="text/javascript" src="js/edit/fraphael.js"></script>
+
+    <!-- 拖动效果 -->
+    <script type="text/javascript" src="js/edit/jquery.browser.js"></script>
+    <script type="text/javascript" src="js/edit/jquery-ui-1.8.23.custom.min.js"></script>
+    <script type="text/javascript" src="js/actionJS/view.js"></script>
+    <script type="text/javascript" src="js/basic/api.js"></script>
+    <!-- <script type="text/javascript" src="js/actionJS/pageToInitialize.js"></script> -->
+    <!-- <script type="text/javascript" src="js/edit/imgScroll.js"></script> -->
+    
+
+</head>
+<body>
+
+     <div class="draw2d-canvas bayax-layout-admin  layui-layout">
+        <div class="bayax-layout-header  layui-header clearfix">
+            <div class="bayax-logo">
+                <img src="./images/logo.png" alt="">
+            </div>
+            <ul class="bayax-nav  bayax-layout-left  bayax-layout-leftone">
+                <li class="layui-nav-item head">
+                    <a class="go-subsys" href="javascript:;">
+                        <span><i class="icon-keyboard_arrow_left"></i></span>
+                        <span class="group-name">子系统列表子系统列表子系统列表子系统列表子系统列表</span>
+                        </span>
+                    </a>
+                    <label>
+                         <span class="title"> 当前您所在的位置:</span>  
+                         <span class="image-name">123123123</span>
+                    </label>
+                </li>
+            </ul>
+
+        </div>
+        <div class="bayax-layout-header bayax-layout-header2  layui-header clearfix">
+            <div class="bayax-logo ">
+                <ul id="toolbar" class="toolbar clearfix">
+                   
+                </ul>
+            </div>
+            
+      
+
+
+
+
+            <div class="bayax-layout-left bayax-layout-lefttwo">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">基本图形</li>
+                        <li>通用</li>
+                        <li>专业</li>
+                        <li>建筑设备</li>
+                        <li>安全防范</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <ul class="comportant-ul clearfix">
+                                 <li>
+                                    <span class="juxing componentImg draw2d_droppable components-juxing" data-shape="rectangleComponent"></span>
+                                    <p>矩形</p>
+                                </li>
+                                <!--  <div>
+                                    <img src="images/img/juxing.png" data-shape="rectangleComponent" class="draw2d_droppable components-juxing">
+                                    <br>
+                                    <span>矩形</span>
+                                </div> -->
+                               <!--  <div>
+                                    <img src="images/img/yuanjiajuxing.png" data-shape="RoundedRectangleComponent" class="draw2d_droppable components-yuanjiajuxing ">
+                                    <br>
+                                    <span>圆角矩形</span>
+                                </div>
+ -->
+
+                               
+                                <li>
+                                    <span class="yuanjiajuxing componentImg"></span>
+                                    <p>圆角矩形</p>
+                                </li>
+                                <li>
+                                    <span class="tuoyuan componentImg"></span>
+                                    <p>椭圆</p>
+                                </li>
+                                <li>
+                                    <span class="straightline componentImg"></span>
+                                    <p>直线</p>
+                                </li>
+                                <li>
+                                    <span class="duobianxing componentImg"></span>
+                                    <p>多边形</p>
+                                </li>
+                                <li>
+                                    <span class="ArrowUp componentImg"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="Arrowright componentImg"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="down componentImg"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="left componentImg"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="leveldouble componentImg"></span>
+                                    <p>双箭头</p>
+                                </li>
+                                <li>
+                                    <span class="Verticaldouble componentImg"></span>
+                                    <p>双箭头</p>
+                                </li>
+                                <li>
+                                    <span class="juxing componentImg"></span>
+                                    <p>管道</p>
+                                </li>
+                                <li>
+                                    <span class="juxing componentImg"></span>
+                                    <p>管道</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="layui-tab-item">
+                            <ul class="comportant-ul clearfix">
+                                <li>
+                                    <span class="tag componentImg"></span>
+                                    <p>标签</p>
+                                </li>
+                                <li>
+                                    <span class="button componentImg"></span>
+                                    <p>按钮</p>
+                                </li>
+                                <li>
+                                    <span class="text componentImg"></span>
+                                    <p>文本</p>
+                                </li>
+                                <li>
+                                    <span class="jpg componentImg"></span>
+                                    <p>自定义</p>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="layui-tab-item">
+                            <ul class="comportant-ul clearfix">
+                                <li>
+                                    <span class="switch componentImg"></span>
+                                    <p>开关</p>
+                                </li>
+                                <li>
+                                    <span class="piping componentImg"></span>
+                                    <p>管道</p>
+                                </li>
+                                <li>
+                                    <span class="Warninglamp componentImg"></span>
+                                    <p>报警提示灯</p>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="layui-tab-item ">
+                            <div class="components-num4">
+                                <a class="LeftBotton" onmousedown='Comscroll.GoUp()' onmouseup="Comscroll.StopUp()" onmouseout="Comscroll.StopUp()" href="javascript:void(0);" target="_self"></a>
+
+                                <div class="pcont" id="scroll_div">
+                                    <div class="ScrCont">
+                                        <ul id="scroll_ul_1" class="comportant-ul scroll-ul">
+                                            <li>
+                                                <span class="Blowerfan componentImg"></span>
+                                                <p>送风机</p>
+                                            </li>
+
+                                            <li class="space-border">
+                                                <span class="Exhaustfan componentImg"></span>
+                                                <p>排风机</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="beng componentImg"></span>
+                                                <p>泵</p>
+                                            </li>
+                                            <li>
+                                                <span class="ElectricTwo-wayValve componentImg"></span>
+                                                <p>电动两通阀</p>
+                                            </li>
+                                            <li>
+                                                <span class="SolenoidValve componentImg"></span>
+                                                <p>电磁阀</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="ElectricButterflyValves componentImg"></span>
+                                                <p>电动蝶阀</p>
+                                            </li>
+
+                                            <li>
+                                                <span class="AirFiltration componentImg"></span>
+                                                <p>空气过滤器</p>
+                                            </li>
+                                            <li>
+                                                <span class="AirHeating componentImg"></span>
+                                                <p>空气加热器</p>
+                                            </li>
+                                            <li>
+                                                <span class="AirCooler componentImg"></span>
+                                                <p>空气冷却器</p>
+                                            </li>
+                                            <li>
+                                                <span class="Humidifier componentImg"></span>
+                                                <p>加湿器</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="controlPanel componentImg"></span>
+                                                <p>温控面板</p>
+                                            </li>
+                                            <li>
+                                                <span class="FluorescentLamp componentImg"></span>
+                                                <p>荧光灯</p>
+                                            </li>
+
+                                            <li>
+                                                <span class="LED componentImg"></span>
+                                                <p>LED灯</p>
+                                            </li>
+                                            <li>
+                                                <span class="Incandescent componentImg"></span>
+                                                <p>白炽灯</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="MetalHalide componentImg"></span>
+                                                <p>金卤灯</p>
+                                            </li>
+                                            <li>
+                                                <span class="temperature componentImg"></span>
+                                                <p>温度</p>
+                                            </li>
+                                            <li>
+                                                <span class="humidity componentImg"></span>
+                                                <p>湿度</p>
+                                            </li>
+                                            <li>
+                                                <span class="pressure componentImg"></span>
+                                                <p>压力</p>
+                                            </li>
+                                            <li>
+                                                <span class="differentialPressure componentImg"></span>
+                                                <p>压差</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="liquid componentImg"></span>
+                                                <p>液位</p>
+                                            </li>
+                                            <li>
+                                                <span class="electric componentImg"></span>
+                                                <p>电流</p>
+                                            </li>
+                                            <li>
+                                                <span class="Voltage componentImg"></span>
+                                                <p>电压</p>
+                                            </li>
+
+                                            <li>
+                                                <span class="frequency componentImg"></span>
+                                                <p>频率</p>
+                                            </li>
+                                            <li>
+                                                <span class="activePower componentImg"></span>
+                                                <p>有功功率</p>
+                                            </li>
+                                            <li>
+                                                <span class="ElectricityConsumption componentImg"></span>
+                                                <p>用电量</p>
+                                            </li>
+                                            <li>
+                                                <span class="level componentImg"></span>
+                                                <p>液体流量</p>
+                                            </li>
+                                            <li>
+                                                <span class="Gas componentImg"></span>
+                                                <p>气体流量</p>
+                                            </li>
+                                            <li class="space-border ">
+                                                <span class="Broadcast componentImg"></span>
+                                                <p>广播</p>
+                                            </li>
+
+
+
+
+
+                                        </ul>
+                                        <ul id="scroll_ul_2" class="comportant-ul scroll-ul"></ul>
+                                    </div>
+                                </div>
+                                <a class="RightBotton" onmousedown='Comscroll.GoDown()' onmouseup='Comscroll.StopDown()' onmouseout='Comscroll.StopDown()' href="javascript:void(0);" target="_self"></a>
+
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <ul class="comportant-ul clearfix">
+                                <li>
+                                    <span class="monitoring componentImg"></span>
+                                    <p>枪机</p>
+                                </li>
+                                <li>
+                                    <span class="qiuji componentImg"></span>
+                                    <p>球机</p>
+                                </li>
+                                <li>
+                                    <span class="highqiuji componentImg"></span>
+                                    <p>高速球</p>
+                                </li>
+                                <li>
+                                    <span class="menjin componentImg"></span>
+                                    <p>门禁</p>
+                                </li>
+                                <li>
+                                    <span class="tance componentImg"></span>
+                                    <p>探测器</p>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+       
+        <div id="canvas" class="canvas"></div>
+
+
+  
+
+
+    <script type="text/javascript">
+
+            $(function(){
+                allCanvasinit('new');
+            })
+    </script>
+
+        <script type="text/javascript" src="js/edit/icheck.min.js"></script>
+        <script type="text/javascript" src="js/basic/layer.js"></script>
+        <script type="text/javascript" src="js/edit/bootstrap.min.js"></script> 
+        <script type="text/javascript" src="js/basic/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="js/edit/colpick.js"></script>   
+        <script type="text/javascript" src="js/ComponentSet/safeComponent.js"></script>
+        <script type="text/javascript" src="js/ComponentSet/labelComponent.js"></script>
+        <script type="text/javascript" src="js/ComponentSet/textComponent.js"></script>
+        <script type="text/javascript" src="js/ComponentSet/imageComponent.js"></script>
+        <script type="text/javascript" src="js/ComponentSet/RectangleComponent.js"></script>
+        <script type="text/javascript" src="js/ComponentSet/LineComponent.js"></script>
+        <script type="text/javascript" src="js/actionJS/attrmenu.js"></script>
+
+        <!-- <script type="text/javascript" src="js/actionJS/canvas.js"></script> -->
+
+
+            <!-- <script src="plugin/jQuery/jquery-1.11.1.min.js"></script> -->
+    <script src="js/basic/api.js "></script>
+    <!-- <script src="./js/basic/common.js"></script> -->
+    <!-- <script src="plugin/vue.js "></script> -->
+    <script src="plugin/layui/layui.js "></script>
+    <script src="canvas.js"></script>
+
+</body>
+</html>

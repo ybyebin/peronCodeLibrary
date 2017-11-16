@@ -1,19 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>canvas</title>
+    <meta charset="UTF-8">
+    <title>智能建筑管理系统</title>
+
+    <meta charset="utf-8" />
+    <meta name="description" content="webscada" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
     <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
     <link rel="stylesheet" href="./css/bayax.css">
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <!-- <link rel="stylesheet" href="./css/basegreen.css"> -->
     <link rel="stylesheet" type="text/css" href="css/canvas.css">
+
+
+
+
+    <!-- 必须导入的JS -->
+
+    <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
+    <!-- <script type="text/javascript" src="js/edit/jquery-1.10.2.min.js"></script> -->
+    <script type="text/javascript" src="js/edit/canvg.js"></script>
+    <script type="text/javascript" src="js/edit/Class.js"></script>
+    <script type="text/javascript" src="js/edit/jquery.autoresize.js"></script>
+    <script type="text/javascript" src="js/edit/jquery.contextmenu.js"></script>
+    <script type="text/javascript" src="js/edit/jquery-touch_punch.js"></script>
+    <script type="text/javascript" src="js/edit/json2.js"></script>
+    <script type="text/javascript" src="js/edit/pathfinding-browser.min.js"></script>
+    <script type="text/javascript" src="js/edit/raphael.js"></script>
+    <script type="text/javascript" src="js/edit/rgbcolor.js"></script>
+    <script type="text/javascript" src="js/edit/shifty.js"></script>
+    <script type="text/javascript" src="js/edit/draw2d.js"></script>
+    <script type="text/javascript" src="js/edit/fraphael.js"></script>
+
+    <!-- 拖动效果 -->
+    <script type="text/javascript" src="js/edit/jquery.browser.js"></script>
+    <script type="text/javascript" src="js/edit/jquery-ui-1.8.23.custom.min.js"></script>
+    <script type="text/javascript" src="js/actionJS/view.js"></script>
+
+
+
+
 </head>
 
-<body class="layui-layout-body">
+<body>
+
     <div class="draw2d-canvas bayax-layout-admin  layui-layout">
         <div class="bayax-layout-header  layui-header clearfix">
             <div class="bayax-logo">
@@ -35,97 +71,340 @@
 
         </div>
         <div class="bayax-layout-header bayax-layout-header2  layui-header clearfix">
+            <div class="bayax-logo ">
+                <ul id="toolbar" class="toolbar clearfix">
+
+                </ul>
+            </div>
+
+            <div class="bayax-layout-left bayax-layout-lefttwo">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">基本图形</li>
+                        <li>通用</li>
+                        <li>专业</li>
+                        <li>建筑设备</li>
+                        <li>安全防范</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <ul class="comportant-ul clearfix">
+                                <li>
+                                    <span class="juxing componentImg draw2d_droppable" data-shape="rectangleComponent"></span>
+                                    <p>矩形</p>
+                                </li>
+
+                                <li>
+                                    <span class="yuanjiajuxing componentImg draw2d_droppable" data-shape="RoundedRectangleComponent"></span>
+                                    <p>圆角矩形</p>
+                                </li>
+                                <li>
+                                    <span class="tuoyuan componentImg draw2d_droppable" data-shape="EllipseComponent"></span>
+                                    <p>椭圆</p>
+                                </li>
+                                <li>
+                                    <span class="straightline componentImg draw2d_droppable" data-shape="LineComponent"></span>
+                                    <p>直线</p>
+                                </li>
+                                <li>
+                                    <span class="duobianxing componentImg draw2d_droppable" data-shape="polygonComponent"></span>
+                                    <p>多边形</p>
+                                </li>
+                                <li>
+                                    <span class="ArrowUp componentImg draw2d_droppable" data-shape="forUpComponent"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="Arrowright componentImg draw2d_droppable" data-shape="forRightComponent"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="down componentImg draw2d_droppable" data-shape="forDownComponent"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="left componentImg draw2d_droppable" data-shape="forLeftComponent"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="leveldouble componentImg draw2d_droppable" data-shape="BothArrowHComponent"></span>
+                                    <p>双箭头</p>
+                                </li>
+                                <li>
+                                    <span class="Verticaldouble componentImg draw2d_droppable" data-shape="BothArrowVComponent"></span>
+                                    <p>双箭头</p>
+                                </li>
+                                <li>
+                                    <span class="juxing componentImg draw2d_droppable" data-shape="conduitCompontent"></span>
+                                    <p>管道</p>
+                                </li>
+                                <li>
+                                    <span class="juxing componentImg draw2d_droppable" data-shape="conduitCompontentV"></span>
+                                    <p>管道</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="layui-tab-item">
+                            <ul class="comportant-ul clearfix">
+                                <li>
+                                    <span class="tag componentImg draw2d_droppable" data-shape="LabelComponent"></span>
+                                    <p>标签</p>
+                                </li>
+                                <li>
+                                    <span class="button componentImg draw2d_droppable" data-shape="buttonComponent"></span>
+                                    <p>按钮</p>
+                                </li>
+                                <li>
+                                    <span class="text componentImg draw2d_droppable" data-shape="textComponent"></span>
+                                    <p>文本</p>
+                                </li>
+                                <li>
+                                    <span class="jpg componentImg draw2d_droppable" data-shape="imageComponent"></span>
+                                    <p>自定义</p>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="layui-tab-item">
+                            <ul class="comportant-ul clearfix">
+                                <li>
+                                    <span class="switch componentImg draw2d_droppable" data-shape="switchComponent"></span>
+                                    <p>开关</p>
+                                </li>
+                                <li>
+                                    <span class="piping componentImg draw2d_droppable" data-shape="pipingComponent"></span>
+                                    <p>管道</p>
+                                </li>
+                                <li>
+                                    <span class="Warninglamp componentImg draw2d_droppable" data-shape="WarninglampComponent"></span>
+                                    <p>报警提示灯</p>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="layui-tab-item ">
+                            <div class="components-num4">
+                                <a class="LeftBotton" onmousedown='Comscroll.GoUp()' onmouseup="Comscroll.StopUp()" onmouseout="Comscroll.StopUp()" href="javascript:void(0);" target="_self"></a>
+
+                                <div class="pcont" id="scroll_div">
+                                    <div class="ScrCont">
+                                        <ul id="scroll_ul_1" class="comportant-ul scroll-ul">
+                                            <li>
+                                                <span class="Blowerfan componentImg draw2d_droppable" data-shape="blowerfanComponent"></span>
+                                                <p>送风机</p>
+                                            </li>
+
+                                            <li class="space-border">
+                                                <span class="Exhaustfan componentImg draw2d_droppable" data-shape="exhaustfanComponent"></span>
+                                                <p>排风机</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="beng componentImg draw2d_droppable" data-shape="bengComponent"></span>
+                                                <p>泵</p>
+                                            </li>
+                                            <li>
+                                                <span class="ElectricTwo-wayValve componentImg draw2d_droppable" data-shape="ElectricTwoWayValveComponent"></span>
+                                                <p>电动两通阀</p>
+                                            </li>
+                                            <li>
+                                                <span class="SolenoidValve componentImg draw2d_droppable" data-shape="SolenoidValveComponent"></span>
+                                                <p>电磁阀</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="ElectricButterflyValves componentImg draw2d_droppable" data-shape="ElectricButterflyValvesComponent"></span>
+                                                <p>电动蝶阀</p>
+                                            </li>
+
+                                            <li>
+                                                <span class="AirFiltration componentImg draw2d_droppable" data-shape="AirFiltrationComponent"></span>
+                                                <p>空气过滤器</p>
+                                            </li>
+                                            <li>
+                                                <span class="AirHeating componentImg draw2d_droppable" data-shape="AirHeatingComponent"></span>
+                                                <p>空气加热器</p>
+                                            </li>
+                                            <li>
+                                                <span class="AirCooler componentImg draw2d_droppable" data-shape="AirCoolerComponent"></span>
+                                                <p>空气冷却器</p>
+                                            </li>
+                                            <li>
+                                                <span class="Humidifier componentImg draw2d_droppable" data-shape="HumidifierComponent"></span>
+                                                <p>加湿器</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="controlPanel componentImg draw2d_droppable" data-shape="controlPanelComponent"></span>
+                                                <p>温控面板</p>
+                                            </li>
+                                            <li>
+                                                <span class="FluorescentLamp componentImg draw2d_droppable" data-shape="FluorescentLampComponent"></span>
+                                                <p>荧光灯</p>
+                                            </li>
+
+                                            <li>
+                                                <span class="LED componentImg draw2d_droppable" data-shape="LEDComponent"></span>
+                                                <p>LED灯</p>
+                                            </li>
+                                            <li>
+                                                <span class="Incandescent componentImg draw2d_droppable" data-shape="IncandescentComponent"></span>
+                                                <p>白炽灯</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="MetalHalide componentImg draw2d_droppable" data-shape="MetalHalideComponent"></span>
+                                                <p>金卤灯</p>
+                                            </li>
+                                            <li>
+                                                <span class="temperature componentImg draw2d_droppable" data-shape="temperatureComponent"></span>
+                                                <p>温度</p>
+                                            </li>
+                                            <li>
+                                                <span class="humidity componentImg draw2d_droppable" data-shape="humidityComponent"></span>
+                                                <p>湿度</p>
+                                            </li>
+                                            <li>
+                                                <span class="pressure componentImg draw2d_droppable" data-shape="pressureComponent"></span>
+                                                <p>压力</p>
+                                            </li>
+                                            <li>
+                                                <span class="differentialPressure componentImg draw2d_droppable" data-shape="differentialPressureComponent"></span>
+                                                <p>压差</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="liquid componentImg draw2d_droppable" data-shape="liquidComponent"></span>
+                                                <p>液位</p>
+                                            </li>
+                                            <li>
+                                                <span class="electric componentImg draw2d_droppable" data-shape="electricComponent"></span>
+                                                <p>电流</p>
+                                            </li>
+                                            <li>
+                                                <span class="Voltage componentImg draw2d_droppable" data-shape="VoltageComponent"></span>
+                                                <p>电压</p>
+                                            </li>
+
+                                            <li>
+                                                <span class="frequency componentImg draw2d_droppable" data-shape="frequencyComponent"></span>
+                                                <p>频率</p>
+                                            </li>
+                                            <li>
+                                                <span class="activePower componentImg draw2d_droppable" data-shape="activePowerComponent"></span>
+                                                <p>有功功率</p>
+                                            </li>
+                                            <li>
+                                                <span class="ElectricityConsumption componentImg draw2d_droppable" data-shape="ElectricityConsumptionComponent"></span>
+                                                <p>用电量</p>
+                                            </li>
+                                            <li>
+                                                <span class="level componentImg draw2d_droppable" data-shape="levelComponent"></span>
+                                                <p>液体流量</p>
+                                            </li>
+                                            <li>
+                                                <span class="Gas componentImg draw2d_droppable" data-shape="GasComponent"></span>
+                                                <p>气体流量</p>
+                                            </li>
+                                            <li class="space-border ">
+                                                <span class="Broadcast componentImg draw2d_droppable" data-shape="BroadcastComponent"></span>
+                                                <p>广播</p>
+                                            </li>
 
 
-            <div class="components-num4">
-                <a class="LeftBotton" onmousedown='GoUp("ScrUp(\"ISL_Cont_1\");")' onmouseup="StopUp('ISL_Cont_1')" onmouseout="StopUp('ISL_Cont_1')" href="javascript:void(0);" target="_self"></a>
-                <div class="pcont" id="ISL_Cont_1">
-                    <div class="ScrCont">
-                        <ul id="List1_1" class="comportant-ul tt">
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
-
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
-
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
-                            <li>
-                                <span class="duobianxing componentImg"></span>
-                                <p>多边形</p>
-                            </li>
 
 
 
+                                        </ul>
+                                        <ul id="scroll_ul_2" class="comportant-ul scroll-ul"></ul>
+                                    </div>
+                                </div>
+                                <a class="RightBotton" onmousedown='Comscroll.GoDown()' onmouseup='Comscroll.StopDown()' onmouseout='Comscroll.StopDown()' href="javascript:void(0);" target="_self"></a>
 
-                        </ul>
-                        <div id="List2_1" class="comportant-ul tt"></div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <ul class="comportant-ul clearfix">
+                                <li>
+                                    <span class="monitoring componentImg draw2d_droppable"></span>
+                                    <p>枪机</p>
+                                </li>
+                                <li>
+                                    <span class="qiuji componentImg draw2d_droppable"></span>
+                                    <p>球机</p>
+                                </li>
+                                <li>
+                                    <span class="highqiuji componentImg draw2d_droppable"></span>
+                                    <p>高速球</p>
+                                </li>
+                                <li>
+                                    <span class="menjin componentImg draw2d_droppable"></span>
+                                    <p>门禁</p>
+                                </li>
+                                <li>
+                                    <span class="tance componentImg draw2d_droppable"></span>
+                                    <p>探测器</p>
+                                </li>
+
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <a class="RightBotton" onmousedown='GoDown("ISL_Cont_1","List1_1","ScrDown(\"ISL_Cont_1\",\"List1_1\")")' onmouseup='StopDown("ISL_Cont_1")' onmouseout='StopDown("ISL_Cont_1")' href="javascript:void(0);" target="_self"></a>
             </div>
 
         </div>
 
 
         <div class="bayax-body">
-            123123
+            <div class="draw2d-body">
+                <div class="content-body-border-top"></div>
+                <div class="draw2d-body-content">
+                    <div class="global-btn-div">
+                        <button onclick="changeSvg()">按钮</button>
+                    </div>
+                    <div class="canvas-div">
+                        <div id="canvas" class="canvas"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="attribute-div">
+                <div class="attr-head">
+                    <p>修改属性</p>
+                </div>
+                <div class="attr-body">
+                    <div class="layui-tab">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">控件属性</li>
+                            <li>画布属性</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">内容1</div>
+                            <div class="layui-tab-item">内容2</div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+        <script type="text/javascript" src="js/edit/icheck.min.js"></script>
+        <script type="text/javascript" src="./plugin/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="js/edit/colpick.js"></script>
+        <script type="text/javascript" src="js/ComponentSet/safeComponent.js"></script>
+        <script type="text/javascript" src="js/ComponentSet/labelComponent.js"></script>
+        <script type="text/javascript" src="js/ComponentSet/textComponent.js"></script>
+        <script type="text/javascript" src="js/ComponentSet/imageComponent.js"></script>
+        <script type="text/javascript" src="js/ComponentSet/RectangleComponent.js"></script>
+        <script type="text/javascript" src="js/ComponentSet/LineComponent.js"></script>
+        <script type="text/javascript" src="js/actionJS/attrmenu.js"></script>
+
+        <!-- <script type="text/javascript" src="js/actionJS/canvas.js"></script> -->
 
 
-    <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
-    <script src="js/basic/api.js "></script>
-    <!-- <script src="./js/basic/common.js"></script> -->
-    <!-- <script src="plugin/vue.js "></script> -->
-    <script src="plugin/layui/layui.js "></script>
-    <script src="./js/datashow/canvas.js"></script>
+        <script src="js/basic/api.js "></script>
+        <!-- <script src="./js/basic/common.js"></script> -->
+        <!-- <script src="plugin/vue.js "></script> -->
+        <script src="plugin/layui/layui.js "></script>
+        <script src="./js/datashow/canvas.js"></script>
+
+
 
 </body>
 

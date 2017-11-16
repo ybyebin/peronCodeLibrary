@@ -124,9 +124,9 @@
     width: 50px;
 }
 
-.bayax-layout-header2 .bayax-logo .toolbar li span {
-    width: 24px;
-    height: 24px;
+.bayax-layout-header2 .bayax-logo .toolbar li span span {
+    /* width: 24px; */
+    /* height: 24px; */
     display: inline-block;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -134,7 +134,7 @@
     border: 1px solid transparent;
 }
 
-.bayax-layout-header2 .bayax-logo .toolbar li span {
+.bayax-layout-header2 .bayax-logo .toolbar li span span {
     background: url(../images/img/img.png) no-repeat;
 }
 
@@ -262,16 +262,24 @@
     position: relative;
     top: 2px;
     padding: 0;
+    padding-right: 15px;
+}
+
+.scroll-ul.comportant-ul li {
+    position: relative;
 }
 
 .scroll-ul.comportant-ul li:first-child {
-    margin-left: 15px;
+    /* margin-left: 15px; */
 }
 
 .components-num4 {
     overflow: hidden;
     zoom: 1;
     width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     /* background: red; */
 }
 
@@ -298,6 +306,7 @@
     width: 15px;
     height: 54px;
     float: left;
+    /* position: relative; */
 }
 
 .components-num4 .LeftBotton {
@@ -307,14 +316,24 @@
 }
 
 .components-num4 .RightBotton {
-    margin: 15px 1px 0 5px;
-    width: 30px;
+    margin: 15px 1px 0 15px;
+    /* width: 30px; */
     background: url(../images/img/Path972.png) no-repeat;
 }
 
-.components-num4 .pl {
-    float: left;
-    margin-left: 15px;
+.components-num4 .space-border-before:before,
+.components-num4 .space-border:after {
+    width: 2px;
+    height: 24px;
+    content: "";
+    top: 12px;
+    right: -8px;
+    position: absolute;
+    background: #DEDEDE;
+}
+
+.components-num4 .space-border-before:before {
+    left: -5px;
 }
 
 
@@ -677,3 +696,78 @@
 
 
 /* 头部 end */
+
+
+/* body   -begin*/
+
+.bayax-body {
+    position: absolute;
+    padding-top: 15px;
+    padding-right: 15px;
+    left: 15px;
+    right: 0;
+    top: 150px;
+    bottom: 0;
+    z-index: 998;
+    width: auto;
+    /* box-sizing: border-box; */
+    /* background: gray; */
+    overflow: auto;
+}
+
+.attribute-div {
+    float: right;
+    width: 300px;
+    background: blue;
+    height: 900px;
+}
+
+.draw2d-body {
+    position: absolute;
+    left: 15px;
+    right: 330px;
+    top: 15px;
+    bottom: 0;
+    z-index: 998;
+    width: auto;
+    background: #1B1F3D;
+    box-sizing: border-box;
+}
+
+.canvas-div {
+    position: absolute;
+    left: 0;
+    right: 220px;
+    top: 20px;
+    bottom: 0;
+    width: auto;
+    box-sizing: border-box;
+    padding-right: 20px;
+    padding-left: 20px;
+    background: #1B1F3D;
+}
+
+.canvas {
+    background-color: #2B2F4C;
+    border: 1px solid #DDDDDD;
+}
+
+
+/* 属性 */
+
+.global-btn-div {
+    float: right;
+    width: 220px;
+    background: blue;
+    /* height: 400px; */
+}
+
+.attr-head {
+    height: 44px;
+    text-align: center;
+    line-height: 44px;
+    background: #2A3147;
+}
+
+
+/* body   -end */

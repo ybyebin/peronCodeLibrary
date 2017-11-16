@@ -362,7 +362,8 @@ example.Toolbar = Class.extend({
         // 为删除按钮的选中状态注册一个选中监听
         view.on("select", $.proxy(this.onSelectionChanged, this));
         // 保存按钮
-        this.saveButton = $('<label class = "toolbar-save"><img class=" baocun-img " src="images/img/baocun.png"><br>保存</label>');
+        this.saveButton = $(' <li><span class="baocun"></span><p>保存</p></li>');
+        // this.saveButton = $('<label class = "toolbar-save"><img class=" baocun-img " src="images/img/baocun.png"><br>保存</label>');
         this.html.append(this.saveButton);
         this.saveButton.button().click($.proxy(function() {
             var subdataArray = []; //全局按钮
@@ -440,7 +441,10 @@ example.Toolbar = Class.extend({
 
 
         // 添加删除按钮
-        this.deleteButton = $('<label class = "toolbar-delete"><img class=" delete-img " src="images/img/delete.png"><br>删除</label>');
+        // 
+        // 
+        this.deleteButton = $(' <li><span class="delete"></span><p>删除</p></li>');
+        // this.deleteButton = $('<label class = "toolbar-delete"><img class=" delete-img " src="images/img/delete.png"><br>删除</label>');
         this.html.append(this.deleteButton);
         this.deleteButton.button().click($.proxy(function() {
 
@@ -455,7 +459,8 @@ example.Toolbar = Class.extend({
         }, this)).button("option", "disabled", true);
 
         // 清除画布
-        this.clearButtons = $('<label class = "toolbar-wangge"><img class=" wangge-img " src="images/img/clear.png"><br>全部清除</label>');
+         this.clearButtons =     $(' <li><span class="clear"></span><p>全部清除</p></li>'); 
+        // this.clearButtons = $('<label class = "toolbar-wangge"><img class=" wangge-img " src="images/img/clear.png"><br>全部清除</label>');
         this.html.append(this.clearButtons);
         this.clearButtons.button().click($.proxy(function() {
             var thisbtn = this;
@@ -487,8 +492,9 @@ example.Toolbar = Class.extend({
 
 
         // 添加撤销按钮及回调
-        //																		
-        this.undoButton = $('<label class = "toolbar-undo"><img class=" chexiao-img " src="images/img/chexiao.png"><br>撤销</label>');
+        //	
+        this.undoButton = 	 $(' <li><span class="chexiao"></span><p>撤销</p></li>');																
+        // this.undoButton = $('<label class = "toolbar-undo"><img class=" chexiao-img " src="images/img/chexiao.png"><br>撤销</label>');
         this.html.append(this.undoButton);
         this.undoButton.button().click($.proxy(function() {
             this.view.getCommandStack().undo();
@@ -496,7 +502,8 @@ example.Toolbar = Class.extend({
 
         // 添加重做按钮及回调
         //
-        this.redoButton = $('<label class = "toolbar-redo"><img class=" fanhui-img " src="images/img/fanhui.png"><br>恢复</label>');
+        this.redoButton = $(' <li><span class="huifu"></span><p>恢复</p></li>');
+        // this.redoButton = $('<label class = "toolbar-redo"><img class=" fanhui-img " src="images/img/fanhui.png"><br>恢复</label>');
         this.html.append(this.redoButton);
         this.redoButton.button().click($.proxy(function() {
             this.view.getCommandStack().redo();
@@ -1070,12 +1077,12 @@ function allCanvasinit(type) {
 
 
 
-    var reader = new draw2d.io.json.Reader();
-    reader.unmarshal(canvas, canvasJson);
+    // var reader = new draw2d.io.json.Reader();
+    // reader.unmarshal(canvas, canvasJson);
 
-    console.log('缩放比例' + canvas.getZoom())
-    console.log('宽度：' + canvas.getWidth());
-    console.log('宽度：' + canvas.getHeight());
+    // console.log('缩放比例' + canvas.getZoom())
+    // console.log('宽度：' + canvas.getWidth());
+    // console.log('宽度：' + canvas.getHeight());
 
 
 }
