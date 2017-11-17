@@ -1,0 +1,284 @@
+/* 数据展示模块********  */
+
+
+/* 头部   -begin */
+
+.bayax-layout-admin .bayax-layout-header {
+    height: 64px;
+    line-height: 66px;
+}
+
+.bayax-header {
+    position: fixed;
+    z-index: 1000;
+}
+
+.bayax-layout-header .bayax-logo {
+    width: 280px;
+    position: absolute;
+    left: 30px;
+    top: 0;
+    height: 100%;
+    line-height: 60px;
+    font-size: 16px;
+}
+
+.bayax-layout-header .bayax-logo img {
+    width: 127px;
+    height: 27px;
+}
+
+.bayax-layout-header label {
+    display: inline-block;
+    width: 120px;
+    padding-left: 20px;
+    height: 100%;
+    font-size: 14px;
+}
+
+.bayax-layout-header label .bayax-proname {
+    padding-left: 4px;
+    position: relative;
+    top: 2px;
+}
+
+.bayax-layout-header label .bayax-proname:before {
+    width: 4px;
+    height: 15px;
+    content: "";
+    top: 3px;
+    left: -7px;
+    position: absolute
+}
+
+.bayax-layout-left {
+    position: absolute!important;
+    left: 300px;
+    top: 0;
+    overflow: hidden;
+}
+
+.bayax-layout-right {
+    position: absolute!important;
+    right: 0;
+    top: 0;
+}
+
+.bayax-layout-admin .bayax-layout-header .layui-nav {
+    background: 0 0;
+}
+
+.bayax-layout-admin .bayax-layout-header .bayax-nav {
+    background: 0 0;
+}
+
+.bayax-nav {
+    position: relative;
+    padding: 0 20px;
+    border-radius: 2px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.bayax-nav .layui-nav-item {
+    position: relative;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: middle;
+    line-height: 60px
+}
+
+.bayax-nav .layui-nav-item a {
+    display: block;
+    padding: 0 20px;
+    box-sizing: border-box;
+    transition: all .3s;
+    -webkit-transition: all .3s
+}
+
+.bayax-nav .layui-nav-item>a {
+    height: 60px;
+}
+
+.bayax-nav .person-operate a {
+    padding-right: 0px;
+}
+
+.bayax-head-bar {
+    display: none;
+    float: right;
+    margin-right: 15px;
+    padding-top: 8px;
+}
+
+.bayax-head-bar .bayax-icon {
+    cursor: point;
+    font-size: 28px;
+    display: inline-block;
+    color: #fff;
+    height: 100%;
+}
+
+.bayax-head-bar .bayax-hover-ul {
+    left: -40px;
+    top: 64px;
+}
+
+.head-warn {
+    margin-right: 30%;
+}
+
+@media screen and (max-width:768px) {
+    .bayax-head-bar {
+        display: block;
+    }
+    .bayax-nav,
+    .bayax-layout-left {
+        display: none;
+    }
+}
+
+
+/* 头部 end */
+
+
+/* body  -begin */
+
+.bayax-body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 66px;
+    bottom: 0;
+    padding: 0 30px;
+    padding-top: 20px;
+    z-index: 998;
+    width: auto;
+    overflow: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    min-width: 768px;
+    /* overflow-x: scroll; */
+}
+
+
+/* body   -end */
+
+
+/* tabs -begin*/
+
+.bayax-tab-item a.btn-sure {
+    height: 27px;
+    width: 70px;
+    padding: 4px 18px;
+    border-radius: 15px;
+    line-height: 20px;
+    border: none;
+    outline: none;
+}
+
+.tab-warn-div {
+    margin-left: 10px;
+}
+
+.tab-warn-div>span {
+    margin-right: 10px;
+}
+
+.tab-warn-div input {
+    width: 105px;
+}
+
+.tab-warn-div-export {
+    float: right;
+}
+
+
+/* tabs    -end */
+
+
+/* 系统管理   -begin*/
+
+.sys-management {
+    top: 65px;
+    left: 0;
+}
+
+.layui-side-scroll ul,
+.layui-side-scroll .layui-nav-bar {
+    background: transparent !important;
+}
+
+.sys-management .layui-nav-tree .layui-nav-item {
+    margin-bottom: 1px;
+    /* background-color: #2D3057; */
+}
+
+.layui-nav-tree .layui-nav-item a {
+    height: 66px !important;
+    line-height: 66px;
+    text-align: left;
+    padding-left: 35px;
+}
+
+.layui-side-scroll ul li a {
+    font-size: 16px !important;
+}
+
+.layui-side-scroll ul li.layui-nav-item .layui-nav-more {
+    top: 30px;
+}
+
+.layui-side-scroll ul li.layui-nav-itemed .layui-nav-more {
+    top: 22px;
+}
+
+.layui-side a i {
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.layui-side-scroll ul li.layui-nav-item dl dd a {
+    height: 46px !important;
+    line-height: 46px;
+    text-align: left;
+    padding-left: 60px;
+}
+
+.sys-man-body {
+    left: 200px;
+    padding-right: 0;
+    overflow-x: auto !important;
+    min-width: inherit !important;
+}
+
+.bayax-content {
+    min-width: 900px;
+    padding-right: 30px;
+    padding-top: 10px;
+}
+
+.content-main-border {
+    border: 1px solid rgba(143, 152, 186, .2);
+    height: 750px;
+    padding-right: 18px;
+}
+
+.div-equipment {
+    height: 750px;
+    overflow: hidden;
+    /* background: red; */
+}
+
+.div-sonequipment {
+    height: 700px;
+    overflow: hidden;
+}
+
+
+/* 系统管理   -end */
