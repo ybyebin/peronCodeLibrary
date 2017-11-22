@@ -307,6 +307,7 @@
     height: 54px;
     float: left;
     /* position: relative; */
+    background: url(../images/img/img.png) no-repeat;
 }
 
 .components-num4 .LeftBotton {
@@ -317,7 +318,6 @@
 
 .components-num4 .RightBotton {
     margin: 15px 1px 0 15px;
-    /* width: 30px; */
     background: url(../images/img/Path972.png) no-repeat;
 }
 
@@ -725,13 +725,14 @@
     width: auto;
     background: #1B1F3D;
     box-sizing: border-box;
+    max-height: 800px;
 }
 
 .canvas-div {
     position: absolute;
     left: 0;
     right: 220px;
-    top: 20px;
+    top: 30px;
     bottom: 0;
     width: auto;
     box-sizing: border-box;
@@ -742,7 +743,12 @@
 
 .canvas {
     background-color: #2B2F4C;
-    border: 1px solid #DDDDDD;
+    /* border: 1px solid #DDDDDD; */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(Hydrangeas.jpg);
+    background-position: center;
+    /* background-color: gray; */
 }
 
 .global-btn-div {
@@ -801,7 +807,7 @@
 .attribute-div {
     float: right;
     width: 300px;
-    height: 785px;
+    height: 781px;
     /* overflow: auto; */
 }
 
@@ -979,6 +985,14 @@
     width: 160px;
 }
 
+.bayax-division-title .bayax-division-text {
+    max-width: 140px;
+    min-width: 35px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .tag-status {
     background: url(../images/img/rightWrong.png) no-repeat;
     height: 20px;
@@ -996,12 +1010,26 @@
     background-position: 0 0;
 }
 
+.color-ul {
+    padding-top: 5px;
+}
+
+.color-ul li {
+    list-style: none;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    float: left;
+    line-height: 12px;
+    text-align: center;
+}
+
 
 /* .style-div {
     display: block;
 } */
-
-.attribute-div {}
 
 .globalbtn-attribute-div {
     display: none;
@@ -1009,6 +1037,13 @@
 
 .globalbtn-attribute-div .attr-content-body {
     display: block;
+}
+
+
+/* 基本图形--无属性 */
+
+.basic-hide {
+    display: none;
 }
 
 
