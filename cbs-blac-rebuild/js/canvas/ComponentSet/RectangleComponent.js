@@ -1466,10 +1466,13 @@ function basicdisplayDiv(obj) {
     // $canvas.menuDivFill.show();
     // $canvas.menuDivAlpha.show();
 
+    // 基本
+    setComponentOptions.basicSet(component);
+    // 位置大小
+    setComponentOptions.sizeAndOffset(component);
 
-    // componentSizeAndoffset(obj);
-    // componentInitData(obj);
-    // setBasicComponentStyleInEditFiled(obj);
+    setComponentOptions.rectangleSet(component);
+
 
     //重置属性框
     canvasVue.resetAttr();
@@ -1486,86 +1489,4 @@ function basicdisplayDiv(obj) {
         canvasVue.routine.name = '第二次改';
     }, 200)
 
-}
-/**
- * [读取并在 属性栏显示 控件属性]
- * @param {[type]} thiss [description]
- */
-function setBasicComponentStyleInEditFiled(com) {
-    // =============================style===================================
-    //填充(背景)颜色  fillColor
-    $canvas.styleFillColor.removeClass("colorWhiteBorder colorBlackBorder");
-    $canvas.styleFillColor.each(function(index, element) {
-        if (com.getBackgroundColor().hash() == rgb2hex($(element).css("background-color")).toUpperCase()) {
-            if (rgb2hex($(element).css("background-color")) == "#ffffff") {
-                $(element).addClass("colorBlackBorder");
-            } else {
-                $(element).addClass("colorWhiteBorder");
-            }
-        }
-    });
-    // 透明度
-    $canvas.styleAlpha.val(com.getAlpha());
-
-    // =============================onTrue===================================
-    //填充(背景)颜色  fillColor
-    $canvas.onTrueFillColor.removeClass("colorWhiteBorder colorBlackBorder");
-    $canvas.onTrueFillColor.each(function(index, element) {
-        if (com.getUserData().onTrue.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
-            if (rgb2hex($(element).css("background-color")) == "#ffffff") {
-                $(element).addClass("colorBlackBorder");
-            } else {
-                $(element).addClass("colorWhiteBorder");
-            }
-        }
-    })
-
-    // 透明度
-    $canvas.onTrueAlpha.val(com.getAlpha());
-
-    // =============================onFalse===================================
-    // 填充(背景)颜色  fillColor
-    $canvas.onFalseFillColor.removeClass("colorWhiteBorder colorBlackBorder");
-    $canvas.onFalseFillColor.each(function(index, element) {
-        if (com.getUserData().onFalse.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
-            if (rgb2hex($(element).css("background-color")) == "#ffffff") {
-                $(element).addClass("colorBlackBorder");
-            } else {
-                $(element).addClass("colorWhiteBorder");
-            }
-        }
-    })
-
-    // 透明度
-    $canvas.onFalseAlpha.val(com.getAlpha());
-
-    // =============================onAlarm===================================
-    // 填充(背景)颜色  fillColor
-    $canvas.onAlarmFillColor.removeClass("colorWhiteBorder colorBlackBorder");
-    $canvas.onAlarmFillColor.each(function(index, element) {
-        if (com.getUserData().onAlarm.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
-            if (rgb2hex($(element).css("background-color")) == "#ffffff") {
-                $(element).addClass("colorBlackBorder");
-            } else {
-                $(element).addClass("colorWhiteBorder");
-            }
-        }
-    });
-
-    // 透明度
-    $canvas.onAlarmAlpha.val(com.getAlpha());
-    // =============================onDisconnected===================================
-    // 填充(背景)颜色  fillColor
-    $canvas.onDiscFillColor.removeClass("colorWhiteBorder colorBlackBorder");
-    $canvas.onDiscFillColor.each(function(index, element) {
-        if (com.getUserData().onDisconnected.FillColor.toUpperCase() == rgb2hex($(element).css("background-color")).toUpperCase()) {
-            if (rgb2hex($(element).css("background-color")) == "#ffffff") {
-                $(element).addClass("colorBlackBorder");
-            } else {
-                $(element).addClass("colorWhiteBorder");
-            }
-        }
-    });
-    // 透明度
-    $canvas.onDiscAlpha.val(com.getAlpha());
 }

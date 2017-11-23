@@ -57,9 +57,67 @@ layui.use(['layer', 'element'], function() {
                         data: '-..'
                     },
 
-                ]
+                ],
+                colorData: [{
+                        color: '#F5A623',
+                        colorstyle: 'background-color:#F5A623',
+                        active: false
+                    },
+                    {
+                        color: '#7ED321',
+                        colorstyle: 'background-color:#7ED321',
+                        active: false
+                    },
+                    {
+                        color: '#F57373',
+                        colorstyle: 'background-color:#F57373',
+                        active: false
+                    },
+
+                    {
+                        color: '#35C99D',
+                        colorstyle: 'background-color:#35C99D',
+                        active: false
+                    },
+                    {
+                        color: '#000000',
+                        colorstyle: 'background-color:#000000',
+                        active: false
+                    },
+                    {
+                        color: '#999999',
+                        colorstyle: 'background-color:#999999',
+                        active: false
+                    },
+                    {
+                        color: '#FFFFFF',
+                        colorstyle: 'background-color:#FFFFFF',
+                        active: false
+                    },
+                    {
+                        color: '#4A4A4A',
+                        colorstyle: 'background-color:#4A4A4A',
+                        active: false
+                    },
+                    {
+                        color: '#03A3FC',
+                        colorstyle: 'background-color:#03A3FC',
+                        active: false
+                    },
+                    {
+                        color: '#DDDDDD',
+                        colorstyle: 'background-color:#DDDDDD',
+                        active: false
+                    }
+
+
+
+                ],
+
 
             },
+
+            // 基本属性
             routine: {
                 name: '',
                 description: '',
@@ -91,6 +149,7 @@ layui.use(['layer', 'element'], function() {
                 }
 
             },
+            // Data
             datas: {
                 tag: {
                     tagname: '',
@@ -102,42 +161,96 @@ layui.use(['layer', 'element'], function() {
                 readonly: false,
 
             },
+            // styles
             styles: {
                 borderWidth: '0',
                 borderStyle: '默认',
-                borderColor: [{
+                borderColor: {
                     color: '',
-                    active: false
-                }]
+                    colorData: [],
+                },
+                fillColor: { //填充颜色
+                    color: '',
+                    colorData: [],
+                },
+                alpha: '', //透明度
+                picture: '', //图片地址
+                flashing: false, //闪烁
+            },
+            ontrue: {
+                borderWidth: '0',
+                borderStyle: '默认',
+                borderColor: {
+                    color: '',
+                    colorData: [],
+                },
+                fillColor: { //填充颜色
+                    color: '',
+                    colorData: [],
+                },
+                alpha: '', //透明度
+                picture: '', //图片地址
+                flashing: false, //闪烁
+            },
+            onfalse: {
+                borderWidth: '0',
+                borderStyle: '默认',
+                borderColor: {
+                    color: '',
+                    colorData: [],
+                },
+                fillColor: { //填充颜色
+                    color: '',
+                    colorData: [],
+                },
+                alpha: '', //透明度
+                picture: '', //图片地址
+                flashing: false, //闪烁
+            },
+            onalarm: {
+                borderWidth: '0',
+                borderStyle: '默认',
+                borderColor: {
+                    color: '',
+                    colorData: [],
+                },
+                alpha: '', //透明度
+                picture: '', //图片地址
+                fillColor: { //填充颜色
+                    color: '',
+                    colorData: [],
+                },
+                flashing: false, //闪烁
+            },
+            ondisc: {
+                borderWidth: '0',
+                borderStyle: '默认',
+                borderColor: {
+                    color: '',
+                    colorData: [],
+                },
+                alpha: '', //透明度
+                picture: '', //图片地址
+                fillColor: { //填充颜色
+                    color: '',
+                    colorData: [],
+                },
+                flashing: false, //闪烁
             }
         },
         mounted: function() {
             var _this = this;
             this.$nextTick(function() {
-                // canvas 初始化
-                canvasSet.allCanvasinit('new');
                 // 自定义下拉群组 初始化
                 bayaxInit();
+                basicSet.init();
+                this.setColorData();
 
-                // 组件滚动
-                Comscroll.picrun_ini("scroll_ul_2", 'scroll_div', "scroll_ul_1");
-                $(".layui-tabscroll-item,.global-btn-body,.comp-level-ul").mCustomScrollbar({
-                    autoHideScrollbar: true
-                });
-                // 属性框打开关闭操作
-                $('.attr-content-title').click(function() {
-                    var _this = $(this);
-                    var clas = 'collapsed';
-                    var divs = '.' + _this.data('for');
 
-                    if (_this.hasClass(clas)) {
-                        _this.removeClass(clas);
-                    } else {
-                        _this.addClass(clas);
-                    }
-                    $(divs).stop().slideToggle(300);
+                // canvas 初始化
+                canvasSet.allCanvasinit('new');
 
-                });
+
 
             });
 
@@ -147,12 +260,164 @@ layui.use(['layer', 'element'], function() {
             setAccessLevel: function(item) {
                 this.routine.accessLevel.level = item;
             },
-            // style    边框宽度
+            // style 边框宽度
             setStyleBorderWidth: function(item) {
                 this.styles.borderWidth = item;
             },
+            // style 边框样式
             setStyleBorderStyle: function(item) {
                 this.styles.borderStyle = item.name;
+            },
+            // style 边框颜色
+            setStyleBorderColor: function(item) {
+                var borderColor = this.styles.borderColor;
+                borderColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                borderColor.color = item.color;
+            },
+            // style 填充颜色
+            setStyleFillColor: function(item) {
+                var fillColor = this.styles.fillColor;
+                fillColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                fillColor.color = item.color;
+            },
+            // ontrue 边框宽度
+            setOnTrueBorderWidth: function(item) {
+                this.ontrue.borderWidth = item;
+            },
+            // ontrue 边框样式
+            setOnTrueBorderStyle: function(item) {
+                this.ontrue.borderStyle = item.name;
+            },
+            // ontrue 边框颜色
+            setOnTrueBorderColor: function(item) {
+                var borderColor = this.ontrue.borderColor;
+                borderColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                borderColor.color = item.color;
+            },
+            // ontrue 填充颜色
+            setOnTrueFillColor: function(item) {
+                var fillColor = this.ontrue.fillColor;
+                fillColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                fillColor.color = item.color;
+            },
+
+            // onfalse 边框宽度
+            setOnFalseBorderWidth: function(item) {
+                this.onfalse.borderWidth = item;
+            },
+            // onfalse 边框样式
+            setOnFalseBorderStyle: function(item) {
+                this.onfalse.borderStyle = item.name;
+            },
+            // onfalse 边框颜色
+            setOnFalseBorderColor: function(item) {
+                var borderColor = this.onfalse.borderColor;
+                borderColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                borderColor.color = item.color;
+            },
+            // onfalse 填充颜色
+            setOnFalseFillColor: function(item) {
+                var fillColor = this.onfalse.fillColor;
+                fillColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                fillColor.color = item.color;
+            },
+
+            // onalarm 边框宽度
+            setOnAlarmBorderWidth: function(item) {
+                this.onalarm.borderWidth = item;
+            },
+            // onalarm 边框样式
+            setOnAlarmBorderStyle: function(item) {
+                this.onalarm.borderStyle = item.name;
+            },
+            // onalarm 边框颜色
+            setOnAlarmBorderColor: function(item) {
+                var borderColor = this.onalarm.borderColor;
+                borderColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                borderColor.color = item.color;
+            },
+            // onalarm 填充颜色
+            setOnAlarmFillColor: function(item) {
+                var fillColor = this.onalarm.fillColor;
+                fillColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                fillColor.color = item.color;
+            },
+
+
+            // ondisc 边框宽度
+            setOnDiscBorderWidth: function(item) {
+                this.ondisc.borderWidth = item;
+            },
+            // ondisc 边框样式
+            setOnDiscBorderStyle: function(item) {
+                this.ondisc.borderStyle = item.name;
+            },
+            // ondisc 边框颜色
+            setOnDiscBorderColor: function(item) {
+                var borderColor = this.ondisc.borderColor;
+                borderColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                borderColor.color = item.color;
+            },
+            // ondisc 填充颜色
+            setOnDiscFillColor: function(item) {
+                var fillColor = this.ondisc.fillColor;
+                fillColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                fillColor.color = item.color;
+            },
+
+
+
+
+
+            // 处理color 数据
+            setColorData: function() {
+                var strColor = JSON.stringify(this.borderData.colorData.map(function(item) {
+                    return item;
+                }));
+                this.styles.borderColor.colorData = JSON.parse(strColor);
+                this.styles.fillColor.colorData = JSON.parse(strColor);
+                this.ontrue.borderColor.colorData = JSON.parse(strColor);
+                this.ontrue.fillColor.colorData = JSON.parse(strColor);
+                this.onfalse.borderColor.colorData = JSON.parse(strColor);
+                this.onfalse.fillColor.colorData = JSON.parse(strColor);
+
+                this.onalarm.borderColor.colorData = JSON.parse(strColor);
+                this.onalarm.fillColor.colorData = JSON.parse(strColor);
+
+                this.ondisc.borderColor.colorData = JSON.parse(strColor);
+                this.ondisc.fillColor.colorData = JSON.parse(strColor);
+
+                console.log(JSON.stringify(this.styles.borderColor.colorData));
             },
             // 重置属性框
             resetAttr: function() {
@@ -174,11 +439,11 @@ layui.use(['layer', 'element'], function() {
                 routine.offx = '';
                 routine.offy = '';
 
-            }
+            },
         }
     })
 
-    // 键路径
+    // 名称
     canvasVue.$watch('routine.name', function(newVal, oldVal) {
         // 做点什么
         if (this.componentData.flag) {
@@ -253,284 +518,3 @@ layui.use(['layer', 'element'], function() {
 
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// canvas 基础设置
-var canvasSet = {
-    BasicData: {
-        width: 0,
-        init: true,
-        scale: 9 / 16
-    },
-    setCanvasWH: function() {
-        var canvas = $('#canvas');
-
-        var w = Number(canvas.width());
-        if (this.BasicData.init) {
-            this.BasicData.width = w;
-            this.BasicData.init = false;
-        }
-        console.log(w)
-        canvas.css('height', w * this.BasicData.scale + 'px');
-    },
-    /**
-     *  还原数据时,在画布找到 控件]
-     * @param  {[type]} id [description]
-     * @return {[type]}    [控件对象]
-     */
-    getCanvasNode: function(id) {
-        if (id != '') {
-            var node = imageCanvas.getFigure(id);
-            var nodeLine = imageCanvas.getLine(id);
-            if (node !== null) {
-                return node;
-            } else if (nodeLine !== null) {
-                return nodeLine;
-            }
-        } else {
-            return false;
-        }
-
-    },
-    /**
-     * [打印 控件数据 ----------调试用]
-     * @param  {[type]} canvas [description]
-     */
-    displayJSON: function(canvas) {
-        var writer = new draw2d.io.json.Writer();
-        writer.marshal(canvas, function(json) {
-            console.log('画布数据:' + JSON.stringify(json, null, 2));
-        });
-    },
-    /**
-     * [canvas 初始化]
-     * @param  {[type]} type [description]
-     * @return {[type]}      [description]
-     */
-    allCanvasinit: function(type) {
-        //选择框  样式
-        draw2d.Configuration.factory.createResizeHandle = function(forShape, type) {
-            var handle = new draw2d.ResizeHandle(forShape, type);
-            handle.attr({
-                width: 10,
-                height: 10,
-                radius: 0,
-                color: "#35C99D",
-                stroke: 1,
-                bgColor: "#35C99D"
-            });
-            return handle;
-        }
-
-        var app = new example.Application();
-
-
-        var canvas = app.view; //主画布
-        // 边框阴影
-        var filter = canvas.paper.createFilter();
-        filter.createShadow(0, 0, 3, 0.3, "#000000");
-        filter.element.setAttribute("x", "-35%");
-        filter.element.setAttribute("y", "-35%");
-
-        app.view.installEditPolicy(new draw2d.policy.connection.DragConnectionCreatePolicy({
-            createConnection: function() {
-                return new HoverConnection();
-            }
-        }));
-
-
-        canvas.on("figure:add", function(emitter, event) {
-            if (!(event.figure instanceof draw2d.Connection)) {
-                event.figure.shape.filter(filter);
-            }
-        });
-        canvas.installEditPolicy(new draw2d.policy.canvas.SnapToGeometryEditPolicy({
-            lineColor: "#35c99d"
-        }));
-        canvas.installEditPolicy(new draw2d.policy.canvas.SnapToInBetweenEditPolicy({
-            lineColor: "#35c99d"
-        }));
-        canvas.installEditPolicy(new draw2d.policy.canvas.SnapToCenterEditPolicy({
-            lineColor: "#35c99d"
-        }));
-
-        canvas.installEditPolicy(new draw2d.policy.canvas.CoronaDecorationPolicy());
-        // canvas.installEditPolicy(new draw2d.policy.canvas.BoundingboxSelectionPolicy());
-        imageCanvas = canvas;
-
-        canvas.installEditPolicy(new CopyInterceptorPolicy());
-        canvas.getCommandStack().addEventListener(function(e) {
-            if (e.isPostChangeEvent()) {
-                canvasSet.displayJSON(canvas);
-            }
-        });
-        // getGroupNameAndViewData(sessionStorage.getItem("view_id"), canvas, type);
-
-
-
-        // var reader = new draw2d.io.json.Reader();
-        // reader.unmarshal(canvas, canvasJson);
-
-        // console.log('缩放比例' + canvas.getZoom())
-        // console.log('宽度：' + canvas.getWidth());
-        // console.log('宽度：' + canvas.getHeight());
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 控件滚动操作
-var Comscroll = {
-    Speed_1: 10,
-    Space_1: 10,
-    PageWidth_1: 50 * 10,
-    interval_1: 5000,
-    fill_1: 0,
-    MoveLock_1: false,
-    MoveTimeObj_1: '',
-    MoveWay_1: "right",
-    Comp_1: 0,
-    scroll_ul_2: '',
-    scroll_div: '',
-    scroll_ul_1: '',
-    GetObj: function(objName) {
-        if (document.getElementById) {
-            return eval('document.getElementById("' + objName + '")')
-        } else {
-            return eval('document.all.' + objName)
-        }
-    },
-    GoUp: function(string) {
-        var _this = this;
-        if (this.MoveLock_1) return;
-        console.log('查看2：' + string)
-        this.MoveLock_1 = true;
-        this.MoveWay_1 = "left";
-        this.MoveTimeObj_1 = setInterval(function() {
-            _this.ScrUp(_this.scroll_div)
-        }, this.Speed_1);
-    },
-    StopUp: function(string) {
-        if (this.MoveWay_1 == "right") {
-            return
-        };
-        clearInterval(this.MoveTimeObj_1);
-        if ((this.scroll_div.scrollLeft - this.fill_1) % this.PageWidth_1 != 0) {
-            this.Comp_1 = this.fill_1 - (this.scroll_div.scrollLeft % this.PageWidth_1);
-            this.CompScr_1(this.scroll_div)
-        } else {
-            this.MoveLock_1 = false
-        }
-    },
-    ScrUp: function(obj) {
-        if (obj.scrollLeft <= 0) {
-            obj.scrollLeft = obj.scrollLeft + obj.offsetWidth
-        }
-        obj.scrollLeft -= this.Space_1;
-    },
-    GoDown: function(string, string2, string3) {
-        var _this = this;
-        clearInterval(this.MoveTimeObj_1);
-        if (this.MoveLock_1) return;
-        this.MoveLock_1 = true;
-        this.MoveWay_1 = "right";
-        this.ScrDown(this.scroll_div, this.scroll_ul_1);
-        this.MoveTimeObj_1 = setInterval(function() {
-            _this.ScrDown(_this.scroll_div, _this.scroll_ul_1);
-        }, this.Speed_1)
-    },
-    StopDown: function(string) {
-        var scrollDiv = this.scroll_div;
-        var fill_1 = this.fill_1;
-        var PageWidth_1 = this.PageWidth_1;
-        if (this.MoveWay_1 == "left") {
-            return
-        };
-        clearInterval(this.MoveTimeObj_1);
-        if (scrollDiv.scrollLeft % PageWidth_1 - (fill_1 >= 0 ? fill_1 : fill_1 + 1) != 0) {
-            this.Comp_1 = PageWidth_1 - scrollDiv.scrollLeft % PageWidth_1 + fill_1;
-            this.CompScr_1(this.scroll_div);
-        } else {
-            this.MoveLock_1 = false
-        }
-    },
-    ScrDown: function(obj1, obj2) {
-        console.log(123)
-        if (obj1.scrollLeft >= obj2.scrollWidth) {
-            obj1.scrollLeft = obj1.scrollLeft - obj2.scrollWidth - 40
-        }
-        obj1.scrollLeft += this.Space_1;
-    },
-    CompScr_1: function(obj) {
-
-        if (this.Comp_1 == 0) {
-            this.MoveLock_1 = false;
-            return
-        }
-        var num, TempSpeed = this.Speed_1,
-            TempSpace = this.Space_1;
-        if (Math.abs(this.Comp_1) < this.PageWidth_1 / 2) {
-            TempSpace = Math.round(Math.abs(this.Comp_1 / this.Space_1));
-            if (TempSpace < 1) {
-                TempSpace = 1
-            }
-        }
-        if (this.Comp_1 < 0) {
-            if (this.Comp_1 < -TempSpace) {
-                this.Comp_1 += TempSpace;
-                num = TempSpace
-            } else {
-                num = -this.Comp_1;
-                this.Comp_1 = 0
-            }
-            obj.scrollLeft -= num;
-            setTimeout(this.CompScr_1(obj), TempSpeed)
-        } else {
-            if (this.Comp_1 > TempSpace) {
-                this.Comp_1 -= TempSpace;
-                num = TempSpace
-            } else {
-                num = this.Comp_1;
-                this.Comp_1 = 0
-            }
-            obj.scrollLeft += num;
-            setTimeout(this.CompScr_1(obj), TempSpeed)
-        }
-    },
-    picrun_ini: function(string, string2, string3) {
-        this.scroll_ul_2 = this.GetObj(string);
-        this.scroll_ul_1 = this.GetObj(string3);
-        this.scroll_div = this.GetObj(string2);
-        this.scroll_ul_2.innerHTML = this.scroll_ul_1.innerHTML;
-        this.scroll_div.scrollLeft = this.fill_1 >= 0 ? this.fill_1 : this.scroll_ul_1.scrollWidth - Math.abs(this.fill_1);
-    }
-
-}

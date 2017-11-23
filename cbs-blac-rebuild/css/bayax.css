@@ -979,6 +979,7 @@ body .bayax-layer-skin .layui-layer-page .layui-layer-content {
     position: relative;
     top: 0px;
     background-position: 0 0;
+    cursor: pointer;
 }
 
 .checkbox-i:hover {

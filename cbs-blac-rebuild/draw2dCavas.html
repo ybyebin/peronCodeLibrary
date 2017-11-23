@@ -67,6 +67,7 @@
                          <span class="title"> 当前您所在的位置:</span>  
                          <span class="image-name">123123123</span>
                     </label>
+
                 </li>
             </ul>
 
@@ -185,7 +186,7 @@
                         </div>
                         <div class="layui-tab-item ">
                             <div class="components-num4">
-                                <a class="LeftBotton" onmousedown='Comscroll.GoUp()' onmouseup="Comscroll.StopUp()" onmouseout="Comscroll.StopUp()" href="javascript:void(0);" target="_self"></a>
+                                <a id="LeftBotton" class="LeftBotton" href="javascript:void(0);" target="_self"></a>
 
                                 <div class="pcont" id="scroll_div">
                                     <div class="ScrCont">
@@ -315,7 +316,7 @@
                                         <ul id="scroll_ul_2" class="comportant-ul scroll-ul"></ul>
                                     </div>
                                 </div>
-                                <a class="RightBotton" onmousedown='Comscroll.GoDown()' onmouseup='Comscroll.StopDown()' onmouseout='Comscroll.StopDown()' href="javascript:void(0);" target="_self"></a>
+                                <a id="RightBotton" class="RightBotton" href="javascript:void(0);" target="_self"></a>
 
                             </div>
                         </div>
@@ -592,11 +593,7 @@
                                                         </span>
                                                     </div>
                                                     <ul class="style-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
-                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setStyleBorderWidth(item)">
-
-                                                        </li>
-
-
+                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setStyleBorderWidth(item)"></li>
                                                     </ul>
                                                 </div>
 
@@ -608,19 +605,14 @@
 
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p v-text="styles.borderStyle" class="bayax-division-text">123</p>
+                                                        <p v-text="styles.borderStyle" class="bayax-division-text"></p>
                                                         <span class="bayax-division-span bayax-division-icon" data-for="style-border-style">
-                                                                        <i></i>
-                                                                    </span>
+                                                            <i></i>
+                                                        </span>
                                                     </div>
                                                     <ul class="style-border-style  bayax-select-ul bayax-anim bayax-anim-upbit">
                                                         <li v-for="(item,index) in borderData.borderStyle" v-text="item.name" @click="setStyleBorderStyle(item)">
-
                                                         </li>
-
-
-
-
                                                     </ul>
                                                 </div>
 
@@ -630,19 +622,21 @@
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-
-                                                    <li>+</li>
-
+                                                    <li v-for="(item,index) in styles.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setStyleBorderColor(item)"></li>
+                                                    <li class="style-border-color">+</li>
                                                 </ul>
 
 
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in styles.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setStyleFillColor(item)"></li>
+                                                    <li class="style-fill-color">+</li>
+
+                                                </ul>
                                             </div>
                                         </div>
                                         <div v-bind:class="basicHideDiv" class=" layui-form-item">
@@ -680,7 +674,7 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="styles.alpha" type="text" name="title" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
@@ -691,7 +685,7 @@
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p class="bayax-division-text">123</p>
+                                                            <p v-model="styles.picture" class="bayax-division-text"></p>
                                                             <span class="bayax-division-span">
                                                                     <span>···</span>
                                                             </span>
@@ -702,7 +696,7 @@
                                             </div>
                                         </div>
                                         <div class="layui-formcheck-item layui-form-item">
-                                            <input type="checkbox" id="style-flashing-check" class="bayaxcheckbox ">
+                                            <input v-model="styles.flashing" type="checkbox" id="style-flashing-check" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="style-flashing-check"></label>
                                             <span>闪烁</span>
                                         </div>
@@ -721,19 +715,13 @@
 
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p class="bayax-division-text">123</p>
+                                                        <p v-text="ontrue.borderWidth" class="bayax-division-text">123</p>
                                                         <span class="bayax-division-span bayax-division-icon" data-for="ontrue-border-width">
-                                                                            <i></i>
-                                                                        </span>
+                                                            <i></i>
+                                                        </span>
                                                     </div>
                                                     <ul class="ontrue-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
-                                                        <!-- <li v-for="(item,index) in sysGroups" v-text="item.name" @click="creatSysLiClick(item)">
-                
-                                                                        </li> -->
-                                                        <li>123</li>
-                                                        <li>123</li>
-                                                        <li>123</li>
-
+                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setOnTrueBorderWidth(item)"></li>
                                                     </ul>
                                                 </div>
 
@@ -745,19 +733,13 @@
 
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p class="bayax-division-text">123</p>
+                                                        <p v-text="ontrue.borderStyle" class="bayax-division-text"></p>
                                                         <span class="bayax-division-span bayax-division-icon" data-for="ontrue-border-style">
-                                                                                <i></i>
-                                                                            </span>
+                                                            <i></i>
+                                                        </span>
                                                     </div>
                                                     <ul class="ontrue-border-style  bayax-select-ul bayax-anim bayax-anim-upbit">
-                                                        <!-- <li v-for="(item,index) in sysGroups" v-text="item.name" @click="creatSysLiClick(item)">
-                    
-                                                                            </li> -->
-                                                        <li>123</li>
-                                                        <li>123</li>
-                                                        <li>123</li>
-
+                                                        <li v-for="(item,index) in borderData.borderStyle" v-text="item.name" @click="setOnTrueBorderStyle(item)"></li>
                                                     </ul>
                                                 </div>
 
@@ -766,13 +748,19 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ontrue.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnTrueBorderColor(item)"></li>
+                                                    <li class="ontrue-border-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ontrue.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnTrueFillColor(item)"></li>
+                                                    <li class="ontrue-fill-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div v-bind:class="basicHideDiv" class=" layui-form-item">
@@ -810,7 +798,7 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="ontrue.alpha" type="text" name="title" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
@@ -821,9 +809,9 @@
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p class="bayax-division-text">123</p>
+                                                            <p v-model="ontrue.picture" class="bayax-division-text"></p>
                                                             <span class="bayax-division-span">
-                                                                            <span>···</span>
+                                                                <span>···</span>
                                                             </span>
                                                         </div>
 
@@ -832,7 +820,7 @@
                                             </div>
                                         </div>
                                         <div class="layui-formcheck-item layui-form-item">
-                                            <input type="checkbox" id="ontrue-flashing-check" class="bayaxcheckbox ">
+                                            <input v-model="ontrue.flashing" type="checkbox" id="ontrue-flashing-check" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="ontrue-flashing-check"></label>
                                             <span>闪烁</span>
                                         </div>
@@ -851,19 +839,13 @@
 
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p class="bayax-division-text">123</p>
+                                                        <p v-text="onfalse.borderWidth" class="bayax-division-text"></p>
                                                         <span class="bayax-division-span bayax-division-icon" data-for="onfalse-border-width">
-                                                                            <i></i>
-                                                                        </span>
+                                                            <i></i>
+                                                        </span>
                                                     </div>
                                                     <ul class="onfalse-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
-                                                        <!-- <li v-for="(item,index) in sysGroups" v-text="item.name" @click="creatSysLiClick(item)">
-                
-                                                                        </li> -->
-                                                        <li>123</li>
-                                                        <li>123</li>
-                                                        <li>123</li>
-
+                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setOnFalseBorderWidth(item)"></li>
                                                     </ul>
                                                 </div>
 
@@ -875,19 +857,13 @@
 
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p class="bayax-division-text">123</p>
+                                                        <p v-text="onfalse.borderStyle" class="bayax-division-text"></p>
                                                         <span class="bayax-division-span bayax-division-icon" data-for="onfalse-border-style">
-                                                                                <i></i>
-                                                                            </span>
+                                                            <i></i>
+                                                        </span>
                                                     </div>
                                                     <ul class="onfalse-border-style  bayax-select-ul bayax-anim bayax-anim-upbit">
-                                                        <!-- <li v-for="(item,index) in sysGroups" v-text="item.name" @click="creatSysLiClick(item)">
-                    
-                                                                            </li> -->
-                                                        <li>123</li>
-                                                        <li>123</li>
-                                                        <li>123</li>
-
+                                                        <li v-for="(item,index) in borderData.borderStyle" v-text="item.name" @click="setOnFalseBorderStyle(item)"></li>
                                                     </ul>
                                                 </div>
 
@@ -896,13 +872,19 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onfalse.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnFalseBorderColor(item)"></li>
+                                                    <li class="onfalse-border-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onfalse.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnFalseFillColor(item)"></li>
+                                                    <li class="onfalse-fill-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div v-bind:class="basicHideDiv" class=" layui-form-item">
@@ -940,7 +922,7 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="onfalse.alpha" type="text" name="title" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
@@ -951,9 +933,9 @@
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p class="bayax-division-text">123</p>
+                                                            <p v-model="onfalse.picture" class="bayax-division-text"></p>
                                                             <span class="bayax-division-span">
-                                                                            <span>···</span>
+                                                                <span>···</span>
                                                             </span>
                                                         </div>
 
@@ -962,7 +944,7 @@
                                             </div>
                                         </div>
                                         <div class="layui-formcheck-item layui-form-item">
-                                            <input type="checkbox" id="onfalse-flashing-check" class="bayaxcheckbox ">
+                                            <input v-model="onfalse.flashing" type="checkbox" id="onfalse-flashing-check" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="onfalse-flashing-check"></label>
                                             <span>闪烁</span>
                                         </div>
@@ -981,19 +963,13 @@
 
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p class="bayax-division-text">123</p>
+                                                        <p v-text="onalarm.borderWidth" class="bayax-division-text"></p>
                                                         <span class="bayax-division-span bayax-division-icon" data-for="onalarm-border-width">
-                                                                            <i></i>
-                                                                        </span>
+                                                            <i></i>
+                                                        </span>
                                                     </div>
                                                     <ul class="onalarm-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
-                                                        <!-- <li v-for="(item,index) in sysGroups" v-text="item.name" @click="creatSysLiClick(item)">
-                
-                                                                        </li> -->
-                                                        <li>123</li>
-                                                        <li>123</li>
-                                                        <li>123</li>
-
+                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setOnAlarmBorderWidth(item)"></li>
                                                     </ul>
                                                 </div>
 
@@ -1005,19 +981,13 @@
 
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p class="bayax-division-text">123</p>
+                                                        <p v-text="onalarm.borderStyle" class="bayax-division-text"></p>
                                                         <span class="bayax-division-span bayax-division-icon" data-for="onalarm-border-style">
-                                                                                <i></i>
-                                                                            </span>
+                                                            <i></i>
+                                                        </span>
                                                     </div>
                                                     <ul class="onalarm-border-style  bayax-select-ul bayax-anim bayax-anim-upbit">
-                                                        <!-- <li v-for="(item,index) in sysGroups" v-text="item.name" @click="creatSysLiClick(item)">
-                    
-                                                                            </li> -->
-                                                        <li>123</li>
-                                                        <li>123</li>
-                                                        <li>123</li>
-
+                                                        <li v-for="(item,index) in borderData.borderStyle" v-text="item.name" @click="setOnAlarmBorderStyle(item)"></li>
                                                     </ul>
                                                 </div>
 
@@ -1026,13 +996,19 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onalarm.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnAlarmBorderColor(item)"></li>
+                                                    <li class="onalarm-border-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onalarm.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnAlarmFillColor(item)"></li>
+                                                    <li class="onalarm-fill-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div v-bind:class="basicHideDiv" class=" layui-form-item">
@@ -1070,7 +1046,7 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="onalarm.alpha" type="text" name="title" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
@@ -1081,9 +1057,9 @@
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p class="bayax-division-text">123</p>
+                                                            <p v-model="onalarm.picture" class="bayax-division-text"></p>
                                                             <span class="bayax-division-span">
-                                                                            <span>···</span>
+                                                                <span>···</span>
                                                             </span>
                                                         </div>
 
@@ -1092,7 +1068,7 @@
                                             </div>
                                         </div>
                                         <div class="layui-formcheck-item layui-form-item">
-                                            <input type="checkbox" id="onalarm-flashing-check" class="bayaxcheckbox ">
+                                            <input v-model="onalarm.flashing" type="checkbox" id="onalarm-flashing-check" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="onalarm-flashing-check"></label>
                                             <span>闪烁</span>
                                         </div>
@@ -1111,19 +1087,13 @@
 
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p class="bayax-division-text">123</p>
+                                                        <p v-text="ondisc.borderWidth" class="bayax-division-text"></p>
                                                         <span class="bayax-division-span bayax-division-icon" data-for="ondisc-border-width">
-                                                                            <i></i>
-                                                                        </span>
+                                                            <i></i>
+                                                        </span>
                                                     </div>
                                                     <ul class="ondisc-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
-                                                        <!-- <li v-for="(item,index) in sysGroups" v-text="item.name" @click="creatSysLiClick(item)">
-                
-                                                                        </li> -->
-                                                        <li>123</li>
-                                                        <li>123</li>
-                                                        <li>123</li>
-
+                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setOnDiscBorderWidth(item)"></li>
                                                     </ul>
                                                 </div>
 
@@ -1135,19 +1105,13 @@
 
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p class="bayax-division-text">123</p>
+                                                        <p v-text="ondisc.borderStyle" class="bayax-division-text"></p>
                                                         <span class="bayax-division-span bayax-division-icon" data-for="ondisc-border-style">
-                                                                                <i></i>
-                                                                            </span>
+                                                            <i></i>
+                                                        </span>
                                                     </div>
                                                     <ul class="ondisc-border-style  bayax-select-ul bayax-anim bayax-anim-upbit">
-                                                        <!-- <li v-for="(item,index) in sysGroups" v-text="item.name" @click="creatSysLiClick(item)">
-                    
-                                                                            </li> -->
-                                                        <li>123</li>
-                                                        <li>123</li>
-                                                        <li>123</li>
-
+                                                        <li v-for="(item,index) in borderData.borderStyle" v-text="item.name" @click="setOnDiscBorderStyle(item)"></li>
                                                     </ul>
                                                 </div>
 
@@ -1156,13 +1120,19 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ondisc.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnDiscBorderColor(item)"></li>
+                                                    <li class="ondisc-border-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ondisc.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnDiscFillColor(item)"></li>
+                                                    <li class="ondisc-fill-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div v-bind:class="basicHideDiv" class=" layui-form-item">
@@ -1200,7 +1170,7 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="ondisc.alpha" type="text" name="title" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
@@ -1211,9 +1181,9 @@
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p class="bayax-division-text">123</p>
+                                                            <p v-model="ondisc.picture" class="bayax-division-text"></p>
                                                             <span class="bayax-division-span">
-                                                                            <span>···</span>
+                                                                <span>···</span>
                                                             </span>
                                                         </div>
 
@@ -1222,7 +1192,7 @@
                                             </div>
                                         </div>
                                         <div class="layui-formcheck-item layui-form-item">
-                                            <input type="checkbox" id="ondisc-flashing-check" class="bayaxcheckbox ">
+                                            <input v-model="ondisc.flashing" type="checkbox" id="ondisc-flashing-check" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="ondisc-flashing-check"></label>
                                             <span>闪烁</span>
                                         </div>
@@ -1315,7 +1285,7 @@
 
     </div>
 
-    <script type="text/javascript" src="js/canvas/basic/icheck.min.js"></script>
+    <!-- <script type="text/javascript" src="js/canvas/basic/icheck.min.js"></script> -->
     <script type="text/javascript" src="./plugin/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript" src="js/canvas/basic/colpick.js"></script>
     <script type="text/javascript" src="js/canvas/ComponentSet/safeComponent.js"></script>
@@ -1329,7 +1299,7 @@
     <script src="js/basic/api.js "></script>
     <script src="plugin/vue.js "></script>
     <script src="plugin/layui/layui.js "></script>
-    <script type="text/javascript" src="js/canvas/actionJS/attrmenu.js"></script>
+    <script src="js/canvas/actionJS/attrmenu.js"></script>
     <script src="./js/canvas/actionJS/canvas.js"></script>
 
 
