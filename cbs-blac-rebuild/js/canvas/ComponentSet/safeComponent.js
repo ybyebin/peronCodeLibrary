@@ -39,7 +39,71 @@ var switchs = 0,
     highqiuji = 0,
     EntranceGuard = 0,
     detector = 0;
-
+// 自定义控件属性
+var safeComponentData = {
+    type: "imageComponent", //类型			
+    proportion: { //自定义属性
+        havepoint: "", //(待定)
+        value: "", //(待定)
+    },
+    tag: {
+        tag_id: -1,
+        tag_type: -1,
+        tag_name: "",
+        bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
+    },
+    blinking: { //闪烁
+        flag: false, //是否闪烁
+        lineWidth: 1,
+        lineColor: "#DDDDDD",
+        lineStyle: null,
+        type: 'style' //备用(忘了干嘛的)
+    },
+    routine: {
+        name: '',
+        description: '', //组件描述
+        visible: false, //是否显示组件(setAlpha(0))
+        enable: false, //组件是否可用
+        accessLevel: 8, //访问等级 0~15
+        hint: { //hover 说明
+            flag: false, //是否显示
+            hintText: '' //text
+        },
+        caption: { //组件标题
+            flag: false, //是否显示
+            capText: 'label' //内容
+        },
+        readOnly: false, //组件是否为只读
+    },
+    onTrue: {
+        lineWidth: 1,
+        lineColor: "#DDDDDD",
+        lineStyle: null,
+        blinking: false,
+        picture: ''
+    },
+    onFalse: {
+        lineWidth: 1,
+        lineColor: "#DDDDDD",
+        lineStyle: null,
+        blinking: false,
+        picture: ''
+    },
+    onAlarm: {
+        lineWidth: 1,
+        lineColor: "#DDDDDD",
+        lineStyle: null,
+        blinking: false,
+        picture: ''
+    },
+    onDisconnected: {
+        lineWidth: 1,
+        lineColor: "#DDDDDD",
+        lineStyle: null,
+        blinking: false,
+        picture: ''
+    }
+}
 
 
 /** 
@@ -203,30 +267,7 @@ var pipingComponent = draw2d.shape.basic.Rectangle.extend({
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
         var data = {
-                name: "管道",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "管道", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
+
                 onTrue: {
                     LineWidth: 1,
                     LineColor: "#DDDDDD",
@@ -4567,19 +4608,17 @@ var detectorComponent = draw2d.shape.basic.Rectangle.extend({
 
 // 属性框
 function displayDiv(component) {
-    //重置属性框
-    // resetAttributeMenu();
-    // $canvas.menuDivBasicHide.hide();
-    // $canvas.menuDivTitle.show();
-
     // 基本
+    setComponentOptions.basePublicSet(component);
+
     setComponentOptions.basicSet(component);
-    // 位置大小
-    setComponentOptions.sizeAndOffset(component);
+    // 大小
+    setComponentOptions.componentSize(component);
+    // 位置 旋转角度
+    setComponentOptions.componentOffsetAndAngle(component);
+
     // 标题
     setComponentOptions.componentCaption(component);
-
-
 
 }
 

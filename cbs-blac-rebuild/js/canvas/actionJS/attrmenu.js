@@ -1,48 +1,39 @@
 var setComponentOptions = {
-    // 基本属性
-    basicSet: function(component) {
 
+    // public method
+    basePublicSet: function(component) {
         var vueRoutine = canvasVue.routine;
         var vueDatas = canvasVue.datas;
-        var vueStyle = canvasVue.styles;
-
-        var vueOnTrue = canvasVue.ontrue;
-        var vueOnFalse = canvasVue.onfalse;
-        var vueOnAlarm = canvasVue.onalarm;
-        var vueOnDisc = canvasVue.ondisc;
-
+        // var vueStyle = canvasVue.styles;
         var data = component.getUserData();
-        /************************basic--begin************************************ */
-
         // 组件名称   name(用户输入)
-        vueRoutine.name = data.name;
+        vueRoutine.name = data.routine.name;
 
         //组件描述   Description
-        vueRoutine.description = data.description;
+        vueRoutine.description = data.routine.description;
 
-        //隐藏组件 Visible  
-        console.log('隐藏组件:' + data.visible)
-        if (data.visible) {
+        //隐藏组件 Visible
+        console.log('隐藏组件:' + data.routine.visible)
+        if (data.routine.visible) {
             vueRoutine.visible = true;
         } else {
             vueRoutine.visible = false;
         }
 
-        //是否不可用 Enable  
-        if (data.enable) {
+        //是否不可用 Enable 
+        if (data.routine.enable) {
             vueRoutine.enable = true;
         } else {
             vueRoutine.enable = false;
         }
 
         //访问等级  AccessLevel 
-        vueRoutine.accessLevel = data.accessLevel;
+        vueRoutine.accessLevel = data.routine.accessLevel;
 
-
-        //是否显示hover  ShowHint 
-        if (data.showHint) {
+        //是否显示hover  ShowHint
+        if (data.routine.hint.flag) {
             vueRoutine.hover = true;
-            vueRoutine.hoverdata.text = data.hint;
+            vueRoutine.hoverdata.text = data.routine.hint.hintText;
             vueRoutine.hoverdata.disabled = false;
         } else {
             vueRoutine.hover = false;
@@ -54,15 +45,26 @@ var setComponentOptions = {
         vueDatas.tag.tagname = data.tag.tag_name;
 
         //是否只读  Readonly 
-
-        if (data.readonly) {
+        if (data.routine.readOnly) {
             vueDatas.readonly = true;
         } else {
             vueDatas.readonly = false;
         }
 
-        /************************basic--end************************************ */
+    },
+    // 基本属性
+    basicSet: function(component) {
 
+        // var vueRoutine = canvasVue.routine;
+        var vueDatas = canvasVue.datas;
+        var vueStyle = canvasVue.styles;
+
+        var vueOnTrue = canvasVue.ontrue;
+        var vueOnFalse = canvasVue.onfalse;
+        var vueOnAlarm = canvasVue.onalarm;
+        var vueOnDisc = canvasVue.ondisc;
+
+        var data = component.getUserData();
 
         /************************style--begin************************************ */
 
@@ -98,7 +100,7 @@ var setComponentOptions = {
         }
 
         //style 闪烁  blinking
-        if (data.blinking) {
+        if (data.blinking.flag) {
             vueStyle.flashing = true;
         } else {
             vueStyle.flashing = false;
@@ -269,17 +271,44 @@ var setComponentOptions = {
         } else {
             vueOnDisc.flashing = false;
         }
-
-
-
-
-
         /************************onDisc-- end************************************ */
+    },
 
-
-
+    //(属性设置) 宽高
+    componentSize: function(component) {
+        var vueRoutine = canvasVue.routine;
+        // var data = component.getUserData();
+        vueRoutine.width = component.getWidth();
+        vueRoutine.height = component.getHeight();
 
     },
+
+    //(属性设置) 位置 旋转角度
+    componentOffsetAndAngle: function(component) {
+        var vueRoutine = canvasVue.routine;
+        //组件位置 X轴位置 
+        vueRoutine.offx = component.getAbsoluteX().toFixed(0);
+        //组件位置 Y轴位置
+        vueRoutine.offy = component.getAbsoluteY();
+        vueRoutine.rotationAngle = component.getRotationAngle();
+    },
+
+    // (属性设置) 显示标题
+    componentCaption: function(component) {
+        var vueRoutine = canvasVue.routine;
+        var data = component.getUserData().routine.caption; //captions={show:true,text:'标题'}
+
+        if (data.flag) {
+            vueRoutine.title = true;
+            vueRoutine.titledata.text = data.capText;
+            vueRoutine.titledata.disabled = false;
+        } else {
+            vueRoutine.title = false;
+            vueRoutine.titledata.disabled = true;
+
+        }
+    },
+
 
     // 基本图形
     rectangleSet: function(component) {
@@ -315,8 +344,6 @@ var setComponentOptions = {
         }
         // 透明度
         vueStyle.alpha = component.getAlpha();
-
-
 
         // =============================onTrue===================================
         //填充(背景)颜色  fillColor
@@ -420,13 +447,6 @@ var setComponentOptions = {
     // label
     labelSet: function(component) {
 
-    },
-    // text
-    textSet: function(component) {
-
-    },
-    // 自定义图像
-    imageSet: function(component) {
         var vueStyle = canvasVue.styles;
 
         var vueOnTrue = canvasVue.ontrue;
@@ -436,9 +456,230 @@ var setComponentOptions = {
 
         var data = component.getUserData();
 
-        // vueStyle.
+        /************************style--begin************************************ */
+
+        //边框宽度  borderWidth
+        vueStyle.borderWidth = component.getStroke();
+
+        //边框样式 borderStyle
+        var s_border_style = component.getDashArray();
+        if (s_border_style === null) {
+            vueStyle.borderStyle = '默认';
+        } else {
+            vueStyle.borderStyle = s_border_style;
+        }
+
+        // 边框颜色
+        var s_border_color = component.getColor().hash();
+        var s_flag = true;
+        vueStyle.borderColor.color = s_border_color;
+        vueStyle.borderColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === s_border_color) {
+                ele.active = true;
+                s_flag = false;
+            }
+        });
+        if (s_flag) {
+            vueStyle.borderColor.colorData.shift();
+            vueStyle.borderColor.colorData.push({
+                color: s_border_color,
+                colorstyle: 'background-color:' + s_border_color,
+                active: true
+            })
+        }
 
 
+        //填充(背景)颜色  fillColor
+        var s_fill_color = component.getBackgroundColor().hash();
+        var s_flag = true;
+        vueStyle.fillColor.color = s_fill_color;
+        vueStyle.fillColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === s_fill_color) {
+                ele.active = true;
+                s_flag = false;
+            }
+        });
+        if (s_flag) {
+            vueStyle.fillColor.colorData.shift();
+            vueStyle.fillColor.colorData.push({
+                color: s_fill_color,
+                colorstyle: 'background-color:' + s_fill_color,
+                active: true
+            })
+        }
+
+        //style 闪烁  blinking
+        if (data.blinking.flag) {
+            vueStyle.flashing = true;
+        } else {
+            vueStyle.flashing = false;
+        }
+
+
+        // 文本内容   
+
+
+
+
+        // 文本颜色
+
+
+
+
+
+
+
+
+
+        /************************style--end************************************** */
+    },
+    // text
+    textSet: function(component) {
+
+
+
+
+
+
+
+
+
+        // =============================style=================================== 
+        //填充(背景)颜色  fillColor
+        var s_fill_color = component.getBackgroundColor().hash();
+        var s_flag = true;
+        vueStyle.fillColor.color = s_fill_color;
+        vueStyle.fillColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === s_fill_color) {
+                ele.active = true;
+                s_flag = false;
+            }
+        });
+        if (s_flag) {
+            vueStyle.fillColor.colorData.shift();
+            vueStyle.fillColor.colorData.push({
+                color: s_fill_color,
+                colorstyle: 'background-color:' + s_fill_color,
+                active: true
+            })
+        }
+
+        // 文本内容  Text
+        // 字体大小
+        // 文本颜色
+
+        // =============================onTrue===================================
+        //填充(背景)颜色  fillColor
+        var ot_fill_color = data.onTrue.fillColor;
+        var ot_flag = true;
+        vueOnTrue.fillColor.color = ot_fill_color;
+        vueOnTrue.fillColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === ot_fill_color) {
+                ele.active = true;
+                s_flag = false;
+            }
+        });
+        if (ot_flag) {
+            vueOnTrue.fillColor.colorData.shift();
+            vueOnTrue.fillColor.colorData.push({
+                color: ot_fill_color,
+                colorstyle: 'background-color:' + ot_fill_color,
+                active: true
+            })
+        }
+
+        // 文本内容  Text
+        // 文本颜色
+
+
+        // =============================onFalse===================================
+        // 填充(背景)颜色  fillColor
+        var of_fill_color = data.onFlase.fillColor;
+        var of_flag = true;
+        vueOnFalse.fillColor.color = of_fill_color;
+        vueOnFalse.fillColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === of_fill_color) {
+                ele.active = true;
+                s_flag = false;
+            }
+        });
+        if (of_flag) {
+            vueOnFalse.fillColor.colorData.shift();
+            vueOnFalse.fillColor.colorData.push({
+                color: of_fill_color,
+                colorstyle: 'background-color:' + of_fill_color,
+                active: true
+            })
+        }
+
+
+        // 文本内容  Text
+        // 文本颜色
+
+
+        // =============================onAlarm===================================
+        // 填充(背景)颜色  fillColor
+        var oa_fill_color = data.onAlarm.fillColor;
+        var oa_flag = true;
+        vueOnAlarm.fillColor.color = oa_fill_color;
+        vueOnAlarm.fillColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === oa_fill_color) {
+                ele.active = true;
+                s_flag = false;
+            }
+        });
+        if (oa_flag) {
+            vueOnAlarm.fillColor.colorData.shift();
+            vueOnAlarm.fillColor.colorData.push({
+                color: of_fill_color,
+                colorstyle: 'background-color:' + oa_fill_color,
+                active: true
+            })
+        }
+
+        // 文本内容  Text
+        // 文本颜色
+
+
+        // =============================onDisconnected===================================
+        // 填充(背景)颜色  fillColor
+        var od_fill_color = data.ononDisconnected.fillColor;
+        var od_flag = true;
+        vueOnDisc.fillColor.color = od_fill_color;
+        vueOnDisc.fillColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === od_fill_color) {
+                ele.active = true;
+                s_flag = false;
+            }
+        });
+        if (od_flag) {
+            vueOnDisc.fillColor.colorData.shift();
+            vueOnDisc.fillColor.colorData.push({
+                color: od_fill_color,
+                colorstyle: 'background-color:' + od_fill_color,
+                active: true
+            })
+        }
+
+        // 文本内容  Text
+        // 文本颜色
+
+    },
+    // 自定义图像
+    imageSet: function(component) {
+        var data = component.getUserData();
+        canvasVue.styles.picture = data.routine.picture;
+        canvasVue.ontrue.picture = data.onTue.picture;
+        canvasVue.onfalse.picture = data.onFalse.picture;
+        canvasVue.onalarm.picture = data.onAlarm.picture;
+        canvasVue.ondisc.picture = data.onDisconnected.picture;
     },
     // 建筑设备、安全防范
     safeSet: function() {
@@ -446,32 +687,7 @@ var setComponentOptions = {
     },
 
 
-    //(属性设置) 宽高位置旋转角度
-    sizeAndOffset: function(component) {
-        var routine = canvasVue.routine;
-        // var data = component.getUserData();
-        routine.width = component.getWidth();
-        routine.height = component.getHeight();
-        routine.offx = component.getAbsoluteX().toFixed(0);
-        routine.offy = component.getAbsoluteY();
-        routine.rotationAngle = component.getRotationAngle();
 
-    },
-    // (属性设置) 显示标题
-    componentCaption: function(component) {
-        var vueRoutine = canvasVue.routine;
-        var data = component.getUserData().captions; //captions={show:true,text:'标题'}
-
-        if (data.show) {
-            vueRoutine.title = true;
-            vueRoutine.titledata.text = data.text;
-            vueRoutine.titledata.disabled = false;
-        } else {
-            vueRoutine.title = false;
-            vueRoutine.titledata.disabled = true;
-
-        }
-    },
     // [编辑控件前 检查前一个控件 TagID 是否绑定上]
     checkPreviousComponentTag: function() {
         var id = canvasVue.componentData.id;
@@ -642,6 +858,51 @@ var basicSet = {
             }
         });
 
+
+        //style 字体颜色设置
+        $('.style-font-color').colpick({
+            layout: 'hex',
+            submitText: '确定',
+            onShow: function() {
+                var color = canvasVue.styles.fontColor.color;
+                if (color != '') {
+                    $(this).colpickSetColor(color.substring(1));
+                }
+
+            },
+            onSubmit: function(hsb, hex, rgb, el) {
+                // var node = getNode();
+                // node.userData.BlinkingColor = '#' + hex;
+                // node.setColor("#" + hex);
+                // node.repaint();
+                var color = ('#' + hex).toUpperCase();
+                var flag = true;
+                var fontColor = canvasVue.styles.fontColor;
+                // if (color !== borderColor.color) {
+                fontColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                    if (ele.color === color) {
+                        ele.active = true;
+                        flag = false;
+                    }
+                });
+                if (flag) {
+                    fontColor.colorData.shift();
+                    fontColor.colorData.push({
+                        color: color,
+                        colorstyle: 'background-color:' + color,
+                        active: true
+                    })
+                }
+
+                fontColor.color = color;
+                console.log(color)
+                $(el).colpickHide();
+            }
+        });
+
+
+
         //ontrue 边框颜色设置
         $('.ontrue-border-color').colpick({
             layout: 'hex',
@@ -725,6 +986,51 @@ var basicSet = {
             }
         });
 
+        // ontrue 字体颜色设置
+        $('.ontrue-font-color').colpick({
+            layout: 'hex',
+            submitText: '确定',
+            onShow: function() {
+                var color = canvasVue.ontrue.fontColor.color;
+                if (color != '') {
+                    $(this).colpickSetColor(color.substring(1));
+                }
+
+            },
+            onSubmit: function(hsb, hex, rgb, el) {
+                // var node = getNode();
+                // node.userData.BlinkingColor = '#' + hex;
+                // node.setColor("#" + hex);
+                // node.repaint();
+                var color = ('#' + hex).toUpperCase();
+                var flag = true;
+                var fontColor = canvasVue.ontrue.fontColor;
+                // if (color !== borderColor.color) {
+                fontColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                    if (ele.color === color) {
+                        ele.active = true;
+                        flag = false;
+                    }
+                });
+                if (flag) {
+                    fontColor.colorData.shift();
+                    fontColor.colorData.push({
+                        color: color,
+                        colorstyle: 'background-color:' + color,
+                        active: true
+                    })
+                }
+
+                fontColor.color = color;
+                console.log(color)
+                $(el).colpickHide();
+            }
+        });
+
+
+
+
         //onfalse 边框颜色设置
         $('.onfalse-border-color').colpick({
             layout: 'hex',
@@ -766,6 +1072,8 @@ var basicSet = {
             }
         });
 
+
+
         //onfalse 填充颜色设置
         $('.onfalse-fill-color').colpick({
             layout: 'hex',
@@ -803,6 +1111,49 @@ var basicSet = {
                 }
 
                 fillColor.color = color;
+                console.log(color)
+                $(el).colpickHide();
+            }
+        });
+
+
+        // onfalse 字体颜色设置
+        $('.onfalse-font-color').colpick({
+            layout: 'hex',
+            submitText: '确定',
+            onShow: function() {
+                var color = canvasVue.onfalse.fontColor.color;
+                if (color != '') {
+                    $(this).colpickSetColor(color.substring(1));
+                }
+
+            },
+            onSubmit: function(hsb, hex, rgb, el) {
+                // var node = getNode();
+                // node.userData.BlinkingColor = '#' + hex;
+                // node.setColor("#" + hex);
+                // node.repaint();
+                var color = ('#' + hex).toUpperCase();
+                var flag = true;
+                var fontColor = canvasVue.onfalse.fontColor;
+                // if (color !== borderColor.color) {
+                fontColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                    if (ele.color === color) {
+                        ele.active = true;
+                        flag = false;
+                    }
+                });
+                if (flag) {
+                    fontColor.colorData.shift();
+                    fontColor.colorData.push({
+                        color: color,
+                        colorstyle: 'background-color:' + color,
+                        active: true
+                    })
+                }
+
+                fontColor.color = color;
                 console.log(color)
                 $(el).colpickHide();
             }
@@ -891,6 +1242,48 @@ var basicSet = {
             }
         });
 
+        // onalarm 字体颜色设置
+        $('.onalarm-font-color').colpick({
+            layout: 'hex',
+            submitText: '确定',
+            onShow: function() {
+                var color = canvasVue.onalarm.fontColor.color;
+                if (color != '') {
+                    $(this).colpickSetColor(color.substring(1));
+                }
+
+            },
+            onSubmit: function(hsb, hex, rgb, el) {
+                // var node = getNode();
+                // node.userData.BlinkingColor = '#' + hex;
+                // node.setColor("#" + hex);
+                // node.repaint();
+                var color = ('#' + hex).toUpperCase();
+                var flag = true;
+                var fontColor = canvasVue.onalarm.fontColor;
+                // if (color !== borderColor.color) {
+                fontColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                    if (ele.color === color) {
+                        ele.active = true;
+                        flag = false;
+                    }
+                });
+                if (flag) {
+                    fontColor.colorData.shift();
+                    fontColor.colorData.push({
+                        color: color,
+                        colorstyle: 'background-color:' + color,
+                        active: true
+                    })
+                }
+
+                fontColor.color = color;
+                console.log(color)
+                $(el).colpickHide();
+            }
+        });
+
         //ondisc 边框颜色设置
         $('.ondisc-border-color').colpick({
             layout: 'hex',
@@ -973,6 +1366,50 @@ var basicSet = {
                 $(el).colpickHide();
             }
         });
+
+        // ondisc 字体颜色设置
+        $('.ondisc-font-color').colpick({
+            layout: 'hex',
+            submitText: '确定',
+            onShow: function() {
+                var color = canvasVue.ondisc.fontColor.color;
+                if (color != '') {
+                    $(this).colpickSetColor(color.substring(1));
+                }
+
+            },
+            onSubmit: function(hsb, hex, rgb, el) {
+                // var node = getNode();
+                // node.userData.BlinkingColor = '#' + hex;
+                // node.setColor("#" + hex);
+                // node.repaint();
+                var color = ('#' + hex).toUpperCase();
+                var flag = true;
+                var fontColor = canvasVue.ondisc.fontColor;
+                // if (color !== borderColor.color) {
+                fontColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                    if (ele.color === color) {
+                        ele.active = true;
+                        flag = false;
+                    }
+                });
+                if (flag) {
+                    fontColor.colorData.shift();
+                    fontColor.colorData.push({
+                        color: color,
+                        colorstyle: 'background-color:' + color,
+                        active: true
+                    })
+                }
+
+                fontColor.color = color;
+                console.log(color)
+                $(el).colpickHide();
+            }
+        });
+
+
     },
     // 控件滚动操作
     comscroll: {
@@ -1362,7 +1799,112 @@ $('.have-btn').on('click', 'button', function() {
 });
 
 
+window.$canvas = {
+    loadings: $('.loading'), //加载等待
+    // 菜单
+    menuFirAttr: $('.first-attr'),
+    menuSecAttr: $('.second-attr'),
+    menuDivAlpha: $('.div-alpha'),
+    menuDivUnit: $('.div-unit'),
+    menuDivTitle: $('.div-title'),
+    menuDivImage: $('.div-image'),
+    menuDivFontSize: $('.div-font-size'),
+    menuDivTextAlpha: $('.div-text-alpha'),
+    menuDivTextVal: $('.div-text-val'),
+    menuDivTextColor: $('.div-text-color'),
+    menuDivFontSize: $('.div-font-size'),
+    menuDivBasicHide: $('.div-basic-hide'),
+    menuJustForLabel: $('.just-for-label'),
+    menuDivLineOnly: $('.div-line-only'),
+    menuDivFill: $('.div-fill'),
+    menuVlcUrl: $('.div-vlcurl'), //摄像地址div
+    menuDivLineCheck: $('.div-line-check'),
+    menuDivNormalWidth: $('.div-normal-width'),
+    menuDIvLineConduit: $('.div-line-conduit'),
+    menuDivLabel: $('.div-label'),
 
+    comTooltips: $('#tooltips'), //控件提示框
+    compID: $("#spanid"), //ID
+    compName: $('#comp-name'), //名称
+    compDesc: $('#comp-desc'), //描述
+    comWidth: $('#comp-width'), //宽
+    comHeight: $('#comp-height'), //高
+    comOffsetX: $('#comp-offsetx'), //位置 x
+    comOffsetY: $('#comp-offsety'), //位置 y
+    comRotation: $('#comp-rotation'), //旋转角度
+    comCaption: $('#comp-title'), //显示标题
+    comCaptionVal: $('#comp-title-val'), //标题内容
+    comHides: $('#comp-hides'), //隐藏控件
+    comEnable: $('#comp-unabel'), //是否可用
+    comLevel: $('#comp-level'), //访问等级
+    comHover: $('#comp-hover'), //hover
+    comHoverVal: $('#comp-hover-val'), //hover内容
+    comTagadd: $('#comp-tagaddress'), //tag
+    comReadonly: $('#comp-readonly'), //只读
+    comVlcUrlVal: $('#comp-vlc-val'), //摄像地址
+
+    styleWidth: $('#style-width'), //style 宽度
+    styleBorderColor: $('.style-border-color ul li'), // style 边框颜色
+    styleFillColor: $('.style-fill-color ul li'), // style 填充颜色
+    styleStyle: $('#style-style'), //style style
+    styleAlpha: $('#comp-alpha-style'), //style 透明度
+    styleFlash: $('#style-flashing'), // style 闪烁
+    stylePicture: $('#style-image'), //style 图片地址
+    styleText: $('#style-text'), //style 文本内容
+    styleFontSize: $('#text-font-size'), //style 字体大小
+    styleFontColor: $('.style-text-color ul li'), //style 字体颜色
+    styleTextUnit: $('#comp-unit-style'), //style 文本单位
+    styleBgAlpha: $('#text-alpha-style'), //style text背景透明
+
+    onTrueWidth: $('#ontrue-width'), // ontrue 宽度
+    onTrueBorderColor: $('.ontrue-border-color ul li'), //ontrue 边框颜色
+    onTrueFillColor: $('.ontrue-fill-color ul li'), // ontrue 填充颜色
+    onTrueStyle: $('#ontrue-style'), //ontrue style
+    onTrueAlpha: $('#comp-alpha-ontrue'), //ontrue 透明度
+    onTrueFlash: $('#ontrue-flashing'), // ontrue 闪烁
+    onTruePicture: $('#ontrue-image'), //ontrue 图片地址
+    onTrueText: $('#ontrue-text'), //onTrue 文本内容
+    onTrueFontColor: $('.ontrue-text-color ul li'), //onTrue 字体颜色
+    onTrueTextUnit: $('#comp-unit-ontrue'), //ontrue 文本单位
+    onTrueBgAlpha: $('#text-alpha-ontrue'), //ontrue text背景透明
+
+
+    onFalseWidth: $('#onfalse-width'), // onfalse 宽度
+    onFalseBorderColor: $('.onfalse-border-color ul li'), // onfalse 边框颜色
+    onFalseFillColor: $('.onfalse-fill-color ul li'), //onfalse 填充颜色
+    onFalseStyle: $('#onfalse-style'), //onfalse style
+    onFalseAlpha: $('#comp-alpha-onfalse'), //onfalse 透明度
+    onFalseFlash: $('#onfalse-flashing'), //onfalse 闪烁
+    onFalsePicture: $('#onfalse-image'), //onfalse 图片地址
+    onFalseText: $('#onfalse-text'), //onfalse 文本内容
+    onFalseFontColor: $('.onfalse-text-color ul li'), //onfalse  字体颜色
+    onFalseTextUnit: $('#comp-unit-onfalse'), //onfalse 文本单位
+    onFalseBgAlpha: $('#text-alpha-onfalse'), //onfalse text背景透明
+
+    onAlarmWidth: $('#onalarm-width'), //onalarm 宽度
+    onAlarmBorderColor: $('.onalarm-border-color ul li'), //onalarm 边框颜色
+    onAlarmFillColor: $('.onalarm-fill-color ul li'), //onalarm 填充颜色
+    onAlarmStyle: $('#onalarm-style'), //onalarm style
+    onAlarmAlpha: $('#comp-alpha-onalarm'), //onalarm 透明度
+    onAlarmFlash: $('#onalarm-flashing'), //onalarm 闪烁
+    onAlarmPicture: $('#onalarm-image'), //onalarm 图片地址
+    onAlarmText: $('#onalarm-text'), //onalarm 文本内容
+    onAlarmFontColor: $('.onalarm-text-color ul li'), //onalarm 字体颜色
+    onAlarmTextUnit: $('#comp-unit-onalarm'), //onalarm 文本单位
+    onAlarmBgAlpha: $('#text-alpha-onalarm'), //onalarm text背景透明
+
+    onDiscWidth: $('#onDisc-width'), //ondisc 宽度
+    onDiscBorderColor: $('.onDisc-border-color ul li'), //ondisc 边框颜色
+    onDiscFillColor: $('.onDisc-fill-color ul li'), //ondisc 填充颜色
+    onDiscStyle: $('#onDisc-style'), //ondisc style
+    onDiscAlpha: $('#comp-alpha-ondisc'), //ondisc 透明度
+    onDiscFlash: $('#onDisc-flashing'), //ondisc 闪烁
+    onDiscPicture: $('#onDisc-image'), //ondisc 图片地址
+    onDiscText: $('#onDisc-text'), //ondisc 文本内容
+    onDiscFontColor: $('.onDisc-text-color ul li'), //ondisc 字体颜色
+    onDiscTextUnit: $('#comp-unit-ondis'), //ondisc 文本单位
+    onDiscBgAlpha: $('#text-alpha-ondisc'), //ondisc text背景透明
+}
 
 
 

@@ -10,6 +10,73 @@ var rectangle = 0,
     conduitnum = 0,
     forDown = 0;
 
+// 自定义控件属性
+var RectangleData = JSON.stringify({
+    type: "basicComponent", //类型			
+    proportion: { //自定义属性
+        havepoint: "", //(待定)
+        value: "", //(待定)
+    },
+    tag: {
+        tag_id: -1,
+        tag_type: -1,
+        tag_name: "",
+        bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
+    },
+    blinking: { //闪烁
+        flag: false, //是否闪烁
+        lineWidth: 1,
+        lineColor: "#D8D8D8",
+        lineStyle: null,
+        type: 'style' //备用(忘了干嘛的)
+    },
+    routine: {
+        name: '',
+        description: '', //组件描述
+        visible: false, //是否显示组件(setAlpha(0))
+        enable: false, //组件是否可用
+        accessLevel: 8, //访问等级 0~15
+        hint: { //hover 说明
+            flag: false, //是否显示
+            hintText: '' //text
+        },
+        readOnly: false, //组件是否为只读
+    },
+    onTrue: {
+        lineWidth: 1,
+        lineColor: "#35C99D",
+        lineStyle: null,
+        fillColor: "#35C99D",
+        alpha: 1,
+        blinking: false,
+    },
+    onFalse: {
+        lineWidth: 1,
+        lineColor: "#35C99D",
+        lineStyle: null,
+        fillColor: "#35C99D",
+        alpha: 1,
+        blinking: false,
+    },
+    onAlarm: {
+        lineWidth: 1,
+        lineColor: "#35C99D",
+        lineStyle: null,
+        fillColor: "#35C99D",
+        alpha: 1,
+        blinking: false,
+    },
+    onDisconnected: {
+        lineWidth: 1,
+        lineColor: "#35C99D",
+        lineStyle: null,
+        fillColor: "#35C99D",
+        alpha: 1,
+        blinking: false,
+    }
+})
+
+
 /** 
  * 矩形
  * @author
@@ -28,87 +95,32 @@ var rectangleComponent = draw2d.shape.node.Between.extend({
 
 
         var thiss = this;
-        var data = {
-            havepoint: "",
-            name: "矩形",
-            types: "basicComponent", //类型			
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 8, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 1,
-            BlinkingColor: "#D8D8D8",
-            DashArray: null,
-            BlinkingType: "style",
-            onTrue: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                FillColor: "#35C99D",
-                alpha: 1,
-                Blinking: false,
-            },
-            onFalse: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            },
-            onAlarm: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            },
-            onDisconnected: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            }
-        }
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '矩形';
         this.attr({
             userData: data
         });
         // 选中
         this.on("click", function() {
-            basicdisplayDiv(thiss);
+            // basicdisplayDiv(thiss);
         });
 
         // 缩放
         this.on("resize", function() {
-            componentResize(thiss);
+            // componentResize(thiss);
         });
         // 移动
         this.on("move", function() {
-            componentMove(thiss);
+            // componentMove(thiss);
         });
         // 悬浮窗
         this.onMouseEnter = function() {
-            if (thiss.userData.ShowHint) {
-                showTooltips(thiss);
-            }
+            // if (thiss.userData.ShowHint) {
+            //     showTooltips(thiss);
+            // }
         };
         this.onMouseLeave = function() {
-            $canvas.comTooltips.hide();
+            // $canvas.comTooltips.hide();
         };
     },
     onTimer: function() {
@@ -146,63 +158,12 @@ var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
         // this.setColor("#D8D8D8"); //边框颜色
         this.setBackgroundColor("#35C99D"); //背景颜色
         var thiss = this;
-        var data = {
-            havepoint: "",
-            name: "圆角矩形",
-            types: "basicComponent", //类型
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述			
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 7, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 1,
-            BlinkingColor: "#D8D8D8",
-            DashArray: null,
-            BlinkingType: "style",
-            onTrue: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            },
-            onFalse: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            },
-            onAlarm: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            },
-            onDisconnected: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            },
-        }
+
+
+
+
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '圆角矩形';
         this.attr({
             userData: data
         });
@@ -264,63 +225,8 @@ var EllipseComponent = draw2d.shape.node.Between.extend({
         // 这里设置hover事件
         var thiss = this;
         this.setHeight(30);
-        var data = {
-            havepoint: "",
-            name: "椭圆",
-            types: "basicComponent", //类型
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 8, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 1,
-            BlinkingColor: "#D8D8D8",
-            DashArray: null,
-            BlinkingType: "style",
-            onTrue: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            }, //状态 
-            onFalse: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            }, //状态 onFalse
-            onAlarm: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            }, //状态 onAlarm
-            onDisconnected: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            }, //状态 onDisconnected
-        }
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '椭圆';
         this.attr({
             userData: data
         });
@@ -378,62 +284,8 @@ var polygonComponent = draw2d.shape.basic.Polygon.extend({
         var w = this.width;
         var h = this.height;
         var thiss = this;
-        var data = {
-            name: "多边形",
-            types: "basicComponent", //类型
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 7, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 1,
-            BlinkingColor: "#D8D8D8",
-            DashArray: null,
-            BlinkingType: "style",
-            onTrue: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            },
-            onFalse: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            },
-            onAlarm: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            },
-            onDisconnected: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false,
-            },
-        }
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '多边形';
         this.attr({
             userData: data
         });
@@ -491,62 +343,8 @@ var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
 
         this.setBackgroundColor("#35C99D"); //背景颜色		
         var thiss = this;
-        var data = {
-            name: "水平双向箭头",
-            types: "basicComponent", //类型			
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 8, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 0,
-            BlinkingColor: "#D8D8D8",
-            DashArray: "",
-            BlinkingType: "style",
-            onTrue: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onFalse: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onAlarm: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onDisconnected: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: null,
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-        }
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '水平双箭头';
         this.attr({
             userData: data
         });
@@ -616,62 +414,8 @@ var BothArrowVComponent = draw2d.shape.icon.Icon.extend({
         }, attr), setter, getter);
         this.setBackgroundColor("#35C99D"); //背景颜色
         var thiss = this;
-        var data = {
-            name: "垂直双向箭头",
-            types: "basicComponent", //类型
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 8, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 0,
-            BlinkingColor: "#D8D8D8",
-            DashArray: "",
-            BlinkingType: "style",
-            onTrue: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onFalse: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onAlarm: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onDisconnected: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-        }
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '垂直双箭头';
         this.attr({
             userData: data
         });
@@ -741,62 +485,8 @@ var forRightComponent = draw2d.shape.icon.Icon.extend({
         }, attr), setter, getter);
         this.setBackgroundColor("#35C99D"); //背景颜色
         var thiss = this;
-        var data = {
-            name: "右箭头",
-            types: "basicComponent", //类型
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 8, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 0,
-            BlinkingColor: "#35C99D",
-            DashArray: "",
-            BlinkingType: "style",
-            onTrue: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onFalse: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onAlarm: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onDisconnected: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-        }
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '右箭头';
         this.attr({
             userData: data
         });
@@ -866,67 +556,11 @@ var forLeftComponent = draw2d.shape.icon.Icon.extend({
         }, attr), setter, getter);
         this.setBackgroundColor("#35C99D"); //背景颜色
         var thiss = this;
-        var data = {
-            name: "左箭头",
-            types: "basicComponent", //类型
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 8, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 0,
-            BlinkingColor: "#35C99D",
-            DashArray: "",
-            BlinkingType: "style",
-            onTrue: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onFalse: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onAlarm: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onDisconnected: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-        }
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '左箭头';
         this.attr({
             userData: data
         });
-
-
 
         this.onDoubleClick = function() {
             console.log(123)
@@ -993,62 +627,8 @@ var forUpComponent = draw2d.shape.icon.Icon.extend({
         }, attr), setter, getter);
         this.setBackgroundColor("#35C99D"); //背景颜色
         var thiss = this;
-        var data = {
-            name: "上箭头",
-            types: "basicComponent", //类型
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 8, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 0,
-            BlinkingColor: "#35C99D",
-            DashArray: "",
-            BlinkingType: "style",
-            onTrue: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onFalse: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onAlarm: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onDisconnected: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-        }
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '上箭头';
         this.attr({
             userData: data
         });
@@ -1120,62 +700,8 @@ var forDownComponent = draw2d.shape.icon.Icon.extend({
 
         this.setBackgroundColor("#35C99D"); //背景颜色
         var thiss = this;
-        var data = {
-            name: "下箭头",
-            types: "basicComponent", //类型
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 8, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 0,
-            BlinkingColor: "#35C99D",
-            DashArray: "",
-            BlinkingType: "style",
-            onTrue: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            }, //状态 
-            onFalse: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onAlarm: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-            onDisconnected: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                alpha: 1,
-                FillColor: "#35C99D",
-                Blinking: false
-            },
-        }
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '下箭头';
         this.attr({
             userData: data
         });
@@ -1247,64 +773,9 @@ var conduitCompontent = draw2d.shape.node.HorizontalBus.extend({
 
 
         var thiss = this;
-        var data = {
-                // havepoint: "",
-                name: "管道",
-                types: "conduitCompontent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 0,
-                BlinkingColor: "#35C99D",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 0,
-                    LineColor: "#35C99D",
-                    LineStyle: "",
-                    alpha: 1,
-                    FillColor: "#35C99D",
-                    Blinking: false
-                }, //状态 
-                onFalse: {
-                    LineWidth: 0,
-                    LineColor: "#35C99D",
-                    LineStyle: "",
-                    alpha: 1,
-                    FillColor: "#35C99D",
-                    Blinking: false
-                },
-                onAlarm: {
-                    LineWidth: 0,
-                    LineColor: "#35C99D",
-                    LineStyle: "",
-                    alpha: 1,
-                    FillColor: "#35C99D",
-                    Blinking: false
-                },
-                onDisconnected: {
-                    LineWidth: 0,
-                    LineColor: "#35C99D",
-                    LineStyle: "",
-                    alpha: 1,
-                    FillColor: "#35C99D",
-                    Blinking: false
-                },
-            }
-            // 初始化 控件属性
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '管道';
+        // 初始化 控件属性
         this.attr({
             userData: data
         });
@@ -1358,64 +829,9 @@ var conduitCompontentV = draw2d.shape.node.VerticalBus.extend({
 
         // this.setConnectionDirStrategy(10);	
         var thiss = this;
-        var data = {
-                // havepoint: "",
-                name: "管道",
-                types: "conduitCompontent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 0,
-                BlinkingColor: "#35C99D",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 0,
-                    LineColor: "#35C99D",
-                    LineStyle: "",
-                    alpha: 1,
-                    FillColor: "#35C99D",
-                    Blinking: false
-                }, //状态 
-                onFalse: {
-                    LineWidth: 0,
-                    LineColor: "#35C99D",
-                    LineStyle: "",
-                    alpha: 1,
-                    FillColor: "#35C99D",
-                    Blinking: false
-                },
-                onAlarm: {
-                    LineWidth: 0,
-                    LineColor: "#35C99D",
-                    LineStyle: "",
-                    alpha: 1,
-                    FillColor: "#35C99D",
-                    Blinking: false
-                },
-                onDisconnected: {
-                    LineWidth: 0,
-                    LineColor: "#35C99D",
-                    LineStyle: "",
-                    alpha: 1,
-                    FillColor: "#35C99D",
-                    Blinking: false
-                },
-            }
-            // 初始化 控件属性
+        var data = JSON.parse(RectangleData);
+        data.routine.name = '管道';
+        // 初始化 控件属性
         this.attr({
             userData: data
         });
@@ -1466,13 +882,6 @@ function basicdisplayDiv(obj) {
     // $canvas.menuDivFill.show();
     // $canvas.menuDivAlpha.show();
 
-    // 基本
-    setComponentOptions.basicSet(component);
-    // 位置大小
-    setComponentOptions.sizeAndOffset(component);
-
-    setComponentOptions.rectangleSet(component);
-
 
     //重置属性框
     canvasVue.resetAttr();
@@ -1482,11 +891,26 @@ function basicdisplayDiv(obj) {
     canvasVue.componentData.flag = false;
 
 
-    canvasVue.routine.name = '第一次改';
 
-    setTimeout(function() {
-        canvasVue.componentData.flag = true;
-        canvasVue.routine.name = '第二次改';
-    }, 200)
+
+    // setTimeout(function() {
+    //     canvasVue.componentData.flag = true;
+    //     canvasVue.routine.name = '第二次改';
+    // }, 200)
+
+
+    // 基本(公共)
+    setComponentOptions.basePublicSet(component);
+    // 基本
+    setComponentOptions.basicSet(component);
+    // 大小
+    setComponentOptions.componentSize(component);
+    // 位置 旋转角度
+    setComponentOptions.componentOffsetAndAngle(component);
+
+    setComponentOptions.rectangleSet(component);
+
+
+
 
 }

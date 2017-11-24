@@ -30,8 +30,33 @@ layui.use(['layer', 'element'], function() {
                 flag: true, //vue watch内容是否执行标志
                 id: ''
             },
-            basicHideDiv: {
-                "basic-hide": false
+            // 无属性隐藏
+            hidediv: {
+                // 基本类型
+                basicHideDiv: {
+                    "basic-hide": false
+                },
+                // 直线 无属性隐藏
+                lineHideDiv: {
+                    "basic-hide": false
+                },
+                // label
+                labelHideDiv: {
+                    "basic-hide": false
+                },
+                // img
+                imgHideDiv: {
+                    "basic-hide": false
+                },
+                // safe
+                safeHideDiv: {
+                    "basic-hide": false
+                },
+                // text
+                textHideDiv: {
+                    "basic-hide": false
+                },
+
             },
             // 边框下拉框数据
             borderData: {
@@ -151,6 +176,7 @@ layui.use(['layer', 'element'], function() {
             },
             // Data
             datas: {
+                vlcUrl: '',
                 tag: {
                     tagname: '',
                     isrighttag: {
@@ -173,7 +199,16 @@ layui.use(['layer', 'element'], function() {
                     color: '',
                     colorData: [],
                 },
+
+                fontSize: 12,
+                fontUnit: '', //单位
+                fontText: '',
+                fontColor: {
+                    color: '',
+                    colorData: [],
+                },
                 alpha: '', //透明度
+                setAlpha: false, //设置背景透明
                 picture: '', //图片地址
                 flashing: false, //闪烁
             },
@@ -185,6 +220,11 @@ layui.use(['layer', 'element'], function() {
                     colorData: [],
                 },
                 fillColor: { //填充颜色
+                    color: '',
+                    colorData: [],
+                },
+                fontText: '',
+                fontColor: {
                     color: '',
                     colorData: [],
                 },
@@ -200,6 +240,11 @@ layui.use(['layer', 'element'], function() {
                     colorData: [],
                 },
                 fillColor: { //填充颜色
+                    color: '',
+                    colorData: [],
+                },
+                fontText: '',
+                fontColor: {
                     color: '',
                     colorData: [],
                 },
@@ -220,6 +265,11 @@ layui.use(['layer', 'element'], function() {
                     color: '',
                     colorData: [],
                 },
+                fontText: '',
+                fontColor: {
+                    color: '',
+                    colorData: [],
+                },
                 flashing: false, //闪烁
             },
             ondisc: {
@@ -232,6 +282,11 @@ layui.use(['layer', 'element'], function() {
                 alpha: '', //透明度
                 picture: '', //图片地址
                 fillColor: { //填充颜色
+                    color: '',
+                    colorData: [],
+                },
+                fontText: '',
+                fontColor: {
                     color: '',
                     colorData: [],
                 },
@@ -286,6 +341,19 @@ layui.use(['layer', 'element'], function() {
                 item.active = true;
                 fillColor.color = item.color;
             },
+            // style 字体颜色
+            setStyleFontColor: function(item) {
+                var fontColor = this.styles.fontColor;
+                fontColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                fontColor.color = item.color;
+            },
+
+
+
+
             // ontrue 边框宽度
             setOnTrueBorderWidth: function(item) {
                 this.ontrue.borderWidth = item;
@@ -312,6 +380,18 @@ layui.use(['layer', 'element'], function() {
                 item.active = true;
                 fillColor.color = item.color;
             },
+
+            // ontrue 字体颜色
+            setOnTrueFontColor: function(item) {
+                var fontColor = this.ontrue.fontColor;
+                fontColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                fontColor.color = item.color;
+            },
+
+
 
             // onfalse 边框宽度
             setOnFalseBorderWidth: function(item) {
@@ -340,6 +420,19 @@ layui.use(['layer', 'element'], function() {
                 fillColor.color = item.color;
             },
 
+            // onfalse 字体颜色
+            setOnFalseFontColor: function(item) {
+                var fontColor = this.onfalse.fontColor;
+                fontColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                fontColor.color = item.color;
+            },
+
+
+
+
             // onalarm 边框宽度
             setOnAlarmBorderWidth: function(item) {
                 this.onalarm.borderWidth = item;
@@ -366,7 +459,15 @@ layui.use(['layer', 'element'], function() {
                 item.active = true;
                 fillColor.color = item.color;
             },
-
+            // onalarm 字体颜色
+            setOnAlarmFontColor: function(item) {
+                var fontColor = this.onalarm.fontColor;
+                fontColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                fontColor.color = item.color;
+            },
 
             // ondisc 边框宽度
             setOnDiscBorderWidth: function(item) {
@@ -395,6 +496,17 @@ layui.use(['layer', 'element'], function() {
                 fillColor.color = item.color;
             },
 
+            // ondisc 字体颜色
+            setOnDiscFontColor: function(item) {
+                var fontColor = this.ondisc.fontColor;
+                fontColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                fontColor.color = item.color;
+            },
+
+
 
 
 
@@ -406,17 +518,23 @@ layui.use(['layer', 'element'], function() {
                 }));
                 this.styles.borderColor.colorData = JSON.parse(strColor);
                 this.styles.fillColor.colorData = JSON.parse(strColor);
+                this.styles.fontColor.colorData = JSON.parse(strColor);
+
                 this.ontrue.borderColor.colorData = JSON.parse(strColor);
                 this.ontrue.fillColor.colorData = JSON.parse(strColor);
+                this.ontrue.fontColor.colorData = JSON.parse(strColor);
+
                 this.onfalse.borderColor.colorData = JSON.parse(strColor);
                 this.onfalse.fillColor.colorData = JSON.parse(strColor);
+                this.onfalse.fontColor.colorData = JSON.parse(strColor);
 
                 this.onalarm.borderColor.colorData = JSON.parse(strColor);
                 this.onalarm.fillColor.colorData = JSON.parse(strColor);
+                this.onalarm.fontColor.colorData = JSON.parse(strColor);
 
                 this.ondisc.borderColor.colorData = JSON.parse(strColor);
                 this.ondisc.fillColor.colorData = JSON.parse(strColor);
-
+                this.ondisc.fontColor.colorData = JSON.parse(strColor);
                 console.log(JSON.stringify(this.styles.borderColor.colorData));
             },
             // 重置属性框

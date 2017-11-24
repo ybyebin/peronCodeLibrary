@@ -32,60 +32,70 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
         var data = {
-            name: "自定义图片控件",
-            types: "imageComponent", //类型
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Caption: "自定义图片控件", //组件标题 组态时/指定引用Tag的Name属性
-            ShowCaption: false, // 是否显示组件标题  (待定)
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 0, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
+            type: "imageComponent", //类型			
+            proportion: { //自定义属性
+                havepoint: "",
+                value: "",
+            },
+            tag: {
                 tag_id: -1,
                 tag_type: -1,
                 tag_name: "",
                 bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
             },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 1,
-            BlinkingColor: "#DDDDDD",
-            DashArray: "",
-            picture: "",
-            BlinkingType: "style",
+            blinking: { //闪烁
+                flag: false, //是否闪烁
+                lineWidth: 1,
+                lineColor: "#D8D8D8",
+                lineStyle: null,
+                type: 'style' //备用(忘了干嘛的)
+            },
+            routine: {
+                name: '',
+                description: '', //组件描述
+                visible: false, //是否显示组件(setAlpha(0))
+                enable: false, //组件是否可用
+                accessLevel: 8, //访问等级 0~15
+                hint: { //hover 说明
+                    flag: false, //是否显示
+                    hintText: '' //text
+                },
+                caption: { //组件标题
+                    flag: false, //是否显示
+                    capText: '自定义图片控件' //内容
+                },
+                readOnly: false, //组件是否为只读
+                picture: ''
+            },
             onTrue: {
-                LineWidth: 1,
-                LineColor: "#DDDDDD",
-                LineStyle: null,
-                Blinking: false,
+                lineWidth: 1,
+                lineColor: "#DDDDDD",
+                lineStyle: null,
+                blinking: false,
                 picture: "images/icon/icon/zidingyi.png"
             },
             onFalse: {
-                LineWidth: 1,
-                LineColor: "#DDDDDD",
-                LineStyle: null,
-                Blinking: false,
+                lineWidth: 1,
+                lineColor: "#DDDDDD",
+                lineStyle: null,
+                blinking: false,
                 picture: "images/icon/icon/zidingyi.png"
             },
             onAlarm: {
-                LineWidth: 1,
-                LineColor: "#DDDDDD",
-                LineStyle: null,
-                Blinking: false,
+                lineWidth: 1,
+                lineColor: "#DDDDDD",
+                lineStyle: null,
+                blinking: false,
                 picture: "images/icon/icon/zidingyi.png"
             },
             onDisconnected: {
-                LineWidth: 1,
-                LineColor: "#DDDDDD",
-                LineStyle: null,
-                Blinking: false,
+                lineWidth: 1,
+                lineColor: "#DDDDDD",
+                lineStyle: null,
+                blinking: false,
                 picture: "images/icon/icon/zidingyi.png"
-            },
-        }
+            }
+        };
         this.attr({
             userData: data
         });
@@ -145,37 +155,17 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
 })
 
 
-function imageDisplayDiv(obj) {
-
+function imageDisplayDiv(component) {
     // 基本
+    setComponentOptions.basePublicSet(component);
     setComponentOptions.basicSet(component);
-    // 位置大小
-    setComponentOptions.sizeAndOffset(component);
+    // 大小
+    setComponentOptions.componentSize(component);
+    // 位置 旋转角度
+    setComponentOptions.componentOffsetAndAngle(component);
     // 标题
     setComponentOptions.componentCaption(component);
-    setCustomImageComponentStyleInEditFiled(obj)
-}
-
-// 设置 自定义图片控件在编辑框的属性值
-function setCustomImageComponentStyleInEditFiled(com) {
-    // style
-    // 图片地址  picture 
-    $canvas.stylePicture.val(com.getUserData().picture);
-
-    //onTrue
-    //图片地址  picture 
-    $canvas.onTruePicture.val(com.getUserData().onTrue.picture);
-
-    // onFalse
-    // 图片地址  picture  
-    $canvas.onFalsePicture.val(com.getUserData().onFalse.picture);
-
-    //onAlarm
-    // 图片地址  picture 
-    $canvas.onAlarmPicture.val(com.getUserData().onAlarm.picture);
-
-    //onDisconnected
-    // 图片地址  picture 
-    $canvas.onDiscPicture.val(com.getUserData().onDisconnected.picture);
+    // 图片url
+    setComponentOptions.imageSet(component);
 
 }

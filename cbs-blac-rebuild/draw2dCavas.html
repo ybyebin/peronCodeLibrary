@@ -409,11 +409,7 @@
                                                 <textarea v-model="routine.description" class="layui-input"></textarea>
                                             </div>
                                         </div>
-
-
-
-
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.lineHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class="layui-form-item">
                                             <div class="layui-inline">
                                                 <label class="layui-form-label">尺寸</label>
                                                 <div class="layui-attrinput-inline layui-input-inline" style="padding-left:5px;">
@@ -426,7 +422,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="hidediv.lineHideDiv" class="layui-form-item">
                                             <div class="layui-inline">
                                                 <label class="layui-form-label">位置</label>
                                                 <div class="layui-attrinput-inline layui-input-inline" style="padding-left:5px;">
@@ -451,13 +447,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="layui-formcheck-item layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.imgHideDiv,hidediv.labelHideDiv,hidediv.textHideDiv]" class="layui-formcheck-item layui-form-item">
                                             <input v-model="routine.horizontal" type="checkbox" id="horizontal" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="horizontal"></label>
                                             <span>水平</span>
                                         </div>
 
-                                        <div class="layui-formcheck-item layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.imgHideDiv,hidediv.labelHideDiv,hidediv.textHideDiv]" class="layui-formcheck-item layui-form-item">
                                             <input v-model="routine.vertical" type="checkbox" id="vertical" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="vertical"></label>
                                             <span>垂直</span>
@@ -469,12 +465,12 @@
                                             </div>
                                         </div>
 
-                                        <div v-bind:class="basicHideDiv" class="layui-formcheck-item layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.labelHideDiv]" class="layui-formcheck-item layui-form-item">
                                             <input v-model="routine.title" type="checkbox" id="comp-title" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="comp-title"></label>
                                             <span>显示标题</span>
                                         </div>
-                                        <div v-bind:class="basicHideDiv" class="layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.labelHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">标题内容</label>
                                             <div class="layui-input-block">
                                                 <input v-model="routine.titledata.text" :disabled="routine.titledata.disabled" type="text" name="title" autocomplete="off" class="layui-input">
@@ -538,10 +534,10 @@
                                         <span>Data</span>
                                     </p>
                                     <div class="data-div attr-content-body reset-content">
-                                        <div v-bind:class="basicHideDiv" class="layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.labelHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">摄像地址</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="datas.vlcUrl" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
                                         <div class="layui-formtag-item layui-form-item">
@@ -629,7 +625,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
@@ -639,53 +635,56 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">文本内容</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="styles.fontText" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">字体大小</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="styles.fontSize" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,,hidediv.labelHideDiv,hidediv.safeHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">单位</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="styles.fontUnit" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">文本颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in styles.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setStyleFontColor(item)"></li>
+                                                    <li class="style-font-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
 
 
-                                        <div class="layui-formcheck-item layui-form-item">
-                                            <input type="checkbox" id="style-alpha-check" class="bayaxcheckbox ">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.labelHideDiv,hidediv.safeHideDiv]" class="layui-formcheck-item layui-form-item">
+                                            <input v-model="styles.setAlpha" type="checkbox" id="style-alpha-check" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="style-alpha-check"></label>
                                             <span>背景透明</span>
                                         </div>
 
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.labelHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
-                                                <input v-model="styles.alpha" type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="styles.alpha" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.labelHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">图片</label>
                                             <div class="layui-input-block">
 
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p v-model="styles.picture" class="bayax-division-text"></p>
+                                                            <p v-text="styles.picture" class="bayax-division-text"></p>
                                                             <span class="bayax-division-span">
                                                                     <span>···</span>
                                                             </span>
@@ -703,7 +702,8 @@
 
                                     </div>
                                 </div>
-                                <div class="attr-content">
+                                <!-- ontrue -->
+                                <div v-bind:class="hidediv.labelHideDiv" class="attr-content">
                                     <p class="attr-content-title " data-toggle="collapse" data-for="ontrue-div">
                                         <i></i>
                                         <span>onTrue</span>
@@ -754,7 +754,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
@@ -763,53 +763,45 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">文本内容</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="ontrue.fontText" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">字体大小</label>
-                                            <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">单位</label>
-                                            <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">文本颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ontrue.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnTrueFontColor(item)"></li>
+                                                    <li class="ontrue-font-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
 
 
-                                        <div class="layui-formcheck-item layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class="layui-formcheck-item layui-form-item">
                                             <input type="checkbox" id="ontrue-alpha-check" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="ontrue-alpha-check"></label>
                                             <span>背景透明</span>
                                         </div>
 
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
                                                 <input v-model="ontrue.alpha" type="text" name="title" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">图片</label>
                                             <div class="layui-input-block">
 
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p v-model="ontrue.picture" class="bayax-division-text"></p>
+                                                            <p v-text="ontrue.picture" class="bayax-division-text"></p>
                                                             <span class="bayax-division-span">
                                                                 <span>···</span>
                                                             </span>
@@ -827,7 +819,7 @@
 
                                     </div>
                                 </div>
-                                <div class="attr-content">
+                                <div v-bind:class="hidediv.labelHideDiv" class="attr-content">
                                     <p class="attr-content-title " data-toggle="collapse" data-for="onfalse-div">
                                         <i></i>
                                         <span>onFalse</span>
@@ -878,7 +870,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
@@ -887,53 +879,45 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">文本内容</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="onfalse.fontText" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">字体大小</label>
-                                            <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">单位</label>
-                                            <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">文本颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onfalse.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnFalseFontColor(item)"></li>
+                                                    <li class="onfalse-font-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
 
 
-                                        <div class="layui-formcheck-item layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class="layui-formcheck-item layui-form-item">
                                             <input type="checkbox" id="onfalse-alpha-check" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="onfalse-alpha-check"></label>
                                             <span>背景透明</span>
                                         </div>
 
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
-                                                <input v-model="onfalse.alpha" type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="onfalse.alpha" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">图片</label>
                                             <div class="layui-input-block">
 
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p v-model="onfalse.picture" class="bayax-division-text"></p>
+                                                            <p v-text="onfalse.picture" class="bayax-division-text"></p>
                                                             <span class="bayax-division-span">
                                                                 <span>···</span>
                                                             </span>
@@ -951,7 +935,7 @@
 
                                     </div>
                                 </div>
-                                <div class="attr-content">
+                                <div v-bind:class="hidediv.labelHideDiv" class="attr-content">
                                     <p class="attr-content-title " data-toggle="collapse" data-for="onalarm-div">
                                         <i></i>
                                         <span>onAlarm</span>
@@ -1002,7 +986,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
@@ -1011,53 +995,45 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">文本内容</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="onalarm.fontText" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">字体大小</label>
-                                            <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">单位</label>
-                                            <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">文本颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onalarm.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnAlarmFontColor(item)"></li>
+                                                    <li class="onalarm-font-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
 
 
-                                        <div class="layui-formcheck-item layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class="layui-formcheck-item layui-form-item">
                                             <input type="checkbox" id="onalarm-alpha-check" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="onalarm-alpha-check"></label>
                                             <span>背景透明</span>
                                         </div>
 
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
                                                 <input v-model="onalarm.alpha" type="text" name="title" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">图片</label>
                                             <div class="layui-input-block">
 
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p v-model="onalarm.picture" class="bayax-division-text"></p>
+                                                            <p v-text="onalarm.picture" class="bayax-division-text"></p>
                                                             <span class="bayax-division-span">
                                                                 <span>···</span>
                                                             </span>
@@ -1075,7 +1051,7 @@
 
                                     </div>
                                 </div>
-                                <div class="attr-content">
+                                <div v-bind:class="hidediv.labelHideDiv" class="attr-content">
                                     <p class="attr-content-title " data-toggle="collapse" data-for="ondisc-div">
                                         <i></i>
                                         <span>onDisconnected</span>
@@ -1126,7 +1102,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
@@ -1135,53 +1111,45 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">文本内容</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="ondisc.fontText" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">字体大小</label>
-                                            <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">单位</label>
-                                            <div class="layui-input-block">
-                                                <input type="text" name="title" autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">文本颜色</label>
                                             <div class="layui-input-block">
-                                                <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ondisc.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnDiscFontColor(item)"></li>
+                                                    <li class="ondisc-font-color">+</li>
+                                                </ul>
                                             </div>
                                         </div>
 
 
-                                        <div class="layui-formcheck-item layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv]" class="layui-formcheck-item layui-form-item">
                                             <input type="checkbox" id="ondisc-alpha-check" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="ondisc-alpha-check"></label>
                                             <span>背景透明</span>
                                         </div>
 
-                                        <div class="layui-form-item">
+                                        <div v-bind:class="[hidediv.lineHideDiv,hidediv.imgHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
                                                 <input v-model="ondisc.alpha" type="text" name="title" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
-                                        <div v-bind:class="basicHideDiv" class=" layui-form-item">
+                                        <div v-bind:class="[hidediv.basicHideDiv,hidediv.lineHideDiv,hidediv.safeHideDiv,hidediv.textHideDiv]" class=" layui-form-item">
                                             <label class="layui-form-label">图片</label>
                                             <div class="layui-input-block">
 
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p v-model="ondisc.picture" class="bayax-division-text"></p>
+                                                            <p v-text="ondisc.picture" class="bayax-division-text"></p>
                                                             <span class="bayax-division-span">
                                                                 <span>···</span>
                                                             </span>
