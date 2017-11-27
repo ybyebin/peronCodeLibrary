@@ -1,4 +1,3 @@
-var imagenum = 0;
 /** 
  * image 标签
  * @author

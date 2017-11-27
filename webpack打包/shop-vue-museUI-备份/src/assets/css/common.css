@@ -1,0 +1,275 @@
+@font-face {
+    font-family: 'ico-bayax';
+    src: url('../font/ico-bayax.eot?avkmlk');
+    src: url('../font/ico-bayax.eot?avkmlk#iefix') format('embedded-opentype'), url('../font/ico-bayax.ttf?avkmlk') format('truetype'), url('../font/ico-bayax.woff?avkmlk') format('woff'), url('../font/ico-bayax.svg?avkmlk#ico-bayax') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'ico-bayax' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add:before {
+    content: "\e145";
+}
+
+.icon-add_circle:before {
+    content: "\e147";
+}
+
+.icon-arrow_back:before {
+    content: "\e5c4";
+}
+
+.icon-assignment_ind:before {
+    content: "\e85e";
+}
+
+.icon-build:before {
+    content: "\e869";
+}
+
+.icon-check:before {
+    content: "\e5ca";
+}
+
+.icon-navigate_before:before {
+    content: "\e408";
+}
+
+.icon-close:before {
+    content: "\e5cd";
+}
+
+.icon-remove_circle:before {
+    content: "\e15c";
+}
+
+.icon-expand_less:before {
+    content: "\e5ce";
+}
+
+.icon-exposure_plus_1:before {
+    content: "\e3cd";
+}
+
+.icon-favorite:before {
+    content: "\e87d";
+}
+
+.icon-favorite_border:before {
+    content: "\e87e";
+}
+
+.icon-format_list_bulleted:before {
+    content: "\e241";
+}
+
+.icon-star:before {
+    content: "\e838";
+}
+
+.icon-help:before {
+    content: "\e887";
+}
+
+.icon-help_outline:before {
+    content: "\e8fd";
+}
+
+.icon-highlight_off:before {
+    content: "\e888";
+}
+
+.icon-insert_drive_file:before {
+    content: "\e24d";
+}
+
+.icon-keyboard_arrow_down:before {
+    content: "\e313";
+}
+
+.icon-keyboard_arrow_left:before {
+    content: "\e314";
+}
+
+.icon-keyboard_arrow_right:before {
+    content: "\e315";
+}
+
+.icon-keyboard_arrow_up:before {
+    content: "\e316";
+}
+
+.icon-keyboard_backspace:before {
+    content: "\e317";
+}
+
+.icon-list:before {
+    content: "\e896";
+}
+
+.icon-live_help:before {
+    content: "\e0c6";
+}
+
+.icon-shopping_cart:before {
+    content: "\e8cc";
+}
+
+.icon-menu:before {
+    content: "\e5d2";
+}
+
+.icon-more_horiz:before {
+    content: "\e5d3";
+}
+
+.icon-more_vert:before {
+    content: "\e5d4";
+}
+
+.icon-power_settings_new:before {
+    content: "\e8ac";
+}
+
+.icon-remove:before {
+    content: "\e15b";
+}
+
+.icon-search:before {
+    content: "\e8b6";
+}
+
+.icon-settings:before {
+    content: "\e8b8";
+}
+
+.icon-star_border:before {
+    content: "\e83a";
+}
+
+.icon-star_half:before {
+    content: "\e839";
+}
+
+.icon-store_mall_directory:before {
+    content: "\e563";
+}
+
+.icon-trending_flat:before {
+    content: "\e8e4";
+}
+
+.icon-view_list:before {
+    content: "\e8ef";
+}
+
+.icon-facebook2:before {
+    content: "\ea91";
+}
+
+body {
+    background: #fff;
+    color: #444;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+body,
+html,
+li,
+input,
+gloabl,
+h2,
+th,
+input,
+nav,
+td,
+h1,
+embed,
+blockquote,
+ol,
+xml,
+div,
+dl,
+dt,
+dd,
+ul,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+abbr,
+p,
+header,
+hgroup,
+Section,
+figure,
+section,
+nav,
+article,
+aside,
+canvas {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    font-size: 100%;
+    border: 0;
+    color: #333;
+    text-decoration: none;
+}
+
+ol,
+ul,
+li {
+    list-style: none;
+}
+
+input,
+textarea {
+    /*-webkit-tap-highlight-color: rgba(255, 255, 255, 0);*/
+    /*-webkit-appearance: none; */
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+}
+
+.clearfix:after {
+    content: ".";
+    /*加一段内容*/
+    display: block;
+    /*让生成的元素以块级元素显示，占满剩余空间*/
+    height: 0;
+    /*避免生成的内容破坏原有布局高度*/
+    clear: both;
+    /*清除浮动*/
+    visibility: hidden;
+    /*让生成的内容不可见*/
+}

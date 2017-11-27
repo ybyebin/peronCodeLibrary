@@ -4,8 +4,12 @@ var setComponentOptions = {
     basePublicSet: function(component) {
         var vueRoutine = canvasVue.routine;
         var vueDatas = canvasVue.datas;
-        // var vueStyle = canvasVue.styles;
         var data = component.getUserData();
+
+        this.checkPreviousComponentTag(component);
+
+
+
         // 组件名称   name(用户输入)
         vueRoutine.name = data.routine.name;
 
@@ -128,7 +132,7 @@ var setComponentOptions = {
             ele.active = false;
             if (ele.color === ot_border_color) {
                 ele.active = true;
-                s_flag = false;
+                ot_flag = false;
             }
         });
         if (ot_flag) {
@@ -170,7 +174,7 @@ var setComponentOptions = {
             ele.active = false;
             if (ele.color === of_border_color) {
                 ele.active = true;
-                s_flag = false;
+                of_flag = false;
             }
         });
         if (of_flag) {
@@ -211,7 +215,7 @@ var setComponentOptions = {
             ele.active = false;
             if (ele.color === oa_border_color) {
                 ele.active = true;
-                s_flag = false;
+                oa_flag = false;
             }
         });
         if (oa_flag) {
@@ -235,10 +239,10 @@ var setComponentOptions = {
         /************************onDisc-- begin********************************** */
 
         //边框宽度  borderWidth
-        vueOnDisc.borderWidth = data.ononDisconnected.lineWidth;
+        vueOnDisc.borderWidth = data.onDisconnected.lineWidth;
 
         //边框样式 borderStyle
-        var od_border_style = data.ononDisconnected.lineStyle;
+        var od_border_style = data.onDisconnected.lineStyle;
         if (od_border_style === null) {
             vueOnDisc.borderStyle = '默认';
         } else {
@@ -246,14 +250,14 @@ var setComponentOptions = {
         }
 
         // 边框颜色
-        var od_border_color = data.ononDisconnected.lineColor;
+        var od_border_color = data.onDisconnected.lineColor;
         var od_flag = true;
         vueOnDisc.borderColor.color = od_border_color;
         vueOnDisc.borderColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === od_border_color) {
                 ele.active = true;
-                s_flag = false;
+                od_flag = false;
             }
         });
         if (od_flag) {
@@ -266,7 +270,7 @@ var setComponentOptions = {
         }
 
         //ontrue 闪烁  blinking
-        if (data.ononDisconnected.blinking) {
+        if (data.onDisconnected.blinking) {
             vueOnDisc.flashing = true;
         } else {
             vueOnDisc.flashing = false;
@@ -354,8 +358,9 @@ var setComponentOptions = {
             ele.active = false;
             if (ele.color === ot_fill_color) {
                 ele.active = true;
-                s_flag = false;
+                ot_flag = false;
             }
+
         });
         if (ot_flag) {
             vueOnTrue.fillColor.colorData.shift();
@@ -372,14 +377,14 @@ var setComponentOptions = {
 
         // =============================onFalse===================================
         // 填充(背景)颜色  fillColor
-        var of_fill_color = data.onFlase.fillColor;
+        var of_fill_color = data.onFalse.fillColor;
         var of_flag = true;
         vueOnFalse.fillColor.color = of_fill_color;
         vueOnFalse.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === of_fill_color) {
                 ele.active = true;
-                s_flag = false;
+                of_flag = false;
             }
         });
         if (of_flag) {
@@ -391,7 +396,7 @@ var setComponentOptions = {
             })
         }
         // 透明度
-        vueOnFalse.alpha = data.onFlase.alpha;
+        vueOnFalse.alpha = data.onFalse.alpha;
 
         // =============================onAlarm===================================
         // 填充(背景)颜色  fillColor
@@ -402,13 +407,13 @@ var setComponentOptions = {
             ele.active = false;
             if (ele.color === oa_fill_color) {
                 ele.active = true;
-                s_flag = false;
+                oa_flag = false;
             }
         });
         if (oa_flag) {
             vueOnAlarm.fillColor.colorData.shift();
             vueOnAlarm.fillColor.colorData.push({
-                color: of_fill_color,
+                color: oa_fill_color,
                 colorstyle: 'background-color:' + oa_fill_color,
                 active: true
             })
@@ -419,14 +424,14 @@ var setComponentOptions = {
 
         // =============================onDisconnected===================================
         // 填充(背景)颜色  fillColor
-        var od_fill_color = data.ononDisconnected.fillColor;
+        var od_fill_color = data.onDisconnected.fillColor;
         var od_flag = true;
         vueOnDisc.fillColor.color = od_fill_color;
         vueOnDisc.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === od_fill_color) {
                 ele.active = true;
-                s_flag = false;
+                od_flag = false;
             }
         });
         if (od_flag) {
@@ -438,7 +443,10 @@ var setComponentOptions = {
             })
         }
         // 透明度
-        vueOnDisc.alpha = data.ononDisconnected.alpha;
+        vueOnDisc.alpha = data.onDisconnected.alpha;
+
+
+
     },
     // 直线
     lineSet: function(component) {
@@ -537,14 +545,6 @@ var setComponentOptions = {
     },
     // text
     textSet: function(component) {
-
-
-
-
-
-
-
-
 
         // =============================style=================================== 
         //填充(背景)颜色  fillColor
@@ -689,7 +689,8 @@ var setComponentOptions = {
 
 
     // [编辑控件前 检查前一个控件 TagID 是否绑定上]
-    checkPreviousComponentTag: function() {
+    checkPreviousComponentTag: function(component) {
+        console.log("ID:" + component.id)
         var id = canvasVue.componentData.id;
         var node = canvasSet.getNodeFromCanvas(id);
         if (node) {
@@ -697,6 +698,9 @@ var setComponentOptions = {
                 layer.msg("上个控件Tag值绑定无效,请重新绑定!")
             }
         }
+
+        canvasVue.componentData.id = component.id;
+        this.checkThisComponentTag(component);
     },
     //  [检查 当前控件 TagID 是否绑定正确]
     checkThisComponentTag: function(component) {
@@ -715,6 +719,23 @@ var setComponentOptions = {
                 datas = true;
                 break;
         }
+    },
+    /**
+     * 将 组件监控值标志 改为  false
+     * 意味着  当属性改变时会   不会改变 当前选中 组件的属性
+     */
+    setComponentFlagFalse: function() {
+        canvasVue.componentData.flag = false;
+    },
+    /**
+     * 将 组件监控值标志 改为  true
+     * 意味着  当属性改变时会 相应改变 当前选中 组件的属性
+     */
+    setComponentFlagTrue: function() {
+        setTimeout(function() {
+            canvasVue.componentData.flag = true;
+        }, 300);
+
     }
 
 }
@@ -1566,7 +1587,8 @@ var canvasSet = {
      * @param  {[type]} id [description]
      * @return {[type]}    [控件对象]
      */
-    getNodeFromCanvas: function(id) {
+    getNodeFromCanvas: function() {
+        var id = canvasVue.componentData.id;
         if (id != '') {
             var node = imageCanvas.getFigure(id);
             var nodeLine = imageCanvas.getLine(id);

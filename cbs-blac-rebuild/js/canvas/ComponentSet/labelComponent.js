@@ -1,4 +1,3 @@
-var labelnum = 0;
 /** 
  * lable 标签 只用于展示无触发动作
  * @author yb

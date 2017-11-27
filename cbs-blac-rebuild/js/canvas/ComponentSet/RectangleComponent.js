@@ -1,15 +1,3 @@
-var rectangle = 0,
-    RoundedRectangle = 0,
-    Ellipse = 0,
-    polygon = 0,
-    BothArrowH = 0,
-    BothArrowV = 0,
-    forRight = 0,
-    forLeft = 0,
-    forUp = 0,
-    conduitnum = 0,
-    forDown = 0;
-
 // 自定义控件属性
 var RectangleData = JSON.stringify({
     type: "basicComponent", //类型			
@@ -102,7 +90,7 @@ var rectangleComponent = draw2d.shape.node.Between.extend({
         });
         // 选中
         this.on("click", function() {
-            // basicdisplayDiv(thiss);
+            basicdisplayDiv(thiss);
         });
 
         // 缩放
@@ -874,29 +862,16 @@ var conduitCompontentV = draw2d.shape.node.VerticalBus.extend({
 
 
 
-function basicdisplayDiv(obj) {
-    // //重置属性框
-    // resetAttributeMenu();
-    // 隐藏该控件没有的属性
-    // $canvas.menuDivBasicHide.hide();
-    // $canvas.menuDivFill.show();
-    // $canvas.menuDivAlpha.show();
-
+function basicdisplayDiv(component) {
+    setComponentOptions.setComponentFlagFalse();
 
     //重置属性框
     canvasVue.resetAttr();
     // 隐藏该控件没有的属性
-    canvasVue.basicHideDiv = true;
-
-    canvasVue.componentData.flag = false;
+    canvasVue.hidediv.basicHideDiv = true;
 
 
 
-
-    // setTimeout(function() {
-    //     canvasVue.componentData.flag = true;
-    //     canvasVue.routine.name = '第二次改';
-    // }, 200)
 
 
     // 基本(公共)
@@ -907,9 +882,10 @@ function basicdisplayDiv(obj) {
     setComponentOptions.componentSize(component);
     // 位置 旋转角度
     setComponentOptions.componentOffsetAndAngle(component);
-
+    // 基本图形  专属方法
     setComponentOptions.rectangleSet(component);
 
+    setComponentOptions.setComponentFlagTrue();
 
 
 

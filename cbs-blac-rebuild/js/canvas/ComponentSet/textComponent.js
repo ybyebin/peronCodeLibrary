@@ -1,9 +1,5 @@
-var textnum = 0;
-var buttons = 0;
-
-
 // 自定义控件属性
-var textComponentData = {
+var textComponentData = JSON.stringify({
     type: "buttonComponent", //类型			
     proportion: { //自定义属性
         valueType: 'textValueComponent',
@@ -46,6 +42,7 @@ var textComponentData = {
         lineStyle: null,
         fillColor: "none",
         text: '',
+        alpha: '',
         textColor: '#FFFFFF',
         // unit:
         blinking: false,
@@ -56,6 +53,7 @@ var textComponentData = {
         lineStyle: null,
         fillColor: "none",
         text: '',
+        alpha: '',
         textColor: '#FFFFFF',
         // unit:
         blinking: false,
@@ -66,6 +64,7 @@ var textComponentData = {
         lineStyle: null,
         fillColor: "none",
         text: '',
+        alpha: '',
         textColor: '#FFFFFF',
         // unit:
         blinking: false,
@@ -76,12 +75,12 @@ var textComponentData = {
         lineStyle: null,
         fillColor: "none",
         text: '',
+        alpha: '',
         textColor: '#FFFFFF',
         // unit:
         blinking: false,
     }
-}
-
+})
 
 
 /** 
@@ -118,77 +117,9 @@ var textComponent = draw2d.shape.basic.Text.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-            name: "文本",
-            types: "buttonComponent", //类型
-            valueType: "textValueComponent",
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Caption: "文本", //组件标题 组态时/指定引用Tag的Name属性
-            ShowCaption: false, // 是否显示组件标题  (待定)
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 7, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 0,
-            BlinkingColor: "#FFFFFF",
-            styleFillColor: 'none',
-            DashArray: "",
-            BlinkingType: "style",
-            unit: '',
-            onTrue: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                FillColor: "none",
-                Text: "",
-                unit: '', //单位
-                TextColor: "#FFFFFF",
-                Blinking: false
-            },
-            onFalse: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                FillColor: "none",
-                Text: "",
-                unit: '',
-                TextColor: "#FFFFFF",
-                Blinking: false
-            },
-            onAlarm: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                FillColor: "none",
-                Text: "",
-                unit: '',
-                TextColor: "#FFFFFF",
-                Blinking: false
-            },
-            onDisconnected: {
-                LineWidth: 0,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                FillColor: "none",
-                Text: "",
-                unit: '',
-                TextColor: "#FFFFFF",
-                Blinking: false
-            }
-        };
-
-        this.attr({ //将自定义的数据加载到控件
+        var data = JSON.parse(textComponentData);
+        data.routine.name = '标签';
+        this.attr({
             userData: data
         });
 
@@ -296,74 +227,11 @@ var buttonComponent = draw2d.shape.note.PostIt.extend({
                 right: 20
             }
         });
-        var data = {
-            name: "按钮",
-            types: "buttonComponent", //类型
-            text: "", //文本
-            textColor: "", //字体颜色;
-            proportion: null, //自定义属性,存储宽高比例等
-            Description: "", //组件描述
-            Caption: "按钮", //组件标题 组态时/指定引用Tag的Name属性
-            ShowCaption: false, // 是否显示组件标题  (待定)
-            Visible: true, //是否显示组件(setAlpha(0))
-            Enable: false, //组件是否可用
-            AccessLevel: 2, //访问等级 0~15
-            ShowHint: false, //是否显示Hover说明(待定)
-            Hint: "", //Hover说明的内容 (待定)
-            Tag: {
-                tag_id: -1,
-                tag_type: -1,
-                tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-            },
-            value: "",
-            Readonly: false, //组件是否为只读
-            Blinking: false, //组件闪烁
-            BlinkingStroke: 1,
-            BlinkingColor: "#35C99D",
-            DashArray: "",
-            BlinkingType: "style",
-            onTrue: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                FillColor: "#FFFFFF",
-                Text: "",
-                TextColor: "#35C99D",
-                Blinking: false
-            },
-            onFalse: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                FillColor: "#FFFFFF",
-                Text: "",
-                TextColor: "#35C99D",
-                Blinking: false
-            },
-            onAlarm: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                FillColor: "#FFFFFF",
-                Text: "",
-                TextColor: "#35C99D",
-                Blinking: false
-            },
-            onDisconnected: {
-                LineWidth: 1,
-                LineColor: "#35C99D",
-                LineStyle: "",
-                FillColor: "#FFFFFF",
-                Text: "",
-                TextColor: "#35C99D",
-                Blinking: false
-            }
-        }
+        var data = JSON.parse(textComponentData);
+        data.routine.name = 'button标签';
         this.attr({
             userData: data
         });
-
         this.label = new draw2d.shape.basic.Label({
             text: "",
             fontFamily: "微软雅黑"

@@ -26,36 +26,37 @@ layui.use(['layer', 'element'], function() {
     canvasVue = new Vue({
         el: '#app',
         data: {
+            // 画布属性
+            canvas: {
+                width: '',
+                height: ''
+            },
             componentData: {
-                flag: true, //vue watch内容是否执行标志
+                flag: false, //vue watch内容是否执行标志
                 id: ''
+            },
+            classObject: {
+                // active: true,
+                textdanger: {
+                    basichide: false
+                }
             },
             // 无属性隐藏
             hidediv: {
                 // 基本类型
-                basicHideDiv: {
-                    "basic-hide": false
-                },
+                basicHideDiv: false,
                 // 直线 无属性隐藏
-                lineHideDiv: {
-                    "basic-hide": false
-                },
+                lineHideDiv: false,
                 // label
-                labelHideDiv: {
-                    "basic-hide": false
-                },
+                labelHideDiv: false,
                 // img
-                imgHideDiv: {
-                    "basic-hide": false
-                },
+                imgHideDiv: false,
                 // safe
-                safeHideDiv: {
-                    "basic-hide": false
-                },
+                safeHideDiv: false,
                 // text
-                textHideDiv: {
-                    "basic-hide": false
-                },
+                textHideDiv: false,
+                // 摄像地址(特殊-单独列出来)
+                vlcUrlHideDiv: true
 
             },
             // 边框下拉框数据
@@ -152,8 +153,8 @@ layui.use(['layer', 'element'], function() {
                 offy: '',
                 rotationAngle: '',
 
-                horizontal: true, //水平(直线属性)
-                vertical: true, //垂直(直线属性)
+                horizontal: false, //水平(直线属性)
+                vertical: false, //垂直(直线属性)
 
                 title: false, //显示标题
                 titledata: {
@@ -229,6 +230,7 @@ layui.use(['layer', 'element'], function() {
                     colorData: [],
                 },
                 alpha: '', //透明度
+                setAlpha: false, //设置背景透明
                 picture: '', //图片地址
                 flashing: false, //闪烁
             },
@@ -249,6 +251,7 @@ layui.use(['layer', 'element'], function() {
                     colorData: [],
                 },
                 alpha: '', //透明度
+                setAlpha: false, //设置背景透明
                 picture: '', //图片地址
                 flashing: false, //闪烁
             },
@@ -260,6 +263,7 @@ layui.use(['layer', 'element'], function() {
                     colorData: [],
                 },
                 alpha: '', //透明度
+                setAlpha: false, //设置背景透明
                 picture: '', //图片地址
                 fillColor: { //填充颜色
                     color: '',
@@ -280,6 +284,7 @@ layui.use(['layer', 'element'], function() {
                     colorData: [],
                 },
                 alpha: '', //透明度
+                setAlpha: false, //设置背景透明
                 picture: '', //图片地址
                 fillColor: { //填充颜色
                     color: '',
@@ -547,15 +552,88 @@ layui.use(['layer', 'element'], function() {
 
                 setTimeout(function() {
                     $(".layui-tabscroll-item").mCustomScrollbar('scrollTo', 'top');
-                }, 100);
+                }, 90);
+
+                var dic = this.hidediv;
+                dic.basicHideDiv = false;
+                dic.lineHideDiv = false;
+                dic.labelHideDiv = false;
+                dic.imgHideDiv = false;
+                dic.safeHideDiv = false;
+                dic.textHideDiv = false;
+                dic.vlcUrlHideDiv = false;
 
                 var routine = this.routine;
+                var datas = this.datas;
+                var styles = this.styles;
+                var ontrue = this.ontrue;
+                var onfalse = this.onfalse;
+                var onalarm = this.onalarm;
+                var ondisc = this.ondisc;
                 routine.name = '';
                 routine.description = '';
                 routine.width = '';
                 routine.height = '';
                 routine.offx = '';
                 routine.offy = '';
+                routine.rotationAngle = '';
+                routine.horizontal = false;
+                routine.vertical = false;
+                routine.title = false;
+                routine.titledata.text = '';
+                routine.titledata.disabled = true;
+                routine.hover = false;
+                routine.hover.text = '';
+                routine.hover.disabled = true;
+
+                routine.visible = false;
+                routine.enable = false;
+                routine.accessLevel.level = 0;
+
+                datas.vlcUrl = '';
+                datas.tag.tagname = '';
+                // datas.tag.isrighttag = right;
+                datas.readonly = false;
+
+                styles.borderWidth = 0;
+                styles.borderStyle = '默认';
+                styles.fontSize = '';
+                styles.fontUnit = '';
+                styles.fontText = '';
+                styles.alpha = '';
+                styles.setAlpha = false;
+                styles.picture = '';
+                styles.flashing = false;
+
+                ontrue.borderWidth = 0;
+                ontrue.borderStyle = '默认';
+                ontrue.fontText = '';
+                ontrue.alpha = '';
+                ontrue.picture = '';
+                ontrue.flashing = false;
+
+                onfalse.borderWidth = 0;
+                onfalse.borderStyle = '默认';
+                onfalse.fontText = '';
+                onfalse.alpha = '';
+                onfalse.picture = '';
+                onfalse.flashing = false;
+
+                onalarm.borderWidth = 0;
+                onalarm.borderStyle = '默认';
+                onalarm.fontText = '';
+                onalarm.alpha = '';
+                onalarm.picture = '';
+                onalarm.flashing = false;
+
+                ondisc.borderWidth = 0;
+                ondisc.borderStyle = '默认';
+                ondisc.fontText = '';
+                ondisc.alpha = '';
+                ondisc.picture = '';
+                ondisc.flashing = false;
+
+
 
             },
         }
@@ -563,10 +641,47 @@ layui.use(['layer', 'element'], function() {
 
     // 名称
     canvasVue.$watch('routine.name', function(newVal, oldVal) {
-        // 做点什么
         if (this.componentData.flag) {
             console.log('旧值:' + oldVal);
             console.log('新值:' + newVal);
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.userData.routine.name = newVal;
+                console.log('查看组件名称：' + node.getUserData().routine.name)
+            }
+        }
+    });
+    // 描述
+    canvasVue.$watch('routine.description', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            console.log('描述旧值:' + oldVal);
+            console.log('描述新值:' + newVal);
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.userData.routine.description = newVal;
+                console.log('查看组件描述：' + node.getUserData().routine.description)
+            }
+        }
+    });
+
+    //尺寸-width
+    canvasVue.$watch('routine.width', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            console.log('宽度旧值:' + oldVal);
+            console.log('宽度新值:' + newVal);
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                if (Number(newVal) < 5) {
+                    layer.msg('最小为5');
+                    return;
+                }
+                if (node.isResizeable()) {
+                    node.setWidth(newVal);
+                    // node.repaint();
+                } else {
+                    layer.msg('该控件不支持缩放');
+                }
+            }
         }
     });
     // 直线水平监控
@@ -635,4 +750,4 @@ layui.use(['layer', 'element'], function() {
 
 
 
-});
+})

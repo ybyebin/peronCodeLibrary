@@ -3,44 +3,10 @@
  * @author yb
  * @Data 2016/7/13
  */
-var switchs = 0,
-    piping = 0,
-    Warninglamp = 0,
-    blowerfan = 0,
-    exhaustfan = 0,
-    beng = 0,
-    ElectricTwoWayValve = 0,
-    SolenoidValve = 0,
-    ElectricButterflyValves = 0,
-    AirFiltration = 0,
-    AirHeating = 0,
-    AirCooler = 0,
-    Humidifier = 0,
-    controlPanel = 0,
-    FluorescentLamp = 0,
-    LED = 0,
-    Incandescent = 0,
-    MetalHalide = 0,
-    temperature = 0,
-    humidity = 0,
-    pressure = 0,
-    differentialPressure = 0,
-    liquid = 0,
-    electric = 0,
-    Voltage = 0,
-    frequency = 0,
-    activePower = 0,
-    ElectricityConsumption = 0,
-    level = 0,
-    Gas = 0,
-    Broadcast = 0,
-    monitoring = 0,
-    qiuji = 0,
-    highqiuji = 0,
-    EntranceGuard = 0,
-    detector = 0;
+
+var safeimgulr = 'images/icon/icon/';
 // 自定义控件属性
-var safeComponentData = {
+var safeComponentData = JSON.stringify({
     type: "imageComponent", //类型			
     proportion: { //自定义属性
         havepoint: "", //(待定)
@@ -103,8 +69,7 @@ var safeComponentData = {
         blinking: false,
         picture: ''
     }
-}
-
+})
 
 /** 
  *  switchComponent  开关
@@ -138,63 +103,17 @@ var switchComponent = draw2d.shape.basic.Rectangle.extend({
             padding: { left: 0, right: 0, top: 0, bottom: 0 }
         });
         this.label.setFontSize(2);
-        var data = {
-                color: "#DDDDDD",
-                stroke: 1,
-                name: "Switch",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "Switch", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/switch1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/switch2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/switch3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/switch4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = 'Switch';
+        data.onTrue.picture = safeimgulr + 'switch1.png';
+        data.onFalse.picture = safeimgulr + 'switch2.png';
+        data.onAlarm.picture = safeimgulr + 'switch3.png';
+        data.onDisconnected.picture = safeimgulr + 'switch4.png';
+
+
         this.attr({
             userData: data
         });
@@ -266,38 +185,16 @@ var pipingComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
 
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/piping1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/piping2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/piping3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/piping4.png"
-                },
-            }
-            // 初始化 控件属性
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = 'piping';
+        data.onTrue.picture = safeimgulr + 'piping1.png';
+        data.onFalse.picture = safeimgulr + 'piping2.png';
+        data.onAlarm.picture = safeimgulr + 'piping3.png';
+        data.onDisconnected.picture = safeimgulr + 'piping4.png';
+
         this.attr({
             userData: data
         });
@@ -361,61 +258,15 @@ var WarninglampComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "报警提示灯",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "报警提示灯", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Warninglamp1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Warninglamp2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Warninglamp3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Warninglamp4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '报警提示灯';
+        data.onTrue.picture = safeimgulr + 'Warninglamp1.png';
+        data.onFalse.picture = safeimgulr + 'Warninglamp2.png';
+        data.onAlarm.picture = safeimgulr + 'Warninglamp3.png';
+        data.onDisconnected.picture = safeimgulr + 'Warninglamp4.png';
         this.attr({
             userData: data
         });
@@ -478,61 +329,20 @@ var blowerfanComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "送风机",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "送风机", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Blowerfan1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Blowerfan2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Blowerfan3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Blowerfan4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '送风机';
+        data.onTrue.picture = safeimgulr + 'Blowerfan1.png';
+        data.onFalse.picture = safeimgulr + 'Blowerfan2.png';
+        data.onAlarm.picture = safeimgulr + 'Blowerfan3.png';
+        data.onDisconnected.picture = safeimgulr + 'Blowerfan4.png';
+
+
         this.attr({
             userData: data
         });
@@ -596,61 +406,16 @@ var exhaustfanComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "排风机",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "排风机", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Exhaustfan1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Exhaustfan2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Exhaustfan3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Exhaustfan4.png"
-                },
-            }
-            // 初始化 控件属性
+
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '排风机';
+        data.onTrue.picture = safeimgulr + 'Exhaustfan1.png';
+        data.onFalse.picture = safeimgulr + 'Exhaustfan2.png';
+        data.onAlarm.picture = safeimgulr + 'Exhaustfan3.png';
+        data.onDisconnected.picture = safeimgulr + 'Exhaustfan4.png';
         this.attr({
             userData: data
         });
@@ -715,61 +480,15 @@ var bengComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "泵",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "泵", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/beng1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/beng2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/beng3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/beng4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '泵';
+        data.onTrue.picture = safeimgulr + 'beng1.png';
+        data.onFalse.picture = safeimgulr + 'beng2.png';
+        data.onAlarm.picture = safeimgulr + 'beng3.png';
+        data.onDisconnected.picture = safeimgulr + 'beng4.png';
         this.attr({
             userData: data
         });
@@ -835,61 +554,15 @@ var ElectricTwoWayValveComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "电动两通阀",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "电动两通阀", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/valve1-1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/valve1-2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/valve1-3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/valve1-4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '电动两通阀';
+        data.onTrue.picture = safeimgulr + 'valve1-1.png';
+        data.onFalse.picture = safeimgulr + 'valve1-2.png';
+        data.onAlarm.picture = safeimgulr + 'valve1-3.png';
+        data.onDisconnected.picture = safeimgulr + 'valve1-4.png';
         this.attr({
             userData: data
         });
@@ -1010,6 +683,16 @@ var SolenoidValveComponent = draw2d.shape.basic.Rectangle.extend({
                 },
             }
             // 初始化 控件属性
+
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '电磁阀';
+        data.onTrue.picture = safeimgulr + 'valve2-1.png';
+        data.onFalse.picture = safeimgulr + 'valve2-2.png';
+        data.onAlarm.picture = safeimgulr + 'valve2-3.png';
+        data.onDisconnected.picture = safeimgulr + 'valve2-4.png';
         this.attr({
             userData: data
         });
@@ -1077,61 +760,15 @@ var ElectricButterflyValvesComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "电动蝶阀",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "电动蝶阀", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/valve3-1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/valve3-2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/valve3-3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/valve3-4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '电动蝶阀';
+        data.onTrue.picture = safeimgulr + 'valve3-1.png';
+        data.onFalse.picture = safeimgulr + 'valve3-2.png';
+        data.onAlarm.picture = safeimgulr + 'valve3-3.png';
+        data.onDisconnected.picture = safeimgulr + 'valve3-4.png';
         this.attr({
             userData: data
         });
@@ -1197,62 +834,16 @@ var AirFiltrationComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "空气过滤器",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "空气过滤器", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
 
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Airfiltration1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Airfiltration2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Airfiltration3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Airfiltration4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '空气过滤器';
+        data.onTrue.picture = safeimgulr + 'Airfiltration1.png';
+        data.onFalse.picture = safeimgulr + 'Airfiltration2.png';
+        data.onAlarm.picture = safeimgulr + 'Airfiltration3.png';
+        data.onDisconnected.picture = safeimgulr + 'Airfiltration4.png';
         this.attr({
             userData: data
         });
@@ -1318,61 +909,15 @@ var AirHeatingComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "空气加热器",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "空气加热器", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Airheating1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Airheatin2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Airheating3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Airheating4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '空气加热器';
+        data.onTrue.picture = safeimgulr + 'Airheating1.png';
+        data.onFalse.picture = safeimgulr + 'Airheating2.png';
+        data.onAlarm.picture = safeimgulr + 'Airheating3.png';
+        data.onDisconnected.picture = safeimgulr + 'Airheating4.png';
         this.attr({
             userData: data
         });
@@ -1442,61 +987,15 @@ var AirCoolerComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "空气冷却器",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "空气冷却器", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Aircooler1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Aircooler2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Aircooler3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Aircooler4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '空气冷却器';
+        data.onTrue.picture = safeimgulr + 'Aircooler1.png';
+        data.onFalse.picture = safeimgulr + 'Aircooler2.png';
+        data.onAlarm.picture = safeimgulr + 'Aircooler3.png';
+        data.onDisconnected.picture = safeimgulr + 'Aircooler4.png';
         this.attr({
             userData: data
         });
@@ -1564,61 +1063,15 @@ var HumidifierComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "加湿器",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "加湿器", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/humidifier1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/humidifier2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/humidifier3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/humidifier4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '加湿器';
+        data.onTrue.picture = safeimgulr + 'humidifier1.png';
+        data.onFalse.picture = safeimgulr + 'humidifier2.png';
+        data.onAlarm.picture = safeimgulr + 'humidifier3.png';
+        data.onDisconnected.picture = safeimgulr + 'humidifier4.png';
         this.attr({
             userData: data
         });
@@ -1686,61 +1139,15 @@ var controlPanelComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "温控面板",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "温控面板", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/controlpanel1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/controlpanel2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/controlpanel3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/controlpanel4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '温控面板';
+        data.onTrue.picture = safeimgulr + 'controlpanel1.png';
+        data.onFalse.picture = safeimgulr + 'controlpanel2.png';
+        data.onAlarm.picture = safeimgulr + 'controlpanel3.png';
+        data.onDisconnected.picture = safeimgulr + 'controlpanel4.png';
         this.attr({
             userData: data
         });
@@ -1808,61 +1215,15 @@ var FluorescentLampComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "荧光灯",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "荧光灯", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Fluorescentlamp1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Fluorescentlamp2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Fluorescentlamp3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Fluorescentlamp4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '荧光灯';
+        data.onTrue.picture = safeimgulr + 'Fluorescentlamp1.png';
+        data.onFalse.picture = safeimgulr + 'Fluorescentlamp2.png';
+        data.onAlarm.picture = safeimgulr + 'Fluorescentlamp3.png';
+        data.onDisconnected.picture = safeimgulr + 'Fluorescentlamp4.png';
         this.attr({
             userData: data
         });
@@ -1930,61 +1291,15 @@ var LEDComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "LED灯",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "LED灯", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/LED1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/LED2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/LED3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/LED4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = 'LED灯';
+        data.onTrue.picture = safeimgulr + 'LED1.png';
+        data.onFalse.picture = safeimgulr + 'LED2.png';
+        data.onAlarm.picture = safeimgulr + 'LED3.png';
+        data.onDisconnected.picture = safeimgulr + 'LED4.png';
         this.attr({
             userData: data
         });
@@ -2051,61 +1366,14 @@ var IncandescentComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "白炽灯",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "白炽灯", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Incandescent1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Incandescent2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Incandescent3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Incandescent4.png"
-                },
-            }
-            // 初始化 控件属性
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '白炽灯';
+        data.onTrue.picture = safeimgulr + 'Incandescent1.png';
+        data.onFalse.picture = safeimgulr + 'Incandescent2.png';
+        data.onAlarm.picture = safeimgulr + 'Incandescent3.png';
+        data.onDisconnected.picture = safeimgulr + 'Incandescent4.png';
         this.attr({
             userData: data
         });
@@ -2172,61 +1440,15 @@ var MetalHalideComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "金卤灯",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "金卤灯", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Metalhalide1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Metalhalide2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Metalhalide3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Metalhalide4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '金卤灯';
+        data.onTrue.picture = safeimgulr + 'Metalhalide1.png';
+        data.onFalse.picture = safeimgulr + 'Metalhalide2.png';
+        data.onAlarm.picture = safeimgulr + 'Metalhalide3.png';
+        data.onDisconnected.picture = safeimgulr + 'Metalhalide4.png';
         this.attr({
             userData: data
         });
@@ -2303,62 +1525,16 @@ var temperatureComponent = draw2d.shape.basic.Rectangle.extend({
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: " 温度",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: " 温度", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/temperature1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/temperature2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/temperature3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/temperature4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '温度';
+        data.onTrue.picture = safeimgulr + 'temperature1.png';
+        data.onFalse.picture = safeimgulr + 'temperature2.png';
+        data.onAlarm.picture = safeimgulr + 'temperature3.png';
+        data.onDisconnected.picture = safeimgulr + 'temperature4.png';
+
         this.attr({
             userData: data
         });
@@ -2443,62 +1619,16 @@ var humidityComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setStroke(0);
         this.labelValue.setFontColor("#000000");
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom());
-        var data = {
-                name: "湿度",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "湿度", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/humidity1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/humidity2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/humidity3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/humidity4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '湿度';
+        data.onTrue.picture = safeimgulr + 'humidity1.png';
+        data.onFalse.picture = safeimgulr + 'humidity2.png';
+        data.onAlarm.picture = safeimgulr + 'humidity3.png';
+        data.onDisconnected.picture = safeimgulr + 'humidity4.png';
+
         this.attr({
             userData: data
         });
@@ -2578,62 +1708,15 @@ var pressureComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setFontColor("#FFFFFF");
 
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
-        var data = {
-                name: "压力",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "压力", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/pressure1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/pressure2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/pressure3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/pressure4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '压力';
+        data.onTrue.picture = safeimgulr + 'pressure1.png';
+        data.onFalse.picture = safeimgulr + 'pressure2.png';
+        data.onAlarm.picture = safeimgulr + 'pressure3.png';
+        data.onDisconnected.picture = safeimgulr + 'pressure4.png';
         this.attr({
             userData: data
         });
@@ -2714,62 +1797,15 @@ var differentialPressureComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setFontColor("#FFFFFF");
 
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
-        var data = {
-                name: "压差",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "压差", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/differentialpressure1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/differentialpressure2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/differentialpressure3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/differentialpressure4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '压差';
+        data.onTrue.picture = safeimgulr + 'differentialpressure1.png';
+        data.onFalse.picture = safeimgulr + 'differentialpressure2.png';
+        data.onAlarm.picture = safeimgulr + 'differentialpressure3.png';
+        data.onDisconnected.picture = safeimgulr + 'differentialpressure4.png';
         this.attr({
             userData: data
         });
@@ -2848,62 +1884,15 @@ var liquidComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setStroke(0);
         this.labelValue.setFontColor("#FFFFFF");
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
-        var data = {
-                name: "液位",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "液位", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/liquid1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/liquid2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/liquid3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/liquid4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '液位';
+        data.onTrue.picture = safeimgulr + 'liquid1.png';
+        data.onFalse.picture = safeimgulr + 'liquid2.png';
+        data.onAlarm.picture = safeimgulr + 'liquid3.png';
+        data.onDisconnected.picture = safeimgulr + 'liquid4.png';
         this.attr({
             userData: data
         });
@@ -2983,62 +1972,15 @@ var electricComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setStroke(0);
         this.labelValue.setFontColor("#FFFFFF");
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
-        var data = {
-                name: "电流",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "电流", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 4, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/electric1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/electric2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/electric3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/electric4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '电流';
+        data.onTrue.picture = safeimgulr + 'electric1.png';
+        data.onFalse.picture = safeimgulr + 'electric2.png';
+        data.onAlarm.picture = safeimgulr + 'electric3.png';
+        data.onDisconnected.picture = safeimgulr + 'electric4.png';
         this.attr({
             userData: data
         });
@@ -3114,62 +2056,14 @@ var VoltageComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setStroke(0);
         this.labelValue.setFontColor("#FFFFFF");
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
-        var data = {
-                name: "电压",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "电压", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, //是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 4, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Voltage1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Voltage2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Voltage3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Voltage4.png"
-                },
-            }
-            // 初始化 控件属性
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '电压';
+        data.onTrue.picture = safeimgulr + 'Voltage1.png';
+        data.onFalse.picture = safeimgulr + 'Voltage2.png';
+        data.onAlarm.picture = safeimgulr + 'Voltage3.png';
+        data.onDisconnected.picture = safeimgulr + 'Voltage4.png';
         this.attr({
             userData: data
         });
@@ -3249,62 +2143,15 @@ var frequencyComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setStroke(0);
         this.labelValue.setFontColor("#FFFFFF");
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
-        var data = {
-                name: "频率",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "频率", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, //是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 4, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/frequency1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/frequency2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/frequency3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/frequency4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '频率';
+        data.onTrue.picture = safeimgulr + 'frequency1.png';
+        data.onFalse.picture = safeimgulr + 'frequency2.png';
+        data.onAlarm.picture = safeimgulr + 'frequency3.png';
+        data.onDisconnected.picture = safeimgulr + 'frequency4.png';
         this.attr({
             userData: data
         });
@@ -3383,62 +2230,15 @@ var activePowerComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setStroke(0);
         this.labelValue.setFontColor("#FFFFFF");
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
-        var data = {
-                name: "有功功率",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "有功功率", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, //是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 4, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/activepower1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/activepower2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/activepower3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/activepower4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '有功功率';
+        data.onTrue.picture = safeimgulr + 'activepower1.png';
+        data.onFalse.picture = safeimgulr + 'activepower2.png';
+        data.onAlarm.picture = safeimgulr + 'activepower3.png';
+        data.onDisconnected.picture = safeimgulr + 'activepower4.png';
         this.attr({
             userData: data
         });
@@ -3516,62 +2316,15 @@ var ElectricityConsumptionComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setStroke(0);
         this.labelValue.setFontColor("#FFFFFF");
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
-        var data = {
-                name: "用电量",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "用电量", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, //是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 4, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Electricityconsumption1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Electricityconsumption2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Electricityconsumption3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Electricityconsumption4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '用电量';
+        data.onTrue.picture = safeimgulr + 'Electricityconsumption1.png';
+        data.onFalse.picture = safeimgulr + 'Electricityconsumption2.png';
+        data.onAlarm.picture = safeimgulr + 'Electricityconsumption3.png';
+        data.onDisconnected.picture = safeimgulr + 'Electricityconsumption4.png';
         this.attr({
             userData: data
         });
@@ -3646,62 +2399,15 @@ var levelComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setStroke(0);
         this.labelValue.setFontColor("#FFFFFF");
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
-        var data = {
-                name: "液体流量",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "液体流量", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 4, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/level1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/level2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/level3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/level4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '液体流量';
+        data.onTrue.picture = safeimgulr + 'level1.png';
+        data.onFalse.picture = safeimgulr + 'level2.png';
+        data.onAlarm.picture = safeimgulr + 'level3.png';
+        data.onDisconnected.picture = safeimgulr + 'level4.png';
         this.attr({
             userData: data
         });
@@ -3779,62 +2485,15 @@ var GasComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setStroke(0);
         this.labelValue.setFontColor("#FFFFFF");
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
-        var data = {
-                name: "气体流量",
-                types: "imageComponent", //类型
-                valueType: "valueComponent", //显示控件绑定的 tag 的值
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "气体流量", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, //是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 4, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Gas1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Gas2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Gas3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Gas4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '气体流量';
+        data.onTrue.picture = safeimgulr + 'Gas1.png';
+        data.onFalse.picture = safeimgulr + 'Gas2.png';
+        data.onAlarm.picture = safeimgulr + 'Gas3.png';
+        data.onDisconnected.picture = safeimgulr + 'Gas4.png';
         this.attr({
             userData: data
         });
@@ -3902,61 +2561,15 @@ var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "广播",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "广播", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 4, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Broadcast1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Broadcast2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Broadcast3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/Broadcast4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '广播';
+        data.onTrue.picture = safeimgulr + 'Broadcast1.png';
+        data.onFalse.picture = safeimgulr + 'Broadcast2.png';
+        data.onAlarm.picture = safeimgulr + 'Broadcast3.png';
+        data.onDisconnected.picture = safeimgulr + 'Broadcast4.png';
         this.attr({
             userData: data
         });
@@ -3993,7 +2606,79 @@ var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
     }
 });
 
+/** 
+ *  BroadcastComponent  广播
+ */
+var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
+    NAME: "BroadcastComponent",
+    init: function(attr) {
+        this._super(attr);
+        this.width = 36;
+        this.height = 36;
+        this.setResizeable(false);
+        this.stroke = 1;
+        this.setColor("#DDDDDD"); //边框颜色
+        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        var thiss = this;
 
+
+        this.image = new draw2d.shape.basic.Image({
+            path: "images/icon/icon/Broadcast1.png",
+            width: 36,
+            height: 36
+        });
+        this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
+
+        this.label = new draw2d.shape.basic.Label({
+            text: "广播组价组件标题",
+            fontFamily: "微软雅黑"
+        });
+        this.add(this.label, new draw2d.layout.locator.TopLocator(this));
+        this.label.setVisible(false);
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '广播';
+        data.onTrue.picture = safeimgulr + 'Broadcast1.png';
+        data.onFalse.picture = safeimgulr + 'Broadcast2.png';
+        data.onAlarm.picture = safeimgulr + 'Broadcast3.png';
+        data.onDisconnected.picture = safeimgulr + 'Broadcast4.png';
+        this.attr({
+            userData: data
+        });
+
+        this.image.on("click", function() {
+            displayDiv(thiss);
+        });
+        // 移动
+        this.on("move", function() {
+            componentMove(thiss);
+        });
+        // 悬浮窗
+        this.image.onMouseEnter = function() {
+            if (thiss.userData.ShowHint) {
+                showTooltips(thiss);
+            }
+        };
+        this.image.onMouseLeave = function() {
+            $canvas.comTooltips.hide();
+        };
+    },
+    onTimer: function() {
+        this.setColor("#03A3FC");
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
+        setTimeout(function() {
+            thiss.setGlow(false);
+            thiss.setColor(thiss.getUserData().BlinkingColor);
+            thiss.setStroke(thiss.getUserData().BlinkingStroke);
+            thiss.setDashArray(thiss.getUserData().DashArray);
+        }, 500);
+    }
+});
 
 /** 
  *  monitoringComponent  枪机
@@ -4024,62 +2709,15 @@ var monitoringComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "枪机",
-                vlcurl: "",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "枪机", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 4, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: { //Tag的地址
-                    tag_id: -1, //用户输入Tag的值
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/monitoring1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/monitoring2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/monitoring3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/monitoring4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+        data.routine.vlcurl = '';
+        data.routine.name = '枪机';
+        data.onTrue.picture = safeimgulr + 'monitoring1.png';
+        data.onFalse.picture = safeimgulr + 'monitoring2.png';
+        data.onAlarm.picture = safeimgulr + 'monitoring3.png';
+        data.onDisconnected.picture = safeimgulr + 'monitoring4.png';
         this.attr({
             userData: data
         });
@@ -4145,62 +2783,16 @@ var qiujiComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "球机",
-                vlcurl: "",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "球机", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 4, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/qiuji1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/qiuji2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/qiuji3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/qiuji4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.vlcurl = '';
+        data.routine.name = '球机';
+        data.onTrue.picture = safeimgulr + 'qiuji1.png';
+        data.onFalse.picture = safeimgulr + 'qiuji2.png';
+        data.onAlarm.picture = safeimgulr + 'qiuji3.png';
+        data.onDisconnected.picture = safeimgulr + 'qiuji4.png';
         this.attr({
             userData: data
         });
@@ -4267,62 +2859,16 @@ var highqiujiComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "高球机",
-                vlcurl: "",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "高球机", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/highqiuji1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/highqiuji2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/highqiuji3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/highqiuji4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.vlcurl = '';
+        data.routine.name = '高球机';
+        data.onTrue.picture = safeimgulr + 'highqiuji1.png';
+        data.onFalse.picture = safeimgulr + 'highqiuji2.png';
+        data.onAlarm.picture = safeimgulr + 'highqiuji3.png';
+        data.onDisconnected.picture = safeimgulr + 'highqiuji4.png';
         this.attr({
             userData: data
         });
@@ -4390,61 +2936,15 @@ var EntranceGuardComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "门禁",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "门禁", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/menjin1.png"
-                },
-                onFalse: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/menjin2.png"
-                },
-                onAlarm: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/menjin3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 1,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/menjin4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '门禁';
+        data.onTrue.picture = safeimgulr + 'menjin1.png';
+        data.onFalse.picture = safeimgulr + 'menjin2.png';
+        data.onAlarm.picture = safeimgulr + 'menjin3.png';
+        data.onDisconnected.picture = safeimgulr + 'menjin4.png';
         this.attr({
             userData: data
         });
@@ -4513,61 +3013,15 @@ var detectorComponent = draw2d.shape.basic.Rectangle.extend({
         });
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
-        var data = {
-                name: "探测器",
-                types: "imageComponent", //类型
-                proportion: null, //自定义属性,存储宽高比例等
-                Description: "", //组件描述
-                Caption: "探测器", //组件标题 组态时/指定引用Tag的Name属性
-                ShowCaption: false, // 是否显示组件标题  (待定)
-                Visible: true, //是否显示组件(setAlpha(0))
-                Enable: false, //组件是否可用
-                AccessLevel: 0, //访问等级 0~15
-                ShowHint: false, //是否显示Hover说明(待定)
-                Hint: "", //Hover说明的内容 (待定)
-                Tag: {
-                    tag_id: -1,
-                    tag_type: -1,
-                    tag_name: "",
-                    bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
-                },
-                value: "",
-                Readonly: false, //组件是否为只读
-                Blinking: false, //组件闪烁
-                BlinkingStroke: 1,
-                BlinkingColor: "#DDDDDD",
-                DashArray: "",
-                BlinkingType: "style",
-                onTrue: {
-                    LineWidth: 2,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/tance1.png"
-                },
-                onFalse: {
-                    LineWidth: 3,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/tance2.png"
-                },
-                onAlarm: {
-                    LineWidth: 4,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/tance3.png"
-                },
-                onDisconnected: {
-                    LineWidth: 5,
-                    LineColor: "#DDDDDD",
-                    LineStyle: null,
-                    Blinking: false,
-                    picture: "images/icon/icon/tance4.png"
-                },
-            }
-            // 初始化 控件属性
+
+        // 初始化 控件属性
+        var data = JSON.parse(safeComponentData);
+
+        data.routine.name = '探测器';
+        data.onTrue.picture = safeimgulr + 'tance1.png';
+        data.onFalse.picture = safeimgulr + 'tance2.png';
+        data.onAlarm.picture = safeimgulr + 'tance3.png';
+        data.onDisconnected.picture = safeimgulr + 'tance4.png';
         this.attr({
             userData: data
         });

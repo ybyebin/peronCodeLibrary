@@ -1,6 +1,3 @@
-var linenum = 0;
-
-
 /** 
  * Line Component
  * @author 
