@@ -1,5 +1,6 @@
 var setComponentOptions = {
-
+    // 图片地址(自定义控件/safeComponent 图片地址)
+    imageBaseUrl:'images/icon/icon/',
     // public method
     basePublicSet: function(component) {
         var vueRoutine = canvasVue.routine;
@@ -109,6 +110,20 @@ var setComponentOptions = {
         } else {
             vueStyle.flashing = false;
         }
+
+
+
+
+        console.log('边框宽度:'+component.getStroke());
+        console.log('边框颜色:'+component.getColor().hash());
+        console.log('边框样式:'+component.getDashArray());
+        console.log('填充颜色:'+component.getBackgroundColor().hash());
+        console.log('透明度:'+component.getAlpha());
+
+
+
+
+
 
         /************************style--end************************************** */
         /************************onTrue--begin************************************** */
@@ -676,7 +691,7 @@ var setComponentOptions = {
     imageSet: function(component) {
         var data = component.getUserData();
         canvasVue.styles.picture = data.routine.picture;
-        canvasVue.ontrue.picture = data.onTue.picture;
+        canvasVue.ontrue.picture = data.onTrue.picture;
         canvasVue.onfalse.picture = data.onFalse.picture;
         canvasVue.onalarm.picture = data.onAlarm.picture;
         canvasVue.ondisc.picture = data.onDisconnected.picture;
@@ -736,7 +751,38 @@ var setComponentOptions = {
             canvasVue.componentData.flag = true;
         }, 300);
 
-    }
+    },
+    // 显示悬浮说明
+    showTooltips:function(component) {
+        var hint = component.userData.routine.hint;
+        if(hint.flag){
+            if(hint.hintText!=''){
+                var pos = this.getMousePos(event);
+                $('#tooltips').show().text(hint.hintText).css({ 'top': pos.y, 'left':pos.x });
+            }
+          
+        }
+       
+ 
+    },
+    // 隐藏悬浮说明
+    hideTooltips:function(component) {
+        $('#tooltips').hide();
+    },
+
+    getMousePos:function (event) {
+        var e = event || window.event;
+        var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+        var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+        var x = e.pageX || e.clientX + scrollX;
+        var y = e.pageY || e.clientY + scrollY;
+        y -=195;
+        x-=50
+         console.log('x: ' + x + '\ny: ' + y)
+        // alert('x: ' + x + '\ny: ' + y);
+        return { 'x': x, 'y': y };
+        // console.log('x: ' + x + '\ny: ' + y)
+ }
 
 }
 
@@ -771,8 +817,8 @@ var basicSet = {
             autoHideScrollbar: true
         });
 
-        // 属性框打开关闭操作
-        $('.attr-content-title').click(function() {
+        // 基础属性框打开关闭操作
+        $('.attr-toggle-default').click(function() {
             var _this = $(this);
             var clas = 'collapsed';
             var divs = '.' + _this.data('for');
@@ -785,6 +831,48 @@ var basicSet = {
             $(divs).stop().slideToggle(300);
 
         });
+
+
+         // 状态属性框打开关闭操作
+         $('.attr-toggle-status').click(function() {
+            var _this = $(this);
+            var clas = 'collapsed';
+            var divs = '.' + _this.data('for');
+
+            var flag = false;
+            if (_this.hasClass(clas)) {
+                flag = true;
+            }
+           
+            $('.status-div').stop().hide();
+            $('.attr-toggle-status').removeClass(clas);
+
+            if(!flag){
+                _this.addClass(clas);
+                $(divs).slideDown(300);
+
+                if (canvasVue.componentData.flag) {
+
+                    var node = canvasSet.getNodeFromCanvas();
+                    if (node) {
+                        node.setBackgroundColor('#35c99d')
+                    }
+
+                }
+
+            }
+
+
+           
+
+        });
+
+
+
+        // 画布自适应缩放
+        window.onresize = function () {
+            canvasSet.setCanvasWH();
+        }
 
 
         // 颜色
@@ -1566,21 +1654,22 @@ var basicSet = {
 
 // canvas 基础设置
 var canvasSet = {
-    BasicData: {
-        width: 0,
-        init: true,
-        scale: 9 / 16
+    basicData: {
+        // 画布基础宽高
+        basicWidth:1300,
+        scale: 9 / 16,
+        s:''
     },
     setCanvasWH: function() {
-        var canvas = $('#canvas');
-
-        var w = Number(canvas.width());
-        if (this.BasicData.init) {
-            this.BasicData.width = w;
-            this.BasicData.init = false;
-        }
-        console.log(w)
-        canvas.css('height', w * this.BasicData.scale + 'px');
+        var w = Number($('.canvas-div').width());
+        var s = this.basicData.basicWidth / w;
+        this.basicData.s = s;
+        $('#canvas').css({
+            width:w+'px',
+            height: w * this.basicData.scale + 'px'
+        });
+       
+        imageCanvas.setZoom(s);
     },
     /**
      *  在画布中捕获控件 用于处理组件

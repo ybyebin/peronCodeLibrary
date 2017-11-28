@@ -5,17 +5,18 @@
  */
 var imageComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "imageComponent",
-    init: function(attr) {
+    init: function (attr) {
         this._super(attr);
         this.width = 36;
         this.height = 36;
         this.stroke = 1;
         this.setColor("#DDDDDD"); //边框颜色
-        // this.setAlpha(0.001);
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
-        var thiss = this;
+        this.setAlpha(0.001);
+        // this.setBackgroundColor("#FFFFFF"); //背景颜色
+        var _this = this;
+        var imgBaseUrl = setComponentOptions.imageBaseUrl +"zidingyi.png";
         this.image = new draw2d.shape.basic.Image({
-            path: "images/icon/icon/zidingyi.png",
+            path:imgBaseUrl,
             // path:"../img/img.png",
             // path: '../images/icon/icon/zidingyi12.svg',
 
@@ -71,28 +72,28 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
                 lineColor: "#DDDDDD",
                 lineStyle: null,
                 blinking: false,
-                picture: "images/icon/icon/zidingyi.png"
+                picture:imgBaseUrl
             },
             onFalse: {
                 lineWidth: 1,
                 lineColor: "#DDDDDD",
                 lineStyle: null,
                 blinking: false,
-                picture: "images/icon/icon/zidingyi.png"
+                picture: imgBaseUrl
             },
             onAlarm: {
                 lineWidth: 1,
                 lineColor: "#DDDDDD",
                 lineStyle: null,
                 blinking: false,
-                picture: "images/icon/icon/zidingyi.png"
+                picture: imgBaseUrl
             },
             onDisconnected: {
                 lineWidth: 1,
                 lineColor: "#DDDDDD",
                 lineStyle: null,
                 blinking: false,
-                picture: "images/icon/icon/zidingyi.png"
+                picture: imgBaseUrl
             }
         };
         this.attr({
@@ -100,32 +101,31 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
 
-        this.on("click", function() {
-            imageDisplayDiv(thiss);
-
-            console.log("图片控件类型")
+        this.on("click", function () {
+            imgBasic.clickMethod(_this);
+            // console.log("图片控件类型")
         });
-        this.image.on("click", function() {
-            imageDisplayDiv(thiss);
+        this.image.on("click", function () {
+            imgBasic.clickMethod(_this);
         });
         // 缩放
-        this.on("resize", function() {
-            thiss.image.setHeight(thiss.getHeight());
-            thiss.image.setWidth(thiss.getWidth());
-            componentResize(thiss);
+        this.on("resize", function () {
+            // thiss.image.setHeight(thiss.getHeight());
+            // thiss.image.setWidth(thiss.getWidth());
+            // componentResize(thiss);
         });
         // 移动
-        this.on("move", function() {
-            componentMove(thiss);
+        this.on("move", function () {
+            // componentMove(thiss);
         });
         // 悬浮窗
-        this.image.onMouseEnter = function() {
-            if (thiss.userData.ShowHint) {
-                showTooltips(thiss);
-            }
+        this.image.onMouseEnter = function () {
+            // if (thiss.userData.ShowHint) {
+            //     showTooltips(thiss);
+            // }
         };
-        this.image.onMouseLeave = function() {
-            $canvas.comTooltips.hide();
+        this.image.onMouseLeave = function () {
+            // $canvas.comTooltips.hide();
         };
 
 
@@ -134,16 +134,16 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
         /**
          *	双击方法----forexample--选择图片
          */
-        this.on("dblclick", function() {});
+        this.on("dblclick", function () { });
     },
 
-    onTimer: function() {
+    onTimer: function () {
         this.setColor("#03A3FC");
         this.setStroke(1);
         this.setGlow(true);
         this.setDashArray("");
         var thiss = this;
-        setTimeout(function() {
+        setTimeout(function () {
             thiss.setGlow(false);
             thiss.setColor(thiss.getUserData().BlinkingColor);
             thiss.setStroke(thiss.getUserData().BlinkingStroke);
@@ -154,17 +154,27 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
 })
 
 
-function imageDisplayDiv(component) {
-    // 基本
-    setComponentOptions.basePublicSet(component);
-    setComponentOptions.basicSet(component);
-    // 大小
-    setComponentOptions.componentSize(component);
-    // 位置 旋转角度
-    setComponentOptions.componentOffsetAndAngle(component);
-    // 标题
-    setComponentOptions.componentCaption(component);
-    // 图片url
-    setComponentOptions.imageSet(component);
 
+
+var imgBasic = {
+    // 自定义控件属性
+    imgData: '',//img是特殊控件只有一个  该属性直接写进组件
+    clickMethod: function (component) {
+        setComponentOptions.setComponentFlagFalse();
+        //重置属性框
+        canvasVue.resetAttr();
+        // 隐藏该控件没有的属性
+        canvasVue.hidediv.imgHideDiv = true;
+        // 基本
+        setComponentOptions.basePublicSet(component);
+        setComponentOptions.basicSet(component);
+        // 大小
+        setComponentOptions.componentSize(component);
+        // 位置 旋转角度
+        setComponentOptions.componentOffsetAndAngle(component);
+        // 标题
+        setComponentOptions.componentCaption(component);
+        // 图片url
+        setComponentOptions.imageSet(component);
+    }
 }

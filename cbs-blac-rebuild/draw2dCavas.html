@@ -360,6 +360,7 @@
                 <div class="draw2d-body-content">
                     <div class="canvas-div">
                         <div id="canvas" class="canvas"></div>
+                        <div id="tooltips"></div>
                     </div>
                     <div class="global-btn-div bayaxMscroll">
                         <!-- <button onclick="changeSvg()">按钮</button> -->
@@ -394,7 +395,7 @@
                         <div class="layui-tab-content bayaxMscroll">
                             <div class="layui-tabscroll-item layui-tab-item layui-show">
                                 <div class="attr-content">
-                                    <p class="attr-content-title collapsed reset-title" data-toggle="collapse" data-for="routine">
+                                    <p class="attr-toggle-default attr-content-titles collapsed reset-title" data-toggle="collapse" data-for="routine">
                                         <i></i>
                                         <span>常规</span>
                                     </p>
@@ -424,7 +425,7 @@
                                             </div>
                                         </div>
 
-                                        <div v-bind:class="hidediv.lineHideDiv" class="layui-form-item">
+                                        <div v-bind:class="{'basic-hide':hidediv.lineHideDiv}" class="layui-form-item">
                                             <div class="layui-inline">
                                                 <label class="layui-form-label">位置</label>
                                                 <div class="layui-attrinput-inline layui-input-inline" style="padding-left:5px;">
@@ -437,7 +438,7 @@
                                             </div>
                                         </div>
 
-                                        <div v-bind:class="hidediv.lineHideDiv" class="layui-form-item">
+                                        <div v-bind:class="{'basic-hide':hidediv.lineHideDiv}" class="layui-form-item">
                                             <div class="layui-inline">
                                                 <label class="layui-form-label"></label>
                                                 <div class="layui-attrinput-inline layui-input-inline" style="padding-left:5px;">
@@ -463,7 +464,7 @@
                                         <div v-bind:class="{'basic-hide':hidediv.lineHideDiv}" class="layui-form-item">
                                             <label class="layui-form-label">旋转角度</label>
                                             <div class="layui-input-block">
-                                                <input v-model="routine.rotationAngle" type="text" name="title" autocomplete="off" class="layui-input">
+                                                <input v-model="routine.rotationAngle" type="number" name="title" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
@@ -531,7 +532,7 @@
                                     </div>
                                 </div>
                                 <div class="attr-content">
-                                    <p class="attr-content-title collapsed reset-title" data-toggle="collapse" data-for="data-div">
+                                    <p class="attr-toggle-default attr-content-titles collapsed reset-title" data-toggle="collapse" data-for="data-div">
                                         <i></i>
                                         <span>Data</span>
                                     </p>
@@ -574,11 +575,11 @@
 
                                 </div>
                                 <div class="attr-content">
-                                    <p class="attr-content-title " data-toggle="collapse" data-for="style-div">
+                                    <p class="attr-toggle-status attr-content-titles" data-toggle="collapse" data-for="style-div">
                                         <i></i>
-                                        <span>Style</span>
+                                        <span>Styles</span>
                                     </p>
-                                    <div class="style-div attr-content-body reset-content">
+                                    <div class="style-div status-div attr-content-body reset-content">
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框宽度</label>
                                             <div class="layui-input-block">
@@ -706,11 +707,11 @@
                                 </div>
                                 <!-- ontrue -->
                                 <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
-                                    <p class="attr-content-title " data-toggle="collapse" data-for="ontrue-div">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="ontrue-div">
                                         <i></i>
                                         <span>onTrue</span>
                                     </p>
-                                    <div class="ontrue-div attr-content-body reset-content">
+                                    <div class="ontrue-div status-div attr-content-body reset-content">
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框宽度</label>
                                             <div class="layui-input-block">
@@ -822,11 +823,11 @@
                                     </div>
                                 </div>
                                 <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
-                                    <p class="attr-content-title " data-toggle="collapse" data-for="onfalse-div">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="onfalse-div">
                                         <i></i>
                                         <span>onFalse</span>
                                     </p>
-                                    <div class="onfalse-div attr-content-body reset-content">
+                                    <div class="onfalse-div status-div attr-content-body reset-content">
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框宽度</label>
                                             <div class="layui-input-block">
@@ -938,11 +939,11 @@
                                     </div>
                                 </div>
                                 <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
-                                    <p class="attr-content-title " data-toggle="collapse" data-for="onalarm-div">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="onalarm-div">
                                         <i></i>
                                         <span>onAlarm</span>
                                     </p>
-                                    <div class="onalarm-div attr-content-body reset-content">
+                                    <div class="onalarm-div status-div attr-content-body reset-content">
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框宽度</label>
                                             <div class="layui-input-block">
@@ -1054,11 +1055,11 @@
                                     </div>
                                 </div>
                                 <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
-                                    <p class="attr-content-title " data-toggle="collapse" data-for="ondisc-div">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="ondisc-div">
                                         <i></i>
                                         <span>onDisconnected</span>
                                     </p>
-                                    <div class="ondisc-div attr-content-body reset-content">
+                                    <div class="ondisc-div status-div attr-content-body reset-content">
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框宽度</label>
                                             <div class="layui-input-block">

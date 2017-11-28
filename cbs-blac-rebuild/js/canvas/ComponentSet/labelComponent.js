@@ -6,7 +6,7 @@
  */
 var LabelComponent = draw2d.shape.note.PostIt.extend({
     NAME: "LabelComponent",
-    init: function(attr) {
+    init: function (attr) {
         this._super(attr);
         this.text = "标签";
         this.fontFamily = "微软雅黑";
@@ -19,7 +19,7 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
         // this.attr({
         //  			padding: {left:15, right:15}
         // 	});
-        var thiss = this;
+        var _this = this;
 
         // 这里设置hover事件
         this.titles = "这里是lable控件"; //设置鼠标指示标题
@@ -74,23 +74,23 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
 
 
         // 选中
-        this.on("click", function() {
-            labeldisplayDiv(thiss);
+        this.on("click", function () {
+            labelBasic.clickMethod(_this);
         });
 
         // 移动
-        this.on("move", function() {
-            componentMove(thiss)
+        this.on("move", function () {
+            // componentMove(thiss)
 
         });
         // 悬浮窗
-        this.onMouseEnter = function() {
-            if (thiss.userData.ShowHint) {
-                showTooltips(thiss);
-            }
+        this.onMouseEnter = function () {
+            // if (thiss.userData.ShowHint) {
+                // showTooltips(thiss);
+            // }
         };
-        this.onMouseLeave = function() {
-            $canvas.comTooltips.hide();
+        this.onMouseLeave = function () {
+            // $canvas.comTooltips.hide();
         };
 
         // =========更改文本===================
@@ -117,13 +117,13 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
 
 
     },
-    onTimer: function() {
+    onTimer: function () {
         this.setColor("#03A3FC");
         this.setStroke(1);
         this.setGlow(true);
         this.setDashArray("");
         var thiss = this;
-        setTimeout(function() {
+        setTimeout(function () {
             thiss.setGlow(false);
             thiss.setColor(thiss.getUserData().BlinkingColor);
             thiss.setStroke(thiss.getUserData().BlinkingStroke);
@@ -132,35 +132,23 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
     }
 })
 
-// 属性框
-function labeldisplayDiv(component) {
-    // 基本(公共)
-    setComponentOptions.basePublicSet(component);
-    // 位置 旋转角度
-    setComponentOptions.componentOffsetAndAngle(component);
-
-    setComponentOptions.labelSet(component);
 
 
-}
+var labelBasic = {
+    // 自定义控件属性
+    labelData: '',//label是特殊控件只有一个  该属性直接写进组件
+    clickMethod: function (component) {
+        setComponentOptions.setComponentFlagFalse();
+        //重置属性框
+        canvasVue.resetAttr();
+        // 隐藏该控件没有的属性
+        canvasVue.hidediv.labelHideDiv = true;
+        // 基本(公共)
+        setComponentOptions.basePublicSet(component);
+        // 位置 旋转角度
+        setComponentOptions.componentOffsetAndAngle(component);
 
-// 设置 自定义图片控件在编辑框的属性值
-function setCustomLabelComponentStyleInEditFiled(com) {
-    checkComponentTagidIsNull(); //判断前一个控件是否正确绑定Tag
-
-    /*
-     * 暂存该控件的id
-     * 用于刷新控件的属性
-     */
-    $canvas.compID.html(com.id);
-    checkThisComponentIsTrue(com); //检查本控件的Tag是否正确(如果已经绑定)
-
-
-
-
-
-
-
-
-
+        setComponentOptions.labelSet(component);
+        setComponentOptions.setComponentFlagTrue();
+    }
 }

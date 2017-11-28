@@ -1,27 +1,10 @@
 var layer,
     canvasVue;
 
-window.onresize = function() {
-    canvasSet.setCanvasWH();
-    imageCanvas.setZoom('1.2');
-
-    var w = Number($('#canvas').width());
-    var s = canvasSet.BasicData.width / w;
-    // imageCanvas.setZoom('1');
-    imageCanvas.setZoom(s);
-
-}
-layui.use(['layer', 'element'], function() {
+layui.use(['layer', 'element'], function () {
     var layer = layui.layer;
     layer = layui.layer;
     var element = layui.element;
-
-    // 设置 画布宽高
-    canvasSet.setCanvasWH();
-
-
-
-
 
     canvasVue = new Vue({
         el: '#app',
@@ -63,78 +46,78 @@ layui.use(['layer', 'element'], function() {
             borderData: {
                 borderWidth: [0, 1, 2, 3, 4, 5],
                 borderStyle: [{
-                        name: '默认',
-                        data: ''
-                    },
-                    {
-                        name: '-',
-                        data: '-'
-                    },
-                    {
-                        name: '.',
-                        data: '.'
-                    },
-                    {
-                        name: '-.',
-                        data: '-.'
-                    },
-                    {
-                        name: '-..',
-                        data: '-..'
-                    },
+                    name: '默认',
+                    data: ''
+                },
+                {
+                    name: '-',
+                    data: '-'
+                },
+                {
+                    name: '.',
+                    data: '.'
+                },
+                {
+                    name: '-.',
+                    data: '-.'
+                },
+                {
+                    name: '-..',
+                    data: '-..'
+                },
 
                 ],
                 colorData: [{
-                        color: '#F5A623',
-                        colorstyle: 'background-color:#F5A623',
-                        active: false
-                    },
-                    {
-                        color: '#7ED321',
-                        colorstyle: 'background-color:#7ED321',
-                        active: false
-                    },
-                    {
-                        color: '#F57373',
-                        colorstyle: 'background-color:#F57373',
-                        active: false
-                    },
+                    color: '#F5A623',
+                    colorstyle: 'background-color:#F5A623',
+                    active: false
+                },
+                {
+                    color: '#7ED321',
+                    colorstyle: 'background-color:#7ED321',
+                    active: false
+                },
+                {
+                    color: '#F57373',
+                    colorstyle: 'background-color:#F57373',
+                    active: false
+                },
 
-                    {
-                        color: '#35C99D',
-                        colorstyle: 'background-color:#35C99D',
-                        active: false
-                    },
-                    {
-                        color: '#000000',
-                        colorstyle: 'background-color:#000000',
-                        active: false
-                    },
-                    {
-                        color: '#999999',
-                        colorstyle: 'background-color:#999999',
-                        active: false
-                    },
-                    {
-                        color: '#FFFFFF',
-                        colorstyle: 'background-color:#FFFFFF',
-                        active: false
-                    },
-                    {
-                        color: '#4A4A4A',
-                        colorstyle: 'background-color:#4A4A4A',
-                        active: false
-                    },
-                    {
-                        color: '#03A3FC',
-                        colorstyle: 'background-color:#03A3FC',
-                        active: false
-                    },
-                    {
-                        color: '#DDDDDD',
-                        colorstyle: 'background-color:#DDDDDD',
-                        active: false
-                    }
+                {
+                    color: '#35C99D',
+                    colorstyle: 'background-color:#35C99D',
+                    active: false
+                },
+                {
+                    color: '#000000',
+                    colorstyle: 'background-color:#000000',
+                    active: false
+                },
+                {
+                    color: '#999999',
+                    colorstyle: 'background-color:#999999',
+                    active: false
+                },
+                {
+                    color: '#FFFFFF',
+                    colorstyle: 'background-color:#FFFFFF',
+                    active: false
+                },
+                {
+                    color: '#4A4A4A',
+                    colorstyle: 'background-color:#4A4A4A',
+                    active: false
+                },
+                {
+                    color: '#03A3FC',
+                    colorstyle: 'background-color:#03A3FC',
+                    active: false
+                },
+                {
+                    color: '#DDDDDD',
+                    colorstyle: 'background-color:#DDDDDD',
+                    active: false
+                }
 
 
 
@@ -298,9 +281,9 @@ layui.use(['layer', 'element'], function() {
                 flashing: false, //闪烁
             }
         },
-        mounted: function() {
+        mounted: function () {
             var _this = this;
-            this.$nextTick(function() {
+            this.$nextTick(function () {
                 // 自定义下拉群组 初始化
                 bayaxInit();
                 basicSet.init();
@@ -309,7 +292,8 @@ layui.use(['layer', 'element'], function() {
 
                 // canvas 初始化
                 canvasSet.allCanvasinit('new');
-
+                // 设置 画布宽高
+                canvasSet.setCanvasWH();
 
 
             });
@@ -317,39 +301,39 @@ layui.use(['layer', 'element'], function() {
         },
         methods: {
             // 访问等级选择
-            setAccessLevel: function(item) {
+            setAccessLevel: function (item) {
                 this.routine.accessLevel.level = item;
             },
             // style 边框宽度
-            setStyleBorderWidth: function(item) {
+            setStyleBorderWidth: function (item) {
                 this.styles.borderWidth = item;
             },
             // style 边框样式
-            setStyleBorderStyle: function(item) {
+            setStyleBorderStyle: function (item) {
                 this.styles.borderStyle = item.name;
             },
             // style 边框颜色
-            setStyleBorderColor: function(item) {
+            setStyleBorderColor: function (item) {
                 var borderColor = this.styles.borderColor;
-                borderColor.colorData.forEach(function(ele) {
+                borderColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 borderColor.color = item.color;
             },
             // style 填充颜色
-            setStyleFillColor: function(item) {
+            setStyleFillColor: function (item) {
                 var fillColor = this.styles.fillColor;
-                fillColor.colorData.forEach(function(ele) {
+                fillColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 fillColor.color = item.color;
             },
             // style 字体颜色
-            setStyleFontColor: function(item) {
+            setStyleFontColor: function (item) {
                 var fontColor = this.styles.fontColor;
-                fontColor.colorData.forEach(function(ele) {
+                fontColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
@@ -360,26 +344,26 @@ layui.use(['layer', 'element'], function() {
 
 
             // ontrue 边框宽度
-            setOnTrueBorderWidth: function(item) {
+            setOnTrueBorderWidth: function (item) {
                 this.ontrue.borderWidth = item;
             },
             // ontrue 边框样式
-            setOnTrueBorderStyle: function(item) {
+            setOnTrueBorderStyle: function (item) {
                 this.ontrue.borderStyle = item.name;
             },
             // ontrue 边框颜色
-            setOnTrueBorderColor: function(item) {
+            setOnTrueBorderColor: function (item) {
                 var borderColor = this.ontrue.borderColor;
-                borderColor.colorData.forEach(function(ele) {
+                borderColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 borderColor.color = item.color;
             },
             // ontrue 填充颜色
-            setOnTrueFillColor: function(item) {
+            setOnTrueFillColor: function (item) {
                 var fillColor = this.ontrue.fillColor;
-                fillColor.colorData.forEach(function(ele) {
+                fillColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
@@ -387,9 +371,9 @@ layui.use(['layer', 'element'], function() {
             },
 
             // ontrue 字体颜色
-            setOnTrueFontColor: function(item) {
+            setOnTrueFontColor: function (item) {
                 var fontColor = this.ontrue.fontColor;
-                fontColor.colorData.forEach(function(ele) {
+                fontColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
@@ -399,26 +383,26 @@ layui.use(['layer', 'element'], function() {
 
 
             // onfalse 边框宽度
-            setOnFalseBorderWidth: function(item) {
+            setOnFalseBorderWidth: function (item) {
                 this.onfalse.borderWidth = item;
             },
             // onfalse 边框样式
-            setOnFalseBorderStyle: function(item) {
+            setOnFalseBorderStyle: function (item) {
                 this.onfalse.borderStyle = item.name;
             },
             // onfalse 边框颜色
-            setOnFalseBorderColor: function(item) {
+            setOnFalseBorderColor: function (item) {
                 var borderColor = this.onfalse.borderColor;
-                borderColor.colorData.forEach(function(ele) {
+                borderColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 borderColor.color = item.color;
             },
             // onfalse 填充颜色
-            setOnFalseFillColor: function(item) {
+            setOnFalseFillColor: function (item) {
                 var fillColor = this.onfalse.fillColor;
-                fillColor.colorData.forEach(function(ele) {
+                fillColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
@@ -426,9 +410,9 @@ layui.use(['layer', 'element'], function() {
             },
 
             // onfalse 字体颜色
-            setOnFalseFontColor: function(item) {
+            setOnFalseFontColor: function (item) {
                 var fontColor = this.onfalse.fontColor;
-                fontColor.colorData.forEach(function(ele) {
+                fontColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
@@ -439,35 +423,35 @@ layui.use(['layer', 'element'], function() {
 
 
             // onalarm 边框宽度
-            setOnAlarmBorderWidth: function(item) {
+            setOnAlarmBorderWidth: function (item) {
                 this.onalarm.borderWidth = item;
             },
             // onalarm 边框样式
-            setOnAlarmBorderStyle: function(item) {
+            setOnAlarmBorderStyle: function (item) {
                 this.onalarm.borderStyle = item.name;
             },
             // onalarm 边框颜色
-            setOnAlarmBorderColor: function(item) {
+            setOnAlarmBorderColor: function (item) {
                 var borderColor = this.onalarm.borderColor;
-                borderColor.colorData.forEach(function(ele) {
+                borderColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 borderColor.color = item.color;
             },
             // onalarm 填充颜色
-            setOnAlarmFillColor: function(item) {
+            setOnAlarmFillColor: function (item) {
                 var fillColor = this.onalarm.fillColor;
-                fillColor.colorData.forEach(function(ele) {
+                fillColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 fillColor.color = item.color;
             },
             // onalarm 字体颜色
-            setOnAlarmFontColor: function(item) {
+            setOnAlarmFontColor: function (item) {
                 var fontColor = this.onalarm.fontColor;
-                fontColor.colorData.forEach(function(ele) {
+                fontColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
@@ -475,26 +459,26 @@ layui.use(['layer', 'element'], function() {
             },
 
             // ondisc 边框宽度
-            setOnDiscBorderWidth: function(item) {
+            setOnDiscBorderWidth: function (item) {
                 this.ondisc.borderWidth = item;
             },
             // ondisc 边框样式
-            setOnDiscBorderStyle: function(item) {
+            setOnDiscBorderStyle: function (item) {
                 this.ondisc.borderStyle = item.name;
             },
             // ondisc 边框颜色
-            setOnDiscBorderColor: function(item) {
+            setOnDiscBorderColor: function (item) {
                 var borderColor = this.ondisc.borderColor;
-                borderColor.colorData.forEach(function(ele) {
+                borderColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 borderColor.color = item.color;
             },
             // ondisc 填充颜色
-            setOnDiscFillColor: function(item) {
+            setOnDiscFillColor: function (item) {
                 var fillColor = this.ondisc.fillColor;
-                fillColor.colorData.forEach(function(ele) {
+                fillColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
@@ -502,9 +486,9 @@ layui.use(['layer', 'element'], function() {
             },
 
             // ondisc 字体颜色
-            setOnDiscFontColor: function(item) {
+            setOnDiscFontColor: function (item) {
                 var fontColor = this.ondisc.fontColor;
-                fontColor.colorData.forEach(function(ele) {
+                fontColor.colorData.forEach(function (ele) {
                     ele.active = false;
                 });
                 item.active = true;
@@ -517,8 +501,8 @@ layui.use(['layer', 'element'], function() {
 
 
             // 处理color 数据
-            setColorData: function() {
-                var strColor = JSON.stringify(this.borderData.colorData.map(function(item) {
+            setColorData: function () {
+                var strColor = JSON.stringify(this.borderData.colorData.map(function (item) {
                     return item;
                 }));
                 this.styles.borderColor.colorData = JSON.parse(strColor);
@@ -540,17 +524,17 @@ layui.use(['layer', 'element'], function() {
                 this.ondisc.borderColor.colorData = JSON.parse(strColor);
                 this.ondisc.fillColor.colorData = JSON.parse(strColor);
                 this.ondisc.fontColor.colorData = JSON.parse(strColor);
-                console.log(JSON.stringify(this.styles.borderColor.colorData));
+                // console.log(JSON.stringify(this.styles.borderColor.colorData));
             },
             // 重置属性框
-            resetAttr: function() {
+            resetAttr: function () {
                 var clas = 'collapsed';
                 $('.attr-content-title').removeClass(clas);
                 $('.reset-title').addClass(clas);
                 $('.reset-content').hide();
                 $('.routine,.data-div').show();
 
-                setTimeout(function() {
+                setTimeout(function () {
                     $(".layui-tabscroll-item").mCustomScrollbar('scrollTo', 'top');
                 }, 90);
 
@@ -561,7 +545,7 @@ layui.use(['layer', 'element'], function() {
                 dic.imgHideDiv = false;
                 dic.safeHideDiv = false;
                 dic.textHideDiv = false;
-                dic.vlcUrlHideDiv = false;
+                dic.vlcUrlHideDiv = true;
 
                 var routine = this.routine;
                 var datas = this.datas;
@@ -640,7 +624,7 @@ layui.use(['layer', 'element'], function() {
     })
 
     // 名称
-    canvasVue.$watch('routine.name', function(newVal, oldVal) {
+    canvasVue.$watch('routine.name', function (newVal, oldVal) {
         if (this.componentData.flag) {
             console.log('旧值:' + oldVal);
             console.log('新值:' + newVal);
@@ -652,7 +636,7 @@ layui.use(['layer', 'element'], function() {
         }
     });
     // 描述
-    canvasVue.$watch('routine.description', function(newVal, oldVal) {
+    canvasVue.$watch('routine.description', function (newVal, oldVal) {
         if (this.componentData.flag) {
             console.log('描述旧值:' + oldVal);
             console.log('描述新值:' + newVal);
@@ -665,7 +649,7 @@ layui.use(['layer', 'element'], function() {
     });
 
     //尺寸-width
-    canvasVue.$watch('routine.width', function(newVal, oldVal) {
+    canvasVue.$watch('routine.width', function (newVal, oldVal) {
         if (this.componentData.flag) {
             console.log('宽度旧值:' + oldVal);
             console.log('宽度新值:' + newVal);
@@ -684,51 +668,175 @@ layui.use(['layer', 'element'], function() {
             }
         }
     });
-    // 直线水平监控
-    canvasVue.$watch('routine.horizontal', function(newVal, oldVal) {
-        // 做点什么
+
+    //尺寸-height
+    canvasVue.$watch('routine.height', function (newVal, oldVal) {
         if (this.componentData.flag) {
-            console.log('旧值:' + oldVal);
-            console.log('新值:' + newVal);
+            console.log('高度旧值:' + oldVal);
+            console.log('高度新值:' + newVal);
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                if (Number(newVal) < 5) {
+                    layer.msg('最小为5');
+                    return;
+                }
+                if (node.isResizeable()) {
+                    node.setHeight(newVal);
+                    // node.repaint();
+                } else {
+                    layer.msg('该控件不支持缩放');
+                }
+            }
         }
     });
+
+    //位置-X
+    canvasVue.$watch('routine.offx', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            console.log('X旧值:' + oldVal);
+            console.log('X新值:' + newVal);
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.setX(newVal);
+            }
+        }
+    });
+    //位置-Y
+    canvasVue.$watch('routine.offy', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            console.log('Y旧值:' + oldVal);
+            console.log('Y新值:' + newVal);
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.setY(newVal);
+            }
+        }
+    });
+
+
+    // 直线水平
+    canvasVue.$watch('routine.horizontal', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            console.log('直线水平旧值:' + oldVal);
+            console.log('直线水平新值:' + newVal);
+            if (newVal) {
+                var node = canvasSet.getNodeFromCanvas();
+                if (node) {
+                    var arr = node.getVertices();
+                    console.log("直线数据:" + JSON.stringify(arr, null, 2))
+                    if (arr.data[1].x === arr.data[0].x) {
+                        layer.msg('直线已垂直不能水平');
+                        this.routine.horizontal = false;
+                    } else {
+                        arr.data[1].y = arr.data[0].y;
+                        node.setVertices(arr);
+                    }
+                }
+
+
+            }
+
+
+        }
+    });
+
+    // 直线垂直
+    canvasVue.$watch('routine.vertical', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            console.log('直线垂直旧值:' + oldVal);
+            console.log('直线垂直新值:' + newVal);
+            if (newVal) {
+                var node = canvasSet.getNodeFromCanvas();
+                if (node) {
+                    var arr = node.getVertices();
+                    console.log("直线数据:" + JSON.stringify(arr, null, 2))
+                    if (arr.data[1].y === arr.data[0].y) {
+                        layer.msg('直线已水平不能垂直');
+                        this.routine.vertical = false;
+                    } else {
+                        arr.data[1].x = arr.data[0].x;
+                        node.setVertices(arr);
+                    }
+                }
+
+            }
+        }
+    });
+
+    // 旋转角度
+    canvasVue.$watch('routine.rotationAngle', function (newVal, oldVal) {
+
+        if (this.componentData.flag) {
+            console.log('角度旧值:' + oldVal);
+            console.log('角度新值：' + newVal);
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                var value = Number(newVal);
+                if (value == "") {
+                    return;
+                }
+                if (value >= -359 || value <= 359) {
+                    node.setRotationAngle(value);
+                    if (node.image) {
+                        node.image.setRotationAngle(value);
+                    }
+                }
+            }
+
+        }
+    });
+
     // hover监控
-    canvasVue.$watch('routine.hover', function(newVal, oldVal) {
+    canvasVue.$watch('routine.hover', function (newVal, oldVal) {
 
         if (this.componentData.flag) {
             // console.log('旧值:' + oldVal);
             console.log(newVal);
             if (newVal) {
-                console.log('选中')
-                this.routine.hoverdata.text = '选中';
-                this.routine.hoverdata.disabled = false;
-            } else {
-                console.log('未选中')
-                this.routine.hoverdata.text = '未选中';
-                this.routine.hoverdata.disabled = true;
+
+
             }
         }
     });
-    // 标题监控
-    canvasVue.$watch('routine.title', function(newVal, oldVal) {
+    // 标题
+    canvasVue.$watch('routine.title', function (newVal, oldVal) {
 
         if (this.componentData.flag) {
             // console.log('旧值:' + oldVal);
             console.log(newVal);
-            if (newVal) {
-                console.log('选中')
-                this.routine.titledata.text = '选中';
-                this.routine.titledata.disabled = false;
-            } else {
-                console.log('未选中')
-                this.routine.titledata.text = '未选中';
-                this.routine.titledata.disabled = true;
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                if (newVal) {
+                    this.routine.titledata.disabled = false;
+                    node.userData.routine.caption.flag = true;
+                    node.label.setVisible(true);
+                    node.label.setText(node.userData.routine.caption.capText);
+                } else {
+                    this.routine.titledata.disabled = true;
+                    node.userData.routine.caption.flag = false;
+                    node.label.setVisible(false);
+
+                }
             }
+
+        }
+    });
+    // 标题内容
+    canvasVue.$watch('routine.titledata.text', function (newVal, oldVal) {
+        console.log(newVal)
+        if (this.componentData.flag) {
+
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.label.setText(newVal);
+                node.userData.routine.caption.capText = newVal;
+            }
+
         }
     });
 
     // 访问等级
-    canvasVue.$watch('routine.accessLevel.level', function(newVal, oldVal) {
+    canvasVue.$watch('routine.accessLevel.level', function (newVal, oldVal) {
 
         // if (this.componentData.flag) {
         console.log('旧值:' + oldVal);
@@ -739,7 +847,7 @@ layui.use(['layer', 'element'], function() {
 
 
     // data  只读
-    canvasVue.$watch('datas.readonly', function(newVal, oldVal) {
+    canvasVue.$watch('datas.readonly', function (newVal, oldVal) {
 
         if (this.componentData.flag) {
             console.log('旧值:' + oldVal);

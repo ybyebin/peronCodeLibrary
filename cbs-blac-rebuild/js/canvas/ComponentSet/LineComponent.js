@@ -9,7 +9,7 @@ var LineComponent = draw2d.shape.basic.Line.extend({
         this._super(attr);
         this.setColor("#35C99D");
         this.setStroke(2);
-        var thiss = this;
+        var _this = this;
         //基础数据
         var data = {
             type: "lineComponent", //类型			
@@ -31,7 +31,7 @@ var LineComponent = draw2d.shape.basic.Line.extend({
                 type: 'style' //备用(忘了干嘛的)
             },
             routine: {
-                name: '',
+                name: '直线',
                 description: '', //组件描述
                 visible: false, //是否显示组件(setAlpha(0))
                 enable: false, //组件是否可用
@@ -75,24 +75,24 @@ var LineComponent = draw2d.shape.basic.Line.extend({
         });
 
         this.on("click", function() {
-            LineDisplayDiv(thiss);
+            lineBasic.clickMethod(_this);
         });
         this.on("change", function() {
-            console.log('===============')
-            var arr = thiss.getVertices();
+            // console.log('===============')
+            // var arr = thiss.getVertices();
 
-            if (arr.data[0].y !== arr.data[1].y) {
-                console.log('不水平!')
-                $('#horizontal').iCheck('uncheck');
-            } else {
-                $('#horizontal').iCheck('check');
-            }
-            if (arr.data[0].x !== arr.data[1].x) {
-                console.log('不垂直!')
-                $('#vertical').iCheck('uncheck');
-            } else {
-                $('#vertical').iCheck('check');
-            }
+            // if (arr.data[0].y !== arr.data[1].y) {
+            //     console.log('不水平!')
+            //     $('#horizontal').iCheck('uncheck');
+            // } else {
+            //     $('#horizontal').iCheck('check');
+            // }
+            // if (arr.data[0].x !== arr.data[1].x) {
+            //     console.log('不垂直!')
+            //     $('#vertical').iCheck('uncheck');
+            // } else {
+            //     $('#vertical').iCheck('check');
+            // }
         });
 
         // 缩放
@@ -102,28 +102,28 @@ var LineComponent = draw2d.shape.basic.Line.extend({
         });
         // 移动
         this.on("move", function() {
-            $canvas.comOffsetX.val(thiss.getVertices().data[0].x);
-            $canvas.comOffsetY.val(thiss.getVertices().data[0].y);
-            $canvas.comTooltips.hide();
+            // $canvas.comOffsetX.val(thiss.getVertices().data[0].x);
+            // $canvas.comOffsetY.val(thiss.getVertices().data[0].y);
+            // $canvas.comTooltips.hide();
         });
 
         // 悬浮窗
         this.onMouseEnter = function() {
-            if (thiss.userData.ShowHint) {
-                var tooltips = $canvas.comTooltips;
-                if (thiss.userData.Hint !== '') {
-                    tooltips.show().html(thiss.userData.Hint);
-                    var tPosX = thiss.getVertices().data[0].x - tooltips.width() / 2 - 10;
-                    var tPosY = thiss.getVertices().data[0].y + 13;
-                    tooltips.css({
-                        'top': tPosY + 'px',
-                        'left': tPosX + 'px'
-                    });
-                }
-            }
+            // if (thiss.userData.ShowHint) {
+            //     var tooltips = $canvas.comTooltips;
+            //     if (thiss.userData.Hint !== '') {
+            //         tooltips.show().html(thiss.userData.Hint);
+            //         var tPosX = thiss.getVertices().data[0].x - tooltips.width() / 2 - 10;
+            //         var tPosY = thiss.getVertices().data[0].y + 13;
+            //         tooltips.css({
+            //             'top': tPosY + 'px',
+            //             'left': tPosX + 'px'
+            //         });
+            //     }
+            // }
         };
         this.onMouseLeave = function() {
-            $canvas.comTooltips.hide();
+            // $canvas.comTooltips.hide();
         };
     },
     onTimer: function() {
@@ -141,10 +141,21 @@ var LineComponent = draw2d.shape.basic.Line.extend({
     }
 });
 
-// 直线
-function LineDisplayDiv(obj) {
-    // 基本(公共)
-    setComponentOptions.basePublicSet(component);
-    // 基本
-    setComponentOptions.basicSet(component);
+
+var lineBasic = {
+    // 自定义控件属性
+    lineData: '',//line是特殊控件只有一个  该属性直接写进组件
+    clickMethod: function (component) {
+        setComponentOptions.setComponentFlagFalse();
+        //重置属性框
+        canvasVue.resetAttr();
+        // 隐藏该控件没有的属性
+        canvasVue.hidediv.lineHideDiv = true;
+        // 基本(公共)
+        setComponentOptions.basePublicSet(component);
+        // 基本
+        setComponentOptions.basicSet(component);
+
+        setComponentOptions.setComponentFlagTrue();
+    }
 }
