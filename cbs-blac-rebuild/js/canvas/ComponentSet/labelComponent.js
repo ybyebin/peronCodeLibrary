@@ -25,7 +25,8 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
         this.titles = "这里是lable控件"; //设置鼠标指示标题
         this.ShowHint = false;
         var data = {
-            type: "LabelComponent", //类型			
+            type: "LabelComponent", //类型
+            status:'default',//该组件绑定tag 的状态				
             proportion: { //自定义属性
                 valueType: 'valueComponent', //显示控件绑定的 tag 的值
                 havepoint: "", //(待定)
@@ -37,13 +38,7 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
                 tag_name: "",
                 bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
             },
-            blinking: { //闪烁
-                flag: false, //是否闪烁
-                lineWidth: 1,
-                lineColor: "#D8D8D8",
-                lineStyle: null,
-                type: 'style' //备用(忘了干嘛的)
-            },
+           
             routine: {
                 name: 'lable',
                 description: '', //组件描述
@@ -59,6 +54,13 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
                     capText: 'label' //内容
                 },
                 readOnly: false, //组件是否为只读
+            },
+
+            defaults:{//该属性用于存储 控件初始化时的状态
+                lineWidth: 0,
+                lineColor: "#000000",
+                fillColor: "#4D90FE",
+                blinking: false,
             },
         };
         this.attr({

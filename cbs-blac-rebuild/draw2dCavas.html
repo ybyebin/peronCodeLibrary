@@ -517,11 +517,7 @@
                                                         </span>
                                                     </div>
                                                     <ul class="comp-level-ul  bayax-select-ul bayax-anim bayax-anim-upbit">
-                                                        <li v-for="(item,index) in routine.accessLevel.LevelData" v-text="item" @click="setAccessLevel(item)">
-
-                                                        </li>
-
-
+                                                        <li v-for="(item,index) in routine.accessLevel.levelData" v-text="item" @click="setAccessLevel(item)"></li>
                                                     </ul>
                                                 </div>
 
@@ -575,9 +571,10 @@
 
                                 </div>
                                 <div class="attr-content">
-                                    <p class="attr-toggle-status attr-content-titles" data-toggle="collapse" data-for="style-div">
+                                    <p class="attr-toggle-status attr-content-titles" data-toggle="collapse" data-for="style-div" data-status="defaults">
                                         <i></i>
-                                        <span>Styles</span>
+                                        <!-- 原 styles -->
+                                        <span>Default</span>
                                     </p>
                                     <div class="style-div status-div attr-content-body reset-content">
                                         <div class="layui-form-item">
@@ -586,25 +583,25 @@
 
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p v-text="styles.borderWidth" class="bayax-division-text"></p>
-                                                        <span class="bayax-division-span bayax-division-icon" data-for="style-border-width">
+                                                        <p v-text="defaults.borderWidth" class="bayax-division-text"></p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="default-border-width">
                                                             <i></i>
                                                         </span>
                                                     </div>
-                                                    <ul class="style-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
-                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setStyleBorderWidth(item)"></li>
+                                                    <ul class="default-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setDefaultBorderWidth(item)"></li>
                                                     </ul>
                                                 </div>
 
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <!-- <div class="layui-form-item">
                                             <label class="layui-form-label">边框样式</label>
                                             <div class="layui-input-block">
 
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p v-text="styles.borderStyle" class="bayax-division-text"></p>
+                                                        <p v-text="default.borderStyle" class="bayax-division-text"></p>
                                                         <span class="bayax-division-span bayax-division-icon" data-for="style-border-style">
                                                             <i></i>
                                                         </span>
@@ -616,13 +613,13 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in styles.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setStyleBorderColor(item)"></li>
-                                                    <li class="style-border-color">+</li>
+                                                    <li v-for="(item,index) in defaults.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setDefaultBorderColor(item)"></li>
+                                                    <li class="default-border-color">+</li>
                                                 </ul>
 
 
@@ -632,8 +629,8 @@
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in styles.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setStyleFillColor(item)"></li>
-                                                    <li class="style-fill-color">+</li>
+                                                    <li v-for="(item,index) in defaults.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setDefaultFillColor(item)"></li>
+                                                    <li class="default-fill-color">+</li>
 
                                                 </ul>
                                             </div>
@@ -641,42 +638,42 @@
                                         <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
                                             <label class="layui-form-label">文本内容</label>
                                             <div class="layui-input-block">
-                                                <input v-model="styles.fontText" type="text" autocomplete="off" class="layui-input">
+                                                <input v-model="defaults.fontText" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
                                         <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">字体大小</label>
                                             <div class="layui-input-block">
-                                                <input v-model="styles.fontSize" type="text" autocomplete="off" class="layui-input">
+                                                <input v-model="defaults.fontSize" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
                                         <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">单位</label>
                                             <div class="layui-input-block">
-                                                <input v-model="styles.fontUnit" type="text" autocomplete="off" class="layui-input">
+                                                <input v-model="defaults.fontUnit" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
                                         <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
                                             <label class="layui-form-label">文本颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in styles.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setStyleFontColor(item)"></li>
-                                                    <li class="style-font-color">+</li>
+                                                    <li v-for="(item,index) in defaults.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setDefaultFontColor(item)"></li>
+                                                    <li class="defaults-font-color">+</li>
                                                 </ul>
                                             </div>
                                         </div>
 
 
                                         <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-formcheck-item layui-form-item">
-                                            <input v-model="styles.setAlpha" type="checkbox" id="style-alpha-check" class="bayaxcheckbox ">
-                                            <label class="checkbox-i" for="style-alpha-check"></label>
+                                            <input v-model="defaults.setAlpha" type="checkbox" id="default-alpha-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="default-alpha-check"></label>
                                             <span>背景透明</span>
                                         </div>
 
                                         <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
-                                                <input v-model="styles.alpha" type="text" autocomplete="off" class="layui-input">
+                                                <input v-model="defaults.alpha" type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
@@ -687,7 +684,7 @@
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p v-text="styles.picture" class="bayax-division-text"></p>
+                                                            <p v-text="defaults.picture" class="bayax-division-text"></p>
                                                             <span class="bayax-division-span">
                                                                     <span>···</span>
                                                             </span>
@@ -698,8 +695,8 @@
                                             </div>
                                         </div>
                                         <div class="layui-formcheck-item layui-form-item">
-                                            <input v-model="styles.flashing" type="checkbox" id="style-flashing-check" class="bayaxcheckbox ">
-                                            <label class="checkbox-i" for="style-flashing-check"></label>
+                                            <input v-model="defaults.flashing" type="checkbox" id="default-flashing-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="default-flashing-check"></label>
                                             <span>闪烁</span>
                                         </div>
 
@@ -707,7 +704,7 @@
                                 </div>
                                 <!-- ontrue -->
                                 <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
-                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="ontrue-div">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="ontrue-div" data-status="onTrue">
                                         <i></i>
                                         <span>onTrue</span>
                                     </p>
@@ -730,7 +727,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <!-- <div class="layui-form-item">
                                             <label class="layui-form-label">边框样式</label>
                                             <div class="layui-input-block">
 
@@ -747,7 +744,7 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
@@ -823,7 +820,7 @@
                                     </div>
                                 </div>
                                 <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
-                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="onfalse-div">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="onfalse-div" data-status="onFalse">
                                         <i></i>
                                         <span>onFalse</span>
                                     </p>
@@ -846,7 +843,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <!-- <div class="layui-form-item">
                                             <label class="layui-form-label">边框样式</label>
                                             <div class="layui-input-block">
 
@@ -863,7 +860,7 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
@@ -939,7 +936,7 @@
                                     </div>
                                 </div>
                                 <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
-                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="onalarm-div">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="onalarm-div" data-status="onAlarm">
                                         <i></i>
                                         <span>onAlarm</span>
                                     </p>
@@ -962,7 +959,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <!-- <div class="layui-form-item">
                                             <label class="layui-form-label">边框样式</label>
                                             <div class="layui-input-block">
 
@@ -979,7 +976,7 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
@@ -1055,7 +1052,7 @@
                                     </div>
                                 </div>
                                 <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
-                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="ondisc-div">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="ondisc-div" data-status="onDisconnected">
                                         <i></i>
                                         <span>onDisconnected</span>
                                     </p>
@@ -1078,7 +1075,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="layui-form-item">
+                                        <!-- <div class="layui-form-item">
                                             <label class="layui-form-label">边框样式</label>
                                             <div class="layui-input-block">
 
@@ -1095,7 +1092,7 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
@@ -1231,7 +1228,7 @@
                                         <div class="bayax-division-title">
                                             <p class="bayax-division-text">123</p>
                                             <span class="bayax-division-span">
-                                                                     <span>···</span>
+                                                <span>···</span>
                                             </span>
                                         </div>
 

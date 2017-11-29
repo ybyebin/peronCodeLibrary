@@ -12,7 +12,8 @@ var LineComponent = draw2d.shape.basic.Line.extend({
         var _this = this;
         //基础数据
         var data = {
-            type: "lineComponent", //类型			
+            type: "lineComponent", //类型	
+            status:'default',//该组件绑定tag 的状态			
             proportion: { //自定义属性
                 havepoint: "", //(待定)
                 value: "", //(待定)
@@ -23,13 +24,7 @@ var LineComponent = draw2d.shape.basic.Line.extend({
                 tag_name: "",
                 bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
             },
-            blinking: { //闪烁
-                flag: false, //是否闪烁
-                lineWidth: 1,
-                lineColor: "#35C99D",
-                lineStyle: null,
-                type: 'style' //备用(忘了干嘛的)
-            },
+           
             routine: {
                 name: '直线',
                 description: '', //组件描述
@@ -42,28 +37,34 @@ var LineComponent = draw2d.shape.basic.Line.extend({
                 },
                 readOnly: false, //组件是否为只读
             },
+            defaults:{//该属性用于存储 控件初始化时的状态
+                lineWidth: 1,
+                lineColor: "#35C99D",
+                // lineStyle: null,
+                blinking: false,
+            },
             onTrue: {
                 lineWidth: 1,
                 lineColor: "#35C99D",
-                lineStyle: null,
+                // lineStyle: null,
                 blinking: false,
             },
             onFalse: {
                 lineWidth: 1,
                 lineColor: "#35C99D",
-                lineStyle: null,
+                // lineStyle: null,
                 blinking: false,
             },
             onAlarm: {
                 lineWidth: 1,
                 lineColor: "#35C99D",
-                lineStyle: null,
+                // lineStyle: null,
                 blinking: false,
             },
             onDisconnected: {
                 lineWidth: 1,
                 lineColor: "#35C99D",
-                lineStyle: null,
+                // lineStyle: null,
                 blinking: false,
             }
 

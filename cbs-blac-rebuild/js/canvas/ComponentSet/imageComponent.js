@@ -12,7 +12,7 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
         this.stroke = 1;
         this.setColor("#DDDDDD"); //边框颜色
         this.setAlpha(0.001);
-        // this.setBackgroundColor("#FFFFFF"); //背景颜色
+        // this.setBackgroundColor("transparent"); //背景颜色
         var _this = this;
         var imgBaseUrl = setComponentOptions.imageBaseUrl +"zidingyi.png";
         this.image = new draw2d.shape.basic.Image({
@@ -32,7 +32,8 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
         var data = {
-            type: "imageComponent", //类型			
+            type: "imageComponent", //类型
+            status:'default',//该组件绑定tag 的状态				
             proportion: { //自定义属性
                 havepoint: "",
                 value: "",
@@ -43,18 +44,12 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
                 tag_name: "",
                 bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
             },
-            blinking: { //闪烁
-                flag: false, //是否闪烁
-                lineWidth: 1,
-                lineColor: "#D8D8D8",
-                lineStyle: null,
-                type: 'style' //备用(忘了干嘛的)
-            },
+           
             routine: {
                 name: '',
                 description: '', //组件描述
-                visible: false, //是否显示组件(setAlpha(0))
-                enable: false, //组件是否可用
+                visible: false, //隐藏组件(setAlpha(0))
+                enable: false, //不可用
                 accessLevel: 8, //访问等级 0~15
                 hint: { //hover 说明
                     flag: false, //是否显示
@@ -67,31 +62,40 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
                 readOnly: false, //组件是否为只读
                 picture: ''
             },
+
+
+            defaults:{//该属性用于存储 控件初始化时的状态
+                lineWidth: 1,
+                lineColor: "#DDDDDD",
+                // lineStyle: null,
+                blinking: false,
+                picture:imgBaseUrl
+            },
             onTrue: {
                 lineWidth: 1,
                 lineColor: "#DDDDDD",
-                lineStyle: null,
+                // lineStyle: null,
                 blinking: false,
                 picture:imgBaseUrl
             },
             onFalse: {
                 lineWidth: 1,
                 lineColor: "#DDDDDD",
-                lineStyle: null,
+                // lineStyle: null,
                 blinking: false,
                 picture: imgBaseUrl
             },
             onAlarm: {
                 lineWidth: 1,
                 lineColor: "#DDDDDD",
-                lineStyle: null,
+                // lineStyle: null,
                 blinking: false,
                 picture: imgBaseUrl
             },
             onDisconnected: {
                 lineWidth: 1,
                 lineColor: "#DDDDDD",
-                lineStyle: null,
+                // lineStyle: null,
                 blinking: false,
                 picture: imgBaseUrl
             }

@@ -49,20 +49,8 @@ var rectangleComponent = draw2d.shape.node.Between.extend({
 
    
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     },
-
-
 
 });
 
@@ -81,9 +69,6 @@ var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
         this.stroke = 0;
         // this.setColor("#D8D8D8"); //边框颜色
         this.setBackgroundColor("#35C99D"); //背景颜色
-
-
-
 
         var _this = this;
         var data = JSON.parse(rectangle.rectangleData);
@@ -115,17 +100,7 @@ var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 })
 
@@ -177,17 +152,7 @@ var EllipseComponent = draw2d.shape.node.Between.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 400);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -235,17 +200,7 @@ var polygonComponent = draw2d.shape.basic.Polygon.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 
 });
@@ -307,17 +262,7 @@ var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
         return this.canvas.paper.path("M0,15L20,0V10H30V0L50,15L30,30V20H20V30L0,15z");
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 
 });
@@ -380,17 +325,7 @@ var BothArrowVComponent = draw2d.shape.icon.Icon.extend({
     },
 
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -450,17 +385,7 @@ var forRightComponent = draw2d.shape.icon.Icon.extend({
         return this.canvas.paper.path("M0,10H10V0L30,15L10,30V20H0V10z");
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -521,17 +446,7 @@ var forLeftComponent = draw2d.shape.icon.Icon.extend({
         return this.canvas.paper.path("M30,20H20V30L0,15L20,0V10H30V20z");
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -593,17 +508,7 @@ var forUpComponent = draw2d.shape.icon.Icon.extend({
         return this.canvas.paper.path("M10,30V20H0L15,0L30,20H20V30H10z");
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -666,17 +571,7 @@ var forDownComponent = draw2d.shape.icon.Icon.extend({
         return this.canvas.paper.path("M10,0V10H0L15,30L30,10H20V0H10z");
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -698,6 +593,7 @@ var conduitCompontent = draw2d.shape.node.HorizontalBus.extend({
         var _this = this;
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '管道';
+        data.onlytype = 'conduitCompontent';//本控件单独属性(区分自己单独标志)
         // 初始化 控件属性
         this.attr({
             userData: data
@@ -725,17 +621,7 @@ var conduitCompontent = draw2d.shape.node.HorizontalBus.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 /** 
@@ -754,6 +640,7 @@ var conduitCompontentV = draw2d.shape.node.VerticalBus.extend({
         var _this = this;
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '管道';
+        data.onlytype = 'conduitCompontent';//本控件单独属性(区分自己单独标志)
         // 初始化 控件属性
         this.attr({
             userData: data
@@ -781,25 +668,17 @@ var conduitCompontentV = draw2d.shape.node.VerticalBus.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
 var rectangle = {
     // 自定义控件属性
     rectangleData: JSON.stringify({
-        type: "basicComponent", //类型			
-        proportion: { //自定义属性
+        type: "basicComponent", //类型
+        status:'default',//该组件绑定tag 的状态
+        editSatus:'defaults',//组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)
+        proportion: { //预留自定义属性
             havepoint: "", //(待定)
             value: "", //(待定)
         },
@@ -809,18 +688,11 @@ var rectangle = {
             tag_name: "",
             bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
         },
-        blinking: { //闪烁
-            flag: false, //是否闪烁
-            lineWidth: 1,
-            lineColor: "#D8D8D8",
-            lineStyle: null,
-            type: 'style' //备用(忘了干嘛的)
-        },
         routine: {
             name: '',
             description: '', //组件描述
-            visible: false, //是否显示组件(setAlpha(0))
-            enable: false, //组件是否可用
+            visible: false, //隐藏组件(setAlpha(0))
+            enable: false, //不可用
             accessLevel: 8, //访问等级 0~15
             hint: { //hover 说明
                 flag: false, //是否显示
@@ -828,10 +700,10 @@ var rectangle = {
             },
             readOnly: false, //组件是否为只读
         },
-        styles:{
+        defaults:{//该属性用于存储 控件初始化时的状态
             lineWidth: 0,
             lineColor: "#000000",
-            lineStyle: null,
+            // lineStyle: null,
             fillColor: "#4D90FE",
             alpha: 1,
             blinking: false,
@@ -839,7 +711,7 @@ var rectangle = {
         onTrue: {
             lineWidth: 0,
             lineColor: "#000000",
-            lineStyle: null,
+            // lineStyle: null,
             fillColor: "#4D90FE",
             alpha: 1,
             blinking: false,
@@ -847,7 +719,7 @@ var rectangle = {
         onFalse: {
             lineWidth: 0,
             lineColor: "#000000",
-            lineStyle: null,
+            // lineStyle: null,
             fillColor: "#4D90FE",
             alpha: 1,
             blinking: false,
@@ -855,7 +727,7 @@ var rectangle = {
         onAlarm: {
             lineWidth: 0,
             lineColor: "#000000",
-            lineStyle: null,
+            // lineStyle: null,
             fillColor: "#4D90FE",
             alpha: 1,
             blinking: false,
@@ -863,7 +735,7 @@ var rectangle = {
         onDisconnected: {
             lineWidth: 0,
             lineColor: "#000000",
-            lineStyle: null,
+            // lineStyle: null,
             fillColor: "#4D90FE",
             alpha: 1,
             blinking: false,
@@ -890,15 +762,11 @@ var rectangle = {
         setComponentOptions.rectangleSet(component);
 
         setComponentOptions.setComponentFlagTrue();
-    }
+    },
+   
 }
 
-function basicdisplayDiv(component) {
 
-
-
-
-}
 
 
 

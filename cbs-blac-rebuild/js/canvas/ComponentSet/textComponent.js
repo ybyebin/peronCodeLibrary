@@ -209,28 +209,13 @@ var buttonComponent = draw2d.shape.note.PostIt.extend({
 });
 
 
-// 属性框
-function textdisplayDiv(obj) {
-    // 基本
-    setComponentOptions.basePublicSet(component);
-    setComponentOptions.basicSet(component);
-
-    // 位置 旋转角度
-    setComponentOptions.componentOffsetAndAngle(component);
-
-    // 标题
-    setComponentOptions.componentCaption(component);
-}
-
-
-
-
 var textBasic = {
     // 自定义控件属性
     textData: JSON.stringify({
         type: "buttonComponent", //类型			
         proportion: { //自定义属性
             valueType: 'textValueComponent',
+            status:'default',//该组件绑定tag 的状态	            
             havepoint: "", //(待定)
             value: "", //(待定)
         },
@@ -240,13 +225,7 @@ var textBasic = {
             tag_name: "",
             bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
         },
-        blinking: { //闪烁
-            flag: false, //是否闪烁
-            lineWidth: 1,
-            lineColor: "#DDDDDD",
-            lineStyle: null,
-            type: 'style' //备用(忘了干嘛的)
-        },
+       
         routine: {
             name: '',
             description: '', //组件描述
@@ -264,10 +243,21 @@ var textBasic = {
             readOnly: false, //组件是否为只读
             unit: '' //单位
         },
+        defaults:{//该属性用于存储 控件初始化时的状态
+            lineWidth: 0,
+            lineColor: "#DDDDDD",
+            // lineStyle: null,
+            fillColor: "none",
+            text: '',
+            alpha: '',
+            textColor: '#FFFFFF',
+            // unit:
+            blinking: false,
+        },
         onTrue: {
             lineWidth: 0,
             lineColor: "#DDDDDD",
-            lineStyle: null,
+            // lineStyle: null,
             fillColor: "none",
             text: '',
             alpha: '',
@@ -278,7 +268,7 @@ var textBasic = {
         onFalse: {
             lineWidth: 0,
             lineColor: "#DDDDDD",
-            lineStyle: null,
+            // lineStyle: null,
             fillColor: "none",
             text: '',
             alpha: '',
@@ -289,7 +279,7 @@ var textBasic = {
         onAlarm: {
             lineWidth: 0,
             lineColor: "#DDDDDD",
-            lineStyle: null,
+            // lineStyle: null,
             fillColor: "none",
             text: '',
             alpha: '',
@@ -300,7 +290,7 @@ var textBasic = {
         onDisconnected: {
             lineWidth: 0,
             lineColor: "#DDDDDD",
-            lineStyle: null,
+            // lineStyle: null,
             fillColor: "none",
             text: '',
             alpha: '',

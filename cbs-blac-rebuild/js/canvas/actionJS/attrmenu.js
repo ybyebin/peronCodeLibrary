@@ -1,16 +1,16 @@
 var setComponentOptions = {
     // 图片地址(自定义控件/safeComponent 图片地址)
-    imageBaseUrl:'images/icon/icon/',
+    imageBaseUrl: 'images/icon/icon/',
     // public method
-    basePublicSet: function(component) {
+    basePublicSet: function (component) {
         var vueRoutine = canvasVue.routine;
         var vueDatas = canvasVue.datas;
         var data = component.getUserData();
 
         this.checkPreviousComponentTag(component);
 
-
-
+        //该属性用于 判断当前闪烁需要的标志 
+        component.userData.editSatus = 'defaults';
         // 组件名称   name(用户输入)
         vueRoutine.name = data.routine.name;
 
@@ -33,7 +33,7 @@ var setComponentOptions = {
         }
 
         //访问等级  AccessLevel 
-        vueRoutine.accessLevel = data.routine.accessLevel;
+        vueRoutine.accessLevel.level = data.routine.accessLevel;
 
         //是否显示hover  ShowHint
         if (data.routine.hint.flag) {
@@ -58,11 +58,11 @@ var setComponentOptions = {
 
     },
     // 基本属性
-    basicSet: function(component) {
+    basicSet: function (component) {
 
         // var vueRoutine = canvasVue.routine;
         var vueDatas = canvasVue.datas;
-        var vueStyle = canvasVue.styles;
+        var vueDefaults = canvasVue.defaults;
 
         var vueOnTrue = canvasVue.ontrue;
         var vueOnFalse = canvasVue.onfalse;
@@ -74,21 +74,21 @@ var setComponentOptions = {
         /************************style--begin************************************ */
 
         //边框宽度  borderWidth
-        vueStyle.borderWidth = component.getStroke();
+        vueDefaults.borderWidth = component.getStroke();
 
         //边框样式 borderStyle
-        var s_border_style = component.getDashArray();
-        if (s_border_style === null) {
-            vueStyle.borderStyle = '默认';
-        } else {
-            vueStyle.borderStyle = s_border_style;
-        }
+        // var s_border_style = component.getDashArray();
+        // if (s_border_style === null) {
+        //     vueDefaults.borderStyle = '默认';
+        // } else {
+        //     vueDefaults.borderStyle = s_border_style;
+        // }
 
         // 边框颜色
         var s_border_color = component.getColor().hash();
         var s_flag = true;
-        vueStyle.borderColor.color = s_border_color;
-        vueStyle.borderColor.colorData.forEach(function(ele) {
+        vueDefaults.borderColor.color = s_border_color;
+        vueDefaults.borderColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === s_border_color) {
                 ele.active = true;
@@ -96,8 +96,8 @@ var setComponentOptions = {
             }
         });
         if (s_flag) {
-            vueStyle.borderColor.colorData.shift();
-            vueStyle.borderColor.colorData.push({
+            vueDefaults.borderColor.colorData.shift();
+            vueDefaults.borderColor.colorData.push({
                 color: s_border_color,
                 colorstyle: 'background-color:' + s_border_color,
                 active: true
@@ -105,20 +105,20 @@ var setComponentOptions = {
         }
 
         //style 闪烁  blinking
-        if (data.blinking.flag) {
-            vueStyle.flashing = true;
+        if (data.defaults.blinking) {
+            vueDefaults.flashing = true;
         } else {
-            vueStyle.flashing = false;
+            vueDefaults.flashing = false;
         }
 
 
 
 
-        console.log('边框宽度:'+component.getStroke());
-        console.log('边框颜色:'+component.getColor().hash());
-        console.log('边框样式:'+component.getDashArray());
-        console.log('填充颜色:'+component.getBackgroundColor().hash());
-        console.log('透明度:'+component.getAlpha());
+        console.log('边框宽度:' + component.getStroke());
+        console.log('边框颜色:' + component.getColor().hash());
+        console.log('边框样式:' + component.getDashArray());
+        console.log('填充颜色:' + component.getBackgroundColor().hash());
+        console.log('透明度:' + component.getAlpha());
 
 
 
@@ -132,18 +132,18 @@ var setComponentOptions = {
         vueOnTrue.borderWidth = data.onTrue.lineWidth;
 
         //边框样式 borderStyle
-        var ot_border_style = data.onTrue.lineStyle;
-        if (ot_border_style === null) {
-            vueOnTrue.borderStyle = '默认';
-        } else {
-            vueOnTrue.borderStyle = ot_border_style;
-        }
+        // var ot_border_style = data.onTrue.lineStyle;
+        // if (ot_border_style === null) {
+        //     vueOnTrue.borderStyle = '默认';
+        // } else {
+        //     vueOnTrue.borderStyle = ot_border_style;
+        // }
 
         // 边框颜色
         var ot_border_color = data.onTrue.lineColor;
         var ot_flag = true;
         vueOnTrue.borderColor.color = ot_border_color;
-        vueOnTrue.borderColor.colorData.forEach(function(ele) {
+        vueOnTrue.borderColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === ot_border_color) {
                 ele.active = true;
@@ -174,18 +174,18 @@ var setComponentOptions = {
         vueOnFalse.borderWidth = data.onFalse.lineWidth;
 
         //边框样式 borderStyle
-        var of_border_style = data.onFalse.lineStyle;
-        if (of_border_style === null) {
-            vueOnFalse.borderStyle = '默认';
-        } else {
-            vueOnFalse.borderStyle = of_border_style;
-        }
+        // var of_border_style = data.onFalse.lineStyle;
+        // if (of_border_style === null) {
+        //     vueOnFalse.borderStyle = '默认';
+        // } else {
+        //     vueOnFalse.borderStyle = of_border_style;
+        // }
 
         // 边框颜色
         var of_border_color = data.onFalse.lineColor;
         var of_flag = true;
         vueOnFalse.borderColor.color = of_border_color;
-        vueOnFalse.borderColor.colorData.forEach(function(ele) {
+        vueOnFalse.borderColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === of_border_color) {
                 ele.active = true;
@@ -215,18 +215,18 @@ var setComponentOptions = {
         vueOnAlarm.borderWidth = data.onAlarm.lineWidth;
 
         //边框样式 borderStyle
-        var oa_border_style = data.onAlarm.lineStyle;
-        if (oa_border_style === null) {
-            vueOnAlarm.borderStyle = '默认';
-        } else {
-            vueOnAlarm.borderStyle = oa_border_style;
-        }
+        // var oa_border_style = data.onAlarm.lineStyle;
+        // if (oa_border_style === null) {
+        //     vueOnAlarm.borderStyle = '默认';
+        // } else {
+        //     vueOnAlarm.borderStyle = oa_border_style;
+        // }
 
         // 边框颜色
         var oa_border_color = data.onAlarm.lineColor;
         var oa_flag = true;
         vueOnAlarm.borderColor.color = oa_border_color;
-        vueOnAlarm.borderColor.colorData.forEach(function(ele) {
+        vueOnAlarm.borderColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === oa_border_color) {
                 ele.active = true;
@@ -257,18 +257,18 @@ var setComponentOptions = {
         vueOnDisc.borderWidth = data.onDisconnected.lineWidth;
 
         //边框样式 borderStyle
-        var od_border_style = data.onDisconnected.lineStyle;
-        if (od_border_style === null) {
-            vueOnDisc.borderStyle = '默认';
-        } else {
-            vueOnDisc.borderStyle = od_border_style;
-        }
+        // var od_border_style = data.onDisconnected.lineStyle;
+        // if (od_border_style === null) {
+        //     vueOnDisc.borderStyle = '默认';
+        // } else {
+        //     vueOnDisc.borderStyle = od_border_style;
+        // }
 
         // 边框颜色
         var od_border_color = data.onDisconnected.lineColor;
         var od_flag = true;
         vueOnDisc.borderColor.color = od_border_color;
-        vueOnDisc.borderColor.colorData.forEach(function(ele) {
+        vueOnDisc.borderColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === od_border_color) {
                 ele.active = true;
@@ -294,7 +294,7 @@ var setComponentOptions = {
     },
 
     //(属性设置) 宽高
-    componentSize: function(component) {
+    componentSize: function (component) {
         var vueRoutine = canvasVue.routine;
         // var data = component.getUserData();
         vueRoutine.width = component.getWidth();
@@ -303,7 +303,7 @@ var setComponentOptions = {
     },
 
     //(属性设置) 位置 旋转角度
-    componentOffsetAndAngle: function(component) {
+    componentOffsetAndAngle: function (component) {
         var vueRoutine = canvasVue.routine;
         //组件位置 X轴位置 
         vueRoutine.offx = component.getAbsoluteX().toFixed(0);
@@ -313,7 +313,7 @@ var setComponentOptions = {
     },
 
     // (属性设置) 显示标题
-    componentCaption: function(component) {
+    componentCaption: function (component) {
         var vueRoutine = canvasVue.routine;
         var data = component.getUserData().routine.caption; //captions={show:true,text:'标题'}
 
@@ -330,11 +330,11 @@ var setComponentOptions = {
 
 
     // 基本图形
-    rectangleSet: function(component) {
+    rectangleSet: function (component) {
 
         var vueRoutine = canvasVue.routine;
         var vueDatas = canvasVue.datas;
-        var vueStyle = canvasVue.styles;
+        var vueDefaults = canvasVue.defaults;
 
         var vueOnTrue = canvasVue.ontrue;
         var vueOnFalse = canvasVue.onfalse;
@@ -345,8 +345,8 @@ var setComponentOptions = {
         //填充(背景)颜色  fillColor
         var s_fill_color = component.getBackgroundColor().hash();
         var s_flag = true;
-        vueStyle.fillColor.color = s_fill_color;
-        vueStyle.fillColor.colorData.forEach(function(ele) {
+        vueDefaults.fillColor.color = s_fill_color;
+        vueDefaults.fillColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === s_fill_color) {
                 ele.active = true;
@@ -354,22 +354,22 @@ var setComponentOptions = {
             }
         });
         if (s_flag) {
-            vueStyle.fillColor.colorData.shift();
-            vueStyle.fillColor.colorData.push({
+            vueDefaults.fillColor.colorData.shift();
+            vueDefaults.fillColor.colorData.push({
                 color: s_fill_color,
                 colorstyle: 'background-color:' + s_fill_color,
                 active: true
             })
         }
         // 透明度
-        vueStyle.alpha = component.getAlpha();
+        vueDefaults.alpha = component.getAlpha();
 
         // =============================onTrue===================================
         //填充(背景)颜色  fillColor
         var ot_fill_color = data.onTrue.fillColor;
         var ot_flag = true;
         vueOnTrue.fillColor.color = ot_fill_color;
-        vueOnTrue.fillColor.colorData.forEach(function(ele) {
+        vueOnTrue.fillColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === ot_fill_color) {
                 ele.active = true;
@@ -395,7 +395,7 @@ var setComponentOptions = {
         var of_fill_color = data.onFalse.fillColor;
         var of_flag = true;
         vueOnFalse.fillColor.color = of_fill_color;
-        vueOnFalse.fillColor.colorData.forEach(function(ele) {
+        vueOnFalse.fillColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === of_fill_color) {
                 ele.active = true;
@@ -418,7 +418,7 @@ var setComponentOptions = {
         var oa_fill_color = data.onAlarm.fillColor;
         var oa_flag = true;
         vueOnAlarm.fillColor.color = oa_fill_color;
-        vueOnAlarm.fillColor.colorData.forEach(function(ele) {
+        vueOnAlarm.fillColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === oa_fill_color) {
                 ele.active = true;
@@ -442,7 +442,7 @@ var setComponentOptions = {
         var od_fill_color = data.onDisconnected.fillColor;
         var od_flag = true;
         vueOnDisc.fillColor.color = od_fill_color;
-        vueOnDisc.fillColor.colorData.forEach(function(ele) {
+        vueOnDisc.fillColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === od_fill_color) {
                 ele.active = true;
@@ -464,13 +464,13 @@ var setComponentOptions = {
 
     },
     // 直线
-    lineSet: function(component) {
+    lineSet: function (component) {
 
     },
     // label
-    labelSet: function(component) {
+    labelSet: function (component) {
 
-        var vueStyle = canvasVue.styles;
+        var vueDefaults = canvasVue.defaults;
 
         var vueOnTrue = canvasVue.ontrue;
         var vueOnFalse = canvasVue.onfalse;
@@ -482,21 +482,21 @@ var setComponentOptions = {
         /************************style--begin************************************ */
 
         //边框宽度  borderWidth
-        vueStyle.borderWidth = component.getStroke();
+        vueDefaults.borderWidth = component.getStroke();
 
         //边框样式 borderStyle
-        var s_border_style = component.getDashArray();
-        if (s_border_style === null) {
-            vueStyle.borderStyle = '默认';
-        } else {
-            vueStyle.borderStyle = s_border_style;
-        }
+        // var s_border_style = component.getDashArray();
+        // if (s_border_style === null) {
+        //     vueDefaults.borderStyle = '默认';
+        // } else {
+        //     vueDefaults.borderStyle = s_border_style;
+        // }
 
         // 边框颜色
         var s_border_color = component.getColor().hash();
         var s_flag = true;
-        vueStyle.borderColor.color = s_border_color;
-        vueStyle.borderColor.colorData.forEach(function(ele) {
+        vueDefaults.borderColor.color = s_border_color;
+        vueDefaults.borderColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === s_border_color) {
                 ele.active = true;
@@ -504,8 +504,8 @@ var setComponentOptions = {
             }
         });
         if (s_flag) {
-            vueStyle.borderColor.colorData.shift();
-            vueStyle.borderColor.colorData.push({
+            vueDefaults.borderColor.colorData.shift();
+            vueDefaults.borderColor.colorData.push({
                 color: s_border_color,
                 colorstyle: 'background-color:' + s_border_color,
                 active: true
@@ -516,8 +516,8 @@ var setComponentOptions = {
         //填充(背景)颜色  fillColor
         var s_fill_color = component.getBackgroundColor().hash();
         var s_flag = true;
-        vueStyle.fillColor.color = s_fill_color;
-        vueStyle.fillColor.colorData.forEach(function(ele) {
+        vueDefaults.fillColor.color = s_fill_color;
+        vueDefaults.fillColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === s_fill_color) {
                 ele.active = true;
@@ -525,8 +525,8 @@ var setComponentOptions = {
             }
         });
         if (s_flag) {
-            vueStyle.fillColor.colorData.shift();
-            vueStyle.fillColor.colorData.push({
+            vueDefaults.fillColor.colorData.shift();
+            vueDefaults.fillColor.colorData.push({
                 color: s_fill_color,
                 colorstyle: 'background-color:' + s_fill_color,
                 active: true
@@ -535,9 +535,9 @@ var setComponentOptions = {
 
         //style 闪烁  blinking
         if (data.blinking.flag) {
-            vueStyle.flashing = true;
+            vueDefaults.flashing = true;
         } else {
-            vueStyle.flashing = false;
+            vueDefaults.flashing = false;
         }
 
 
@@ -559,14 +559,14 @@ var setComponentOptions = {
         /************************style--end************************************** */
     },
     // text
-    textSet: function(component) {
+    textSet: function (component) {
 
         // =============================style=================================== 
         //填充(背景)颜色  fillColor
         var s_fill_color = component.getBackgroundColor().hash();
         var s_flag = true;
-        vueStyle.fillColor.color = s_fill_color;
-        vueStyle.fillColor.colorData.forEach(function(ele) {
+        vueDefaults.fillColor.color = s_fill_color;
+        vueDefaults.fillColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === s_fill_color) {
                 ele.active = true;
@@ -574,8 +574,8 @@ var setComponentOptions = {
             }
         });
         if (s_flag) {
-            vueStyle.fillColor.colorData.shift();
-            vueStyle.fillColor.colorData.push({
+            vueDefaults.fillColor.colorData.shift();
+            vueDefaults.fillColor.colorData.push({
                 color: s_fill_color,
                 colorstyle: 'background-color:' + s_fill_color,
                 active: true
@@ -591,7 +591,7 @@ var setComponentOptions = {
         var ot_fill_color = data.onTrue.fillColor;
         var ot_flag = true;
         vueOnTrue.fillColor.color = ot_fill_color;
-        vueOnTrue.fillColor.colorData.forEach(function(ele) {
+        vueOnTrue.fillColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === ot_fill_color) {
                 ele.active = true;
@@ -616,7 +616,7 @@ var setComponentOptions = {
         var of_fill_color = data.onFlase.fillColor;
         var of_flag = true;
         vueOnFalse.fillColor.color = of_fill_color;
-        vueOnFalse.fillColor.colorData.forEach(function(ele) {
+        vueOnFalse.fillColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === of_fill_color) {
                 ele.active = true;
@@ -642,7 +642,7 @@ var setComponentOptions = {
         var oa_fill_color = data.onAlarm.fillColor;
         var oa_flag = true;
         vueOnAlarm.fillColor.color = oa_fill_color;
-        vueOnAlarm.fillColor.colorData.forEach(function(ele) {
+        vueOnAlarm.fillColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === oa_fill_color) {
                 ele.active = true;
@@ -667,7 +667,7 @@ var setComponentOptions = {
         var od_fill_color = data.ononDisconnected.fillColor;
         var od_flag = true;
         vueOnDisc.fillColor.color = od_fill_color;
-        vueOnDisc.fillColor.colorData.forEach(function(ele) {
+        vueOnDisc.fillColor.colorData.forEach(function (ele) {
             ele.active = false;
             if (ele.color === od_fill_color) {
                 ele.active = true;
@@ -688,23 +688,27 @@ var setComponentOptions = {
 
     },
     // 自定义图像
-    imageSet: function(component) {
+    imageSet: function (component) {
         var data = component.getUserData();
-        canvasVue.styles.picture = data.routine.picture;
+        canvasVue.defaults.picture = data.routine.picture;
         canvasVue.ontrue.picture = data.onTrue.picture;
         canvasVue.onfalse.picture = data.onFalse.picture;
         canvasVue.onalarm.picture = data.onAlarm.picture;
         canvasVue.ondisc.picture = data.onDisconnected.picture;
     },
     // 建筑设备、安全防范
-    safeSet: function() {
+    safeSet: function () {
 
     },
 
 
 
-    // [编辑控件前 检查前一个控件 TagID 是否绑定上]
-    checkPreviousComponentTag: function(component) {
+    /**
+     * 编辑控件前
+     * 检查前一个控件 TagID 是否绑定上
+     * 当前样式切换到 default状态样式
+     */
+    checkPreviousComponentTag: function (component) {
         console.log("ID:" + component.id)
         var id = canvasVue.componentData.id;
         var node = canvasSet.getNodeFromCanvas(id);
@@ -712,13 +716,45 @@ var setComponentOptions = {
             if (node.userData.tag.bingding_status == 2) {
                 layer.msg("上个控件Tag值绑定无效,请重新绑定!")
             }
+
+            var defaults =  node.userData.defaults;
+            node.userData.editSatus = 'defaults';
+
+            node.setStroke(defaults.lineWidth);
+            node.setColor(defaults.lineColor);
+
+
+            switch(node.type){
+                case 'basicComponent':
+                node.setBackgroundColor(defaults.fillColor);
+                node.setAlpha(defaults.alpha);
+                break;
+                case 'imageComponent':
+                node.image.setPath(defaults.picture);
+                break;
+                case 'LabelComponent':
+                node.setBackgroundColor(defaults.fillColor);
+                break;
+                case 'lineComponent':
+                // 
+                break;
+                case 'buttonComponent':
+                node.setBackgroundColor(defaults.fillColor);
+                node.setAlpha(defaults.alpha);
+
+                // 文本
+                // 文本颜色
+                break;
+            }
+
         }
 
         canvasVue.componentData.id = component.id;
+        
         this.checkThisComponentTag(component);
     },
     //  [检查 当前控件 TagID 是否绑定正确]
-    checkThisComponentTag: function(component) {
+    checkThisComponentTag: function (component) {
         var tagspan = $('.tag-status');
         var datas = canvasVue.datas.tag.isrighttag;
         switch (Number(component.userData.tag.bingding_status)) {
@@ -739,50 +775,123 @@ var setComponentOptions = {
      * 将 组件监控值标志 改为  false
      * 意味着  当属性改变时会   不会改变 当前选中 组件的属性
      */
-    setComponentFlagFalse: function() {
+    setComponentFlagFalse: function () {
         canvasVue.componentData.flag = false;
     },
     /**
      * 将 组件监控值标志 改为  true
      * 意味着  当属性改变时会 相应改变 当前选中 组件的属性
      */
-    setComponentFlagTrue: function() {
-        setTimeout(function() {
+    setComponentFlagTrue: function () {
+        setTimeout(function () {
             canvasVue.componentData.flag = true;
         }, 300);
 
     },
-    // 显示悬浮说明
-    showTooltips:function(component) {
-        var hint = component.userData.routine.hint;
-        if(hint.flag){
-            if(hint.hintText!=''){
-                var pos = this.getMousePos(event);
-                $('#tooltips').show().text(hint.hintText).css({ 'top': pos.y, 'left':pos.x });
+    // 闪烁方法
+    flashMethod:function(component){
+        component.setColor("#03A3FC");
+        component.setStroke(1);
+        component.setGlow(true);
+        setTimeout(function () {
+            component.setGlow(false);
+            var userdata = component.getUserData();
+            var type = '';
+            switch(userdata.editSatus){
+                case 'defaults':
+                type = 'defaults';
+                break;
+                case 'onTrue':
+                type = 'onTrue';
+                break;
+                case 'onFalse':
+                type = 'onFalse';
+                break;
+                case 'onAlarm':
+                type = 'onAlarm';
+                break;
+                case 'onDisconnected':
+                type = 'onDisconnected';
+                break;
             }
-          
-        }
-       
- 
-    },
-    // 隐藏悬浮说明
-    hideTooltips:function(component) {
-        $('#tooltips').hide();
+            component.setColor(userdata[type].lineColor);
+            component.setStroke(userdata[type].lineWidth);
+        }, 500);
     },
 
-    getMousePos:function (event) {
+    // 组件属性框切换触发
+    statusChangeMethod:function(type){
+        var node = canvasSet.getNodeFromCanvas();
+        if (node) {
+            var userdata =  node.userData;
+            userdata.editSatus = type;
+            console.log(type)
+            node.stopTimer();
+            if(userdata[type].blinking){
+             node.startTimer(canvasVue.componentData.flashTime);
+            }
+
+             node.setStroke(userdata[type].lineWidth);
+            node.setColor(userdata[type].lineColor);
+
+            
+            switch(node.type){
+                case 'basicComponent':
+                console.log('查看填充颜色：'+userdata[type].fillColor)
+                node.setBackgroundColor(userdata[type].fillColor);
+                node.setAlpha(userdata[type].alpha);
+                break;
+                case 'imageComponent':
+                node.image.setPath(userdata[type].picture);
+                break;
+                case 'LabelComponent':
+                node.setBackgroundColor(userdata[type].fillColor);
+                break;
+                case 'lineComponent':
+                // 
+                break;
+                case 'buttonComponent':
+                node.setBackgroundColor(userdata[type].fillColor);
+                node.setAlpha(userdata[type].alpha);
+
+                // 文本
+                // 文本颜色
+                break;
+            }
+
+
+        }
+    },
+
+
+    // 显示悬浮说明
+    showTooltips: function (component) {
+        var hint = component.userData.routine.hint;
+        if (hint.flag) {
+            if (hint.hintText != '') {
+                var pos = this.getMousePos(event);
+                $('#tooltips').show().text(hint.hintText).css({ 'top': pos.y, 'left': pos.x });
+            }
+        }
+    },
+    // 隐藏悬浮说明
+    hideTooltips: function (component) {
+        $('#tooltips').hide();
+    },
+    // 获取鼠标位置
+    getMousePos: function (event) {
         var e = event || window.event;
         var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
         var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
         var x = e.pageX || e.clientX + scrollX;
         var y = e.pageY || e.clientY + scrollY;
-        y -=195;
-        x-=50
-         console.log('x: ' + x + '\ny: ' + y)
+        y -= 195;
+        x -= 50
+        console.log('x: ' + x + '\ny: ' + y)
         // alert('x: ' + x + '\ny: ' + y);
         return { 'x': x, 'y': y };
         // console.log('x: ' + x + '\ny: ' + y)
- }
+    }
 
 }
 
@@ -795,20 +904,20 @@ var setComponentOptions = {
 // 基础功能设置
 var basicSet = {
     //初始化 
-    init: function() {
+    init: function () {
         var _this = this;
         // 组件滚动功能
         this.comscroll.picrun_ini("scroll_ul_2", 'scroll_div', "scroll_ul_1");
         // 做滚动按钮
-        $('#LeftBotton').mousedown(function() {
+        $('#LeftBotton').mousedown(function () {
             _this.comscroll.GoUp();
-        }).mouseup(function() {
+        }).mouseup(function () {
             _this.comscroll.StopUp()
         });
         // 右滚动按钮
-        $('#RightBotton').mousedown(function() {
+        $('#RightBotton').mousedown(function () {
             _this.comscroll.GoDown()
-        }).mouseup(function() {
+        }).mouseup(function () {
             _this.comscroll.StopDown()
         });
 
@@ -818,7 +927,7 @@ var basicSet = {
         });
 
         // 基础属性框打开关闭操作
-        $('.attr-toggle-default').click(function() {
+        $('.attr-toggle-default').click(function () {
             var _this = $(this);
             var clas = 'collapsed';
             var divs = '.' + _this.data('for');
@@ -833,8 +942,8 @@ var basicSet = {
         });
 
 
-         // 状态属性框打开关闭操作
-         $('.attr-toggle-status').click(function() {
+        // 状态属性框打开关闭操作
+        $('.attr-toggle-status').click(function () {
             var _this = $(this);
             var clas = 'collapsed';
             var divs = '.' + _this.data('for');
@@ -843,27 +952,21 @@ var basicSet = {
             if (_this.hasClass(clas)) {
                 flag = true;
             }
-           
+
             $('.status-div').stop().hide();
             $('.attr-toggle-status').removeClass(clas);
 
-            if(!flag){
+            if (!flag) {
                 _this.addClass(clas);
                 $(divs).slideDown(300);
-
-                if (canvasVue.componentData.flag) {
-
-                    var node = canvasSet.getNodeFromCanvas();
-                    if (node) {
-                        node.setBackgroundColor('#35c99d')
-                    }
-
-                }
-
+                setComponentOptions.statusChangeMethod(_this.data('status'));  
             }
 
 
-           
+
+            
+
+
 
         });
 
@@ -883,28 +986,28 @@ var basicSet = {
 
 
 
-    watchColorClick: function() {
-        //style 边框颜色设置
-        $('.style-border-color').colpick({
+    watchColorClick: function () {
+        //default 边框颜色设置
+        $('.default-border-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
-                var color = canvasVue.styles.borderColor.color;
+            onShow: function () {
+                var color = canvasVue.defaults.borderColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
                 // node.repaint();
                 var color = ('#' + hex).toUpperCase();
                 var flag = true;
-                var borderColor = canvasVue.styles.borderColor;
+                var borderColor = canvasVue.defaults.borderColor;
                 // if (color !== borderColor.color) {
-                borderColor.colorData.forEach(function(ele) {
+                borderColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -925,27 +1028,23 @@ var basicSet = {
                 $(el).colpickHide();
             }
         });
-        //style 填充颜色设置
-        $('.style-fill-color').colpick({
+        //default 填充颜色设置
+        $('.default-fill-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
-                var color = canvasVue.styles.fillColor.color;
+            onShow: function () {
+                var color = canvasVue.defaults.fillColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function(hsb, hex, rgb, el) {
-                // var node = getNode();
-                // node.userData.BlinkingColor = '#' + hex;
-                // node.setColor("#" + hex);
-                // node.repaint();
+            onSubmit: function (hsb, hex, rgb, el) {
+
                 var color = ('#' + hex).toUpperCase();
                 var flag = true;
-                var fillColor = canvasVue.styles.fillColor;
-                // if (color !== borderColor.color) {
-                fillColor.colorData.forEach(function(ele) {
+                var fillColor = canvasVue.defaults.fillColor;
+                fillColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -968,27 +1067,27 @@ var basicSet = {
         });
 
 
-        //style 字体颜色设置
-        $('.style-font-color').colpick({
+        //default 字体颜色设置
+        $('.default-font-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
-                var color = canvasVue.styles.fontColor.color;
+            onShow: function () {
+                var color = canvasVue.defaults.fontColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
                 // node.repaint();
                 var color = ('#' + hex).toUpperCase();
                 var flag = true;
-                var fontColor = canvasVue.styles.fontColor;
+                var fontColor = canvasVue.defaults.fontColor;
                 // if (color !== borderColor.color) {
-                fontColor.colorData.forEach(function(ele) {
+                fontColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1016,13 +1115,13 @@ var basicSet = {
         $('.ontrue-border-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.ontrue.borderColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1031,7 +1130,7 @@ var basicSet = {
                 var flag = true;
                 var borderColor = canvasVue.ontrue.borderColor;
                 // if (color !== borderColor.color) {
-                borderColor.colorData.forEach(function(ele) {
+                borderColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1057,14 +1156,14 @@ var basicSet = {
         $('.ontrue-fill-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.ontrue.fillColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1073,7 +1172,7 @@ var basicSet = {
                 var flag = true;
                 var fillColor = canvasVue.ontrue.fillColor;
                 // if (color !== borderColor.color) {
-                fillColor.colorData.forEach(function(ele) {
+                fillColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1099,14 +1198,14 @@ var basicSet = {
         $('.ontrue-font-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.ontrue.fontColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1115,7 +1214,7 @@ var basicSet = {
                 var flag = true;
                 var fontColor = canvasVue.ontrue.fontColor;
                 // if (color !== borderColor.color) {
-                fontColor.colorData.forEach(function(ele) {
+                fontColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1144,13 +1243,13 @@ var basicSet = {
         $('.onfalse-border-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.onfalse.borderColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1159,7 +1258,7 @@ var basicSet = {
                 var flag = true;
                 var borderColor = canvasVue.onfalse.borderColor;
                 // if (color !== borderColor.color) {
-                borderColor.colorData.forEach(function(ele) {
+                borderColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1187,14 +1286,14 @@ var basicSet = {
         $('.onfalse-fill-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.onfalse.fillColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1203,7 +1302,7 @@ var basicSet = {
                 var flag = true;
                 var fillColor = canvasVue.onfalse.fillColor;
                 // if (color !== borderColor.color) {
-                fillColor.colorData.forEach(function(ele) {
+                fillColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1230,14 +1329,14 @@ var basicSet = {
         $('.onfalse-font-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.onfalse.fontColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1246,7 +1345,7 @@ var basicSet = {
                 var flag = true;
                 var fontColor = canvasVue.onfalse.fontColor;
                 // if (color !== borderColor.color) {
-                fontColor.colorData.forEach(function(ele) {
+                fontColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1272,13 +1371,13 @@ var basicSet = {
         $('.onalarm-border-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.onalarm.borderColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1287,7 +1386,7 @@ var basicSet = {
                 var flag = true;
                 var borderColor = canvasVue.onalarm.borderColor;
                 // if (color !== borderColor.color) {
-                borderColor.colorData.forEach(function(ele) {
+                borderColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1313,14 +1412,14 @@ var basicSet = {
         $('.onalarm-fill-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.onalarm.fillColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1329,7 +1428,7 @@ var basicSet = {
                 var flag = true;
                 var fillColor = canvasVue.onalarm.fillColor;
                 // if (color !== borderColor.color) {
-                fillColor.colorData.forEach(function(ele) {
+                fillColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1355,14 +1454,14 @@ var basicSet = {
         $('.onalarm-font-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.onalarm.fontColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1371,7 +1470,7 @@ var basicSet = {
                 var flag = true;
                 var fontColor = canvasVue.onalarm.fontColor;
                 // if (color !== borderColor.color) {
-                fontColor.colorData.forEach(function(ele) {
+                fontColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1397,13 +1496,13 @@ var basicSet = {
         $('.ondisc-border-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.ondisc.borderColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1412,7 +1511,7 @@ var basicSet = {
                 var flag = true;
                 var borderColor = canvasVue.ondisc.borderColor;
                 // if (color !== borderColor.color) {
-                borderColor.colorData.forEach(function(ele) {
+                borderColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1438,14 +1537,14 @@ var basicSet = {
         $('.ondisc-fill-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.ondisc.fillColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1454,7 +1553,7 @@ var basicSet = {
                 var flag = true;
                 var fillColor = canvasVue.ondisc.fillColor;
                 // if (color !== borderColor.color) {
-                fillColor.colorData.forEach(function(ele) {
+                fillColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1480,14 +1579,14 @@ var basicSet = {
         $('.ondisc-font-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function() {
+            onShow: function () {
                 var color = canvasVue.ondisc.fontColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function(hsb, hex, rgb, el) {
+            onSubmit: function (hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1496,7 +1595,7 @@ var basicSet = {
                 var flag = true;
                 var fontColor = canvasVue.ondisc.fontColor;
                 // if (color !== borderColor.color) {
-                fontColor.colorData.forEach(function(ele) {
+                fontColor.colorData.forEach(function (ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1534,24 +1633,24 @@ var basicSet = {
         scroll_ul_2: '',
         scroll_div: '',
         scroll_ul_1: '',
-        GetObj: function(objName) {
+        GetObj: function (objName) {
             if (document.getElementById) {
                 return eval('document.getElementById("' + objName + '")')
             } else {
                 return eval('document.all.' + objName)
             }
         },
-        GoUp: function(string) {
+        GoUp: function (string) {
             var _this = this;
             if (this.MoveLock_1) return;
             console.log('查看2：' + string)
             this.MoveLock_1 = true;
             this.MoveWay_1 = "left";
-            this.MoveTimeObj_1 = setInterval(function() {
+            this.MoveTimeObj_1 = setInterval(function () {
                 _this.ScrUp(_this.scroll_div)
             }, this.Speed_1);
         },
-        StopUp: function(string) {
+        StopUp: function (string) {
             if (this.MoveWay_1 == "right") {
                 return
             };
@@ -1563,24 +1662,24 @@ var basicSet = {
                 this.MoveLock_1 = false
             }
         },
-        ScrUp: function(obj) {
+        ScrUp: function (obj) {
             if (obj.scrollLeft <= 0) {
                 obj.scrollLeft = obj.scrollLeft + obj.offsetWidth
             }
             obj.scrollLeft -= this.Space_1;
         },
-        GoDown: function(string, string2, string3) {
+        GoDown: function (string, string2, string3) {
             var _this = this;
             clearInterval(this.MoveTimeObj_1);
             if (this.MoveLock_1) return;
             this.MoveLock_1 = true;
             this.MoveWay_1 = "right";
             this.ScrDown(this.scroll_div, this.scroll_ul_1);
-            this.MoveTimeObj_1 = setInterval(function() {
+            this.MoveTimeObj_1 = setInterval(function () {
                 _this.ScrDown(_this.scroll_div, _this.scroll_ul_1);
             }, this.Speed_1)
         },
-        StopDown: function(string) {
+        StopDown: function (string) {
             var scrollDiv = this.scroll_div;
             var fill_1 = this.fill_1;
             var PageWidth_1 = this.PageWidth_1;
@@ -1595,14 +1694,14 @@ var basicSet = {
                 this.MoveLock_1 = false
             }
         },
-        ScrDown: function(obj1, obj2) {
+        ScrDown: function (obj1, obj2) {
             console.log(123)
             if (obj1.scrollLeft >= obj2.scrollWidth) {
                 obj1.scrollLeft = obj1.scrollLeft - obj2.scrollWidth - 40
             }
             obj1.scrollLeft += this.Space_1;
         },
-        CompScr_1: function(obj) {
+        CompScr_1: function (obj) {
 
             if (this.Comp_1 == 0) {
                 this.MoveLock_1 = false;
@@ -1638,7 +1737,7 @@ var basicSet = {
                 setTimeout(this.CompScr_1(obj), TempSpeed)
             }
         },
-        picrun_ini: function(string, string2, string3) {
+        picrun_ini: function (string, string2, string3) {
             this.scroll_ul_2 = this.GetObj(string);
             this.scroll_ul_1 = this.GetObj(string3);
             this.scroll_div = this.GetObj(string2);
@@ -1656,19 +1755,19 @@ var basicSet = {
 var canvasSet = {
     basicData: {
         // 画布基础宽高
-        basicWidth:1300,
+        basicWidth: 1300,
         scale: 9 / 16,
-        s:''
+        s: ''
     },
-    setCanvasWH: function() {
+    setCanvasWH: function () {
         var w = Number($('.canvas-div').width());
         var s = this.basicData.basicWidth / w;
         this.basicData.s = s;
         $('#canvas').css({
-            width:w+'px',
+            width: w + 'px',
             height: w * this.basicData.scale + 'px'
         });
-       
+
         imageCanvas.setZoom(s);
     },
     /**
@@ -1676,7 +1775,7 @@ var canvasSet = {
      * @param  {[type]} id [description]
      * @return {[type]}    [控件对象]
      */
-    getNodeFromCanvas: function() {
+    getNodeFromCanvas: function () {
         var id = canvasVue.componentData.id;
         if (id != '') {
             var node = imageCanvas.getFigure(id);
@@ -1695,9 +1794,9 @@ var canvasSet = {
      * [打印 控件数据 ----------调试用]
      * @param  {[type]} canvas [description]
      */
-    displayJSON: function(canvas) {
+    displayJSON: function (canvas) {
         var writer = new draw2d.io.json.Writer();
-        writer.marshal(canvas, function(json) {
+        writer.marshal(canvas, function (json) {
             console.log('画布数据:' + JSON.stringify(json, null, 2));
         });
     },
@@ -1706,9 +1805,9 @@ var canvasSet = {
      * @param  {[type]} type [description]
      * @return {[type]}      [description]
      */
-    allCanvasinit: function(type) {
+    allCanvasinit: function (type) {
         //选择框  样式
-        draw2d.Configuration.factory.createResizeHandle = function(forShape, type) {
+        draw2d.Configuration.factory.createResizeHandle = function (forShape, type) {
             var handle = new draw2d.ResizeHandle(forShape, type);
             handle.attr({
                 width: 10,
@@ -1732,13 +1831,13 @@ var canvasSet = {
         filter.element.setAttribute("y", "-35%");
 
         app.view.installEditPolicy(new draw2d.policy.connection.DragConnectionCreatePolicy({
-            createConnection: function() {
+            createConnection: function () {
                 return new HoverConnection();
             }
         }));
 
 
-        canvas.on("figure:add", function(emitter, event) {
+        canvas.on("figure:add", function (emitter, event) {
             if (!(event.figure instanceof draw2d.Connection)) {
                 event.figure.shape.filter(filter);
             }
@@ -1758,7 +1857,7 @@ var canvasSet = {
         imageCanvas = canvas;
 
         canvas.installEditPolicy(new CopyInterceptorPolicy());
-        canvas.getCommandStack().addEventListener(function(e) {
+        canvas.getCommandStack().addEventListener(function (e) {
             if (e.isPostChangeEvent()) {
                 canvasSet.displayJSON(canvas);
             }
@@ -1900,11 +1999,11 @@ function componentMove(com) {
     $canvas.comTooltips.hide();
 }
 
-$('#canvas').on('click', function() {
+$('#canvas').on('click', function () {
     $canvas.menuFirAttr.show();
     $canvas.menuSecAttr.hide();
 });
-$('.have-btn').on('click', 'button', function() {
+$('.have-btn').on('click', 'button', function () {
     $canvas.menuFirAttr.hide();
     $canvas.menuSecAttr.show();
 });

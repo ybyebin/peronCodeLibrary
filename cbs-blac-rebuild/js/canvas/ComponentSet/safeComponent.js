@@ -17,6 +17,7 @@ var switchComponent = draw2d.shape.basic.Rectangle.extend({
             width: 36,
             height: 36
         });
+        this.image.setRotationAngle(45);
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
         this.label = new draw2d.shape.basic.Label({
@@ -2982,34 +2983,14 @@ var detectorComponent = draw2d.shape.basic.Rectangle.extend({
     }
 });
 
-// 属性框
-function displayDiv(component) {
-    // 基本
-    setComponentOptions.basePublicSet(component);
 
-    setComponentOptions.basicSet(component);
-    // 大小
-    setComponentOptions.componentSize(component);
-    // 位置 旋转角度
-    setComponentOptions.componentOffsetAndAngle(component);
-
-    // 标题
-    setComponentOptions.componentCaption(component);
-
-}
-
-
-//视频地址
-function vlcvalue(com) {
-    $canvas.menuVlcUrl.show(); //视频地址
-    $canvas.comVlcUrlVal.val(com.getUserData().vlcurl)
-}
 
 
 var safeBasic = {
     // 自定义控件属性
     safeData: JSON.stringify({
-        type: "imageComponent", //类型			
+        type: "imageComponent", //类型
+        status:'default',//该组件绑定tag 的状态				
         proportion: { //自定义属性
             havepoint: "", //(待定)
             value: "", //(待定)
@@ -3020,18 +3001,12 @@ var safeBasic = {
             tag_name: "",
             bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
         },
-        blinking: { //闪烁
-            flag: false, //是否闪烁
-            lineWidth: 1,
-            lineColor: "#DDDDDD",
-            lineStyle: null,
-            type: 'style' //备用(忘了干嘛的)
-        },
+       
         routine: {
             name: '',
             description: '', //组件描述
-            visible: false, //是否显示组件(setAlpha(0))
-            enable: false, //组件是否可用
+            visible: false, //隐藏组件(setAlpha(0))
+            enable: false, //不可用
             accessLevel: 8, //访问等级 0~15
             hint: { //hover 说明
                 flag: false, //是否显示
@@ -3043,31 +3018,38 @@ var safeBasic = {
             },
             readOnly: false, //组件是否为只读
         },
+        defaults:{//该属性用于存储 控件初始化时的状态
+            lineWidth: 1,
+            lineColor: "#DDDDDD",
+            // lineStyle: null,
+            blinking: false,
+            picture: ''
+        },
         onTrue: {
             lineWidth: 1,
             lineColor: "#DDDDDD",
-            lineStyle: null,
+            // lineStyle: null,
             blinking: false,
             picture: ''
         },
         onFalse: {
             lineWidth: 1,
             lineColor: "#DDDDDD",
-            lineStyle: null,
+            // lineStyle: null,
             blinking: false,
             picture: ''
         },
         onAlarm: {
             lineWidth: 1,
             lineColor: "#DDDDDD",
-            lineStyle: null,
+            // lineStyle: null,
             blinking: false,
             picture: ''
         },
         onDisconnected: {
             lineWidth: 1,
             lineColor: "#DDDDDD",
-            lineStyle: null,
+            // lineStyle: null,
             blinking: false,
             picture: ''
         }
