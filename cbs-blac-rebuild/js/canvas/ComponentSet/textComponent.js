@@ -208,22 +208,23 @@ var buttonComponent = draw2d.shape.note.PostIt.extend({
     }
 });
 
-
+// 文本组件
 var textBasic = {
     // 自定义控件属性
     textData: JSON.stringify({
-        type: "buttonComponent", //类型			
-        proportion: { //自定义属性
-            valueType: 'textValueComponent',
-            status:'default',//该组件绑定tag 的状态	            
-            havepoint: "", //(待定)
-            value: "", //(待定)
+        type: "textComponent", //类型	
+        custom: { 
+            valueType: 'textValueComponent',             
+            newCreat:true,//  用于在拖拽组件时判断(是否新拖拽的控件)
+            editSatus:'defaults',//组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)            
         },
         tag: {
             tag_id: -1,
             tag_type: -1,
             tag_name: "",
-            bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
+            bingding_status: 0, //0 默认状态,1 已经绑定,2 绑定错误
+            status:'default',//该组件绑定tag 的状态(用于监控画面)
+            
         },
        
         routine: {

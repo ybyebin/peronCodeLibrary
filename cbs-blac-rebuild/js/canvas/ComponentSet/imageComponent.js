@@ -6,20 +6,18 @@
 var imageComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "imageComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setAlpha(0.001);
-        // this.setBackgroundColor("transparent"); //背景颜色
+        this._super($.extend({
+            width:36,
+            height:36,
+            stroke: 0,
+            alpha:0,
+            bgColor:imgBasic.fillColor
+        }, attr));
+        this.stroke = 0;
         var _this = this;
         var imgBaseUrl = setComponentOptions.imageBaseUrl +"zidingyi.png";
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl,
-            // path:"../img/img.png",
-            // path: '../images/icon/icon/zidingyi12.svg',
-
             width: 36,
             height: 36
         });
@@ -32,17 +30,17 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
         this.label.setVisible(false);
         var data = {
-            type: "imageComponent", //类型
-            status:'default',//该组件绑定tag 的状态				
-            proportion: { //自定义属性
-                havepoint: "",
-                value: "",
+            type: "customImageComponent", //类型
+            custom: { 
+                newCreat:true,//  用于在拖拽组件时判断(是否新拖拽的控件)
+                editSatus:'defaults',//组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)
             },
             tag: {
                 tag_id: -1,
                 tag_type: -1,
                 tag_name: "",
-                bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
+                bingding_status: 0, //0 默认状态,1 已经绑定,2 绑定错误
+                status:'default',//该组件绑定tag 的状态(用于监控画面)	     
             },
            
             routine: {
@@ -60,42 +58,46 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
                     capText: '自定义图片控件' //内容
                 },
                 readOnly: false, //组件是否为只读
-                picture: ''
             },
 
 
             defaults:{//该属性用于存储 控件初始化时的状态
-                lineWidth: 1,
-                lineColor: "#DDDDDD",
-                // lineStyle: null,
+                lineWidth: 0,
+                lineColor: imgBasic.lineColor,
+                fillColor: imgBasic.fillColor,
                 blinking: false,
+                alpha: 0,
                 picture:imgBaseUrl
             },
             onTrue: {
-                lineWidth: 1,
-                lineColor: "#DDDDDD",
-                // lineStyle: null,
+                lineWidth: 0,
+                lineColor: imgBasic.lineColor,
+                fillColor: imgBasic.fillColor,
+                alpha: 0,
                 blinking: false,
                 picture:imgBaseUrl
             },
             onFalse: {
-                lineWidth: 1,
-                lineColor: "#DDDDDD",
-                // lineStyle: null,
+                lineWidth: 0,
+                lineColor: imgBasic.lineColor,
+                fillColor: imgBasic.fillColor,
+                alpha: 0,
                 blinking: false,
                 picture: imgBaseUrl
             },
             onAlarm: {
-                lineWidth: 1,
-                lineColor: "#DDDDDD",
-                // lineStyle: null,
+                lineWidth: 0,
+                lineColor: imgBasic.lineColor,
+                fillColor: imgBasic.fillColor,
+                alpha: 0,
                 blinking: false,
                 picture: imgBaseUrl
             },
             onDisconnected: {
-                lineWidth: 1,
-                lineColor: "#DDDDDD",
-                // lineStyle: null,
+                lineWidth: 0,
+                lineColor: imgBasic.lineColor,
+                fillColor: imgBasic.fillColor,
+                alpha: 0,
                 blinking: false,
                 picture: imgBaseUrl
             }
@@ -105,35 +107,28 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
 
-        this.on("click", function () {
-            imgBasic.clickMethod(_this);
-            // console.log("图片控件类型")
-        });
+        // this.on("click", function () {
+        //     imgBasic.clickMethod(_this);
+        //     // console.log("图片控件类型")
+        // });
         this.image.on("click", function () {
             imgBasic.clickMethod(_this);
         });
         // 缩放
         this.on("resize", function () {
-            // thiss.image.setHeight(thiss.getHeight());
-            // thiss.image.setWidth(thiss.getWidth());
-            // componentResize(thiss);
+            setComponentOptions.componentOnResizeMethod(_this);
         });
         // 移动
         this.on("move", function () {
-            // componentMove(thiss);
+            setComponentOptions.componentOnMoveMethod(_this);
         });
         // 悬浮窗
         this.image.onMouseEnter = function () {
-            // if (thiss.userData.ShowHint) {
-            //     showTooltips(thiss);
-            // }
+            setComponentOptions.showTooltips(_this);
         };
         this.image.onMouseLeave = function () {
-            // $canvas.comTooltips.hide();
+            setComponentOptions.hideTooltips();
         };
-
-
-
 
         /**
          *	双击方法----forexample--选择图片
@@ -142,26 +137,18 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
     },
 
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 
 })
 
 
 
-
+// 自定义图片组件
 var imgBasic = {
     // 自定义控件属性
+    lineColor:'#000000',
+    fillColor:'#35c99d',
     imgData: '',//img是特殊控件只有一个  该属性直接写进组件
     clickMethod: function (component) {
         setComponentOptions.setComponentFlagFalse();
@@ -178,7 +165,13 @@ var imgBasic = {
         setComponentOptions.componentOffsetAndAngle(component);
         // 标题
         setComponentOptions.componentCaption(component);
+
+        // 此处调用 基本图形方法设置(透明度和填充颜色)
+        setComponentOptions.rectangleSet(component);
         // 图片url
         setComponentOptions.imageSet(component);
+
+
+        setComponentOptions.setComponentFlagTrue();
     }
 }

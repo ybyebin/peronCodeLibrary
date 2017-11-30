@@ -34,11 +34,15 @@ example.View = draw2d.Canvas.extend({
 
     },
     onDrop: function(droppedDomNode, x, y, shiftKey, ctrlKey) {
+
+
+       
         var type = $(droppedDomNode).data("shape");
         console.log("这里是:::" + type);
         var figure = eval("new " + type + "();");
         console.log(figure.getId());
-
+        console.log(figure.getUserData())
+        var _this = figure;
         // create a command for the undo/redo support
         if (type == "LineComponent") {
             var thisx = x;
@@ -50,6 +54,10 @@ example.View = draw2d.Canvas.extend({
             var command = new draw2d.command.CommandAdd(this, figure, x, y);
             this.getCommandStack().execute(command);
         }
+
+        setTimeout(function(){
+            _this.userData.custom.newCreat =false;
+        },500)
 
     }
 });

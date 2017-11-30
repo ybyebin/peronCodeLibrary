@@ -40,7 +40,9 @@ layui.use(['layer', 'element'], function () {
                 // text
                 textHideDiv: false,
                 // 摄像地址(特殊-单独列出来)
-                vlcUrlHideDiv: true
+                vlcUrlHideDiv: true,
+                //管道(特殊-单独列出来)
+                conduitHideDiv:false,
 
             },
             // 边框下拉框数据
@@ -219,7 +221,7 @@ layui.use(['layer', 'element'], function () {
                 flashing: false, //闪烁
             },
             onfalse: {
-                borderWidth: '0',
+                borderWidth: 0,
                 // borderStyle: '默认',
                 borderColor: {
                     color: '',
@@ -240,7 +242,7 @@ layui.use(['layer', 'element'], function () {
                 flashing: false, //闪烁
             },
             onalarm: {
-                borderWidth: '0',
+                borderWidth: '',
                 // borderStyle: '默认',
                 borderColor: {
                     color: '',
@@ -261,7 +263,7 @@ layui.use(['layer', 'element'], function () {
                 flashing: false, //闪烁
             },
             ondisc: {
-                borderWidth: '0',
+                borderWidth: '',
                 // borderStyle: '默认',
                 borderColor: {
                     color: '',
@@ -462,6 +464,7 @@ layui.use(['layer', 'element'], function () {
             // ondisc 边框宽度
             setOnDiscBorderWidth: function (item) {
                 this.ondisc.borderWidth = item;
+                console.log('边框宽度:'+item)
             },
             // ondisc 边框样式
             // setOnDiscBorderStyle: function (item) {
@@ -548,6 +551,7 @@ layui.use(['layer', 'element'], function () {
                 dic.safeHideDiv = false;
                 dic.textHideDiv = false;
                 dic.vlcUrlHideDiv = true;
+                dic.conduitHideDiv = false;
 
                 var routine = this.routine;
                 var datas = this.datas;
@@ -699,7 +703,12 @@ layui.use(['layer', 'element'], function () {
             console.log('X新值:' + newVal);
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                node.setX(newVal);
+                if(newVal === ''){
+                    node.setX(0);
+                }else{
+                    node.setX(newVal);
+                }
+                
             }
         }
     });
@@ -710,7 +719,11 @@ layui.use(['layer', 'element'], function () {
             console.log('Y新值:' + newVal);
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                node.setY(newVal);
+                if(newVal === ''){
+                    node.setX(0);
+                }else{
+                    node.setY(newVal);
+                }
             }
         }
     });
@@ -1228,4 +1241,72 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
+
+    // ondisc -边框宽度
+    canvasVue.$watch('ondisc.borderWidth', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if(node){
+                node.setStroke(newVal)
+                node.userData.onDisconnected.lineWidth = newVal;                 
+            }   
+        }
+    });
+
+    // ondisc -边框颜色
+    canvasVue.$watch('ondisc.borderColor.color', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.setColor(newVal)
+                node.userData.onDisconnected.lineColor = newVal;
+            }
+        }
+    });
+
+     // ondisc -填充颜色
+     canvasVue.$watch('ondisc.fillColor.color', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.setBackgroundColor(newVal)
+                node.userData.onDisconnected.fillColor = newVal;
+            }
+        }
+    });
+
+     // ondisc -透明度
+     canvasVue.$watch('ondisc.alpha', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                var num= Number(newVal);
+                if(num >= 0 && num <=1){
+                    node.setAlpha(num)
+                    node.userData.onDisconnected.alpha = num;
+                }else{
+                    node.setAlpha(1);
+                    node.userData.onDisconnected.alpha = 1;
+                    layer.msg('透明度范围 0~1');
+                }
+                
+            }
+        }
+    });
+
+    // ondisc -闪烁
+    canvasVue.$watch('ondisc.flashing', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                if (newVal) {
+                    node.startTimer(canvasVue.componentData.flashTime);
+                    node.userData.onDisconnected.blinking = true;
+                } else {
+                    node.stopTimer();
+                    node.userData.onDisconnected.blinking = false;
+                }
+            }
+        }
+    });
 })

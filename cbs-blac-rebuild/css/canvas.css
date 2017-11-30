@@ -1074,6 +1074,10 @@
 .colpick {
     z-index: 99999;
 }
+.select-ul-up{
+    top: auto !important;
+    bottom: 43px;
+}
 
 
 /* .style-div {

@@ -625,7 +625,7 @@
 
                                             </div>
                                         </div>
-                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
@@ -670,7 +670,7 @@
                                             <span>背景透明</span>
                                         </div>
 
-                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.conduitHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
                                                 <input v-model="defaults.alpha" type="text" autocomplete="off" class="layui-input">
@@ -754,7 +754,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
@@ -787,7 +787,7 @@
                                             <span>背景透明</span>
                                         </div>
 
-                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.conduitHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
                                                 <input v-model="ontrue.alpha" type="text" name="title" autocomplete="off" class="layui-input">
@@ -870,7 +870,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
@@ -903,7 +903,7 @@
                                             <span>背景透明</span>
                                         </div>
 
-                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.conduitHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
                                                 <input v-model="onfalse.alpha" type="text" autocomplete="off" class="layui-input">
@@ -952,7 +952,7 @@
                                                             <i></i>
                                                         </span>
                                                     </div>
-                                                    <ul class="onalarm-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                    <ul class="select-ul-up onalarm-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
                                                         <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setOnAlarmBorderWidth(item)"></li>
                                                     </ul>
                                                 </div>
@@ -986,7 +986,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
@@ -1019,7 +1019,7 @@
                                             <span>背景透明</span>
                                         </div>
 
-                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.conduitHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
                                                 <input v-model="onalarm.alpha" type="text" name="title" autocomplete="off" class="layui-input">
@@ -1068,7 +1068,7 @@
                                                             <i></i>
                                                         </span>
                                                     </div>
-                                                    <ul class="ondisc-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                    <ul class="select-ul-up ondisc-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
                                                         <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setOnDiscBorderWidth(item)"></li>
                                                     </ul>
                                                 </div>
@@ -1102,7 +1102,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
@@ -1135,7 +1135,7 @@
                                             <span>背景透明</span>
                                         </div>
 
-                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.conduitHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">透明度</label>
                                             <div class="layui-input-block">
                                                 <input v-model="ondisc.alpha" type="text" name="title" autocomplete="off" class="layui-input">

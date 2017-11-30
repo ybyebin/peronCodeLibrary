@@ -10,7 +10,7 @@ var setComponentOptions = {
         this.checkPreviousComponentTag(component);
 
         //该属性用于 判断当前闪烁需要的标志 
-        component.userData.editSatus = 'defaults';
+        component.userData.custom.editSatus = 'defaults';
         // 组件名称   name(用户输入)
         vueRoutine.name = data.routine.name;
 
@@ -75,7 +75,7 @@ var setComponentOptions = {
 
         //边框宽度  borderWidth
         vueDefaults.borderWidth = component.getStroke();
-
+        console.log('查看边框宽度：'+component.getStroke())
         //边框样式 borderStyle
         // var s_border_style = component.getDashArray();
         // if (s_border_style === null) {
@@ -117,7 +117,7 @@ var setComponentOptions = {
         console.log('边框宽度:' + component.getStroke());
         console.log('边框颜色:' + component.getColor().hash());
         console.log('边框样式:' + component.getDashArray());
-        console.log('填充颜色:' + component.getBackgroundColor().hash());
+        // console.log('填充颜色:' + component.().hash());
         console.log('透明度:' + component.getAlpha());
 
 
@@ -690,7 +690,7 @@ var setComponentOptions = {
     // 自定义图像
     imageSet: function (component) {
         var data = component.getUserData();
-        canvasVue.defaults.picture = data.routine.picture;
+        canvasVue.defaults.picture = data.defaults.picture;
         canvasVue.ontrue.picture = data.onTrue.picture;
         canvasVue.onfalse.picture = data.onFalse.picture;
         canvasVue.onalarm.picture = data.onAlarm.picture;
@@ -705,7 +705,7 @@ var setComponentOptions = {
 
     /**
      * 编辑控件前
-     * 检查前一个控件 TagID 是否绑定上
+     * 
      * 当前样式切换到 default状态样式
      */
     checkPreviousComponentTag: function (component) {
@@ -713,32 +713,36 @@ var setComponentOptions = {
         var id = canvasVue.componentData.id;
         var node = canvasSet.getNodeFromCanvas(id);
         if (node) {
-            if (node.userData.tag.bingding_status == 2) {
-                layer.msg("上个控件Tag值绑定无效,请重新绑定!")
-            }
+            // if (node.userData.tag.bingding_status == 2) {
+            //     layer.msg("上个控件Tag值绑定无效,请重新绑定!")
+            // }
 
             var defaults =  node.userData.defaults;
-            node.userData.editSatus = 'defaults';
+            node.userData.custom.editSatus = 'defaults';
 
             node.setStroke(defaults.lineWidth);
             node.setColor(defaults.lineColor);
 
 
-            switch(node.type){
+            switch(node.userData.type){
                 case 'basicComponent':
                 node.setBackgroundColor(defaults.fillColor);
                 node.setAlpha(defaults.alpha);
                 break;
-                case 'imageComponent':
+                case 'customImageComponent':
+                node.setBackgroundColor(defaults.fillColor);
+                node.setAlpha(defaults.alpha);
                 node.image.setPath(defaults.picture);
                 break;
-                case 'LabelComponent':
+                case 'labelComponent':
                 node.setBackgroundColor(defaults.fillColor);
                 break;
                 case 'lineComponent':
                 // 
                 break;
-                case 'buttonComponent':
+                case 'defaultComponent':
+                break;
+                case 'textComponent':
                 node.setBackgroundColor(defaults.fillColor);
                 node.setAlpha(defaults.alpha);
 
@@ -797,7 +801,7 @@ var setComponentOptions = {
             component.setGlow(false);
             var userdata = component.getUserData();
             var type = '';
-            switch(userdata.editSatus){
+            switch(userdata.custom.editSatus){
                 case 'defaults':
                 type = 'defaults';
                 break;
@@ -818,39 +822,81 @@ var setComponentOptions = {
             component.setStroke(userdata[type].lineWidth);
         }, 500);
     },
+    // 组件缩放时 方法
+    componentOnResizeMethod:function(component){
+        var w = component.getWidth();
+        var h = component.getHeight();
+        canvasVue.routine.width = w;
+        canvasVue.routine.height = h;
+        if(component.image){
+            component.image.setWidth(w);
+            component.image.setHeight(h);
+        }
+    },
+    // 组件移动时  方法
+    componentOnMoveMethod: function (component) {
+        if (!component.userData.custom.newCreat) {
+            this.hideTooltips();
+
+            switch (component.userData.type) {
+                case 'basicComponent':
+                    rectangle.clickMethod(component);
+                    break;
+                case 'customImageComponent':
+                    imgBasic.clickMethod(component);
+                case 'defaultComponent':
+                    // imgBasic.clickMethod(component);
+                    break;
+                case 'labelComponent':
+                    // labelBasic.clickMethod(component);
+                    break;
+                case 'lineComponent':
+                    // lineBasic.clickMethod(component);
+                    break;
+                case 'textComponent':
+                break;
+            }
+
+        }
+
+    },
 
     // 组件属性框切换触发
     statusChangeMethod:function(type){
         var node = canvasSet.getNodeFromCanvas();
         if (node) {
             var userdata =  node.userData;
-            userdata.editSatus = type;
+            userdata.custom.editSatus = type;
             console.log(type)
             node.stopTimer();
             if(userdata[type].blinking){
              node.startTimer(canvasVue.componentData.flashTime);
             }
 
-             node.setStroke(userdata[type].lineWidth);
+            node.setStroke(userdata[type].lineWidth);
             node.setColor(userdata[type].lineColor);
 
+
             
-            switch(node.type){
+            switch(userdata.type){
                 case 'basicComponent':
-                console.log('查看填充颜色：'+userdata[type].fillColor)
                 node.setBackgroundColor(userdata[type].fillColor);
                 node.setAlpha(userdata[type].alpha);
                 break;
-                case 'imageComponent':
+                case 'customImageComponent':
+                node.setBackgroundColor(userdata[type].fillColor);
+                node.setAlpha(userdata[type].alpha);
                 node.image.setPath(userdata[type].picture);
                 break;
-                case 'LabelComponent':
+                case 'labelComponent':
                 node.setBackgroundColor(userdata[type].fillColor);
                 break;
                 case 'lineComponent':
                 // 
                 break;
-                case 'buttonComponent':
+                case 'defaultComponent':
+                break;
+                case 'textComponent':
                 node.setBackgroundColor(userdata[type].fillColor);
                 node.setAlpha(userdata[type].alpha);
 

@@ -4,32 +4,20 @@
 var switchComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "switchComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
-       var imgBaseUrl = setComponentOptions.imageBaseUrl;
+        this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
+       
+        var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path: imgBaseUrl+ "switch1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
-        this.image.setRotationAngle(45);
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "开关",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
-        this.label.attr({
-            padding: { left: 0, right: 0, top: 0, bottom: 0 }
-        });
-        // this.label.setFontSize(2);
+        
+      
 
         var _this = this;
         
@@ -72,17 +60,7 @@ var switchComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 
 });
@@ -93,28 +71,24 @@ var switchComponent = draw2d.shape.basic.Rectangle.extend({
 var pipingComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "pipingComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
        
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "piping1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "管道",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
         var _this = this;
         // 初始化 控件属性
         var data = JSON.parse(safeBasic.safeData);
@@ -146,17 +120,7 @@ var pipingComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -166,27 +130,23 @@ var pipingComponent = draw2d.shape.basic.Rectangle.extend({
 var WarninglampComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "WarninglampComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "Warninglamp1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "报警提示灯",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -219,17 +179,7 @@ var WarninglampComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -239,27 +189,23 @@ var WarninglampComponent = draw2d.shape.basic.Rectangle.extend({
 var blowerfanComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "blowerfanComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "Blowerfan1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "送风机标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         // 初始化 控件属性
 
@@ -298,17 +244,7 @@ var blowerfanComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -319,28 +255,23 @@ var blowerfanComponent = draw2d.shape.basic.Rectangle.extend({
 var exhaustfanComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "exhaustfanComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "Exhaustfan1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "排风机标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
-
 
         var _this = this;
         
@@ -374,17 +305,7 @@ var exhaustfanComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -395,27 +316,23 @@ var exhaustfanComponent = draw2d.shape.basic.Rectangle.extend({
 var bengComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "bengComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "beng1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "泵标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -449,17 +366,7 @@ var bengComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -471,27 +378,23 @@ var bengComponent = draw2d.shape.basic.Rectangle.extend({
 var ElectricTwoWayValveComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "ElectricTwoWayValveComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "valve1-1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "电动两通阀标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -525,17 +428,7 @@ var ElectricTwoWayValveComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -546,28 +439,24 @@ var ElectricTwoWayValveComponent = draw2d.shape.basic.Rectangle.extend({
 var SolenoidValveComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "SolenoidValveComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
 
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "valve2-1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "电磁阀标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
        
         var _this = this;
         
@@ -601,17 +490,7 @@ var SolenoidValveComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -622,28 +501,24 @@ var SolenoidValveComponent = draw2d.shape.basic.Rectangle.extend({
 var ElectricButterflyValvesComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "ElectricButterflyValvesComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path: imgBaseUrl+"valve3-1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "电动蝶阀标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -676,17 +551,7 @@ var ElectricButterflyValvesComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -698,27 +563,26 @@ var ElectricButterflyValvesComponent = draw2d.shape.basic.Rectangle.extend({
 var AirFiltrationComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "AirFiltrationComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
+
+
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path: "images/icon/icon/Airfiltration1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "空气过滤器标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
 
         var _this = this;
@@ -754,17 +618,7 @@ var AirFiltrationComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -774,27 +628,23 @@ var AirFiltrationComponent = draw2d.shape.basic.Rectangle.extend({
 var AirHeatingComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "AirHeatingComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+       this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "Airheating1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "空气加热器标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -830,17 +680,7 @@ var AirHeatingComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -852,28 +692,24 @@ var AirHeatingComponent = draw2d.shape.basic.Rectangle.extend({
 var AirCoolerComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "AirCoolerComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl + "Aircooler1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "空气冷却器标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -907,17 +743,7 @@ var AirCoolerComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -929,28 +755,24 @@ var AirCoolerComponent = draw2d.shape.basic.Rectangle.extend({
 var HumidifierComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "HumidifierComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "humidifier1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "加湿器标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -984,17 +806,7 @@ var HumidifierComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -1006,28 +818,24 @@ var HumidifierComponent = draw2d.shape.basic.Rectangle.extend({
 var controlPanelComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "controlPanelComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "controlpanel1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "温控面板标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -1063,17 +871,7 @@ var controlPanelComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -1085,28 +883,23 @@ var controlPanelComponent = draw2d.shape.basic.Rectangle.extend({
 var FluorescentLampComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "FluorescentLampComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "Fluorescentlamp1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "荧光灯标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
-
         var _this = this;
         // 初始化 控件属性
         var data = JSON.parse(safeBasic.safeData);
@@ -1139,17 +932,7 @@ var FluorescentLampComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -1160,28 +943,24 @@ var FluorescentLampComponent = draw2d.shape.basic.Rectangle.extend({
 var LEDComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "LEDComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "LED1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "LED灯标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -1217,17 +996,7 @@ var LEDComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -1238,27 +1007,24 @@ var LEDComponent = draw2d.shape.basic.Rectangle.extend({
 var IncandescentComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "IncandescentComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "Incandescent1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "白炽灯标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
+        
         var _this = this;
         
         // 初始化 控件属性
@@ -1290,17 +1056,7 @@ var IncandescentComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -1311,29 +1067,25 @@ var IncandescentComponent = draw2d.shape.basic.Rectangle.extend({
 var MetalHalideComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "MetalHalideComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "Metalhalide1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "金卤灯标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
-
+        
         var _this = this;
         
         // 初始化 控件属性
@@ -1367,17 +1119,7 @@ var MetalHalideComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -1387,27 +1129,25 @@ var MetalHalideComponent = draw2d.shape.basic.Rectangle.extend({
 var temperatureComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "temperatureComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;  
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "temperature1.png",
-            // path: "images/test.svg",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "温度标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
+        this.add(this.label, new draw2d.layout.locator.TopLocator(this));
+
 
         this.labelValue = new draw2d.shape.basic.Label({
             text: "123123",
@@ -1418,8 +1158,7 @@ var temperatureComponent = draw2d.shape.basic.Rectangle.extend({
         this.labelValue.setFontColor("gray");
 
         this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
-        this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
+       
 
         var _this = this;
         
@@ -1462,17 +1201,7 @@ var temperatureComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 /** 
@@ -1481,28 +1210,23 @@ var temperatureComponent = draw2d.shape.basic.Rectangle.extend({
 var humidityComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "humidityComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
-
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "humidity1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "湿度标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
 
         // 控件显示的数值
@@ -1551,17 +1275,7 @@ var humidityComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -1571,28 +1285,23 @@ var humidityComponent = draw2d.shape.basic.Rectangle.extend({
 var pressureComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "pressureComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
-
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "pressure1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "压力标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
 
         // 控件显示的数值
@@ -1641,17 +1350,7 @@ var pressureComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -1663,28 +1362,24 @@ var pressureComponent = draw2d.shape.basic.Rectangle.extend({
 var differentialPressureComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "differentialPressureComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
        
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "differentialpressure1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "压差标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
 
         // 控件显示的数值
@@ -1733,17 +1428,7 @@ var differentialPressureComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -1755,28 +1440,23 @@ var differentialPressureComponent = draw2d.shape.basic.Rectangle.extend({
 var liquidComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "liquidComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "liquid1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "液位标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
-
 
         // 控件显示的数值
         this.labelValue = new draw2d.shape.basic.Label({
@@ -1821,17 +1501,7 @@ var liquidComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -1843,28 +1513,24 @@ var liquidComponent = draw2d.shape.basic.Rectangle.extend({
 var electricComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "electricComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "electric1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "电流标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
 
         // 控件显示的数值
@@ -1911,17 +1577,7 @@ var electricComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -1932,26 +1588,23 @@ var electricComponent = draw2d.shape.basic.Rectangle.extend({
 var VoltageComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "VoltageComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "Voltage1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
-        this.label = new draw2d.shape.basic.Label({
-            text: "电压组件标题",
-            fontFamily: "微软雅黑"
-        });
+       
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         // 控件显示的数值
         this.labelValue = new draw2d.shape.basic.Label({
@@ -1994,17 +1647,7 @@ var VoltageComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -2016,28 +1659,24 @@ var VoltageComponent = draw2d.shape.basic.Rectangle.extend({
 var frequencyComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "frequencyComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "frequency1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "频率组价组件标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
 
         // 控件显示的数值
@@ -2084,17 +1723,7 @@ var frequencyComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -2105,29 +1734,24 @@ var frequencyComponent = draw2d.shape.basic.Rectangle.extend({
 var activePowerComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "activePowerComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "activepower1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "有功功率组价组件标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
-
 
         // 控件显示的数值
         this.labelValue = new draw2d.shape.basic.Label({
@@ -2172,17 +1796,7 @@ var activePowerComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -2192,28 +1806,24 @@ var activePowerComponent = draw2d.shape.basic.Rectangle.extend({
 var ElectricityConsumptionComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "ElectricityConsumptionComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "Electricityconsumption1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "用电量组价组件标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
 
         // 控件显示的数值
@@ -2258,17 +1868,7 @@ var ElectricityConsumptionComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -2280,27 +1880,23 @@ var ElectricityConsumptionComponent = draw2d.shape.basic.Rectangle.extend({
 var levelComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "levelComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "level1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "液体流量组价组件标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
         // 控件显示的数值
         this.labelValue = new draw2d.shape.basic.Label({
             text: "",
@@ -2344,17 +1940,7 @@ var levelComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -2364,28 +1950,24 @@ var levelComponent = draw2d.shape.basic.Rectangle.extend({
 var GasComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "GasComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "Gas1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "气体流量组价组件标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
 
         // 控件显示的数值
@@ -2431,19 +2013,10 @@ var GasComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
+
 
 
 /** 
@@ -2452,105 +2025,23 @@ var GasComponent = draw2d.shape.basic.Rectangle.extend({
 var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "BroadcastComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
-
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "Broadcast1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "广播组价组件标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
-
-        var _this = this;
-        
-        // 初始化 控件属性
-        var data = JSON.parse(safeBasic.safeData);
-
-        data.routine.name = '广播';
-        data.onTrue.picture = imgBaseUrl + 'Broadcast1.png';
-        data.onFalse.picture = imgBaseUrl + 'Broadcast2.png';
-        data.onAlarm.picture = imgBaseUrl + 'Broadcast3.png';
-        data.onDisconnected.picture = imgBaseUrl + 'Broadcast4.png';
-        this.attr({
-            userData: data
-        });
-
-        this.image.on("click", function () {
-            safeBasic.clickMethod(_this);
-            
-        });
-        // 移动
-        this.on("move", function () {
-            // componentMove(thiss);
-        });
-        // 悬浮窗
-        this.image.onMouseEnter = function () {
-            // if (thiss.userData.ShowHint) {
-            //     showTooltips(thiss);
-            // }
-        };
-        this.image.onMouseLeave = function () {
-            // $canvas.comTooltips.hide();
-        };
-    },
-    onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
-    }
-});
-
-/** 
- *  BroadcastComponent  广播
- */
-var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
-    NAME: "BroadcastComponent",
-    init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
-
-        var imgBaseUrl = setComponentOptions.imageBaseUrl;
-        this.image = new draw2d.shape.basic.Image({
-            path:imgBaseUrl+ "Broadcast1.png",
-            width: 36,
-            height: 36
-        });
-        this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
-
-        this.label = new draw2d.shape.basic.Label({
-            text: "广播组价组件标题",
-            fontFamily: "微软雅黑"
-        });
-        this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
-
         var _this = this;
         
         // 初始化 控件属性
@@ -2583,17 +2074,7 @@ var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -2603,28 +2084,24 @@ var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
 var monitoringComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "monitoringComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "monitoring1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "枪机组价组件标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -2659,17 +2136,7 @@ var monitoringComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -2680,27 +2147,23 @@ var monitoringComponent = draw2d.shape.basic.Rectangle.extend({
 var qiujiComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "qiujiComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "qiuji1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "球机组价组件标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -2736,17 +2199,7 @@ var qiujiComponent = draw2d.shape.basic.Rectangle.extend({
         };
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -2757,27 +2210,23 @@ var qiujiComponent = draw2d.shape.basic.Rectangle.extend({
 var highqiujiComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "highqiujiComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "highqiuji1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "高球机组价组件标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -2815,17 +2264,7 @@ var highqiujiComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -2836,27 +2275,23 @@ var highqiujiComponent = draw2d.shape.basic.Rectangle.extend({
 var EntranceGuardComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "EntranceGuardComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "menjin1.png",
-            width: 36,
-            height: 36
+            width: safeBasic.width,
+            height: safeBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "门禁组价组件标题",
-            fontFamily: "微软雅黑"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -2891,17 +2326,7 @@ var EntranceGuardComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
@@ -2911,30 +2336,28 @@ var EntranceGuardComponent = draw2d.shape.basic.Rectangle.extend({
 var detectorComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "detectorComponent",
     init: function (attr) {
-        this._super(attr);
-        this.width = 36;
-        this.height = 36;
-        this.setResizeable(false);
-        this.stroke = 1;
-        this.setColor("#DDDDDD"); //边框颜色
-        this.setBackgroundColor("#FFFFFF"); //背景颜色
+        this._super($.extend({
+            stroke: safeBasic.stroke,
+            width:safeBasic.width,
+            height:safeBasic.height,
+            resizeable:safeBasic.resizeable,
+            bgColor:safeBasic.fillColor
+        }, attr));
 
 
         var imgBaseUrl = setComponentOptions.imageBaseUrl;
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl+ "tance1.png",
-            width: 36,
-            height: 36,
+            width: safeBasic.width,
+            height: safeBasic.height
 
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
         this.image.setRotationAngle(90);
-        this.label = new draw2d.shape.basic.Label({
-            text: "探测器组价组件标题",
-            fontFamily: "微软雅黑"
-        });
+
+
+         this.label = new draw2d.shape.basic.Label(JSON.parse(safeBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
         var _this = this;
         
@@ -2969,37 +2392,44 @@ var detectorComponent = draw2d.shape.basic.Rectangle.extend({
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
 
 
-
+// 默认组件(系统默认提供)
 var safeBasic = {
     // 自定义控件属性
+   width:36,
+   height:36,
+    defaultset:JSON.stringify({
+        bgColor:'#FFFFFF',
+        resizeable:false,
+        width:36,
+        height:36,
+        stroke:0,
+    }),
+
+    labelset:JSON.stringify({
+        text:'呵呵',
+        fontFamily: '微软雅黑',
+        padding:{ left: 0, right: 0, top: 0, bottom: 0 },
+        visible:true,
+    }),
+  
     safeData: JSON.stringify({
-        type: "imageComponent", //类型
-        status:'default',//该组件绑定tag 的状态				
-        proportion: { //自定义属性
-            havepoint: "", //(待定)
-            value: "", //(待定)
+        type: "defaultComponent", //类型
+        custom: { 
+            newCreat:true,//  用于在拖拽组件时判断(是否新拖拽的控件)            
+            editSatus:'defaults',//组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)  
         },
         tag: {
             tag_id: -1,
             tag_type: -1,
             tag_name: "",
-            bingding_status: 0 //0 默认状态,1 已经绑定,2 绑定错误
+            bingding_status: 0, //0 默认状态,1 已经绑定,2 绑定错误
+            status:'default',//该组件绑定tag 的状态(用于监控画面)    
         },
        
         routine: {
