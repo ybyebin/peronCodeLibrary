@@ -7,23 +7,16 @@
 var LabelComponent = draw2d.shape.note.PostIt.extend({
     NAME: "LabelComponent",
     init: function (attr) {
-        this._super(attr);
-        this.text = "标签";
-        this.fontFamily = "微软雅黑";
-        this.setWidth(100);
-        this.minWidth = 200;
-        // this.setBackgroundColor("#999999");
-        // this.setBackgroundColor('#515F7B')
-        this.setColor("#FFFFFF");
-        this.setRadius(2);
-        // this.attr({
-        //  			padding: {left:15, right:15}
-        // 	});
         var _this = this;
+        this._super(attr);
+        this.attr({
+            padding: { left: 10, right: 10 },
+            radius: 2,
+            text: '标签',
+        });
 
-        // 这里设置hover事件
-        this.titles = "这里是lable控件"; //设置鼠标指示标题
-        this.ShowHint = false;
+
+      
         var data = {
             type: "labelComponent", //类型
             custom: {
@@ -46,8 +39,8 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
                 enable: false, //组件是否可用
                 accessLevel: 8, //访问等级 0~15
                 hint: { //hover 说明
-                    flag: false, //是否显示
-                    hintText: '' //text
+                    flag: true, //是否显示
+                    hintText: '该组件用于显示文本,没有状态属性' //text
                 },
                 caption: { //组件标题
                     flag: false, //是否显示
@@ -57,22 +50,25 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
             },
 
             defaults:{//该属性用于存储 控件初始化时的状态
-                lineWidth: 0,
-                lineColor: "#000000",
-                fillColor: "#4D90FE",
+                lineWidth: 1,
+                lineColor: "#FFFFFF",
+                fillColor: "#5B5B5B",
+                textColor:"#FFFFFF",
+                // text:"",
                 blinking: false,
+                
             },
         };
         this.attr({
             userData: data
         });
 
-        this.label = new draw2d.shape.basic.Label({
-            text: "",
-            fontFamily: "微软雅黑"
-        });
-        this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
+        // this.label = new draw2d.shape.basic.Label({
+        //     text: "",
+        //     fontFamily: "微软雅黑"
+        // });
+        // this.add(this.label, new draw2d.layout.locator.TopLocator(this));
+        // this.label.setVisible(false);
 
 
         // 选中
@@ -82,55 +78,19 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
 
         // 移动
         this.on("move", function () {
-            // componentMove(thiss)
-
+            setComponentOptions.componentOnMoveMethod(_this);
         });
         // 悬浮窗
         this.onMouseEnter = function () {
-            // if (thiss.userData.ShowHint) {
-                // showTooltips(thiss);
-            // }
+            setComponentOptions.showTooltips(_this);
         };
         this.onMouseLeave = function () {
-            // $canvas.comTooltips.hide();
+            setComponentOptions.hideTooltips();
         };
-
-        // =========更改文本===================
-        // this.installEditor(new draw2d.ui.LabelInplaceEditor({
-        // 	onCommit: $.proxy(function(value) {
-
-        // 		data.text = value;
-        // 		console.log(">>>>>>>>>>>" + JSON.stringify(data, null, 2));
-        // 		// this.label.getParent().setUserData(data);
-        // 		this.attr({
-        // 			userData: data
-        // 		});
-
-        // 		console.log(">>>>>>>>>>>" + JSON.stringify(this.userData, null, 2));
-        // 		if (typeof(Storage) !== "undefined") {
-        // 			console.log("支持保存设置");
-        // 			// localStorage.setItem(this.label.getParent().getId(), value);//存储图标
-        // 		}
-
-        // 		// alert("new value set to:"+value + "父元素ID:" + this.getId());
-        // 	}, this),
-        // 	onCancel: function() {}
-        // }));
-
 
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 })
 

@@ -154,10 +154,10 @@
                                     <span class="tag componentImg draw2d_droppable" data-shape="LabelComponent"></span>
                                     <p>标签</p>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <span class="button componentImg draw2d_droppable" data-shape="buttonComponent"></span>
                                     <p>按钮</p>
-                                </li>
+                                </li> -->
                                 <li>
                                     <span class="text componentImg draw2d_droppable" data-shape="textComponent"></span>
                                     <p>文本</p>
@@ -450,13 +450,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-formcheck-item layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.textHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-formcheck-item layui-form-item">
                                             <input v-model="routine.horizontal" type="checkbox" id="horizontal" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="horizontal"></label>
                                             <span>水平</span>
                                         </div>
 
-                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-formcheck-item layui-form-item">
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.textHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-formcheck-item layui-form-item">
                                             <input v-model="routine.vertical" type="checkbox" id="vertical" class="bayaxcheckbox ">
                                             <label class="checkbox-i" for="vertical"></label>
                                             <span>垂直</span>
@@ -644,7 +644,7 @@
                                         <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
                                             <label class="layui-form-label">字体大小</label>
                                             <div class="layui-input-block">
-                                                <input v-model="defaults.fontSize" type="text" autocomplete="off" class="layui-input">
+                                                <input v-model="defaults.fontSize" type="number" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
                                         <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">

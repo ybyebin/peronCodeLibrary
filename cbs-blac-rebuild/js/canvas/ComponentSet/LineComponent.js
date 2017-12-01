@@ -6,19 +6,19 @@
 var LineComponent = draw2d.shape.basic.Line.extend({
     NAME: "LineComponent",
     init: function(attr) {
+        var _this = this;
         this._super($.extend({
             stroke: 2,
             color:rectangle.fillColor
         }, attr));
 
-        var _this = this;
+
         //基础数据
         var data = {
             type: "lineComponent", //类型	
             custom: { 
                 newCreat:true,//  用于在拖拽组件时判断(是否新拖拽的控件)                
-                editSatus:'defaults',//组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)        
-                
+                editSatus:'defaults',//组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)          
             },
             tag: {
                 tag_id: -1,
@@ -42,27 +42,27 @@ var LineComponent = draw2d.shape.basic.Line.extend({
             },
             defaults:{//该属性用于存储 控件初始化时的状态
                 lineWidth: 2,
-                lineColor: "#35C99D",
+                lineColor: lineBasic.fillColor,
                 blinking: false,
             },
             onTrue: {
                 lineWidth: 2,
-                lineColor: "#35C99D",
+                lineColor: lineBasic.fillColor,
                 blinking: false,
             },
             onFalse: {
                 lineWidth: 2,
-                lineColor: "#35C99D",
+                lineColor: lineBasic.fillColor,
                 blinking: false,
             },
             onAlarm: {
                 lineWidth: 2,
-                lineColor: "#35C99D",
+                lineColor: lineBasic.fillColor,
                 blinking: false,
             },
             onDisconnected: {
                 lineWidth: 2,
-                lineColor: "#35C99D",
+                lineColor: lineBasic.fillColor,
                 blinking: false,
             }
 
@@ -76,18 +76,21 @@ var LineComponent = draw2d.shape.basic.Line.extend({
             lineBasic.clickMethod(_this);
         });
         this.on("change", function() {
-            var arr = _this.getVertices();
-            var vueRoutine =  canvasVue.routine;
-            if (arr.data[0].y !== arr.data[1].y) {
-                vueRoutine.horizontal = false;
-            } else {
-                vueRoutine.horizontal = true;
+            if(!_this.userData.custom.newCreat){
+                var arr = _this.getVertices();
+                var vueRoutine =  canvasVue.routine;
+                if (arr.data[0].y !== arr.data[1].y) {
+                    vueRoutine.horizontal = false;
+                } else {
+                    vueRoutine.horizontal = true;
+                }
+                if (arr.data[0].x !== arr.data[1].x) {
+                    vueRoutine.vertical = false;
+                } else {
+                    vueRoutine.vertical = true;
+                }
             }
-            if (arr.data[0].x !== arr.data[1].x) {
-                vueRoutine.vertical = false;
-            } else {
-                vueRoutine.vertical = true;
-            }
+           
         });
 
         // 缩放
@@ -96,7 +99,7 @@ var LineComponent = draw2d.shape.basic.Line.extend({
         });
         // 移动
         this.on("move", function() {
-            //不提供 移动方法  
+            setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
@@ -127,7 +130,8 @@ var lineBasic = {
         setComponentOptions.basePublicSet(component);
         // 基本
         setComponentOptions.basicSet(component);
-
+        // 直线
+        // setComponentOptions.lineSet(component);
         setComponentOptions.setComponentFlagTrue();
     }
 }

@@ -6,20 +6,15 @@
 var imageComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "imageComponent",
     init: function (attr) {
-        this._super($.extend({
-            width:36,
-            height:36,
-            stroke: 0,
-            alpha:0,
-            bgColor:imgBasic.fillColor
-        }, attr));
-        this.stroke = 0;
         var _this = this;
+        this._super($.extend(JSON.parse(imgBasic.defaultset), attr));
+        
+        // 图片数据
         var imgBaseUrl = setComponentOptions.imageBaseUrl +"zidingyi.png";
         this.image = new draw2d.shape.basic.Image({
             path:imgBaseUrl,
-            width: 36,
-            height: 36
+            width: imgBasic.width,
+            height:imgBasic.height
         });
         this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 
@@ -109,19 +104,22 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
 
         // this.on("click", function () {
         //     imgBasic.clickMethod(_this);
-        //     // console.log("图片控件类型")
         // });
+
         this.image.on("click", function () {
             imgBasic.clickMethod(_this);
         });
+        
         // 缩放
         this.on("resize", function () {
             setComponentOptions.componentOnResizeMethod(_this);
         });
+
         // 移动
         this.on("move", function () {
             setComponentOptions.componentOnMoveMethod(_this);
         });
+
         // 悬浮窗
         this.image.onMouseEnter = function () {
             setComponentOptions.showTooltips(_this);
@@ -148,7 +146,18 @@ var imageComponent = draw2d.shape.basic.Rectangle.extend({
 var imgBasic = {
     // 自定义控件属性
     lineColor:'#000000',
-    fillColor:'#35c99d',
+    fillColor:'#35C99D',
+    width: 36,
+    height: 36,
+    defaultset: JSON.stringify({
+        bgColor: '#35C99D',
+        width: 36,
+        height: 36,
+        stroke: 0,
+        alpha:0
+    }),
+
+
     imgData: '',//img是特殊控件只有一个  该属性直接写进组件
     clickMethod: function (component) {
         setComponentOptions.setComponentFlagFalse();

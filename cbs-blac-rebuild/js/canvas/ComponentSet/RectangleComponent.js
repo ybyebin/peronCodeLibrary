@@ -6,15 +6,15 @@
 var rectangleComponent = draw2d.shape.node.Between.extend({
     NAME: "rectangleComponent",
     init: function (attr) {
+        var _this = this;
         this._super($.extend({
             stroke: 0,
             bgColor:rectangle.fillColor
         }, attr));
-
-        var _this = this;
+        
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '矩形';
-
         this.attr({
             userData: data
         });
@@ -59,17 +59,16 @@ var rectangleComponent = draw2d.shape.node.Between.extend({
 var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
     NAME: "RoundedRectangleComponent",
     init: function (attr) {
+        var _this = this;
         this._super($.extend({
             stroke: 0,
             radius:10,
             bgColor:rectangle.fillColor,
         }, attr));
 
-
-        var _this = this;
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '圆角矩形';    
-      
         this.attr({
             userData: data
         });
@@ -110,6 +109,7 @@ var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
 var EllipseComponent = draw2d.shape.node.Between.extend({
     NAME: "EllipseComponent",
     init: function (attr) {
+        var _this = this;
         this._super($.extend({
             stroke: 0,
             height:30,
@@ -117,10 +117,9 @@ var EllipseComponent = draw2d.shape.node.Between.extend({
             bgColor:rectangle.fillColor
         }, attr));
 
-        var _this = this;
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '椭圆';
-
         this.attr({
             userData: data
         });
@@ -161,6 +160,7 @@ var EllipseComponent = draw2d.shape.node.Between.extend({
 var polygonComponent = draw2d.shape.basic.Polygon.extend({
     NAME: "polygonComponent",
     init: function (attr) {
+        var _this = this;
         this._super($.extend({
             stroke: 0,
             bgColor:rectangle.fillColor,
@@ -169,7 +169,7 @@ var polygonComponent = draw2d.shape.basic.Polygon.extend({
         // var w = this.width;
         // var h = this.height;
 
-        var _this = this;
+       // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '多边形';
         this.attr({
@@ -214,6 +214,7 @@ var polygonComponent = draw2d.shape.basic.Polygon.extend({
 var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
     NAME: "BothArrowHComponent",
     init: function (attr, setter, getter) {
+        var _this = this;
         this._super($.extend({
             width: 50,
             height: 30,
@@ -222,7 +223,7 @@ var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
         this.setBackgroundColor(rectangle.fillColor); //背景颜色	
 
 
-        var _this = this;
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '水平双箭头';
         this.attr({
@@ -279,13 +280,14 @@ var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
 var BothArrowVComponent = draw2d.shape.icon.Icon.extend({
     NAME: "BothArrowVComponent",
     init: function (attr, setter, getter) {
+        var _this = this;
         this._super($.extend({
             width: 30,
             height: 50
         }, attr), setter, getter);
         this.setBackgroundColor(rectangle.fillColor); //背景颜色
 
-        var _this = this;
+       // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '垂直双箭头';
         this.attr({
@@ -342,13 +344,14 @@ var BothArrowVComponent = draw2d.shape.icon.Icon.extend({
 var forRightComponent = draw2d.shape.icon.Icon.extend({
     NAME: "forRightComponent",
     init: function (attr, setter, getter) {
+        var _this = this;
         this._super($.extend({
             width: 30,
             height: 30
         }, attr), setter, getter);
         this.setBackgroundColor(rectangle.fillColor); //背景颜色
-
-        var _this = this;
+      
+       // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '右箭头';
         this.attr({
@@ -405,6 +408,7 @@ var forRightComponent = draw2d.shape.icon.Icon.extend({
 var forLeftComponent = draw2d.shape.icon.Icon.extend({
     NAME: "forLeftComponent",
     init: function (attr, setter, getter) {
+        var _this = this;
         this._super($.extend({
             width: 30,
             height: 30
@@ -412,7 +416,7 @@ var forLeftComponent = draw2d.shape.icon.Icon.extend({
 
         this.setBackgroundColor(rectangle.fillColor); //背景颜色
 
-        var _this = this;
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '左箭头';
         this.attr({
@@ -467,14 +471,14 @@ var forLeftComponent = draw2d.shape.icon.Icon.extend({
 var forUpComponent = draw2d.shape.icon.Icon.extend({
     NAME: "forUpComponent",
     init: function (attr, setter, getter) {
+        var _this = this;
         this._super($.extend({
             width: 30,
             height: 30
         }, attr), setter, getter);
-
         this.setBackgroundColor(rectangle.fillColor); //背景颜色
 
-        var _this = this;
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '上箭头';
         this.attr({
@@ -530,6 +534,7 @@ var forUpComponent = draw2d.shape.icon.Icon.extend({
 var forDownComponent = draw2d.shape.icon.Icon.extend({
     NAME: "forDownComponent",
     init: function (attr, setter, getter) {
+        var _this = this;
         this._super($.extend({
             width: 30,
             height: 30
@@ -537,7 +542,7 @@ var forDownComponent = draw2d.shape.icon.Icon.extend({
 
         this.setBackgroundColor(rectangle.fillColor); //背景颜色
 
-        var _this = this;
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '下箭头';
         this.attr({
@@ -592,15 +597,16 @@ var forDownComponent = draw2d.shape.icon.Icon.extend({
 var conduitCompontent = draw2d.shape.node.HorizontalBus.extend({
     NAME: "conduitCompontent",
     init: function (attr) {
+        var _this = this;
         this._super($.extend({
             width:100,
             height:50,
             stroke:0,
             alpha:1,
-            // bgColor:rectangle.fillColor
+            bgColor:rectangle.fillColor
         }, attr));
 
-        var _this = this;
+       // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '管道';
         data.onlytype = 'conduitCompontent';//本控件单独属性(区分自己单独标志)
@@ -643,15 +649,16 @@ var conduitCompontent = draw2d.shape.node.HorizontalBus.extend({
 var conduitCompontentV = draw2d.shape.node.VerticalBus.extend({
     NAME: "conduitCompontentV",
     init: function (attr) {
+        var _this = this;
         this._super($.extend({
             width:50,
             height:100,
             stroke: 0,
-            // bgColor:rectangle.fillColor
+            bgColor:rectangle.fillColor
         }, attr));
 
        
-        var _this = this;
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '管道';
         data.onlytype = 'conduitCompontent';//本控件单独属性(区分自己单独标志)
@@ -688,7 +695,7 @@ var conduitCompontentV = draw2d.shape.node.VerticalBus.extend({
 });
 // 基础组件
 var rectangle = {
-    fillColor:'#35c99d',
+    fillColor:'#35C99D',
     // 自定义控件属性
     rectangleData: JSON.stringify({
         type: "basicComponent", //类型
@@ -719,7 +726,7 @@ var rectangle = {
         defaults:{//该属性用于存储 控件初始化时的状态
             lineWidth: 0,
             lineColor: "#000000",
-             fillColor: "#35C99D",
+            fillColor: "#35C99D",
             alpha: 1,
             blinking: false,
         },

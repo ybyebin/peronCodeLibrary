@@ -187,9 +187,9 @@ layui.use(['layer', 'element'], function () {
                     colorData: [],
                 },
 
-                fontSize: 12,
+                fontSize: '',
                 fontUnit: '', //单位
-                fontText: '',
+                fontText: '',//内容
                 fontColor: {
                     color: '',
                     colorData: [],
@@ -567,8 +567,8 @@ layui.use(['layer', 'element'], function () {
                 routine.offx = '';
                 routine.offy = '';
                 routine.rotationAngle = '';
-                routine.horizontal = false;
-                routine.vertical = false;
+                // routine.horizontal = false;
+                // routine.vertical = false;
                 routine.title = false;
                 routine.titledata.text = '';
                 routine.titledata.disabled = true;
@@ -927,12 +927,12 @@ layui.use(['layer', 'element'], function () {
             }   
         }
     });
-     // 摄像地址(待定)
+     // 摄像地址
      canvasVue.$watch('datas.vlcUrl', function (newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if(node){
-               
+                node.userData.routine.vlcurl = newVal;
             }   
         }
     });
@@ -1014,6 +1014,47 @@ layui.use(['layer', 'element'], function () {
             }
         }
     });
+
+    // defaults -文本内容
+    canvasVue.$watch('defaults.fontText', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if(node){
+                console.log()
+                node.setText(newVal);
+            }   
+        }
+    });
+     // defaults -字体大小
+    canvasVue.$watch('defaults.fontSize', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                if (!isNaN(Number(newVal))) {
+                    if (newVal === '') {
+                        node.setFontSize(14);
+                    } else {
+                        node.setFontSize(Number(newVal));
+                    }
+                } else {
+                    node.setFontSize(14);
+                }
+            }
+        }
+    });
+
+     // default -文本颜色
+     canvasVue.$watch('defaults.fontColor.color', function (newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.setFontColor(newVal)
+                node.userData.defaults.fontColor = newVal;
+            }
+        }
+    });
+
+
 
     // default -闪烁
     canvasVue.$watch('defaults.flashing', function (newVal, oldVal) {

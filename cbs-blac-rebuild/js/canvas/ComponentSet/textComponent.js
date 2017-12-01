@@ -7,32 +7,22 @@
 var textComponent = draw2d.shape.basic.Text.extend({
     NAME: "textComponent",
     init: function (attr) {
+        var _this = this;
         this._super(attr);
-        this.text = "0";
-        this.fontFamily = "微软雅黑";
-        this.setStroke(0);
-        this.setFontColor("#FFFFFF")
-        this.setFontSize(15);
-        this.setResizeable(false);
-        // this.setAlpha(0.3);
-        // this.setBackgroundColor('#4F5D77');	
         this.attr({
-            padding: {
-                left: 15,
-                right: 15
-            }
+            padding: {left: 10, right: 10},
+            text:'文本',
+            stroke:0,
+            fontColor:"#FFFFFF",
+            fontSize:15,
+            resizeable:false,
         });
 
-        var _this = this;
+
         // 添加标题
-        this.label = new draw2d.shape.basic.Label({
-            text: "",
-            fontFamily: "微软雅黑"
-            // color: "#0d0d0d",
-            // fontColor: "#0d0d0d"
-        });
+        this.label = new draw2d.shape.basic.Label(JSON.parse(textBasic.labelset));
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
+
         var data = JSON.parse(textBasic.textData);
         data.routine.name = '标签';
         this.attr({
@@ -41,176 +31,36 @@ var textComponent = draw2d.shape.basic.Text.extend({
 
         this.on("click", function () {
            textBasic.clickMethod(_this);
-            // $canvas.menuDivUnit.show();
-            // $canvas.menuDivTextAlpha.show();
-
-            // $canvas.styleTextUnit.val(thiss.getUserData().unit);
-            // $canvas.onTrueTextUnit.val(thiss.getUserData().onTrue.unit);
-            // $canvas.onFalseTextUnit.val(thiss.getUserData().onFalse.unit);
-            // $canvas.onAlarmTextUnit.val(thiss.getUserData().onAlarm.unit);
-            // $canvas.onDiscTextUnit.val(thiss.getUserData().onDisconnected.unit);
-
-            // if (thiss.getBackgroundColor().hash() === 'none') {
-            //     $canvas.styleBgAlpha.iCheck('check').iCheck('disable');
-            // } else {
-            //     $canvas.styleBgAlpha.iCheck('uncheck').iCheck('enable');
-
-            // }
-
-            // if (thiss.getUserData().onTrue.FillColor === 'none') {
-            //     $canvas.onTrueBgAlpha.iCheck('check').iCheck('disable');
-            // } else {
-            //     $canvas.onTrueBgAlpha.iCheck('uncheck').iCheck('enable');
-
-            // }
-            // if (thiss.getUserData().onFalse.FillColor === 'none') {
-            //     $canvas.onFalseBgAlpha.iCheck('check').iCheck('disable');
-            // } else {
-            //     $canvas.onFalseBgAlpha.iCheck('uncheck').iCheck('enable');
-            // }
-            // if (thiss.getUserData().onAlarm.FillColor === 'none') {
-            //     $canvas.onAlarmBgAlpha.iCheck('check').iCheck('disable');
-            // } else {
-            //     $canvas.onAlarmBgAlpha.iCheck('uncheck').iCheck('enable');
-            // }
-
-            // if (thiss.getUserData().onDisconnected.FillColor === 'none') {
-            //     $canvas.onDiscBgAlpha.iCheck('check').iCheck('disable');
-            // } else {
-            //     $canvas.onDiscBgAlpha.iCheck('uncheck').iCheck('enable');
-            // }
-
-
-
+        
         });
         // 移动
         this.on("move", function () {
-            // componentMove(thiss);
+            setComponentOptions.componentOnMoveMethod(_this);
         });
         // 悬浮窗
         this.onMouseEnter = function () {
-            // if (thiss.userData.ShowHint) {
-            //     showTooltips(thiss);
-            // }
+            setComponentOptions.showTooltips(_this);
         };
         this.onMouseLeave = function () {
-            // $canvas.comTooltips.hide();
+            setComponentOptions.hideTooltips();
         };
-
-        // =========更改文本===================
-        // this.installEditor(new draw2d.ui.LabelInplaceEditor());
-
-
     },
     onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
+        setComponentOptions.flashMethod(this);
     }
 });
 
-/** 
- * button 标签
- * @author
- * @extend draw2d.shape.note.PostIt
- */
-var buttonComponent = draw2d.shape.note.PostIt.extend({
-    NAME: "buttonComponent",
-    init: function (attr) {
-        this._super(attr);
-        this.text = "按钮";
-        this.fontFamily = "微软雅黑";
-        this.setBackgroundColor("#FFFFFF");
-        this.setColor("#35C99D");
-        this.height = 25;
-        this.width = 60;
-        this.setFontColor("#35C99D");
-        this.setRadius(2);
-        this.setFontSize(14);
-        var _this = this;
-        this.attr({
-            padding: {
-                left: 20,
-                top: 3,
-                right: 20
-            }
-        });
-        var data = JSON.parse(textBasic.textData);
-        data.routine.name = 'button标签';
-        this.attr({
-            userData: data
-        });
-        this.label = new draw2d.shape.basic.Label({
-            text: "",
-            fontFamily: "微软雅黑"
-            // color: "#0d0d0d",
-            // fontColor: "#0d0d0d"
-        });
-        this.add(this.label, new draw2d.layout.locator.TopLocator(this));
-        this.label.setVisible(false);
 
-        this.on("click", function () {
-            textBasic.clickMethod(_this);
-        });
-
-        // 移动
-        this.on("move", function () {
-            // componentMove(thiss);
-        });
-        // 悬浮窗
-        this.onMouseEnter = function () {
-            if (this.userData.ShowHint) {
-                // showTooltips(this);
-            }
-        };
-        this.onMouseLeave = function () {
-            // $canvas.comTooltips.hide();
-        };
-
-
-        // =========更改文本===================
-        this.installEditor(new draw2d.ui.LabelInplaceEditor({
-            onCommit: $.proxy(function (value) {
-
-                data.text = value;
-                console.log(">>>>>>>>>>>" + JSON.stringify(data, null, 2));
-                // this.label.getParent().setUserData(data);
-                this.attr({
-                    userData: data
-                });
-
-            }, this),
-            onCancel: function () { }
-        }));
-
-
-    },
-    onTimer: function () {
-        this.setColor("#03A3FC");
-        this.setStroke(1);
-        this.setGlow(true);
-        this.setDashArray("");
-        var thiss = this;
-        setTimeout(function () {
-            thiss.setGlow(false);
-            thiss.setColor(thiss.getUserData().BlinkingColor);
-            thiss.setStroke(thiss.getUserData().BlinkingStroke);
-            thiss.setDashArray(thiss.getUserData().DashArray);
-        }, 500);
-    }
-});
 
 // 文本组件
 var textBasic = {
     // 自定义控件属性
+    labelset: JSON.stringify({
+        text: '呵呵',
+        fontFamily: '微软雅黑',
+        padding: { left: 0, right: 0, top: 0, bottom: 0 },
+        visible: true,
+    }),
     textData: JSON.stringify({
         type: "textComponent", //类型	
         custom: { 

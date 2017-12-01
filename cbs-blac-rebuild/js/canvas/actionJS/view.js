@@ -50,6 +50,7 @@ example.View = draw2d.Canvas.extend({
             figure.setEndPoint(x - 70, y + 70);
             var command = new draw2d.command.CommandAdd(this, figure, x, y);
             this.getCommandStack().execute(command);
+           
         } else {
             var command = new draw2d.command.CommandAdd(this, figure, x, y);
             this.getCommandStack().execute(command);
@@ -57,7 +58,7 @@ example.View = draw2d.Canvas.extend({
 
         setTimeout(function(){
             _this.userData.custom.newCreat =false;
-        },500)
+        },500);
 
     }
 });

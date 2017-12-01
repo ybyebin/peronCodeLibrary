@@ -465,6 +465,18 @@ var setComponentOptions = {
     },
     // 直线
     lineSet: function (component) {
+        var arr = component.getVertices();
+        var vueRoutine =  canvasVue.routine;
+        if (arr.data[0].y !== arr.data[1].y) {
+            // vueRoutine.horizontal = false;
+        } else {
+            vueRoutine.horizontal = true;
+        }
+        if (arr.data[0].x !== arr.data[1].x) {
+            // vueRoutine.vertical = false;
+        } else {
+            vueRoutine.vertical = true;
+        }
 
     },
     // label
@@ -479,7 +491,7 @@ var setComponentOptions = {
 
         var data = component.getUserData();
 
-        /************************style--begin************************************ */
+        /************************defaults--begin************************************ */
 
         //边框宽度  borderWidth
         vueDefaults.borderWidth = component.getStroke();
@@ -534,7 +546,7 @@ var setComponentOptions = {
         }
 
         //style 闪烁  blinking
-        if (data.blinking.flag) {
+        if (data.defaults.flag) {
             vueDefaults.flashing = true;
         } else {
             vueDefaults.flashing = false;
@@ -542,21 +554,39 @@ var setComponentOptions = {
 
 
         // 文本内容   
+        vueDefaults.fontText = component.getText()
+       
+        // 字体大小
+        vueDefaults.fontSize = component.getFontSize();
+        // 文本颜色  getFontColor().hash() 
+
+         var font_fill_color = component.getFontColor().hash();
+         var font_flag = true;
+         vueDefaults.fontColor.color = font_fill_color;
+         vueDefaults.fontColor.colorData.forEach(function (ele) {
+             ele.active = false;
+             if (ele.color === font_fill_color) {
+                 ele.active = true;
+                 font_flag = false;
+             }
+         });
+         if (font_flag) {
+             vueDefaults.fontColor.colorData.shift();
+             vueDefaults.fontColor.colorData.push({
+                 color: font_fill_color,
+                 colorstyle: 'background-color:' + font_fill_color,
+                 active: true
+             })
+         }
 
 
 
 
-        // 文本颜色
 
 
 
 
-
-
-
-
-
-        /************************style--end************************************** */
+        /************************defaults--end************************************** */
     },
     // text
     textSet: function (component) {
@@ -735,7 +765,7 @@ var setComponentOptions = {
                 node.image.setPath(defaults.picture);
                 break;
                 case 'labelComponent':
-                node.setBackgroundColor(defaults.fillColor);
+                // node.setBackgroundColor(defaults.fillColor);
                 break;
                 case 'lineComponent':
                 // 
@@ -837,7 +867,6 @@ var setComponentOptions = {
     componentOnMoveMethod: function (component) {
         if (!component.userData.custom.newCreat) {
             this.hideTooltips();
-
             switch (component.userData.type) {
                 case 'basicComponent':
                     rectangle.clickMethod(component);
@@ -845,18 +874,17 @@ var setComponentOptions = {
                 case 'customImageComponent':
                     imgBasic.clickMethod(component);
                 case 'defaultComponent':
-                    // imgBasic.clickMethod(component);
+                    safeBasic.clickMethod(component);
                     break;
                 case 'labelComponent':
-                    // labelBasic.clickMethod(component);
+                    labelBasic.clickMethod(component);
                     break;
                 case 'lineComponent':
-                    // lineBasic.clickMethod(component);
+                     lineBasic.clickMethod(component);
                     break;
                 case 'textComponent':
                 break;
             }
-
         }
 
     },
