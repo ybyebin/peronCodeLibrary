@@ -36,7 +36,7 @@ example.View = draw2d.Canvas.extend({
     onDrop: function(droppedDomNode, x, y, shiftKey, ctrlKey) {
 
 
-       
+
         var type = $(droppedDomNode).data("shape");
         console.log("这里是:::" + type);
         var figure = eval("new " + type + "();");
@@ -50,15 +50,15 @@ example.View = draw2d.Canvas.extend({
             figure.setEndPoint(x - 70, y + 70);
             var command = new draw2d.command.CommandAdd(this, figure, x, y);
             this.getCommandStack().execute(command);
-           
+
         } else {
             var command = new draw2d.command.CommandAdd(this, figure, x, y);
             this.getCommandStack().execute(command);
         }
 
-        setTimeout(function(){
-            _this.userData.custom.newCreat =false;
-        },500);
+        setTimeout(function() {
+            _this.userData.custom.newCreat = false;
+        }, 500);
 
     }
 });
@@ -80,99 +80,71 @@ example.Toolbar = Class.extend({
         view.on("select", $.proxy(this.onSelectionChanged, this));
         // 保存按钮
         this.saveButton = $(' <li><span class="baocun"></span><p>保存</p></li>');
-        // this.saveButton = $('<label class = "toolbar-save"><img class=" baocun-img " src="images/img/baocun.png"><br>保存</label>');
         this.html.append(this.saveButton);
         this.saveButton.button().click($.proxy(function() {
-            var subdataArray = []; //全局按钮
-            var writer = new draw2d.io.json.Writer();
-            writer.marshal(this.view, function(json) {
-                console.log(JSON.stringify(json, null, 2))
-                if (json.length == 0) {
-                    layer.msg("未绑定任何控件");
-                } else {
-
-                    $('.have-btn button').each(function(index, element) {
-                        console.log("ID为:" + $(element).attr('id'));
-                        console.log("ID为:" + $(element).data('name'));
-
-                        var dic = {
-                            id: Number($(element).attr('id')),
-                            name: $(element).data('name'),
-                            tag_id: Number($(element).data('tag-id')),
-                            tag_type: Number($(element).data('tag-type')),
-                            tag_name: $(element).data('tag-name'),
-                            bingding_status: Number($(element).data('bingding-status')),
-                            readonly: $(element).data('readonly'),
-                        }
-                        subdataArray.push(dic);
-                    });
-                    console.log("全局按钮数据:" + JSON.stringify(subdataArray, null, 2))
-                    var canvasData = {
-                        canvas: json,
-                        subCanvas: subdataArray,
-                    }
-                    var data = {
-                        view_data: JSON.stringify(canvasData),
-                        id: sessionStorage.getItem("view_id"),
-                        background_img_url: $("#myBgimage").data("url"),
-                        background_color: rgb2hex($("#canvas").css("background-color")),
-                    }
-
-                    console.log("上传数据为================:" + JSON.stringify(data, null, 2))
 
 
-                    // 此处上传用户设置好的数据
-                    $.ajax({
-                        url: '/api/view/1',
-                        type: 'PUT',
-                        dataType: 'json',
-                        data: data,
-                        beforeSend: function() {
-                            $(".loading").show();
-                        },
-                        complete: function() {
-                            $(".loading").hide();
-                        },
-                        success: function(data) {
-                            $(".loading").hide();
-                            if (data.success == true) {
-                                layer.msg("数据保存成功");
-                            } else {
-                                layer.msg("数据保存失败原因:" + data.error_message);
-                                console.log("保存失败原因:" + JSON.stringify(data, null, 2))
-                            }
-                        },
-                        error: function(data) {
-                            $(".loading").hide();
-                            returnLogIn(data);
+            console.log(JSON.stringify(canvasVue.globalBtnData.btndata, null, 2));
+            new draw2d.io.json.Writer().marshal(this.view, function(json) {
+                console.log(JSON.stringify(json, null, 2));
+
+                var canvasData = {
+                    canvas: json,
+                    subCanvas: canvasVue.globalBtnData.btndata,
+                    bg_color: canvasVue.canvas.bgColor.color,
+                    bg_img_url: canvasVue.canvas.bgColor.bgimage,
+                }
+
+                var data = {
+                    view_data: JSON.stringify(canvasData),
+                    id: sessionStorage.getItem("view_id"),
+                    background_img_url: '',
+                    background_color: '',
+                }
+
+
+                // 此处上传用户设置好的数据
+                $.ajax({
+                    url: '/api/view/1',
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: data,
+                    beforeSend: function() {
+                        canvasVue.loadingShow = true;
+                    },
+                    complete: function() {
+                        canvasVue.loadingShow = false;
+                    },
+                    success: function(data) {
+                        canvasVue.loadingShow = false;
+                        if (data.success == true) {
+                            layer.msg("数据保存成功");
+                        } else {
                             layer.msg("数据保存失败原因:" + data.error_message);
                             console.log("保存失败原因:" + JSON.stringify(data, null, 2))
                         }
-                    });
-                }
-
-            });
-
+                    },
+                    error: function(data) {
+                        canvasVue.loadingShow = false;
+                        // returnLogIn(data);
+                        layer.msg("数据保存失败原因:" + data.error_message);
+                        console.log("保存失败原因:" + JSON.stringify(data, null, 2))
+                    }
+                });
+            })
 
         }, this)).button("option", "disabled", false);
 
 
         // 添加删除按钮
-        // 
-        // 
         this.deleteButton = $(' <li><span class="delete"></span><p>删除</p></li>');
-        // this.deleteButton = $('<label class = "toolbar-delete"><img class=" delete-img " src="images/img/delete.png"><br>删除</label>');
         this.html.append(this.deleteButton);
         this.deleteButton.button().click($.proxy(function() {
-
-
             var node = this.view.getPrimarySelection();
             if (node !== null) {
                 var command = new draw2d.command.CommandDelete(node);
                 this.view.getCommandStack().execute(command);
-
             }
-
         }, this)).button("option", "disabled", true);
 
         // 清除画布
@@ -180,28 +152,28 @@ example.Toolbar = Class.extend({
         // this.clearButtons = $('<label class = "toolbar-wangge"><img class=" wangge-img " src="images/img/clear.png"><br>全部清除</label>');
         this.html.append(this.clearButtons);
         this.clearButtons.button().click($.proxy(function() {
-            var thisbtn = this;
-            layer.open({
-                title: ['清除画面', 'font-size:18px;color:#fff;background:#3E4687;height:50px;font-weight:bold;line-height:50px;padding-left:30px;border:none;'],
-                type: 1,
-                skin: 'layui-primary', //加上边框
-                area: ['900px', '200px'], //宽高
-                content: $("#deleteAllcomAndcanvas"), //捕获的元素,
-                shift: 2,
-                move: false,
-                btn: ['确定', '放弃'],
-                yes: function(index) {
-                    thisbtn.view.clear(); //清除主画布
-                    $("#myBgimage").attr("src", "images/logo-text.png"); //清除用户上传的图片
-                    $("#canvas").css("background-color", "");
-                    $('#canvas-img').val('');
-                    $('#myBgimage').data("url", '');
-                    $('.canvas-fill-color ul li').removeClass("colorWhiteBorder colorBlackBorder");
-                    layer.close(index);
+            var _this = this;
+            layer.confirm('确认清除画面吗？', {
+                title: ['清除画面', 'height:40px;line-height:40px;'],
+                skin: 'bayax-layer-skin',
+                success: function() {
+                    $('.layui-layer-btn a').addClass('confirm');
                 },
-                btn2: function(index) {
-                    layer.close(index);
-                },
+                btn: ['确定', '取消']
+            }, function(index) {
+                _this.view.clear(); //清除主画布
+                $('#canvas').css({
+                    'background-color': canvasVue.canvas.default.bgcolor,
+                    'background-image': canvasVue.canvas.default.bgimage
+                });
+
+                canvasVue.globalBtnData.btndata = [];
+                canvasVue.showHideFlag.attrdiv = false;
+                $('.li-comp').click();
+                canvasVue.resetAttr();
+                layer.close(index);
+            }, function() {
+
             });
 
         }, this)).button("option", "disabled", false);

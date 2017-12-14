@@ -1,23 +1,38 @@
 var layer,
     canvasVue;
 
-layui.use(['layer', 'element'], function () {
-    var layer = layui.layer;
+layui.use(['layer', 'element'], function() {
+    // var layer = layui.layer;
     layer = layui.layer;
     var element = layui.element;
-
+    var timeoutId; //搜索延时操作标志
     canvasVue = new Vue({
         el: '#app',
         data: {
+            loadingShow: false, //loading
+            showHideFlag: {
+                attrdiv: false, //组件 和 全局按钮 属性框 切换
+            },
             // 画布属性
             canvas: {
+                view_id: sessionStorage.getItem("view_id"),
                 width: '',
-                height: ''
+                height: '',
+                bgColor: { //背景颜色
+                    color: '#2B2F4C',
+                    colorData: [],
+                    bgimage: 'none'
+                },
+                setDefault: false,
+                default: {
+                    bgcolor: '#2B2F4C',
+                    bgimage: 'none'
+                }
             },
             componentData: {
                 flag: false, //vue watch内容是否执行标志
                 id: '',
-                flashTime:1000  //闪烁间隔
+                flashTime: 1000 //闪烁间隔
             },
             classObject: {
                 // active: true,
@@ -42,7 +57,7 @@ layui.use(['layer', 'element'], function () {
                 // 摄像地址(特殊-单独列出来)
                 vlcUrlHideDiv: true,
                 //管道(特殊-单独列出来)
-                conduitHideDiv:false,
+                conduitHideDiv: false,
 
             },
             // 边框下拉框数据
@@ -71,56 +86,56 @@ layui.use(['layer', 'element'], function () {
 
                 // ],
                 colorData: [{
-                    color: '#F5A623',
-                    colorstyle: 'background-color:#F5A623',
-                    active: false
-                },
-                {
-                    color: '#7ED321',
-                    colorstyle: 'background-color:#7ED321',
-                    active: false
-                },
-                {
-                    color: '#F57373',
-                    colorstyle: 'background-color:#F57373',
-                    active: false
-                },
+                        color: '#F5A623',
+                        colorstyle: 'background-color:#F5A623',
+                        active: false
+                    },
+                    {
+                        color: '#7ED321',
+                        colorstyle: 'background-color:#7ED321',
+                        active: false
+                    },
+                    {
+                        color: '#F57373',
+                        colorstyle: 'background-color:#F57373',
+                        active: false
+                    },
 
-                {
-                    color: '#35C99D',
-                    colorstyle: 'background-color:#35C99D',
-                    active: false
-                },
-                {
-                    color: '#000000',
-                    colorstyle: 'background-color:#000000',
-                    active: false
-                },
-                {
-                    color: '#999999',
-                    colorstyle: 'background-color:#999999',
-                    active: false
-                },
-                {
-                    color: '#FFFFFF',
-                    colorstyle: 'background-color:#FFFFFF',
-                    active: false
-                },
-                {
-                    color: '#4A4A4A',
-                    colorstyle: 'background-color:#4A4A4A',
-                    active: false
-                },
-                {
-                    color: '#03A3FC',
-                    colorstyle: 'background-color:#03A3FC',
-                    active: false
-                },
-                {
-                    color: '#DDDDDD',
-                    colorstyle: 'background-color:#DDDDDD',
-                    active: false
-                }
+                    {
+                        color: '#35C99D',
+                        colorstyle: 'background-color:#35C99D',
+                        active: false
+                    },
+                    {
+                        color: '#000000',
+                        colorstyle: 'background-color:#000000',
+                        active: false
+                    },
+                    {
+                        color: '#999999',
+                        colorstyle: 'background-color:#999999',
+                        active: false
+                    },
+                    {
+                        color: '#FFFFFF',
+                        colorstyle: 'background-color:#FFFFFF',
+                        active: false
+                    },
+                    {
+                        color: '#4A4A4A',
+                        colorstyle: 'background-color:#4A4A4A',
+                        active: false
+                    },
+                    {
+                        color: '#03A3FC',
+                        colorstyle: 'background-color:#03A3FC',
+                        active: false
+                    },
+                    {
+                        color: '#DDDDDD',
+                        colorstyle: 'background-color:#DDDDDD',
+                        active: false
+                    }
 
 
 
@@ -189,7 +204,7 @@ layui.use(['layer', 'element'], function () {
 
                 fontSize: '',
                 fontUnit: '', //单位
-                fontText: '',//内容
+                fontText: '', //内容
                 fontColor: {
                     color: '',
                     colorData: [],
@@ -282,11 +297,36 @@ layui.use(['layer', 'element'], function () {
                     colorData: [],
                 },
                 flashing: false, //闪烁
-            }
+            },
+            checkeds: true,
+            // 全局按钮
+            globalBtnData: {
+                btndata: [],
+                attr: {
+                    current: '', //当前正在编辑的按钮
+                    name: '',
+                    tag_name: '',
+                    boolean: 'true', //开关型数据
+                    num: '', //实数型数据
+                },
+                flag: {
+                    alreadybind: true,
+                    isBoolean: true,
+                }
+            },
+            bindTag: {
+                // alreadylayer: false, //tag弹窗是否弹出标志
+                checkRadio: '', //被选中的tag
+                type: '', //区分是 组件还是全局按钮   component/globalbtn
+                labels: [],
+                searchText: '',
+
+            },
+            // checkRadio: '',
         },
-        mounted: function () {
+        mounted: function() {
             var _this = this;
-            this.$nextTick(function () {
+            this.$nextTick(function() {
                 // 自定义下拉群组 初始化
                 bayaxInit();
                 basicSet.init();
@@ -294,21 +334,68 @@ layui.use(['layer', 'element'], function () {
 
 
                 // canvas 初始化
-                canvasSet.allCanvasinit('new');
+                canvasSet.allCanvasinit(type);
                 // 设置 画布宽高
                 canvasSet.setCanvasWH();
 
+                setTimeout(function() {
+                    $('#gbtn-value-false').prop('checked', true)
+                }, 2000)
+
+                // this.setComTag();
+
+
+                // this.bindTag.labels = [{
+                //         id: 1,
+                //         name: '测试',
+                //         tag_type: '整数',
+                //         description: '123123',
+                //         node_name: '12312',
+                //         point_id: '123123'
+
+
+                //     },
+                //     {
+                //         id: 2,
+                //         name: '测试2',
+                //         tag_type: '整数2',
+                //         description: '123123',
+                //         node_name: '12312',
+                //         point_id: '123123'
+
+
+                //     },
+                //     {
+                //         id: 3,
+                //         name: '测试2',
+                //         tag_type: '整数2',
+                //         description: '123123',
+                //         node_name: '12312',
+                //         point_id: '123123'
+
+
+                //     }, {
+                //         id: 4,
+                //         name: '测试2',
+                //         tag_type: '整数2',
+                //         description: '123123',
+                //         node_name: '12312',
+                //         point_id: '123123'
+
+
+                //     }
+                // ]
 
             });
 
         },
         methods: {
             // 访问等级选择
-            setAccessLevel: function (item) {
+            setAccessLevel: function(item) {
                 this.routine.accessLevel.level = item;
             },
             // defaults 边框宽度
-            setDefaultBorderWidth: function (item) {
+            setDefaultBorderWidth: function(item) {
                 this.defaults.borderWidth = item;
             },
             // defaults 边框样式
@@ -316,38 +403,41 @@ layui.use(['layer', 'element'], function () {
             //     this.defaults.borderStyle = item.name;
             // },
             // defaults 边框颜色
-            setDefaultBorderColor: function (item) {
+            setDefaultBorderColor: function(item) {
                 var borderColor = this.defaults.borderColor;
-                borderColor.colorData.forEach(function (ele) {
+                borderColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 borderColor.color = item.color;
             },
             // defaults 填充颜色
-            setDefaultFillColor: function (item) {
+            setDefaultFillColor: function(item) {
                 var fillColor = this.defaults.fillColor;
-                fillColor.colorData.forEach(function (ele) {
+                fillColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 fillColor.color = item.color;
             },
             // defaults 字体颜色
-            setDefaultFontColor: function (item) {
+            setDefaultFontColor: function(item) {
                 var fontColor = this.defaults.fontColor;
-                fontColor.colorData.forEach(function (ele) {
+                fontColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 fontColor.color = item.color;
             },
 
-
+            // style 上传image图片
+            upImageStyle: function() {
+                $('#imageFileStyle').click();
+            },
 
 
             // ontrue 边框宽度
-            setOnTrueBorderWidth: function (item) {
+            setOnTrueBorderWidth: function(item) {
                 this.ontrue.borderWidth = item;
             },
             // ontrue 边框样式
@@ -355,18 +445,18 @@ layui.use(['layer', 'element'], function () {
             //     this.ontrue.borderStyle = item.name;
             // },
             // ontrue 边框颜色
-            setOnTrueBorderColor: function (item) {
+            setOnTrueBorderColor: function(item) {
                 var borderColor = this.ontrue.borderColor;
-                borderColor.colorData.forEach(function (ele) {
+                borderColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 borderColor.color = item.color;
             },
             // ontrue 填充颜色
-            setOnTrueFillColor: function (item) {
+            setOnTrueFillColor: function(item) {
                 var fillColor = this.ontrue.fillColor;
-                fillColor.colorData.forEach(function (ele) {
+                fillColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
@@ -374,19 +464,24 @@ layui.use(['layer', 'element'], function () {
             },
 
             // ontrue 字体颜色
-            setOnTrueFontColor: function (item) {
+            setOnTrueFontColor: function(item) {
                 var fontColor = this.ontrue.fontColor;
-                fontColor.colorData.forEach(function (ele) {
+                fontColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 fontColor.color = item.color;
             },
 
+            // ontrue 上传image图片
+            upImageOnTrue: function() {
+                $('#imageFileOnTrue').click();
+            },
+
 
 
             // onfalse 边框宽度
-            setOnFalseBorderWidth: function (item) {
+            setOnFalseBorderWidth: function(item) {
                 this.onfalse.borderWidth = item;
             },
             // onfalse 边框样式
@@ -394,18 +489,18 @@ layui.use(['layer', 'element'], function () {
             //     this.onfalse.borderStyle = item.name;
             // },
             // onfalse 边框颜色
-            setOnFalseBorderColor: function (item) {
+            setOnFalseBorderColor: function(item) {
                 var borderColor = this.onfalse.borderColor;
-                borderColor.colorData.forEach(function (ele) {
+                borderColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 borderColor.color = item.color;
             },
             // onfalse 填充颜色
-            setOnFalseFillColor: function (item) {
+            setOnFalseFillColor: function(item) {
                 var fillColor = this.onfalse.fillColor;
-                fillColor.colorData.forEach(function (ele) {
+                fillColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
@@ -413,20 +508,23 @@ layui.use(['layer', 'element'], function () {
             },
 
             // onfalse 字体颜色
-            setOnFalseFontColor: function (item) {
+            setOnFalseFontColor: function(item) {
                 var fontColor = this.onfalse.fontColor;
-                fontColor.colorData.forEach(function (ele) {
+                fontColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 fontColor.color = item.color;
             },
 
-
+            // onfalse 上传image图片
+            upImageOnFalse: function() {
+                $('#imageFileOnFalse').click();
+            },
 
 
             // onalarm 边框宽度
-            setOnAlarmBorderWidth: function (item) {
+            setOnAlarmBorderWidth: function(item) {
                 this.onalarm.borderWidth = item;
             },
             // onalarm 边框样式
@@ -434,55 +532,61 @@ layui.use(['layer', 'element'], function () {
             //     this.onalarm.borderStyle = item.name;
             // },
             // onalarm 边框颜色
-            setOnAlarmBorderColor: function (item) {
+            setOnAlarmBorderColor: function(item) {
                 var borderColor = this.onalarm.borderColor;
-                borderColor.colorData.forEach(function (ele) {
+                borderColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 borderColor.color = item.color;
             },
             // onalarm 填充颜色
-            setOnAlarmFillColor: function (item) {
+            setOnAlarmFillColor: function(item) {
                 var fillColor = this.onalarm.fillColor;
-                fillColor.colorData.forEach(function (ele) {
+                fillColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 fillColor.color = item.color;
             },
             // onalarm 字体颜色
-            setOnAlarmFontColor: function (item) {
+            setOnAlarmFontColor: function(item) {
                 var fontColor = this.onalarm.fontColor;
-                fontColor.colorData.forEach(function (ele) {
+                fontColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 fontColor.color = item.color;
             },
 
+            // onalarm 上传image图片
+            upImageOnAlarm: function() {
+                $('#imageFileOnAlarm').click();
+            },
+
+
             // ondisc 边框宽度
-            setOnDiscBorderWidth: function (item) {
+            setOnDiscBorderWidth: function(item) {
                 this.ondisc.borderWidth = item;
-                console.log('边框宽度:'+item)
+                console.log('边框宽度:' + item)
             },
             // ondisc 边框样式
             // setOnDiscBorderStyle: function (item) {
             //     this.ondisc.borderStyle = item.name;
             // },
             // ondisc 边框颜色
-            setOnDiscBorderColor: function (item) {
+            setOnDiscBorderColor: function(item) {
                 var borderColor = this.ondisc.borderColor;
-                borderColor.colorData.forEach(function (ele) {
+                borderColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 borderColor.color = item.color;
             },
             // ondisc 填充颜色
-            setOnDiscFillColor: function (item) {
+            setOnDiscFillColor: function(item) {
                 var fillColor = this.ondisc.fillColor;
-                fillColor.colorData.forEach(function (ele) {
+                fillColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
@@ -490,13 +594,18 @@ layui.use(['layer', 'element'], function () {
             },
 
             // ondisc 字体颜色
-            setOnDiscFontColor: function (item) {
+            setOnDiscFontColor: function(item) {
                 var fontColor = this.ondisc.fontColor;
-                fontColor.colorData.forEach(function (ele) {
+                fontColor.colorData.forEach(function(ele) {
                     ele.active = false;
                 });
                 item.active = true;
                 fontColor.color = item.color;
+            },
+
+            // ondisc 上传image图片
+            upImageOnDisc: function() {
+                $('#imageFileOnDisc').click();
             },
 
 
@@ -504,9 +613,10 @@ layui.use(['layer', 'element'], function () {
 
 
 
+
             // 处理color 数据
-            setColorData: function () {
-                var strColor = JSON.stringify(this.borderData.colorData.map(function (item) {
+            setColorData: function() {
+                var strColor = JSON.stringify(this.borderData.colorData.map(function(item) {
                     return item;
                 }));
                 this.defaults.borderColor.colorData = JSON.parse(strColor);
@@ -528,10 +638,14 @@ layui.use(['layer', 'element'], function () {
                 this.ondisc.borderColor.colorData = JSON.parse(strColor);
                 this.ondisc.fillColor.colorData = JSON.parse(strColor);
                 this.ondisc.fontColor.colorData = JSON.parse(strColor);
+
+
+                this.canvas.bgColor.colorData = JSON.parse(strColor);
+
                 // console.log(JSON.stringify(this.defaults.borderColor.colorData));
             },
             // 重置属性框
-            resetAttr: function () {
+            resetAttr: function() {
                 var clas = 'collapsed';
                 $('.attr-content-titles').removeClass(clas);
                 $('.reset-title').addClass(clas);
@@ -539,7 +653,7 @@ layui.use(['layer', 'element'], function () {
                 $('.reset-content').hide();
                 $('.routine,.data-div').show();
 
-                setTimeout(function () {
+                setTimeout(function() {
                     $(".layui-tabscroll-item").mCustomScrollbar('scrollTo', 'top');
                 }, 90);
 
@@ -626,11 +740,252 @@ layui.use(['layer', 'element'], function () {
 
 
             },
+
+            // 画布背景颜色
+            setCanvasBgColor: function(item) {
+                var bgColor = this.canvas.bgColor;
+                bgColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                });
+                item.active = true;
+                bgColor.color = item.color;
+                canvasVue.canvas.setDefault = false;
+
+            },
+            // 上传canvas背景图片
+            upCanvasbgImage: function() {
+                $('#fileCanvasImage').click();
+            },
+
+
+            // ==================全局按钮===================
+            // 添加全局按钮
+            addGlobalBtn: function() {
+                var id = Number(Math.random().toString().substr(3, 10) + Date.now()).toString(36)
+                var dic = {
+                    id: id,
+                    name: '按钮',
+                    tag: {
+                        tag_id: -1,
+                        tag_type: -1,
+                        tag_name: '',
+                        is_readonly: false,
+                        tag_value: '', //设定值 用于监控画面更改绑定的tag的值
+                        bingding_status: 0, //0 默认状态,1 已经绑定,2 绑定错误
+                        status: 'default', //该组件绑定tag 的状态(用于监控画面)	     
+                    }
+                };
+                this.globalBtnData.btndata.push(dic);
+                console.log(JSON.stringify(dic, null, 2))
+
+            },
+            // 删除全局按钮
+            deleteGlobalBtn: function(item) {
+                var arrs = this.globalBtnData.btndata;
+                var indexs = arrs.indexOf(item);
+                console.log(JSON.stringify(item, null, 2))
+                arrs.splice(indexs, 1);
+            },
+            // 设置全局按钮属性
+            setGlobalBtnAttr: function(item) {
+                console.log(JSON.stringify(item, null, 2))
+
+                setComponentOptions.setComponentFlagFalse();
+                this.showHideFlag.attrdiv = true;
+                var attr = this.globalBtnData.attr;
+                attr.current = item;
+                attr.name = item.name;
+                attr.tag_name = item.tag.tag_name;
+                if (item.tag.bingding_status === 1) {
+
+                    this.globalBtnData.flag.alreadybind = true;
+                    if (item.tag.tag_type === 1) {
+                        // 开关型
+                        this.globalBtnData.flag.isBoolean = true;
+                        if (item.tag.tag_value == 'true') {
+                            this.globalBtnData.attr.boolean = 'true';
+                        } else {
+                            this.globalBtnData.attr.boolean = 'false';
+                        }
+                    } else {
+                        // 非开关型
+                        this.globalBtnData.flag.isBoolean = false;
+
+                        attr.num = item.tag.tag_value;
+                    }
+
+
+                } else {
+                    this.globalBtnData.flag.alreadybind = false;
+                }
+
+
+                setComponentOptions.setComponentFlagTrue();
+
+            },
+
+            // 设置全局按钮绑定tag
+            setBtnTag: function() {
+                basicSet.bindTag.globalBtnbindTag();
+            },
+            // 设置组件绑定Tag
+            setComTag: function() {
+                basicSet.bindTag.combindTag();
+            },
+            // 搜索tag方法
+            getLabelData: function(page) {
+                var onePageNum = 8;
+                var _this = this;
+                var dataUp = {
+                    name: _this.bindTag.searchText,
+                    // project_id: _this.project.id,
+                    page: page,
+                    page_item_count: onePageNum,
+                };
+
+
+                $.ajax({
+                    url: apiurl + 'tag',
+                    type: 'get',
+                    dataType: 'json',
+                    data: dataUp,
+                    beforeSend: function() {
+                        _this.loadingShow = true;
+                    },
+                    complete: function() {
+                        _this.loadingShow = false;
+                    },
+                    success: function(data) {
+
+                        console.log('tag数据:' + JSON.stringify(data, null, 2));
+
+                        _this.loadingShow = false;
+
+
+                        var nullData = {
+                            id: '',
+                            name: '',
+                            description: '',
+                            tag_type: '',
+                            node_name: '',
+                            point_id: '',
+                            type: '',
+                            ishide: true,
+                        }
+
+
+
+                        if (data.data == null || data.data.items == null) {
+                            console.log('无数据')
+                            _this.bindTag.labels = [];
+                            for (var i = 0; i < onePageNum; i++) {
+                                _this.bindTag.labels.push(nullData);
+                            }
+                            $(".tcdPageCode").hide();
+                            $('.havedata').hide();
+                            $('.noData').show();
+                        } else {
+                            console.log('有数据')
+                            var datas = data.data.items;
+                            var labelDatas = datas.map(function(item) {
+                                item.type = item.tag_type;
+                                item.ishide = false;
+                                switch (Number(item.tag_type)) {
+                                    case 1:
+                                        item.tag_type = "开关型";
+                                        break;
+                                    case 2:
+                                        item.tag_type = "整数型";
+                                        break;
+                                    case 3:
+                                        item.tag_type = "实数型";
+                                        break;
+                                    case 4:
+                                        item.tag_type = "字符型";
+                                        break;
+                                }
+                                return item;
+                            });
+                            console.log('数据labelDatas:' + JSON.stringify(labelDatas))
+                            if (labelDatas.length < onePageNum) {
+                                var num = onePageNum - labelDatas.length;
+                                for (var i = 0; i < num; i++) {
+                                    labelDatas.push(nullData);
+                                }
+                            }
+                            console.log(JSON.stringify(labelDatas, null, 2));
+
+                            _this.bindTag.labels = labelDatas;
+                            $('.havedata').show();
+                            $('.noData').hide();
+                            $(".tcdPageCode").show().createPage({
+                                pageCount: data.data.pageCount,
+                                current: page,
+                                backFn: function(p) {
+                                    _this.getLabelData(p);
+                                }
+                            });
+                        }
+                    },
+                    error: function(data) {
+                        _this.loadingShow = false;
+                        returnLogIn(data);
+                    }
+                });
+
+            },
+            // 搜索Tag
+            searchtags: function(page) {
+                console.log(this.bindTag.searchText);
+
+                var _this = this;
+                this.debounce(function() {
+                    _this.getLabelData(page);
+
+                }, 300, {
+                    leading: false
+                })();
+
+
+
+            },
+            // 清除搜索框
+            cleanSearchVal: function() {
+                this.bindTag.searchText = '';
+
+            },
+            // 搜索延时
+            debounce: function(fn, delay, options) {
+
+                if (!options) {
+                    options = {};
+                }
+                var leadingExc = false;
+
+                return function() {
+                    var that = this,
+                        args = arguments;
+                    if (!leadingExc && !(options.leading === false)) {
+                        fn.apply(that, args);
+                    }
+                    leadingExc = true;
+                    if (timeoutId) {
+                        clearTimeout(timeoutId);
+                    }
+                    timeoutId = setTimeout(function() {
+                        if (!(options.trailing === false)) {
+                            fn.apply(that, args);
+                        }
+                        leadingExc = false;
+                    }, delay);
+                }
+            },
+
         }
     })
 
     // 名称
-    canvasVue.$watch('routine.name', function (newVal, oldVal) {
+    canvasVue.$watch('routine.name', function(newVal, oldVal) {
         if (this.componentData.flag) {
             console.log('旧值:' + oldVal);
             console.log('新值:' + newVal);
@@ -642,7 +997,7 @@ layui.use(['layer', 'element'], function () {
         }
     });
     // 描述
-    canvasVue.$watch('routine.description', function (newVal, oldVal) {
+    canvasVue.$watch('routine.description', function(newVal, oldVal) {
         if (this.componentData.flag) {
             console.log('描述旧值:' + oldVal);
             console.log('描述新值:' + newVal);
@@ -655,7 +1010,7 @@ layui.use(['layer', 'element'], function () {
     });
 
     //尺寸-width
-    canvasVue.$watch('routine.width', function (newVal, oldVal) {
+    canvasVue.$watch('routine.width', function(newVal, oldVal) {
         if (this.componentData.flag) {
             console.log('宽度旧值:' + oldVal);
             console.log('宽度新值:' + newVal);
@@ -676,7 +1031,7 @@ layui.use(['layer', 'element'], function () {
     });
 
     //尺寸-height
-    canvasVue.$watch('routine.height', function (newVal, oldVal) {
+    canvasVue.$watch('routine.height', function(newVal, oldVal) {
         if (this.componentData.flag) {
             console.log('高度旧值:' + oldVal);
             console.log('高度新值:' + newVal);
@@ -697,31 +1052,31 @@ layui.use(['layer', 'element'], function () {
     });
 
     //位置-X
-    canvasVue.$watch('routine.offx', function (newVal, oldVal) {
+    canvasVue.$watch('routine.offx', function(newVal, oldVal) {
         if (this.componentData.flag) {
             console.log('X旧值:' + oldVal);
             console.log('X新值:' + newVal);
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                if(newVal === ''){
+                if (newVal === '') {
                     node.setX(0);
-                }else{
+                } else {
                     node.setX(newVal);
                 }
-                
+
             }
         }
     });
     //位置-Y
-    canvasVue.$watch('routine.offy', function (newVal, oldVal) {
+    canvasVue.$watch('routine.offy', function(newVal, oldVal) {
         if (this.componentData.flag) {
             console.log('Y旧值:' + oldVal);
             console.log('Y新值:' + newVal);
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                if(newVal === ''){
+                if (newVal === '') {
                     node.setX(0);
-                }else{
+                } else {
                     node.setY(newVal);
                 }
             }
@@ -730,7 +1085,7 @@ layui.use(['layer', 'element'], function () {
 
 
     // 直线水平
-    canvasVue.$watch('routine.horizontal', function (newVal, oldVal) {
+    canvasVue.$watch('routine.horizontal', function(newVal, oldVal) {
         if (this.componentData.flag) {
             console.log('直线水平旧值:' + oldVal);
             console.log('直线水平新值:' + newVal);
@@ -756,7 +1111,7 @@ layui.use(['layer', 'element'], function () {
     });
 
     // 直线垂直
-    canvasVue.$watch('routine.vertical', function (newVal, oldVal) {
+    canvasVue.$watch('routine.vertical', function(newVal, oldVal) {
         if (this.componentData.flag) {
             console.log('直线垂直旧值:' + oldVal);
             console.log('直线垂直新值:' + newVal);
@@ -778,17 +1133,17 @@ layui.use(['layer', 'element'], function () {
         }
     });
     // 旋转角度
-    canvasVue.$watch('routine.rotationAngle', function (newVal, oldVal) {
+    canvasVue.$watch('routine.rotationAngle', function(newVal, oldVal) {
 
         if (this.componentData.flag) {
             console.log('角度旧值:' + oldVal);
             console.log('角度新值：' + newVal);
-            console.log( Number(newVal))
+            console.log(Number(newVal))
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
                 var value = Number(newVal);
                 if (value >= -359 && value <= 359) {
-                    node.setRotationAngle(value); 
+                    node.setRotationAngle(value);
                 }
             }
 
@@ -796,35 +1151,35 @@ layui.use(['layer', 'element'], function () {
     });
 
     // hover监控
-    canvasVue.$watch('routine.hover', function (newVal, oldVal) {
+    canvasVue.$watch('routine.hover', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             console.log(newVal);
 
-            if(node){
-                if (newVal) { 
+            if (node) {
+                if (newVal) {
                     this.routine.hoverdata.disabled = false;
-                    node.userData.routine.hint.flag =true;
-                 }else{
+                    node.userData.routine.hint.flag = true;
+                } else {
                     this.routine.hoverdata.disabled = true;
-                    node.userData.routine.hint.flag =false;
-                 }
-            }   
+                    node.userData.routine.hint.flag = false;
+                }
+            }
         }
     });
     // hover 内容
-    canvasVue.$watch('routine.hoverdata.text', function (newVal, oldVal) {
-        console.log('新值:'+newVal);
-        console.log('旧值:'+newVal);
+    canvasVue.$watch('routine.hoverdata.text', function(newVal, oldVal) {
+        console.log('新值:' + newVal);
+        console.log('旧值:' + newVal);
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
-            if(node){
-                node.userData.routine.hint.hintText =newVal;
-            }   
+            if (node) {
+                node.userData.routine.hint.hintText = newVal;
+            }
         }
     });
     // 标题
-    canvasVue.$watch('routine.title', function (newVal, oldVal) {
+    canvasVue.$watch('routine.title', function(newVal, oldVal) {
 
         if (this.componentData.flag) {
             // console.log('旧值:' + oldVal);
@@ -847,7 +1202,7 @@ layui.use(['layer', 'element'], function () {
         }
     });
     // 标题内容
-    canvasVue.$watch('routine.titledata.text', function (newVal, oldVal) {
+    canvasVue.$watch('routine.titledata.text', function(newVal, oldVal) {
         console.log(newVal)
         if (this.componentData.flag) {
 
@@ -860,14 +1215,14 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // 隐藏组件
-     canvasVue.$watch('routine.visible', function (newVal, oldVal) {
+    // 隐藏组件
+    canvasVue.$watch('routine.visible', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             console.log(newVal);
 
-            if(node){
-                if (newVal) { 
+            if (node) {
+                if (newVal) {
                     // node.setAlpha(0);
                     node.userData.routine.visible = true;
                     layer.msg('本组件运行时不可见');
@@ -882,8 +1237,8 @@ layui.use(['layer', 'element'], function () {
                     //         node.setVisible(false);
                     //     // }
                     // }
-                   
-                 }else{
+
+                } else {
                     // node.setAlpha(1);
                     node.userData.routine.visible = false;
                     // if (node.image) {
@@ -898,84 +1253,84 @@ layui.use(['layer', 'element'], function () {
                     //     // }
                     // }
 
-                 }
-            }   
+                }
+            }
         }
     });
-     // 不可用
-     canvasVue.$watch('routine.enable', function (newVal, oldVal) {
+    // 不可用
+    canvasVue.$watch('routine.enable', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             console.log(newVal);
 
-            if(node){
-                if (newVal) { 
-                    node.userData.routine.enable = true;                  
-                 }else{
-                    node.userData.routine.enable = false;              
-                 }
-            }   
+            if (node) {
+                if (newVal) {
+                    node.userData.routine.enable = true;
+                } else {
+                    node.userData.routine.enable = false;
+                }
+            }
         }
     });
 
     // 访问等级
-    canvasVue.$watch('routine.accessLevel.level', function (newVal, oldVal) {
+    canvasVue.$watch('routine.accessLevel.level', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
-            if(node){
-                node.userData.routine.accessLevel = newVal;    
-            }   
+            if (node) {
+                node.userData.routine.accessLevel = newVal;
+            }
         }
     });
-     // 摄像地址
-     canvasVue.$watch('datas.vlcUrl', function (newVal, oldVal) {
+    // 摄像地址
+    canvasVue.$watch('datas.vlcUrl', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
-            if(node){
+            if (node) {
                 node.userData.routine.vlcurl = newVal;
-            }   
+            }
         }
     });
 
 
-     // tag地址 (待定)
-     canvasVue.$watch('datas.tag.tagname', function (newVal, oldVal) {
+    // tag地址 (待定)
+    canvasVue.$watch('datas.tag.tagname', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
-            if(node){
-               
-            }   
+            if (node) {
+
+            }
         }
     });
 
     // data  只读
-    canvasVue.$watch('datas.readonly', function (newVal, oldVal) {
+    canvasVue.$watch('datas.readonly', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
-            if(node){
-                if (newVal) { 
-                    node.userData.routine.readOnly = true;                  
-                 }else{
-                    node.userData.routine.readOnly = false;              
-                 }
-            }   
+            if (node) {
+                if (newVal) {
+                    node.userData.routine.readOnly = true;
+                } else {
+                    node.userData.routine.readOnly = false;
+                }
+            }
         }
     });
 
-   
+
     // default -边框宽度
-    canvasVue.$watch('defaults.borderWidth', function (newVal, oldVal) {
+    canvasVue.$watch('defaults.borderWidth', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
-            if(node){
+            if (node) {
                 node.setStroke(newVal)
-                node.userData.defaults.lineWidth = newVal;                 
-            }   
+                node.userData.defaults.lineWidth = newVal;
+            }
         }
     });
 
     // default -边框颜色
-    canvasVue.$watch('defaults.borderColor.color', function (newVal, oldVal) {
+    canvasVue.$watch('defaults.borderColor.color', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -985,8 +1340,8 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // default -填充颜色
-     canvasVue.$watch('defaults.fillColor.color', function (newVal, oldVal) {
+    // default -填充颜色
+    canvasVue.$watch('defaults.fillColor.color', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -996,37 +1351,37 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // default -透明度
-     canvasVue.$watch('defaults.alpha', function (newVal, oldVal) {
+    // default -透明度
+    canvasVue.$watch('defaults.alpha', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                var num= Number(newVal);
-                if(num >= 0 && num <=1){
+                var num = Number(newVal);
+                if (num >= 0 && num <= 1) {
                     node.setAlpha(num)
                     node.userData.defaults.alpha = num;
-                }else{
+                } else {
                     node.setAlpha(1);
                     node.userData.defaults.alpha = 1;
                     layer.msg('透明度范围 0~1');
                 }
-                
+
             }
         }
     });
 
     // defaults -文本内容
-    canvasVue.$watch('defaults.fontText', function (newVal, oldVal) {
+    canvasVue.$watch('defaults.fontText', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
-            if(node){
+            if (node) {
                 console.log()
                 node.setText(newVal);
-            }   
+            }
         }
     });
-     // defaults -字体大小
-    canvasVue.$watch('defaults.fontSize', function (newVal, oldVal) {
+    // defaults -字体大小
+    canvasVue.$watch('defaults.fontSize', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1043,8 +1398,8 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // default -文本颜色
-     canvasVue.$watch('defaults.fontColor.color', function (newVal, oldVal) {
+    // default -文本颜色
+    canvasVue.$watch('defaults.fontColor.color', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1057,7 +1412,7 @@ layui.use(['layer', 'element'], function () {
 
 
     // default -闪烁
-    canvasVue.$watch('defaults.flashing', function (newVal, oldVal) {
+    canvasVue.$watch('defaults.flashing', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1074,19 +1429,19 @@ layui.use(['layer', 'element'], function () {
 
 
 
-     // ontrue -边框宽度
-     canvasVue.$watch('ontrue.borderWidth', function (newVal, oldVal) {
+    // ontrue -边框宽度
+    canvasVue.$watch('ontrue.borderWidth', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
-            if(node){
+            if (node) {
                 node.setStroke(newVal)
-                node.userData.onTrue.lineWidth = newVal;                 
-            }   
+                node.userData.onTrue.lineWidth = newVal;
+            }
         }
     });
 
     // ontrue -边框颜色
-    canvasVue.$watch('ontrue.borderColor.color', function (newVal, oldVal) {
+    canvasVue.$watch('ontrue.borderColor.color', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1096,8 +1451,8 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // ontrue -填充颜色
-     canvasVue.$watch('ontrue.fillColor.color', function (newVal, oldVal) {
+    // ontrue -填充颜色
+    canvasVue.$watch('ontrue.fillColor.color', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1107,27 +1462,27 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // ontrue -透明度
-     canvasVue.$watch('ontrue.alpha', function (newVal, oldVal) {
+    // ontrue -透明度
+    canvasVue.$watch('ontrue.alpha', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                var num= Number(newVal);
-                if(num >= 0 && num <=1){
+                var num = Number(newVal);
+                if (num >= 0 && num <= 1) {
                     node.setAlpha(num)
                     node.userData.onTrue.alpha = num;
-                }else{
+                } else {
                     node.setAlpha(1);
                     node.userData.onTrue.alpha = 1;
                     layer.msg('透明度范围 0~1');
                 }
-                
+
             }
         }
     });
 
     // ontrue -闪烁
-    canvasVue.$watch('ontrue.flashing', function (newVal, oldVal) {
+    canvasVue.$watch('ontrue.flashing', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1143,20 +1498,20 @@ layui.use(['layer', 'element'], function () {
     });
 
 
-    
-     // onfalse -边框宽度
-     canvasVue.$watch('onfalse.borderWidth', function (newVal, oldVal) {
+
+    // onfalse -边框宽度
+    canvasVue.$watch('onfalse.borderWidth', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
-            if(node){
+            if (node) {
                 node.setStroke(newVal)
-                node.userData.onFalse.lineWidth = newVal;                 
-            }   
+                node.userData.onFalse.lineWidth = newVal;
+            }
         }
     });
 
     // onfalse -边框颜色
-    canvasVue.$watch('onfalse.borderColor.color', function (newVal, oldVal) {
+    canvasVue.$watch('onfalse.borderColor.color', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1166,8 +1521,8 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // onfalse -填充颜色
-     canvasVue.$watch('onfalse.fillColor.color', function (newVal, oldVal) {
+    // onfalse -填充颜色
+    canvasVue.$watch('onfalse.fillColor.color', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1177,27 +1532,27 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // onfalse -透明度
-     canvasVue.$watch('onfalse.alpha', function (newVal, oldVal) {
+    // onfalse -透明度
+    canvasVue.$watch('onfalse.alpha', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                var num= Number(newVal);
-                if(num >= 0 && num <=1){
+                var num = Number(newVal);
+                if (num >= 0 && num <= 1) {
                     node.setAlpha(num)
                     node.userData.onFalse.alpha = num;
-                }else{
+                } else {
                     node.setAlpha(1);
                     node.userData.onFalse.alpha = 1;
                     layer.msg('透明度范围 0~1');
                 }
-                
+
             }
         }
     });
 
     // onfalse -闪烁
-    canvasVue.$watch('onfalse.flashing', function (newVal, oldVal) {
+    canvasVue.$watch('onfalse.flashing', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1213,20 +1568,20 @@ layui.use(['layer', 'element'], function () {
     });
 
 
-        
-     // onalarm -边框宽度
-     canvasVue.$watch('onalarm.borderWidth', function (newVal, oldVal) {
+
+    // onalarm -边框宽度
+    canvasVue.$watch('onalarm.borderWidth', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
-            if(node){
+            if (node) {
                 node.setStroke(newVal)
-                node.userData.onAlarm.lineWidth = newVal;                 
-            }   
+                node.userData.onAlarm.lineWidth = newVal;
+            }
         }
     });
 
     // onalarm -边框颜色
-    canvasVue.$watch('onalarm.borderColor.color', function (newVal, oldVal) {
+    canvasVue.$watch('onalarm.borderColor.color', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1236,8 +1591,8 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // onalarm -填充颜色
-     canvasVue.$watch('onalarm.fillColor.color', function (newVal, oldVal) {
+    // onalarm -填充颜色
+    canvasVue.$watch('onalarm.fillColor.color', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1247,27 +1602,27 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // onalarm -透明度
-     canvasVue.$watch('onalarm.alpha', function (newVal, oldVal) {
+    // onalarm -透明度
+    canvasVue.$watch('onalarm.alpha', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                var num= Number(newVal);
-                if(num >= 0 && num <=1){
+                var num = Number(newVal);
+                if (num >= 0 && num <= 1) {
                     node.setAlpha(num)
                     node.userData.onAlarm.alpha = num;
-                }else{
+                } else {
                     node.setAlpha(1);
                     node.userData.onAlarm.alpha = 1;
                     layer.msg('透明度范围 0~1');
                 }
-                
+
             }
         }
     });
 
     // onalarm -闪烁
-    canvasVue.$watch('onalarm.flashing', function (newVal, oldVal) {
+    canvasVue.$watch('onalarm.flashing', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1284,18 +1639,18 @@ layui.use(['layer', 'element'], function () {
 
 
     // ondisc -边框宽度
-    canvasVue.$watch('ondisc.borderWidth', function (newVal, oldVal) {
+    canvasVue.$watch('ondisc.borderWidth', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
-            if(node){
+            if (node) {
                 node.setStroke(newVal)
-                node.userData.onDisconnected.lineWidth = newVal;                 
-            }   
+                node.userData.onDisconnected.lineWidth = newVal;
+            }
         }
     });
 
     // ondisc -边框颜色
-    canvasVue.$watch('ondisc.borderColor.color', function (newVal, oldVal) {
+    canvasVue.$watch('ondisc.borderColor.color', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1305,8 +1660,8 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // ondisc -填充颜色
-     canvasVue.$watch('ondisc.fillColor.color', function (newVal, oldVal) {
+    // ondisc -填充颜色
+    canvasVue.$watch('ondisc.fillColor.color', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1316,27 +1671,27 @@ layui.use(['layer', 'element'], function () {
         }
     });
 
-     // ondisc -透明度
-     canvasVue.$watch('ondisc.alpha', function (newVal, oldVal) {
+    // ondisc -透明度
+    canvasVue.$watch('ondisc.alpha', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                var num= Number(newVal);
-                if(num >= 0 && num <=1){
+                var num = Number(newVal);
+                if (num >= 0 && num <= 1) {
                     node.setAlpha(num)
                     node.userData.onDisconnected.alpha = num;
-                }else{
+                } else {
                     node.setAlpha(1);
                     node.userData.onDisconnected.alpha = 1;
                     layer.msg('透明度范围 0~1');
                 }
-                
+
             }
         }
     });
 
     // ondisc -闪烁
-    canvasVue.$watch('ondisc.flashing', function (newVal, oldVal) {
+    canvasVue.$watch('ondisc.flashing', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1350,4 +1705,79 @@ layui.use(['layer', 'element'], function () {
             }
         }
     });
+
+
+    // canvas 背景颜色
+    canvasVue.$watch('canvas.bgColor.color', function(newVal, oldVal) {
+        $('#canvas').css({
+            'background-color': newVal
+        });
+    });
+
+
+    // canvas 恢复默认
+    canvasVue.$watch('canvas.setDefault', function(newVal, oldVal) {
+        if (newVal) {
+
+            console.log(newVal)
+                // var canvas = canvasVue.canvas;
+            var bgColor = canvasVue.canvas.bgColor;
+            var color = canvasVue.canvas.default.bgcolor;
+            var flag = true;
+
+            bgColor.colorData.forEach(function(ele) {
+                ele.active = false;
+                if (ele.color === color) {
+                    ele.active = true;
+                    flag = false;
+                }
+            });
+            if (flag) {
+                bgColor.colorData.shift();
+                bgColor.colorData.push({
+                    color: color,
+                    colorstyle: 'background-color:' + color,
+                    active: true
+                });
+            }
+
+            $('#canvas').css({
+                'background-color': color,
+                'background-image': canvasVue.canvas.default.bgimage
+            });
+
+            bgColor.bgimage = 'none';
+            bgColor.color = color;
+        }
+    });
+
+
+
+
+    // 全局按钮名称
+    canvasVue.$watch('globalBtnData.attr.name', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            this.globalBtnData.attr.current.name = newVal;
+            console.log(JSON.stringify(canvasVue.globalBtnData.attr.current, null, 2))
+        }
+
+    });
+
+    // 开关型 全局按钮 默认值设定
+    canvasVue.$watch('globalBtnData.attr.boolean', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            console.log(newVal);
+            this.globalBtnData.attr.current.tag.tag_value = newVal;
+        }
+    });
+
+    // 非开关型 全局按钮 默认值设定
+    canvasVue.$watch('globalBtnData.attr.num', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            console.log(newVal);
+            this.globalBtnData.attr.current.tag.tag_value = newVal;
+        }
+    });
+
+
 })

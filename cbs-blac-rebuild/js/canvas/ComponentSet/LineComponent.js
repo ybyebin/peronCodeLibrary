@@ -9,25 +9,26 @@ var LineComponent = draw2d.shape.basic.Line.extend({
         var _this = this;
         this._super($.extend({
             stroke: 2,
-            color:rectangle.fillColor
+            color: rectangle.fillColor
         }, attr));
 
 
         //基础数据
         var data = {
             type: "lineComponent", //类型	
-            custom: { 
-                newCreat:true,//  用于在拖拽组件时判断(是否新拖拽的控件)                
-                editSatus:'defaults',//组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)          
+            custom: {
+                newCreat: true, //  用于在拖拽组件时判断(是否新拖拽的控件)                
+                editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)          
             },
             tag: {
                 tag_id: -1,
                 tag_type: -1,
                 tag_name: "",
-                bingding_status: 0 ,//0 默认状态,1 已经绑定,2 绑定错误
-                status:'default',//该组件绑定tag 的状态(用于监控画面)
+                is_readonly: false,
+                bingding_status: 0, //0 默认状态,1 已经绑定,2 绑定错误
+                status: 'default', //该组件绑定tag 的状态(用于监控画面)
             },
-           
+
             routine: {
                 name: '直线',
                 description: '', //组件描述
@@ -40,7 +41,7 @@ var LineComponent = draw2d.shape.basic.Line.extend({
                 },
                 readOnly: false, //组件是否为只读
             },
-            defaults:{//该属性用于存储 控件初始化时的状态
+            defaults: { //该属性用于存储 控件初始化时的状态
                 lineWidth: 2,
                 lineColor: lineBasic.fillColor,
                 blinking: false,
@@ -76,9 +77,9 @@ var LineComponent = draw2d.shape.basic.Line.extend({
             lineBasic.clickMethod(_this);
         });
         this.on("change", function() {
-            if(!_this.userData.custom.newCreat){
+            if (!_this.userData.custom.newCreat) {
                 var arr = _this.getVertices();
-                var vueRoutine =  canvasVue.routine;
+                var vueRoutine = canvasVue.routine;
                 if (arr.data[0].y !== arr.data[1].y) {
                     vueRoutine.horizontal = false;
                 } else {
@@ -90,12 +91,12 @@ var LineComponent = draw2d.shape.basic.Line.extend({
                     vueRoutine.vertical = true;
                 }
             }
-           
+
         });
 
         // 缩放
         this.on("resize", function() {
-                //不提供 缩放方法    
+            //不提供 缩放方法    
         });
         // 移动
         this.on("move", function() {
@@ -118,9 +119,9 @@ var LineComponent = draw2d.shape.basic.Line.extend({
 // 直线
 var lineBasic = {
     // 自定义控件属性
-    fillColor:'#35C99D',
-    lineData: '',//line是特殊控件只有一个  该属性直接写进组件
-    clickMethod: function (component) {
+    fillColor: '#35C99D',
+    lineData: '', //line是特殊控件只有一个  该属性直接写进组件
+    clickMethod: function(component) {
         setComponentOptions.setComponentFlagFalse();
         //重置属性框
         canvasVue.resetAttr();

@@ -205,7 +205,7 @@ layui.use(['layer', 'form'], function() {
                                     console.log("新建画面的ID:" + data.data.id);
                                     sessionStorage.setItem("view_id", data.data.id);
                                     sessionStorage.setItem("view_name", _this.creatViewData.viewName);
-                                    window.location.href = "canvas.html";
+                                    window.location.href = "draw2dCavas.html";
                                 }
                             }
                         } else {
@@ -334,7 +334,7 @@ layui.use(['layer', 'form'], function() {
             sysEditViews: function(item) {
                 if (typeof(Storage) !== "undefined") {
                     sessionStorage.setItem("view_id", item.id);
-                    window.location.href = "editCanvas.html";
+                    window.location.href = "draw2dCavas.html";
                 }
             },
 

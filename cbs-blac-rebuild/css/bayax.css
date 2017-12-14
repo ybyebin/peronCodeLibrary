@@ -576,7 +576,7 @@ a.nextPage {
 /* 分列式 下拉按钮组   -begin */
 
 .bayax-division-select {
-    width: 190px;
+    width: 188px;
     /* background: blue; */
     border: 1px solid rgba(143, 152, 186, 0.31);
     border-radius: 2px;
@@ -999,6 +999,39 @@ body .bayax-layer-skin .layui-layer-page .layui-layer-content {
 }
 
 .bayaxcheckbox:disabled:hover+.checkbox-i {
+    background-position: -72px 0;
+}
+
+.radiobox-i {
+    margin-right: 10px;
+    background: url(../images/icheckblack.png) no-repeat;
+    background-repeat: no-repeat;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    position: relative;
+    top: 0px;
+    background-position: -120px 0;
+    cursor: pointer;
+}
+
+.radiobox-i:hover {
+    background-position: -144px 0;
+}
+
+.bayaxcheckbox:checked+.radiobox-i {
+    background-position: -168px 0
+}
+
+.bayaxcheckbox:checked:hover+.radiobox-i {
+    /* background-position: -48px 0; */
+}
+
+.bayaxcheckbox:disabled+.radiobox-i {
+    /* background-position: -192px 0; */
+}
+
+.bayaxcheckbox:disabled:hover+.radiobox-i {
     background-position: -72px 0;
 }
 

@@ -5,13 +5,13 @@
 // var rectangleComponent = draw2d.shape.basic.Rectangle.extend({
 var rectangleComponent = draw2d.shape.node.Between.extend({
     NAME: "rectangleComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend({
             stroke: 0,
-            bgColor:rectangle.fillColor
+            bgColor: rectangle.fillColor
         }, attr));
-        
+
         // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '矩形';
@@ -20,30 +20,30 @@ var rectangleComponent = draw2d.shape.node.Between.extend({
         });
 
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
 
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     },
 
@@ -58,46 +58,46 @@ var rectangleComponent = draw2d.shape.node.Between.extend({
 // var RoundedRectangleComponent = draw2d.shape.basic.Rectangle.extend({
 var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
     NAME: "RoundedRectangleComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend({
             stroke: 0,
-            radius:10,
-            bgColor:rectangle.fillColor,
+            radius: 10,
+            bgColor: rectangle.fillColor,
         }, attr));
 
         // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
-        data.routine.name = '圆角矩形';    
+        data.routine.name = '圆角矩形';
         this.attr({
             userData: data
         });
 
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 })
@@ -108,13 +108,13 @@ var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
  */
 var EllipseComponent = draw2d.shape.node.Between.extend({
     NAME: "EllipseComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend({
             stroke: 0,
-            height:30,
-            radius:25,
-            bgColor:rectangle.fillColor
+            height: 30,
+            radius: 25,
+            bgColor: rectangle.fillColor
         }, attr));
 
         // 初始化 控件属性
@@ -125,29 +125,29 @@ var EllipseComponent = draw2d.shape.node.Between.extend({
         });
 
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -159,17 +159,17 @@ var EllipseComponent = draw2d.shape.node.Between.extend({
  */
 var polygonComponent = draw2d.shape.basic.Polygon.extend({
     NAME: "polygonComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend({
             stroke: 0,
-            bgColor:rectangle.fillColor,
+            bgColor: rectangle.fillColor,
         }, attr));
 
         // var w = this.width;
         // var h = this.height;
 
-       // 初始化 控件属性
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '多边形';
         this.attr({
@@ -177,30 +177,30 @@ var polygonComponent = draw2d.shape.basic.Polygon.extend({
         });
 
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗 
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 
@@ -213,7 +213,7 @@ var polygonComponent = draw2d.shape.basic.Polygon.extend({
  */
 var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
     NAME: "BothArrowHComponent",
-    init: function (attr, setter, getter) {
+    init: function(attr, setter, getter) {
         var _this = this;
         this._super($.extend({
             width: 50,
@@ -230,30 +230,30 @@ var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
             userData: data
         });
 
-        this.onDoubleClick = function () {
+        this.onDoubleClick = function() {
             console.log(123)
         };
 
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
@@ -262,10 +262,10 @@ var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
      * @private
      * @returns
      */
-    createSet: function () {
+    createSet: function() {
         return this.canvas.paper.path("M0,15L20,0V10H30V0L50,15L30,30V20H20V30L0,15z");
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 
@@ -279,7 +279,7 @@ var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
  */
 var BothArrowVComponent = draw2d.shape.icon.Icon.extend({
     NAME: "BothArrowVComponent",
-    init: function (attr, setter, getter) {
+    init: function(attr, setter, getter) {
         var _this = this;
         this._super($.extend({
             width: 30,
@@ -287,38 +287,38 @@ var BothArrowVComponent = draw2d.shape.icon.Icon.extend({
         }, attr), setter, getter);
         this.setBackgroundColor(rectangle.fillColor); //背景颜色
 
-       // 初始化 控件属性
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '垂直双箭头';
         this.attr({
             userData: data
         });
 
-        this.onDoubleClick = function () {
+        this.onDoubleClick = function() {
             // console.log(123)
             // console.log("颜色为:"+thiss.getColor().hash())
         };
 
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
@@ -328,11 +328,11 @@ var BothArrowVComponent = draw2d.shape.icon.Icon.extend({
      * @private
      * @returns
      */
-    createSet: function () {
+    createSet: function() {
         return this.canvas.paper.path("M15,0L30,20H20V30H30L15,50L0,30H10V20H0L15,0z");
     },
 
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -343,45 +343,45 @@ var BothArrowVComponent = draw2d.shape.icon.Icon.extend({
  */
 var forRightComponent = draw2d.shape.icon.Icon.extend({
     NAME: "forRightComponent",
-    init: function (attr, setter, getter) {
+    init: function(attr, setter, getter) {
         var _this = this;
         this._super($.extend({
             width: 30,
             height: 30
         }, attr), setter, getter);
         this.setBackgroundColor(rectangle.fillColor); //背景颜色
-      
-       // 初始化 控件属性
+
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '右箭头';
         this.attr({
             userData: data
         });
 
-        this.onDoubleClick = function () {
+        this.onDoubleClick = function() {
             // console.log(123)
         };
-        
+
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
@@ -391,10 +391,10 @@ var forRightComponent = draw2d.shape.icon.Icon.extend({
      * @private
      * @returns
      */
-    createSet: function () {
+    createSet: function() {
         return this.canvas.paper.path("M0,10H10V0L30,15L10,30V20H0V10z");
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -407,7 +407,7 @@ var forRightComponent = draw2d.shape.icon.Icon.extend({
  */
 var forLeftComponent = draw2d.shape.icon.Icon.extend({
     NAME: "forLeftComponent",
-    init: function (attr, setter, getter) {
+    init: function(attr, setter, getter) {
         var _this = this;
         this._super($.extend({
             width: 30,
@@ -423,30 +423,30 @@ var forLeftComponent = draw2d.shape.icon.Icon.extend({
             userData: data
         });
 
-        this.onDoubleClick = function () {
+        this.onDoubleClick = function() {
             // console.log(123)
         };
 
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
@@ -455,10 +455,10 @@ var forLeftComponent = draw2d.shape.icon.Icon.extend({
      * @private
      * @returns
      */
-    createSet: function () {
+    createSet: function() {
         return this.canvas.paper.path("M30,20H20V30L0,15L20,0V10H30V20z");
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -470,7 +470,7 @@ var forLeftComponent = draw2d.shape.icon.Icon.extend({
  */
 var forUpComponent = draw2d.shape.icon.Icon.extend({
     NAME: "forUpComponent",
-    init: function (attr, setter, getter) {
+    init: function(attr, setter, getter) {
         var _this = this;
         this._super($.extend({
             width: 30,
@@ -486,30 +486,30 @@ var forUpComponent = draw2d.shape.icon.Icon.extend({
         });
 
 
-        this.onDoubleClick = function () {
+        this.onDoubleClick = function() {
             console.log(123)
         };
-        
+
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
@@ -518,10 +518,10 @@ var forUpComponent = draw2d.shape.icon.Icon.extend({
      * @private
      * @returns
      */
-    createSet: function () {
+    createSet: function() {
         return this.canvas.paper.path("M10,30V20H0L15,0L30,20H20V30H10z");
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -533,7 +533,7 @@ var forUpComponent = draw2d.shape.icon.Icon.extend({
  */
 var forDownComponent = draw2d.shape.icon.Icon.extend({
     NAME: "forDownComponent",
-    init: function (attr, setter, getter) {
+    init: function(attr, setter, getter) {
         var _this = this;
         this._super($.extend({
             width: 30,
@@ -551,30 +551,30 @@ var forDownComponent = draw2d.shape.icon.Icon.extend({
 
 
 
-        this.onDoubleClick = function () {
+        this.onDoubleClick = function() {
             console.log(123)
         };
-        
+
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
         });
 
-         // 缩放
-         this.on("resize", function () {
+        // 缩放
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
@@ -583,10 +583,10 @@ var forDownComponent = draw2d.shape.icon.Icon.extend({
      * @private
      * @returns
      */
-    createSet: function () {
+    createSet: function() {
         return this.canvas.paper.path("M10,0V10H0L15,30L30,10H20V0H10z");
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -596,50 +596,50 @@ var forDownComponent = draw2d.shape.icon.Icon.extend({
  */
 var conduitCompontent = draw2d.shape.node.HorizontalBus.extend({
     NAME: "conduitCompontent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend({
-            width:100,
-            height:50,
-            stroke:0,
-            alpha:1,
-            bgColor:rectangle.fillColor
+            width: 100,
+            height: 50,
+            stroke: 0,
+            alpha: 1,
+            bgColor: rectangle.fillColor
         }, attr));
 
-       // 初始化 控件属性
+        // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '管道';
-        data.onlytype = 'conduitCompontent';//本控件单独属性(区分自己单独标志)
+        data.onlytype = 'conduitCompontent'; //本控件单独属性(区分自己单独标志)
         // 初始化 控件属性
         this.attr({
             userData: data
         });
 
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
             canvasVue.hidediv.conduitHideDiv = true;
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -648,68 +648,69 @@ var conduitCompontent = draw2d.shape.node.HorizontalBus.extend({
  */
 var conduitCompontentV = draw2d.shape.node.VerticalBus.extend({
     NAME: "conduitCompontentV",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend({
-            width:50,
-            height:100,
+            width: 50,
+            height: 100,
             stroke: 0,
-            bgColor:rectangle.fillColor
+            bgColor: rectangle.fillColor
         }, attr));
 
-       
+
         // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '管道';
-        data.onlytype = 'conduitCompontent';//本控件单独属性(区分自己单独标志)
+        data.onlytype = 'conduitCompontent'; //本控件单独属性(区分自己单独标志)
         // 初始化 控件属性
         this.attr({
             userData: data
         });
 
         // 选中
-        this.on("click", function () {
+        this.on("click", function() {
             rectangle.clickMethod(_this);
             canvasVue.hidediv.conduitHideDiv = true;
         });
 
         // 缩放
-        this.on("resize", function () {
-           setComponentOptions.componentOnResizeMethod(_this);
+        this.on("resize", function() {
+            setComponentOptions.componentOnResizeMethod(_this);
         });
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
 // 基础组件
 var rectangle = {
-    fillColor:'#35C99D',
+    fillColor: '#35C99D',
     // 自定义控件属性
     rectangleData: JSON.stringify({
         type: "basicComponent", //类型
         custom: {
-            newCreat:true,//  用于在拖拽组件时判断(是否新拖拽的控件)
-            editSatus:'defaults',//组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)        
+            newCreat: true, //  用于在拖拽组件时判断(是否新拖拽的控件)
+            editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)        
         },
         tag: {
             tag_id: -1,
             tag_type: -1,
             tag_name: "",
+            is_readonly: false,
             bingding_status: 0, //0 默认状态,1 已经绑定,2 绑定错误
-            status:'default',//该组件绑定tag 的状态(用于监控画面)
-            
+            status: 'default', //该组件绑定tag 的状态(用于监控画面)
+
         },
         routine: {
             name: '',
@@ -723,7 +724,7 @@ var rectangle = {
             },
             readOnly: false, //组件是否为只读
         },
-        defaults:{//该属性用于存储 控件初始化时的状态
+        defaults: { //该属性用于存储 控件初始化时的状态
             lineWidth: 0,
             lineColor: "#000000",
             fillColor: "#35C99D",
@@ -760,7 +761,7 @@ var rectangle = {
         }
     }),
     // 点击方法
-    clickMethod: function (component) {
+    clickMethod: function(component) {
         setComponentOptions.setComponentFlagFalse();
 
         //重置属性框
@@ -781,10 +782,5 @@ var rectangle = {
 
         setComponentOptions.setComponentFlagTrue();
     },
-   
+
 }
-
-
-
-
-

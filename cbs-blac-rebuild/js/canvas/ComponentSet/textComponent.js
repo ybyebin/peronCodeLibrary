@@ -6,16 +6,16 @@
  */
 var textComponent = draw2d.shape.basic.Text.extend({
     NAME: "textComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super(attr);
         this.attr({
-            padding: {left: 10, right: 10},
-            text:'文本',
-            stroke:0,
-            fontColor:"#FFFFFF",
-            fontSize:15,
-            resizeable:false,
+            padding: { left: 10, right: 10 },
+            text: '文本',
+            stroke: 0,
+            fontColor: "#FFFFFF",
+            fontSize: 15,
+            resizeable: false,
         });
 
 
@@ -29,23 +29,23 @@ var textComponent = draw2d.shape.basic.Text.extend({
             userData: data
         });
 
-        this.on("click", function () {
-           textBasic.clickMethod(_this);
-        
+        this.on("click", function() {
+            textBasic.clickMethod(_this);
+
         });
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
         // 悬浮窗
-        this.onMouseEnter = function () {
+        this.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.onMouseLeave = function () {
+        this.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -63,20 +63,21 @@ var textBasic = {
     }),
     textData: JSON.stringify({
         type: "textComponent", //类型	
-        custom: { 
-            valueType: 'textValueComponent',             
-            newCreat:true,//  用于在拖拽组件时判断(是否新拖拽的控件)
-            editSatus:'defaults',//组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)            
+        custom: {
+            valueType: 'textValueComponent',
+            newCreat: true, //  用于在拖拽组件时判断(是否新拖拽的控件)
+            editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)            
         },
         tag: {
             tag_id: -1,
             tag_type: -1,
             tag_name: "",
+            is_readonly: false,
             bingding_status: 0, //0 默认状态,1 已经绑定,2 绑定错误
-            status:'default',//该组件绑定tag 的状态(用于监控画面)
-            
+            status: 'default', //该组件绑定tag 的状态(用于监控画面)
+
         },
-       
+
         routine: {
             name: '',
             description: '', //组件描述
@@ -94,7 +95,7 @@ var textBasic = {
             readOnly: false, //组件是否为只读
             unit: '' //单位
         },
-        defaults:{//该属性用于存储 控件初始化时的状态
+        defaults: { //该属性用于存储 控件初始化时的状态
             lineWidth: 0,
             lineColor: "#DDDDDD",
             // lineStyle: null,
@@ -150,7 +151,7 @@ var textBasic = {
             blinking: false,
         }
     }),
-    clickMethod: function (component) {
+    clickMethod: function(component) {
         setComponentOptions.setComponentFlagFalse();
         //重置属性框
         canvasVue.resetAttr();

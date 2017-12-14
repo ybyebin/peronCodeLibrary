@@ -1,1758 +1,1384 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>智能建筑管理系统</title>
-	<meta charset="utf-8" />	
-	<meta name="description" content="webscada" />		
-	<meta content="" name="description" />	
-	<meta content="" name="author" />	
-	
-	<link type="text/css" rel="stylesheet" href="css/basic/bootstrap.min.css"/>
-	<link type="text/css" rel="stylesheet" href="css/basic/jquery.mCustomScrollbar.css">
-	<link rel="stylesheet" type="text/css" href="css/basic/colpick.css">	
-	<link rel="stylesheet" type="text/css" href="css/basic/check_black.css">	
-	<link rel="stylesheet" type="text/css" href="css/basic/layer.css">
-	<link rel="stylesheet" type="text/css" href="css/bayax.css">
-	<link rel="stylesheet" type="text/css" href="css/edit.css">
+    <meta charset="UTF-8">
+    <title>智能建筑管理系统</title>
 
-	<!-- 必须导入的JS -->
-	<script type="text/javascript" src="js/edit/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="js/edit/canvg.js"></script>
-	<script type="text/javascript" src="js/edit/Class.js"></script>
-	<script type="text/javascript" src="js/edit/jquery.autoresize.js"></script>
-	<script type="text/javascript" src="js/edit/jquery.contextmenu.js"></script>
-	<script type="text/javascript" src="js/edit/jquery-touch_punch.js"></script>
-	<script type="text/javascript" src="js/edit/json2.js"></script>
-	<script type="text/javascript" src="js/edit/pathfinding-browser.min.js"></script>
-	<script type="text/javascript" src="js/edit/raphael.js"></script>
-	<script type="text/javascript" src="js/edit/rgbcolor.js"></script>
-	<script type="text/javascript" src="js/edit/shifty.js"></script>
-	<script type="text/javascript" src="js/edit/draw2d.js"></script>
-	<script type="text/javascript" src="js/edit/fraphael.js"></script>
-		
+    <meta charset="utf-8" />
+    <meta name="description" content="webscada" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
 
-	<!-- 拖动效果 -->
-	<script type="text/javascript" src="js/edit/jquery.browser.js"></script>
-	<script type="text/javascript" src="js/edit/jquery-ui-1.8.23.custom.min.js"></script>
-	<script type="text/javascript" src="js/actionJS/view.js"></script>
-	<script type="text/javascript" src="js/basic/api.js"></script>
-	
-	<script type="text/javascript" src="js/edit/imgScroll.js"></script>
-	<script type="text/javascript" src="js/edit/icheck.min.js"></script>
 
-	<script type="text/javascript" src="js/basic/layer.js"></script>
+    <link rel="stylesheet" href="plugin/layui/css/layui.css">
+    <link rel="stylesheet" href="./css/basic/colpick.css">
+    <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
+    <link rel="stylesheet" href="./css/bayax.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <!-- <link rel="stylesheet" href="./css/basegreen.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/canvas.css">
+
+
+
+
+    <!-- 必须导入的JS -->
+
+    <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
+    <!-- <script type="text/javascript" src="js/edit/jquery-1.10.2.min.js"></script> -->
+    <script type="text/javascript" src="js/canvas/basic/canvg.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/Class.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/jquery.autoresize.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/jquery.contextmenu.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/jquery-touch_punch.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/json2.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/pathfinding-browser.min.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/raphael.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/rgbcolor.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/shifty.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/draw2d.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/fraphael.js"></script>
+
+    <!-- 拖动效果 -->
+    <script type="text/javascript" src="js/canvas/basic/jquery.browser.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/jquery-ui-1.8.23.custom.min.js"></script>
+    <script type="text/javascript" src="js/canvas/actionJS/view.js"></script>
+
+
+
 
 </head>
+
 <body>
-	<div class="navbar-fixed-top">
-		<div class="head">
-			<ul>
-				<li class="col-sm-3 col-md-2" style="min-width: 286px;">
-					<a href="graphicImages.html">
-						<img id="logo" src="images/logo-text.png"></a>
-				</li>
-				<li class="form-group col-sm-7 col-sm-offset-3 col-md-7 col-md-offset-2" >
-					<a href="graphicImagesView.html">
-					<span class="go-subsys"> <i></i>
-						<span></span>
-					</span>
-					<label>
-						当前您所在的位置:
-						<span class="group-name"></span>
-					</label>
-				</a>
-				</li>
-			</ul>
-		</div>
-		<div class="head-tool form-group" style="padding: 0;">
-			<ul class="head-tool-ul">
-				<li class="col-sm-2" style="min-width: 286px;">
-					<div id="toolbar" ></div>
-				</li>
-				<li id="lis" class="col-sm-10 col-sm-my-9" style="padding: 0;">
-
-					<div id="components">
-						<ul class="nav">
-							<li class="active">
-								<a href="#components-num1" data-toggle="tab">基本图形</a>
-							</li>
-							<li>
-								<a href="#components-num2" data-toggle="tab">通用</a>
-							</li>
-							<li>
-								<a href="#components-num3" data-toggle="tab">专业</a>
-							</li>
-							<li>
-								<a href="#components-num4" data-toggle="tab">建筑设备</a>
-							</li>
-							<li>
-								<a href="#components-num5" data-toggle="tab">安全防范</a>
-							</li>
-
-						</ul>
-						<div class="tab-content">
-							<div class="tab-pane fade in active" id="components-num1">
-								<div>
-									<img src="images/img/juxing.png" data-shape="rectangleComponent" class="draw2d_droppable components-juxing">
-									<br>
-									<span>矩形</span>
-								</div>
-								<div>
-									<img src="images/img/yuanjiajuxing.png" data-shape="RoundedRectangleComponent" class="draw2d_droppable components-yuanjiajuxing ">
-									<br>
-									<span>圆角矩形</span>
-								</div>
-
-								<div>
-									<img src="images/img/tuoyuan.png" data-shape="EllipseComponent" class="draw2d_droppable components-tuoyuan">
-									<br>
-									<span>椭圆</span>
-								</div>
-
-								<div>
-									<img src="images/img/straightline.png" data-shape="LineComponent" class="draw2d_droppable components-straightline">
-									<br>
-									<span>直线</span>
-								</div>
-
-								<div>
-									<img src="images/img/duobianxing.png" data-shape="polygonComponent" class="draw2d_droppable components-duobianxing">
-									<br>
-									<span>多边形</span>
-								</div>
-								<div>
-									<img src="images/img/ArrowUp.png" data-shape="forUpComponent" class="draw2d_droppable components-ArrowUp">
-									<br>
-									<span>箭头</span>
-								</div>
-								<div>
-									<img src="images/img/Arrowright.png" data-shape="forRightComponent" class="draw2d_droppable components-Arrow">
-									<br>
-									<span>箭头</span>
-								</div>
-								<div>
-									<img src="images/img/down.png" data-shape="forDownComponent" class="draw2d_droppable components-ArrowDown">
-									<br>
-									<span>箭头</span>
-								</div>
-								<div>
-									<img src="images/img/left.png" data-shape="forLeftComponent" class="draw2d_droppable components-ArrowLeft">
-									<br>
-									<span>箭头</span>
-								</div>
-
-								<div>
-									<img src="images/img/level double.png" data-shape="BothArrowHComponent" class="draw2d_droppable  components-leveldouble">
-									<br>
-									<span>双箭头</span>
-								</div>
-								<div>
-									<img src="images/img/Vertical double.png" data-shape="BothArrowVComponent" class="draw2d_droppable components-Verticaldouble">
-									<br>
-									<span>双箭头</span>
-								</div>
-
-								<div>
-									<img src="images/img/juxing.png" data-shape="conduitCompontent" class="draw2d_droppable components-Verticaldouble">
-									<br>
-									<span>管道</span>
-								</div>
-								<div>
-									<img src="images/img/juxing.png" data-shape="conduitCompontentV" class="draw2d_droppable components-Verticaldouble">
-									<br>
-									<span>管道</span>
-								</div>
-
-
-							</div>
-							<div class="tab-pane fade" id="components-num2">
-								<div>
-									<img src="images/img/tag.png" data-shape="LabelComponent" class="draw2d_droppable components-label">
-									<br>
-									<span>标签</span>
-								</div>
-								<div>
-									<img src="images/img/button.png" data-shape="buttonComponent" class="draw2d_droppable components-button">
-									<br>
-									<span>按钮</span>
-								</div>
-								<div>
-									<img src="images/img/text.png" data-shape="textComponent" class="draw2d_droppable components-text">
-									<br>
-									<span>文本</span>
-								</div>
-								<div>
-
-									<img src="images/img/jpg.png" data-shape="imageComponent" class="draw2d_droppable components-imageComponent">
-									<br>
-									<span>自定义</span>
-								</div>
-							</div>
-							<div class="tab-pane fade" id="components-num3">
-								<div>
-									<img src="images/img/switch.png" data-shape="switchComponent" class="draw2d_droppable components-switch">
-									<br>
-									<span>开关</span>
-								</div>
-
-								<div>
-									<img src="images/img/piping.png" data-shape="pipingComponent" class="draw2d_droppable components-piping">
-									<br>
-									<span>管道</span>
-								</div>
-
-								<div>
-									<img src="images/img/Warninglamp.png" data-shape="WarninglampComponent" class="draw2d_droppable components-Warninglamp">
-									<br>
-									<span>报警提示灯</span>
-								</div>
-							</div>
-							<div class="tab-pane fade components-num4" id="components-num4">
-
-								<a class="LeftBotton" onmousedown='GoUp("ScrUp(\"ISL_Cont_1\");")' onmouseup="StopUp('ISL_Cont_1')" onmouseout="StopUp('ISL_Cont_1')" href="javascript:void(0);" target="_self"></a>
-								<div class="pcont" id="ISL_Cont_1">
-									<div class="ScrCont">
-										<div id="List1_1">
-
-											<a class="pl" href="#">
-												<img src="images/img/Blowerfan.png" data-shape="blowerfanComponent" class="draw2d_droppable components-Blowerfan">送风机</a>
-
-											<a class="pl a-fan border " href="#">
-												<img src="images/img/Exhaustfan.png" data-shape="exhaustfanComponent" class="draw2d_droppable components-Exhaustfan">排风机</a>
-
-											<a class="pl a-beng border" href="#">
-												<img src="images/img/beng.png" data-shape="bengComponent" class="draw2d_droppable components-beng">&nbsp;泵</a>
-
-											<a class="pl a-ElectricTwo-wayValve" href="#">
-												<img src="images/img/ElectricTwo-wayValve.png" data-shape="ElectricTwoWayValveComponent" class="draw2d_droppable components-ElectricTwoWayValve">电动两通阀</a>
-											<a class="pl a-SolenoidValve" href="#">
-												<img src="images/img/SolenoidValve.png" data-shape="SolenoidValveComponent" class="draw2d_droppable components-SolenoidValve">电磁阀</a>
-											<a class="pl a-valves border" href="#">
-												<img src="images/img/ElectricButterflyValves.png" data-shape="ElectricButterflyValvesComponent" class="draw2d_droppable components-ElectricButterflyValves">电动蝶阀</a>
-
-											<a class="pl a-AirFiltrations" href="#">
-												<img src="images/img/AirFiltration.png" data-shape="AirFiltrationComponent" class="draw2d_droppable components-AirFiltration">空气过滤器</a>
-											<a class="pl a-AirFiltration" href="#">
-												<img src="images/img/AirHeating.png" data-shape="AirHeatingComponent" class="draw2d_droppable components-AirHeating">空气加热器</a>
-											<a class="pl a-AirFiltration" href="#">
-												<img src="images/img/AirCooler.png" data-shape="AirCoolerComponent" class="draw2d_droppable components-AirCooler">空气冷却器</a>
-											<a class="pl a-Humidifier" href="#">
-												<img src="images/img/Humidifier.png" data-shape="HumidifierComponent" class="draw2d_droppable components-Humidifier">加湿器</a>
-											<a class="pl a-controlPanel border" href="#">
-												<img src="images/img/controlPanel.png" data-shape="controlPanelComponent" class="draw2d_droppable components-controlPanel">温控面板</a>
-
-											<a class="pl a-FluorescentLamp" href="#">
-												<img src="images/img/FluorescentLamp.png" data-shape="FluorescentLampComponent" class="draw2d_droppable components-FluorescentLamp">荧光灯</a>
-											<a class="pl a-LED" href="#">
-												<img src="images/img/LED.png" data-shape="LEDComponent" class="draw2d_droppable components-LED">LED灯</a>
-											<a class="pl a-Incandescent" href="#">
-												<img src="images/img/Incandescent.png" data-shape="IncandescentComponent" class="draw2d_droppable components-Incandescent">白炽灯</a>
-											<a class="pl a-MetalHalide border" href="#">
-												<img src="images/img/MetalHalide.png" data-shape="MetalHalideComponent" class="draw2d_droppable components-MetalHalide">金卤灯</a>
-
-											<a class="pl a-temperatures" href="#">
-												<img src="images/img/temperature.png" data-shape="temperatureComponent" class="draw2d_droppable components-temperature">温度</a>
-											<a class="pl a-temperature" href="#">
-												<img src="images/img/humidity.png" data-shape="humidityComponent" class="draw2d_droppable components-humidity">湿度</a>
-											<a class="pl a-temperature" href="#">
-												<img src="images/img/pressure.png" data-shape="pressureComponent" class="draw2d_droppable components-pressure">压力</a>
-
-											<a class="pl a-temperature" href="#">
-												<img src="images/img/differentialPressure.png" data-shape="differentialPressureComponent" class="draw2d_droppable components-differentialPressure">压差</a>
-											<a class="pl a-liquids border" href="#">
-												<img src="images/img/liquid.png" data-shape="liquidComponent" class="draw2d_droppable components-liquid">液位</a>
-
-											<a class="pl a-electric" href="#">
-												<img src="images/img/electric.png" data-shape="electricComponent" class="draw2d_droppable components-electric">电流</a>
-											<a class="pl a-liquid" href="#">
-												<img src="images/img/Voltage.png" data-shape="VoltageComponent" class="draw2d_droppable components-Voltage">电压</a>
-											<a class="pl a-liquid" href="#">
-												<img src="images/img/frequency.png" data-shape="frequencyComponent" class="draw2d_droppable components-frequency">频率</a>
-											<a class="pl a-liquid" href="#">
-												<img src="images/img/activePower.png" data-shape="activePowerComponent" class="draw2d_droppable components-activePower">有功功率</a>
-											<a class="pl a-liquid" href="#">
-												<img src="images/img/ElectricityConsumption.png" data-shape="ElectricityConsumptionComponent" class="draw2d_droppable components-ElectricityConsumption">用电量</a>
-											<a class="pl a-level " href="#">
-												<img src="images/img/level.png" data-shape="levelComponent" class="draw2d_droppable components-level">液体流量</a>
-											<a class="pl a-liquid" href="#">
-												<img src="images/img/Gas.png" data-shape="GasComponent" class="draw2d_droppable components-Gas">气体流量</a>
-											<a class="pl a-Broadcast border" href="#">
-												<img src="images/img/Broadcast.png" data-shape="BroadcastComponent" class="draw2d_droppable components-Broadcast">广播</a>
-
-										</div>
-										<div id="List2_1"></div>
-									</div>
-								</div>
-								<a class="RightBotton" onmousedown='GoDown("ISL_Cont_1","List1_1","ScrDown(\"ISL_Cont_1\",\"List1_1\")")' onmouseup='StopDown("ISL_Cont_1")' onmouseout='StopDown("ISL_Cont_1")' href="javascript:void(0);" target="_self"></a>
-
-							</div>
-
-							<div class="tab-pane fade " id="components-num5">
-								<div>
-									<img src="images/img/monitoring.png" data-shape="monitoringComponent" class="draw2d_droppable components-monitoring">
-									<br>
-									<span>枪机</span>
-								</div>
-								<div>
-									<img src="images/img/qiuji.png" data-shape="qiujiComponent" class="draw2d_droppable components-qiuji">
-									<br>
-									<span>球机</span>
-								</div>
-								<div>
-									<img src="images/img/highqiuji.png" data-shape="highqiujiComponent" class="draw2d_droppable components-highqiuji">
-									<br>
-									<span>高速球</span>
-								</div>
-								<div>
-									<img src="images/img/menjin.png" data-shape="EntranceGuardComponent" class="draw2d_droppable components-menjin">
-									<br>
-									<span>门禁</span>
-								</div>
-								<div>
-									<img src="images/img/tance.png" data-shape="detectorComponent" class="draw2d_droppable components-tance">
-									<br>
-									<span>探测器</span>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</li>
-			</ul>
-
-		</div>
-	</div>
-
-	<div class="content-canvas form-group">
-	
-		<ul class="content-ul">
-			<li class="li-canvas col-sm-1">
-				<div class="back-only">
-				<div id="canvas" class="canvas">
-					<img id="myBgimage" data-url="" src="images/logo-text.png">
-					<div id="tooltips"></div>
-				</div>			
-				<div id="global-btn">
-					<p class="p-title">
-						<span>全局按钮</span>
-						<span class="span-add">添加</span>
-					</p>
-					<div class="have-btn">
-						<div class="no-glo-btn">
-							<p>暂无全局按钮</p>
-							<p>请点击右上角添加</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			</li>
-			<li class="attribute-menu col-sm-2">
-				<div class="first-attr" >
-					<p class="title" data-toggle="collapse" data-target="#first-attr">修改属性</p>
-					<div id="first-attr" class="collapse in">
-						<ul class="nav nav-tabs tab-ul">
-							<li class="active">
-								<a href="#component-attr" data-toggle="tab">控件属性</a>
-							</li>
-							<li>
-								<a href="#canvas-attr" data-toggle="tab">画布属性</a>
-							</li>
-
-						</ul>
-						<div class="tab-content tab-attribute">
-							<div class="tab-pane fade in active" id="component-attr">
-								
-								<span id="spanid" style="display:none"></span>
-								<div class="component-attr">
-									<p data-toggle="collapse" data-target="#div-conventional" class="p-show"> <i></i>
-										常规
-									</p>
-									<div id="div-conventional" class=" component-attr-son collapse in">
-										<form class="form-horizontal">
-											<div class="form-group">
-												<label class="control-label col-sm-1">名称</label>
-												<label class="control-label col-sm-8" >
-													<input id="comp-name" type="text" class="form-control"></label>
-											</div>
-											<div class="form-group">
-												<label class="control-label col-sm-1">描述</label>
-												<label class="control-label col-sm-8" >
-													<textarea id="comp-desc" class="form-control"></textarea> </label>
-											</div>
-											
-											<div class="form-group div-size div-line-only">
-												<label class="control-label col-sm-1">尺寸</label>
-												<label class="control-label col-sm-3">
-													<input id="comp-width" type="text" class="form-control">
-												</label>
-												<label class="control-label">
-												<span class="conventional-lock glyphicon glyphicon-lock" aria-hidden="true"></span>
-												</label>
-												<label class="control-label col-sm-3">
-													<input id="comp-height" type="text" class="form-control">
-												</label>
-											</div>
-											<div class="form-group div-location div-line-only">
-												<label class="control-label col-sm-1">位置</label>
-												<label class="control-label col-sm-3">
-													<input id="comp-offsetx" type="text" class="form-control">
-												</label>
-												<label class="control-label">
-												</label>
-												<label class="control-label col-sm-3">
-													<input id="comp-offsety" type="text" class="form-control">
-												</label>
-											</div>
-											<div class="form-group div-xy div-line-only">
-												<label class="control-label col-sm-1"></label>
-												<label class="control-label col-sm-3">
-													X
-												</label>
-												<label class="control-label">
-												</label>
-												<label class="control-label col-sm-3">
-													Y
-												</label>
-											</div>
-											<!-- 直线测试 -->
-											<div class="form-group div-checkbox div-line-check">
-												<label class="control-label col-sm-1">
-											
-													<input  type="checkbox" id="horizontal"  class="bayaxcheckbox "  ><label class="checkbox-i" for="horizontal"></label>
-												</label>
-													
-												<label class="control-label col-sm-8">水平</label>
-											</div>
-											<div class="form-group div-checkbox div-line-check">
-												<label class="control-label col-sm-1">
-												<input  type="checkbox" id="vertical"  class="bayaxcheckbox "  ><label class="checkbox-i" for="vertical"></label>
-													</label>
-												<label class="control-label col-sm-8">垂直</label>
-											</div>
-											<!-- 直线测试 -->
-
-											<div class="form-group" >
-												<label class="control-label col-sm-1">旋转角度</label>
-												<label class="control-label col-sm-8">
-													<input id="comp-rotation" type="text" class="form-control"></label>
-											</div>
-
-											<div class="form-group div-checkbox div-basic-hide div-title">
-												<label class="control-label col-sm-1">
-													<input id="comp-title" type="checkbox" name="ckss" class="ckss">
-												</label>
-												<label class="control-label col-sm-8">
-													显示标题
-												</label>
-											</div>
-
-											<div class="form-group div-basic-hide div-title">
-												<label class="control-label col-sm-1">标题内容</label>
-												<label class="control-label col-sm-8" >
-													<input id="comp-title-val" type="text" class="form-control"></label>
-											</div>
-
-
-											<div class="form-group div-checkbox">
-												<label class="control-label col-sm-1">
-													<input id="comp-hover" type="checkbox" name="ckss" class="ckss">
-												</label>
-												<label class="control-label col-sm-8">
-													显示说明
-												</label>
-											</div>
-
-											<div class="form-group" >
-												<label class="control-label col-sm-1">说明内容</label>
-												<label class="control-label col-sm-8" >
-													<input id="comp-hover-val" type="text" class="form-control"></label>
-											</div>
-
-											<div class="form-group div-checkbox">
-												<label  class="control-label col-sm-1">
-													<input id="comp-hides" type="checkbox" name="ckss" class="ckss">
-												</label>
-												<label class="control-label col-sm-8">
-													隐藏组件
-												</label>
-											</div>
-
-											<div class="form-group div-checkbox">
-												<label  class="control-label col-sm-1">
-													<input id="comp-unabel" type="checkbox" name="ckss" class="ckss">
-												</label>
-												<label class="control-label col-sm-8">
-													不可用
-												</label>
-											</div>
-
-
-
-											<div class="form-group div-dropdown-menu" style="margin-bottom: 10px;">
-												<label class="control-label col-sm-1">访问等级</label>
-												<label class="control-label col-sm-8">
-													<div class="btn-group" >
-														<button type="button" class="btn btn-default" disabled="disabled" style="">
-															<span id="comp-level">123</span>
-														</button>
-														<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-															<span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu comp-level-ul" role="menu">
-															<li>
-																<a href="#">0</a>
-															</li>
-															<li>
-																<a href="#">1</a>
-															</li>
-															<li>
-																<a href="#">2</a>
-															</li>
-															<li>
-																<a href="#">3</a>
-															</li>
-															<li>
-																<a href="#">4</a>
-															</li>
-															<li>
-																<a href="#">5</a>
-															</li>
-															<li>
-																<a href="#">6</a>
-															</li>
-															<li>
-																<a href="#">7</a>
-															</li>
-															<li>
-																<a href="#">8</a>
-															</li>
-															<li>
-																<a href="#">9</a>
-															</li>
-															<li>
-																<a href="#">10</a>
-															</li>
-															<li>
-																<a href="#">11</a>
-															</li>
-															<li>
-																<a href="#">12</a>
-															</li>
-															<li>
-																<a href="#">13</a>
-															</li>
-															<li>
-																<a href="#">14</a>
-															</li>
-															<li>
-																<a href="#">15</a>
-															</li>
-														</ul>
-													</div>
-												
-												</label>
-											</div>
-
-										</form>
-										
-									</div>
-
-									<p data-toggle="collapse" data-target="#div-data" class="p-show"> <i></i>
-										Data
-									</p>
-									<div id="div-data" class="component-attr-son collapse in">	
-										<form class="form-horizontal">
-											<div class="form-group div-basic-hide div-vlcurl">
-												<label class="control-label col-sm-1">摄像地址</label>
-												<label class="control-label col-sm-8" >
-													<input id="comp-vlc-val" type="text" class="form-control"></label>
-											</div>
-
-
-											<div class="form-group">
-												<label class="control-label col-sm-1">Tag地址</label>
-												<label class="control-label col-sm-7" style="z-index: 0;padding-right: 0;">
-													<div class="input-group" >
-														<input id="comp-tagaddress"  type="text" class="form-control input-img" disabled="disabled">
-														<span class="input-group-btn" >
-															<button id="comp-tagaddress-btn" class="btn btn-default btn-img" type="button">...</button>
-														</span>
-													</div>
-												</label>
-												<label class="col-sm-1 control-label" style="width: 20px;padding-left: 0;padding-right: 0;">
-													<img id="tagWrongImg" src = "images/img/rights.png" height="20" width="20" >
-												</label>
-											</div>
-
-											<div class="form-group div-checkbox" style="padding-bottom: 10px;" >
-												<label class="control-label col-sm-1">
-													<input id="comp-readonly" type="checkbox" name="ckss" class="ckss">
-												</label>
-												<label class="control-label col-sm-8">
-													只读
-												</label>
-											</div>
-
-										</form>
-
-									</div>
-
-									<p data-toggle="collapse" data-target="#div-style" class="collapsed p-hide">
-										<i></i>
-										Style
-									</p>
-									<div id="div-style" class="component-attr-son collapse">
-										<form class="form-horizontal">
-											<div class="form-group div-dropdown-menu div-normal-width">
-												<label class="control-label col-sm-1">边框宽度</label>
-												<label class="control-label col-sm-8" >
-													<div class="btn-group">
-														<button type="button" class="btn btn-default" disabled="disabled">
-															<span id="style-width">123</span>
-														</button>
-														<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-															<span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu style-width-ul" role="menu">
-															<li>
-																<a href="#">0</a>
-															</li>
-															<li>
-																<a href="#">1</a>
-															</li>
-															<li>
-																<a href="#">2</a>
-															</li>
-															<li>
-																<a href="#">3</a>
-															</li>
-															<li>
-																<a href="#">4</a>
-															</li>
-															<li>
-																<a href="#">5</a>
-															</li>
-														</ul>
-													</div>
-												
-												</label>
-											</div>
-											<div class="form-group div-line-conduit">
-												<label class="control-label col-sm-1">边框宽度</label>
-												<label class="control-label col-sm-8" >
-													<input id="comp-conline-width" type="number" class="form-control"></label>
-											</div>
-											<div class="form-group div-dropdown-menu">
-												<label class="control-label col-sm-1">边框样式</label>
-												<label class="control-label col-sm-8" >
-													<div class="btn-group" >
-														<button type="button" class="btn btn-default"  disabled="disabled">
-															<span id="style-style">123</span>
-														</button>
-														<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-															<span class="caret"></span>
-															
-														</button>
-														<ul class="dropdown-menu style-style-ul " role="menu">
-															<li>
-																<a href="#">默认</a>
-															</li>
-															<li>
-																<a href="#">-</a>
-															</li>
-															<li>
-																<a href="#">.</a>
-															</li>
-															<li>
-																<a href="#">-.</a>
-															</li>
-															<li>
-																<a href="#">-..</a>
-															</li>
-															<li>
-																<a href="#">.</a>
-															</li>
-														</ul>
-													</div>
-												
-												</label>
-											</div>
-
-											<div class="form-group">
-												<label class="control-label col-sm-1">边框颜色</label>
-												<label class="control-label col-sm-8 style-border-color" style="padding-right: 0;">
-													<ul class="color-board">
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-													</ul>
-													<span >+</span>
-												</label>
-											</div>
-
-											<div class="form-group div-basic-hide div-text-val">
-												<label class="control-label col-sm-1">文本内容</label>
-												<label class="control-label col-sm-8" >
-													<input id="style-text" type="text" class="form-control"></label>
-											</div>
-											
-											<div class="form-group div-font-size">
-												<label class="control-label col-sm-1">字体大小</label>
-												<label class="control-label col-sm-8" >
-													<input id="text-font-size" type="text" class="form-control"></label>
-											</div>
-											<div class="form-group div-unit">
-												<label class="control-label col-sm-1">单位</label>
-												<label class="control-label col-sm-8">
-													<input id="comp-unit-style" type="text" class="form-control"></label>
-											</div>
-											<div class="form-group div-basic-hide div-text-color">
-												<label class="control-label col-sm-1">文本颜色</label>
-												<label class="control-label col-sm-8 style-text-color" style="padding-right: 0;">
-													<ul class="color-board">
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-													</ul>
-													<span >+</span>
-												</label>
-											</div>
-
-											<div class="form-group div-fill">
-												<label class="control-label col-sm-1">填充颜色</label>
-												<label class="control-label col-sm-8 style-fill-color" style="padding-right: 0;">
-													<ul class="color-board">
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-														<li></li>
-													</ul>
-													<span >+</span>
-												</label>
-											</div>
-											<div class="form-group div-text-alpha">
-												<label class="control-label col-sm-1">背景透明</label>
-												<label class="control-label col-sm-8">
-													<input id="text-alpha-style" type="checkbox" name="ckss" class="ckss">
-												</label>
-											</div>
-											<div class="form-group div-alpha">
-												<label class="control-label col-sm-1">透明度</label>
-												<label class="control-label col-sm-8">
-													<input id="comp-alpha-style" type="number" class="form-control"></label>
-											</div>											
-											<div class="form-group div-basic-hide div-image">
-												<label class="control-label col-sm-1">图片</label>
-												<label class="control-label col-sm-8" style="z-index: 0;">
-													<div class="input-group" >
-														<input id="style-image" type="text" class="form-control input-img" disabled="disabled">
-														<span class="input-group-btn" >
-															<button id="style-image-btn" class="btn btn-default btn-img" type="button">...</button>
-														</span>
-													</div>
-												</label>
-											</div>
-
-											<div class="form-group div-checkbox">
-												<label class="control-label col-sm-1">
-													<input id="style-flashing" type="checkbox" name="ckss" class="ckss">
-												</label>
-												<label class="control-label col-sm-8">
-													闪烁
-												</label>
-											</div>
-
-										</form>
-										
-
-
-									</div>
-									<div class="just-for-label">
-										<p data-toggle="collapse" data-target="#div-ontrue" class="collapsed p-hide"> <i></i>
-											onTrue
-										</p>
-										<div id="div-ontrue" class="component-attr-son collapse">
-											<form class="form-horizontal">
-												<div class="form-group div-dropdown-menu div-normal-width">
-													<label class="control-label col-sm-1">边框宽度</label>
-													<label class="control-label col-sm-8" >
-														<div class="btn-group">
-															<button type="button" class="btn btn-default" disabled="disabled">
-																<span id="ontrue-width"></span>
-															</button>
-															<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-																<span class="caret"></span>
-															</button>
-															<ul class="dropdown-menu ontrue-width-ul" role="menu">
-																<li>
-																	<a href="#">0</a>
-																</li>
-																<li>
-																	<a href="#">1</a>
-																</li>
-																<li>
-																	<a href="#">2</a>
-																</li>
-																<li>
-																	<a href="#">3</a>
-																</li>
-																<li>
-																	<a href="#">4</a>
-																</li>
-																<li>
-																	<a href="#">5</a>
-																</li>
-															</ul>
-														</div>
-
-													</label>
-												</div>
-
-												<div class="form-group div-line-conduit">
-													<label class="control-label col-sm-1">边框宽度</label>
-													<label class="control-label col-sm-8" >
-														<input id="ontrue-conline-width" type="text" class="form-control"></label>
-												</div>
-												<div class="form-group div-dropdown-menu">
-													<label class="control-label col-sm-1">边框样式</label>
-													<label class="control-label col-sm-8" >
-														<div class="btn-group" >
-															<button type="button" class="btn btn-default"  disabled="disabled">
-																<span id="ontrue-style"></span>
-															</button>
-															<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-																<span class="caret"></span>
-
-															</button>
-															<ul class="dropdown-menu ontrue-style-ul" role="menu">
-																<li>
-																	<a href="#">默认</a>
-																</li>
-																<li>
-																	<a href="#">-</a>
-																</li>
-																<li>
-																	<a href="#">.</a>
-																</li>
-																<li>
-																	<a href="#">-.</a>
-																</li>
-																<li>
-																	<a href="#">-..</a>
-																</li>
-																<li>
-																	<a href="#">.</a>
-																</li>
-															</ul>
-														</div>
-
-													</label>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label col-sm-1">边框颜色</label>
-													<label class="control-label col-sm-8 ontrue-border-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-
-												<div class="form-group div-basic-hide div-text-val">
-													<label class="control-label col-sm-1">文本内容</label>
-													<label class="control-label col-sm-8" >
-														<input id="ontrue-text" type="text" class="form-control"></label>
-												</div>
-												
-												<div class="form-group div-unit">
-												<label class="control-label col-sm-1">单位</label>
-												<label class="control-label col-sm-8">
-													<input id="comp-unit-ontrue" type="text" class="form-control"></label>
-												</div>
-
-												<div class="form-group div-basic-hide div-text-color">
-													<label class="control-label col-sm-1">文本颜色</label>
-													<label class="control-label col-sm-8 ontrue-text-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-
-												<div class="form-group div-fill">
-													<label class="control-label col-sm-1">填充颜色</label>
-													<label class="control-label col-sm-8 ontrue-fill-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-												<div class="form-group div-text-alpha">
-													<label class="control-label col-sm-1">背景透明</label>
-													<label class="control-label col-sm-8">
-														<input id="text-alpha-ontrue" type="checkbox" name="ckss" class="ckss">
-													</label>
-												</div>
-												<div class="form-group div-alpha">
-													<label class="control-label col-sm-1">透明度</label>
-													<label class="control-label col-sm-8">
-														<input id="comp-alpha-ontrue" type="number" class="form-control"></label>
-												</div>
-
-												<div class="form-group div-basic-hide div-image">
-													<label class="control-label col-sm-1">图片</label>
-													<label class="control-label col-sm-8" >
-														<div class="input-group" >
-															<input id="ontrue-image" type="text" class="form-control input-img" disabled="disabled">									
-															<span class="input-group-btn" >
-																<button id="ontrue-image-btn" class="btn btn-default btn-img" type="button">...</button>
-															</span>
-														</div>
-													</label>
-												</div>
-
-												<div class="form-group div-checkbox" style="margin-bottom: 10px;">
-													<label class="control-label col-sm-1">
-														<input id="ontrue-flashing" type="checkbox" name="ckss" class="ckss"></label>
-													<label class="control-label col-sm-8">闪烁</label>
-												</div>
-
-											</form>
-										</div>
-
-										<p data-toggle="collapse" data-target="#div-onfalse" class="collapsed p-hide"> <i></i>
-											onFalse
-										</p>
-										<div id="div-onfalse" class="component-attr-son collapse">
-											<form class="form-horizontal" style="margin-bottom: 30px;">
-												<div class="form-group div-dropdown-menu div-normal-width">
-													<label class="control-label col-sm-1">边框宽度</label>
-													<label class="control-label col-sm-8" >
-														<div class="btn-group">
-															<button type="button" class="btn btn-default" disabled="disabled">
-																<span id="onfalse-width">false</span>
-															</button>
-															<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-																<span class="caret"></span>
-
-															</button>
-															<ul class="dropdown-menu onfalse-width-ul" role="menu">
-																<li>
-																	<a href="#">0</a>
-																</li>
-																<li>
-																	<a href="#">1</a>
-																</li>
-																<li>
-																	<a href="#">2</a>
-																</li>
-																<li>
-																	<a href="#">3</a>
-																</li>
-																<li>
-																	<a href="#">4</a>
-																</li>
-																<li>
-																	<a href="#">5</a>
-																</li>
-															</ul>
-														</div>
-
-													</label>
-												</div>
-
-												<div class="form-group div-line-conduit">
-													<label class="control-label col-sm-1">边框宽度</label>
-													<label class="control-label col-sm-8" >
-														<input id="onfalse-conline-width" type="text" class="form-control"></label>
-												</div>
-												<div class="form-group div-dropdown-menu">
-													<label class="control-label col-sm-1">边框样式</label>
-													<label class="control-label col-sm-8" >
-														<div class="btn-group" >
-															<button type="button" class="btn btn-default"  disabled="disabled">
-																<span id="onfalse-style"></span>
-															</button>
-															<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-																<span class="caret"></span>
-
-															</button>
-															<ul class="dropdown-menu onfalse-style-ul" role="menu">
-																<li>
-																	<a href="#">默认</a>
-																</li>
-																<li>
-																	<a href="#">-</a>
-																</li>
-																<li>
-																	<a href="#">.</a>
-																</li>
-																<li>
-																	<a href="#">-.</a>
-																</li>
-																<li>
-																	<a href="#">-..</a>
-																</li>
-																<li>
-																	<a href="#">.</a>
-																</li>
-															</ul>
-														</div>
-
-													</label>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label col-sm-1">边框颜色</label>
-													<label class="control-label col-sm-8 onfalse-border-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-
-												<div class="form-group div-basic-hide div-text-val">
-													<label class="control-label col-sm-1">文本内容</label>
-													<label class="control-label col-sm-8" >
-														<input id="onfalse-text" type="text" class="form-control"></label>
-												</div>
-												
-												
-												<div class="form-group div-unit">
-												<label class="control-label col-sm-1">单位</label>
-												<label class="control-label col-sm-8">
-													<input id="comp-unit-onfalse" type="text" class="form-control"></label>
-											</div>
-
-												<div class="form-group div-basic-hide div-text-color">
-													<label class="control-label col-sm-1">文本颜色</label>
-													<label class="control-label col-sm-8 onfalse-text-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-
-												<div class="form-group div-fill">
-													<label class="control-label col-sm-1">填充颜色</label>
-													<label class="control-label col-sm-8 onfalse-fill-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-												<div class="form-group div-text-alpha">
-												<label class="control-label col-sm-1">背景透明</label>
-												<label class="control-label col-sm-8">
-													<input id="text-alpha-onfalse" type="checkbox" name="ckss" class="ckss">
-												</label>
-											</div>
-													<div class="form-group div-alpha">
-													<label class="control-label col-sm-1">透明度</label>
-													<label class="control-label col-sm-8">
-														<input id="comp-alpha-onfalse" type="number" class="form-control"></label>
-												</div>
-												<div class="form-group div-basic-hide div-image" >
-													<label class="control-label col-sm-1">图片</label>
-													<label class="control-label col-sm-8" >
-														<div class="input-group" >
-															<input id="onfalse-image" type="text" class="form-control input-img" disabled="disabled">									
-															<span class="input-group-btn" >
-																<button id="onfalse-image-btn" class="btn btn-default btn-img" type="button">...</button>
-															</span>
-														</div>
-													</label>
-												</div>
-
-												<div class="form-group div-checkbox">
-													<label class="control-label col-sm-1">
-														<input id="onfalse-flashing" type="checkbox" name="ckss" class="ckss"></label>
-													<label class="control-label col-sm-8">闪烁</label>
-												</div>
-
-											</form>
-										</div>
-
-										<p data-toggle="collapse" data-target="#div-onalarm" class="collapsed p-hide">
-											<i></i>
-											onAlarm
-										</p>
-										<div id="div-onalarm" class="component-attr-son collapse ">
-											<form class="form-horizontal" style="margin-bottom: 40px;">
-												<div class="form-group div-dropdown-menu div-normal-width">
-													<label class="control-label col-sm-1">边框宽度</label>
-													<label class="control-label col-sm-8" >
-														<div class="btn-group">
-															<button type="button" class="btn btn-default" disabled="disabled">
-																<span id="onalarm-width"></span>
-															</button>
-															<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-																<span class="caret"></span>
-
-															</button>
-															<ul class="dropdown-menu onalarm-width-ul" role="menu">
-																<li>
-																	<a href="#">0</a>
-																</li>
-																<li>
-																	<a href="#">1</a>
-																</li>
-																<li>
-																	<a href="#">2</a>
-																</li>
-																<li>
-																	<a href="#">3</a>
-																</li>
-																<li>
-																	<a href="#">4</a>
-																</li>
-																<li>
-																	<a href="#">5</a>
-																</li>
-															</ul>
-														</div>
-
-													</label>
-												</div>
-
-												<div class="form-group div-line-conduit">
-													<label class="control-label col-sm-1">边框宽度</label>
-													<label class="control-label col-sm-8" >
-														<input id="onalarm-conline-width" type="text" class="form-control"></label>
-												</div>
-
-												<div class="form-group div-dropdown-menu">
-													<label class="control-label col-sm-1">边框样式</label>
-													<label class="control-label col-sm-8" >
-														<div class="btn-group" >
-															<button type="button" class="btn btn-default"  disabled="disabled">
-																<span id="onalarm-style"></span>
-															</button>
-															<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-																<span class="caret"></span>
-
-															</button>
-															<ul class="dropdown-menu onalarm-style-ul" role="menu">
-																<li>
-																	<a href="#">默认</a>
-																</li>
-																<li>
-																	<a href="#">-</a>
-																</li>
-																<li>
-																	<a href="#">.</a>
-																</li>
-																<li>
-																	<a href="#">-.</a>
-																</li>
-																<li>
-																	<a href="#">-..</a>
-																</li>
-																<li>
-																	<a href="#">.</a>
-																</li>
-															</ul>
-														</div>
-
-													</label>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label col-sm-1">边框颜色</label>
-													<label class="control-label col-sm-8 onalarm-border-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-
-												<div class="form-group div-basic-hide div-text-val">
-													<label class="control-label col-sm-1">文本内容</label>
-													<label class="control-label col-sm-8" >
-														<input id="onalarm-text" type="text" class="form-control"></label>
-												</div>
-												<div class="form-group div-unit">
-												<label class="control-label col-sm-1">单位</label>
-												<label class="control-label col-sm-8">
-													<input id="comp-unit-onalarm" type="text" class="form-control"></label>
-											</div>
-
-												<div class="form-group div-basic-hide div-text-color">
-													<label class="control-label col-sm-1">文本颜色</label>
-													<label class="control-label col-sm-8 onalarm-text-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-
-												<div class="form-group div-fill">
-													<label class="control-label col-sm-1">填充颜色</label>
-													<label class="control-label col-sm-8 onalarm-fill-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-
-												<div class="form-group div-text-alpha">
-												<label class="control-label col-sm-1">背景透明</label>
-												<label class="control-label col-sm-8">
-													<input id="text-alpha-onalarm" type="checkbox" name="ckss" class="ckss">
-												</label>
-											</div>
-											
-												<div class="form-group div-alpha">
-													<label class="control-label col-sm-1">透明度</label>
-													<label class="control-label col-sm-8">
-														<input id="comp-alpha-onalarm" type="number" class="form-control"></label>
-												</div>
-
-												<div class="form-group div-basic-hide div-image">
-													<label class="control-label col-sm-1">图片</label>
-													<label class="control-label col-sm-8" >
-														<div class="input-group" >
-															<input id="onalarm-image" type="text" class="form-control input-img" disabled="disabled">									
-															<span class="input-group-btn" >
-																<button id="onalarm-image-btn" class="btn btn-default btn-img" type="button">...</button>
-															</span>
-														</div>
-													</label>
-												</div>
-
-												<div class="form-group div-checkbox" style="margin-bottom: 10px;">
-													<label class="control-label col-sm-1">
-														<input id="onalarm-flashing" type="checkbox" name="ckss" class="ckss"></label>
-													<label class="control-label col-sm-8">闪烁</label>
-												</div>
-
-											</form>
-										</div>
-
-										<p data-toggle="collapse" data-target="#div-ondiscon" class="collapsed p-hide">
-											<i></i>
-											onDisconnected
-										</p>
-										<div id="div-ondiscon" class="component-attr-son collapse">
-											<form class="form-horizontal" style="margin-bottom: 90px;">
-												<div class="form-group div-dropdown-menu div-normal-width">
-													<label class="control-label col-sm-1">边框宽度</label>
-													<label class="control-label col-sm-8" >
-														<div class="btn-group">
-															<button type="button" class="btn btn-default" disabled="disabled">
-																<span id="onDisc-width"></span>
-															</button>
-															<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-																<span class="caret"></span>
-
-															</button>
-															<ul class="dropdown-menu onDisc-width-ul" role="menu">
-																<li>
-																	<a href="#">0</a>
-																</li>
-																<li>
-																	<a href="#">1</a>
-																</li>
-																<li>
-																	<a href="#">2</a>
-																</li>
-																<li>
-																	<a href="#">3</a>
-																</li>
-																<li>
-																	<a href="#">4</a>
-																</li>
-																<li>
-																	<a href="#">5</a>
-																</li>
-															</ul>
-														</div>
-
-													</label>
-												</div>
-												
-												<div class="form-group div-line-conduit">
-													<label class="control-label col-sm-1">边框宽度</label>
-													<label class="control-label col-sm-8" >
-														<input id="ondis-conline-width" type="text" class="form-control"></label>
-												</div>
-
-												<div class="form-group div-dropdown-menu">
-													<label class="control-label col-sm-1">边框样式</label>
-													<label class="control-label col-sm-8" >
-														<div class="btn-group" >
-															<button type="button" class="btn btn-default"  disabled="disabled">
-																<span id="onDisc-style"></span>
-															</button>
-															<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-																<span class="caret"></span>
-
-															</button>
-															<ul class="dropdown-menu onDisc-style-ul" role="menu" style="z-index: 99999999">
-																<li>
-																	<a href="#">默认</a>
-																</li>
-																<li>
-																	<a href="#">-</a>
-																</li>
-																<li>
-																	<a href="#">.</a>
-																</li>
-																<li>
-																	<a href="#">-.</a>
-																</li>
-																<li>
-																	<a href="#">-..</a>
-																</li>
-																<li>
-																	<a href="#">.</a>
-																</li>
-															</ul>
-														</div>
-
-													</label>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label col-sm-1">边框颜色</label>
-													<label class="control-label col-sm-8 onDisc-border-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-
-												<div class="form-group div-basic-hide div-text-val">
-													<label class="control-label col-sm-1">文本内容</label>
-													<label class="control-label col-sm-8" >
-														<input id="onDisc-text" type="text" class="form-control"></label>
-												</div>
-
-
-												<div class="form-group div-unit">
-												<label class="control-label col-sm-1">单位</label>
-												<label class="control-label col-sm-8">
-													<input id="comp-unit-ondis" type="text" class="form-control"></label>
-												</div>
-
-												<div class="form-group div-basic-hide div-text-color">
-													<label class="control-label col-sm-1">文本颜色</label>
-													<label class="control-label col-sm-8 onDisc-text-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-
-												<div class="form-group div-fill">
-													<label class="control-label col-sm-1">填充颜色</label>
-													<label class="control-label col-sm-8 onDisc-fill-color" style="padding-right: 0;">
-														<ul class="color-board">
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-															<li></li>
-														</ul>
-														<span >+</span>
-													</label>
-												</div>
-
-
-												<div class="form-group div-text-alpha">
-												<label class="control-label col-sm-1">背景透明</label>
-												<label class="control-label col-sm-8">
-												<input id="text-alpha-ondisc" type="checkbox" name="ckss" class="ckss">
-													
-												</label>
-											</div>
-												<div class="form-group div-alpha">
-													<label class="control-label col-sm-1">透明度</label>
-													<label class="control-label col-sm-8">
-														<input id="comp-alpha-ondisc" type="number" class="form-control"></label>
-												</div>
-
-												<div class="form-group div-basic-hide div-image">
-													<label class="control-label col-sm-1">图片</label>
-													<label class="control-label col-sm-8" >
-														<div class="input-group" >
-															<input id="onDisc-image" type="text" class="form-control input-img" disabled="disabled">									
-															<span class="input-group-btn" >
-																<button id="onDisc-image-btn" class="btn btn-default btn-img" type="button">...</button>
-															</span>
-														</div>
-													</label>
-												</div>
-
-												<div class="form-group div-checkbox" style="margin-bottom: 10px;">
-													<label class="control-label col-sm-1">
-														<input id="onDisc-flashing" type="checkbox" name="ckss" class="ckss"></label>
-													<label class="control-label col-sm-8">闪烁</label>
-												</div>
-											</form>
-										</div>
-									</div>
-
-								</div>
-
-
-							</div>
-							<div class="tab-pane fade" id="canvas-attr">
-								<form class="form-horizontal">
-									<div class="form-group" >
-										<label class="control-label col-sm-1">画布图片</label>
-										<label class="control-label col-sm-8" >
-											<div class="input-group" >
-												<input id="canvas-img" type="text" class="form-control" disabled="disabled" >
-												<span class="input-group-btn">
-													<button id="canvas-img-btn" class="btn btn-default" type="button">...</button>
-												</span>
-											</div>
-										</label>
-									</div>
-									<div class="form-group">
-										<label class="control-label col-sm-1">画布颜色</label>
-										<label class="control-label col-sm-8 canvas-fill-color">
-											<ul class="color-board">
-												<li></li>
-												<li></li>
-												<li></li>
-												<li></li>
-												<li></li>
-												<li></li>
-												<li></li>
-												<li></li>
-												<li></li>
-											</ul>
-											<span class="add-color">+</span>
-										</label>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-										
-				</div>
-				<div class="second-attr" style="display: none;">
-					<p id="glo-title" class="title" data-id="">全局按钮属性</p>
-					<form class="form-horizontal">
-						<div class="form-group">
-							<label class="control-label col-sm-1">名称</label>
-							<label class="control-label col-sm-8">
-								<input id="glo-btn-name" type="text" class="form-control"></label>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-1">Tag地址</label>
-							<label class="control-label col-sm-7" style="z-index: 0;padding-right: 0;">
-								<div class="input-group" >
-									<input id="glo-btn-tagname"  type="text" class="form-control input-img">					
-									<span class="input-group-btn" >
-										<button id="glo-btn-btn" class="btn btn-default btn-img" type="button">...</button>
-									</span>
-								</div>
-							</label>
-							<label class="col-sm-1 control-label" style="width: 20px;padding-left: 0;padding-right: 0;">
-								<img id="glo-btn-img" src = "" height="20" width="20" ></label>
-						</div>
-
-						<div class="form-group div-checkbox">
-							<label class="control-label col-sm-1">
-								<input id="glo-checkbox" type="checkbox" name="ckss" class="ckss"></label>
-							<label class="control-label col-sm-8">只读</label>
-						</div>
-					</form>
-				</div>
-			</li>
-		</ul>
-			
-		</div>
-		<div class="loading" style="display:none">
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-			<!-- 上传图片 for  imageComponent style  -->
-			<input type="file" id="imageFileStyle" size="28" style="opacity: 0;display:none;" onchange="imageShowPreviewStyle(this)" />
-			<!-- 上传图片 for  imageComponent  onTrue -->
-			<input type="file" id="imageFileOnTrue" size="28" style="opacity: 0;display:none;" onchange="imageShowPreviewOnTrue(this)" />
-			<!-- 上传图片 for  imageComponent  onFalse -->
-			<input type="file" id="imageFileOnFalse" size="28" style="opacity: 0;display:none;" onchange="imageShowPreviewOnFalse(this)" />
-			<!-- 上传图片 for  imageComponent  onAlerm -->
-			<input type="file" id="imageFileOnAlerm" size="28" style="opacity: 0;display:none;" onchange="imageShowPreviewOnAlerm(this)" />
-			<!-- 上传图片 for  imageComponent  onDisconnected -->
-			<input type="file" id="imageFileOnDisconnected" size="28" style="opacity: 0;display:none;" onchange="imageShowPreviewOnDisconnected(this)" />
-			<!-- 上传图片 for  Canvas   -->
-			<input type="file" id="fileField" size="28" style="opacity: 0;display:none;" onchange="showPreview(this)" />
-		
-		<div id="search-datalabel" style="display: none;">
-
-			<div class="content-search">
-				<label class="col-sm-1">
-					<span id="search-span" class="glyphicon glyphicon-search"></span>
-				</label>
-				<input id="content-search-input" type="text" placeholder="请输入数据标签名称" required class="col-sm-9">		
-				<label class="col-sm-1 label_img">
-					<img id="clearImage" src="images/delete.png" style="margin-left: -10px;">
-					</label>
-			</div>	
-			<br>		
-			<br>			
-			<br>		
-			<form class="form-horizontal">
-
-			<div  class="form-group search-datalabel-left">
-				<div class="search_no_datalabel" style="display: none;">无数据</div>
-
-				<table id="search_datalabel_tab"  class="table table-striped" style="margin-bottom: 0;padding-bottom: 0">
-					<thead>
-						<tr>
-							<th>标签名称</th>
-							<th>类型</th>
-							<th>描述</th>
-							<th>节点名称</th>
-							<th>寄存器</th>
-							<th>选择</th>
-						</tr>
-					</thead>
-					<tbody style="margin-bottom: 0">
-						
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-
-
-					</tbody>
-				</table>
-				<div id="table-boths" class="form-group">
-					<div class="tcdPageCode"></div>
-				</div>
-			</div>
-		</form>
-		</div>
-	
-	
-			<div id="deleteAllcomAndcanvas" style="display: none;">
-				<p style="color: #fff">确认清除画面吗</p>
-			</div>
-	<script type="text/javascript">(function($) {
-			$(window).on("load", function() {
-				$(".component-attr").mCustomScrollbar({
-					autoHideScrollbar: true
-				});
-				
-				$('.have-btn').mCustomScrollbar({
-					autoHideScrollbar: true
-				});
-					});
-				})(jQuery);
-
-			picrun_ini("List2_1", 'ISL_Cont_1', "List1_1");
-	</script>
-
-
-		<script type="text/javascript" src="js/edit/bootstrap.min.js"></script>	
-		<script type="text/javascript" src="js/basic/jquery.mCustomScrollbar.concat.min.js"></script>
-		<script type="text/javascript" src="js/edit/colpick.js"></script>	
-		<script type="text/javascript" src="js/actionJS/reEditPageToInitialize.js"></script>	
-		<script type="text/javascript" src="js/ComponentSet/safeComponent.js"></script>
-		<script type="text/javascript" src="js/ComponentSet/labelComponent.js"></script>
-		<script type="text/javascript" src="js/ComponentSet/textComponent.js"></script>
-		<script type="text/javascript" src="js/ComponentSet/imageComponent.js"></script>
-		<script type="text/javascript" src="js/ComponentSet/RectangleComponent.js"></script>
-		<script type="text/javascript" src="js/ComponentSet/LineComponent.js"></script>
-		<script type="text/javascript" src="js/actionJS/attrmenu.js"></script>
+
+    <div id="app" class="draw2d-canvas bayax-layout-admin  layui-layout">
+        <div class="bayax-layout-header  layui-header clearfix">
+            <div class="bayax-logo">
+                <img src="./images/logo.png" alt="">
+            </div>
+            <ul class="bayax-nav  bayax-layout-left  bayax-layout-leftone">
+                <li class="layui-nav-item head">
+                    <a class="go-subsys" href="javascript:;">
+                        <span><i class="icon-keyboard_arrow_left"></i></span>
+                        <span class="group-name"> <div v-bind:class="classObject">123123</div></span>
+                        </span>
+                    </a>
+                    <label>
+                         <span class="title"> 当前您所在的位置:</span>  
+                         <span class="image-name"></span>
+                    </label>
+
+                </li>
+            </ul>
+
+
+
+        </div>
+        <div class="bayax-layout-header bayax-layout-header2  layui-header clearfix">
+            <div class="bayax-logo ">
+                <ul id="toolbar" class="toolbar clearfix">
+
+                </ul>
+            </div>
+
+            <div class="bayax-layout-left bayax-layout-lefttwo">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">基本图形</li>
+                        <li>通用</li>
+                        <li>专业</li>
+                        <li>建筑设备</li>
+                        <li>安全防范</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <ul class="comportant-ul clearfix">
+                                <li>
+                                    <span class="juxing componentImg draw2d_droppable" data-shape="rectangleComponent"></span>
+                                    <p>矩形</p>
+                                </li>
+
+                                <li>
+                                    <span class="yuanjiajuxing componentImg draw2d_droppable" data-shape="RoundedRectangleComponent"></span>
+                                    <p>圆角矩形</p>
+                                </li>
+                                <li>
+                                    <span class="tuoyuan componentImg draw2d_droppable" data-shape="EllipseComponent"></span>
+                                    <p>椭圆</p>
+                                </li>
+                                <li>
+                                    <span class="straightline componentImg draw2d_droppable" data-shape="LineComponent"></span>
+                                    <p>直线</p>
+                                </li>
+                                <li>
+                                    <span class="duobianxing componentImg draw2d_droppable" data-shape="polygonComponent"></span>
+                                    <p>多边形</p>
+                                </li>
+                                <li>
+                                    <span class="ArrowUp componentImg draw2d_droppable" data-shape="forUpComponent"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="Arrowright componentImg draw2d_droppable" data-shape="forRightComponent"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="down componentImg draw2d_droppable" data-shape="forDownComponent"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="left componentImg draw2d_droppable" data-shape="forLeftComponent"></span>
+                                    <p>箭头</p>
+                                </li>
+                                <li>
+                                    <span class="leveldouble componentImg draw2d_droppable" data-shape="BothArrowHComponent"></span>
+                                    <p>双箭头</p>
+                                </li>
+                                <li>
+                                    <span class="Verticaldouble componentImg draw2d_droppable" data-shape="BothArrowVComponent"></span>
+                                    <p>双箭头</p>
+                                </li>
+                                <li>
+                                    <span class="juxing componentImg draw2d_droppable" data-shape="conduitCompontent"></span>
+                                    <p>管道</p>
+                                </li>
+                                <li>
+                                    <span class="juxing componentImg draw2d_droppable" data-shape="conduitCompontentV"></span>
+                                    <p>管道</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="layui-tab-item">
+                            <ul class="comportant-ul clearfix">
+                                <li>
+                                    <span class="tag componentImg draw2d_droppable" data-shape="LabelComponent"></span>
+                                    <p>标签</p>
+                                </li>
+                                <!-- <li>
+                                    <span class="button componentImg draw2d_droppable" data-shape="buttonComponent"></span>
+                                    <p>按钮</p>
+                                </li> -->
+                                <li>
+                                    <span class="text componentImg draw2d_droppable" data-shape="textComponent"></span>
+                                    <p>文本</p>
+                                </li>
+                                <li>
+                                    <span class="jpg componentImg draw2d_droppable" data-shape="imageComponent"></span>
+                                    <p>自定义</p>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="layui-tab-item">
+                            <ul class="comportant-ul clearfix">
+                                <li>
+                                    <span class="switch componentImg draw2d_droppable" data-shape="switchComponent"></span>
+                                    <p>开关</p>
+                                </li>
+                                <li>
+                                    <span class="piping componentImg draw2d_droppable" data-shape="pipingComponent"></span>
+                                    <p>管道</p>
+                                </li>
+                                <li>
+                                    <span class="Warninglamp componentImg draw2d_droppable" data-shape="WarninglampComponent"></span>
+                                    <p>报警提示灯</p>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="layui-tab-item ">
+                            <div class="components-num4">
+                                <a id="LeftBotton" class="LeftBotton" href="javascript:void(0);" target="_self"></a>
+
+                                <div class="pcont" id="scroll_div">
+                                    <div class="ScrCont">
+                                        <ul id="scroll_ul_1" class="comportant-ul scroll-ul">
+                                            <li>
+                                                <span class="Blowerfan componentImg draw2d_droppable" data-shape="blowerfanComponent"></span>
+                                                <p>送风机</p>
+                                            </li>
+
+                                            <li class="space-border">
+                                                <span class="Exhaustfan componentImg draw2d_droppable" data-shape="exhaustfanComponent"></span>
+                                                <p>排风机</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="beng componentImg draw2d_droppable" data-shape="bengComponent"></span>
+                                                <p>泵</p>
+                                            </li>
+                                            <li>
+                                                <span class="ElectricTwo-wayValve componentImg draw2d_droppable" data-shape="ElectricTwoWayValveComponent"></span>
+                                                <p>电动两通阀</p>
+                                            </li>
+                                            <li>
+                                                <span class="SolenoidValve componentImg draw2d_droppable" data-shape="SolenoidValveComponent"></span>
+                                                <p>电磁阀</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="ElectricButterflyValves componentImg draw2d_droppable" data-shape="ElectricButterflyValvesComponent"></span>
+                                                <p>电动蝶阀</p>
+                                            </li>
+
+                                            <li>
+                                                <span class="AirFiltration componentImg draw2d_droppable" data-shape="AirFiltrationComponent"></span>
+                                                <p>空气过滤器</p>
+                                            </li>
+                                            <li>
+                                                <span class="AirHeating componentImg draw2d_droppable" data-shape="AirHeatingComponent"></span>
+                                                <p>空气加热器</p>
+                                            </li>
+                                            <li>
+                                                <span class="AirCooler componentImg draw2d_droppable" data-shape="AirCoolerComponent"></span>
+                                                <p>空气冷却器</p>
+                                            </li>
+                                            <li>
+                                                <span class="Humidifier componentImg draw2d_droppable" data-shape="HumidifierComponent"></span>
+                                                <p>加湿器</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="controlPanel componentImg draw2d_droppable" data-shape="controlPanelComponent"></span>
+                                                <p>温控面板</p>
+                                            </li>
+                                            <li>
+                                                <span class="FluorescentLamp componentImg draw2d_droppable" data-shape="FluorescentLampComponent"></span>
+                                                <p>荧光灯</p>
+                                            </li>
+
+                                            <li>
+                                                <span class="LED componentImg draw2d_droppable" data-shape="LEDComponent"></span>
+                                                <p>LED灯</p>
+                                            </li>
+                                            <li>
+                                                <span class="Incandescent componentImg draw2d_droppable" data-shape="IncandescentComponent"></span>
+                                                <p>白炽灯</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="MetalHalide componentImg draw2d_droppable" data-shape="MetalHalideComponent"></span>
+                                                <p>金卤灯</p>
+                                            </li>
+                                            <li>
+                                                <span class="temperature componentImg draw2d_droppable" data-shape="temperatureComponent"></span>
+                                                <p>温度</p>
+                                            </li>
+                                            <li>
+                                                <span class="humidity componentImg draw2d_droppable" data-shape="humidityComponent"></span>
+                                                <p>湿度</p>
+                                            </li>
+                                            <li>
+                                                <span class="pressure componentImg draw2d_droppable" data-shape="pressureComponent"></span>
+                                                <p>压力</p>
+                                            </li>
+                                            <li>
+                                                <span class="differentialPressure componentImg draw2d_droppable" data-shape="differentialPressureComponent"></span>
+                                                <p>压差</p>
+                                            </li>
+                                            <li class="space-border">
+                                                <span class="liquid componentImg draw2d_droppable" data-shape="liquidComponent"></span>
+                                                <p>液位</p>
+                                            </li>
+                                            <li>
+                                                <span class="electric componentImg draw2d_droppable" data-shape="electricComponent"></span>
+                                                <p>电流</p>
+                                            </li>
+                                            <li>
+                                                <span class="Voltage componentImg draw2d_droppable" data-shape="VoltageComponent"></span>
+                                                <p>电压</p>
+                                            </li>
+
+                                            <li>
+                                                <span class="frequency componentImg draw2d_droppable" data-shape="frequencyComponent"></span>
+                                                <p>频率</p>
+                                            </li>
+                                            <li>
+                                                <span class="activePower componentImg draw2d_droppable" data-shape="activePowerComponent"></span>
+                                                <p>有功功率</p>
+                                            </li>
+                                            <li>
+                                                <span class="ElectricityConsumption componentImg draw2d_droppable" data-shape="ElectricityConsumptionComponent"></span>
+                                                <p>用电量</p>
+                                            </li>
+                                            <li>
+                                                <span class="level componentImg draw2d_droppable" data-shape="levelComponent"></span>
+                                                <p>液体流量</p>
+                                            </li>
+                                            <li>
+                                                <span class="Gas componentImg draw2d_droppable" data-shape="GasComponent"></span>
+                                                <p>气体流量</p>
+                                            </li>
+                                            <li class="space-border ">
+                                                <span class="Broadcast componentImg draw2d_droppable" data-shape="BroadcastComponent"></span>
+                                                <p>广播</p>
+                                            </li>
+
+
+
+
+
+                                        </ul>
+                                        <ul id="scroll_ul_2" class="comportant-ul scroll-ul"></ul>
+                                    </div>
+                                </div>
+                                <a id="RightBotton" class="RightBotton" href="javascript:void(0);" target="_self"></a>
+
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <ul class="comportant-ul clearfix">
+                                <li>
+                                    <span class="monitoring componentImg draw2d_droppable" data-shape="monitoringComponent"></span>
+                                    <p>枪机</p>
+                                </li>
+                                <li>
+                                    <span class="qiuji componentImg draw2d_droppable" data-shape="qiujiComponent"></span>
+                                    <p>球机</p>
+                                </li>
+                                <li>
+                                    <span class="highqiuji componentImg draw2d_droppable" data-shape="highqiujiComponent"></span>
+                                    <p>高速球</p>
+                                </li>
+                                <li>
+                                    <span class="menjin componentImg draw2d_droppable" data-shape="EntranceGuardComponent"></span>
+                                    <p>门禁</p>
+                                </li>
+                                <li>
+                                    <span class="tance componentImg draw2d_droppable" data-shape="detectorComponent"></span>
+                                    <p>探测器</p>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="bayax-body">
+            <div class="draw2d-body">
+                <div class="content-body-border-top"></div>
+                <div class="draw2d-body-content">
+                    <div class="canvas-div">
+                        <div id="canvas" class="canvas"></div>
+                        <div id="tooltips"></div>
+                    </div>
+                    <div class="global-btn-div bayaxMscroll">
+                        <div class="global-btn-head">
+                            <span>全局按钮</span>
+                            <span @click="addGlobalBtn">添加</span>
+                        </div>
+                        <div class="global-btn-body">
+                            <ul class="globalbtn-ul">
+                                <li v-for="item in globalBtnData.btndata">
+                                    <button v-text="item.name" @click="setGlobalBtnAttr(item)" class="bayax-btn"></button>
+                                    <span @click="deleteGlobalBtn(item)" class="btn-tag-status"></span>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div v-bind:class="{'basic-hide':showHideFlag.attrdiv}" class="component-attribute-div attribute-div">
+                <div class="attr-head">
+                    <p>修改属性</p>
+                </div>
+                <div class="attr-body">
+                    <div class="layui-tab">
+                        <ul class="layui-tab-title">
+                            <li class="li-comp layui-this">控件属性</li>
+                            <li class="li-canvas">画布属性</li>
+                        </ul>
+                        <div class="layui-tab-content bayaxMscroll">
+                            <div class="layui-tabscroll-item layui-tab-item layui-show">
+                                <div class="attr-content">
+                                    <p class="attr-toggle-default attr-content-titles collapsed reset-title" data-toggle="collapse" data-for="routine">
+                                        <i></i>
+                                        <span>常规</span>
+                                    </p>
+
+                                    <div class="routine attr-content-body reset-content">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">名称</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="routine.name" type="text" name="title" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-formdesc-item layui-form-item">
+                                            <label class="layui-form-label">描述</label>
+                                            <div class="layui-input-block">
+                                                <textarea v-model="routine.description" class="layui-input"></textarea>
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv},{'basic-hide':hidediv.labelHideDiv}]" class="layui-form-item">
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">尺寸</label>
+                                                <div class="layui-attrinput-inline layui-input-inline" style="padding-left:5px;">
+                                                    <input v-model="routine.width" type="number" autocomplete="off" class="layui-input">
+                                                </div>
+                                                <div class="layui-form-mid">-</div>
+                                                <div class="layui-attrinput-inline layui-input-inline">
+                                                    <input v-model="routine.height" type="number" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="{'basic-hide':hidediv.lineHideDiv}" class="layui-form-item">
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">位置</label>
+                                                <div class="layui-attrinput-inline layui-input-inline" style="padding-left:5px;">
+                                                    <input v-model="routine.offx" type="text" autocomplete="off" class="layui-input">
+                                                </div>
+                                                <div class="layui-form-mid"> </div>
+                                                <div class="layui-attrinput-inline layui-input-inline">
+                                                    <input v-model="routine.offy" type="text" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="{'basic-hide':hidediv.lineHideDiv}" class="layui-form-item">
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label"></label>
+                                                <div class="layui-attrinput-inline layui-input-inline" style="padding-left:5px;">
+                                                    <span>X</span>
+                                                </div>
+                                                <div class="layui-form-mid"> </div>
+                                                <div class="layui-attrinput-inline layui-input-inline">
+                                                    <span>Y</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.textHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-formcheck-item layui-form-item">
+                                            <input v-model="routine.horizontal" type="checkbox" id="horizontal" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="horizontal"></label>
+                                            <span>水平</span>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.textHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-formcheck-item layui-form-item">
+                                            <input v-model="routine.vertical" type="checkbox" id="vertical" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="vertical"></label>
+                                            <span>垂直</span>
+                                        </div>
+                                        <div v-bind:class="{'basic-hide':hidediv.lineHideDiv}" class="layui-form-item">
+                                            <label class="layui-form-label">旋转角度</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="routine.rotationAngle" type="number" name="title" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv}]" class="layui-formcheck-item layui-form-item">
+                                            <input v-model="routine.title" type="checkbox" id="comp-title" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="comp-title"></label>
+                                            <span>显示标题</span>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">标题内容</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="routine.titledata.text" :disabled="routine.titledata.disabled" type="text" name="title" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="layui-formcheck-item layui-form-item">
+                                            <input v-model="routine.hover" type="checkbox" id="comp-hover" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="comp-hover"></label>
+                                            <span>显示说明</span>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">说明内容</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="routine.hoverdata.text" :disabled="routine.hoverdata.disabled" type="text" name="title" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-formcheck-item layui-form-item">
+                                            <input v-model="routine.visible" type="checkbox" id="comp-hides" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="comp-hides"></label>
+                                            <span>隐藏组件</span>
+                                        </div>
+
+                                        <div class="layui-formcheck-item layui-form-item">
+                                            <input v-model="routine.enable" type="checkbox" id="comp-unabel" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="comp-unabel"></label>
+                                            <span>不可用</span>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">访问等级</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="routine.accessLevel.level" class="bayax-division-text">123</p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="comp-level-ul">
+                                                            <i></i>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="comp-level-ul  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in routine.accessLevel.levelData" v-text="item" @click="setAccessLevel(item)"></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="attr-content">
+                                    <p class="attr-toggle-default attr-content-titles collapsed reset-title" data-toggle="collapse" data-for="data-div">
+                                        <i></i>
+                                        <span>Data</span>
+                                    </p>
+                                    <div class="data-div attr-content-body reset-content">
+                                        <div v-bind:class="{'basic-hide':hidediv.vlcUrlHideDiv}" class="layui-form-item">
+                                            <label class="layui-form-label">摄像地址</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="datas.vlcUrl" type="text" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-formtag-item layui-form-item">
+                                            <label class="layui-form-label">Tag地址</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="layui-input-inline">
+                                                    <div class="bayax-division-select bayax-select-group">
+                                                        <div class="bayax-division-title">
+                                                            <p v-text="datas.tag.tagname" class="bayax-division-text"></p>
+                                                            <span @click='setComTag' class="bayax-division-span">
+                                                                <span>···</span>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <span v-bind:class="datas.tag.isrighttag" class="tag-status rights"></span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-formcheck-item layui-form-item">
+                                            <input v-model="datas.readonly" type="checkbox" id="comp-readonly" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="comp-readonly"></label>
+                                            <span>只读</span>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="attr-content">
+                                    <p class="attr-toggle-status attr-content-titles" data-toggle="collapse" data-for="style-div" data-status="defaults">
+                                        <i></i>
+                                        <!-- 原 styles -->
+                                        <span>Default</span>
+                                    </p>
+                                    <div class="style-div status-div attr-content-body reset-content">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">边框宽度</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="defaults.borderWidth" class="bayax-division-text"></p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="default-border-width">
+                                                            <i></i>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="default-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setDefaultBorderWidth(item)"></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- <div class="layui-form-item">
+                                            <label class="layui-form-label">边框样式</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="default.borderStyle" class="bayax-division-text"></p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="style-border-style">
+                                                            <i></i>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="style-border-style  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in borderData.borderStyle" v-text="item.name" @click="setStyleBorderStyle(item)">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div> -->
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">边框颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in defaults.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setDefaultBorderColor(item)"></li>
+                                                    <li class="default-border-color">+</li>
+                                                </ul>
+
+
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">填充颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in defaults.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setDefaultFillColor(item)"></li>
+                                                    <li class="default-fill-color">+</li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">文本内容</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="defaults.fontText" type="text" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">字体大小</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="defaults.fontSize" type="number" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">单位</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="defaults.fontUnit" type="text" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">文本颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in defaults.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setDefaultFontColor(item)"></li>
+                                                    <li class="defaults-font-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-formcheck-item layui-form-item">
+                                            <input v-model="defaults.setAlpha" type="checkbox" id="default-alpha-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="default-alpha-check"></label>
+                                            <span>背景透明</span>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.conduitHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">透明度</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="defaults.alpha" type="text" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">图片</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="layui-input-inline">
+                                                    <div class="bayax-division-select bayax-select-group">
+                                                        <div class="bayax-division-title">
+                                                            <p v-text="defaults.picture" class="bayax-division-text"></p>
+                                                            <span @click='upImageStyle' class="bayax-division-span">
+                                                                    <span>···</span>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-formcheck-item layui-form-item">
+                                            <input v-model="defaults.flashing" type="checkbox" id="default-flashing-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="default-flashing-check"></label>
+                                            <span>闪烁</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- ontrue -->
+                                <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="ontrue-div" data-status="onTrue">
+                                        <i></i>
+                                        <span>onTrue</span>
+                                    </p>
+                                    <div class="ontrue-div status-div attr-content-body reset-content">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">边框宽度</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="ontrue.borderWidth" class="bayax-division-text">123</p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="ontrue-border-width">
+                                                            <i></i>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="ontrue-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setOnTrueBorderWidth(item)"></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- <div class="layui-form-item">
+                                            <label class="layui-form-label">边框样式</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="ontrue.borderStyle" class="bayax-division-text"></p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="ontrue-border-style">
+                                                            <i></i>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="ontrue-border-style  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in borderData.borderStyle" v-text="item.name" @click="setOnTrueBorderStyle(item)"></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div> -->
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">边框颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ontrue.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnTrueBorderColor(item)"></li>
+                                                    <li class="ontrue-border-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">填充颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ontrue.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnTrueFillColor(item)"></li>
+                                                    <li class="ontrue-fill-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">文本内容</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="ontrue.fontText" type="text" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">文本颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ontrue.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnTrueFontColor(item)"></li>
+                                                    <li class="ontrue-font-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-formcheck-item layui-form-item">
+                                            <input v-model="ontrue.setAlpha" type="checkbox" id="ontrue-alpha-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="ontrue-alpha-check"></label>
+                                            <span>背景透明</span>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.conduitHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">透明度</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="ontrue.alpha" type="text" name="title" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">图片</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="layui-input-inline">
+                                                    <div class="bayax-division-select bayax-select-group">
+                                                        <div class="bayax-division-title">
+                                                            <p v-text="ontrue.picture" class="bayax-division-text"></p>
+                                                            <span @click='upImageOnTrue' class="bayax-division-span">
+                                                                <span>···</span>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-formcheck-item layui-form-item">
+                                            <input v-model="ontrue.flashing" type="checkbox" id="ontrue-flashing-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="ontrue-flashing-check"></label>
+                                            <span>闪烁</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="onfalse-div" data-status="onFalse">
+                                        <i></i>
+                                        <span>onFalse</span>
+                                    </p>
+                                    <div class="onfalse-div status-div attr-content-body reset-content">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">边框宽度</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="onfalse.borderWidth" class="bayax-division-text"></p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="onfalse-border-width">
+                                                            <i></i>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="onfalse-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setOnFalseBorderWidth(item)"></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- <div class="layui-form-item">
+                                            <label class="layui-form-label">边框样式</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="onfalse.borderStyle" class="bayax-division-text"></p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="onfalse-border-style">
+                                                            <i></i>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="onfalse-border-style  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in borderData.borderStyle" v-text="item.name" @click="setOnFalseBorderStyle(item)"></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div> -->
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">边框颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onfalse.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnFalseBorderColor(item)"></li>
+                                                    <li class="onfalse-border-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">填充颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onfalse.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnFalseFillColor(item)"></li>
+                                                    <li class="onfalse-fill-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">文本内容</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="onfalse.fontText" type="text" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">文本颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onfalse.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnFalseFontColor(item)"></li>
+                                                    <li class="onfalse-font-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-formcheck-item layui-form-item">
+                                            <input v-model="onfalse.setAlpha" type="checkbox" id="onfalse-alpha-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="onfalse-alpha-check"></label>
+                                            <span>背景透明</span>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.conduitHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">透明度</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="onfalse.alpha" type="text" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">图片</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="layui-input-inline">
+                                                    <div class="bayax-division-select bayax-select-group">
+                                                        <div class="bayax-division-title">
+                                                            <p v-text="onfalse.picture" class="bayax-division-text"></p>
+                                                            <span @click='upImageOnFalse' class="bayax-division-span">
+                                                                <span>···</span>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-formcheck-item layui-form-item">
+                                            <input v-model="onfalse.flashing" type="checkbox" id="onfalse-flashing-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="onfalse-flashing-check"></label>
+                                            <span>闪烁</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="onalarm-div" data-status="onAlarm">
+                                        <i></i>
+                                        <span>onAlarm</span>
+                                    </p>
+                                    <div class="onalarm-div status-div attr-content-body reset-content">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">边框宽度</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="onalarm.borderWidth" class="bayax-division-text"></p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="onalarm-border-width">
+                                                            <i></i>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="select-ul-up onalarm-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setOnAlarmBorderWidth(item)"></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- <div class="layui-form-item">
+                                            <label class="layui-form-label">边框样式</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="onalarm.borderStyle" class="bayax-division-text"></p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="onalarm-border-style">
+                                                            <i></i>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="onalarm-border-style  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in borderData.borderStyle" v-text="item.name" @click="setOnAlarmBorderStyle(item)"></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div> -->
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">边框颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onalarm.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnAlarmBorderColor(item)"></li>
+                                                    <li class="onalarm-border-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">填充颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onalarm.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnAlarmFillColor(item)"></li>
+                                                    <li class="onalarm-fill-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">文本内容</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="onalarm.fontText" type="text" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">文本颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in onalarm.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnAlarmFontColor(item)"></li>
+                                                    <li class="onalarm-font-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-formcheck-item layui-form-item">
+                                            <input v-model="onalarm.setAlpha" type="checkbox" id="onalarm-alpha-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="onalarm-alpha-check"></label>
+                                            <span>背景透明</span>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.conduitHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">透明度</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="onalarm.alpha" type="text" name="title" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">图片</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="layui-input-inline">
+                                                    <div class="bayax-division-select bayax-select-group">
+                                                        <div class="bayax-division-title">
+                                                            <p v-text="onalarm.picture" class="bayax-division-text"></p>
+                                                            <span @click='upImageOnAlarm' class="bayax-division-span">
+                                                                <span>···</span>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-formcheck-item layui-form-item">
+                                            <input v-model="onalarm.flashing" type="checkbox" id="onalarm-flashing-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="onalarm-flashing-check"></label>
+                                            <span>闪烁</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div v-bind:class="{'basic-hide':hidediv.labelHideDiv}" class="attr-content">
+                                    <p class="attr-toggle-status attr-content-titles " data-toggle="collapse" data-for="ondisc-div" data-status="onDisconnected">
+                                        <i></i>
+                                        <span>onDisconnected</span>
+                                    </p>
+                                    <div class="ondisc-div status-div attr-content-body reset-content">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">边框宽度</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="ondisc.borderWidth" class="bayax-division-text"></p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="ondisc-border-width">
+                                                            <i></i>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="select-ul-up ondisc-border-width  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in borderData.borderWidth" v-text="item" @click="setOnDiscBorderWidth(item)"></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- <div class="layui-form-item">
+                                            <label class="layui-form-label">边框样式</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="ondisc.borderStyle" class="bayax-division-text"></p>
+                                                        <span class="bayax-division-span bayax-division-icon" data-for="ondisc-border-style">
+                                                            <i></i>
+                                                        </span>
+                                                    </div>
+                                                    <ul class="ondisc-border-style  bayax-select-ul bayax-anim bayax-anim-upbit">
+                                                        <li v-for="(item,index) in borderData.borderStyle" v-text="item.name" @click="setOnDiscBorderStyle(item)"></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div> -->
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">边框颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ondisc.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnDiscBorderColor(item)"></li>
+                                                    <li class="ondisc-border-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">填充颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ondisc.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnDiscFillColor(item)"></li>
+                                                    <li class="ondisc-fill-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">文本内容</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="ondisc.fontText" type="text" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">文本颜色</label>
+                                            <div class="layui-input-block">
+                                                <ul class="color-ul">
+                                                    <li v-for="(item,index) in ondisc.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnDiscFontColor(item)"></li>
+                                                    <li class="ondisc-font-color">+</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class="layui-formcheck-item layui-form-item">
+                                            <input v-model="ondisc.setAlpha" type="checkbox" id="ondisc-alpha-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="ondisc-alpha-check"></label>
+                                            <span>背景透明</span>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.conduitHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class="layui-form-item">
+                                            <label class="layui-form-label">透明度</label>
+                                            <div class="layui-input-block">
+                                                <input v-model="ondisc.alpha" type="text" name="title" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.labelHideDiv},{'basic-hide':hidediv.safeHideDiv},{'basic-hide':hidediv.textHideDiv}]" class=" layui-form-item">
+                                            <label class="layui-form-label">图片</label>
+                                            <div class="layui-input-block">
+
+                                                <div class="layui-input-inline">
+                                                    <div class="bayax-division-select bayax-select-group">
+                                                        <div class="bayax-division-title">
+                                                            <p v-text="ondisc.picture" class="bayax-division-text"></p>
+                                                            <span @click='upImageOnDisc' class="bayax-division-span">
+                                                                <span>···</span>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-formcheck-item layui-form-item">
+                                            <input v-model="ondisc.flashing" type="checkbox" id="ondisc-flashing-check" class="bayaxcheckbox ">
+                                            <label class="checkbox-i" for="ondisc-flashing-check"></label>
+                                            <span>闪烁</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tabscroll-item layui-tab-item">
+                                <div class="attr-content-body" style="display: block">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">图片</label>
+                                        <div class="layui-input-block">
+                                            <div class="layui-input-inline">
+                                                <div class="bayax-division-select bayax-select-group">
+                                                    <div class="bayax-division-title">
+                                                        <p v-text="canvas.bgColor.bgimage" class="bayax-division-text"></p>
+                                                        <span @click='upCanvasbgImage' class="bayax-division-span">
+                                                             <span>···</span>
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">背景颜色</label>
+                                        <div class="layui-input-block">
+                                            <ul class="color-ul">
+                                                <li v-for="(item,index) in canvas.bgColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setCanvasBgColor(item)"></li>
+                                                <li class="canvas-bgcolor">+</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-formcheck-item layui-form-item">
+                                        <input v-model="canvas.setDefault" type="checkbox" id="set-default" class="bayaxcheckbox ">
+                                        <label class="checkbox-i" for="set-default"></label>
+                                        <span>恢复默认</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div v-bind:class="{'basic-show':showHideFlag.attrdiv}" class="globalbtn-attribute-div attribute-div">
+                <div class="attr-head">
+                    <p>全局按钮属性</p>
+                </div>
+
+                <div class="attr-body">
+                    <div class="attr-content-body">
+
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">名称</label>
+                            <div class="layui-input-block">
+                                <input v-model="globalBtnData.attr.name" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Tag地址</label>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline">
+                                    <div class="bayax-division-select bayax-select-group">
+                                        <div class="bayax-division-title">
+                                            <p v-text="globalBtnData.attr.tag_name" class="bayax-division-text"></p>
+                                            <span @click="setBtnTag" class="bayax-division-span">
+                                                <span>···</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div v-show="globalBtnData.flag.alreadybind">
+                            <div v-show="!globalBtnData.flag.isBoolean" class="layui-form-item">
+                                <label class="layui-form-label">默认值</label>
+                                <div class="layui-input-block">
+                                    <input v-model="globalBtnData.attr.num" type="text" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div v-show="globalBtnData.flag.isBoolean">
+                                <div class="layui-formcheck-item layui-form-item">
+                                    <input v-model="globalBtnData.attr.boolean" value="true" name="values" type="radio" id="gbtn-value-true" class="bayaxcheckbox ">
+                                    <label class="radiobox-i" for="gbtn-value-true"></label>
+                                    <span>true</span>
+                                </div>
+                                <div class="layui-formcheck-item layui-form-item">
+                                    <input v-model="globalBtnData.attr.boolean" value="false" name="values" type="radio" id="gbtn-value-false" class="bayaxcheckbox ">
+                                    <label class="radiobox-i" for="gbtn-value-false"></label>
+                                    <span>false</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+
+
+
+        </div>
+        <!-- 绑定标签-->
+        <div id="layer-add-tags" class="layer-default">
+            <div class="canvas-layer bayax-layer-content">
+                <div class="layui-row">
+                    <div class="layui-form">
+                        <div class="clearfix">
+                            <div class="layui-input-inline content-search">
+                                <span class="search-span icon-search"></span>
+                                <input v-model="bindTag.searchText" v-on:input="searchtags(1)" type="text" placeholder="请输入标签名称" required>
+                                <span @click="cleanSearchVal" class="span-del icon-highlight_off"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="tag-table">
+                            <div class="content">
+                                <!-- <div class="noData">
+                                    无数据
+                                </div> -->
+                                <div class="havedata">
+                                    <table class="bayax-table">
+                                        <thead>
+                                            <tr>
+                                                <th>标签名称</th>
+                                                <th>类型</th>
+                                                <th>描述</th>
+                                                <th>节点名称</th>
+                                                <th>寄存器</th>
+                                                <th>选择</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="item in bindTag.labels">
+                                                <td v-text="item.name"></td>
+                                                <td v-text="item.tag_type"></td>
+                                                <td v-text="item.description"></td>
+                                                <td v-text="item.node_name"></td>
+                                                <td v-text="item.point_id"></td>
+                                                <td>
+                                                    <input v-bind:class="{ 'basic-hide': item.ishide }" v-model="bindTag.checkRadio" type="radio" :id="item.id+'tags'" :value="item" class="bayaxcheckbox" name="tags">
+                                                    <label v-bind:class="{ 'basic-hide': item.ishide }" class="radiobox-i" :for="item.id+'tags'"></label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="relode-data tcdPageCode"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- 上传图片 for  imageComponent style  -->
+    <input type="file" id="imageFileStyle" class="up-image" onchange="basicSet.uploadImage.upFileStyleImage(this)" />
+    <!-- 上传图片 for  imageComponent  onTrue -->
+    <input type="file" id="imageFileOnTrue" class="up-image" onchange="basicSet.uploadImage.upFileOnTrueImage(this)" />
+    <!-- 上传图片 for  imageComponent  onFalse -->
+    <input type="file" id="imageFileOnFalse" class="up-image" onchange="basicSet.uploadImage.upFileOnFalseImage(this)" />
+    <!-- 上传图片 for  imageComponent  onAlerm -->
+    <input type="file" id="imageFileOnAlarm" class="up-image" onchange="basicSet.uploadImage.upFileOnAlarmImage(this)" />
+    <!-- 上传图片 for  imageComponent  onDisconnected -->
+    <input type="file" id="imageFileOnDisc" class="up-image" onchange="basicSet.uploadImage.upFileOnDiscImage(this)" />
+    <!-- 上传图片 for  Canvas   -->
+    <input type="file" id="fileCanvasImage" class="up-image" onchange="basicSet.uploadImage.upCanvasImage(this)" />
+
+    <script>
+        var type = 'edit';
+    </script>
+    <!-- <script type="text/javascript" src="js/canvas/basic/icheck.min.js"></script> -->
+    <script type="text/javascript" src="./plugin/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="js/canvas/basic/colpick.js"></script>
+    <script type="text/javascript" src="js/canvas/ComponentSet/safeComponent.js"></script>
+    <script type="text/javascript" src="js/canvas/ComponentSet/labelComponent.js"></script>
+    <script type="text/javascript" src="js/canvas/ComponentSet/textComponent.js"></script>
+    <script type="text/javascript" src="js/canvas/ComponentSet/imageComponent.js"></script>
+    <script type="text/javascript" src="js/canvas/ComponentSet/RectangleComponent.js"></script>
+    <script type="text/javascript" src="js/canvas/ComponentSet/LineComponent.js"></script>
+
+
+    <script src="js/basic/api.js "></script>
+    <script src="plugin/vue.js "></script>
+    <script src="plugin/layui/layui.js "></script>
+    <script src="js/canvas/actionJS/attrmenu.js"></script>
+    <script src="./js/canvas/actionJS/canvas.js"></script>
+
+
 
 </body>
+
 </html>

@@ -1,8 +1,13 @@
+/**
+ * 在属性栏显示 组件样式
+ */
 var setComponentOptions = {
     // 图片地址(自定义控件/safeComponent 图片地址)
     imageBaseUrl: 'images/icon/icon/',
     // public method
-    basePublicSet: function (component) {
+    basePublicSet: function(component) {
+        canvasVue.showHideFlag.attrdiv = false;
+        $('.li-comp').click();
         var vueRoutine = canvasVue.routine;
         var vueDatas = canvasVue.datas;
         var data = component.getUserData();
@@ -58,7 +63,7 @@ var setComponentOptions = {
 
     },
     // 基本属性
-    basicSet: function (component) {
+    basicSet: function(component) {
 
         // var vueRoutine = canvasVue.routine;
         var vueDatas = canvasVue.datas;
@@ -75,20 +80,20 @@ var setComponentOptions = {
 
         //边框宽度  borderWidth
         vueDefaults.borderWidth = component.getStroke();
-        console.log('查看边框宽度：'+component.getStroke())
-        //边框样式 borderStyle
-        // var s_border_style = component.getDashArray();
-        // if (s_border_style === null) {
-        //     vueDefaults.borderStyle = '默认';
-        // } else {
-        //     vueDefaults.borderStyle = s_border_style;
-        // }
+        console.log('查看边框宽度：' + component.getStroke())
+            //边框样式 borderStyle
+            // var s_border_style = component.getDashArray();
+            // if (s_border_style === null) {
+            //     vueDefaults.borderStyle = '默认';
+            // } else {
+            //     vueDefaults.borderStyle = s_border_style;
+            // }
 
         // 边框颜色
         var s_border_color = component.getColor().hash();
         var s_flag = true;
         vueDefaults.borderColor.color = s_border_color;
-        vueDefaults.borderColor.colorData.forEach(function (ele) {
+        vueDefaults.borderColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === s_border_color) {
                 ele.active = true;
@@ -143,7 +148,7 @@ var setComponentOptions = {
         var ot_border_color = data.onTrue.lineColor;
         var ot_flag = true;
         vueOnTrue.borderColor.color = ot_border_color;
-        vueOnTrue.borderColor.colorData.forEach(function (ele) {
+        vueOnTrue.borderColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === ot_border_color) {
                 ele.active = true;
@@ -185,7 +190,7 @@ var setComponentOptions = {
         var of_border_color = data.onFalse.lineColor;
         var of_flag = true;
         vueOnFalse.borderColor.color = of_border_color;
-        vueOnFalse.borderColor.colorData.forEach(function (ele) {
+        vueOnFalse.borderColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === of_border_color) {
                 ele.active = true;
@@ -226,7 +231,7 @@ var setComponentOptions = {
         var oa_border_color = data.onAlarm.lineColor;
         var oa_flag = true;
         vueOnAlarm.borderColor.color = oa_border_color;
-        vueOnAlarm.borderColor.colorData.forEach(function (ele) {
+        vueOnAlarm.borderColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === oa_border_color) {
                 ele.active = true;
@@ -268,7 +273,7 @@ var setComponentOptions = {
         var od_border_color = data.onDisconnected.lineColor;
         var od_flag = true;
         vueOnDisc.borderColor.color = od_border_color;
-        vueOnDisc.borderColor.colorData.forEach(function (ele) {
+        vueOnDisc.borderColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === od_border_color) {
                 ele.active = true;
@@ -294,7 +299,7 @@ var setComponentOptions = {
     },
 
     //(属性设置) 宽高
-    componentSize: function (component) {
+    componentSize: function(component) {
         var vueRoutine = canvasVue.routine;
         // var data = component.getUserData();
         vueRoutine.width = component.getWidth();
@@ -303,7 +308,7 @@ var setComponentOptions = {
     },
 
     //(属性设置) 位置 旋转角度
-    componentOffsetAndAngle: function (component) {
+    componentOffsetAndAngle: function(component) {
         var vueRoutine = canvasVue.routine;
         //组件位置 X轴位置 
         vueRoutine.offx = component.getAbsoluteX().toFixed(0);
@@ -313,7 +318,7 @@ var setComponentOptions = {
     },
 
     // (属性设置) 显示标题
-    componentCaption: function (component) {
+    componentCaption: function(component) {
         var vueRoutine = canvasVue.routine;
         var data = component.getUserData().routine.caption; //captions={show:true,text:'标题'}
 
@@ -330,7 +335,7 @@ var setComponentOptions = {
 
 
     // 基本图形
-    rectangleSet: function (component) {
+    rectangleSet: function(component) {
 
         var vueRoutine = canvasVue.routine;
         var vueDatas = canvasVue.datas;
@@ -346,7 +351,7 @@ var setComponentOptions = {
         var s_fill_color = component.getBackgroundColor().hash();
         var s_flag = true;
         vueDefaults.fillColor.color = s_fill_color;
-        vueDefaults.fillColor.colorData.forEach(function (ele) {
+        vueDefaults.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === s_fill_color) {
                 ele.active = true;
@@ -369,7 +374,7 @@ var setComponentOptions = {
         var ot_fill_color = data.onTrue.fillColor;
         var ot_flag = true;
         vueOnTrue.fillColor.color = ot_fill_color;
-        vueOnTrue.fillColor.colorData.forEach(function (ele) {
+        vueOnTrue.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === ot_fill_color) {
                 ele.active = true;
@@ -395,7 +400,7 @@ var setComponentOptions = {
         var of_fill_color = data.onFalse.fillColor;
         var of_flag = true;
         vueOnFalse.fillColor.color = of_fill_color;
-        vueOnFalse.fillColor.colorData.forEach(function (ele) {
+        vueOnFalse.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === of_fill_color) {
                 ele.active = true;
@@ -418,7 +423,7 @@ var setComponentOptions = {
         var oa_fill_color = data.onAlarm.fillColor;
         var oa_flag = true;
         vueOnAlarm.fillColor.color = oa_fill_color;
-        vueOnAlarm.fillColor.colorData.forEach(function (ele) {
+        vueOnAlarm.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === oa_fill_color) {
                 ele.active = true;
@@ -442,7 +447,7 @@ var setComponentOptions = {
         var od_fill_color = data.onDisconnected.fillColor;
         var od_flag = true;
         vueOnDisc.fillColor.color = od_fill_color;
-        vueOnDisc.fillColor.colorData.forEach(function (ele) {
+        vueOnDisc.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === od_fill_color) {
                 ele.active = true;
@@ -464,9 +469,9 @@ var setComponentOptions = {
 
     },
     // 直线
-    lineSet: function (component) {
+    lineSet: function(component) {
         var arr = component.getVertices();
-        var vueRoutine =  canvasVue.routine;
+        var vueRoutine = canvasVue.routine;
         if (arr.data[0].y !== arr.data[1].y) {
             // vueRoutine.horizontal = false;
         } else {
@@ -480,7 +485,7 @@ var setComponentOptions = {
 
     },
     // label
-    labelSet: function (component) {
+    labelSet: function(component) {
 
         var vueDefaults = canvasVue.defaults;
 
@@ -508,7 +513,7 @@ var setComponentOptions = {
         var s_border_color = component.getColor().hash();
         var s_flag = true;
         vueDefaults.borderColor.color = s_border_color;
-        vueDefaults.borderColor.colorData.forEach(function (ele) {
+        vueDefaults.borderColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === s_border_color) {
                 ele.active = true;
@@ -529,7 +534,7 @@ var setComponentOptions = {
         var s_fill_color = component.getBackgroundColor().hash();
         var s_flag = true;
         vueDefaults.fillColor.color = s_fill_color;
-        vueDefaults.fillColor.colorData.forEach(function (ele) {
+        vueDefaults.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === s_fill_color) {
                 ele.active = true;
@@ -555,29 +560,29 @@ var setComponentOptions = {
 
         // 文本内容   
         vueDefaults.fontText = component.getText()
-       
+
         // 字体大小
         vueDefaults.fontSize = component.getFontSize();
         // 文本颜色  getFontColor().hash() 
 
-         var font_fill_color = component.getFontColor().hash();
-         var font_flag = true;
-         vueDefaults.fontColor.color = font_fill_color;
-         vueDefaults.fontColor.colorData.forEach(function (ele) {
-             ele.active = false;
-             if (ele.color === font_fill_color) {
-                 ele.active = true;
-                 font_flag = false;
-             }
-         });
-         if (font_flag) {
-             vueDefaults.fontColor.colorData.shift();
-             vueDefaults.fontColor.colorData.push({
-                 color: font_fill_color,
-                 colorstyle: 'background-color:' + font_fill_color,
-                 active: true
-             })
-         }
+        var font_fill_color = component.getFontColor().hash();
+        var font_flag = true;
+        vueDefaults.fontColor.color = font_fill_color;
+        vueDefaults.fontColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === font_fill_color) {
+                ele.active = true;
+                font_flag = false;
+            }
+        });
+        if (font_flag) {
+            vueDefaults.fontColor.colorData.shift();
+            vueDefaults.fontColor.colorData.push({
+                color: font_fill_color,
+                colorstyle: 'background-color:' + font_fill_color,
+                active: true
+            })
+        }
 
 
 
@@ -589,14 +594,14 @@ var setComponentOptions = {
         /************************defaults--end************************************** */
     },
     // text
-    textSet: function (component) {
+    textSet: function(component) {
 
         // =============================style=================================== 
         //填充(背景)颜色  fillColor
         var s_fill_color = component.getBackgroundColor().hash();
         var s_flag = true;
         vueDefaults.fillColor.color = s_fill_color;
-        vueDefaults.fillColor.colorData.forEach(function (ele) {
+        vueDefaults.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === s_fill_color) {
                 ele.active = true;
@@ -621,7 +626,7 @@ var setComponentOptions = {
         var ot_fill_color = data.onTrue.fillColor;
         var ot_flag = true;
         vueOnTrue.fillColor.color = ot_fill_color;
-        vueOnTrue.fillColor.colorData.forEach(function (ele) {
+        vueOnTrue.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === ot_fill_color) {
                 ele.active = true;
@@ -646,7 +651,7 @@ var setComponentOptions = {
         var of_fill_color = data.onFlase.fillColor;
         var of_flag = true;
         vueOnFalse.fillColor.color = of_fill_color;
-        vueOnFalse.fillColor.colorData.forEach(function (ele) {
+        vueOnFalse.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === of_fill_color) {
                 ele.active = true;
@@ -672,7 +677,7 @@ var setComponentOptions = {
         var oa_fill_color = data.onAlarm.fillColor;
         var oa_flag = true;
         vueOnAlarm.fillColor.color = oa_fill_color;
-        vueOnAlarm.fillColor.colorData.forEach(function (ele) {
+        vueOnAlarm.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === oa_fill_color) {
                 ele.active = true;
@@ -697,7 +702,7 @@ var setComponentOptions = {
         var od_fill_color = data.ononDisconnected.fillColor;
         var od_flag = true;
         vueOnDisc.fillColor.color = od_fill_color;
-        vueOnDisc.fillColor.colorData.forEach(function (ele) {
+        vueOnDisc.fillColor.colorData.forEach(function(ele) {
             ele.active = false;
             if (ele.color === od_fill_color) {
                 ele.active = true;
@@ -718,7 +723,7 @@ var setComponentOptions = {
 
     },
     // 自定义图像
-    imageSet: function (component) {
+    imageSet: function(component) {
         var data = component.getUserData();
         canvasVue.defaults.picture = data.defaults.picture;
         canvasVue.ontrue.picture = data.onTrue.picture;
@@ -727,7 +732,7 @@ var setComponentOptions = {
         canvasVue.ondisc.picture = data.onDisconnected.picture;
     },
     // 建筑设备、安全防范
-    safeSet: function () {
+    safeSet: function() {
 
     },
 
@@ -738,7 +743,7 @@ var setComponentOptions = {
      * 
      * 当前样式切换到 default状态样式
      */
-    checkPreviousComponentTag: function (component) {
+    checkPreviousComponentTag: function(component) {
         console.log("ID:" + component.id)
         var id = canvasVue.componentData.id;
         var node = canvasSet.getNodeFromCanvas(id);
@@ -747,48 +752,48 @@ var setComponentOptions = {
             //     layer.msg("上个控件Tag值绑定无效,请重新绑定!")
             // }
 
-            var defaults =  node.userData.defaults;
+            var defaults = node.userData.defaults;
             node.userData.custom.editSatus = 'defaults';
 
             node.setStroke(defaults.lineWidth);
             node.setColor(defaults.lineColor);
 
 
-            switch(node.userData.type){
+            switch (node.userData.type) {
                 case 'basicComponent':
-                node.setBackgroundColor(defaults.fillColor);
-                node.setAlpha(defaults.alpha);
-                break;
+                    node.setBackgroundColor(defaults.fillColor);
+                    node.setAlpha(defaults.alpha);
+                    break;
                 case 'customImageComponent':
-                node.setBackgroundColor(defaults.fillColor);
-                node.setAlpha(defaults.alpha);
-                node.image.setPath(defaults.picture);
-                break;
+                    node.setBackgroundColor(defaults.fillColor);
+                    node.setAlpha(defaults.alpha);
+                    node.image.setPath(defaults.picture);
+                    break;
                 case 'labelComponent':
-                // node.setBackgroundColor(defaults.fillColor);
-                break;
+                    // node.setBackgroundColor(defaults.fillColor);
+                    break;
                 case 'lineComponent':
-                // 
-                break;
+                    // 
+                    break;
                 case 'defaultComponent':
-                break;
+                    break;
                 case 'textComponent':
-                node.setBackgroundColor(defaults.fillColor);
-                node.setAlpha(defaults.alpha);
+                    node.setBackgroundColor(defaults.fillColor);
+                    node.setAlpha(defaults.alpha);
 
-                // 文本
-                // 文本颜色
-                break;
+                    // 文本
+                    // 文本颜色
+                    break;
             }
 
         }
 
         canvasVue.componentData.id = component.id;
-        
+
         this.checkThisComponentTag(component);
     },
     //  [检查 当前控件 TagID 是否绑定正确]
-    checkThisComponentTag: function (component) {
+    checkThisComponentTag: function(component) {
         var tagspan = $('.tag-status');
         var datas = canvasVue.datas.tag.isrighttag;
         switch (Number(component.userData.tag.bingding_status)) {
@@ -809,62 +814,62 @@ var setComponentOptions = {
      * 将 组件监控值标志 改为  false
      * 意味着  当属性改变时会   不会改变 当前选中 组件的属性
      */
-    setComponentFlagFalse: function () {
+    setComponentFlagFalse: function() {
         canvasVue.componentData.flag = false;
     },
     /**
      * 将 组件监控值标志 改为  true
      * 意味着  当属性改变时会 相应改变 当前选中 组件的属性
      */
-    setComponentFlagTrue: function () {
-        setTimeout(function () {
+    setComponentFlagTrue: function() {
+        setTimeout(function() {
             canvasVue.componentData.flag = true;
         }, 300);
 
     },
     // 闪烁方法
-    flashMethod:function(component){
+    flashMethod: function(component) {
         component.setColor("#03A3FC");
         component.setStroke(1);
         component.setGlow(true);
-        setTimeout(function () {
+        setTimeout(function() {
             component.setGlow(false);
             var userdata = component.getUserData();
             var type = '';
-            switch(userdata.custom.editSatus){
+            switch (userdata.custom.editSatus) {
                 case 'defaults':
-                type = 'defaults';
-                break;
+                    type = 'defaults';
+                    break;
                 case 'onTrue':
-                type = 'onTrue';
-                break;
+                    type = 'onTrue';
+                    break;
                 case 'onFalse':
-                type = 'onFalse';
-                break;
+                    type = 'onFalse';
+                    break;
                 case 'onAlarm':
-                type = 'onAlarm';
-                break;
+                    type = 'onAlarm';
+                    break;
                 case 'onDisconnected':
-                type = 'onDisconnected';
-                break;
+                    type = 'onDisconnected';
+                    break;
             }
             component.setColor(userdata[type].lineColor);
             component.setStroke(userdata[type].lineWidth);
         }, 500);
     },
     // 组件缩放时 方法
-    componentOnResizeMethod:function(component){
+    componentOnResizeMethod: function(component) {
         var w = component.getWidth();
         var h = component.getHeight();
         canvasVue.routine.width = w;
         canvasVue.routine.height = h;
-        if(component.image){
+        if (component.image) {
             component.image.setWidth(w);
             component.image.setHeight(h);
         }
     },
     // 组件移动时  方法
-    componentOnMoveMethod: function (component) {
+    componentOnMoveMethod: function(component) {
         if (!component.userData.custom.newCreat) {
             this.hideTooltips();
             switch (component.userData.type) {
@@ -880,57 +885,60 @@ var setComponentOptions = {
                     labelBasic.clickMethod(component);
                     break;
                 case 'lineComponent':
-                     lineBasic.clickMethod(component);
+                    lineBasic.clickMethod(component);
                     break;
                 case 'textComponent':
-                break;
+                    break;
             }
         }
+
+
+
 
     },
 
     // 组件属性框切换触发
-    statusChangeMethod:function(type){
+    statusChangeMethod: function(type) {
         var node = canvasSet.getNodeFromCanvas();
         if (node) {
-            var userdata =  node.userData;
+            var userdata = node.userData;
             userdata.custom.editSatus = type;
             console.log(type)
             node.stopTimer();
-            if(userdata[type].blinking){
-             node.startTimer(canvasVue.componentData.flashTime);
+            if (userdata[type].blinking) {
+                node.startTimer(canvasVue.componentData.flashTime);
             }
 
             node.setStroke(userdata[type].lineWidth);
             node.setColor(userdata[type].lineColor);
 
 
-            
-            switch(userdata.type){
-                case 'basicComponent':
-                node.setBackgroundColor(userdata[type].fillColor);
-                node.setAlpha(userdata[type].alpha);
-                break;
-                case 'customImageComponent':
-                node.setBackgroundColor(userdata[type].fillColor);
-                node.setAlpha(userdata[type].alpha);
-                node.image.setPath(userdata[type].picture);
-                break;
-                case 'labelComponent':
-                node.setBackgroundColor(userdata[type].fillColor);
-                break;
-                case 'lineComponent':
-                // 
-                break;
-                case 'defaultComponent':
-                break;
-                case 'textComponent':
-                node.setBackgroundColor(userdata[type].fillColor);
-                node.setAlpha(userdata[type].alpha);
 
-                // 文本
-                // 文本颜色
-                break;
+            switch (userdata.type) {
+                case 'basicComponent':
+                    node.setBackgroundColor(userdata[type].fillColor);
+                    node.setAlpha(userdata[type].alpha);
+                    break;
+                case 'customImageComponent':
+                    node.setBackgroundColor(userdata[type].fillColor);
+                    node.setAlpha(userdata[type].alpha);
+                    node.image.setPath(userdata[type].picture);
+                    break;
+                case 'labelComponent':
+                    node.setBackgroundColor(userdata[type].fillColor);
+                    break;
+                case 'lineComponent':
+                    // 
+                    break;
+                case 'defaultComponent':
+                    break;
+                case 'textComponent':
+                    node.setBackgroundColor(userdata[type].fillColor);
+                    node.setAlpha(userdata[type].alpha);
+
+                    // 文本
+                    // 文本颜色
+                    break;
             }
 
 
@@ -939,7 +947,7 @@ var setComponentOptions = {
 
 
     // 显示悬浮说明
-    showTooltips: function (component) {
+    showTooltips: function(component) {
         var hint = component.userData.routine.hint;
         if (hint.flag) {
             if (hint.hintText != '') {
@@ -949,11 +957,11 @@ var setComponentOptions = {
         }
     },
     // 隐藏悬浮说明
-    hideTooltips: function (component) {
+    hideTooltips: function(component) {
         $('#tooltips').hide();
     },
     // 获取鼠标位置
-    getMousePos: function (event) {
+    getMousePos: function(event) {
         var e = event || window.event;
         var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
         var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
@@ -962,7 +970,7 @@ var setComponentOptions = {
         y -= 195;
         x -= 50
         console.log('x: ' + x + '\ny: ' + y)
-        // alert('x: ' + x + '\ny: ' + y);
+            // alert('x: ' + x + '\ny: ' + y);
         return { 'x': x, 'y': y };
         // console.log('x: ' + x + '\ny: ' + y)
     }
@@ -978,30 +986,31 @@ var setComponentOptions = {
 // 基础功能设置
 var basicSet = {
     //初始化 
-    init: function () {
+    init: function() {
         var _this = this;
         // 组件滚动功能
         this.comscroll.picrun_ini("scroll_ul_2", 'scroll_div', "scroll_ul_1");
         // 做滚动按钮
-        $('#LeftBotton').mousedown(function () {
+        $('#LeftBotton').mousedown(function() {
             _this.comscroll.GoUp();
-        }).mouseup(function () {
+        }).mouseup(function() {
             _this.comscroll.StopUp()
         });
         // 右滚动按钮
-        $('#RightBotton').mousedown(function () {
+        $('#RightBotton').mousedown(function() {
             _this.comscroll.GoDown()
-        }).mouseup(function () {
+        }).mouseup(function() {
             _this.comscroll.StopDown()
         });
 
+        $('.globalbtn-ul').show();
         // 滚动条美化
         $(".layui-tabscroll-item,.global-btn-body,.comp-level-ul").mCustomScrollbar({
             autoHideScrollbar: true
         });
 
         // 基础属性框打开关闭操作
-        $('.attr-toggle-default').click(function () {
+        $('.attr-toggle-default').click(function() {
             var _this = $(this);
             var clas = 'collapsed';
             var divs = '.' + _this.data('for');
@@ -1017,7 +1026,7 @@ var basicSet = {
 
 
         // 状态属性框打开关闭操作
-        $('.attr-toggle-status').click(function () {
+        $('.attr-toggle-status').click(function() {
             var _this = $(this);
             var clas = 'collapsed';
             var divs = '.' + _this.data('for');
@@ -1033,55 +1042,46 @@ var basicSet = {
             if (!flag) {
                 _this.addClass(clas);
                 $(divs).slideDown(300);
-                setComponentOptions.statusChangeMethod(_this.data('status'));  
+                setComponentOptions.statusChangeMethod(_this.data('status'));
             }
-
-
-
-            
-
-
-
         });
 
 
 
         // 画布自适应缩放
-        window.onresize = function () {
+        window.onresize = function() {
             canvasSet.setCanvasWH();
         }
 
-
         // 颜色
         this.watchColorClick();
+
+        // 画布点击方法
+        // canvasSet.canvasClick();
     },
 
 
 
 
 
-    watchColorClick: function () {
+    watchColorClick: function() {
         //default 边框颜色设置
         $('.default-border-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.defaults.borderColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function (hsb, hex, rgb, el) {
-                // var node = getNode();
-                // node.userData.BlinkingColor = '#' + hex;
-                // node.setColor("#" + hex);
-                // node.repaint();
+            onSubmit: function(hsb, hex, rgb, el) {
                 var color = ('#' + hex).toUpperCase();
                 var flag = true;
                 var borderColor = canvasVue.defaults.borderColor;
                 // if (color !== borderColor.color) {
-                borderColor.colorData.forEach(function (ele) {
+                borderColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1106,19 +1106,19 @@ var basicSet = {
         $('.default-fill-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.defaults.fillColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
 
                 var color = ('#' + hex).toUpperCase();
                 var flag = true;
                 var fillColor = canvasVue.defaults.fillColor;
-                fillColor.colorData.forEach(function (ele) {
+                fillColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1145,14 +1145,14 @@ var basicSet = {
         $('.default-font-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.defaults.fontColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1161,7 +1161,7 @@ var basicSet = {
                 var flag = true;
                 var fontColor = canvasVue.defaults.fontColor;
                 // if (color !== borderColor.color) {
-                fontColor.colorData.forEach(function (ele) {
+                fontColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1189,13 +1189,13 @@ var basicSet = {
         $('.ontrue-border-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.ontrue.borderColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1204,7 +1204,7 @@ var basicSet = {
                 var flag = true;
                 var borderColor = canvasVue.ontrue.borderColor;
                 // if (color !== borderColor.color) {
-                borderColor.colorData.forEach(function (ele) {
+                borderColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1230,14 +1230,14 @@ var basicSet = {
         $('.ontrue-fill-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.ontrue.fillColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1246,7 +1246,7 @@ var basicSet = {
                 var flag = true;
                 var fillColor = canvasVue.ontrue.fillColor;
                 // if (color !== borderColor.color) {
-                fillColor.colorData.forEach(function (ele) {
+                fillColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1272,14 +1272,14 @@ var basicSet = {
         $('.ontrue-font-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.ontrue.fontColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1288,7 +1288,7 @@ var basicSet = {
                 var flag = true;
                 var fontColor = canvasVue.ontrue.fontColor;
                 // if (color !== borderColor.color) {
-                fontColor.colorData.forEach(function (ele) {
+                fontColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1317,13 +1317,13 @@ var basicSet = {
         $('.onfalse-border-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.onfalse.borderColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1332,7 +1332,7 @@ var basicSet = {
                 var flag = true;
                 var borderColor = canvasVue.onfalse.borderColor;
                 // if (color !== borderColor.color) {
-                borderColor.colorData.forEach(function (ele) {
+                borderColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1360,14 +1360,14 @@ var basicSet = {
         $('.onfalse-fill-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.onfalse.fillColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1376,7 +1376,7 @@ var basicSet = {
                 var flag = true;
                 var fillColor = canvasVue.onfalse.fillColor;
                 // if (color !== borderColor.color) {
-                fillColor.colorData.forEach(function (ele) {
+                fillColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1403,14 +1403,14 @@ var basicSet = {
         $('.onfalse-font-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.onfalse.fontColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1419,7 +1419,7 @@ var basicSet = {
                 var flag = true;
                 var fontColor = canvasVue.onfalse.fontColor;
                 // if (color !== borderColor.color) {
-                fontColor.colorData.forEach(function (ele) {
+                fontColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1445,13 +1445,13 @@ var basicSet = {
         $('.onalarm-border-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.onalarm.borderColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1460,7 +1460,7 @@ var basicSet = {
                 var flag = true;
                 var borderColor = canvasVue.onalarm.borderColor;
                 // if (color !== borderColor.color) {
-                borderColor.colorData.forEach(function (ele) {
+                borderColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1486,14 +1486,14 @@ var basicSet = {
         $('.onalarm-fill-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.onalarm.fillColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1502,7 +1502,7 @@ var basicSet = {
                 var flag = true;
                 var fillColor = canvasVue.onalarm.fillColor;
                 // if (color !== borderColor.color) {
-                fillColor.colorData.forEach(function (ele) {
+                fillColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1528,14 +1528,14 @@ var basicSet = {
         $('.onalarm-font-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.onalarm.fontColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1544,7 +1544,7 @@ var basicSet = {
                 var flag = true;
                 var fontColor = canvasVue.onalarm.fontColor;
                 // if (color !== borderColor.color) {
-                fontColor.colorData.forEach(function (ele) {
+                fontColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1570,13 +1570,13 @@ var basicSet = {
         $('.ondisc-border-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.ondisc.borderColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1585,7 +1585,7 @@ var basicSet = {
                 var flag = true;
                 var borderColor = canvasVue.ondisc.borderColor;
                 // if (color !== borderColor.color) {
-                borderColor.colorData.forEach(function (ele) {
+                borderColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1611,14 +1611,14 @@ var basicSet = {
         $('.ondisc-fill-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.ondisc.fillColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1627,7 +1627,7 @@ var basicSet = {
                 var flag = true;
                 var fillColor = canvasVue.ondisc.fillColor;
                 // if (color !== borderColor.color) {
-                fillColor.colorData.forEach(function (ele) {
+                fillColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1653,14 +1653,14 @@ var basicSet = {
         $('.ondisc-font-color').colpick({
             layout: 'hex',
             submitText: '确定',
-            onShow: function () {
+            onShow: function() {
                 var color = canvasVue.ondisc.fontColor.color;
                 if (color != '') {
                     $(this).colpickSetColor(color.substring(1));
                 }
 
             },
-            onSubmit: function (hsb, hex, rgb, el) {
+            onSubmit: function(hsb, hex, rgb, el) {
                 // var node = getNode();
                 // node.userData.BlinkingColor = '#' + hex;
                 // node.setColor("#" + hex);
@@ -1669,7 +1669,7 @@ var basicSet = {
                 var flag = true;
                 var fontColor = canvasVue.ondisc.fontColor;
                 // if (color !== borderColor.color) {
-                fontColor.colorData.forEach(function (ele) {
+                fontColor.colorData.forEach(function(ele) {
                     ele.active = false;
                     if (ele.color === color) {
                         ele.active = true;
@@ -1692,7 +1692,467 @@ var basicSet = {
         });
 
 
+
+
+
+        // canvas 背景颜色设置
+        $('.canvas-bgcolor').colpick({
+            layout: 'hex',
+            submitText: '确定',
+            onShow: function() {
+                var color = canvasVue.canvas.bgColor.color;
+                if (color != '') {
+                    $(this).colpickSetColor(color.substring(1));
+                }
+
+            },
+            onSubmit: function(hsb, hex, rgb, el) {
+                var color = ('#' + hex).toUpperCase();
+                var flag = true;
+                var bgColor = canvasVue.canvas.bgColor;
+                // if (color !== borderColor.color) {
+                bgColor.colorData.forEach(function(ele) {
+                    ele.active = false;
+                    if (ele.color === color) {
+                        ele.active = true;
+                        flag = false;
+                    }
+                });
+                if (flag) {
+                    bgColor.colorData.shift();
+                    bgColor.colorData.push({
+                        color: color,
+                        colorstyle: 'background-color:' + color,
+                        active: true
+                    });
+                }
+
+                bgColor.color = color;
+                canvasVue.canvas.setDefault = false;
+                console.log(color)
+                $(el).colpickHide();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     },
+    // 上传图片
+    uploadImage: {
+        upCanvasImage: function(source) {
+            var file = source.files[0];
+            if (file == null) {
+                return;
+            }
+            if (!/image\/\w+/.test(file.type)) {
+                layer.msg("请确保文件为图像类型")
+                return false;
+            }
+            if (window.FileReader) {
+                var fr = new FileReader();
+                fr.readAsDataURL(file);
+                fr.onload = function(e) {
+
+                    console.log(e.target.result)
+
+                    $.ajax({
+                        url: apiurl + 'fileupload',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            data: e.target.result
+                        },
+                        beforeSend: function() {
+                            canvasVue.loadingShow = true;
+                        },
+                        complete: function() {
+                            canvasVue.loadingShow = false;
+                        },
+                        success: function(data) {
+                            if (data.success) {
+                                layer.msg('图片上传成功');
+                                $('#canvas').css({
+                                    'background-image': 'url(' + e.target.result + ')'
+                                });
+                                canvasVue.canvas.bgColor.bgimage = data.data;
+                            } else {
+                                layer.msg("上传图片失败:" + data.error_message);
+                            }
+                        },
+                        error: function(data) {
+                            canvasVue.loadingShow = false;
+                            layer.msg("上传图片失败:" + data.error_message);
+                        }
+                    })
+                };
+            }
+        },
+        upFileStyleImage: function(source) {
+            var file = source.files[0];
+            if (file == null) {
+                return;
+            }
+            if (!/image\/\w+/.test(file.type)) {
+                layer.msg("请确保文件为图像类型");
+                return false;
+            }
+            if (window.FileReader) {
+                var fr = new FileReader();
+                fr.readAsDataURL(file);
+                fr.onload = function(e) {
+                    var node = getNode();
+                    $.ajax({
+                        url: apiurl + 'fileupload',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            data: e.target.result
+                        },
+                        beforeSend: function() {
+                            canvasVue.loadingShow = true;
+                        },
+                        complete: function() {
+                            canvasVue.loadingShow = false;
+                        },
+                        success: function(data) {
+
+                            if (data.success) {
+                                // console.log("上传图片成功style:" + JSON.stringify(data, null, 2))
+                                layer.msg('图片上传成功');
+
+                                var node = canvasSet.getNodeFromCanvas();
+                                if (node) {
+                                    node.image.setPath(e.target.result);
+                                    node.userData.defaults.picture = data.data;
+                                    canvasVue.defaults.picture = data.data;
+                                }
+
+                            } else {
+                                layer.msg("上传图片失败:" + data.error_message);
+                            }
+                        },
+                        error: function(data) {
+                            canvasVue.loadingShow = false;
+                            layer.msg("上传图片失败:" + data.error_message);
+                        }
+                    })
+                };
+            }
+        },
+        upFileOnTrueImage: function(source) {
+            var file = source.files[0];
+            if (file == null) {
+                return;
+            }
+            if (!/image\/\w+/.test(file.type)) {
+                layer.msg("请确保文件为图像类型");
+                return false;
+            }
+            if (window.FileReader) {
+                var fr = new FileReader();
+                fr.readAsDataURL(file);
+                fr.onload = function(e) {
+                    var node = getNode();
+                    $.ajax({
+                        url: apiurl + 'fileupload',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            data: e.target.result
+                        },
+
+                        beforeSend: function() {
+                            canvasVue.loadingShow = true;
+                        },
+                        complete: function() {
+                            canvasVue.loadingShow = false;
+                        },
+                        success: function(data) {
+
+                            if (data.success) {
+                                // console.log("上传图片成功style:" + JSON.stringify(data, null, 2))
+                                layer.msg('图片上传成功');
+
+                                var node = canvasSet.getNodeFromCanvas();
+                                if (node) {
+                                    node.image.setPath(e.target.result);
+                                    node.userData.onTrue.picture = data.data;
+                                    canvasVue.ontrue.picture = data.data;
+                                }
+                            } else {
+                                layer.msg("上传图片失败:" + data.error_message);
+                            }
+                        },
+                        error: function(data) {
+                            canvasVue.loadingShow = false;
+                            layer.msg("上传图片失败:" + data.error_message);
+                        }
+                    });
+                };
+            }
+        },
+        upFileOnFalseImage: function(source) {
+            var file = source.files[0];
+            if (file == null) {
+                return;
+            }
+            if (!/image\/\w+/.test(file.type)) {
+                layer.msg("请确保文件为图像类型");
+                return false;
+            }
+            if (window.FileReader) {
+                var fr = new FileReader();
+                fr.readAsDataURL(file);
+                fr.onload = function(e) {
+                    var node = getNode();
+                    $.ajax({
+                        url: apiurl + 'fileupload',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            data: e.target.result
+                        },
+                        beforeSend: function() {
+                            canvasVue.loadingShow = true;
+                        },
+                        complete: function() {
+                            canvasVue.loadingShow = false;
+                        },
+                        success: function(data) {
+
+                            if (data.success) {
+                                // console.log("上传图片成功style:" + JSON.stringify(data, null, 2))
+                                layer.msg('图片上传成功');
+
+                                var node = canvasSet.getNodeFromCanvas();
+                                if (node) {
+                                    node.image.setPath(e.target.result);
+                                    node.userData.onFalse.picture = data.data;
+                                    canvasVue.onfalse.picture = data.data;
+                                }
+                            } else {
+                                layer.msg("上传图片失败:" + data.error_message);
+                            }
+                        },
+                        error: function(data) {
+                            canvasVue.loadingShow = false;
+                            layer.msg("上传图片失败:" + data.error_message);
+                        }
+                    })
+                };
+            }
+        },
+        upFileOnAlarmImage: function(source) {
+            var file = source.files[0];
+            if (file == null) {
+                return;
+            }
+            if (!/image\/\w+/.test(file.type)) {
+                layer.msg("请确保文件为图像类型");
+                return false;
+            }
+            if (window.FileReader) {
+                var fr = new FileReader();
+                fr.readAsDataURL(file);
+                fr.onload = function(e) {
+                    var node = getNode();
+
+                    $.ajax({
+                        url: apiurl + 'fileupload',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            data: e.target.result
+                        },
+
+                        beforeSend: function() {
+                            canvasVue.loadingShow = true;
+                        },
+                        complete: function() {
+                            canvasVue.loadingShow = false;
+                        },
+                        success: function(data) {
+                            if (data.success) {
+                                // console.log("上传图片成功style:" + JSON.stringify(data, null, 2))
+                                layer.msg('图片上传成功');
+
+                                var node = canvasSet.getNodeFromCanvas();
+                                if (node) {
+                                    node.image.setPath(e.target.result);
+                                    node.userData.onAlarm.picture = data.data;
+                                    canvasVue.onalarm.picture = data.data;
+                                }
+
+                            } else {
+                                layer.msg("上传图片失败:" + data.error_message);
+                            }
+                        },
+                        error: function(data) {
+                            canvasVue.loadingShow = false;
+                            layer.msg("上传图片失败:" + data.error_message);
+                        }
+                    })
+                };
+            }
+        },
+        upFileOnDiscImage: function(source) {
+            var file = source.files[0];
+            if (file == null) {
+                return;
+            }
+            if (!/image\/\w+/.test(file.type)) {
+                layer.msg("请确保文件为图像类型");
+                return false;
+            }
+            if (window.FileReader) {
+                var fr = new FileReader();
+                fr.readAsDataURL(file);
+                fr.onload = function(e) {
+                    var node = getNode();
+                    $.ajax({
+                        url: apiurl + 'fileupload',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            data: e.target.result
+                        },
+                        beforeSend: function() {
+                            canvasVue.loadingShow = true;
+                        },
+                        complete: function() {
+                            canvasVue.loadingShow = false;
+                        },
+                        success: function(data) {
+
+                            if (data.success) {
+                                layer.msg('图片上传成功');
+
+                                var node = canvasSet.getNodeFromCanvas();
+                                if (node) {
+                                    node.image.setPath(e.target.result);
+                                    node.userData.onDisconnected.picture = data.data;
+                                    canvasVue.ondisc.picture = data.data;
+                                }
+                            } else {
+                                layer.msg("上传图片失败:" + data.error_message);
+                            }
+                        },
+                        error: function(data) {
+                            canvasVue.loadingShow = false;
+                            layer.msg("上传图片失败:" + data.error_message);
+                        }
+                    })
+                };
+            }
+        },
+    },
+    // 绑定 tag
+    bindTag: {
+        combindTag: function() {
+            var layer_open = layer.open({
+                title: ['组件绑定数据标签'],
+                type: 1,
+                skin: 'bayax-layer-skin', //加上边框
+                area: ['800px', '610px'], //宽高
+                content: $("#layer-add-tags"), //捕获的元素,
+                shift: 2,
+                // maxmin: true,
+                resize: false,
+                btn: ['保存', '取消'],
+                yes: function(index) {
+
+                    var bindTag = canvasVue.bindTag;
+                    if (bindTag.checkRadio !== '') {
+                        // 组件
+                        if (canvasVue.componentData.flag) {
+                            var node = canvasSet.getNodeFromCanvas();
+                            if (node) {
+                                var tag = node.userData.tag;
+                                tag.tag_id = bindTag.checkRadio.id;
+                                tag.tag_type = bindTag.checkRadio.type;
+                                tag.tag_name = bindTag.checkRadio.name;
+                                tag.is_readonly = bindTag.checkRadio.is_readonly;
+                                tag.bingding_status = 1;
+
+
+                                canvasVue.datas.tag.tagname = bindTag.checkRadio.name; // 显示绑定tag的名称
+                                layer.close(index);
+                            } else {
+                                layer.msg('未选中任何组件');
+                            }
+                        } else {
+                            layer.msg('未选中任何组件');
+                        }
+
+                    } else {
+                        layer.msg('未选择任何标签');
+                    }
+
+                },
+                btn2: function(index) {},
+
+            });
+        },
+        globalBtnbindTag: function() {
+            var layer_open = layer.open({
+                title: ['全局按钮绑定数据标签'],
+                type: 1,
+                skin: 'bayax-layer-skin', //加上边框
+                area: ['800px', '610px'], //宽高
+                content: $("#layer-add-tags"), //捕获的元素,
+                shift: 2,
+                // maxmin: true,
+                resize: false,
+                btn: ['保存', '取消'],
+                yes: function(index) {
+                    var btn = canvasVue.globalBtnData.attr.current;
+                    var bindTag = canvasVue.bindTag;
+                    if (bindTag.checkRadio !== '') {
+                        if (bindTag.checkRadio.is_readonly) {
+                            layer.msg('只读标签,不能绑定到全局按钮')
+                        } else {
+                            btn.tag.tag_id = bindTag.checkRadio.id;
+                            btn.tag.tag_type = bindTag.checkRadio.type;
+                            btn.tag.tag_name = bindTag.checkRadio.name;
+                            btn.tag.is_readonly = bindTag.checkRadio.is_readonly;
+                            btn.tag.bingding_status = 1;
+                            canvasVue.globalBtnData.attr.tag_name = bindTag.checkRadio.name;
+                            canvasVue.globalBtnData.flag.alreadybind = true;
+                            if (btn.tag.tag_type === 1) {
+                                // 开关型
+                                canvasVue.globalBtnData.flag.isBoolean = true;
+                                canvasVue.globalBtnData.attr.boolean = 'true';
+
+                            } else {
+                                // 非开关型
+                                canvasVue.globalBtnData.flag.isBoolean = false;
+                                canvasVue.globalBtnData.attr.num = '';
+                            }
+                            canvasVue.datas.tag.tagname = bindTag.checkRadio.name;
+                            layer.close(index);
+                        }
+
+                    } else {
+                        layer.msg('未选择任何标签');
+                    }
+                },
+                btn2: function(index) {},
+            });
+        }
+    },
+
+
     // 控件滚动操作
     comscroll: {
         Speed_1: 10,
@@ -1707,24 +2167,24 @@ var basicSet = {
         scroll_ul_2: '',
         scroll_div: '',
         scroll_ul_1: '',
-        GetObj: function (objName) {
+        GetObj: function(objName) {
             if (document.getElementById) {
                 return eval('document.getElementById("' + objName + '")')
             } else {
                 return eval('document.all.' + objName)
             }
         },
-        GoUp: function (string) {
+        GoUp: function(string) {
             var _this = this;
             if (this.MoveLock_1) return;
             console.log('查看2：' + string)
             this.MoveLock_1 = true;
             this.MoveWay_1 = "left";
-            this.MoveTimeObj_1 = setInterval(function () {
+            this.MoveTimeObj_1 = setInterval(function() {
                 _this.ScrUp(_this.scroll_div)
             }, this.Speed_1);
         },
-        StopUp: function (string) {
+        StopUp: function(string) {
             if (this.MoveWay_1 == "right") {
                 return
             };
@@ -1736,24 +2196,24 @@ var basicSet = {
                 this.MoveLock_1 = false
             }
         },
-        ScrUp: function (obj) {
+        ScrUp: function(obj) {
             if (obj.scrollLeft <= 0) {
                 obj.scrollLeft = obj.scrollLeft + obj.offsetWidth
             }
             obj.scrollLeft -= this.Space_1;
         },
-        GoDown: function (string, string2, string3) {
+        GoDown: function(string, string2, string3) {
             var _this = this;
             clearInterval(this.MoveTimeObj_1);
             if (this.MoveLock_1) return;
             this.MoveLock_1 = true;
             this.MoveWay_1 = "right";
             this.ScrDown(this.scroll_div, this.scroll_ul_1);
-            this.MoveTimeObj_1 = setInterval(function () {
+            this.MoveTimeObj_1 = setInterval(function() {
                 _this.ScrDown(_this.scroll_div, _this.scroll_ul_1);
             }, this.Speed_1)
         },
-        StopDown: function (string) {
+        StopDown: function(string) {
             var scrollDiv = this.scroll_div;
             var fill_1 = this.fill_1;
             var PageWidth_1 = this.PageWidth_1;
@@ -1768,14 +2228,14 @@ var basicSet = {
                 this.MoveLock_1 = false
             }
         },
-        ScrDown: function (obj1, obj2) {
+        ScrDown: function(obj1, obj2) {
             console.log(123)
             if (obj1.scrollLeft >= obj2.scrollWidth) {
                 obj1.scrollLeft = obj1.scrollLeft - obj2.scrollWidth - 40
             }
             obj1.scrollLeft += this.Space_1;
         },
-        CompScr_1: function (obj) {
+        CompScr_1: function(obj) {
 
             if (this.Comp_1 == 0) {
                 this.MoveLock_1 = false;
@@ -1811,7 +2271,7 @@ var basicSet = {
                 setTimeout(this.CompScr_1(obj), TempSpeed)
             }
         },
-        picrun_ini: function (string, string2, string3) {
+        picrun_ini: function(string, string2, string3) {
             this.scroll_ul_2 = this.GetObj(string);
             this.scroll_ul_1 = this.GetObj(string3);
             this.scroll_div = this.GetObj(string2);
@@ -1820,6 +2280,8 @@ var basicSet = {
         }
 
     },
+
+    // 
 
 };
 
@@ -1833,7 +2295,7 @@ var canvasSet = {
         scale: 9 / 16,
         s: ''
     },
-    setCanvasWH: function () {
+    setCanvasWH: function() {
         var w = Number($('.canvas-div').width());
         var s = this.basicData.basicWidth / w;
         this.basicData.s = s;
@@ -1849,7 +2311,7 @@ var canvasSet = {
      * @param  {[type]} id [description]
      * @return {[type]}    [控件对象]
      */
-    getNodeFromCanvas: function () {
+    getNodeFromCanvas: function() {
         var id = canvasVue.componentData.id;
         if (id != '') {
             var node = imageCanvas.getFigure(id);
@@ -1868,9 +2330,9 @@ var canvasSet = {
      * [打印 控件数据 ----------调试用]
      * @param  {[type]} canvas [description]
      */
-    displayJSON: function (canvas) {
+    displayJSON: function(canvas) {
         var writer = new draw2d.io.json.Writer();
-        writer.marshal(canvas, function (json) {
+        writer.marshal(canvas, function(json) {
             console.log('画布数据:' + JSON.stringify(json, null, 2));
         });
     },
@@ -1879,9 +2341,9 @@ var canvasSet = {
      * @param  {[type]} type [description]
      * @return {[type]}      [description]
      */
-    allCanvasinit: function (type) {
+    allCanvasinit: function(type) {
         //选择框  样式
-        draw2d.Configuration.factory.createResizeHandle = function (forShape, type) {
+        draw2d.Configuration.factory.createResizeHandle = function(forShape, type) {
             var handle = new draw2d.ResizeHandle(forShape, type);
             handle.attr({
                 width: 10,
@@ -1905,13 +2367,13 @@ var canvasSet = {
         filter.element.setAttribute("y", "-35%");
 
         app.view.installEditPolicy(new draw2d.policy.connection.DragConnectionCreatePolicy({
-            createConnection: function () {
+            createConnection: function() {
                 return new HoverConnection();
             }
         }));
 
 
-        canvas.on("figure:add", function (emitter, event) {
+        canvas.on("figure:add", function(emitter, event) {
             if (!(event.figure instanceof draw2d.Connection)) {
                 event.figure.shape.filter(filter);
             }
@@ -1931,28 +2393,130 @@ var canvasSet = {
         imageCanvas = canvas;
 
         canvas.installEditPolicy(new CopyInterceptorPolicy());
-        canvas.getCommandStack().addEventListener(function (e) {
+        canvas.getCommandStack().addEventListener(function(e) {
             if (e.isPostChangeEvent()) {
                 canvasSet.displayJSON(canvas);
             }
         });
-        // getGroupNameAndViewData(sessionStorage.getItem("view_id"), canvas, type);
 
 
 
-        // var reader = new draw2d.io.json.Reader();
-        // reader.unmarshal(canvas, canvasJson);
+        if (type === 'creat') {} else {
+            // 请求并在画面中还原数据
+            $.ajax({
+                url: '/api/view/' + canvasVue.canvas.view_id,
+                type: 'GET',
+                beforeSend: function() {
+                    canvasVue.loadingShow = true;
+                },
+                complete: function() {
+                    canvasVue.loadingShow = false;
+                },
+                success: function(data) {
+                    canvasVue.loadingShow = false;
+                    if (data.success) {
+                        console.log("请求到的数据:" + JSON.stringify(data, null, 2))
+                            // 此处添加  头部的  系统名称和 画面名称
+                        if (data.data !== null) {
+                            $('.go-subsys span').text(sessionStorage.getItem("viewGroupeName"));
+                            // $('.go-subsys span').text(unescape(getRequest.name));
+                            $('.group-name').text(data.data.name);
+                            var bg_img_url = data.data.background_img_url;
+                            if (bg_img_url === null || bg_img_url === '') {} else {
+                                // $("#myBgimage").attr("src", bg_img_url);
+                                $('#myBgimage').css('background-image', 'url(' + bg_img_url + ')');
+                                $("#myBgimage").data("url", bg_img_url);
+                            }
+                            if (data.data.background_color !== null) {
+                                $("#canvas").css("background-color", data.data.background_color);
+                            }
 
-        // console.log('缩放比例' + canvas.getZoom())
-        // console.log('宽度：' + canvas.getWidth());
-        // console.log('宽度：' + canvas.getHeight());
+                            if (data.data.view_data !== null) {
+                                var canvasJson = JSON.parse(data.data.view_data).canvas;
+                                var subCanvas = JSON.parse(data.data.view_data).subCanvas;
+                                console.log(JSON.stringify(subCanvas, null, 2))
+                                for (var i in subCanvas) {
 
+                                    $('.no-glo-btn').hide();
+                                    var obj = '<p><button id="' + subCanvas[i].id + '" data-tag-id="' + subCanvas[i].tag_id + '" data-tag-name="' + subCanvas[i].tag_name + '" data-tag-type="' + subCanvas[i].tag_type + '" data-bingding-status="' + subCanvas[i].bingding_status + '" data-readonly="' + subCanvas[i].readonly + '" data-name="' + subCanvas[i].name + '">' + subCanvas[i].name + '</button><img src="images/delete.png"></p>';
+                                    $('.have-btn #mCSB_2_container').append(obj);
+                                }
 
+                                var reader = new draw2d.io.json.Reader();
+                                reader.unmarshal(canvas, canvasJson);
+                                // 插件问题清空数据
+                                $('#comp-offsetx').val('');
+                                $('#comp-offsety').val('');
+
+                                var writer = new draw2d.io.json.Writer();
+                                writer.marshal(canvas, function(json) {
+
+                                    for (var i in json) {
+                                        var node = getCanvasNode(json[i].id);
+                                        if (node.userData.ShowCaption) {
+                                            // 获取节点并更改标题	
+                                            switch (json[i].userData.ShowCaption) {
+                                                case true:
+                                                    node.label.setVisible(true);
+                                                    break;
+                                                case false:
+                                                    node.label.setVisible(false);
+                                                    break;
+                                            }
+                                            node.label.setText(json[i].userData.Caption);
+                                            node.label.repaint();
+                                        }
+
+                                        // 节点闪烁
+                                        if (node.userData.Blinking == true) {
+                                            node.startTimer(1000);
+                                        }
+                                        if (node.userData.types === 'conduitCompontent') {
+                                            node.resetPorts();
+                                        }
+
+                                        if (node.image) {
+                                            node.image.setHeight(node.getHeight());
+                                            node.image.setWidth(node.getWidth());
+                                        }
+                                        if (node.userData.picture) {
+                                            node.image.setPath(node.userData.picture);
+                                            node.image.setHeight(node.getHeight());
+                                            node.image.setWidth(node.getWidth());
+                                        }
+                                        switch (node.alpha) {
+                                            case 0:
+                                                node.setAlpha(0);
+                                                if (node.image) {
+                                                    node.image.setAlpha(0);
+                                                }
+                                                if (node.label) {
+                                                    node.label.setAlpha(0);
+                                                }
+                                                break;
+                                        }
+                                        node.repaint();
+                                    }
+
+                                });
+                            }
+
+                        } else {
+                            layer.msg('获取数据失败')
+                        }
+
+                    } else {
+                        layer.msg(data.error_message);
+                        console.log("获取画面数据失败" + JSON.stringify(data, null, 2))
+                    }
+
+                },
+                error: function(data) {
+                    publicAjaxError(data);
+                }
+            });
+        }
     },
-
-
-
-
 }
 
 
@@ -2044,164 +2608,3 @@ function rgb2hex(rgb) {
     return "#" + zero_fill_hex(decimal, 6);
 }
 /****************颜色代码转换************************/
-
-
-
-
-//控件悬浮提示框
-function showTooltips(obj) {
-    var tooltips = $canvas.comTooltips;
-    if (obj.userData.Hint !== '') {
-        tooltips.show().html(obj.userData.Hint);
-        var tPosX = obj.getAbsoluteX() + obj.getWidth() / 2 - tooltips.width() / 2 - 10
-        var tPosY = obj.getAbsoluteY() + obj.getHeight() + 10;
-        tooltips.css({
-            'top': tPosY + 'px',
-            'left': tPosX + 'px'
-        });
-    }
-}
-// 控件缩放  备用
-function componentResize(com) {
-    $canvas.comWidth.val(com.getWidth());
-    $canvas.comHeight.val(com.getHeight());
-}
-// 控件移动
-function componentMove(com) {
-    $canvas.comOffsetX.val(com.getAbsoluteX().toFixed(0));
-    $canvas.comOffsetY.val(com.getAbsoluteY().toFixed(0));
-    $canvas.comTooltips.hide();
-}
-
-$('#canvas').on('click', function () {
-    $canvas.menuFirAttr.show();
-    $canvas.menuSecAttr.hide();
-});
-$('.have-btn').on('click', 'button', function () {
-    $canvas.menuFirAttr.hide();
-    $canvas.menuSecAttr.show();
-});
-
-
-window.$canvas = {
-    loadings: $('.loading'), //加载等待
-    // 菜单
-    menuFirAttr: $('.first-attr'),
-    menuSecAttr: $('.second-attr'),
-    menuDivAlpha: $('.div-alpha'),
-    menuDivUnit: $('.div-unit'),
-    menuDivTitle: $('.div-title'),
-    menuDivImage: $('.div-image'),
-    menuDivFontSize: $('.div-font-size'),
-    menuDivTextAlpha: $('.div-text-alpha'),
-    menuDivTextVal: $('.div-text-val'),
-    menuDivTextColor: $('.div-text-color'),
-    menuDivFontSize: $('.div-font-size'),
-    menuDivBasicHide: $('.div-basic-hide'),
-    menuJustForLabel: $('.just-for-label'),
-    menuDivLineOnly: $('.div-line-only'),
-    menuDivFill: $('.div-fill'),
-    menuVlcUrl: $('.div-vlcurl'), //摄像地址div
-    menuDivLineCheck: $('.div-line-check'),
-    menuDivNormalWidth: $('.div-normal-width'),
-    menuDIvLineConduit: $('.div-line-conduit'),
-    menuDivLabel: $('.div-label'),
-
-    comTooltips: $('#tooltips'), //控件提示框
-    compID: $("#spanid"), //ID
-    compName: $('#comp-name'), //名称
-    compDesc: $('#comp-desc'), //描述
-    comWidth: $('#comp-width'), //宽
-    comHeight: $('#comp-height'), //高
-    comOffsetX: $('#comp-offsetx'), //位置 x
-    comOffsetY: $('#comp-offsety'), //位置 y
-    comRotation: $('#comp-rotation'), //旋转角度
-    comCaption: $('#comp-title'), //显示标题
-    comCaptionVal: $('#comp-title-val'), //标题内容
-    comHides: $('#comp-hides'), //隐藏控件
-    comEnable: $('#comp-unabel'), //是否可用
-    comLevel: $('#comp-level'), //访问等级
-    comHover: $('#comp-hover'), //hover
-    comHoverVal: $('#comp-hover-val'), //hover内容
-    comTagadd: $('#comp-tagaddress'), //tag
-    comReadonly: $('#comp-readonly'), //只读
-    comVlcUrlVal: $('#comp-vlc-val'), //摄像地址
-
-    styleWidth: $('#style-width'), //style 宽度
-    styleBorderColor: $('.style-border-color ul li'), // style 边框颜色
-    styleFillColor: $('.style-fill-color ul li'), // style 填充颜色
-    styleStyle: $('#style-style'), //style style
-    styleAlpha: $('#comp-alpha-style'), //style 透明度
-    styleFlash: $('#style-flashing'), // style 闪烁
-    stylePicture: $('#style-image'), //style 图片地址
-    styleText: $('#style-text'), //style 文本内容
-    styleFontSize: $('#text-font-size'), //style 字体大小
-    styleFontColor: $('.style-text-color ul li'), //style 字体颜色
-    styleTextUnit: $('#comp-unit-style'), //style 文本单位
-    styleBgAlpha: $('#text-alpha-style'), //style text背景透明
-
-    onTrueWidth: $('#ontrue-width'), // ontrue 宽度
-    onTrueBorderColor: $('.ontrue-border-color ul li'), //ontrue 边框颜色
-    onTrueFillColor: $('.ontrue-fill-color ul li'), // ontrue 填充颜色
-    onTrueStyle: $('#ontrue-style'), //ontrue style
-    onTrueAlpha: $('#comp-alpha-ontrue'), //ontrue 透明度
-    onTrueFlash: $('#ontrue-flashing'), // ontrue 闪烁
-    onTruePicture: $('#ontrue-image'), //ontrue 图片地址
-    onTrueText: $('#ontrue-text'), //onTrue 文本内容
-    onTrueFontColor: $('.ontrue-text-color ul li'), //onTrue 字体颜色
-    onTrueTextUnit: $('#comp-unit-ontrue'), //ontrue 文本单位
-    onTrueBgAlpha: $('#text-alpha-ontrue'), //ontrue text背景透明
-
-
-    onFalseWidth: $('#onfalse-width'), // onfalse 宽度
-    onFalseBorderColor: $('.onfalse-border-color ul li'), // onfalse 边框颜色
-    onFalseFillColor: $('.onfalse-fill-color ul li'), //onfalse 填充颜色
-    onFalseStyle: $('#onfalse-style'), //onfalse style
-    onFalseAlpha: $('#comp-alpha-onfalse'), //onfalse 透明度
-    onFalseFlash: $('#onfalse-flashing'), //onfalse 闪烁
-    onFalsePicture: $('#onfalse-image'), //onfalse 图片地址
-    onFalseText: $('#onfalse-text'), //onfalse 文本内容
-    onFalseFontColor: $('.onfalse-text-color ul li'), //onfalse  字体颜色
-    onFalseTextUnit: $('#comp-unit-onfalse'), //onfalse 文本单位
-    onFalseBgAlpha: $('#text-alpha-onfalse'), //onfalse text背景透明
-
-    onAlarmWidth: $('#onalarm-width'), //onalarm 宽度
-    onAlarmBorderColor: $('.onalarm-border-color ul li'), //onalarm 边框颜色
-    onAlarmFillColor: $('.onalarm-fill-color ul li'), //onalarm 填充颜色
-    onAlarmStyle: $('#onalarm-style'), //onalarm style
-    onAlarmAlpha: $('#comp-alpha-onalarm'), //onalarm 透明度
-    onAlarmFlash: $('#onalarm-flashing'), //onalarm 闪烁
-    onAlarmPicture: $('#onalarm-image'), //onalarm 图片地址
-    onAlarmText: $('#onalarm-text'), //onalarm 文本内容
-    onAlarmFontColor: $('.onalarm-text-color ul li'), //onalarm 字体颜色
-    onAlarmTextUnit: $('#comp-unit-onalarm'), //onalarm 文本单位
-    onAlarmBgAlpha: $('#text-alpha-onalarm'), //onalarm text背景透明
-
-    onDiscWidth: $('#onDisc-width'), //ondisc 宽度
-    onDiscBorderColor: $('.onDisc-border-color ul li'), //ondisc 边框颜色
-    onDiscFillColor: $('.onDisc-fill-color ul li'), //ondisc 填充颜色
-    onDiscStyle: $('#onDisc-style'), //ondisc style
-    onDiscAlpha: $('#comp-alpha-ondisc'), //ondisc 透明度
-    onDiscFlash: $('#onDisc-flashing'), //ondisc 闪烁
-    onDiscPicture: $('#onDisc-image'), //ondisc 图片地址
-    onDiscText: $('#onDisc-text'), //ondisc 文本内容
-    onDiscFontColor: $('.onDisc-text-color ul li'), //ondisc 字体颜色
-    onDiscTextUnit: $('#comp-unit-ondis'), //ondisc 文本单位
-    onDiscBgAlpha: $('#text-alpha-ondisc'), //ondisc text背景透明
-}
-
-
-
-
-/**
- * [组件点击显示数据]
- * @return {[type]} [description]
- */
-function componentInitData(com) {
-    checkComponentTagidIsNull(); //判断前一个控件是否正确绑定Tag
-
-    checkThisComponentIsTrue(com); //检查本控件的Tag是否正确(如果已经绑定)
-    // =================================基本-开始======================
-    // 暂存该控件的id,用于刷新控件的属性
-    $canvas.compID.html(com.id);
-}

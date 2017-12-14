@@ -363,16 +363,15 @@
                         <div id="tooltips"></div>
                     </div>
                     <div class="global-btn-div bayaxMscroll">
-                        <!-- <button onclick="changeSvg()">按钮</button> -->
                         <div class="global-btn-head">
                             <span>全局按钮</span>
-                            <span>添加</span>
+                            <span @click="addGlobalBtn">添加</span>
                         </div>
                         <div class="global-btn-body">
-                            <ul>
-                                <li>
-                                    <button class="bayax-btn">按钮</button>
-                                    <span class="tag-status"></span>
+                            <ul class="globalbtn-ul">
+                                <li v-for="item in globalBtnData.btndata">
+                                    <button v-text="item.name" @click="setGlobalBtnAttr(item)" class="bayax-btn"></button>
+                                    <span @click="deleteGlobalBtn(item)" class="btn-tag-status"></span>
                                 </li>
 
                             </ul>
@@ -382,15 +381,15 @@
 
                 </div>
             </div>
-            <div class="attribute-div">
+            <div v-bind:class="{'basic-hide':showHideFlag.attrdiv}" class="component-attribute-div attribute-div">
                 <div class="attr-head">
                     <p>修改属性</p>
                 </div>
                 <div class="attr-body">
                     <div class="layui-tab">
                         <ul class="layui-tab-title">
-                            <li class="layui-this">控件属性</li>
-                            <li>画布属性</li>
+                            <li class="li-comp layui-this">控件属性</li>
+                            <li class="li-canvas">画布属性</li>
                         </ul>
                         <div class="layui-tab-content bayaxMscroll">
                             <div class="layui-tabscroll-item layui-tab-item layui-show">
@@ -399,6 +398,7 @@
                                         <i></i>
                                         <span>常规</span>
                                     </p>
+
                                     <div class="routine attr-content-body reset-content">
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">名称</label>
@@ -546,8 +546,8 @@
                                                 <div class="layui-input-inline">
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
-                                                            <p v-text="datas.tag.tagname" class="bayax-division-text">123</p>
-                                                            <span class="bayax-division-span">
+                                                            <p v-text="datas.tag.tagname" class="bayax-division-text"></p>
+                                                            <span @click='setComTag' class="bayax-division-span">
                                                                 <span>···</span>
                                                             </span>
                                                         </div>
@@ -685,7 +685,7 @@
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
                                                             <p v-text="defaults.picture" class="bayax-division-text"></p>
-                                                            <span class="bayax-division-span">
+                                                            <span @click='upImageStyle' class="bayax-division-span">
                                                                     <span>···</span>
                                                             </span>
                                                         </div>
@@ -802,7 +802,7 @@
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
                                                             <p v-text="ontrue.picture" class="bayax-division-text"></p>
-                                                            <span class="bayax-division-span">
+                                                            <span @click='upImageOnTrue' class="bayax-division-span">
                                                                 <span>···</span>
                                                             </span>
                                                         </div>
@@ -918,7 +918,7 @@
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
                                                             <p v-text="onfalse.picture" class="bayax-division-text"></p>
-                                                            <span class="bayax-division-span">
+                                                            <span @click='upImageOnFalse' class="bayax-division-span">
                                                                 <span>···</span>
                                                             </span>
                                                         </div>
@@ -1034,7 +1034,7 @@
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
                                                             <p v-text="onalarm.picture" class="bayax-division-text"></p>
-                                                            <span class="bayax-division-span">
+                                                            <span @click='upImageOnAlarm' class="bayax-division-span">
                                                                 <span>···</span>
                                                             </span>
                                                         </div>
@@ -1150,7 +1150,7 @@
                                                     <div class="bayax-division-select bayax-select-group">
                                                         <div class="bayax-division-title">
                                                             <p v-text="ondisc.picture" class="bayax-division-text"></p>
-                                                            <span class="bayax-division-span">
+                                                            <span @click='upImageOnDisc' class="bayax-division-span">
                                                                 <span>···</span>
                                                             </span>
                                                         </div>
@@ -1176,8 +1176,8 @@
                                             <div class="layui-input-inline">
                                                 <div class="bayax-division-select bayax-select-group">
                                                     <div class="bayax-division-title">
-                                                        <p class="bayax-division-text">123</p>
-                                                        <span class="bayax-division-span">
+                                                        <p v-text="canvas.bgColor.bgimage" class="bayax-division-text"></p>
+                                                        <span @click='upCanvasbgImage' class="bayax-division-span">
                                                              <span>···</span>
                                                         </span>
                                                     </div>
@@ -1191,8 +1191,17 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">背景颜色</label>
                                         <div class="layui-input-block">
-                                            <!-- <input type="text" name="title" autocomplete="off" class="layui-input"> -->
+                                            <ul class="color-ul">
+                                                <li v-for="(item,index) in canvas.bgColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setCanvasBgColor(item)"></li>
+                                                <li class="canvas-bgcolor">+</li>
+                                            </ul>
                                         </div>
+                                    </div>
+
+                                    <div class="layui-formcheck-item layui-form-item">
+                                        <input v-model="canvas.setDefault" type="checkbox" id="set-default" class="bayaxcheckbox ">
+                                        <label class="checkbox-i" for="set-default"></label>
+                                        <span>恢复默认</span>
                                     </div>
 
                                 </div>
@@ -1205,7 +1214,7 @@
 
             </div>
 
-            <div class="globalbtn-attribute-div attribute-div">
+            <div v-bind:class="{'basic-show':showHideFlag.attrdiv}" class="globalbtn-attribute-div attribute-div">
                 <div class="attr-head">
                     <p>全局按钮属性</p>
                 </div>
@@ -1217,7 +1226,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">名称</label>
                             <div class="layui-input-block">
-                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                <input v-model="globalBtnData.attr.name" type="text" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -1226,8 +1235,8 @@
                                 <div class="layui-input-inline">
                                     <div class="bayax-division-select bayax-select-group">
                                         <div class="bayax-division-title">
-                                            <p class="bayax-division-text">123</p>
-                                            <span class="bayax-division-span">
+                                            <p v-text="globalBtnData.attr.tag_name" class="bayax-division-text"></p>
+                                            <span @click="setBtnTag" class="bayax-division-span">
                                                 <span>···</span>
                                             </span>
                                         </div>
@@ -1237,22 +1246,119 @@
 
                             </div>
                         </div>
+                        <div v-show="globalBtnData.flag.alreadybind">
+                            <div v-show="!globalBtnData.flag.isBoolean" class="layui-form-item">
+                                <label class="layui-form-label">默认值</label>
+                                <div class="layui-input-block">
+                                    <input v-model="globalBtnData.attr.num" type="text" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div v-show="globalBtnData.flag.isBoolean">
+                                <div class="layui-formcheck-item layui-form-item">
+                                    <input v-model="globalBtnData.attr.boolean" value="true" name="values" type="radio" id="gbtn-value-true" class="bayaxcheckbox ">
+                                    <label class="radiobox-i" for="gbtn-value-true"></label>
+                                    <span>true</span>
+                                </div>
+                                <div class="layui-formcheck-item layui-form-item">
+                                    <input v-model="globalBtnData.attr.boolean" value="false" name="values" type="radio" id="gbtn-value-false" class="bayaxcheckbox ">
+                                    <label class="radiobox-i" for="gbtn-value-false"></label>
+                                    <span>false</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
 
-                        <div class="layui-formcheck-item layui-form-item">
-                            <input type="checkbox" id="global-readonly-check" class="bayaxcheckbox ">
-                            <label class="checkbox-i" for="global-readonly-check"></label>
-                            <span>只读</span>
+
+
+        </div>
+        <!-- 绑定标签-->
+        <div id="layer-add-tags" class="layer-default">
+            <div class="canvas-layer bayax-layer-content">
+                <div class="layui-row">
+                    <div class="layui-form">
+                        <div class="clearfix">
+                            <div class="layui-input-inline content-search">
+                                <span class="search-span icon-search"></span>
+                                <input v-model="bindTag.searchText" v-on:input="searchtags(1)" type="text" placeholder="请输入标签名称" required>
+                                <span @click="cleanSearchVal" class="span-del icon-highlight_off"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="tag-table">
+                            <div class="content">
+                                <!-- <div class="noData">
+                                    无数据
+                                </div> -->
+                                <div class="havedata">
+                                    <table class="bayax-table">
+                                        <thead>
+                                            <tr>
+                                                <th>标签名称</th>
+                                                <th>类型</th>
+                                                <th>描述</th>
+                                                <th>节点名称</th>
+                                                <th>寄存器</th>
+                                                <th>选择</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="item in bindTag.labels">
+                                                <td v-text="item.name"></td>
+                                                <td v-text="item.tag_type"></td>
+                                                <td v-text="item.description"></td>
+                                                <td v-text="item.node_name"></td>
+                                                <td v-text="item.point_id"></td>
+                                                <td>
+                                                    <input v-bind:class="{ 'basic-hide': item.ishide }" v-model="bindTag.checkRadio" type="radio" :id="item.id+'tags'" :value="item" class="bayaxcheckbox" name="tags">
+                                                    <label v-bind:class="{ 'basic-hide': item.ishide }" class="radiobox-i" :for="item.id+'tags'"></label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="relode-data tcdPageCode"></div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
         </div>
 
     </div>
 
+
+    <!-- 上传图片 for  imageComponent style  -->
+    <input type="file" id="imageFileStyle" class="up-image" onchange="basicSet.uploadImage.upFileStyleImage(this)" />
+    <!-- 上传图片 for  imageComponent  onTrue -->
+    <input type="file" id="imageFileOnTrue" class="up-image" onchange="basicSet.uploadImage.upFileOnTrueImage(this)" />
+    <!-- 上传图片 for  imageComponent  onFalse -->
+    <input type="file" id="imageFileOnFalse" class="up-image" onchange="basicSet.uploadImage.upFileOnFalseImage(this)" />
+    <!-- 上传图片 for  imageComponent  onAlerm -->
+    <input type="file" id="imageFileOnAlarm" class="up-image" onchange="basicSet.uploadImage.upFileOnAlarmImage(this)" />
+    <!-- 上传图片 for  imageComponent  onDisconnected -->
+    <input type="file" id="imageFileOnDisc" class="up-image" onchange="basicSet.uploadImage.upFileOnDiscImage(this)" />
+    <!-- 上传图片 for  Canvas   -->
+    <input type="file" id="fileCanvasImage" class="up-image" onchange="basicSet.uploadImage.upCanvasImage(this)" />
+    <script>
+        var type = 'creat';
+    </script>
     <!-- <script type="text/javascript" src="js/canvas/basic/icheck.min.js"></script> -->
     <script type="text/javascript" src="./plugin/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript" src="js/canvas/basic/colpick.js"></script>

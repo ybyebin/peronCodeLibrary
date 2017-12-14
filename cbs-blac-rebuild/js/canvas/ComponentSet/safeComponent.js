@@ -3,7 +3,7 @@
  */
 var switchComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "switchComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -36,29 +36,29 @@ var switchComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 
@@ -69,7 +69,7 @@ var switchComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var pipingComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "pipingComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -101,29 +101,29 @@ var pipingComponent = draw2d.shape.basic.Rectangle.extend({
         this.attr({
             userData: data
         });
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -133,7 +133,7 @@ var pipingComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var WarninglampComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "WarninglampComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -166,29 +166,29 @@ var WarninglampComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -198,7 +198,7 @@ var WarninglampComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var blowerfanComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "blowerfanComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -231,28 +231,28 @@ var blowerfanComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -263,7 +263,7 @@ var blowerfanComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var exhaustfanComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "exhaustfanComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -296,29 +296,29 @@ var exhaustfanComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -329,7 +329,7 @@ var exhaustfanComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var bengComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "bengComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -362,30 +362,30 @@ var bengComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -397,7 +397,7 @@ var bengComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var ElectricTwoWayValveComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "ElectricTwoWayValveComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -430,30 +430,30 @@ var ElectricTwoWayValveComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -464,7 +464,7 @@ var ElectricTwoWayValveComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var SolenoidValveComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "SolenoidValveComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -497,29 +497,29 @@ var SolenoidValveComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -530,7 +530,7 @@ var SolenoidValveComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var ElectricButterflyValvesComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "ElectricButterflyValvesComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -563,29 +563,29 @@ var ElectricButterflyValvesComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -597,7 +597,7 @@ var ElectricButterflyValvesComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var AirFiltrationComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "AirFiltrationComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -630,30 +630,30 @@ var AirFiltrationComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -663,7 +663,7 @@ var AirFiltrationComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var AirHeatingComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "AirHeatingComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -696,31 +696,31 @@ var AirHeatingComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -732,7 +732,7 @@ var AirHeatingComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var AirCoolerComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "AirCoolerComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -765,29 +765,29 @@ var AirCoolerComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -799,7 +799,7 @@ var AirCoolerComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var HumidifierComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "HumidifierComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -832,29 +832,29 @@ var HumidifierComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -866,7 +866,7 @@ var HumidifierComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var controlPanelComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "controlPanelComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -899,31 +899,31 @@ var controlPanelComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
 
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -935,7 +935,7 @@ var controlPanelComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var FluorescentLampComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "FluorescentLampComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -968,30 +968,30 @@ var FluorescentLampComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1002,7 +1002,7 @@ var FluorescentLampComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var LEDComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "LEDComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1035,32 +1035,32 @@ var LEDComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
 
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1071,7 +1071,7 @@ var LEDComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var IncandescentComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "IncandescentComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1104,29 +1104,29 @@ var IncandescentComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1137,7 +1137,7 @@ var IncandescentComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var MetalHalideComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "MetalHalideComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1170,30 +1170,30 @@ var MetalHalideComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1203,7 +1203,7 @@ var MetalHalideComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var temperatureComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "temperatureComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1244,29 +1244,29 @@ var temperatureComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1275,7 +1275,7 @@ var temperatureComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var humidityComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "humidityComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1318,32 +1318,32 @@ var humidityComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
 
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1353,7 +1353,7 @@ var humidityComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var pressureComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "pressureComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1396,31 +1396,31 @@ var pressureComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1432,7 +1432,7 @@ var pressureComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var differentialPressureComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "differentialPressureComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1474,31 +1474,31 @@ var differentialPressureComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
 
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1510,7 +1510,7 @@ var differentialPressureComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var liquidComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "liquidComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1554,30 +1554,30 @@ var liquidComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1589,7 +1589,7 @@ var liquidComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var electricComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "electricComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1634,31 +1634,31 @@ var electricComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1669,7 +1669,7 @@ var electricComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var VoltageComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "VoltageComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1711,30 +1711,30 @@ var VoltageComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1746,7 +1746,7 @@ var VoltageComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var frequencyComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "frequencyComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1791,30 +1791,30 @@ var frequencyComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1825,7 +1825,7 @@ var frequencyComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var activePowerComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "activePowerComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1870,29 +1870,29 @@ var activePowerComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中 
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1902,7 +1902,7 @@ var activePowerComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var ElectricityConsumptionComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "ElectricityConsumptionComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -1945,30 +1945,30 @@ var ElectricityConsumptionComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
 
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -1980,7 +1980,7 @@ var ElectricityConsumptionComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var levelComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "levelComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -2022,30 +2022,30 @@ var levelComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -2055,7 +2055,7 @@ var levelComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var GasComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "GasComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -2098,30 +2098,30 @@ var GasComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -2133,7 +2133,7 @@ var GasComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "BroadcastComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -2167,29 +2167,29 @@ var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -2199,7 +2199,7 @@ var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var monitoringComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "monitoringComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -2235,30 +2235,30 @@ var monitoringComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
             safeBasic.vlcValue(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -2269,7 +2269,7 @@ var monitoringComponent = draw2d.shape.basic.Rectangle.extend({
 
 var qiujiComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "qiujiComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -2304,30 +2304,30 @@ var qiujiComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中   
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
             safeBasic.vlcValue(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -2338,7 +2338,7 @@ var qiujiComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var highqiujiComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "highqiujiComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -2373,31 +2373,31 @@ var highqiujiComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
             safeBasic.vlcValue(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -2408,7 +2408,7 @@ var highqiujiComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var EntranceGuardComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "EntranceGuardComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -2443,30 +2443,30 @@ var EntranceGuardComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -2476,7 +2476,7 @@ var EntranceGuardComponent = draw2d.shape.basic.Rectangle.extend({
  */
 var detectorComponent = draw2d.shape.basic.Rectangle.extend({
     NAME: "detectorComponent",
-    init: function (attr) {
+    init: function(attr) {
         var _this = this;
         this._super($.extend(JSON.parse(safeBasic.defaultset), attr));
 
@@ -2512,31 +2512,31 @@ var detectorComponent = draw2d.shape.basic.Rectangle.extend({
         });
 
         // 选中
-        this.image.on("click", function () {
+        this.image.on("click", function() {
             safeBasic.clickMethod(_this);
         });
 
         // 缩放
-        this.on("resize", function () {
+        this.on("resize", function() {
             setComponentOptions.componentOnResizeMethod(_this);
         });
 
         // 移动
-        this.on("move", function () {
+        this.on("move", function() {
             setComponentOptions.componentOnMoveMethod(_this);
         });
 
         // 悬浮窗
-        this.image.onMouseEnter = function () {
+        this.image.onMouseEnter = function() {
             setComponentOptions.showTooltips(_this);
         };
-        this.image.onMouseLeave = function () {
+        this.image.onMouseLeave = function() {
             setComponentOptions.hideTooltips();
         };
 
 
     },
-    onTimer: function () {
+    onTimer: function() {
         setComponentOptions.flashMethod(this);
     }
 });
@@ -2566,19 +2566,20 @@ var safeBasic = {
     safeData: JSON.stringify({
         type: "defaultComponent", //类型
         custom: {
-            newCreat: true,//  用于在拖拽组件时判断(是否新拖拽的控件)            
-            editSatus: 'defaults',//组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)  
-            showValue: {//是否是显示数值的默认控件
+            newCreat: true, //  用于在拖拽组件时判断(是否新拖拽的控件)            
+            editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)  
+            showValue: { //是否是显示数值的默认控件
                 flag: false,
-                value: ''//(如果启用 showValue属性)显示控件绑定的tag的值
+                value: '' //(如果启用 showValue属性)显示控件绑定的tag的值
             }
         },
         tag: {
             tag_id: -1,
             tag_type: -1,
             tag_name: "",
+            is_readonly: false,
             bingding_status: 0, //0 默认状态,1 已经绑定,2 绑定错误
-            status: 'default',//该组件绑定tag 的状态(用于监控画面)    
+            status: 'default', //该组件绑定tag 的状态(用于监控画面)    
         },
 
         routine: {
@@ -2597,7 +2598,7 @@ var safeBasic = {
             },
             readOnly: false, //组件是否为只读
         },
-        defaults: {//该属性用于存储 控件初始化时的状态
+        defaults: { //该属性用于存储 控件初始化时的状态
             lineWidth: 0,
             lineColor: "#000000",
             // lineStyle: null,
@@ -2633,7 +2634,7 @@ var safeBasic = {
             picture: ''
         }
     }),
-    clickMethod: function (component) {
+    clickMethod: function(component) {
         setComponentOptions.setComponentFlagFalse();
         //重置属性框
         canvasVue.resetAttr();
@@ -2654,11 +2655,11 @@ var safeBasic = {
         setComponentOptions.setComponentFlagTrue();
     },
     // 设置视频地址
-    vlcValue: function (component) {
+    vlcValue: function(component) {
         canvasVue.hidediv.vlcUrlHideDiv = false;
     },
     // 设置控件名称和图片
-    setImageUrl: function (data, imageData, name) {
+    setImageUrl: function(data, imageData, name) {
         data.routine.name = name;
         data.defaults.picture = imageData.urlOne;
         data.onTrue.picture = imageData.urlOne;

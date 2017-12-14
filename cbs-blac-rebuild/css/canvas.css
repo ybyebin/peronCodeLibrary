@@ -747,20 +747,24 @@
     background-color: #2B2F4C;
     background-repeat: no-repeat;
     background-size: contain;
-    /* background-image: url(Hydrangeas.jpg); */
+    background-image: url(Hydrangeas.jpg);
     background-position: center;
     width: 1300px;
     height: 730px;
 }
+
+
 /*tooltip-开始*/
+
 #tooltips {
-	position: absolute;
-	background: #88b7d5;
-	border: 4px solid #c2e1f5;
-	padding: 5px;
-	display: block;
-	display: none;
+    position: absolute;
+    background: #88b7d5;
+    border: 4px solid #c2e1f5;
+    padding: 5px;
+    display: block;
+    display: none;
 }
+
 
 /* #tooltips:after,
 #tooltips:before {
@@ -788,6 +792,7 @@
 	left: 50%;
 	margin-left: -13px;
 } */
+
 
 /*tooltip-结束*/
 
@@ -817,6 +822,10 @@
     overflow: hidden;
 }
 
+.globalbtn-ul {
+    display: none;
+}
+
 .global-btn-body ul li {
     margin-top: 10px;
 }
@@ -824,6 +833,7 @@
 .global-btn-body ul li button {
     width: 165px;
     border-radius: 3px;
+    overflow: hidden;
 }
 
 .global-btn-body ul li span {
@@ -1033,6 +1043,7 @@
     text-overflow: ellipsis;
 }
 
+.btn-tag-status,
 .tag-status {
     background: url(../images/img/rightWrong.png) no-repeat;
     height: 20px;
@@ -1074,7 +1085,8 @@
 .colpick {
     z-index: 99999;
 }
-.select-ul-up{
+
+.select-ul-up {
     top: auto !important;
     bottom: 43px;
 }
@@ -1097,6 +1109,70 @@
 
 .basic-hide {
     display: none;
+}
+
+.basic-show {
+    display: block;
+}
+
+
+/* 上传图片 input */
+
+.up-image {
+    display: none;
+    opacity: 0;
+}
+
+
+/*bind  tag */
+
+.canvas-layer {
+    padding: 20px 25px;
+    padding-bottom: 0;
+}
+
+.canvas-layer .content-search {
+    float: left;
+}
+
+.tag-table {
+    border: 1px solid #3C3F61;
+    margin-top: 10px;
+    height: 415px;
+}
+
+.noData {
+    margin-top: 25%;
+    font-size: 18px;
+    text-align: center;
+}
+
+.havedata {
+    /* display: none; */
+}
+
+.tag-table .bayax-table {
+    border-bottom: none;
+}
+
+.bayax-table>thead>tr>th {
+    padding-bottom: 9px;
+}
+
+.bayax-table tbody td {
+    height: 40px;
+}
+
+.tag-table .bayax-table tbody tr td:last-child {
+    width: 45px;
+}
+
+.bayax-table tbody>tr:nth-of-type(even) {
+    background-color: #1D2141;
+}
+
+.bayax-table tbody>tr:nth-of-type(odd) {
+    background-color: #2B2E4B;
 }
 
 
