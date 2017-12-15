@@ -16,6 +16,8 @@ layui.use(['layer', 'element'], function() {
             // 画布属性
             canvas: {
                 view_id: sessionStorage.getItem("view_id"),
+                view_name: '',
+                group_name: sessionStorage.getItem("viewGroupeName"),
                 width: '',
                 height: '',
                 bgColor: { //背景颜色
@@ -34,12 +36,7 @@ layui.use(['layer', 'element'], function() {
                 id: '',
                 flashTime: 1000 //闪烁间隔
             },
-            classObject: {
-                // active: true,
-                textdanger: {
-                    basichide: false
-                }
-            },
+
             // 无属性隐藏
             hidediv: {
                 // 基本类型
@@ -803,8 +800,10 @@ layui.use(['layer', 'element'], function() {
                         // 开关型
                         this.globalBtnData.flag.isBoolean = true;
                         if (item.tag.tag_value == 'true') {
+                            console.log('点击：' + 'true')
                             this.globalBtnData.attr.boolean = 'true';
                         } else {
+                            console.log('点击：' + 'true')
                             this.globalBtnData.attr.boolean = 'false';
                         }
                     } else {
@@ -1714,6 +1713,13 @@ layui.use(['layer', 'element'], function() {
         });
     });
 
+    // canvas 背景图片
+    canvasVue.$watch('canvas.bgColor.bgimage', function(newVal, oldVal) {
+        $('#canvas').css({
+            'background-image': 'url(' + newVal + ')'
+        });
+    });
+
 
     // canvas 恢复默认
     canvasVue.$watch('canvas.setDefault', function(newVal, oldVal) {
@@ -1768,6 +1774,7 @@ layui.use(['layer', 'element'], function() {
         if (this.componentData.flag) {
             console.log(newVal);
             this.globalBtnData.attr.current.tag.tag_value = newVal;
+
         }
     });
 

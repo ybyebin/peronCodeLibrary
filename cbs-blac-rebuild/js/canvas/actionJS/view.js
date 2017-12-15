@@ -92,7 +92,7 @@ example.Toolbar = Class.extend({
                     canvas: json,
                     subCanvas: canvasVue.globalBtnData.btndata,
                     bg_color: canvasVue.canvas.bgColor.color,
-                    bg_img_url: canvasVue.canvas.bgColor.bgimage,
+                    bg_image: canvasVue.canvas.bgColor.bgimage,
                 }
 
                 var data = {

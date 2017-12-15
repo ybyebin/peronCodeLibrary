@@ -2131,13 +2131,17 @@ var basicSet = {
                             canvasVue.globalBtnData.flag.alreadybind = true;
                             if (btn.tag.tag_type === 1) {
                                 // 开关型
+
+                                console.log('开关型')
                                 canvasVue.globalBtnData.flag.isBoolean = true;
                                 canvasVue.globalBtnData.attr.boolean = 'true';
+                                btn.tag.tag_value = 'true';
 
                             } else {
                                 // 非开关型
                                 canvasVue.globalBtnData.flag.isBoolean = false;
                                 canvasVue.globalBtnData.attr.num = '';
+                                btn.tag.tag_value = '';
                             }
                             canvasVue.datas.tag.tagname = bindTag.checkRadio.name;
                             layer.close(index);
@@ -2307,12 +2311,28 @@ var canvasSet = {
         imageCanvas.setZoom(s);
     },
     /**
-     *  在画布中捕获控件 用于处理组件
-     * @param  {[type]} id [description]
+     *  在画布中捕获控件 用于设置组件属性
      * @return {[type]}    [控件对象]
      */
     getNodeFromCanvas: function() {
         var id = canvasVue.componentData.id;
+        if (id != '') {
+            var node = imageCanvas.getFigure(id);
+            var nodeLine = imageCanvas.getLine(id);
+            if (node !== null) {
+                return node;
+            } else if (nodeLine !== null) {
+                return nodeLine;
+            }
+        } else {
+            return false;
+        }
+    },
+    /**
+     *  在画布中捕获控件 用于还原画布数据
+     * @param  {[type]} id [description]
+     */
+    getNodeFromCanvasById: function(id) {
         if (id != '') {
             var node = imageCanvas.getFigure(id);
             var nodeLine = imageCanvas.getLine(id);
@@ -2401,122 +2421,113 @@ var canvasSet = {
 
 
 
-        if (type === 'creat') {} else {
-            // 请求并在画面中还原数据
-            $.ajax({
-                url: '/api/view/' + canvasVue.canvas.view_id,
-                type: 'GET',
-                beforeSend: function() {
-                    canvasVue.loadingShow = true;
-                },
-                complete: function() {
-                    canvasVue.loadingShow = false;
-                },
-                success: function(data) {
-                    canvasVue.loadingShow = false;
-                    if (data.success) {
-                        console.log("请求到的数据:" + JSON.stringify(data, null, 2))
-                            // 此处添加  头部的  系统名称和 画面名称
-                        if (data.data !== null) {
-                            $('.go-subsys span').text(sessionStorage.getItem("viewGroupeName"));
-                            // $('.go-subsys span').text(unescape(getRequest.name));
-                            $('.group-name').text(data.data.name);
-                            var bg_img_url = data.data.background_img_url;
-                            if (bg_img_url === null || bg_img_url === '') {} else {
-                                // $("#myBgimage").attr("src", bg_img_url);
-                                $('#myBgimage').css('background-image', 'url(' + bg_img_url + ')');
-                                $("#myBgimage").data("url", bg_img_url);
-                            }
-                            if (data.data.background_color !== null) {
-                                $("#canvas").css("background-color", data.data.background_color);
-                            }
 
-                            if (data.data.view_data !== null) {
-                                var canvasJson = JSON.parse(data.data.view_data).canvas;
-                                var subCanvas = JSON.parse(data.data.view_data).subCanvas;
-                                console.log(JSON.stringify(subCanvas, null, 2))
-                                for (var i in subCanvas) {
+        // 请求并在画面中还原数据
+        $.ajax({
+            url: '/api/view/' + canvasVue.canvas.view_id,
+            type: 'GET',
+            beforeSend: function() {
+                canvasVue.loadingShow = true;
+            },
+            complete: function() {
+                canvasVue.loadingShow = false;
+            },
+            success: function(data) {
+                canvasVue.loadingShow = false;
+                if (data.success) {
+                    console.log("请求到的数据:" + JSON.stringify(data, null, 2))
+                        // 此处添加  头部的  系统名称和 画面名称
+                    if (data.data !== null) {
+                        canvasVue.canvas.view_name = data.data.name;
 
-                                    $('.no-glo-btn').hide();
-                                    var obj = '<p><button id="' + subCanvas[i].id + '" data-tag-id="' + subCanvas[i].tag_id + '" data-tag-name="' + subCanvas[i].tag_name + '" data-tag-type="' + subCanvas[i].tag_type + '" data-bingding-status="' + subCanvas[i].bingding_status + '" data-readonly="' + subCanvas[i].readonly + '" data-name="' + subCanvas[i].name + '">' + subCanvas[i].name + '</button><img src="images/delete.png"></p>';
-                                    $('.have-btn #mCSB_2_container').append(obj);
-                                }
+                        var totalData = data.data.view_data;
+                        if (totalData !== null) {
+                            var dic = JSON.parse(totalData);
+                            // 画布 组件数据
+                            var canvasJson = dic.canvas;
+                            // 画布数据
+                            canvasVue.canvas.bgColor.color = dic.bg_color;
+                            canvasVue.canvas.bgColor.bgimage = dic.bg_img_url;
+                            // 全局按钮数据
+                            canvasVue.globalBtnData.btndata = dic.subCanvas;
+                            console.log(JSON.stringify(dic.subCanvas, null, 2))
 
-                                var reader = new draw2d.io.json.Reader();
-                                reader.unmarshal(canvas, canvasJson);
-                                // 插件问题清空数据
-                                $('#comp-offsetx').val('');
-                                $('#comp-offsety').val('');
+                            var reader = new draw2d.io.json.Reader();
+                            reader.unmarshal(canvas, canvasJson);
+                            // 插件问题清空数据(待处理)
 
-                                var writer = new draw2d.io.json.Writer();
-                                writer.marshal(canvas, function(json) {
 
-                                    for (var i in json) {
-                                        var node = getCanvasNode(json[i].id);
-                                        if (node.userData.ShowCaption) {
-                                            // 获取节点并更改标题	
-                                            switch (json[i].userData.ShowCaption) {
-                                                case true:
-                                                    node.label.setVisible(true);
-                                                    break;
-                                                case false:
-                                                    node.label.setVisible(false);
-                                                    break;
+                            var writer = new draw2d.io.json.Writer();
+                            writer.marshal(canvas, function(json) {
+
+                                for (var i in json) {
+                                    var node = canvasSet.getNodeFromCanvasById(json[i].id);
+                                    if (node) {
+
+                                        var userData = node.userData;
+
+                                        //将编辑状态设置为默认状态
+                                        userData.custom.editSatus = 'defaults';
+
+                                        // 更改标题	
+                                        if (userData.routine.hasOwnProperty("caption")) {
+                                            var caption = userData.routine.caption;
+                                            if (caption.flag) {
+                                                node.label.setVisible(true);
                                             }
-                                            node.label.setText(json[i].userData.Caption);
-                                            node.label.repaint();
+                                            node.label.setText(caption.capText);
+                                            // node.label.repaint();
                                         }
 
                                         // 节点闪烁
-                                        if (node.userData.Blinking == true) {
-                                            node.startTimer(1000);
+                                        if (userData.defaults.blinking) {
+                                            node.startTimer(canvasVue.componentData.flashTime);
                                         }
-                                        if (node.userData.types === 'conduitCompontent') {
+
+                                        // 基础管道组件
+                                        if (userData.hasOwnProperty("onlytype")) {
                                             node.resetPorts();
                                         }
 
+                                        // 图片
                                         if (node.image) {
                                             node.image.setHeight(node.getHeight());
                                             node.image.setWidth(node.getWidth());
                                         }
-                                        if (node.userData.picture) {
-                                            node.image.setPath(node.userData.picture);
+                                        if (userData.defaults.hasOwnProperty("picture")) {
+                                            node.image.setPath(userData.defaults.picture);
                                             node.image.setHeight(node.getHeight());
                                             node.image.setWidth(node.getWidth());
                                         }
-                                        switch (node.alpha) {
-                                            case 0:
-                                                node.setAlpha(0);
-                                                if (node.image) {
-                                                    node.image.setAlpha(0);
-                                                }
-                                                if (node.label) {
-                                                    node.label.setAlpha(0);
-                                                }
-                                                break;
-                                        }
-                                        node.repaint();
+
+
+                                        //隐藏组件(编辑画面  隐藏属性不生效)
+
                                     }
 
-                                });
-                            }
+                                }
 
-                        } else {
-                            layer.msg('获取数据失败')
+                            });
                         }
 
                     } else {
-                        layer.msg(data.error_message);
-                        console.log("获取画面数据失败" + JSON.stringify(data, null, 2))
+                        layer.msg('获取数据失败')
                     }
 
-                },
-                error: function(data) {
-                    publicAjaxError(data);
+                } else {
+                    layer.msg(data.error_message);
+                    console.log("获取画面数据失败" + JSON.stringify(data, null, 2))
                 }
-            });
-        }
+
+            },
+            error: function(data) {
+                publicAjaxError(data);
+            }
+        });
+
     },
+
+
 }
 
 
