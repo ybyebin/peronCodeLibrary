@@ -282,3 +282,291 @@
 
 
 /* 系统管理   -end */
+
+
+/* 设备监控   -begin */
+
+.device-control-side {
+    top: 65px;
+}
+
+.device-control-side .layui-nav-tree .layui-nav-item a {
+    height: 50px !important;
+    line-height: 50px;
+    text-align: left;
+    padding-right: 20px;
+    padding-left: 25px;
+}
+
+.device-control-side .layui-nav-tree .layui-nav-item dl dd>a {
+    padding-left: 60px;
+    padding-right: 0;
+}
+
+.device-control-side .layui-nav-tree .layui-nav-item a>span {
+    font-size: 16px;
+    background: #2D3057;
+}
+
+.device-control-side .layui-nav-tree .layui-nav-more {
+    top: 22px!important;
+    right: 15px;
+}
+
+.device-control-side .layui-nav-tree .layui-nav-itemed .layui-nav-more {
+    right: 15px;
+    top: 16px!important;
+}
+
+.device-control-side .layui-nav-tree .layui-nav-item>a:hover {
+    background: #2D3057!important;
+}
+
+.device-control-side .layui-nav-tree li {
+    margin-top: 1px;
+}
+
+.device-control-side .layui-nav-tree .layui-nav-child dd {
+    margin-top: 1px;
+}
+
+.device-control-side .layui-nav-tree .layui-nav-child dd.layui-this,
+.layui-nav-tree .layui-nav-child dd.layui-this a,
+.layui-nav-tree .layui-this,
+.layui-nav-tree .layui-this>a,
+.layui-nav-tree .layui-this>a:hover {
+    background: #3E4687;
+}
+
+.device-control-side .layui-nav-item>a>i.device-type-i {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    position: relative;
+    top: 9px;
+    margin-right: 2px;
+    background: url(../images/flags.png) no-repeat;
+}
+
+.device-control-side .layui-nav li>a>i.dianti {
+    background-position: 0 -420px;
+}
+
+.device-control-side li>a:hover>i.dianti {
+    background-position: 0 -448px;
+}
+
+.device-control-side .layui-nav li>a>i.huanjing {
+    background-position: 0 -364px;
+}
+
+.device-control-side li>a:hover>i.huanjing {
+    background-position: 0 -392px;
+}
+
+.device-control-side .layui-nav li>a>i.jishui {
+    background-position: 0 -588px;
+}
+
+.device-control-side li>a:hover>i.jishui {
+    background-position: 0 -616px;
+}
+
+.device-control-side .layui-nav li>a>i.paishui {
+    background-position: 0 -84px;
+}
+
+.device-control-side li>a:hover>i.paishui {
+    background-position: 0 -112px;
+}
+
+.device-control-side .layui-nav li>a>i.lengshui {
+    background-position: 0 -532px;
+}
+
+.device-control-side li>a:hover>i.lengshui {
+    background-position: 0 -560px;
+}
+
+.device-control-side .layui-nav li>a>i.ruqin {
+    background-position: 0 -140px;
+}
+
+.device-control-side li>a:hover>i.ruqin {
+    background-position: 0 0;
+}
+
+.device-control-side .layui-nav li>a>i.zhaoming {
+    background-position: 0 -308px;
+}
+
+.device-control-side li>a:hover>i.zhaoming {
+    background-position: 0 -168px;
+}
+
+.device-control-side .layui-nav li>a>i.kongtiao {
+    background-position: 0 -644px;
+}
+
+.device-control-side li>a:hover>i.kongtiao {
+    background-position: 0 -504px;
+}
+
+.device-control-side .layui-nav li>a>i.vedio {
+    background-position: 0 -28px;
+}
+
+.device-control-side li>a:hover>i.vedio {
+    background-position: 0 -56px;
+}
+
+.device-control-side .layui-nav li>a>i.tingche {
+    background-position: 0 -252px;
+}
+
+.device-control-side li>a:hover>i.tingche {
+    background-position: 0 -280px;
+}
+
+.device-control-side .layui-nav li>a>i.fengji {
+    background-position: 0 -476px;
+}
+
+.device-control-side li>a:hover>i.fengji {
+    background-position: 0 -336px;
+}
+
+.device-control-side .layui-nav li>a>i.custom {
+    background-position: 0 -196px;
+}
+
+.device-control-side li>a:hover>i.custom {
+    background-position: 0 -224px;
+}
+
+.h-noview {
+    text-align: center;
+    color: #666;
+}
+
+.device-control-body {
+    padding-right: 20px;
+    left: 190px;
+}
+
+.device-control-body .content-main-mon {
+    position: absolute;
+    top: 81px;
+    left: 30px;
+    right: 20px;
+    bottom: 0;
+    /* height: 750px; */
+}
+
+.canvas-div {
+    position: absolute;
+    top: 20px;
+    bottom: 0;
+    left: 20px;
+    right: 180px;
+    background: blue;
+}
+
+#canvas {
+    background-color: #2B2F4C;
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* background-image: url(Hydrangeas.jpg); */
+    background-position: center;
+    width: 1300px;
+    height: 730px;
+}
+.mark{
+    background-image: url('../images/imgs.png');
+}
+.global-btn-body {
+    float: right;
+    width: 145px;
+    height: 100%;
+    max-height: 100%;
+    /* background: red; */
+    overflow: hidden;
+    padding: 0 3px;
+
+}
+.globalbtn-title{
+    padding: 5px 0;
+    padding-left: 10px;
+    padding-top: 8px;
+    border-radius: 2px;
+    cursor: pointer;
+    background: rgba(195,233,255,0.1);
+    border: 1px solid rgba(172,177,218,.1);
+    border-bottom: none;
+}
+.global-btn-body >div{
+    background-color: rgba(28, 31, 56, .1);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+}
+.globalbtn-title span:first-child{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-position: -40px 0;
+}
+.globalbtn-title span:last-child{
+    position: relative;
+    top: -4px;
+    left: 10px;
+    font-size: 16px;
+}
+.globalbtn-ul {
+    padding:15px;
+    padding-top: 10px;
+}
+
+.global-btn-body ul li {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.global-btn-body ul li:first-child {
+    margin-top: 0;
+}
+
+.global-btn-body ul li button {
+    width: 100%;
+    overflow: hidden;
+    color: #fff;
+    background: #3F446E;
+    border-radius: 4px;
+    height: 34px;
+    line-height: 34px;
+}
+.global-btn-body ul li button:hover{
+    background-color: #30366A;
+    color: #fff;
+}
+
+/* 列表与趋势图 */
+table.table-trend span.mark{
+    width: 20px;
+    height: 22px;
+    margin-right: 3px;
+}
+table.table-trend span.mark.warn{
+    position: relative;
+    top: 5px;
+    display: inline-block;
+    background-position: -20px 0 ;
+}
+
+table.table-trend span.mark.error{
+    position: relative;
+    top: 5px;
+    display: inline-block;
+    background-position: 0 0 ;
+}
+
+
+/* 设备监控   -end *

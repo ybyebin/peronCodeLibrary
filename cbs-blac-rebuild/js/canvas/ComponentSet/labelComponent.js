@@ -22,7 +22,8 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
             custom: {
                 valueType: 'valueComponent', //显示控件绑定的 tag 的值
                 newCreat: true, //  用于在拖拽组件时判断(是否新拖拽的控件)                
-                editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)                
+                editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc) 
+                blinkingType:'',//监控画面 用于 组件闪烁 判断标志                 
             },
             tag: {
                 tag_id: -1,
@@ -40,7 +41,7 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
                 enable: false, //组件是否可用
                 accessLevel: 8, //访问等级 0~15
                 hint: { //hover 说明
-                    flag: true, //是否显示
+                    flag: false, //是否显示
                     hintText: '该组件用于显示文本,没有状态属性' //text
                 },
                 caption: { //组件标题

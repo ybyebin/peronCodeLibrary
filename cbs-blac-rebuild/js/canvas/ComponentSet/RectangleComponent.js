@@ -15,6 +15,7 @@ var rectangleComponent = draw2d.shape.node.Between.extend({
         // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '矩形';
+        data.custom.havepoint = true;
         this.attr({
             userData: data
         });
@@ -69,6 +70,7 @@ var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
         // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '圆角矩形';
+        data.custom.havepoint = true;
         this.attr({
             userData: data
         });
@@ -120,6 +122,7 @@ var EllipseComponent = draw2d.shape.node.Between.extend({
         // 初始化 控件属性
         var data = JSON.parse(rectangle.rectangleData);
         data.routine.name = '椭圆';
+        data.custom.havepoint = true;
         this.attr({
             userData: data
         });
@@ -701,7 +704,8 @@ var rectangle = {
         type: "basicComponent", //类型
         custom: {
             newCreat: true, //  用于在拖拽组件时判断(是否新拖拽的控件)
-            editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)        
+            editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc) 
+            blinkingType:'',//监控画面 用于 组件闪烁 判断标志  
         },
         tag: {
             tag_id: -1,

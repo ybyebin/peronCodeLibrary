@@ -47,6 +47,7 @@ var setComponentOptions = {
             vueRoutine.hoverdata.disabled = false;
         } else {
             vueRoutine.hover = false;
+            vueRoutine.hoverdata.text = data.routine.hint.hintText;
             vueRoutine.hoverdata.disabled = true;
 
         }
@@ -888,6 +889,7 @@ var setComponentOptions = {
                     lineBasic.clickMethod(component);
                     break;
                 case 'textComponent':
+                textBasic.clickMethod(component);
                     break;
             }
         }

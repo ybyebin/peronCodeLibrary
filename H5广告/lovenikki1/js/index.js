@@ -1,4 +1,4 @@
-(function (root, factory) {
+(function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         //AMD
         define(factory);
@@ -9,11 +9,11 @@
         //浏览器全局变量(root 即 window)
         root.resLoader = factory(root);
     }
-}(this, function () {
-    var isFunc = function (f) {
-        return typeof f === 'function';
-    }
-    //构造器函数
+}(this, function() {
+    var isFunc = function(f) {
+            return typeof f === 'function';
+        }
+        //构造器函数
     function resLoader(config) {
         this.option = {
             resourceType: 'image', //资源类型，默认为图片
@@ -27,8 +27,7 @@
             for (i in config) {
                 this.option[i] = config[i];
             }
-        }
-        else {
+        } else {
             alert('参数错误！');
             return;
         }
@@ -37,22 +36,22 @@
         this.currentIndex = 0; //当前正在加载的资源索引
     };
 
-    resLoader.prototype.start = function () {
+    resLoader.prototype.start = function() {
         this.status = 1;
         var _this = this;
         var baseUrl = this.option.baseUrl;
         for (var i = 0, l = this.option.resources.length; i < l; i++) {
-            var r = this.option.resources[i], url = '';
+            var r = this.option.resources[i],
+                url = '';
             if (r.indexOf('http://') === 0 || r.indexOf('https://') === 0) {
                 url = r;
-            }
-            else {
+            } else {
                 url = baseUrl + r;
             }
 
             var image = new Image();
-            image.onload = function () { _this.loaded(); };
-            image.onerror = function () { _this.loaded(); };
+            image.onload = function() { _this.loaded(); };
+            image.onerror = function() { _this.loaded(); };
             image.src = url;
         }
         if (isFunc(this.option.onStart)) {
@@ -60,7 +59,7 @@
         }
     }
 
-    resLoader.prototype.loaded = function () {
+    resLoader.prototype.loaded = function() {
         if (isFunc(this.option.onProgress)) {
             this.option.onProgress(++this.currentIndex, this.total);
         }
@@ -90,59 +89,50 @@ var loader = new resLoader({
         'image/NIKKI.png',
         'image/person.png',
     ],
-    onStart: function (total) {
+    onStart: function(total) {
         console.log('start:' + total);
-        var wh = document.documentElement.clientWidth;
-        if (wh >= 640) {
-            wh = 640;
-        }
-        var ww = wh * 480 / 320;
-        document.documentElement.style.fontSize = wh / 16 + "px";
-        $('.sec').css({
-            'height': ww + 'px',
-            'width': wh + 'px'
-        });
-    
-        window.onresize = function () {
-            var wh = document.documentElement.clientWidth;
-            if (wh >= 640) {
-                wh = 640;
-            }
-            var ww = wh * 480 / 320;
-            document.documentElement.style.fontSize = wh / 16 + "px";
-            $('.sec').css({
-                'height': ww + 'px',
-                'width': wh + 'px'
-            });
-        }
+
 
 
         // fr  en-US  fr-FR  fr-CA
         var currentLang = navigator.language; //判断除IE外其他浏览器使用语言
-        if(currentLang === 'fr' || currentLang === 'fr-FR' ||currentLang === 'fr-CA'){
-           adData.data.languageType = 'france';
+        if (currentLang === 'fr' || currentLang === 'fr-FR' || currentLang === 'fr-CA') {
+            adData.data.languageType = 'france';
             adData.changeLanguage();
         }
 
 
     },
-    onProgress: function (current, total) {
+    onProgress: function(current, total) {
         console.log(current + '/' + total);
 
         adData.loadingMethod(current, total);
     },
-    onComplete: function (total) {
+    onComplete: function(total) {
         adData.loadingFinish();
-        console.log('图片加载完成');     
+        console.log('图片加载完成');
         adData.sec2Method();
+        // adData.sec8Method();
     }
 });
 
 
 
-$(function () {
+$(function() {
     console.log('文件加载完成');
-    loader.start();        
+    loader.start();
+    // window.onresize = function () {
+    //     var wh = document.documentElement.clientWidth;
+    //     if (wh >= 640) {
+    //         wh = 640;
+    //     }
+    //     var ww = wh * 480 / 320;
+    //     document.documentElement.style.fontSize = wh / 16 + "px";
+    //     $('.sec').css({
+    //         'height': ww + 'px',
+    //         'width': wh + 'px'
+    //     });
+    // }
 });
 
 var adData = {
@@ -170,33 +160,33 @@ var adData = {
 
         },
         getDressed: false,
-        languageType:'english',
+        languageType: 'english',
         language: {
             install: 'Installer',
             claim: "Réclamer",
             sec2p1: 'Mon meilleur ami va se marier le mois',
             sec2p2: 'prochain! Je devrais lui faire une surprise.',
             sec3p1: "C'est l'heure du tirage au sort!",
-            sec5proName:'Mariage rêveur',
-            mature:'Maturité',
-            gorgeous:'Splendeur',
-            elegance:'Élégance',
-            pure:'Pureté',
-            cute:'Tendresse',
-            sec4proName:'Poetic Tomorrow',
-            sec6strp1:'Bon! Je vais lui faire une belle mariée  avec ceux-ci !',
-            sec7strp1:'Objectif: Aider Nikki à concevoir une  tenue de mariage pendant',
-            start:'Commencer',
-            sec8strp1:'Aidez Nikki à finir son design !',
-            time:'Temps',
-            sec9sucp1:'Vous avez gagné un cadeau secret.',
-            sec9sucp2:'Venez rejoindre le voyage de Nikki et',
-            sec9sucp3:'découvrez le monde élégant',
-            sec9sucp32:'MAINTENANT!',
-            sec9sucp4:'Il faut plus de vêtements satisfaisants.',
-            sec9sucp5:' Venez rejoindre le monde de Nikki pour',
-            sec9sucp52:'en trouver plus!',
-            replay:'Rejouer',
+            sec5proName: 'Mariage rêveur',
+            mature: 'Maturité',
+            gorgeous: 'Splendeur',
+            elegance: 'Élégance',
+            pure: 'Pureté',
+            cute: 'Tendresse',
+            sec4proName: 'Poetic Tomorrow',
+            sec6strp1: 'Bon! Je vais lui faire une belle mariée  avec ceux-ci !',
+            sec7strp1: 'Objectif: Aider Nikki à concevoir une  tenue de mariage pendant',
+            start: 'Commencer',
+            sec8strp1: 'Aidez Nikki à finir son design !',
+            time: 'Temps',
+            sec9sucp1: 'Vous avez gagné un cadeau secret.',
+            sec9sucp2: 'Venez rejoindre le voyage de Nikki et',
+            sec9sucp3: 'découvrez le monde élégant',
+            sec9sucp32: 'MAINTENANT!',
+            sec9sucp4: 'Il faut plus de vêtements satisfaisants.',
+            sec9sucp5: ' Venez rejoindre le monde de Nikki pour',
+            sec9sucp52: 'en trouver plus!',
+            replay: 'Rejouer',
         },
         sec: $('.sec'),
         sec2: $('.sec2'),
@@ -207,16 +197,16 @@ var adData = {
         sec7: $('.sec7'),
         sec8: $('.sec8'),
         sec9: $('.sec9'),
-        bounceInLeft:'bounceInLeft',
-        bounceOutLeft:'bounceOutLeft',
+        bounceInLeft: 'bounceInLeft',
+        bounceOutLeft: 'bounceOutLeft',
 
 
     },
-    loadingMethod: function (current, total) {
+    loadingMethod: function(current, total) {
         var percent = current / total * 100;
         $('.progressbar').css('width', percent + '%');
     },
-    loadingFinish: function () {
+    loadingFinish: function() {
         $('.sec-start').addClass('sec-start-add');
         $('.spirit').addClass('spirit-add');
         $('.pumping-cell').addClass('pumping-cell-add');
@@ -225,42 +215,42 @@ var adData = {
         $('.text-spirit').addClass('text-spirit-add');
         $('.sec9').addClass('sec9-add');
     },
-    sec2Method: function () {
+    sec2Method: function() {
         $('.loading').hide();
-        var sec2dialog =  $('.sec2-dialog');
-        var sec2dialog_ripple =  $('.sec2-dialog-ripple');
+        var sec2dialog = $('.sec2-dialog');
+        var sec2dialog_ripple = $('.sec2-dialog-ripple');
         adData.data.sec2.show();
         sec2dialog.show().addClass(adData.data.bounceInLeft);
-        setTimeout(function () {
+        setTimeout(function() {
             sec2dialog_ripple.show();
-            adData.data.sec2.on('click', function () {
+            adData.data.sec2.on('click', function() {
                 sec2dialog_ripple.hide();
                 sec2dialog.removeClass(adData.data.bounceInLeft).addClass(adData.data.bounceOutLeft);
-                setTimeout(function () {
+                setTimeout(function() {
                     adData.sec3Method();
-                }, 600);
+                }, 400);
             });
-        }, 1000)
+        }, 300)
     },
-    sec3Method: function () {
+    sec3Method: function() {
         adData.data.sec2.unbind();
         adData.data.sec.hide();
         $('.sec3').show();
-        var sec3dialog =  $('.sec3-dialog');
+        var sec3dialog = $('.sec3-dialog');
         sec3dialog.addClass(adData.data.bounceInLeft);
-        setTimeout(function () {
-            $('.sec3-dialog-claim').show().on('click', function () {
+        setTimeout(function() {
+            $('.sec3-dialog-claim').show().on('click', function() {
                 $(this).hide();
                 sec3dialog.removeClass(adData.data.bounceInLeft).addClass(adData.data.bounceOutLeft);
-                setTimeout(function () {
+                setTimeout(function() {
                     // 先5后4
                     adData.sec5Method();
-                }, 600);
+                }, 400);
             });
 
-        }, 1000)
+        }, 500)
     },
-    sec5Method: function () {
+    sec5Method: function() {
         $('.sec3-dialog-claim').unbind();
         adData.data.sec.hide();
         adData.data.sec5.show();
@@ -271,43 +261,43 @@ var adData = {
 
         $('.sec5-poetic-name').show().addClass(zoomin);
 
-        setTimeout(function () {
+        setTimeout(function() {
             $('.heart-level').show().addClass(zoomin);
-            setTimeout(function () {
+            setTimeout(function() {
                 $('.sec5-label').show().addClass(zoomin);
-                setTimeout(function () {
+                setTimeout(function() {
                     $('.sec5-spirit-left1').show().addClass(zoomin);
-                    setTimeout(function () {
+                    setTimeout(function() {
                         $('.sec5-spirit-right1').show().addClass(zoomin);
-                        setTimeout(function () {
+                        setTimeout(function() {
                             $('.sec5-spirit-left2').show().addClass(zoomin);
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 $('.sec5-spirit-right2').show().addClass(zoomin);
-                                setTimeout(function () {
-                                    $('.sec5-claim').show().on('click', function () {
+                                setTimeout(function() {
+                                    $('.sec5-claim').show().on('click', function() {
                                         $('.heart-level,.sec5-label').hide().removeClass(zoomin);
                                         $(this).hide();
                                         $('.sec5-spirit-left1').addClass('zoomOutDownleft1');
                                         $('.sec5-spirit-right1').addClass('zoomOutDownright1');
                                         $('.sec5-spirit-left2').addClass('zoomOutDownleft2');
                                         $('.sec5-spirit-right2').addClass('zoomOutDownright2');
-                                        setTimeout(function () {
+                                        setTimeout(function() {
                                             adData.sec4Method();
-                                        }, 1000)
+                                        }, 500)
                                     });
-                                }, 700)
-                            }, 700)
-                        }, 700)
-                    }, 700)
-                }, 700)
-            }, 700)
-        }, 700);
+                                }, 400)
+                            }, 400)
+                        }, 400)
+                    }, 400)
+                }, 400)
+            }, 400)
+        }, 400);
 
 
 
 
     },
-    sec4Method: function () {
+    sec4Method: function() {
 
         $('.sec5-claim').unbind();
 
@@ -320,84 +310,80 @@ var adData = {
         var zoomoutDown = 'zoomOutDown';
 
         $('.sec4-poetic-name').show().addClass(zoomin);
-        setTimeout(function () {
+        setTimeout(function() {
             $('.heart-level4').show().addClass(zoomin);
-            setTimeout(function () {
+            setTimeout(function() {
                 $('.sec4-label').show().addClass(zoomin);
-                setTimeout(function () {
+                setTimeout(function() {
                     $('.sec4-spirit-left1').show().addClass(zoomin);
-                    setTimeout(function () {
+                    setTimeout(function() {
                         $('.sec4-spirit-right1').show().addClass(zoomin);
-                        setTimeout(function () {
+                        setTimeout(function() {
                             $('.sec4-spirit-left2').show().addClass(zoomin);
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 $('.sec4-spirit-right2').show().addClass(zoomin);
-                                setTimeout(function () {
-                                    $('.sec4-claim').show().on('click', function () {
+                                setTimeout(function() {
+                                    $('.sec4-claim').show().on('click', function() {
                                         $('.heart-level4,.sec4-label').hide().removeClass(zoomin);
                                         $(this).hide();
                                         $('.sec4-spirit-left1').addClass('zoomOutDownleft1');
                                         $('.sec4-spirit-right1').addClass('zoomOutDownright1');
                                         $('.sec4-spirit-left2').addClass('zoomOutDownleft2');
                                         $('.sec4-spirit-right2').addClass('zoomOutDownright2');
-                                        setTimeout(function () {
+                                        setTimeout(function() {
                                             adData.sec6Method();
-                                        }, 1000)
+                                        }, 500)
                                     });
-                                }, 700)
-                            }, 700)
-                        }, 700)
-                    }, 700)
-                }, 700)
-            }, 700);
-           
-        }, 700);
-
-
-
-
+                                }, 400)
+                            }, 400)
+                        }, 400)
+                    }, 400)
+                }, 400)
+            }, 400);
+        }, 400);
     },
-    sec6Method: function () {
+    sec6Method: function() {
         $('.sec4-claim').unbind();
 
         adData.data.sec.hide();
         $('.sec6').show();
         $('.sec6-dialog').show().addClass(adData.data.bounceInLeft);
-        setTimeout(function () {
+        setTimeout(function() {
             $('.sec6-dialog-ripple').show();
-            $('.sec6').on('click', function () {
+            $('.sec6').on('click', function() {
                 $('.sec6-dialog-ripple').hide();
                 $('.sec6-dialog').removeClass(adData.data.bounceInLeft).addClass(adData.data.bounceOutLeft);
-                setTimeout(function () {
+                setTimeout(function() {
                     adData.sec7Method();
-                }, 600);
+                }, 400);
             });
-        }, 1000)
+        }, 300)
     },
-    sec7Method: function () {
+    sec7Method: function() {
 
         $('.sec6').unbind();
         $('.sec').hide();
         $('.sec7').show();
         $('.sec7-dialog').show().addClass(adData.data.bounceInLeft);
 
-        setTimeout(function () {
-            $('.sec7-claim').show().on('click', function () {
+        setTimeout(function() {
+            $('.sec7-claim').show().on('click', function() {
                 $(this).hide();
                 $('.sec7-dialog').removeClass(adData.data.bounceInLeft).addClass(adData.data.bounceOutLeft);
-                setTimeout(function () {
+                setTimeout(function() {
                     adData.sec8Method();
-                }, 600);
+                }, 400);
             });
-        }, 1000);
+        }, 300);
     },
-    sec8Method: function () {
+    sec8Method: function() {
         $('.sec7-claim').unbind();
         $('.sec').hide();
         $('.sec8').show();
         $('.slide-menu').show().addClass('bounceInRight');
-        setTimeout(function () {
-            $('.press-btn').on('click', function () {
+        // $('.slide-menu').show();
+        setTimeout(function() {
+            $('.press-btn').on('click', function() {
                 if (adData.data.getDressed) {
                     clearInterval(adData.data.interval);
                     adData.sec9Method();
@@ -405,14 +391,17 @@ var adData = {
                 }
             });
 
-            $('.slide-menu-ripple').show().on('click', function () {
+            $('.slide-menu-ripple').show().on('click', function() {
                 $(this).hide();
-                setTimeout(function () {
+                setTimeout(function() {
                     $('.slide-menu-ripple').unbind();
-                    $('.slide-menu').removeClass('bounceInRight').addClass('bounceOutRight');
+                    $('.slide-menu').removeClass('bounceInRight').addClass('bounceOutRight').hide();
+                    // $('.slide-menu').removeClass('bounceInRight').hide();
+
                     $('.slide-hair').show().addClass('bounceInRight');
-                    setTimeout(function () {
-                        $('.slide-hair-rippledream,.slide-hair-rippletomo').show().on('click', function () {
+                    // $('.slide-hair').show();
+                    setTimeout(function() {
+                        $('.slide-hair-rippledream,.slide-hair-rippletomo').show().on('click', function() {
 
                             console.log($(this).data('for'));
                             var type = $(this).data('for');
@@ -421,7 +410,7 @@ var adData = {
                                 case 'dream':
                                     adData.data.resoult.hair.type = '.res-dream-hair';
                                     $('.hair-dream.move').show().addClass('movedream');
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $('.hair-dream.move').hide().removeClass('movedream');
                                         $('.person-hair').hide();
                                         $('.sec8-dream-hair').show();
@@ -430,7 +419,7 @@ var adData = {
                                 case 'tomo':
                                     adData.data.resoult.hair.type = '.res-tomorrow-hair';
                                     $('.hair-tomorrow.move').show().addClass('movetomorrow');
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $('.hair-tomorrow.move').hide().removeClass('movetomorrow');
                                         $('.person-hair').hide();
                                         $('.sec8-tomorrow-hair').show();
@@ -440,28 +429,40 @@ var adData = {
                                     break;
                             }
                             $('.slide-hair-ripple').hide();
-                            $('.slide-hair-rippleback').show().on('click', function () {
+                            $('.slide-hair-rippleback').show().on('click', function() {
                                 $(this).hide();
-                                $('.slide-hair').removeClass('bounceInRight').addClass('bounceOutRight');
-                                $('.slide-menu').removeClass('bounceOutRight').addClass('bounceInRight');
-                                $('.sec8-dialog').css('visibility', 'visible').addClass('sec8-bounceInLeft').on('click', function () {
+                                $('.slide-hair').hide().removeClass('bounceInRight');
+                                $('.slide-menu').show().removeClass('bounceOutRight').addClass('bounceInRight');
+                                // $('.slide-menu').show().removeClass('bounceOutRight');
+                                $('.sec8-dialog').css('visibility', 'visible').addClass('sec8-bounceInLeft').on('click', function() {
                                     $(this).css('visibility', 'hidden');
 
+                                    $('.click-div').show().on('click', function() {
+
+                                        if ($('.slide-menu').css('display') == 'none') {
+                                            $('.slide-div').hide().removeClass('bounceInRight');
+                                            $('.slide-menu').removeClass('bounceOutRight').show().addClass('bounceInRight');　
+                                        }
+                                    });
                                     clearInterval(adData.data.interval);
                                     $('.timebar').css('width', '100%');
                                     adData.countDownMethod();
 
 
                                     // slide-menu  p方法
-                                    $('.slide-menu>p').on('click', function () {
+                                    $('.slide-menu>p').on('click', function() {
                                         console.log($(this).data('for'));
                                         var type = $(this).data('for');
-                                        $('.slide-menu').removeClass('bounceInRight').addClass('bounceOutRight');
+                                        $('.slide-menu').removeClass('bounceInRight').addClass('bounceOutRight').hide();
                                         $(type).show().removeClass('bounceOutRight').addClass('bounceInRight');
+
+
+                                        // $('.slide-menu').removeClass('bounceInRight').hide();
+                                        // $(type).show().removeClass('bounceOutRight');
                                     });
 
                                     //具体 配件方法
-                                    $('.menu-p-public').on('click', function () {
+                                    $('.menu-p-public').on('click', function() {
                                         console.log($(this).data('for'));
                                         var type = $(this).data('for');
                                         switch (type) {
@@ -469,7 +470,7 @@ var adData = {
                                             case '.hair-dream.move':
                                                 adData.data.resoult.hair.type = '.res-dream-hair';
                                                 $(type).show().addClass('movedream');
-                                                setTimeout(function () {
+                                                setTimeout(function() {
                                                     $(type).hide().removeClass('movedream');
                                                     $('.person-hair').hide();
                                                     $('.sec8-dream-hair').show();
@@ -478,7 +479,7 @@ var adData = {
                                             case '.hair-tomorrow.move':
                                                 adData.data.resoult.hair.type = '.res-tomorrow-hair';
                                                 $(type).show().addClass('movetomorrow');
-                                                setTimeout(function () {
+                                                setTimeout(function() {
                                                     $(type).hide().removeClass('movetomorrow');
                                                     $('.person-hair').hide();
                                                     $('.sec8-tomorrow-hair').show();
@@ -488,7 +489,7 @@ var adData = {
                                                 adData.data.resoult.dress.flag = true;
                                                 adData.data.resoult.dress.type = '.res-dream-clothes';
                                                 $(type).show().addClass('movedream');
-                                                setTimeout(function () {
+                                                setTimeout(function() {
                                                     $(type).hide().removeClass('movedream');
                                                     $('.person-clothes').hide();
                                                     $('.sec8-dream-clothes').show();
@@ -498,7 +499,7 @@ var adData = {
                                                 adData.data.resoult.dress.flag = true;
                                                 adData.data.resoult.dress.type = '.res-tomorrow-clothes';
                                                 $(type).show().addClass('movetomorrow');
-                                                setTimeout(function () {
+                                                setTimeout(function() {
                                                     $(type).hide().removeClass('movetomorrow');
                                                     $('.person-clothes').hide();
                                                     $('.sec8-tomorrow-clothes').show();
@@ -508,7 +509,7 @@ var adData = {
                                                 adData.data.resoult.accessory.flag = true;
                                                 adData.data.resoult.accessory.type = '.res-dream-tou,.res-dream-xl';
                                                 $(type).show().addClass('movedream');
-                                                setTimeout(function () {
+                                                setTimeout(function() {
                                                     $(type).hide().removeClass('movedream');
                                                     $('.person-tou').hide();
                                                     $('.sec8-dream-tou,.sec8-dream-xl').show();
@@ -518,7 +519,7 @@ var adData = {
                                                 adData.data.resoult.accessory.flag = true;
                                                 adData.data.resoult.accessory.type = '.res-tomorrow-tou';
                                                 $(type).show().addClass('movetomorrow');
-                                                setTimeout(function () {
+                                                setTimeout(function() {
                                                     $(type).hide().removeClass('movetomorrow');
                                                     $('.person-tou').hide();
                                                     $('.sec8-tomorrow-tou').show();
@@ -528,7 +529,7 @@ var adData = {
                                                 adData.data.resoult.face.flag = true;
                                                 adData.data.resoult.face.type = '.res-dream-face';
                                                 $(type).show().addClass('movedream');
-                                                setTimeout(function () {
+                                                setTimeout(function() {
                                                     $(type).hide().removeClass('movedream');
                                                     $('.person-face').hide();
                                                     $('.sec8-dream-face').show();
@@ -538,7 +539,7 @@ var adData = {
                                                 adData.data.resoult.face.flag = true;
                                                 adData.data.resoult.face.type = '.res-tomorrow-face';
                                                 $(type).show().addClass('movetomorrow');
-                                                setTimeout(function () {
+                                                setTimeout(function() {
                                                     $(type).hide().removeClass('movetomorrow');
                                                     $('.person-face').hide();
                                                     $('.sec8-tomorrow-face').show();
@@ -547,13 +548,14 @@ var adData = {
                                         }
                                     });
                                     // 返回 按钮
-                                    $('.slide-back').on('click', function () {
+                                    $('.slide-back').on('click', function() {
                                         var type = $(this).data('for');
-                                        $(type).removeClass('bounceInRight').addClass('bounceOutRight');
-                                        $('.slide-menu').removeClass('bounceOutRight').addClass('bounceInRight');
+                                        $(type).hide().removeClass('bounceInRight');
+                                        $('.slide-menu').removeClass('bounceOutRight').show().addClass('bounceInRight');
+                                        // $('.slide-menu').removeClass('bounceOutRight').show();
                                     });
                                 });
-                                setTimeout(function () {
+                                setTimeout(function() {
                                     $('.sec8-dialog .ripple').show();
 
                                 }, 500);
@@ -568,10 +570,10 @@ var adData = {
                 }, 100)
 
             })
-        }, 600);
+        }, 300);
     },
 
-    sec9Method: function () {
+    sec9Method: function() {
         $('.sec').hide();
         $('.sec9').show();
         if (adData.data.num === 3) {
@@ -582,7 +584,7 @@ var adData = {
             // 选完
             $('.perfect').show().addClass('pulse');
             $('.sec9-dialog-success').show().addClass(adData.data.bounceInLeft);
-            setTimeout(function () {
+            setTimeout(function() {
                 $('.operation-div').show();
             }, 600);
 
@@ -590,7 +592,7 @@ var adData = {
             // 未选完
             $('.perfect').hide().removeClass('pulse');
             $('.sec9-dialog-fail').show().addClass(adData.data.bounceInLeft);
-            setTimeout(function () {
+            setTimeout(function() {
                 $('.operation-div').show();
             }, 600);
         }
@@ -606,25 +608,25 @@ var adData = {
 
     },
 
-    countDownMethod: function () {
+    countDownMethod: function() {
         var _this = this;
         // this.data.timePLemgth = $('.time-content').width();
-        this.data.interval = setInterval(function () {
+        this.data.interval = setInterval(function() {
             console.log(_this.data.time)
             var widths = _this.data.time / 60 * 100 + '%';
-            console.log('时间：'+_this.data.time+'宽度：'+widths)
+            // console.log('时间：' + _this.data.time + '宽度：' + widths)
             $('.timebar').css('width', widths);
             _this.data.time -= 1;
 
             var res = adData.data.resoult;
-            if (res.hair.flag && res.dress.flag && res.accessory.flag && res.face.flag) {
+            if (res.dress.flag) {
                 adData.data.getDressed = true;
-                if(adData.data.languageType ==='english'){
+                if (adData.data.languageType === 'english') {
                     $('.press-btn').removeClass('unable-e').addClass('enable-e');
-                }else{
+                } else {
                     $('.press-btn').removeClass('unable-f').addClass('enable-f');
                 }
-                
+
             }
 
 
@@ -636,8 +638,8 @@ var adData = {
         }, 1000)
     },
     // 修改语言
-    changeLanguage: function () {
-        var clas ='fayu';
+    changeLanguage: function() {
+        var clas = 'fayu';
         var language = adData.data.language;
         // 右上 下载
         $('.install a').text(language.install);
@@ -659,7 +661,7 @@ var adData = {
         $('.gorgeous').text(language.gorgeous);
         $('.elegance').text(language.elegance);
         $('.pure').text(language.pure);
-        
+
 
         // sec4
         $('.sec4-poetic-name').text(language.sec4proName)
@@ -690,24 +692,24 @@ var adData = {
 
         // sec9
 
-        $('.sec9suc-p1').text(language.sec9sucp1).css('margin-top','.4rem');
+        $('.sec9suc-p1').text(language.sec9sucp1).css('margin-top', '.4rem');
         $('.sec9suc-p2').text(language.sec9sucp2);
         $('.sec9suc-p3').text(language.sec9sucp3);
         $('.sec9suc-p32').text(language.sec9sucp32);
-        $('.sec9suc-p4').text(language.sec9sucp4).css('margin-top','.8rem!important');;
+        $('.sec9suc-p4').text(language.sec9sucp4).css('margin-top', '.8rem!important');;
         $('.sec9suc-p5').text(language.sec9sucp5);
 
         $('.sec9suc-p52').text(language.sec9sucp52);
 
         $('.replay').text(language.replay);
-       
 
 
-       
+
+
 
     },
     // 重置
-    reset: function () {
+    reset: function() {
 
         $('.sec2-dialog').removeClass('bounceInLeft bounceOutLeft');
         $('.sec3-dialog').removeClass('bounceInLeft bounceOutLeft');
@@ -757,14 +759,14 @@ var adData = {
         $('.default-hair,.default-clothes').show();
 
         $('.sec7-dialog').removeClass('bounceInLeft bounceOutLeft');
-        if(adData.data.languageType ==='english'){
+        if (adData.data.languageType === 'english') {
             $('.press-btn').addClass('unable-e').removeClass('enable-e').unbind();
-            
-        }else{
+
+        } else {
             $('.press-btn').addClass('unable-f').removeClass('enable-e').unbind();
-            
+
         }
-       
+
 
         $('.sec9-dialog-success').hide().removeClass('bounceInLeft');
         $('.sec9-dialog-fail').hide().removeClass('bounceInLeft');
@@ -773,7 +775,7 @@ var adData = {
         $('.operation-div').hide();
         $('.res-model').hide();
         $('.res-person').hide();
-
+        $('.click-div').hide().unbind();
         $('.slide-hair-rippledream,.slide-hair-rippletomo').unbind();
         $('.slide-hair-rippleback').unbind();
         $('.slide-menu>p').unbind();

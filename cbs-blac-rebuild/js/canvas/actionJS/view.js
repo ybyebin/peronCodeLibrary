@@ -86,15 +86,14 @@ example.Toolbar = Class.extend({
 
             console.log(JSON.stringify(canvasVue.globalBtnData.btndata, null, 2));
             new draw2d.io.json.Writer().marshal(this.view, function(json) {
-                console.log(JSON.stringify(json, null, 2));
-
+                console.log('查看数据' + canvasVue.canvas.bgColor.bgimage)
                 var canvasData = {
                     canvas: json,
                     subCanvas: canvasVue.globalBtnData.btndata,
                     bg_color: canvasVue.canvas.bgColor.color,
                     bg_image: canvasVue.canvas.bgColor.bgimage,
                 }
-
+                console.log(JSON.stringify(canvasData, null, 2))
                 var data = {
                     view_data: JSON.stringify(canvasData),
                     id: sessionStorage.getItem("view_id"),

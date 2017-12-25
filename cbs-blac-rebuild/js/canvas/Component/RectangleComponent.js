@@ -4,87 +4,78 @@
  */
 // var rectangleComponent = draw2d.shape.basic.Rectangle.extend({
 var rectangleComponent = draw2d.shape.node.Between.extend({
-	NAME: "rectangleComponent",
-	init: function(attr) {
-		this._super(attr);
-		this.setResizeable(false);
-		this.setSelectable(false);
-		this.setDraggable(false);
-		var thiss = this;
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};
+    NAME: "rectangleComponent",
+    init: function(attr) {
+        this._super(attr);
+        this.setResizeable(false);
+        this.setSelectable(false);
+        this.setDraggable(false);
+        var thiss = this;
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            // if (thiss.userData.ShowHint) {
+            // 	showTooltips(thiss);
+            // }
+        };
+        this.onMouseLeave = function() {
+            // $('#tooltips').hide();
+        };
 
-		this.getOutputPort(0).setVisible(false);
-		this.getInputPort(0).setVisible(false);
+        this.getOutputPort(0).setVisible(false);
+        this.getInputPort(0).setVisible(false);
 
-		this.onDoubleClick = function() {
+        this.onDoubleClick = function() {
 
-		};
-		// 单击事件
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id)
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
-		});
+        };
+        // 单击事件
+        this.on("click", function() {
 
-	},
+        });
 
-	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
+    },
 
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
-	}
+    onTimer: function() {
+        this.setColor("#03A3FC");
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
+
+        // setTimeout(function() {
+        // 	switch (thiss.getUserData().BlinkingType) {
+        // 		case "style":
+        // 			thiss.setGlow(false);
+        // 			thiss.setColor(thiss.getUserData().BlinkingColor);
+        // 			thiss.setStroke(thiss.getUserData().BlinkingStroke);
+        // 			thiss.setDashArray(thiss.getUserData().DashArray);
+        // 			break;
+        // 		case "onTrue":
+        // 			thiss.setGlow(false);
+        // 			thiss.setColor(thiss.getUserData().onTrue.LineColor);
+        // 			thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+        // 			thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+        // 			break;
+        // 		case "onFalse":
+        // 			thiss.setGlow(false);
+        // 			thiss.setColor(thiss.getUserData().onFalse.LineColor);
+        // 			thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+        // 			thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+        // 			break;
+        // 		case "onAlarm":
+        // 			thiss.setGlow(false);
+        // 			thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+        // 			thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+        // 			thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+        // 			break;
+        // 		case "onDisconnected":
+        // 			thiss.setGlow(false);
+        // 			thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+        // 			thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+        // 			thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+        // 			break;
+        // 	}
+        // }, 500);
+    }
 
 
 })
@@ -97,89 +88,89 @@ var rectangleComponent = draw2d.shape.node.Between.extend({
  */
 // var RoundedRectangleComponent = draw2d.shape.basic.Rectangle.extend({
 var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
-	NAME: "RoundedRectangleComponent",
-	init: function(attr) {
-		this._super(attr);
+    NAME: "RoundedRectangleComponent",
+    init: function(attr) {
+        this._super(attr);
 
-		this.setResizeable(false);
-		this.setSelectable(false);
-		this.setDraggable(false);
-		var thiss = this;
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};
-		this.onDoubleClick = function() {
+        this.setResizeable(false);
+        this.setSelectable(false);
+        this.setDraggable(false);
+        var thiss = this;
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            if (thiss.userData.ShowHint) {
+                showTooltips(thiss);
+            }
+        };
+        this.onMouseLeave = function() {
+            $('#tooltips').hide();
+        };
+        this.onDoubleClick = function() {
 
-		};
+        };
 
-		this.getOutputPort(0).setVisible(false);
-		this.getInputPort(0).setVisible(false);
-		// 选中
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
-		});
+        this.getOutputPort(0).setVisible(false);
+        this.getInputPort(0).setVisible(false);
+        // 选中
+        this.on("click", function() {
+            console.log("绑定的id:" + thiss.getUserData().Tag.tag_id);
+            if (thiss.getUserData().Tag.tag_id === -1) {
+                // layer.msg('未绑定任何数据标签')
+            } else {
+                if (thiss.getUserData().Readonly == false) {
+                    changeComponentState(thiss.id);
+                } else {
+                    // layer.msg('本控件为只读控件');
+                }
+            }
+        });
 
-	},
-
-
-	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
+    },
 
 
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
-	}
+    onTimer: function() {
+        this.setColor("#03A3FC");
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
+
+
+        setTimeout(function() {
+            switch (thiss.getUserData().BlinkingType) {
+                case "style":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().BlinkingColor);
+                    thiss.setStroke(thiss.getUserData().BlinkingStroke);
+                    thiss.setDashArray(thiss.getUserData().DashArray);
+                    break;
+                case "onTrue":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onTrue.LineColor);
+                    thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+                    break;
+                case "onFalse":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onFalse.LineColor);
+                    thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+                    break;
+                case "onAlarm":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+                case "onDisconnected":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+            }
+        }, 500);
+    }
 
 })
 
@@ -188,92 +179,92 @@ var RoundedRectangleComponent = draw2d.shape.node.Between.extend({
  * @extend draw2d.shape.basic.Rectangle 
  */
 var EllipseComponent = draw2d.shape.node.Between.extend({
-	NAME: "EllipseComponent",
-	init: function(attr) {
-		this._super(attr);
-		this.setResizeable(false);
-		this.setSelectable(false);
-		this.setDraggable(false);
-		var thiss = this;
-		this.setRadius(25);
-		this.setHeight(30);
+    NAME: "EllipseComponent",
+    init: function(attr) {
+        this._super(attr);
+        this.setResizeable(false);
+        this.setSelectable(false);
+        this.setDraggable(false);
+        var thiss = this;
+        this.setRadius(25);
+        this.setHeight(30);
 
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            if (thiss.userData.ShowHint) {
+                showTooltips(thiss);
+            }
+        };
+        this.onMouseLeave = function() {
+            $('#tooltips').hide();
+        };
 
-		this.onDoubleClick = function() {
+        this.onDoubleClick = function() {
 
-		};
+        };
 
-		this.getOutputPort(0).setVisible(false);
-		this.getInputPort(0).setVisible(false);
-		
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
-		});
+        this.getOutputPort(0).setVisible(false);
+        this.getInputPort(0).setVisible(false);
+
+        this.on("click", function() {
+            console.log("绑定的id:" + thiss.getUserData().Tag.tag_id);
+            if (thiss.getUserData().Tag.tag_id === -1) {
+                // layer.msg('未绑定任何数据标签')
+            } else {
+                if (thiss.getUserData().Readonly == false) {
+                    changeComponentState(thiss.id);
+                } else {
+                    // layer.msg('本控件为只读控件');
+                }
+            }
+        });
 
 
 
-	},
+    },
 
-	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
+    onTimer: function() {
+        this.setColor("#03A3FC");
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
 
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
-	}
+        setTimeout(function() {
+            switch (thiss.getUserData().BlinkingType) {
+                case "style":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().BlinkingColor);
+                    thiss.setStroke(thiss.getUserData().BlinkingStroke);
+                    thiss.setDashArray(thiss.getUserData().DashArray);
+                    break;
+                case "onTrue":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onTrue.LineColor);
+                    thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+                    break;
+                case "onFalse":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onFalse.LineColor);
+                    thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+                    break;
+                case "onAlarm":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+                case "onDisconnected":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+            }
+        }, 500);
+    }
 
 });
 
@@ -283,85 +274,85 @@ var EllipseComponent = draw2d.shape.node.Between.extend({
  * @extend draw2d.shape.basic.Polygon
  */
 var polygonComponent = draw2d.shape.basic.Polygon.extend({
-	NAME: "polygonComponent",
-	init: function(attr) {
-		this._super(attr);
-		this.setResizeable(false);
-		this.setSelectable(false);
-		this.setDraggable(false);
+    NAME: "polygonComponent",
+    init: function(attr) {
+        this._super(attr);
+        this.setResizeable(false);
+        this.setSelectable(false);
+        this.setDraggable(false);
 
-		var thiss = this;
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (this.userData.ShowHint) {
-				showTooltips(this);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};
+        var thiss = this;
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            if (this.userData.ShowHint) {
+                showTooltips(this);
+            }
+        };
+        this.onMouseLeave = function() {
+            $('#tooltips').hide();
+        };
 
-		this.onDoubleClick = function() {
+        this.onDoubleClick = function() {
 
-		};
+        };
 
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				console.log(thiss.getUserData().Readonly)
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
-		});
+        this.on("click", function() {
+            console.log("绑定的id:" + thiss.getUserData().Tag.tag_id);
+            if (thiss.getUserData().Tag.tag_id === -1) {
+                layer.msg('未绑定任何数据标签')
+            } else {
+                console.log(thiss.getUserData().Readonly)
+                if (thiss.getUserData().Readonly == false) {
+                    changeComponentState(thiss.id);
+                } else {
+                    layer.msg('本控件为只读控件');
+                }
+            }
+        });
 
-	},
-	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
+    },
+    onTimer: function() {
+        this.setColor("#03A3FC");
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
 
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
-	}
+        setTimeout(function() {
+            switch (thiss.getUserData().BlinkingType) {
+                case "style":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().BlinkingColor);
+                    thiss.setStroke(thiss.getUserData().BlinkingStroke);
+                    thiss.setDashArray(thiss.getUserData().DashArray);
+                    break;
+                case "onTrue":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onTrue.LineColor);
+                    thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+                    break;
+                case "onFalse":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onFalse.LineColor);
+                    thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+                    break;
+                case "onAlarm":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+                case "onDisconnected":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+            }
+        }, 500);
+    }
 
 });
 
@@ -372,103 +363,103 @@ var polygonComponent = draw2d.shape.basic.Polygon.extend({
  */
 var forRightComponent = draw2d.shape.icon.Icon.extend({
 
-	NAME: "forRightComponent",
-	init: function(attr, setter, getter) {
-		this._super($.extend({
-			width: 30,
-			height: 30
-		}, attr), setter, getter);
+    NAME: "forRightComponent",
+    init: function(attr, setter, getter) {
+        this._super($.extend({
+            width: 30,
+            height: 30
+        }, attr), setter, getter);
 
-		this.setSelectable(false);
-		this.setDraggable(false);
-
-
-		var thiss = this;
-
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (this.userData.ShowHint) {
-				showTooltips(this);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};
+        this.setSelectable(false);
+        this.setDraggable(false);
 
 
-		this.onDoubleClick = function() {
-			// console.log(123)
-		};
-		// 
+        var thiss = this;
 
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
-		})
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            if (this.userData.ShowHint) {
+                showTooltips(this);
+            }
+        };
+        this.onMouseLeave = function() {
+            $('#tooltips').hide();
+        };
 
 
+        this.onDoubleClick = function() {
+            // console.log(123)
+        };
+        // 
 
-	},
+        this.on("click", function() {
+            console.log("绑定的id:" + thiss.getUserData().Tag.tag_id);
+            if (thiss.getUserData().Tag.tag_id === -1) {
+                // layer.msg('未绑定任何数据标签')
+            } else {
+                if (thiss.getUserData().Readonly == false) {
+                    changeComponentState(thiss.id);
+                } else {
+                    // layer.msg('本控件为只读控件');
+                }
+            }
+        })
 
-	/**
-	 * @private
-	 * @returns
-	 */
-	createSet: function() {
-		// return this.canvas.paper.path("M21.786,12.876l7.556-4.363l-7.556-4.363v2.598H2.813v3.5h18.973V12.876z");
-		return this.canvas.paper.path("M0,10H10V0L30,15L10,30V20H0V10z");
 
-	},
-	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
 
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
-	}
+    },
+
+    /**
+     * @private
+     * @returns
+     */
+    createSet: function() {
+        // return this.canvas.paper.path("M21.786,12.876l7.556-4.363l-7.556-4.363v2.598H2.813v3.5h18.973V12.876z");
+        return this.canvas.paper.path("M0,10H10V0L30,15L10,30V20H0V10z");
+
+    },
+    onTimer: function() {
+        this.setColor("#03A3FC");
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
+
+        setTimeout(function() {
+            switch (thiss.getUserData().BlinkingType) {
+                case "style":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().BlinkingColor);
+                    thiss.setStroke(thiss.getUserData().BlinkingStroke);
+                    thiss.setDashArray(thiss.getUserData().DashArray);
+                    break;
+                case "onTrue":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onTrue.LineColor);
+                    thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+                    break;
+                case "onFalse":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onFalse.LineColor);
+                    thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+                    break;
+                case "onAlarm":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+                case "onDisconnected":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+            }
+        }, 500);
+    }
 });
 
 
@@ -479,96 +470,96 @@ var forRightComponent = draw2d.shape.icon.Icon.extend({
  */
 var forLeftComponent = draw2d.shape.icon.Icon.extend({
 
-	NAME: "forLeftComponent",
-	init: function(attr, setter, getter) {
-		this._super($.extend({
-			width: 30,
-			height: 30
-		}, attr), setter, getter);
-		var thiss = this;
-		this.setSelectable(false);
-		this.setDraggable(false);
+    NAME: "forLeftComponent",
+    init: function(attr, setter, getter) {
+        this._super($.extend({
+            width: 30,
+            height: 30
+        }, attr), setter, getter);
+        var thiss = this;
+        this.setSelectable(false);
+        this.setDraggable(false);
 
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (this.userData.ShowHint) {
-				showTooltips(this);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};
-		this.onDoubleClick = function() {
-			console.log(123)
-		};
-		// 
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            if (this.userData.ShowHint) {
+                showTooltips(this);
+            }
+        };
+        this.onMouseLeave = function() {
+            $('#tooltips').hide();
+        };
+        this.onDoubleClick = function() {
+            console.log(123)
+        };
+        // 
 
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
-		})
+        this.on("click", function() {
+            console.log("绑定的id:" + thiss.getUserData().Tag.tag_id);
+            if (thiss.getUserData().Tag.tag_id === -1) {
+                // layer.msg('未绑定任何数据标签')
+            } else {
+                if (thiss.getUserData().Readonly == false) {
+                    changeComponentState(thiss.id);
+                } else {
+                    // layer.msg('本控件为只读控件');
+                }
+            }
+        })
 
 
-	},
+    },
 
-	/**
-	 * @private
-	 * @returns
-	 */
-	createSet: function() {
-		return this.canvas.paper.path("M30,20H20V30L0,15L20,0V10H30V20z");
+    /**
+     * @private
+     * @returns
+     */
+    createSet: function() {
+        return this.canvas.paper.path("M30,20H20V30L0,15L20,0V10H30V20z");
 
-	},
-	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
+    },
+    onTimer: function() {
+        this.setColor("#03A3FC");
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
 
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
-	}
+        setTimeout(function() {
+            switch (thiss.getUserData().BlinkingType) {
+                case "style":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().BlinkingColor);
+                    thiss.setStroke(thiss.getUserData().BlinkingStroke);
+                    thiss.setDashArray(thiss.getUserData().DashArray);
+                    break;
+                case "onTrue":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onTrue.LineColor);
+                    thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+                    break;
+                case "onFalse":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onFalse.LineColor);
+                    thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+                    break;
+                case "onAlarm":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+                case "onDisconnected":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+            }
+        }, 500);
+    }
 });
 
 
@@ -578,98 +569,98 @@ var forLeftComponent = draw2d.shape.icon.Icon.extend({
  */
 var forUpComponent = draw2d.shape.icon.Icon.extend({
 
-	NAME: "forUpComponent",
-	init: function(attr, setter, getter) {
-		this._super($.extend({
-			width: 30,
-			height: 30
-		}, attr), setter, getter);
-		this.setSelectable(false);
-		this.setDraggable(false);
+    NAME: "forUpComponent",
+    init: function(attr, setter, getter) {
+        this._super($.extend({
+            width: 30,
+            height: 30
+        }, attr), setter, getter);
+        this.setSelectable(false);
+        this.setDraggable(false);
 
 
-		var thiss = this;
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (this.userData.ShowHint) {
-				showTooltips(this);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};
+        var thiss = this;
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            if (this.userData.ShowHint) {
+                showTooltips(this);
+            }
+        };
+        this.onMouseLeave = function() {
+            $('#tooltips').hide();
+        };
 
-		this.onDoubleClick = function() {
-			// console.log(123)
-		};
-		// 
+        this.onDoubleClick = function() {
+            // console.log(123)
+        };
+        // 
 
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
-		})
+        this.on("click", function() {
+            console.log("绑定的id:" + thiss.getUserData().Tag.tag_id);
+            if (thiss.getUserData().Tag.tag_id === -1) {
+                // layer.msg('未绑定任何数据标签')
+            } else {
+                if (thiss.getUserData().Readonly == false) {
+                    changeComponentState(thiss.id);
+                } else {
+                    // layer.msg('本控件为只读控件');
+                }
+            }
+        })
 
 
 
-	},
+    },
 
-	/**
-	 * @private
-	 * @returns
-	 */
-	createSet: function() {
-		return this.canvas.paper.path("M10,30V20H0L15,0L30,20H20V30H10z");
-	},
-	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
+    /**
+     * @private
+     * @returns
+     */
+    createSet: function() {
+        return this.canvas.paper.path("M10,30V20H0L15,0L30,20H20V30H10z");
+    },
+    onTimer: function() {
+        this.setColor("#03A3FC");
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
 
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
-	}
+        setTimeout(function() {
+            switch (thiss.getUserData().BlinkingType) {
+                case "style":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().BlinkingColor);
+                    thiss.setStroke(thiss.getUserData().BlinkingStroke);
+                    thiss.setDashArray(thiss.getUserData().DashArray);
+                    break;
+                case "onTrue":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onTrue.LineColor);
+                    thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+                    break;
+                case "onFalse":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onFalse.LineColor);
+                    thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+                    break;
+                case "onAlarm":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+                case "onDisconnected":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+            }
+        }, 500);
+    }
 });
 
 
@@ -679,95 +670,95 @@ var forUpComponent = draw2d.shape.icon.Icon.extend({
  */
 var forDownComponent = draw2d.shape.icon.Icon.extend({
 
-	NAME: "forDownComponent",
-	init: function(attr, setter, getter) {
-		this._super($.extend({
-			width: 30,
-			height: 30
-		}, attr), setter, getter);
-		this.setSelectable(false);
-		this.setDraggable(false);
+    NAME: "forDownComponent",
+    init: function(attr, setter, getter) {
+        this._super($.extend({
+            width: 30,
+            height: 30
+        }, attr), setter, getter);
+        this.setSelectable(false);
+        this.setDraggable(false);
 
-		var thiss = this;
+        var thiss = this;
 
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (this.userData.ShowHint) {
-				showTooltips(this);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            if (this.userData.ShowHint) {
+                showTooltips(this);
+            }
+        };
+        this.onMouseLeave = function() {
+            $('#tooltips').hide();
+        };
 
-		this.onDoubleClick = function() {
+        this.onDoubleClick = function() {
 
-		};
-		// 
+        };
+        // 
 
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
-		});
-	},
+        this.on("click", function() {
+            console.log("绑定的id:" + thiss.getUserData().Tag.tag_id);
+            if (thiss.getUserData().Tag.tag_id === -1) {
+                // layer.msg('未绑定任何数据标签')
+            } else {
+                if (thiss.getUserData().Readonly == false) {
+                    changeComponentState(thiss.id);
+                } else {
+                    // layer.msg('本控件为只读控件');
+                }
+            }
+        });
+    },
 
-	/**
-	 * @private
-	 * @returns
-	 */
-	createSet: function() {
-		return this.canvas.paper.path("M10,0V10H0L15,30L30,10H20V0H10z");
-	},
-	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
+    /**
+     * @private
+     * @returns
+     */
+    createSet: function() {
+        return this.canvas.paper.path("M10,0V10H0L15,30L30,10H20V0H10z");
+    },
+    onTimer: function() {
+        this.setColor("#03A3FC");
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
 
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
-	}
+        setTimeout(function() {
+            switch (thiss.getUserData().BlinkingType) {
+                case "style":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().BlinkingColor);
+                    thiss.setStroke(thiss.getUserData().BlinkingStroke);
+                    thiss.setDashArray(thiss.getUserData().DashArray);
+                    break;
+                case "onTrue":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onTrue.LineColor);
+                    thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+                    break;
+                case "onFalse":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onFalse.LineColor);
+                    thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+                    break;
+                case "onAlarm":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+                case "onDisconnected":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+            }
+        }, 500);
+    }
 });
 
 
@@ -778,95 +769,95 @@ var forDownComponent = draw2d.shape.icon.Icon.extend({
  */
 var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
 
-	NAME: "BothArrowHComponent",
-	init: function(attr, setter, getter) {
-		this._super($.extend({
-			width: 50,
-			height: 30
-		}, attr), setter, getter);	
-		this.setSelectable(false);
-		this.setDraggable(false);
-		
-		var thiss = this;
-		
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (this.userData.ShowHint) {
-				showTooltips(this);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};	
-		this.onDoubleClick = function(){
-			
-		};
-		
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
-		});
+    NAME: "BothArrowHComponent",
+    init: function(attr, setter, getter) {
+        this._super($.extend({
+            width: 50,
+            height: 30
+        }, attr), setter, getter);
+        this.setSelectable(false);
+        this.setDraggable(false);
 
-		
+        var thiss = this;
 
-	},
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            if (this.userData.ShowHint) {
+                showTooltips(this);
+            }
+        };
+        this.onMouseLeave = function() {
+            $('#tooltips').hide();
+        };
+        this.onDoubleClick = function() {
 
-	/**
-	 * @private
-	 * @returns
-	 */
-	createSet: function() {
-		return this.canvas.paper.path("M0,15L20,0V10H30V0L50,15L30,30V20H20V30L0,15z");
-	},
-	onTimer:function(){
+        };
+
+        this.on("click", function() {
+            console.log("绑定的id:" + thiss.getUserData().Tag.tag_id);
+            if (thiss.getUserData().Tag.tag_id === -1) {
+                // layer.msg('未绑定任何数据标签')
+            } else {
+                if (thiss.getUserData().Readonly == false) {
+                    changeComponentState(thiss.id);
+                } else {
+                    // layer.msg('本控件为只读控件');
+                }
+            }
+        });
+
+
+
+    },
+
+    /**
+     * @private
+     * @returns
+     */
+    createSet: function() {
+        return this.canvas.paper.path("M0,15L20,0V10H30V0L50,15L30,30V20H20V30L0,15z");
+    },
+    onTimer: function() {
         this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
 
-		setTimeout(function(){
-			switch(thiss.getUserData().BlinkingType){
-				case "style":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().BlinkingColor);
-				thiss.setStroke(thiss.getUserData().BlinkingStroke);
-				thiss.setDashArray(thiss.getUserData().DashArray);
-				break;
-				case "onTrue":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().onTrue.LineColor);
-				thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-				thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-				break;
-				case "onFalse":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().onFalse.LineColor);
-				thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-				thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-				break;
-				case "onAlarm":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-				thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-				thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-				break;
-				case "onDisconnected":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-				thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-				thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-				break;
-			}
-		}, 500);
+        setTimeout(function() {
+            switch (thiss.getUserData().BlinkingType) {
+                case "style":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().BlinkingColor);
+                    thiss.setStroke(thiss.getUserData().BlinkingStroke);
+                    thiss.setDashArray(thiss.getUserData().DashArray);
+                    break;
+                case "onTrue":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onTrue.LineColor);
+                    thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+                    break;
+                case "onFalse":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onFalse.LineColor);
+                    thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+                    break;
+                case "onAlarm":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+                case "onDisconnected":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+            }
+        }, 500);
     }
 });
 
@@ -876,262 +867,262 @@ var BothArrowHComponent = draw2d.shape.icon.Icon.extend({
  */
 var BothArrowVComponent = draw2d.shape.icon.Icon.extend({
 
-	NAME: "BothArrowVComponent",
-	init: function(attr, setter, getter) {
-		this._super($.extend({
-			width: 30,
-			height: 50
-		}, attr), setter, getter);
-		
-		this.setSelectable(false);
-		this.setDraggable(false);
-		var thiss = this;
-		console.log("边框宽度" + this.getStroke( ));
-		
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (this.userData.ShowHint) {
-				showTooltips(this);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};		
-		this.onDoubleClick = function(){
-			// alert("123")
-		};
-		
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
-		});
+    NAME: "BothArrowVComponent",
+    init: function(attr, setter, getter) {
+        this._super($.extend({
+            width: 30,
+            height: 50
+        }, attr), setter, getter);
 
-		
+        this.setSelectable(false);
+        this.setDraggable(false);
+        var thiss = this;
+        console.log("边框宽度" + this.getStroke());
 
-	},
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            if (this.userData.ShowHint) {
+                showTooltips(this);
+            }
+        };
+        this.onMouseLeave = function() {
+            $('#tooltips').hide();
+        };
+        this.onDoubleClick = function() {
+            // alert("123")
+        };
 
-	/**
-	 * @private
-	 * @returns
-	 */
-	createSet: function() {
-		return this.canvas.paper.path("M15,0L30,20H20V30H30L15,50L0,30H10V20H0L15,0z");
-	},
-	onTimer:function(){
+        this.on("click", function() {
+            console.log("绑定的id:" + thiss.getUserData().Tag.tag_id);
+            if (thiss.getUserData().Tag.tag_id === -1) {
+                // layer.msg('未绑定任何数据标签')
+            } else {
+                if (thiss.getUserData().Readonly == false) {
+                    changeComponentState(thiss.id);
+                } else {
+                    // layer.msg('本控件为只读控件');
+                }
+            }
+        });
+
+
+
+    },
+
+    /**
+     * @private
+     * @returns
+     */
+    createSet: function() {
+        return this.canvas.paper.path("M15,0L30,20H20V30H30L15,50L0,30H10V20H0L15,0z");
+    },
+    onTimer: function() {
         this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
 
-		setTimeout(function(){
-			switch(thiss.getUserData().BlinkingType){
-				case "style":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().BlinkingColor);
-				thiss.setStroke(thiss.getUserData().BlinkingStroke);
-				thiss.setDashArray(thiss.getUserData().DashArray);
-				break;
-				case "onTrue":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().onTrue.LineColor);
-				thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-				thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-				break;
-				case "onFalse":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().onFalse.LineColor);
-				thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-				thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-				break;
-				case "onAlarm":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-				thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-				thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-				break;
-				case "onDisconnected":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-				thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-				thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-				break;
-			}
-		}, 500);
+        setTimeout(function() {
+            switch (thiss.getUserData().BlinkingType) {
+                case "style":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().BlinkingColor);
+                    thiss.setStroke(thiss.getUserData().BlinkingStroke);
+                    thiss.setDashArray(thiss.getUserData().DashArray);
+                    break;
+                case "onTrue":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onTrue.LineColor);
+                    thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+                    break;
+                case "onFalse":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onFalse.LineColor);
+                    thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+                    break;
+                case "onAlarm":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+                case "onDisconnected":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+            }
+        }, 500);
     }
 });
 
 
 // 管道
 var conduitCompontent = draw2d.shape.node.HorizontalBus.extend({
-	NAME: "conduitCompontent",
-	init: function(attr) {
-		this._super(attr);
-		this.setResizeable(false);
-		this.setSelectable(false);
-		this.setDraggable(false);
-		var thiss = this;
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (this.userData.ShowHint) {
-				showTooltips(this);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};
+    NAME: "conduitCompontent",
+    init: function(attr) {
+        this._super(attr);
+        this.setResizeable(false);
+        this.setSelectable(false);
+        this.setDraggable(false);
+        var thiss = this;
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            if (this.userData.ShowHint) {
+                showTooltips(this);
+            }
+        };
+        this.onMouseLeave = function() {
+            $('#tooltips').hide();
+        };
 
-		// this.getOutputPort(0).setVisible(false);
-		// this.getInputPort(0).setVisible(false);
+        // this.getOutputPort(0).setVisible(false);
+        // this.getInputPort(0).setVisible(false);
 
-		this.onDoubleClick = function() {
+        this.onDoubleClick = function() {
 
-		};
-		// 单击事件
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
-		});
+        };
+        // 单击事件
+        this.on("click", function() {
+            console.log("绑定的id:" + thiss.getUserData().Tag.tag_id);
+            if (thiss.getUserData().Tag.tag_id === -1) {
+                // layer.msg('未绑定任何数据标签')
+            } else {
+                if (thiss.getUserData().Readonly == false) {
+                    changeComponentState(thiss.id);
+                } else {
+                    // layer.msg('本控件为只读控件');
+                }
+            }
+        });
 
-	},
+    },
 
-	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
+    onTimer: function() {
+        this.setColor("#03A3FC");
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
 
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
-	}
+        setTimeout(function() {
+            switch (thiss.getUserData().BlinkingType) {
+                case "style":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().BlinkingColor);
+                    thiss.setStroke(thiss.getUserData().BlinkingStroke);
+                    thiss.setDashArray(thiss.getUserData().DashArray);
+                    break;
+                case "onTrue":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onTrue.LineColor);
+                    thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+                    break;
+                case "onFalse":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onFalse.LineColor);
+                    thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+                    break;
+                case "onAlarm":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+                case "onDisconnected":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+            }
+        }, 500);
+    }
 })
 
 var conduitCompontentV = draw2d.shape.node.HorizontalBus.extend({
-	NAME: "conduitCompontentV",
-	init: function(attr) {
-		this._super(attr);
-		this.setResizeable(false);
-		this.setSelectable(false);
-		this.setDraggable(false);
-		var thiss = this;
-		// 悬浮窗
-		this.onMouseEnter = function() {
-			if (this.userData.ShowHint) {
-				showTooltips(this);
-			}
-		};
-		this.onMouseLeave =  function() {
-			$('#tooltips').hide();
-		};
-		
-		this.onDoubleClick = function() {
+    NAME: "conduitCompontentV",
+    init: function(attr) {
+        this._super(attr);
+        this.setResizeable(false);
+        this.setSelectable(false);
+        this.setDraggable(false);
+        var thiss = this;
+        // 悬浮窗
+        this.onMouseEnter = function() {
+            if (this.userData.ShowHint) {
+                showTooltips(this);
+            }
+        };
+        this.onMouseLeave = function() {
+            $('#tooltips').hide();
+        };
 
-		};
-		// 单击事件
-		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
-		});
+        this.onDoubleClick = function() {
 
-	},
+        };
+        // 单击事件
+        this.on("click", function() {
+            console.log("绑定的id:" + thiss.getUserData().Tag.tag_id);
+            if (thiss.getUserData().Tag.tag_id === -1) {
+                // layer.msg('未绑定任何数据标签')
+            } else {
+                if (thiss.getUserData().Readonly == false) {
+                    changeComponentState(thiss.id);
+                } else {
+                    // layer.msg('本控件为只读控件');
+                }
+            }
+        });
 
-	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
+    },
 
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
-	}
+    onTimer: function() {
+        this.setColor("#03A3FC");
+        this.setStroke(1);
+        this.setGlow(true);
+        this.setDashArray("");
+        var thiss = this;
+
+        setTimeout(function() {
+            switch (thiss.getUserData().BlinkingType) {
+                case "style":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().BlinkingColor);
+                    thiss.setStroke(thiss.getUserData().BlinkingStroke);
+                    thiss.setDashArray(thiss.getUserData().DashArray);
+                    break;
+                case "onTrue":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onTrue.LineColor);
+                    thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
+                    break;
+                case "onFalse":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onFalse.LineColor);
+                    thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
+                    break;
+                case "onAlarm":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+                case "onDisconnected":
+                    thiss.setGlow(false);
+                    thiss.setColor(thiss.getUserData().onAlarm.LineColor);
+                    thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
+                    thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
+                    break;
+            }
+        }, 500);
+    }
 })

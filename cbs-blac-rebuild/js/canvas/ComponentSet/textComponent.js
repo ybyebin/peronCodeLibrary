@@ -24,7 +24,7 @@ var textComponent = draw2d.shape.basic.Text.extend({
         this.add(this.label, new draw2d.layout.locator.TopLocator(this));
 
         var data = JSON.parse(textBasic.textData);
-        data.routine.name = '标签';
+        data.routine.name = '文本';
         this.attr({
             userData: data
         });
@@ -35,6 +35,7 @@ var textComponent = draw2d.shape.basic.Text.extend({
         });
         // 移动
         this.on("move", function() {
+            console.log(123123)
             setComponentOptions.componentOnMoveMethod(_this);
         });
         // 悬浮窗
@@ -59,14 +60,15 @@ var textBasic = {
         text: '呵呵',
         fontFamily: '微软雅黑',
         padding: { left: 0, right: 0, top: 0, bottom: 0 },
-        visible: true,
+        visible: false,
     }),
     textData: JSON.stringify({
         type: "textComponent", //类型	
         custom: {
             valueType: 'textValueComponent',
             newCreat: true, //  用于在拖拽组件时判断(是否新拖拽的控件)
-            editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)            
+            editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)   
+            blinkingType:'',//监控画面 用于 组件闪烁 判断标志           
         },
         tag: {
             tag_id: -1,

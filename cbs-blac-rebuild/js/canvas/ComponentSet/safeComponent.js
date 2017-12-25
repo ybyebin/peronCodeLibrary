@@ -2568,6 +2568,7 @@ var safeBasic = {
         custom: {
             newCreat: true, //  用于在拖拽组件时判断(是否新拖拽的控件)            
             editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)  
+            blinkingType:'',//监控画面 用于 组件闪烁 判断标志  
             showValue: { //是否是显示数值的默认控件
                 flag: false,
                 value: '' //(如果启用 showValue属性)显示控件绑定的tag的值
