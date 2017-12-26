@@ -526,34 +526,47 @@ layui.use(['layer', 'element', 'laydate'], function() {
                                         node.getOutputPort(0).setVisible(false);
                                         node.getInputPort(0).setVisible(false);
                                     }
+                                }
 
-                                    // 更改标题	
-                                    if (userData.routine.hasOwnProperty("caption")) {
-                                        var caption = userData.routine.caption;
-                                        if (caption.flag) {
-                                            node.label.setVisible(true);
-                                        }
-                                        node.label.setText(caption.capText);
-                                    }
-
-
-                                    // 节点闪烁
-                                    if (userData.defaults.blinking) {
-                                        // 待完成
-                                    }
-
-                                    // 图片
+                                // 隐藏组件
+                                if (userData.routine.visible) {
+                                     node.setAlpha(0);
                                     if (node.image) {
-                                        node.image.setHeight(node.getHeight());
-                                        node.image.setWidth(node.getWidth());
+                                        node.image.setAlpha(0);
                                     }
-                                    if (userData.defaults.hasOwnProperty("picture")) {
-                                        node.image.setPath(userData.defaults.picture);
-                                        node.image.setHeight(node.getHeight());
-                                        node.image.setWidth(node.getWidth());
+                                    if (node.label) {
+                                        node.label.setAlpha(0);
+                                    }
+                                    if (userData.hasOwnProperty("onlytype")) {
+                                        node.setVisible(false);
                                     }
 
+                                }
 
+                                 // 更改标题	
+                                 if (userData.routine.hasOwnProperty("caption")) {
+                                    var caption = userData.routine.caption;
+                                    if (caption.flag) {
+                                        node.label.setVisible(true);
+                                    }
+                                    node.label.setText(caption.capText);
+                                }
+
+
+                                // 节点闪烁
+                                if (userData.defaults.blinking) {
+                                    // 待完成
+                                }
+
+                                // 图片
+                                if (node.image) {
+                                    node.image.setHeight(node.getHeight());
+                                    node.image.setWidth(node.getWidth());
+                                }
+                                if (userData.defaults.hasOwnProperty("picture")) {
+                                    node.image.setPath(userData.defaults.picture);
+                                    node.image.setHeight(node.getHeight());
+                                    node.image.setWidth(node.getWidth());
                                 }
                             }
 
@@ -712,26 +725,47 @@ layui.use(['layer', 'element', 'laydate'], function() {
             
             /**
              * [初始化 画布控件显示数据-------onTrue]
-             * @param  {[type]} node [description]
-             * @return {[type]}      [description]
+             * @param  {node}  [组件]
+             * @return {values}  [值]
              */
             deviceComTrue: function (node, values) {
+                var data = node.userData.onTrue;
+                var value = String(values);
+
                 node.stopTimer();
                 node.userData.custom.blinkingType = "onTrue";
 
-                if (node.userData.onTrue.blinking == true) {
-                    node.startTimer(1000);
-                  }
+               
+
+                if(data.type ==='labelComponent'){
+                    node.setText(value);
+                }else{
+                    if (data.blinking == true) {
+                        node.startTimer(1000);
+                    }
                   // 边框宽度
-                  node.setStroke(Number(node.userData.onTrue.LineWidth));
-                 // 文本颜色   
-                //   node.setColor(node.userData.onTrue.LineColor);
-
-
+                  node.setStroke(Number(data.LineWidth));
+                  node.setColor(data.LineColor);
+                }
+                 
+                
                   switch (node.userData.type) {
+                    // case 'labelComponent':
+                    // break;
+                    case 'lineComponent':
+                    break;
+                    case 'basicComponent':
+                    break;
+                    case 'textComponent':
+                    break;
                     case 'defaultComponent':
+                        node.setBackgroundColor(data.fillColor);
+                        if(!node.userData.routine.visible){
+                            node.setAlpha(data.alpha);
+                        }
+                    break;
                     case 'customImageComponent':
-                    node.image.setPath(node.userData.onTrue.picture);
+                        node.image.setPath(data.picture);
 
                     break;
                 }

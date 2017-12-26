@@ -55,10 +55,9 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
                 lineWidth: 1,
                 lineColor: "#FFFFFF",
                 fillColor: "#5B5B5B",
-                textColor: "#FFFFFF",
+                fontColor: "#FFFFFF",
                 // text:"",
                 blinking: false,
-
             },
         };
         this.attr({

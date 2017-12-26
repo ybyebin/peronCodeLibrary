@@ -415,7 +415,9 @@ layui.use(['layer', 'element'], function() {
                     ele.active = false;
                 });
                 item.active = true;
+                console.log('改变之前:'+fillColor.color);
                 fillColor.color = item.color;
+                console.log('改变之后:'+fillColor.color);
             },
             // defaults 字体颜色
             setDefaultFontColor: function(item) {
@@ -710,6 +712,7 @@ layui.use(['layer', 'element'], function() {
                 // ontrue.borderStyle = '默认';
                 ontrue.fontText = '';
                 ontrue.alpha = '';
+                ontrue.setAlpha = false;
                 ontrue.picture = '';
                 ontrue.flashing = false;
 
@@ -717,6 +720,7 @@ layui.use(['layer', 'element'], function() {
                 // onfalse.borderStyle = '默认';
                 onfalse.fontText = '';
                 onfalse.alpha = '';
+                onfalse.setAlpha = false;
                 onfalse.picture = '';
                 onfalse.flashing = false;
 
@@ -724,6 +728,7 @@ layui.use(['layer', 'element'], function() {
                 // onalarm.borderStyle = '默认';
                 onalarm.fontText = '';
                 onalarm.alpha = '';
+                onalarm.setAlpha = false;
                 onalarm.picture = '';
                 onalarm.flashing = false;
 
@@ -731,6 +736,7 @@ layui.use(['layer', 'element'], function() {
                 // ondisc.borderStyle = '默认';
                 ondisc.fontText = '';
                 ondisc.alpha = '';
+                ondisc.setAlpha = false;
                 ondisc.picture = '';
                 ondisc.flashing = false;
 
@@ -1322,7 +1328,7 @@ layui.use(['layer', 'element'], function() {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                node.setStroke(newVal)
+                node.setStroke(newVal);
                 node.userData.defaults.lineWidth = newVal;
             }
         }
@@ -1333,7 +1339,7 @@ layui.use(['layer', 'element'], function() {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                node.setColor(newVal)
+                node.setColor(newVal);
                 node.userData.defaults.lineColor = newVal;
             }
         }
@@ -1341,11 +1347,15 @@ layui.use(['layer', 'element'], function() {
 
     // default -填充颜色
     canvasVue.$watch('defaults.fillColor.color', function(newVal, oldVal) {
+        console.log('监控改变之前:'+oldVal);
+        console.log('监控改变之后:'+newVal);
+       
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                node.setBackgroundColor(newVal)
+                node.setBackgroundColor(newVal);
                 node.userData.defaults.fillColor = newVal;
+                this.defaults.setAlpha = false;
             }
         }
     });
@@ -1357,7 +1367,7 @@ layui.use(['layer', 'element'], function() {
             if (node) {
                 var num = Number(newVal);
                 if (num >= 0 && num <= 1) {
-                    node.setAlpha(num)
+                    node.setAlpha(num);
                     node.userData.defaults.alpha = num;
                 } else {
                     node.setAlpha(1);
@@ -1369,13 +1379,32 @@ layui.use(['layer', 'element'], function() {
         }
     });
 
+     // default -设置透明
+     canvasVue.$watch('defaults.setAlpha', function(newVal, oldVal) {
+         console.log('查看:'+newVal);
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                if (newVal) {
+                    node.setBackgroundColor('none');
+                    this.defaults.fillColor.color = 'none';
+                    this.defaults.fillColor.colorData.forEach(function(ele) {
+                        ele.active = false;   
+                    });
+                } 
+            }
+        }
+    });
+
+
+
     // defaults -文本内容
     canvasVue.$watch('defaults.fontText', function(newVal, oldVal) {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                console.log()
                 node.setText(newVal);
+                node.userData.defaults.text= newVal;
             }
         }
     });
@@ -1396,6 +1425,9 @@ layui.use(['layer', 'element'], function() {
             }
         }
     });
+
+
+
 
     // default -文本颜色
     canvasVue.$watch('defaults.fontColor.color', function(newVal, oldVal) {
@@ -1444,7 +1476,7 @@ layui.use(['layer', 'element'], function() {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                node.setColor(newVal)
+                node.setColor(newVal);
                 node.userData.onTrue.lineColor = newVal;
             }
         }
@@ -1455,11 +1487,37 @@ layui.use(['layer', 'element'], function() {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                node.setBackgroundColor(newVal)
+                node.setBackgroundColor(newVal);
                 node.userData.onTrue.fillColor = newVal;
+                this.ontrue.setAlpha = false;
             }
         }
     });
+
+     // ontrue -文本内容
+     canvasVue.$watch('ontrue.fontText', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                console.log()
+                node.setText(newVal);
+                node.userData.onTrue.text = newVal;
+            }
+        }
+    });
+
+    // ontrue -文本颜色
+    canvasVue.$watch('ontrue.fontColor.color', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.setFontColor(newVal)
+                node.userData.onTrue.fontColor = newVal;
+            }
+        }
+    });
+
+
 
     // ontrue -透明度
     canvasVue.$watch('ontrue.alpha', function(newVal, oldVal) {
@@ -1468,7 +1526,7 @@ layui.use(['layer', 'element'], function() {
             if (node) {
                 var num = Number(newVal);
                 if (num >= 0 && num <= 1) {
-                    node.setAlpha(num)
+                    node.setAlpha(num);
                     node.userData.onTrue.alpha = num;
                 } else {
                     node.setAlpha(1);
@@ -1479,6 +1537,23 @@ layui.use(['layer', 'element'], function() {
             }
         }
     });
+
+     // ontrue -设置透明
+     canvasVue.$watch('ontrue.setAlpha', function(newVal, oldVal) {
+        console.log('查看:'+newVal);
+       if (this.componentData.flag) {
+           var node = canvasSet.getNodeFromCanvas();
+           if (node) {
+               if (newVal) {
+                   node.setBackgroundColor('none');
+                   this.ontrue.fillColor.color = 'none';
+                   this.ontrue.fillColor.colorData.forEach(function(ele) {
+                    ele.active = false;   
+                });
+               } 
+           }
+       }
+   });
 
     // ontrue -闪烁
     canvasVue.$watch('ontrue.flashing', function(newVal, oldVal) {
@@ -1527,6 +1602,31 @@ layui.use(['layer', 'element'], function() {
             if (node) {
                 node.setBackgroundColor(newVal)
                 node.userData.onFalse.fillColor = newVal;
+                this.onfalse.setAlpha = false;
+            }
+        }
+    });
+
+
+    // onfalse -文本内容
+    canvasVue.$watch('onfalse.fontText', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                console.log()
+                node.setText(newVal);
+                node.userData.onFalse.text = newVal;
+            }
+        }
+    });
+
+    // onfalse -文本颜色
+    canvasVue.$watch('onfalse.fontColor.color', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.setFontColor(newVal)
+                node.userData.onFalse.fontColor = newVal;
             }
         }
     });
@@ -1549,6 +1649,23 @@ layui.use(['layer', 'element'], function() {
             }
         }
     });
+
+     // onfalse -设置透明
+     canvasVue.$watch('onfalse.setAlpha', function(newVal, oldVal) {
+        console.log('查看:'+newVal);
+       if (this.componentData.flag) {
+           var node = canvasSet.getNodeFromCanvas();
+           if (node) {
+               if (newVal) {
+                   node.setBackgroundColor('none');
+                   this.onfalse.fillColor.color = 'none';
+                   this.onfalse.fillColor.colorData.forEach(function(ele) {
+                    ele.active = false;   
+                });
+               } 
+           }
+       }
+   });
 
     // onfalse -闪烁
     canvasVue.$watch('onfalse.flashing', function(newVal, oldVal) {
@@ -1597,6 +1714,30 @@ layui.use(['layer', 'element'], function() {
             if (node) {
                 node.setBackgroundColor(newVal)
                 node.userData.onAlarm.fillColor = newVal;
+                this.onalarm.setAlpha = false;
+            }
+        }
+    });
+
+     // onalarm -文本内容
+     canvasVue.$watch('onalarm.fontText', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                console.log()
+                node.setText(newVal);
+                node.userData.onAlarm.text = newVal;
+            }
+        }
+    });
+
+    // onalarm -文本颜色
+    canvasVue.$watch('onalarm.fontColor.color', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.setFontColor(newVal)
+                node.userData.onAlarm.fontColor = newVal;
             }
         }
     });
@@ -1619,6 +1760,24 @@ layui.use(['layer', 'element'], function() {
             }
         }
     });
+
+
+     // onalarm -设置透明
+     canvasVue.$watch('onalarm.setAlpha', function(newVal, oldVal) {
+        console.log('查看:'+newVal);
+       if (this.componentData.flag) {
+           var node = canvasSet.getNodeFromCanvas();
+           if (node) {
+               if (newVal) {
+                   node.setBackgroundColor('none');
+                   this.onalarm.fillColor.color = 'none';
+                   this.onalarm.fillColor.colorData.forEach(function(ele) {
+                    ele.active = false;   
+                });
+               } 
+           }
+       }
+   });
 
     // onalarm -闪烁
     canvasVue.$watch('onalarm.flashing', function(newVal, oldVal) {
@@ -1666,6 +1825,30 @@ layui.use(['layer', 'element'], function() {
             if (node) {
                 node.setBackgroundColor(newVal)
                 node.userData.onDisconnected.fillColor = newVal;
+                this.ondisc.setAlpha = false;
+            }
+        }
+    });
+
+     // ondisc -文本内容
+     canvasVue.$watch('ondisc.fontText', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                console.log()
+                node.setText(newVal);
+                node.userData.onDisconnected.text = newVal;
+            }
+        }
+    });
+
+    // ondisc -文本颜色
+    canvasVue.$watch('ondisc.fontColor.color', function(newVal, oldVal) {
+        if (this.componentData.flag) {
+            var node = canvasSet.getNodeFromCanvas();
+            if (node) {
+                node.setFontColor(newVal)
+                node.userData.onDisconnected.fontColor = newVal;
             }
         }
     });
@@ -1688,6 +1871,23 @@ layui.use(['layer', 'element'], function() {
             }
         }
     });
+
+     // ondisc -设置透明
+     canvasVue.$watch('ondisc.setAlpha', function(newVal, oldVal) {
+        console.log('查看:'+newVal);
+       if (this.componentData.flag) {
+           var node = canvasSet.getNodeFromCanvas();
+           if (node) {
+               if (newVal) {
+                   node.setBackgroundColor('none');
+                   this.ondisc.fillColor.color = 'none';
+                   this.ondisc.fillColor.colorData.forEach(function(ele) {
+                    ele.active = false;   
+                });
+               } 
+           }
+       }
+   });
 
     // ondisc -闪烁
     canvasVue.$watch('ondisc.flashing', function(newVal, oldVal) {

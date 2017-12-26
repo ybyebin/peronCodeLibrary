@@ -596,6 +596,18 @@ var setComponentOptions = {
     },
     // text
     textSet: function(component) {
+        // var vueRoutine = canvasVue.routine;
+        var vueDatas = canvasVue.datas;
+        var vueDefaults = canvasVue.defaults;
+
+        var vueOnTrue = canvasVue.ontrue;
+        var vueOnFalse = canvasVue.onfalse;
+        var vueOnAlarm = canvasVue.onalarm;
+        var vueOnDisc = canvasVue.ondisc;
+
+        var data = component.getUserData();
+
+
 
         // =============================style=================================== 
         //填充(背景)颜色  fillColor
@@ -609,7 +621,7 @@ var setComponentOptions = {
                 s_flag = false;
             }
         });
-        if (s_flag) {
+        if (s_flag && s_fill_color !== 'none') {
             vueDefaults.fillColor.colorData.shift();
             vueDefaults.fillColor.colorData.push({
                 color: s_fill_color,
@@ -619,11 +631,33 @@ var setComponentOptions = {
         }
 
         // 文本内容  Text
+        vueDefaults.fontText = data.defaults.text;
         // 字体大小
+         vueDefaults.fontSize = component.getFontSize();
         // 文本颜色
+        var s_font_color = component.getFontColor().hash();
+        var s_font_flag = true;
+        vueDefaults.fontColor.color = s_font_color;
+        vueDefaults.fontColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === s_font_color) {
+                ele.active = true;
+                s_font_flag = false;
+            }
+        });
+        if (s_font_flag) {
+            vueDefaults.fontColor.colorData.shift();
+            vueDefaults.fontColor.colorData.push({
+                color: s_font_color,
+                colorstyle: 'background-color:' + s_font_color,
+                active: true
+            })
+        }
+
+
 
         // =============================onTrue===================================
-        //填充(背景)颜色  fillColor
+        // 填充(背景)颜色  fillColor
         var ot_fill_color = data.onTrue.fillColor;
         var ot_flag = true;
         vueOnTrue.fillColor.color = ot_fill_color;
@@ -634,7 +668,7 @@ var setComponentOptions = {
                 s_flag = false;
             }
         });
-        if (ot_flag) {
+        if (ot_flag && ot_fill_color!=='none') {
             vueOnTrue.fillColor.colorData.shift();
             vueOnTrue.fillColor.colorData.push({
                 color: ot_fill_color,
@@ -644,29 +678,48 @@ var setComponentOptions = {
         }
 
         // 文本内容  Text
+        vueOnTrue.fontText = data.onTrue.text;
         // 文本颜色
+        var ot_font_color = data.onTrue.fontColor;
+        var ot_font_flag = true;
+        vueOnTrue.fontColor.color = ot_font_color;
+        vueOnTrue.fontColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === ot_font_color) {
+                ele.active = true;
+                ot_font_flag = false;
+            }
+        });
+        if (ot_font_flag) {
+            vueOnTrue.fontColor.colorData.shift();
+            vueOnTrue.fontColor.colorData.push({
+                color: ot_font_color,
+                colorstyle: 'background-color:' + ot_font_color,
+                active: true
+            })
+        }
 
 
         // =============================onFalse===================================
         // 填充(背景)颜色  fillColor
-        var of_fill_color = data.onFlase.fillColor;
-        var of_flag = true;
-        vueOnFalse.fillColor.color = of_fill_color;
-        vueOnFalse.fillColor.colorData.forEach(function(ele) {
-            ele.active = false;
-            if (ele.color === of_fill_color) {
-                ele.active = true;
-                s_flag = false;
-            }
-        });
-        if (of_flag) {
-            vueOnFalse.fillColor.colorData.shift();
-            vueOnFalse.fillColor.colorData.push({
-                color: of_fill_color,
-                colorstyle: 'background-color:' + of_fill_color,
-                active: true
-            })
-        }
+        // var of_fill_color = data.onFlase.fillColor;
+        // var of_flag = true;
+        // vueOnFalse.fillColor.color = of_fill_color;
+        // vueOnFalse.fillColor.colorData.forEach(function(ele) {
+        //     ele.active = false;
+        //     if (ele.color === of_fill_color) {
+        //         ele.active = true;
+        //         s_flag = false;
+        //     }
+        // });
+        // if (of_flag) {
+        //     vueOnFalse.fillColor.colorData.shift();
+        //     vueOnFalse.fillColor.colorData.push({
+        //         color: of_fill_color,
+        //         colorstyle: 'background-color:' + of_fill_color,
+        //         active: true
+        //     })
+        // }
 
 
         // 文本内容  Text
@@ -675,24 +728,24 @@ var setComponentOptions = {
 
         // =============================onAlarm===================================
         // 填充(背景)颜色  fillColor
-        var oa_fill_color = data.onAlarm.fillColor;
-        var oa_flag = true;
-        vueOnAlarm.fillColor.color = oa_fill_color;
-        vueOnAlarm.fillColor.colorData.forEach(function(ele) {
-            ele.active = false;
-            if (ele.color === oa_fill_color) {
-                ele.active = true;
-                s_flag = false;
-            }
-        });
-        if (oa_flag) {
-            vueOnAlarm.fillColor.colorData.shift();
-            vueOnAlarm.fillColor.colorData.push({
-                color: of_fill_color,
-                colorstyle: 'background-color:' + oa_fill_color,
-                active: true
-            })
-        }
+        // var oa_fill_color = data.onAlarm.fillColor;
+        // var oa_flag = true;
+        // vueOnAlarm.fillColor.color = oa_fill_color;
+        // vueOnAlarm.fillColor.colorData.forEach(function(ele) {
+        //     ele.active = false;
+        //     if (ele.color === oa_fill_color) {
+        //         ele.active = true;
+        //         s_flag = false;
+        //     }
+        // });
+        // if (oa_flag) {
+        //     vueOnAlarm.fillColor.colorData.shift();
+        //     vueOnAlarm.fillColor.colorData.push({
+        //         color: of_fill_color,
+        //         colorstyle: 'background-color:' + oa_fill_color,
+        //         active: true
+        //     })
+        // }
 
         // 文本内容  Text
         // 文本颜色
@@ -700,24 +753,24 @@ var setComponentOptions = {
 
         // =============================onDisconnected===================================
         // 填充(背景)颜色  fillColor
-        var od_fill_color = data.ononDisconnected.fillColor;
-        var od_flag = true;
-        vueOnDisc.fillColor.color = od_fill_color;
-        vueOnDisc.fillColor.colorData.forEach(function(ele) {
-            ele.active = false;
-            if (ele.color === od_fill_color) {
-                ele.active = true;
-                s_flag = false;
-            }
-        });
-        if (od_flag) {
-            vueOnDisc.fillColor.colorData.shift();
-            vueOnDisc.fillColor.colorData.push({
-                color: od_fill_color,
-                colorstyle: 'background-color:' + od_fill_color,
-                active: true
-            })
-        }
+        // var od_fill_color = data.ononDisconnected.fillColor;
+        // var od_flag = true;
+        // vueOnDisc.fillColor.color = od_fill_color;
+        // vueOnDisc.fillColor.colorData.forEach(function(ele) {
+        //     ele.active = false;
+        //     if (ele.color === od_fill_color) {
+        //         ele.active = true;
+        //         s_flag = false;
+        //     }
+        // });
+        // if (od_flag) {
+        //     vueOnDisc.fillColor.colorData.shift();
+        //     vueOnDisc.fillColor.colorData.push({
+        //         color: od_fill_color,
+        //         colorstyle: 'background-color:' + od_fill_color,
+        //         active: true
+        //     })
+        // }
 
         // 文本内容  Text
         // 文本颜色

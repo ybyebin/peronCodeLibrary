@@ -102,9 +102,9 @@ var textBasic = {
             lineColor: "#DDDDDD",
             // lineStyle: null,
             fillColor: "none",
-            text: '',
+            text: '文本',
             alpha: '',
-            textColor: '#FFFFFF',
+            fontColor: '#FFFFFF',
             // unit:
             blinking: false,
         },
@@ -113,9 +113,9 @@ var textBasic = {
             lineColor: "#DDDDDD",
             // lineStyle: null,
             fillColor: "none",
-            text: '',
+            text: '1111111111',
             alpha: '',
-            textColor: '#FFFFFF',
+            fontColor: '#FFFFFF',
             // unit:
             blinking: false,
         },
@@ -126,7 +126,7 @@ var textBasic = {
             fillColor: "none",
             text: '',
             alpha: '',
-            textColor: '#FFFFFF',
+            fontColor: '#FFFFFF',
             // unit:
             blinking: false,
         },
@@ -137,7 +137,7 @@ var textBasic = {
             fillColor: "none",
             text: '',
             alpha: '',
-            textColor: '#FFFFFF',
+            fontColor: '#FFFFFF',
             // unit:
             blinking: false,
         },
@@ -148,7 +148,7 @@ var textBasic = {
             fillColor: "none",
             text: '',
             alpha: '',
-            textColor: '#FFFFFF',
+            fontColor: '#FFFFFF',
             // unit:
             blinking: false,
         }
@@ -162,6 +162,7 @@ var textBasic = {
         // 基本
         setComponentOptions.basePublicSet(component);
         setComponentOptions.basicSet(component);
+        setComponentOptions.textSet(component);
 
         // 位置 旋转角度
         setComponentOptions.componentOffsetAndAngle(component);
