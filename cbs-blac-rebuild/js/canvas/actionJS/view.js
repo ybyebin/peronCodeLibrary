@@ -86,7 +86,50 @@ example.Toolbar = Class.extend({
 
             console.log(JSON.stringify(canvasVue.globalBtnData.btndata, null, 2));
             new draw2d.io.json.Writer().marshal(this.view, function(json) {
-                console.log('查看数据' + canvasVue.canvas.bgColor.bgimage)
+
+                console.log('处理前:'+JSON.stringify(json,null,2))
+                for(var i in json){
+                    var dic = json[i];
+                    var defaults = json[i].userData.defaults;
+
+                    switch (dic.userData.type) {
+                        case 'basicComponent':
+                            dic.alpha = defaults.alpha;
+                            dic.stroke = defaults.lineWidth;
+                            dic.color = defaults.lineColor;
+                            dic.bgColor = defaults.fillColor;
+                            break;
+                        case 'lineComponent':
+                            dic.stroke = defaults.lineWidth;
+                            dic.color = defaults.lineColor;
+                            break;
+                        case 'labelComponent':
+                            break;
+                        case 'textComponent':
+                            dic.stroke = defaults.lineWidth;
+                            dic.color = defaults.lineColor;
+                            dic.bgColor = defaults.fillColor;
+                            dic.text = defaults.text;
+                            dic.fontColor = defaults.fontColor;
+                            break;
+                        case 'customImageComponent':
+                            dic.stroke = defaults.lineWidth;
+                            dic.color = defaults.lineColor;
+                            dic.bgColor = defaults.fillColor;
+                            dic.alpha = defaults.alpha;
+                            break;
+                        case 'defaultComponent':
+                            dic.stroke = defaults.lineWidth;
+                            dic.color = defaults.lineColor;
+                            break;
+                    }
+                }
+                console.log('处理后:'+JSON.stringify(json,null,2))
+
+
+
+
+
                 var canvasData = {
                     canvas: json,
                     subCanvas: canvasVue.globalBtnData.btndata,
@@ -299,14 +342,20 @@ var CopyInterceptorPolicy = draw2d.policy.canvas.SingleSelectionPolicy.extend({
 var HoverConnection = draw2d.Connection.extend({
     init: function(sourcePort, targetPort) {
         var self = this;
+       
         this._super({
             router: new draw2d.layout.connection.InteractiveManhattanConnectionRouter(),
             radius: 5,
             // source: sourcePort,
             // target: targetPort,
             stroke: 1.35,
-            color: "#68C9FF"
+            // color: "#68C9FF"
+            color:'#35C99D',
+
         });
+
+
+        
 
         this.on("dragEnter", function(emitter, event) {
             console.log('drag enter');
@@ -326,7 +375,7 @@ var HoverConnection = draw2d.Connection.extend({
         });
     },
 
-    onDragEnter: function(draggedFigure) {
-        return this;
-    }
+    // onDragEnter: function(draggedFigure) {
+    //     return this;
+    // }
 });

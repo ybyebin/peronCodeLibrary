@@ -618,7 +618,7 @@
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in defaults.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setDefaultBorderColor(item)"></li>
+                                                    <li v-for="(item,index) in defaults.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setDefaultBorderColor(item)"></li>
                                                     <li class="default-border-color">+</li>
                                                 </ul>
 
@@ -629,7 +629,7 @@
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in defaults.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setDefaultFillColor(item)"></li>
+                                                    <li v-for="(item,index) in defaults.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setDefaultFillColor(item)"></li>
                                                     <li class="default-fill-color">+</li>
 
                                                 </ul>
@@ -657,7 +657,7 @@
                                             <label class="layui-form-label">文本颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in defaults.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setDefaultFontColor(item)"></li>
+                                                    <li v-for="(item,index) in defaults.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setDefaultFontColor(item)"></li>
                                                     <li class="defaults-font-color">+</li>
                                                 </ul>
                                             </div>
@@ -749,7 +749,7 @@
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in ontrue.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnTrueBorderColor(item)"></li>
+                                                    <li v-for="(item,index) in ontrue.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnTrueBorderColor(item)"></li>
                                                     <li class="ontrue-border-color">+</li>
                                                 </ul>
                                             </div>
@@ -758,7 +758,7 @@
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in ontrue.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnTrueFillColor(item)"></li>
+                                                    <li v-for="(item,index) in ontrue.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnTrueFillColor(item)"></li>
                                                     <li class="ontrue-fill-color">+</li>
                                                 </ul>
                                             </div>
@@ -766,7 +766,7 @@
                                         <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
                                             <label class="layui-form-label">文本内容</label>
                                             <div class="layui-input-block">
-                                                <input v-model="ontrue.fontText" type="text" autocomplete="off" class="layui-input">
+                                                <input v-model="ontrue.fontText" title='默认显示填写值,如果不填,则显示绑定tag当前状态的值' type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
@@ -774,7 +774,7 @@
                                             <label class="layui-form-label">文本颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in ontrue.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnTrueFontColor(item)"></li>
+                                                    <li v-for="(item,index) in ontrue.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnTrueFontColor(item)"></li>
                                                     <li class="ontrue-font-color">+</li>
                                                 </ul>
                                             </div>
@@ -865,7 +865,7 @@
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in onfalse.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnFalseBorderColor(item)"></li>
+                                                    <li v-for="(item,index) in onfalse.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnFalseBorderColor(item)"></li>
                                                     <li class="onfalse-border-color">+</li>
                                                 </ul>
                                             </div>
@@ -874,7 +874,7 @@
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in onfalse.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnFalseFillColor(item)"></li>
+                                                    <li v-for="(item,index) in onfalse.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnFalseFillColor(item)"></li>
                                                     <li class="onfalse-fill-color">+</li>
                                                 </ul>
                                             </div>
@@ -882,7 +882,7 @@
                                         <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
                                             <label class="layui-form-label">文本内容</label>
                                             <div class="layui-input-block">
-                                                <input v-model="onfalse.fontText" type="text" autocomplete="off" class="layui-input">
+                                                <input v-model="onfalse.fontText" type="text" title='默认显示填写值,如果不填,则显示绑定tag当前状态的值' autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
@@ -890,7 +890,7 @@
                                             <label class="layui-form-label">文本颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in onfalse.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnFalseFontColor(item)"></li>
+                                                    <li v-for="(item,index) in onfalse.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnFalseFontColor(item)"></li>
                                                     <li class="onfalse-font-color">+</li>
                                                 </ul>
                                             </div>
@@ -981,7 +981,7 @@
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in onalarm.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnAlarmBorderColor(item)"></li>
+                                                    <li v-for="(item,index) in onalarm.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnAlarmBorderColor(item)"></li>
                                                     <li class="onalarm-border-color">+</li>
                                                 </ul>
                                             </div>
@@ -990,7 +990,7 @@
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in onalarm.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnAlarmFillColor(item)"></li>
+                                                    <li v-for="(item,index) in onalarm.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnAlarmFillColor(item)"></li>
                                                     <li class="onalarm-fill-color">+</li>
                                                 </ul>
                                             </div>
@@ -998,7 +998,7 @@
                                         <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
                                             <label class="layui-form-label">文本内容</label>
                                             <div class="layui-input-block">
-                                                <input v-model="onalarm.fontText" type="text" autocomplete="off" class="layui-input">
+                                                <input v-model="onalarm.fontText" title='默认显示填写值,如果不填,则显示绑定tag当前状态的值' type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
@@ -1006,7 +1006,7 @@
                                             <label class="layui-form-label">文本颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in onalarm.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnAlarmFontColor(item)"></li>
+                                                    <li v-for="(item,index) in onalarm.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnAlarmFontColor(item)"></li>
                                                     <li class="onalarm-font-color">+</li>
                                                 </ul>
                                             </div>
@@ -1097,7 +1097,7 @@
                                             <label class="layui-form-label">边框颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in ondisc.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnDiscBorderColor(item)"></li>
+                                                    <li v-for="(item,index) in ondisc.borderColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnDiscBorderColor(item)"></li>
                                                     <li class="ondisc-border-color">+</li>
                                                 </ul>
                                             </div>
@@ -1106,7 +1106,7 @@
                                             <label class="layui-form-label">填充颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in ondisc.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnDiscFillColor(item)"></li>
+                                                    <li v-for="(item,index) in ondisc.fillColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnDiscFillColor(item)"></li>
                                                     <li class="ondisc-fill-color">+</li>
                                                 </ul>
                                             </div>
@@ -1114,7 +1114,7 @@
                                         <div v-bind:class="[{'basic-hide':hidediv.basicHideDiv},{'basic-hide':hidediv.lineHideDiv},{'basic-hide':hidediv.imgHideDiv},{'basic-hide':hidediv.safeHideDiv}]" class=" layui-form-item">
                                             <label class="layui-form-label">文本内容</label>
                                             <div class="layui-input-block">
-                                                <input v-model="ondisc.fontText" type="text" autocomplete="off" class="layui-input">
+                                                <input v-model="ondisc.fontText" title='默认显示填写值,如果不填,则显示绑定tag当前状态的值' type="text" autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
@@ -1122,7 +1122,7 @@
                                             <label class="layui-form-label">文本颜色</label>
                                             <div class="layui-input-block">
                                                 <ul class="color-ul">
-                                                    <li v-for="(item,index) in ondisc.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" @click="setOnDiscFontColor(item)"></li>
+                                                    <li v-for="(item,index) in ondisc.fontColor.colorData" :class="{active:item.active}" :style="item.colorstyle" :title="item.color" @click="setOnDiscFontColor(item)"></li>
                                                     <li class="ondisc-font-color">+</li>
                                                 </ul>
                                             </div>

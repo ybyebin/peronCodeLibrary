@@ -2,6 +2,70 @@
  * @description [控件库]
  */
 
+
+
+
+
+
+
+
+
+
+/****************************************自定义图片*******************************************/ 
+ /** 
+ * image 标签
+ * @author
+ * @extend draw2d.shape.basic.Image
+ */
+var imageComponent = draw2d.shape.basic.Rectangle.extend({
+	NAME: "imageComponent",
+	init: function(attr) {
+		this._super(attr);
+		this.setResizeable(false);
+		this.setSelectable(false);
+		this.setDraggable(false);
+		var thiss = this;
+		this.image = new draw2d.shape.basic.Image({
+			path: "images/icon/icon/zidingyi.png",
+			width: 36,
+			height: 36
+		});
+		this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
+
+		this.label = new draw2d.shape.basic.Label({
+			text: "",
+			fontFamily: "微软雅黑"
+		});
+		this.add(this.label, new draw2d.layout.locator.TopLocator(this));
+		this.label.setVisible(false);
+
+		this.image.onMouseEnter = function() {
+			
+		};
+		this.image.onMouseLeave = function() {
+		};
+
+		this.image.on("click", function() {
+			alert('123')
+		});
+
+		/**
+		 *	双击方法
+		 */
+		this.on("dblclick", function() {});
+	},
+	onTimer: function() {
+		monitoringVue.flashMethod(this);
+	}
+
+})
+
+
+
+
+
+/****************************************默认组件********************************************/ 
+
 /** 
  * @description [开关]
  * @extend draw2d.shape.basic.Rectangle
@@ -28,71 +92,18 @@ var switchComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.label, new draw2d.layout.locator.TopLocator(this));
 		this.label.setVisible(false);
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
-
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
-
-
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 
 });
@@ -126,71 +137,19 @@ var pipingComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
-
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 
 });
@@ -225,70 +184,18 @@ var WarninglampComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
-
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 
 });
@@ -323,69 +230,18 @@ var blowerfanComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 
 });
@@ -421,72 +277,21 @@ var exhaustfanComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 
 });
@@ -522,70 +327,19 @@ var bengComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 
 });
@@ -621,70 +375,19 @@ var ElectricTwoWayValveComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -719,70 +422,19 @@ var SolenoidValveComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -817,70 +469,17 @@ var ElectricButterflyValvesComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
-
-
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -916,71 +515,17 @@ var AirFiltrationComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
-
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
-
-
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -1038,46 +583,7 @@ var AirHeatingComponent = draw2d.shape.basic.Rectangle.extend({
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -1113,70 +619,19 @@ var AirCoolerComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+		
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -1212,70 +667,19 @@ var HumidifierComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -1311,71 +715,20 @@ var controlPanelComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -1411,72 +764,21 @@ var FluorescentLampComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -1511,71 +813,20 @@ var LEDComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -1609,73 +860,17 @@ var IncandescentComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
-
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
-			
+				
 		});
-
-
-
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -1711,71 +906,19 @@ var MetalHalideComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
-
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -1818,71 +961,20 @@ var temperatureComponent = draw2d.shape.basic.Rectangle.extend({
 
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 /** 
@@ -1923,71 +1015,20 @@ var humidityComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom());
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -2029,71 +1070,18 @@ var pressureComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
-
-
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -2138,70 +1126,18 @@ var differentialPressureComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
-
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -2245,71 +1181,19 @@ var liquidComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
-
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+		
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -2354,70 +1238,19 @@ var electricComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+		
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -2460,71 +1293,20 @@ var VoltageComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+		
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -2569,70 +1351,19 @@ var frequencyComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -2675,71 +1406,19 @@ var activePowerComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+		
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
-
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -2781,71 +1460,19 @@ var ElectricityConsumptionComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -2889,71 +1516,18 @@ var levelComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
-
-
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -2995,71 +1569,20 @@ var GasComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.labelValue, new draw2d.layout.locator.CenterLocatorCustom(this));
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -3094,71 +1617,20 @@ var BroadcastComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+		
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -3194,68 +1666,19 @@ var monitoringComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 		this.image.on("click", function() {
-			if (thiss.getUserData().vlcurl != "")
-			 {
-			 	console.log(thiss.getUserData().vlcurl)
-			 	vlc(thiss.getUserData().name,thiss.getUserData().vlcurl)
-			 	
-			 }else{
-			 	layer.msg("未绑定地址")
-			 }
+			
 		});
 
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -3290,69 +1713,19 @@ var qiujiComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("此控件绑定的TagsID:" + thiss.getUserData().Tag.userInput);
-			if (thiss.getUserData().vlcurl != "")
-			 {
-			 	console.log(thiss.getUserData().vlcurl)
-			 	vlc(thiss.getUserData().name,thiss.getUserData().vlcurl)
-			 	
-			 }else{
-			 	layer.msg("未绑定地址")
-			 }
+			
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -3387,70 +1760,19 @@ var highqiujiComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 
 		this.image.on("click", function() {
-			console.log("此控件绑定的TagsID:" + thiss.getUserData().Tag.userInput);
-			if (thiss.getUserData().vlcurl != "")
-			 {
-			 	console.log(thiss.getUserData().vlcurl)
-			 	vlc(thiss.getUserData().name,thiss.getUserData().vlcurl)
-			 	
-			 }else{
-			 	layer.msg("未绑定地址")
-			 }
+			
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -3485,69 +1807,18 @@ var EntranceGuardComponent = draw2d.shape.basic.Rectangle.extend({
 		this.label.setVisible(false);
 
 		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
+			
 		};
 		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
 		};
 
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+		
 		});
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
@@ -3566,7 +1837,6 @@ var detectorComponent = draw2d.shape.basic.Rectangle.extend({
 
 		var thiss = this;
 
-
 		this.image = new draw2d.shape.basic.Image({
 			path: "images/icon/icon/tance1.png",
 			width: 36,
@@ -3576,95 +1846,26 @@ var detectorComponent = draw2d.shape.basic.Rectangle.extend({
 		this.add(this.image, new draw2d.layout.locator.CenterLocator(this));
 		this.image.setRotationAngle(90);
 
-		this.image.onMouseEnter = function() {
-			if (thiss.userData.ShowHint) {
-				showTooltips(thiss);
-			}
-		};
-		this.image.onMouseLeave = function() {
-			$('#tooltips').hide();
-		};
+		
 		this.label = new draw2d.shape.basic.Label({
 			text: "探测器组价组件标题",
 		});
 		this.add(this.label, new draw2d.layout.locator.TopLocator(this));
 		this.label.setVisible(false);
 
-
+		this.image.onMouseEnter = function() {
+			
+		};
+		this.image.onMouseLeave = function() {
+		};
 		this.image.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id);
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					layer.msg('本控件为只读控件');
-				}
-			}
+			
 		});
-
 
 	},
 	onTimer: function() {
-		this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-
-		setTimeout(function() {
-			switch (thiss.getUserData().BlinkingType) {
-				case "style":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().BlinkingColor);
-					thiss.setStroke(thiss.getUserData().BlinkingStroke);
-					thiss.setDashArray(thiss.getUserData().DashArray);
-					break;
-				case "onTrue":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onTrue.LineColor);
-					thiss.setStroke(thiss.getUserData().onTrue.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onTrue.LineStyle);
-					break;
-				case "onFalse":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onFalse.LineColor);
-					thiss.setStroke(thiss.getUserData().onFalse.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onFalse.LineStyle);
-					break;
-				case "onAlarm":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-				case "onDisconnected":
-					thiss.setGlow(false);
-					thiss.setColor(thiss.getUserData().onAlarm.LineColor);
-					thiss.setStroke(thiss.getUserData().onAlarm.LineWidth);
-					thiss.setDashArray(thiss.getUserData().onAlarm.LineStyle);
-					break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
 	}
 });
 
 
-
-// 显示 hover
-function hoverShow(thiss) {
-	if (thiss.getUserData().ShowHint === true) {
-		if (thiss.getUserData().Hint !== "") {
-			$("#mainCanvasTooltip").html(thiss.getUserData().Hint);
-			var tPosX = thiss.getAbsoluteX() + thiss.getWidth() / 2 - ($("#mainCanvasTooltip").width()) / 2 + 10;
-			var tPosY = thiss.getAbsoluteY() + thiss.getHeight() + 10;
-			$("#mainCanvasTooltip").css({
-				"display": "block",
-				"top": tPosY,
-				"left": tPosX
-			});
-		}
-
-	};
-}

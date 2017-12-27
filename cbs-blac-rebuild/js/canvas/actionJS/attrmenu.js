@@ -630,6 +630,13 @@ var setComponentOptions = {
             })
         }
 
+         // 背景透明
+         if(s_fill_color === 'none'){
+            vueDefaults.setAlpha = true;
+         }else{
+            vueDefaults.setAlpha = false;
+         }
+
         // 文本内容  Text
         vueDefaults.fontText = data.defaults.text;
         // 字体大小
@@ -654,7 +661,7 @@ var setComponentOptions = {
             })
         }
 
-
+       
 
         // =============================onTrue===================================
         // 填充(背景)颜色  fillColor
@@ -676,6 +683,13 @@ var setComponentOptions = {
                 active: true
             })
         }
+
+         // 背景透明
+         if(ot_fill_color === 'none'){
+            vueOnTrue.setAlpha = true;
+         }else{
+            vueOnTrue.setAlpha = false;
+         }
 
         // 文本内容  Text
         vueOnTrue.fontText = data.onTrue.text;
@@ -702,83 +716,161 @@ var setComponentOptions = {
 
         // =============================onFalse===================================
         // 填充(背景)颜色  fillColor
-        // var of_fill_color = data.onFlase.fillColor;
-        // var of_flag = true;
-        // vueOnFalse.fillColor.color = of_fill_color;
-        // vueOnFalse.fillColor.colorData.forEach(function(ele) {
-        //     ele.active = false;
-        //     if (ele.color === of_fill_color) {
-        //         ele.active = true;
-        //         s_flag = false;
-        //     }
-        // });
-        // if (of_flag) {
-        //     vueOnFalse.fillColor.colorData.shift();
-        //     vueOnFalse.fillColor.colorData.push({
-        //         color: of_fill_color,
-        //         colorstyle: 'background-color:' + of_fill_color,
-        //         active: true
-        //     })
-        // }
+        var of_fill_color = data.onFalse.fillColor;
+        var of_flag = true;
+        vueOnFalse.fillColor.color = of_fill_color;
+        vueOnFalse.fillColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === of_fill_color) {
+                ele.active = true;
+                of_flag = false;
+            }
+        });
+        if (of_flag && of_fill_color !=='none') {
+            vueOnFalse.fillColor.colorData.shift();
+            vueOnFalse.fillColor.colorData.push({
+                color: of_fill_color,
+                colorstyle: 'background-color:' + of_fill_color,
+                active: true
+            })
+        }
 
+         // 背景透明
+         if(of_fill_color === 'none'){
+            vueOnFalse.setAlpha = true;
+         }else{
+            vueOnFalse.setAlpha = false;
+         }
 
         // 文本内容  Text
-        // 文本颜色
-
+        vueOnFalse.fontText = data.onFalse.text;
+        // // 文本颜色
+        var of_font_color = data.onFalse.fontColor;
+        var of_font_flag = true;
+        vueOnFalse.fontColor.color = of_font_color;
+        vueOnFalse.fontColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === of_font_color) {
+                ele.active = true;
+                of_font_flag = false;
+            }
+        });
+        if (of_font_flag) {
+            vueOnFalse.fontColor.colorData.shift();
+            vueOnFalse.fontColor.colorData.push({
+                color: of_font_color,
+                colorstyle: 'background-color:' + of_font_color,
+                active: true
+            })
+        }
 
         // =============================onAlarm===================================
         // 填充(背景)颜色  fillColor
-        // var oa_fill_color = data.onAlarm.fillColor;
-        // var oa_flag = true;
-        // vueOnAlarm.fillColor.color = oa_fill_color;
-        // vueOnAlarm.fillColor.colorData.forEach(function(ele) {
-        //     ele.active = false;
-        //     if (ele.color === oa_fill_color) {
-        //         ele.active = true;
-        //         s_flag = false;
-        //     }
-        // });
-        // if (oa_flag) {
-        //     vueOnAlarm.fillColor.colorData.shift();
-        //     vueOnAlarm.fillColor.colorData.push({
-        //         color: of_fill_color,
-        //         colorstyle: 'background-color:' + oa_fill_color,
-        //         active: true
-        //     })
-        // }
+        var oa_fill_color = data.onAlarm.fillColor;
+        var oa_flag = true;
+        vueOnAlarm.fillColor.color = oa_fill_color;
+        vueOnAlarm.fillColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === oa_fill_color) {
+                ele.active = true;
+                oa_flag = false;
+            }
+        });
+        if (oa_flag && oa_fill_color!=='none') {
+            vueOnAlarm.fillColor.colorData.shift();
+            vueOnAlarm.fillColor.colorData.push({
+                color: of_fill_color,
+                colorstyle: 'background-color:' + oa_fill_color,
+                active: true
+            })
+        }
+        // 背景透明
+        if(oa_fill_color === 'none'){
+            vueOnAlarm.setAlpha = true;
+         }else{
+            vueOnAlarm.setAlpha = false;
+         }
 
         // 文本内容  Text
+        vueOnAlarm.fontText = data.onAlarm.text;
         // 文本颜色
+        var oa_font_color = data.onAlarm.fontColor;
+        var oa_font_flag = true;
+        vueOnAlarm.fontColor.color = oa_font_color;
+        vueOnAlarm.fontColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === oa_font_color) {
+                ele.active = true;
+                oa_font_flag = false;
+            }
+        });
+        if (oa_font_flag) {
+            vueOnAlarm.fontColor.colorData.shift();
+            vueOnAlarm.fontColor.colorData.push({
+                color: oa_font_color,
+                colorstyle: 'background-color:' + oa_font_color,
+                active: true
+            })
+        }
 
 
         // =============================onDisconnected===================================
+        
+        
         // 填充(背景)颜色  fillColor
-        // var od_fill_color = data.ononDisconnected.fillColor;
-        // var od_flag = true;
-        // vueOnDisc.fillColor.color = od_fill_color;
-        // vueOnDisc.fillColor.colorData.forEach(function(ele) {
-        //     ele.active = false;
-        //     if (ele.color === od_fill_color) {
-        //         ele.active = true;
-        //         s_flag = false;
-        //     }
-        // });
-        // if (od_flag) {
-        //     vueOnDisc.fillColor.colorData.shift();
-        //     vueOnDisc.fillColor.colorData.push({
-        //         color: od_fill_color,
-        //         colorstyle: 'background-color:' + od_fill_color,
-        //         active: true
-        //     })
-        // }
+        var od_fill_color = data.onDisconnected.fillColor;
+        var od_flag = true;
+        vueOnDisc.fillColor.color = od_fill_color;
+        vueOnDisc.fillColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === od_fill_color) {
+                ele.active = true;
+                od_flag = false;
+            }
+        });
+        if (od_flag && od_fill_color!=='none') {
+            vueOnDisc.fillColor.colorData.shift();
+            vueOnDisc.fillColor.colorData.push({
+                color: od_fill_color,
+                colorstyle: 'background-color:' + od_fill_color,
+                active: true
+            })
+        }
 
-        // 文本内容  Text
-        // 文本颜色
+        // 背景透明
+        if(od_fill_color === 'none'){
+            vueOnDisc.setAlpha = true;
+         }else{
+            vueOnDisc.setAlpha = false;
+         }
+
+         // 文本内容  Text
+        vueOnDisc.fontText = data.onDisconnected.text;
+         // 文本颜色
+        var od_font_color = data.onDisconnected.fontColor;
+        var od_font_flag = true;
+        vueOnDisc.fontColor.color = od_font_color;
+        vueOnDisc.fontColor.colorData.forEach(function(ele) {
+            ele.active = false;
+            if (ele.color === od_font_color) {
+                ele.active = true;
+                od_font_flag = false;
+            }
+        });
+        if (od_font_flag) {
+            vueOnDisc.fontColor.colorData.shift();
+            vueOnDisc.fontColor.colorData.push({
+                color: od_font_color,
+                colorstyle: 'background-color:' + od_font_color,
+                active: true
+            })
+        }
 
     },
     // 自定义图像
     imageSet: function(component) {
         var data = component.getUserData();
+        component.image.setPath(data.defaults.picture);
         canvasVue.defaults.picture = data.defaults.picture;
         canvasVue.ontrue.picture = data.onTrue.picture;
         canvasVue.onfalse.picture = data.onFalse.picture;
@@ -786,8 +878,9 @@ var setComponentOptions = {
         canvasVue.ondisc.picture = data.onDisconnected.picture;
     },
     // 建筑设备、安全防范
-    safeSet: function() {
-
+    safeSet: function(component) {
+        var data = component.getUserData();
+        component.image.setPath(data.defaults.picture);
     },
 
 
@@ -932,6 +1025,7 @@ var setComponentOptions = {
                     break;
                 case 'customImageComponent':
                     imgBasic.clickMethod(component);
+                    break;
                 case 'defaultComponent':
                     safeBasic.clickMethod(component);
                     break;
@@ -954,6 +1048,7 @@ var setComponentOptions = {
 
     // 组件属性框切换触发
     statusChangeMethod: function(type) {
+       
         var node = canvasSet.getNodeFromCanvas();
         if (node) {
             var userdata = node.userData;
@@ -986,18 +1081,25 @@ var setComponentOptions = {
                     // 
                     break;
                 case 'defaultComponent':
+                    node.image.setPath(userdata[type].picture);
                     break;
                 case 'textComponent':
                     node.setBackgroundColor(userdata[type].fillColor);
-                    node.setAlpha(userdata[type].alpha);
-
                     // 文本
+                    node.setText(userdata[type].text);
                     // 文本颜色
+                    node.setFontColor(userdata[type].fontColor);
+
                     break;
             }
 
 
         }
+        setTimeout(function(){
+            $(".layui-tabscroll-item").mCustomScrollbar('scrollTo', 'bottom');
+        },290)
+        
+       
     },
 
 
@@ -1025,9 +1127,7 @@ var setComponentOptions = {
         y -= 195;
         x -= 50
         console.log('x: ' + x + '\ny: ' + y)
-            // alert('x: ' + x + '\ny: ' + y);
         return { 'x': x, 'y': y };
-        // console.log('x: ' + x + '\ny: ' + y)
     }
 
 }
@@ -1190,6 +1290,7 @@ var basicSet = {
                 }
 
                 fillColor.color = color;
+                canvasVue.defaults.setAlpha = false;
                 console.log(color)
                 $(el).colpickHide();
             }
@@ -1318,6 +1419,7 @@ var basicSet = {
                 }
 
                 fillColor.color = color;
+                canvasVue.ontrue.setAlpha = false;
                 console.log(color)
                 $(el).colpickHide();
             }
@@ -1448,6 +1550,7 @@ var basicSet = {
                 }
 
                 fillColor.color = color;
+                canvasVue.onfalse.setAlpha = false;
                 console.log(color)
                 $(el).colpickHide();
             }
@@ -1574,6 +1677,7 @@ var basicSet = {
                 }
 
                 fillColor.color = color;
+                canvasVue.onalarm.setAlpha = false;
                 console.log(color)
                 $(el).colpickHide();
             }
@@ -1699,6 +1803,7 @@ var basicSet = {
                 }
 
                 fillColor.color = color;
+                canvasVue.ondisc.setAlpha = false;
                 console.log(color)
                 $(el).colpickHide();
             }

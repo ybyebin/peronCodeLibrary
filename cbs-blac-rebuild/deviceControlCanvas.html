@@ -12,11 +12,6 @@
     <!-- <link rel="stylesheet" href="./css/basegreen.css"> -->
     <link rel="stylesheet" type="text/css" href="css/datashow.css">
 
-
-
-
-
-
     <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="js/canvas/basic/canvg.js"></script>
     <script type="text/javascript" src="js/canvas/basic/Class.js"></script>
@@ -117,12 +112,12 @@
         <div class="device-control-body bayax-body">
             <div class="layui-tab">
                 <ul class="bayax-tab-title layui-tab-title">
-                    <li class="layui-this">设备监控</li>
+                    <li class="layui-this" @click="reSetCanvasWH">设备监控</li>
                     <li>列表与趋势图</li>
 
                 </ul>
                 <div class="layui-tab-content">
-                    <div class="bayax-tab-item layui-tab-item ">
+                    <div class="bayax-tab-item layui-tab-item layui-show">
                         <div class="content-main-mon content-main node-content-main">
                             <div class="canvas-div">
                                 <div id="canvas"></div>
@@ -146,7 +141,7 @@
 
                         </div>
                     </div>
-                    <div class="bayax-tab-item layui-tab-item  layui-show">
+                    <div class="bayax-tab-item layui-tab-item  ">
                         <div class="content-main node-content-main">                         
                             <table class="bayax-table table-trend">
                                 <thead>
@@ -201,6 +196,7 @@
     <script src="plugin/layui/layui.js "></script>
 
     <script src="js/canvas/Component/RectangleComponent.js"></script>
+    <script src="js/canvas/Component/imageComponent.js"></script>
 
     <script src="./js/datashow/device.js"></script>
 

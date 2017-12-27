@@ -415,9 +415,8 @@ layui.use(['layer', 'element'], function() {
                     ele.active = false;
                 });
                 item.active = true;
-                console.log('改变之前:'+fillColor.color);
                 fillColor.color = item.color;
-                console.log('改变之后:'+fillColor.color);
+                this.defaults.setAlpha = false;
             },
             // defaults 字体颜色
             setDefaultFontColor: function(item) {
@@ -460,6 +459,7 @@ layui.use(['layer', 'element'], function() {
                 });
                 item.active = true;
                 fillColor.color = item.color;
+                this.ontrue.setAlpha = false;
             },
 
             // ontrue 字体颜色
@@ -504,6 +504,7 @@ layui.use(['layer', 'element'], function() {
                 });
                 item.active = true;
                 fillColor.color = item.color;
+                this.onfalse.setAlpha = false;
             },
 
             // onfalse 字体颜色
@@ -547,6 +548,7 @@ layui.use(['layer', 'element'], function() {
                 });
                 item.active = true;
                 fillColor.color = item.color;
+                this.onalarm.setAlpha = false;
             },
             // onalarm 字体颜色
             setOnAlarmFontColor: function(item) {
@@ -590,6 +592,7 @@ layui.use(['layer', 'element'], function() {
                 });
                 item.active = true;
                 fillColor.color = item.color;
+                this.ondisc.setAlpha = false;
             },
 
             // ondisc 字体颜色
@@ -1355,7 +1358,6 @@ layui.use(['layer', 'element'], function() {
             if (node) {
                 node.setBackgroundColor(newVal);
                 node.userData.defaults.fillColor = newVal;
-                this.defaults.setAlpha = false;
             }
         }
     });
@@ -1381,7 +1383,7 @@ layui.use(['layer', 'element'], function() {
 
      // default -设置透明
      canvasVue.$watch('defaults.setAlpha', function(newVal, oldVal) {
-         console.log('查看:'+newVal);
+         console.log('透明改变了查看:'+newVal);
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
@@ -1434,7 +1436,7 @@ layui.use(['layer', 'element'], function() {
         if (this.componentData.flag) {
             var node = canvasSet.getNodeFromCanvas();
             if (node) {
-                node.setFontColor(newVal)
+                node.setFontColor(newVal);
                 node.userData.defaults.fontColor = newVal;
             }
         }
@@ -1489,7 +1491,6 @@ layui.use(['layer', 'element'], function() {
             if (node) {
                 node.setBackgroundColor(newVal);
                 node.userData.onTrue.fillColor = newVal;
-                this.ontrue.setAlpha = false;
             }
         }
     });
@@ -1602,7 +1603,6 @@ layui.use(['layer', 'element'], function() {
             if (node) {
                 node.setBackgroundColor(newVal)
                 node.userData.onFalse.fillColor = newVal;
-                this.onfalse.setAlpha = false;
             }
         }
     });
@@ -1714,7 +1714,6 @@ layui.use(['layer', 'element'], function() {
             if (node) {
                 node.setBackgroundColor(newVal)
                 node.userData.onAlarm.fillColor = newVal;
-                this.onalarm.setAlpha = false;
             }
         }
     });
@@ -1825,7 +1824,6 @@ layui.use(['layer', 'element'], function() {
             if (node) {
                 node.setBackgroundColor(newVal)
                 node.userData.onDisconnected.fillColor = newVal;
-                this.ondisc.setAlpha = false;
             }
         }
     });

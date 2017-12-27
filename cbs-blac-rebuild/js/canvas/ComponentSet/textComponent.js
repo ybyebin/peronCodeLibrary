@@ -68,7 +68,7 @@ var textBasic = {
             valueType: 'textValueComponent',
             newCreat: true, //  用于在拖拽组件时判断(是否新拖拽的控件)
             editSatus: 'defaults', //组件正在编辑的属性(default/ontrue/onfalse/onalarm/ondisc)   
-            blinkingType:'',//监控画面 用于 组件闪烁 判断标志           
+            blinkingType:'defaults',//监控画面 用于 组件闪烁 判断标志           
         },
         tag: {
             tag_id: -1,

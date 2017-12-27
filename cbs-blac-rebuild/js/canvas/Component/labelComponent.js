@@ -1,4 +1,3 @@
-
 /** 
  * lable 标签 只用于展示无触发动作
  * @author yb
@@ -36,59 +35,10 @@ var LabelComponent = draw2d.shape.note.PostIt.extend({
 
 		// 选中
 		this.on("click", function() {
-			console.log("绑定的id:"+thiss.getUserData().Tag.tag_id)
-			if (thiss.getUserData().Tag.tag_id === -1) {
-				// layer.msg('未绑定任何数据标签')
-			} else {
-				if (thiss.getUserData().Readonly == false) {
-					changeComponentState(thiss.id);
-				}else{
-					// layer.msg('本控件为只读控件');
-				}
-			}
+			
 		})			
 	},
 	onTimer:function(){
-        this.setColor("#03A3FC");
-		this.setStroke(1);
-		this.setGlow(true);
-		this.setDashArray("");
-		var thiss = this;
-		console.log("123");
-
-		setTimeout(function(){
-			switch(thiss.getUserData().BlinkingType){
-				case "style":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().BlinkingColor);
-				thiss.setStroke(thiss.getUserData().BlinkingStroke);
-				thiss.setDashArray(thiss.getUserData().DashArray);
-				break;
-				case "onTrue":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().BlinkingColor);
-				thiss.setStroke(thiss.getUserData().BlinkingStroke);
-				thiss.setDashArray(thiss.getUserData().DashArray);
-				break;
-				case "onFalse":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().BlinkingColor);
-				thiss.setStroke(thiss.getUserData().BlinkingStroke);
-				thiss.setDashArray(thiss.getUserData().DashArray);
-				break;
-				case "onAlarm":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().BlinkingColor);
-				thiss.setStroke(thiss.getUserData().BlinkingStroke);
-				thiss.setDashArray(thiss.getUserData().DashArray);
-				break;
-				case "onDisconnected":
-				thiss.setGlow(false);
-				thiss.setColor(thiss.getUserData().BlinkingColor);
-				thiss.setStroke(thiss.getUserData().BlinkingStroke);
-				thiss.setDashArray(thiss.getUserData().DashArray);
-				break;
-			}
-		}, 500);
+		monitoringVue.flashMethod(this);
     }
 });
