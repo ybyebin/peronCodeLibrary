@@ -1125,7 +1125,7 @@ var setComponentOptions = {
         var x = e.pageX || e.clientX + scrollX;
         var y = e.pageY || e.clientY + scrollY;
         y -= 195;
-        x -= 50
+        x -= 50;
         console.log('x: ' + x + '\ny: ' + y)
         return { 'x': x, 'y': y };
     }

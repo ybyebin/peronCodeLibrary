@@ -1,3 +1,7 @@
+
+
+
+
 (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         //AMD
@@ -82,9 +86,12 @@ var loader = new resLoader({
         'image/startbg.jpg',
         'image/img.png',
         'image/lifu.png',
-        'image/mrrs.jpg',
+        'image/center.png',
         'image/hzbj.jpg',
-        'image/textimg.png',
+        'image/e-img.png',
+        'image/f-img.png',
+        'image/bling.png',
+        'image/smallbling.png',
         'image/cpbg.jpg',
         'image/NIKKI.png',
         'image/person.png',
@@ -92,15 +99,12 @@ var loader = new resLoader({
     onStart: function(total) {
         console.log('start:' + total);
 
-
-
         // fr  en-US  fr-FR  fr-CA
         var currentLang = navigator.language; //判断除IE外其他浏览器使用语言
         if (currentLang === 'fr' || currentLang === 'fr-FR' || currentLang === 'fr-CA') {
             adData.data.languageType = 'france';
             adData.changeLanguage();
         }
-
 
     },
     onProgress: function(current, total) {
@@ -110,9 +114,8 @@ var loader = new resLoader({
     },
     onComplete: function(total) {
         adData.loadingFinish();
-        console.log('图片加载完成');
+        adData.addClick();
         adData.sec2Method();
-        // adData.sec8Method();
     }
 });
 
@@ -136,6 +139,32 @@ $(function() {
 });
 
 var adData = {
+
+    loadingMethod: function(current, total) {
+        var percent = current / total * 100;
+        $('.progressbar').css('width', percent + '%');
+    },
+    loadingFinish: function() {
+        $('.sec-start').addClass('sec-start-add');
+        $('.spirit').addClass('spirit-add');
+        $('.pumping-cell').addClass('pumping-cell-add');
+        $('.sec-public').addClass('sec-public-add');
+        $('.sec8').addClass('sec8-add');
+        $('.text-spirit').addClass('text-spirit-add');
+        $('.sec9').addClass('sec9-add');
+
+        $('.div-center').addClass('div-center-add');
+        $('.bling').addClass('bling-add');
+        $('.s-bling').addClass('s-bling-add');
+
+        if (adData.data.languageType === 'english') {
+            $('.spirit-flag').addClass('spirit-flag-e');
+        } else {
+            $('.spirit-flag').addClass('spirit-flag-f');
+        }
+
+
+    },
     data: {
         interval: '',
         time: 60,
@@ -162,460 +191,157 @@ var adData = {
         getDressed: false,
         languageType: 'english',
         language: {
-            install: 'Installer',
-            claim: "Réclamer",
-            sec2p1: 'Mon meilleur ami va se marier le mois',
-            sec2p2: 'prochain! Je devrais lui faire une surprise.',
+            sec2p1: 'Mon meilleur ami va se marier le mois prochain! Je devrais lui faire une surprise.',
             sec3p1: "C'est l'heure du tirage au sort!",
-            sec5proName: 'Mariage rêveur',
             mature: 'Maturité',
             gorgeous: 'Splendeur',
             elegance: 'Élégance',
             pure: 'Pureté',
             cute: 'Tendresse',
-            sec4proName: 'Poetic Tomorrow',
-            sec6strp1: 'Bon! Je vais lui faire une belle mariée  avec ceux-ci !',
-            sec7strp1: 'Objectif: Aider Nikki à concevoir une  tenue de mariage pendant',
-            start: 'Commencer',
+            poeticText1: 'Poétique demain',
+            poeticText6: 'Mariage rêveur',
+            sec6strp1: 'Bon! Je vais lui faire une belle mariée avec ceux-ci !',
+            sec7strp1: 'Objectif: Aider Nikki à concevoir une tenue de mariage pendant 60s',
             sec8strp1: 'Aidez Nikki à finir son design !',
             time: 'Temps',
-            sec9sucp1: 'Vous avez gagné un cadeau secret.',
-            sec9sucp2: 'Venez rejoindre le voyage de Nikki et',
-            sec9sucp3: 'découvrez le monde élégant',
-            sec9sucp32: 'MAINTENANT!',
-            sec9sucp4: 'Il faut plus de vêtements satisfaisants.',
-            sec9sucp5: ' Venez rejoindre le monde de Nikki pour',
-            sec9sucp52: 'en trouver plus!',
-            replay: 'Rejouer',
+            sec9sucp1: 'Vous avez gagné un cadeau secret. Venez rejoindre le voyage de Nikki et découvrez le monde élégant MAINTENANT!',
+            sec9failp1: 'Il faut plus de vêtements satisfaisants.  Venez rejoindre le monde de Nikki pour en trouver plus!',
         },
-        sec: $('.sec'),
-        sec2: $('.sec2'),
-        sec3: $('.sec3'),
-        sec4: $('.sec4'),
-        sec5: $('.sec5'),
-        sec6: $('.sec6'),
-        sec7: $('.sec7'),
-        sec8: $('.sec8'),
-        sec9: $('.sec9'),
-        bounceInLeft: 'bounceInLeft',
-        bounceOutLeft: 'bounceOutLeft',
+    },
+    time300: 300,
+    time400: 400,
+    time500: 500,
+    sec: $('.sec'),
+    sec2: $('.sec2'),
+    sec3: $('.sec3'),
+    sec4: $('.sec4'),
+    sec5: $('.sec5'),
+    sec6: $('.sec6'),
+    sec7: $('.sec7'),
+    sec8: $('.sec8'),
+    sec9: $('.sec9'),
+    bounceInLeft: 'bounceInLeft', //动画 左侧进入
+    bounceOutLeft: 'bounceOutLeft', //动画 左侧移除
+    bounceIn: 'bounceIn', //动画 缩放显示
+    bounceOut: 'bounceOut', //动画 缩放隐藏
+    bounceInRight: 'bounceInRight', //动画 右侧进入
+    bounceOutRight: 'bounceOutRight', //动画 右侧移除
+    fadeIn: 'fadeIn', //动画 渐隐
+    movedream: 'movedream', //动画 上排移动
+    movetomorrow: 'movetomorrow', //动画 下排移动
+    sec2Dialog: $('.sec2-dialog'), //sec2 弹窗
+    secDialogRipple: $('.sec2-dialog-ripple'), //sec2 点击区域
+    sec3Dialog: $('.sec3-dialog'), //sec3 弹窗
+    sec3DialogClaim: $('.sec3-dialog-claim'), //sec3 claim
+    sec4DivCenter1: $('.div-center-1'), //sec4 div-center-1
+    sec4DivCenter6: $('.div-center-6'),
+    sec6Dialog: $('.sec6-dialog'), //sec6 弹窗
+    sec6DialogRipple: $('.sec6-dialog-ripple'), //sec6 点击区域
+    sec7Dialog: $('.sec7-dialog'), //sec7弹窗
+    sec7Claim: $('.sec7-claim'), // sec7 start按钮
+    sec8SlideMenu: $('.slide-menu'), //sec8 slidemenu
+    sec8SlideMenuRipple: $('.slide-menu-ripple'), //sec8 第一步  指引手指
+    sec8HairRipple: $('.slide-hair-rippledream,.slide-hair-rippletomo'), //指引，发型指引手指
+    sec8TimeBar: $('.timebar'), //时间轴
+    sec8ClickDiv: $('.click-div'), //sec8 左侧非slide区域
+    sec8SlideHair: $('.slide-hair'), //发型 slidemenu
+    sec8PersonHair: $('.person-hair'), //模特 发型
+    sec8PersonClothes: $('.person-clothes'), //模特  服装
+    sec8PersonTou: $('.person-tou'), //模特 头饰
+    secPersonFace: $('.person-face'), //模特 妆容
+    sec9Perfect: $('.perfect'), //perfect 标志
+    sec9OPeration: $('.operation-div'), // 操作  replay/install
 
 
-    },
-    loadingMethod: function(current, total) {
-        var percent = current / total * 100;
-        $('.progressbar').css('width', percent + '%');
-    },
-    loadingFinish: function() {
-        $('.sec-start').addClass('sec-start-add');
-        $('.spirit').addClass('spirit-add');
-        $('.pumping-cell').addClass('pumping-cell-add');
-        $('.sec-public').addClass('sec-public-add');
-        $('.sec8').addClass('sec8-add');
-        $('.text-spirit').addClass('text-spirit-add');
-        $('.sec9').addClass('sec9-add');
-    },
     sec2Method: function() {
         $('.loading').hide();
-        var sec2dialog = $('.sec2-dialog');
-        var sec2dialog_ripple = $('.sec2-dialog-ripple');
-        adData.data.sec2.show();
-        sec2dialog.show().addClass(adData.data.bounceInLeft);
+        adData.sec2.show();
+        adData.sec2Dialog.show().addClass(adData.bounceInLeft);
         setTimeout(function() {
-            sec2dialog_ripple.show();
-            adData.data.sec2.on('click', function() {
-                sec2dialog_ripple.hide();
-                sec2dialog.removeClass(adData.data.bounceInLeft).addClass(adData.data.bounceOutLeft);
-                setTimeout(function() {
-                    adData.sec3Method();
-                }, 400);
-            });
-        }, 300)
+            adData.secDialogRipple.show();
+        }, adData.time300)
     },
     sec3Method: function() {
-        adData.data.sec2.unbind();
-        adData.data.sec.hide();
-        $('.sec3').show();
-        var sec3dialog = $('.sec3-dialog');
-        sec3dialog.addClass(adData.data.bounceInLeft);
+        adData.sec.hide();
+        adData.sec3.show();
+        adData.sec3Dialog.addClass(adData.bounceInLeft);
         setTimeout(function() {
-            $('.sec3-dialog-claim').show().on('click', function() {
-                $(this).hide();
-                sec3dialog.removeClass(adData.data.bounceInLeft).addClass(adData.data.bounceOutLeft);
-                setTimeout(function() {
-                    // 先5后4
-                    adData.sec5Method();
-                }, 400);
-            });
-
-        }, 500)
+            adData.sec3DialogClaim.show();
+        }, adData.time300)
     },
-    sec5Method: function() {
-        $('.sec3-dialog-claim').unbind();
-        adData.data.sec.hide();
-        adData.data.sec5.show();
 
-        // 放大出现
-        var zoomin = 'zoomIn';
-        var zoomoutDown = 'zoomOutDown';
-
-        $('.sec5-poetic-name').show().addClass(zoomin);
-
-        setTimeout(function() {
-            $('.heart-level').show().addClass(zoomin);
-            setTimeout(function() {
-                $('.sec5-label').show().addClass(zoomin);
-                setTimeout(function() {
-                    $('.sec5-spirit-left1').show().addClass(zoomin);
-                    setTimeout(function() {
-                        $('.sec5-spirit-right1').show().addClass(zoomin);
-                        setTimeout(function() {
-                            $('.sec5-spirit-left2').show().addClass(zoomin);
-                            setTimeout(function() {
-                                $('.sec5-spirit-right2').show().addClass(zoomin);
-                                setTimeout(function() {
-                                    $('.sec5-claim').show().on('click', function() {
-                                        $('.heart-level,.sec5-label').hide().removeClass(zoomin);
-                                        $(this).hide();
-                                        $('.sec5-spirit-left1').addClass('zoomOutDownleft1');
-                                        $('.sec5-spirit-right1').addClass('zoomOutDownright1');
-                                        $('.sec5-spirit-left2').addClass('zoomOutDownleft2');
-                                        $('.sec5-spirit-right2').addClass('zoomOutDownright2');
-                                        setTimeout(function() {
-                                            adData.sec4Method();
-                                        }, 500)
-                                    });
-                                }, 400)
-                            }, 400)
-                        }, 400)
-                    }, 400)
-                }, 400)
-            }, 400)
-        }, 400);
-
-
-
-
-    },
     sec4Method: function() {
-
-        $('.sec5-claim').unbind();
-
-        adData.data.sec.hide();
-        $('.sec4').show();
-
-
-        // 测试放大出现
-        var zoomin = 'zoomIn';
-        var zoomoutDown = 'zoomOutDown';
-
-        $('.sec4-poetic-name').show().addClass(zoomin);
-        setTimeout(function() {
-            $('.heart-level4').show().addClass(zoomin);
-            setTimeout(function() {
-                $('.sec4-label').show().addClass(zoomin);
-                setTimeout(function() {
-                    $('.sec4-spirit-left1').show().addClass(zoomin);
-                    setTimeout(function() {
-                        $('.sec4-spirit-right1').show().addClass(zoomin);
-                        setTimeout(function() {
-                            $('.sec4-spirit-left2').show().addClass(zoomin);
-                            setTimeout(function() {
-                                $('.sec4-spirit-right2').show().addClass(zoomin);
-                                setTimeout(function() {
-                                    $('.sec4-claim').show().on('click', function() {
-                                        $('.heart-level4,.sec4-label').hide().removeClass(zoomin);
-                                        $(this).hide();
-                                        $('.sec4-spirit-left1').addClass('zoomOutDownleft1');
-                                        $('.sec4-spirit-right1').addClass('zoomOutDownright1');
-                                        $('.sec4-spirit-left2').addClass('zoomOutDownleft2');
-                                        $('.sec4-spirit-right2').addClass('zoomOutDownright2');
-                                        setTimeout(function() {
-                                            adData.sec6Method();
-                                        }, 500)
-                                    });
-                                }, 400)
-                            }, 400)
-                        }, 400)
-                    }, 400)
-                }, 400)
-            }, 400);
-        }, 400);
+        adData.sec.hide();
+        $('.sec-public-1').show();
+        adData.sec4DivCenter1.show().addClass(adData.bounceIn);
     },
     sec6Method: function() {
-        $('.sec4-claim').unbind();
-
-        adData.data.sec.hide();
-        $('.sec6').show();
-        $('.sec6-dialog').show().addClass(adData.data.bounceInLeft);
+        adData.sec.hide();
+        adData.sec6.show();
+        adData.sec6Dialog.addClass(adData.bounceInLeft);
         setTimeout(function() {
-            $('.sec6-dialog-ripple').show();
-            $('.sec6').on('click', function() {
-                $('.sec6-dialog-ripple').hide();
-                $('.sec6-dialog').removeClass(adData.data.bounceInLeft).addClass(adData.data.bounceOutLeft);
-                setTimeout(function() {
-                    adData.sec7Method();
-                }, 400);
-            });
-        }, 300)
+            adData.sec6DialogRipple.show();
+        }, adData.time300)
     },
     sec7Method: function() {
-
-        $('.sec6').unbind();
-        $('.sec').hide();
-        $('.sec7').show();
-        $('.sec7-dialog').show().addClass(adData.data.bounceInLeft);
-
+        adData.sec.hide();
+        adData.sec7.show();
+        adData.sec7Dialog.addClass(adData.bounceInLeft);
         setTimeout(function() {
-            $('.sec7-claim').show().on('click', function() {
-                $(this).hide();
-                $('.sec7-dialog').removeClass(adData.data.bounceInLeft).addClass(adData.data.bounceOutLeft);
-                setTimeout(function() {
-                    adData.sec8Method();
-                }, 400);
-            });
-        }, 300);
+            adData.sec7Claim.show();
+        }, adData.time300);
     },
     sec8Method: function() {
-        $('.sec7-claim').unbind();
-        $('.sec').hide();
-        $('.sec8').show();
-        $('.slide-menu').show().addClass('bounceInRight');
-        // $('.slide-menu').show();
+        adData.sec.hide();
+        adData.sec8.show();
+        adData.sec8SlideMenu.show().addClass(adData.bounceInRight);
         setTimeout(function() {
-            $('.press-btn').on('click', function() {
-                if (adData.data.getDressed) {
-                    clearInterval(adData.data.interval);
-                    adData.sec9Method();
-                    console.log('跳转=======================')
-                }
-            });
-
-            $('.slide-menu-ripple').show().on('click', function() {
-                $(this).hide();
-                setTimeout(function() {
-                    $('.slide-menu-ripple').unbind();
-                    $('.slide-menu').removeClass('bounceInRight').addClass('bounceOutRight').hide();
-                    // $('.slide-menu').removeClass('bounceInRight').hide();
-
-                    $('.slide-hair').show().addClass('bounceInRight');
-                    // $('.slide-hair').show();
-                    setTimeout(function() {
-                        $('.slide-hair-rippledream,.slide-hair-rippletomo').show().on('click', function() {
-
-                            console.log($(this).data('for'));
-                            var type = $(this).data('for');
-                            adData.data.resoult.hair.flag = true;
-                            switch (type) {
-                                case 'dream':
-                                    adData.data.resoult.hair.type = '.res-dream-hair';
-                                    $('.hair-dream.move').show().addClass('movedream');
-                                    setTimeout(function() {
-                                        $('.hair-dream.move').hide().removeClass('movedream');
-                                        $('.person-hair').hide();
-                                        $('.sec8-dream-hair').show();
-                                    }, 300);
-                                    break;
-                                case 'tomo':
-                                    adData.data.resoult.hair.type = '.res-tomorrow-hair';
-                                    $('.hair-tomorrow.move').show().addClass('movetomorrow');
-                                    setTimeout(function() {
-                                        $('.hair-tomorrow.move').hide().removeClass('movetomorrow');
-                                        $('.person-hair').hide();
-                                        $('.sec8-tomorrow-hair').show();
-                                    }, 300)
-                                    break;
-                                default:
-                                    break;
-                            }
-                            $('.slide-hair-ripple').hide();
-                            $('.slide-hair-rippleback').show().on('click', function() {
-                                $(this).hide();
-                                $('.slide-hair').hide().removeClass('bounceInRight');
-                                $('.slide-menu').show().removeClass('bounceOutRight').addClass('bounceInRight');
-                                // $('.slide-menu').show().removeClass('bounceOutRight');
-                                $('.sec8-dialog').css('visibility', 'visible').addClass('sec8-bounceInLeft').on('click', function() {
-                                    $(this).css('visibility', 'hidden');
-
-                                    $('.click-div').show().on('click', function() {
-
-                                        if ($('.slide-menu').css('display') == 'none') {
-                                            $('.slide-div').hide().removeClass('bounceInRight');
-                                            $('.slide-menu').removeClass('bounceOutRight').show().addClass('bounceInRight');　
-                                        }
-                                    });
-                                    clearInterval(adData.data.interval);
-                                    $('.timebar').css('width', '100%');
-                                    adData.countDownMethod();
-
-
-                                    // slide-menu  p方法
-                                    $('.slide-menu>p').on('click', function() {
-                                        console.log($(this).data('for'));
-                                        var type = $(this).data('for');
-                                        $('.slide-menu').removeClass('bounceInRight').addClass('bounceOutRight').hide();
-                                        $(type).show().removeClass('bounceOutRight').addClass('bounceInRight');
-
-
-                                        // $('.slide-menu').removeClass('bounceInRight').hide();
-                                        // $(type).show().removeClass('bounceOutRight');
-                                    });
-
-                                    //具体 配件方法
-                                    $('.menu-p-public').on('click', function() {
-                                        console.log($(this).data('for'));
-                                        var type = $(this).data('for');
-                                        switch (type) {
-                                            // 发型
-                                            case '.hair-dream.move':
-                                                adData.data.resoult.hair.type = '.res-dream-hair';
-                                                $(type).show().addClass('movedream');
-                                                setTimeout(function() {
-                                                    $(type).hide().removeClass('movedream');
-                                                    $('.person-hair').hide();
-                                                    $('.sec8-dream-hair').show();
-                                                }, 300);
-                                                break;
-                                            case '.hair-tomorrow.move':
-                                                adData.data.resoult.hair.type = '.res-tomorrow-hair';
-                                                $(type).show().addClass('movetomorrow');
-                                                setTimeout(function() {
-                                                    $(type).hide().removeClass('movetomorrow');
-                                                    $('.person-hair').hide();
-                                                    $('.sec8-tomorrow-hair').show();
-                                                }, 300)
-                                                break;
-                                            case '.clothes-dream.move':
-                                                adData.data.resoult.dress.flag = true;
-                                                adData.data.resoult.dress.type = '.res-dream-clothes';
-                                                $(type).show().addClass('movedream');
-                                                setTimeout(function() {
-                                                    $(type).hide().removeClass('movedream');
-                                                    $('.person-clothes').hide();
-                                                    $('.sec8-dream-clothes').show();
-                                                }, 300);
-                                                break;
-                                            case '.clothes-tomorrow.move':
-                                                adData.data.resoult.dress.flag = true;
-                                                adData.data.resoult.dress.type = '.res-tomorrow-clothes';
-                                                $(type).show().addClass('movetomorrow');
-                                                setTimeout(function() {
-                                                    $(type).hide().removeClass('movetomorrow');
-                                                    $('.person-clothes').hide();
-                                                    $('.sec8-tomorrow-clothes').show();
-                                                }, 300);
-                                                break;
-                                            case '.accessory-dream.move':
-                                                adData.data.resoult.accessory.flag = true;
-                                                adData.data.resoult.accessory.type = '.res-dream-tou,.res-dream-xl';
-                                                $(type).show().addClass('movedream');
-                                                setTimeout(function() {
-                                                    $(type).hide().removeClass('movedream');
-                                                    $('.person-tou').hide();
-                                                    $('.sec8-dream-tou,.sec8-dream-xl').show();
-                                                }, 300);
-                                                break;
-                                            case '.accessory-tomorrow.move':
-                                                adData.data.resoult.accessory.flag = true;
-                                                adData.data.resoult.accessory.type = '.res-tomorrow-tou';
-                                                $(type).show().addClass('movetomorrow');
-                                                setTimeout(function() {
-                                                    $(type).hide().removeClass('movetomorrow');
-                                                    $('.person-tou').hide();
-                                                    $('.sec8-tomorrow-tou').show();
-                                                }, 300);
-                                                break;
-                                            case '.face-dream.move':
-                                                adData.data.resoult.face.flag = true;
-                                                adData.data.resoult.face.type = '.res-dream-face';
-                                                $(type).show().addClass('movedream');
-                                                setTimeout(function() {
-                                                    $(type).hide().removeClass('movedream');
-                                                    $('.person-face').hide();
-                                                    $('.sec8-dream-face').show();
-                                                }, 300);
-                                                break;
-                                            case '.face-tomorrow.move':
-                                                adData.data.resoult.face.flag = true;
-                                                adData.data.resoult.face.type = '.res-tomorrow-face';
-                                                $(type).show().addClass('movetomorrow');
-                                                setTimeout(function() {
-                                                    $(type).hide().removeClass('movetomorrow');
-                                                    $('.person-face').hide();
-                                                    $('.sec8-tomorrow-face').show();
-                                                }, 300);
-                                                break;
-                                        }
-                                    });
-                                    // 返回 按钮
-                                    $('.slide-back').on('click', function() {
-                                        var type = $(this).data('for');
-                                        $(type).hide().removeClass('bounceInRight');
-                                        $('.slide-menu').removeClass('bounceOutRight').show().addClass('bounceInRight');
-                                        // $('.slide-menu').removeClass('bounceOutRight').show();
-                                    });
-                                });
-                                setTimeout(function() {
-                                    $('.sec8-dialog .ripple').show();
-
-                                }, 500);
-
-                            });
-                        });
-                        // $('.slide-hair-rippledream').on('click',function(){
-
-                        // });
-                    }, 500)
-
-                }, 100)
-
-            })
-        }, 300);
+            adData.sec8SlideMenuRipple.show();
+        }, adData.time300);
     },
 
     sec9Method: function() {
-        $('.sec').hide();
-        $('.sec9').show();
+        adData.sec.hide();
+        adData.sec9.show();
         if (adData.data.num === 3) {
             $('.replay').hide();
             $('.install-last').css('margin-left', '0')
         }
-        if (adData.data.getDressed) {
-            // 选完
-            $('.perfect').show().addClass('pulse');
-            $('.sec9-dialog-success').show().addClass(adData.data.bounceInLeft);
+        var res = adData.data.resoult;
+        if (res.hair.flag && res.dress.flag && res.accessory.flag && res.face.flag) {
+            // 四种装饰全选
+            adData.sec9Perfect.show().addClass('pulse');
+            $('.sec9-dialog-success').css('visibility', 'visible').addClass(adData.bounceInLeft);
             setTimeout(function() {
-                $('.operation-div').show();
+                adData.sec9OPeration.show();
             }, 600);
 
         } else {
-            // 未选完
-            $('.perfect').hide().removeClass('pulse');
-            $('.sec9-dialog-fail').show().addClass(adData.data.bounceInLeft);
+            // 未全选
+            adData.sec9Perfect.hide().removeClass('pulse');
+            $('.sec9-dialog-fail').css('visibility', 'visible').addClass(adData.bounceInLeft);
             setTimeout(function() {
-                $('.operation-div').show();
+                adData.sec9OPeration.show();
             }, 600);
         }
 
 
 
         var src = adData.data.resoult;
-        $('.res-model').show().addClass('fadeIn');
-        $(src.hair.type).show().addClass('fadeIn');
-        $(src.dress.type).show().addClass('fadeIn');
-        $(src.accessory.type).show().addClass('fadeIn');
-        $(src.face.type).show().addClass('fadeIn');
+        $('.res-model').show().addClass(adData.fadeIn);
+        $(src.hair.type).show().addClass(adData.fadeIn);
+        $(src.dress.type).show().addClass(adData.fadeIn);
+        $(src.accessory.type).show().addClass(adData.fadeIn);
+        $(src.face.type).show().addClass(adData.fadeIn);
 
     },
 
     countDownMethod: function() {
         var _this = this;
-        // this.data.timePLemgth = $('.time-content').width();
         this.data.interval = setInterval(function() {
             console.log(_this.data.time)
             var widths = _this.data.time / 60 * 100 + '%';
-            // console.log('时间：' + _this.data.time + '宽度：' + widths)
-            $('.timebar').css('width', widths);
+            adData.sec8TimeBar.css('width', widths);
             _this.data.time -= 1;
 
             var res = adData.data.resoult;
@@ -626,9 +352,7 @@ var adData = {
                 } else {
                     $('.press-btn').removeClass('unable-f').addClass('enable-f');
                 }
-
             }
-
 
             if (_this.data.time === 0) {
                 clearInterval(_this.data.interval);
@@ -639,43 +363,40 @@ var adData = {
     },
     // 修改语言
     changeLanguage: function() {
-        var clas = 'fayu';
+
         var language = adData.data.language;
-        // 右上 下载
-        $('.install a').text(language.install);
-        $('.install-last').text(language.install);
-        // 按钮
-        $('.clarm').text(language.claim);
-        $('.sec45-claim').addClass(clas);
+
         // sec2
         $('.sec2-p1').text(language.sec2p1);
-        $('.sec2-p2').text(language.sec2p2);
 
         // sec3
-        $('.sec3-p1 ').text(language.sec3p1);
+        $('.sec3-p1 ').text(language.sec3p1).css('font-size','.65rem');
 
-        // sec5
-        $('.title span.spirit').addClass(clas);
-        $('.sec5-poetic-name').text(language.sec5proName);
+        // sec4
         $('.mature').text(language.mature);
         $('.gorgeous').text(language.gorgeous);
         $('.elegance').text(language.elegance);
         $('.pure').text(language.pure);
-
-
-        // sec4
-        $('.sec4-poetic-name').text(language.sec4proName)
         $('.cute').text(language.cute);
 
-        // sec6
-        $('.sec6-strp1').text(language.sec6strp1);
+        $('.poetic-name-1').text(language.poeticText1);
+        $('.poetic-name-6').text(language.poeticText6);
 
-        // sec7
-        $('.sec7-strp1').text(language.sec7strp1);
-        $('.sec7-start').addClass(clas);
+        // sec6
+        $('.sec6-strp1').text(language.sec6strp1).css('font-size','.7rem');
+
+        // sec7   
+        $('.sec7-strp1').text(language.sec7strp1).css({
+            'font-size':'.7rem',
+            'padding-left':'.7rem'
+        });;
+
 
         // sec8
-        $('.sec8-strp1').text(language.sec8strp1);
+        $('.sec8-strp1').text(language.sec8strp1).css({
+            'font-size':'.62rem',
+            'padding-left':'.2rem'
+        });;
         $('.sec8-time').text(language.time);
 
         $('.category-hair-e').addClass('category-hair-f');
@@ -691,46 +412,25 @@ var adData = {
         $('.press-btn').addClass('unable-f');
 
         // sec9
-
-        $('.sec9suc-p1').text(language.sec9sucp1).css('margin-top', '.4rem');
-        $('.sec9suc-p2').text(language.sec9sucp2);
-        $('.sec9suc-p3').text(language.sec9sucp3);
-        $('.sec9suc-p32').text(language.sec9sucp32);
-        $('.sec9suc-p4').text(language.sec9sucp4).css('margin-top', '.8rem!important');;
-        $('.sec9suc-p5').text(language.sec9sucp5);
-
-        $('.sec9suc-p52').text(language.sec9sucp52);
-
-        $('.replay').text(language.replay);
-
-
-
-
+        $('.sec9sucp1').text(language.sec9sucp1).css({
+            'font-size':'.7rem',
+            'padding-left':'.6rem'
+        });;;
+        $('.sec9failp1').text(language.sec9failp1).css('font-size','.7rem');;
 
     },
     // 重置
     reset: function() {
 
-        $('.sec2-dialog').removeClass('bounceInLeft bounceOutLeft');
-        $('.sec3-dialog').removeClass('bounceInLeft bounceOutLeft');
+        adData.sec2Dialog.removeClass('bounceInLeft bounceOutLeft');
+        adData.sec3Dialog.removeClass('bounceInLeft bounceOutLeft');
 
-        $('.sec5-poetic-name,.sec5-spirit-left1,.sec5-spirit-right1,.sec5-spirit-left2,sec5-spirit-right2').hide().removeClass('zoomIn');
-        $('.sec5-spirit-left1').removeClass('zoomOutDownleft1').hide();
-        $('.sec5-spirit-right1').removeClass('zoomOutDownright1').hide();
-        $('.sec5-spirit-left2').removeClass('zoomOutDownleft2').hide();
-        $('.sec5-spirit-right2').removeClass('zoomOutDownright2').hide();
+        $('.sec-public .div-center').removeClass('bounceOut')
 
-
-        $('.sec4-poetic-name,.sec4-spirit-left1,.sec4-spirit-right1,.sec4-spirit-left2,sec4-spirit-right2').hide().removeClass('zoomIn');
-        $('.sec4-spirit-left1').removeClass('zoomOutDownleft1').hide();
-        $('.sec4-spirit-right1').removeClass('zoomOutDownright1').hide();
-        $('.sec4-spirit-left2').removeClass('zoomOutDownleft2').hide();
-        $('.sec4-spirit-right2').removeClass('zoomOutDownright2').hide();
-
-        $('.sec6-dialog').removeClass('bounceInLeft bounceOutLeft');
-        $('.sec7-dialog').removeClass('bounceInLeft bounceOutLeft');
+        adData.sec6Dialog.removeClass('bounceInLeft bounceOutLeft');
+        adData.sec7Dialog.removeClass('bounceInLeft bounceOutLeft');
         clearInterval(adData.data.interval);
-        $('.timebar').css('width', '100%');
+        adData.sec8TimeBar.css('width', '100%');
         adData.data.resoult = {
             hair: {
                 flag: false,
@@ -755,28 +455,28 @@ var adData = {
 
         $('.slide-all').hide().removeClass('bounceInRight bounceOutRight');
         $('.sec8person-tomo,.sec8person-dream').hide();
-
         $('.default-hair,.default-clothes').show();
 
-        $('.sec7-dialog').removeClass('bounceInLeft bounceOutLeft');
+
         if (adData.data.languageType === 'english') {
-            $('.press-btn').addClass('unable-e').removeClass('enable-e').unbind();
+            $('.press-btn').addClass('unable-e').removeClass('enable-e');
 
         } else {
-            $('.press-btn').addClass('unable-f').removeClass('enable-e').unbind();
+            $('.press-btn').addClass('unable-f').removeClass('enable-f');
 
         }
 
+        $('.sec9-dialog-success').css('visibility', 'hidden')
+        $('.sec9-dialog-fail').css('visibility', 'hidden')
+        // $('.sec9-dialog-success').hide().removeClass('bounceInLeft');
+        // $('.sec9-dialog-fail').hide().removeClass('bounceInLeft');
 
-        $('.sec9-dialog-success').hide().removeClass('bounceInLeft');
-        $('.sec9-dialog-fail').hide().removeClass('bounceInLeft');
+        adData.sec9Perfect.hide().removeClass('pulse');
+        adData.sec9OPeration.hide();
 
-        $('.perfect').hide().removeClass('pulse');
-        $('.operation-div').hide();
         $('.res-model').hide();
         $('.res-person').hide();
-        $('.click-div').hide().unbind();
-        $('.slide-hair-rippledream,.slide-hair-rippletomo').unbind();
+        adData.sec8ClickDiv.hide();
         $('.slide-hair-rippleback').unbind();
         $('.slide-menu>p').unbind();
         $('.menu-p-public').unbind();
@@ -786,6 +486,263 @@ var adData = {
         adData.sec2Method();
 
 
+    },
+
+    addClick: function() {
+
+        // sec2
+        adData.sec2.on('click', function() {
+            adData.secDialogRipple.hide();
+            adData.sec2Dialog.removeClass(adData.bounceInLeft).addClass(adData.bounceOutLeft);
+            setTimeout(function() {
+                adData.sec3Method();
+            }, adData.time400);
+        });
+
+        // sec3
+        adData.sec3DialogClaim.on('click', function() {
+            $(this).hide();
+            adData.sec3Dialog.removeClass(adData.bounceInLeft).addClass(adData.bounceOutLeft);
+
+            setTimeout(function() {
+                adData.sec.hide();
+                $('.bling-sec').show();
+                setTimeout(function() {
+                    adData.sec4Method();
+                }, 1200)
+
+            }, adData.time400);
+        });
+
+        // sec4
+        $('.public-claim-1').on('click', function() {
+            adData.sec4DivCenter1.removeClass(adData.bounceIn).addClass(adData.bounceOut);
+            setTimeout(function() {
+                $('.s-bling-1').show();
+                setTimeout(function() {
+                    $('.s-bling-1').hide();
+                    adData.sec.hide();
+                    $('.sec-public-6').show();
+                    adData.sec4DivCenter6.show().addClass(adData.bounceIn);
+                }, 100);
+            }, 400)
+
+        });
+
+        $('.public-claim-6').on('click', function() {
+            adData.sec4DivCenter6.removeClass(adData.bounceIn).addClass(adData.bounceOut);
+            setTimeout(function() {
+                $('.s-bling-6').show();
+                setTimeout(function() {
+                    $('.s-bling-6').hide();
+                    adData.sec6Method();
+                }, 100);
+
+            }, 400);
+        });
+       
+        // sec6
+        $('.sec6').on('click', function() {
+            adData.sec6DialogRipple.hide();
+            adData.sec6Dialog.removeClass(adData.bounceInLeft).addClass(adData.bounceOutLeft);
+            setTimeout(function() {
+                adData.sec7Method();
+            }, adData.time400);
+        });
+        // sec7
+        adData.sec7Claim.on('click', function() {
+            $(this).hide();
+            adData.sec7Dialog.removeClass(adData.bounceInLeft).addClass(adData.bounceOutLeft);
+            setTimeout(function() {
+                adData.sec8Method();
+            }, adData.time400);
+        });
+
+        // sec8
+
+        // getpress btn
+        $('.press-btn').on('click', function() {
+            if (adData.data.getDressed) {
+                clearInterval(adData.data.interval);
+                adData.sec9Method();
+                console.log('跳转=======================')
+            }
+        });
+
+        // 第一步  手指指引
+        adData.sec8SlideMenuRipple.on('click', function() {
+            $(this).hide();
+            adData.sec8SlideMenu.removeClass(adData.bounceInRight).addClass(adData.bounceOutRight).hide();
+            adData.sec8SlideHair.show().addClass(adData.bounceInRight);
+            setTimeout(function() {
+                adData.sec8HairRipple.show();
+            }, adData.time300)
+        });
+
+        // 发型栏   手指指引
+        adData.sec8HairRipple.on('click', function() {
+            adData.sec8HairRipple.hide();
+            var type = $(this).data('for');
+            adData.data.resoult.hair.flag = true;
+            switch (type) {
+                case 'dream':
+                    adData.data.resoult.hair.type = '.res-dream-hair';
+                    $('.hair-dream.move').show().addClass(adData.movedream);
+                    setTimeout(function() {
+                        $('.hair-dream.move').hide().removeClass(adData.movedream);
+                        adData.sec8PersonHair.hide();
+                        $('.sec8-dream-hair').show();
+                    }, adData.time300);
+                    break;
+                case 'tomo':
+                    adData.data.resoult.hair.type = '.res-tomorrow-hair';
+                    $('.hair-tomorrow.move').show().addClass(adData.movetomorrow);
+                    setTimeout(function() {
+                        $('.hair-tomorrow.move').hide().removeClass(adData.movetomorrow);
+                        adData.sec8PersonHair.hide();
+                        $('.sec8-tomorrow-hair').show();
+                    }, adData.time300)
+                    break;
+                default:
+                    break;
+            }
+
+            // 发型栏 返回指引  
+            $('.slide-hair-rippleback').show().on('click', function() {
+                $(this).hide();
+                adData.sec8SlideHair.hide().removeClass(adData.bounceInRight);
+                adData.sec8SlideMenu.show().removeClass(adData.bounceOutRight).addClass(adData.bounceInRight);
+                $('.sec8-dialog').css('visibility', 'visible').addClass('sec8-bounceInLeft');
+                setTimeout(function() {
+                    $('.sec8-dialog .ripple').show();
+                }, 500);
+
+            });; // 第一幕返回指引
+        });
+
+
+
+
+        // 开始自由操作  指引
+        $('.sec8-dialog').on('click', function() {
+            $(this).css('visibility', 'hidden').removeClass('sec8-bounceInLeft');
+            $('.sec8-dialog .ripple').hide();
+            adData.sec8ClickDiv.show();
+            clearInterval(adData.data.interval);
+            adData.sec8TimeBar.css('width', '100%');
+            adData.countDownMethod();
+
+
+            // slide-menu  p方法
+            $('.slide-menu>p').on('click', function() {
+                console.log($(this).data('for'));
+                var type = $(this).data('for');
+                adData.sec8SlideMenu.removeClass(adData.bounceInRight).addClass(adData.bounceOutRight).hide();
+                $(type).show().removeClass(adData.bounceOutRight).addClass(adData.bounceInRight);
+            });
+
+            //具体 配件方法
+            $('.menu-p-public').on('click', function() {
+                console.log($(this).data('for'));
+                var type = $(this).data('for');
+                switch (type) {
+                    // 发型
+                    case '.hair-dream.move':
+                        adData.data.resoult.hair.type = '.res-dream-hair';
+                        $(type).show().addClass(adData.movedream);
+                        setTimeout(function() {
+                            $(type).hide().removeClass(adData.movedream);
+                            adData.sec8PersonHair.hide();
+                            $('.sec8-dream-hair').show();
+                        }, adData.time300);
+                        break;
+                    case '.hair-tomorrow.move':
+                        adData.data.resoult.hair.type = '.res-tomorrow-hair';
+                        $(type).show().addClass(adData.movetomorrow);
+                        setTimeout(function() {
+                            $(type).hide().removeClass(adData.movetomorrow);
+                            adData.sec8PersonHair.hide();
+                            $('.sec8-tomorrow-hair').show();
+                        }, adData.time300)
+                        break;
+                    case '.clothes-dream.move':
+                        adData.data.resoult.dress.flag = true;
+                        adData.data.resoult.dress.type = '.res-dream-clothes';
+                        $(type).show().addClass(adData.movedream);
+                        setTimeout(function() {
+                            $(type).hide().removeClass(adData.movedream);
+                            adData.sec8PersonClothes.hide();
+                            $('.sec8-dream-clothes').show();
+                        }, adData.time300);
+                        break;
+                    case '.clothes-tomorrow.move':
+                        adData.data.resoult.dress.flag = true;
+                        adData.data.resoult.dress.type = '.res-tomorrow-clothes';
+                        $(type).show().addClass(adData.movetomorrow);
+                        setTimeout(function() {
+                            $(type).hide().removeClass(adData.movetomorrow);
+                            adData.sec8PersonClothes.hide();
+                            $('.sec8-tomorrow-clothes').show();
+                        }, adData.time300);
+                        break;
+                    case '.accessory-dream.move':
+                        adData.data.resoult.accessory.flag = true;
+                        adData.data.resoult.accessory.type = '.res-dream-tou,.res-dream-xl';
+                        $(type).show().addClass(adData.movedream);
+                        setTimeout(function() {
+                            $(type).hide().removeClass(adData.movedream);
+                            adData.sec8PersonTou.hide();
+                            $('.sec8-dream-tou,.sec8-dream-xl').show();
+                        }, adData.time300);
+                        break;
+                    case '.accessory-tomorrow.move':
+                        adData.data.resoult.accessory.flag = true;
+                        adData.data.resoult.accessory.type = '.res-tomorrow-tou';
+                        $(type).show().addClass(adData.movetomorrow);
+                        setTimeout(function() {
+                            $(type).hide().removeClass(adData.movetomorrow);
+                            adData.sec8PersonTou.hide();
+                            $('.sec8-tomorrow-tou').show();
+                        }, adData.time300);
+                        break;
+                    case '.face-dream.move':
+                        adData.data.resoult.face.flag = true;
+                        adData.data.resoult.face.type = '.res-dream-face';
+                        $(type).show().addClass(adData.movedream);
+                        setTimeout(function() {
+                            $(type).hide().removeClass(adData.movedream);
+                            adData.secPersonFace.hide();
+                            $('.sec8-dream-face').show();
+                        }, adData.time300);
+                        break;
+                    case '.face-tomorrow.move':
+                        adData.data.resoult.face.flag = true;
+                        adData.data.resoult.face.type = '.res-tomorrow-face';
+                        $(type).show().addClass(adData.movetomorrow);
+                        setTimeout(function() {
+                            $(type).hide().removeClass(adData.movetomorrow);
+                            adData.secPersonFace.hide();
+                            $('.sec8-tomorrow-face').show();
+                        }, adData.time300);
+                        break;
+                }
+            });
+            // 返回 按钮
+            $('.slide-back').on('click', function() {
+                var type = $(this).data('for');
+                $(type).hide().removeClass(adData.bounceInRight);
+                adData.sec8SlideMenu.removeClass(adData.bounceOutRight).show().addClass(adData.bounceInRight);
+            });
+        });
+
+        // 左边 非slide 区域点击方法
+        adData.sec8ClickDiv.on('click', function() {
+            if (adData.sec8SlideMenu.css('display') == 'none') {
+                $('.slide-div').hide().removeClass(adData.bounceInRight);
+                adData.sec8SlideMenu.removeClass(adData.bounceOutRight).show().addClass(adData.bounceInRight);　
+            }
+        });
     }
+
 
 }

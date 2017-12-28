@@ -68,6 +68,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
         }
     });
 
+    //vue 组件  点 值 
     Vue.component('td-value', {
         render: function (createElement) {
             var _this = this;
@@ -84,13 +85,11 @@ layui.use(['layer', 'element', 'laydate'], function () {
             show: {}
         }
     });
-
+    // vue 组件  是否有趋势图
     Vue.component('td-watch', {
         render: function (createElement) {
             var _this = this;
             var id = _this.show.tag_id;
-
-
             switch (Number(this.show.trends)) {
                 case 0:
                     return createElement('span', '-');
@@ -116,6 +115,8 @@ layui.use(['layer', 'element', 'laydate'], function () {
             show: {}
         }
     });
+
+    // vue 组件 是否可操作
     Vue.component('td-operation', {
         render: function (createElement) {
             var _this = this;
@@ -132,7 +133,8 @@ layui.use(['layer', 'element', 'laydate'], function () {
                         },
                         on: {
                             'click': function () {
-                                console.log('查看:' + id)
+                                console.log('查看:' + id);
+                                monitoringVue.operationClick(id);
                             }
                         }
                     }, '操作');
@@ -145,7 +147,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
             show: {}
         }
     });
-     monitoringVue = new Vue({
+    monitoringVue = new Vue({
         el: '#app',
         data: {
             project: {
@@ -157,80 +159,20 @@ layui.use(['layer', 'element', 'laydate'], function () {
             canvas: '',
             monitoringGroup: [],//群组画面
             globalBtnData: [],//全局按钮
-            tableTrend: {
-                '1': {
-                    'tag_id': 1,
-                    "name": '组件1',
-                    "trends": false,// 是否有趋势数据
-                    "tag_type": 1,
-                    "readonly": false,
-                    "alarm": null,
-                    "status": null,
-                    "value": 100,
-                    "component": [
-                        {
-                            id: "e4dd000a-ec98-67b9-8416-26119692beb3",
-                        },
-                        {
-                            id: "4ccfbf00-31f0-6254-17f0-6dbfdeab6097",
-                        }
-                    ]
-                },
-                '2': {
-                    'tag_id': 2,
-                    "name": '组件2',
-                    "trends": true,// 是否有趋势数据
-                    "tag_type": 1,
-                    "readonly": false,
-                    "alarm": true,
-                    "status": 0,
-                    "value": 100,
-                    "component": [
-                        {
-                            id: "e4dd000a-ec98-67b9-8416-26119692beb3",
-                        },
-                        {
-                            id: "4ccfbf00-31f0-6254-17f0-6dbfdeab6097",
-                        }
-                    ]
-                },
-                '3': {
-                    'tag_id': 3,
-                    "name": '组件3',
-                    "trends": false,// 是否有趋势数据
-                    "tag_type": 1,
-                    "readonly": false,
-                    "alarm": null,
-                    "status": 1,
-                    "value": null,
-                    "component": [
-                        {
-                            id: "e4dd000a-ec98-67b9-8416-26119692beb3",
-                        },
-                        {
-                            id: "4ccfbf00-31f0-6254-17f0-6dbfdeab6097",
-                        }
-                    ]
-                },
-                '4': {
-                    'tag_id': 4,
-                    "name": '组件4',
-                    "trends": 1,// 是否有趋势数据
-                    "tag_type": 1,
-                    "readonly": true,
-                    "alarm": false,
-                    "status": 0,
-                    "value": 200,
-                    "component": [
-                        {
-                            id: "e4dd000a-ec98-67b9-8416-26119692beb3",
-                        },
-                        {
-                            id: "4ccfbf00-31f0-6254-17f0-6dbfdeab6097",
-                        }
-                    ]
-                }
-            },//列表与趋势图
+            tableTrend: {},//列表
+            layerData: { //组件弹窗操作
+                actionBool: '1',//bool
+                acttionReal: '',//实数型
+                actionString: ''//字符型
+            },
+            MqttOperation:{
+                view_id:'',//画面ID
+                mqtt:'',
+                reconnectTimeout:5000,//断开重连间隔时间
+                clientID:123,//(忘了)
+                restart:false //重置标志
+
+            }
         },
         mounted: function () {
             // var _this = this;
@@ -244,6 +186,11 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 this.loadMonitoringGroups();
 
                 this.getTableTrend();
+
+                // mqtt心跳
+                this.sendHeadData();
+
+
 
             });
 
@@ -359,12 +306,23 @@ layui.use(['layer', 'element', 'laydate'], function () {
                             },
                             {
                                 "project_id": 1,
+                                "name": "测试hover",
+                                "external_link": null,
+                                "view_group_id": 117,
+                                "background_img_url": null,
+                                "background_color": null,
+                                "view_data": "{\"canvas\":[{\"type\":\"rectangleComponent\",\"id\":\"34f4e8dd-bd98-96ea-33e6-dae24c964fbc\",\"x\":113,\"y\":66,\"width\":50,\"height\":50,\"alpha\":1,\"angle\":0,\"userData\":{\"type\":\"basicComponent\",\"custom\":{\"newCreat\":false,\"editSatus\":\"defaults\",\"havepoint\":true},\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"bingding_status\":0,\"status\":\"default\"},\"routine\":{\"name\":\"矩形\",\"description\":\"\",\"visible\":false,\"enable\":false,\"accessLevel\":8,\"hint\":{\"flag\":true,\"hintText\":\"123123123123\"},\"readOnly\":false},\"defaults\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onTrue\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onFalse\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onAlarm\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onDisconnected\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false}},\"cssClass\":\"rectangleComponent\",\"ports\":[{\"type\":\"draw2d.InputPort\",\"id\":\"0746c494-398b-f9d5-b93b-9c0f6b4e4eeb\",\"width\":10,\"height\":10,\"alpha\":1,\"angle\":0,\"userData\":{},\"cssClass\":\"draw2d_InputPort\",\"bgColor\":\"#4F6870\",\"color\":\"#1B1B1B\",\"stroke\":1,\"dasharray\":null,\"maxFanOut\":9007199254740991,\"name\":\"input0\",\"port\":\"draw2d.InputPort\",\"locator\":\"draw2d.layout.locator.InputPortLocator\"},{\"type\":\"draw2d.OutputPort\",\"id\":\"b5082b4e-531d-9564-2d16-8789c2f2b128\",\"width\":10,\"height\":10,\"alpha\":1,\"angle\":0,\"userData\":{},\"cssClass\":\"draw2d_OutputPort\",\"bgColor\":\"#4F6870\",\"color\":\"#1B1B1B\",\"stroke\":1,\"dasharray\":null,\"maxFanOut\":9007199254740991,\"name\":\"output0\",\"port\":\"draw2d.OutputPort\",\"locator\":\"draw2d.layout.locator.OutputPortLocator\"}],\"bgColor\":\"#35C99D\",\"color\":\"#000000\",\"stroke\":0,\"radius\":0,\"dasharray\":null}],\"subCanvas\":[{\"id\":\"fvrhowv8x1s0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"brdx1zd6bpk0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"8pstndm5j0c0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"k9d1cdrr3rk000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"3dia0fkanj80000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"8zjrr99u8zs0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"c4qy6kc67wo0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"5opz3pwpzyc0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"52dykgdyfwk0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"50dw7cuaaig0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"2ku5if25hk60000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"art1gkcofco0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"1d54zm2lp90g000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"wlvydacbnbk000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"bg37fd4kzps0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"fvlmt11uqts0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"6689z527w7k0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"d9gmuyx0vl40000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"148o0ak924m8000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"8k2yacstd6w0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}}],\"bg_color\":\"#2B2F4C\"}",
+                                "id": 178,
+                                "create_time": "0001-01-01 00:00:00"
+                            },
+                            {
+                                "project_id": 1,
                                 "name": "adacc",
                                 "external_link": null,
                                 "view_group_id": 117,
                                 "background_img_url": null,
                                 "background_color": null,
-                                "view_data": "{\"canvas\":[{\"type\":\"rectangleComponent\",\"id\":\"34f4e8dd-bd98-96ea-33e6-dae24c964fbc\",\"x\":113,\"y\":66,\"width\":50,\"height\":50,\"alpha\":1,\"angle\":0,\"userData\":{\"type\":\"basicComponent\",\"custom\":{\"newCreat\":false,\"editSatus\":\"defaults\",\"havepoint\":true},\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"bingding_status\":0,\"status\":\"default\"},\"routine\":{\"name\":\"矩形\",\"description\":\"\",\"visible\":false,\"enable\":false,\"accessLevel\":8,\"hint\":{\"flag\":false,\"hintText\":\"\"},\"readOnly\":false},\"defaults\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onTrue\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onFalse\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onAlarm\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onDisconnected\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false}},\"cssClass\":\"rectangleComponent\",\"ports\":[{\"type\":\"draw2d.InputPort\",\"id\":\"0746c494-398b-f9d5-b93b-9c0f6b4e4eeb\",\"width\":10,\"height\":10,\"alpha\":1,\"angle\":0,\"userData\":{},\"cssClass\":\"draw2d_InputPort\",\"bgColor\":\"#4F6870\",\"color\":\"#1B1B1B\",\"stroke\":1,\"dasharray\":null,\"maxFanOut\":9007199254740991,\"name\":\"input0\",\"port\":\"draw2d.InputPort\",\"locator\":\"draw2d.layout.locator.InputPortLocator\"},{\"type\":\"draw2d.OutputPort\",\"id\":\"b5082b4e-531d-9564-2d16-8789c2f2b128\",\"width\":10,\"height\":10,\"alpha\":1,\"angle\":0,\"userData\":{},\"cssClass\":\"draw2d_OutputPort\",\"bgColor\":\"#4F6870\",\"color\":\"#1B1B1B\",\"stroke\":1,\"dasharray\":null,\"maxFanOut\":9007199254740991,\"name\":\"output0\",\"port\":\"draw2d.OutputPort\",\"locator\":\"draw2d.layout.locator.OutputPortLocator\"}],\"bgColor\":\"#35C99D\",\"color\":\"#000000\",\"stroke\":0,\"radius\":0,\"dasharray\":null}],\"subCanvas\":[{\"id\":\"fvrhowv8x1s0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"brdx1zd6bpk0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"8pstndm5j0c0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"k9d1cdrr3rk000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"3dia0fkanj80000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"8zjrr99u8zs0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"c4qy6kc67wo0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"5opz3pwpzyc0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"52dykgdyfwk0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"50dw7cuaaig0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"2ku5if25hk60000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"art1gkcofco0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"1d54zm2lp90g000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"wlvydacbnbk000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"bg37fd4kzps0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"fvlmt11uqts0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"6689z527w7k0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"d9gmuyx0vl40000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"148o0ak924m8000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"8k2yacstd6w0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}}],\"bg_color\":\"#2B2F4C\"}",
+                                "view_data": "{\"canvas\":[{\"type\":\"rectangleComponent\",\"id\":\"34f4e8dd-bd98-96ea-33e6-dae24c964fbc\",\"x\":113,\"y\":66,\"width\":50,\"height\":50,\"alpha\":1,\"angle\":0,\"userData\":{\"type\":\"basicComponent\",\"custom\":{\"newCreat\":false,\"editSatus\":\"defaults\",\"havepoint\":true},\"tag\":{\"tag_id\":193,\"tag_type\":2,\"tag_name\":\"泵\",\"is_readonly\":false,\"bingding_status\":0,\"status\":\"default\"},\"routine\":{\"name\":\"矩形\",\"description\":\"\",\"visible\":false,\"enable\":false,\"accessLevel\":8,\"hint\":{\"flag\":false,\"hintText\":\"\"},\"readOnly\":false},\"defaults\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onTrue\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onFalse\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onAlarm\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false},\"onDisconnected\":{\"lineWidth\":0,\"lineColor\":\"#000000\",\"fillColor\":\"#35C99D\",\"alpha\":1,\"blinking\":false}},\"cssClass\":\"rectangleComponent\",\"ports\":[{\"type\":\"draw2d.InputPort\",\"id\":\"0746c494-398b-f9d5-b93b-9c0f6b4e4eeb\",\"width\":10,\"height\":10,\"alpha\":1,\"angle\":0,\"userData\":{},\"cssClass\":\"draw2d_InputPort\",\"bgColor\":\"#4F6870\",\"color\":\"#1B1B1B\",\"stroke\":1,\"dasharray\":null,\"maxFanOut\":9007199254740991,\"name\":\"input0\",\"port\":\"draw2d.InputPort\",\"locator\":\"draw2d.layout.locator.InputPortLocator\"},{\"type\":\"draw2d.OutputPort\",\"id\":\"b5082b4e-531d-9564-2d16-8789c2f2b128\",\"width\":10,\"height\":10,\"alpha\":1,\"angle\":0,\"userData\":{},\"cssClass\":\"draw2d_OutputPort\",\"bgColor\":\"#4F6870\",\"color\":\"#1B1B1B\",\"stroke\":1,\"dasharray\":null,\"maxFanOut\":9007199254740991,\"name\":\"output0\",\"port\":\"draw2d.OutputPort\",\"locator\":\"draw2d.layout.locator.OutputPortLocator\"}],\"bgColor\":\"#35C99D\",\"color\":\"#000000\",\"stroke\":0,\"radius\":0,\"dasharray\":null}],\"subCanvas\":[{\"id\":\"fvrhowv8x1s0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"brdx1zd6bpk0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"8pstndm5j0c0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"k9d1cdrr3rk000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"3dia0fkanj80000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"8zjrr99u8zs0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"c4qy6kc67wo0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"5opz3pwpzyc0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"52dykgdyfwk0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"50dw7cuaaig0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"2ku5if25hk60000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"art1gkcofco0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"1d54zm2lp90g000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"wlvydacbnbk000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"bg37fd4kzps0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"fvlmt11uqts0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"6689z527w7k0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"d9gmuyx0vl40000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"148o0ak924m8000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}},{\"id\":\"8k2yacstd6w0000\",\"name\":\"按钮\",\"tag\":{\"tag_id\":-1,\"tag_type\":-1,\"tag_name\":\"\",\"is_readonly\":false,\"tag_value\":\"\",\"bingding_status\":0,\"status\":\"default\"}}],\"bg_color\":\"#2B2F4C\"}",
                                 "id": 180,
                                 "create_time": "0001-01-01 00:00:00"
                             }
@@ -492,18 +450,31 @@ layui.use(['layer', 'element', 'laydate'], function () {
             },
             // 获取 设备监控 画面数据
             getCanvasData: function (item) {
-
                 var _this = this;
+                this.getTableTrend(item.id);
+                $('#monitortab').click();
+                if (this.MqttOperation.restart) {
+                    this.unsubscribeView();
+                    this.MqttOperation.mqtt.disconnect();
+                    this.MqttOperation.restart = false;
+                  }
+                
+            
+                  this.MQTTconnect();
+                // setTimeout(function () {
+                //     _this.setCanvasWH();
+                // }, 80);
+                this.canvas.clear(); //清空画布
+                this.globalBtnData = []; //清空全局按钮
+
                 if (item.view_data === null) {
                     layer.msg('画面无数据');
-                    _this.canvas.clear(); //清空画布
-                    _this.globalBtnData = []; //清空全局按钮
                 } else {
                     var canvasArr = JSON.parse(item.view_data).canvas;
                     var globalArr = JSON.parse(item.view_data).subCanvas;
 
                     // 还原 全局按钮 数据
-                    _this.globalBtnData = globalArr;
+                    this.globalBtnData = globalArr;
 
                     // 还原 canvas 数据
                     var reader = new draw2d.io.json.Reader();
@@ -518,7 +489,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
                             //  控件的 输入输出节点(隐藏)
                             if (node) {
                                 console.log('type：' + JSON.stringify(node.userData, null, 2))
-    
+
                                 var userData = node.userData;
                                 if (userData.hasOwnProperty('type')) {
                                     if (userData.type === 'basicComponent') {
@@ -531,7 +502,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
                                             node.getInputPort(0).setVisible(false);
                                         }
                                     }
-    
+
                                     // 隐藏组件
                                     if (userData.routine.visible) {
                                         node.setAlpha(0);
@@ -544,9 +515,9 @@ layui.use(['layer', 'element', 'laydate'], function () {
                                         if (userData.hasOwnProperty("onlytype")) {
                                             node.setVisible(false);
                                         }
-    
+
                                     }
-    
+
                                     // 更改标题	
                                     if (userData.routine.hasOwnProperty("caption")) {
                                         var caption = userData.routine.caption;
@@ -555,14 +526,14 @@ layui.use(['layer', 'element', 'laydate'], function () {
                                         }
                                         node.label.setText(caption.capText);
                                     }
-    
-    
+
+
                                     // 节点闪烁
                                     if (userData.defaults.blinking) {
-                                        // 待完成
-    
+                                        node.startTimer(1000);
+
                                     }
-    
+
                                     // 图片
                                     if (node.image) {
                                         node.image.setHeight(node.getHeight());
@@ -573,7 +544,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
                                         node.image.setHeight(node.getHeight());
                                         node.image.setWidth(node.getWidth());
                                     }
-                                }else{
+                                } else {
                                     node.setDraggable(false);
                                     node.setSelectable(false);
                                 }
@@ -582,6 +553,8 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     });
                 }
             },
+
+            /***************************表格方法**********************************/ 
             // 获取 列表与趋势图 数据
             getTableTrend: function (id) {
 
@@ -595,11 +568,11 @@ layui.use(['layer', 'element', 'laydate'], function () {
                             "name": "泵0",
                             "tag_id": 193,
                             "trends": false,// 是否有趋势数据
-                            "tag_type": 1,
+                            "tag_type": 2,
                             "readonly": false,
                             "alarm": null,
-                            "status": null,
-                            "value": null,
+                            "status": 0,
+                            "value": '123',
                             "create_time": "0001-01-01 00:00:00"
                         },
                         {
@@ -667,8 +640,345 @@ layui.use(['layer', 'element', 'laydate'], function () {
 
 
             },
-            // 更新canvas 画面
-            reloadCanvas: function (result) {
+
+            //操作 click
+            operationClick: function (tagid) {
+                var _this = this;
+                var key = String(tagid);
+                if (this.tableTrend.hasOwnProperty(key)) {
+                    var currentTag = this.tableTrend[key];
+                    if (currentTag.status === 0) {
+                        var values = currentTag.value;
+                        if (values == null) {
+                            layer.msg('tag的值为 null')
+                        } else {
+                            switch (currentTag.tag_type) {
+                                case 1:
+                                    layer.open({
+                                        title: ['操作'],
+                                        type: 1,
+                                        skin: 'bayax-layer-skin',
+                                        area: ['300px', '200px'],
+                                        content: $('#action-bool'),
+                                        shift: 2,
+                                        resize: false,
+                                        btn: ['保存', '取消'],
+                                        success: function () {
+                                            if (Number(values) === 1) {
+                                                _this.layerData.actionBool = '1';
+                                            } else {
+                                                _this.layerData.actionBool = '0';
+                                            }
+                                        },
+                                        yes: function (index) {
+                                            console.log(_this.layerData.actionBool);
+
+                                            _this.ajaxChangeTagValue({
+                                                tag_id: tagid,
+                                                value: Number(_this.layerData.actionBool)
+                                            });
+                                        },
+                                        btn2: function (index) {
+                                        },
+                                    });
+                                    break;
+                                case 2:
+                                case 3:
+                                    layer.open({
+                                        title: ['操作'],
+                                        type: 1,
+                                        skin: 'bayax-layer-skin',
+                                        area: ['300px', '200px'],
+                                        content: $('#action-real'),
+                                        shift: 2,
+                                        resize: false,
+                                        btn: ['保存', '取消'],
+                                        success: function () {
+                                            _this.layerData.acttionReal = values;
+                                        },
+                                        yes: function (index) {
+                                            console.log(_this.layerData.acttionReal);
+
+                                            if (_this.layerData.acttionReal === '') {
+                                                layer.msg('请输入正确格式的数值')
+                                            } else {
+                                                _this.ajaxChangeTagValue({
+                                                    tag_id: tagid,
+                                                    value: Number(_this.layerData.acttionReal)
+                                                });
+                                            }
+                                        },
+                                        btn2: function (index) {
+
+                                        },
+                                    });
+                                    break;
+                                case 4:
+                                    layer.open({
+                                        title: ['操作'],
+                                        type: 1,
+                                        skin: 'bayax-layer-skin',
+                                        area: ['300px', '200px'],
+                                        content: $('#action-str'),
+                                        shift: 2,
+                                        resize: false,
+                                        btn: ['保存', '取消'],
+                                        success: function () {
+                                            _this.layerData.actionString = values;
+                                        },
+                                        yes: function (index) {
+                                            console.log(_this.layerData.actionString);
+                                            _this.ajaxChangeTagValue({
+                                                tag_id: tagid,
+                                                value: _this.layerData.actionString
+                                            });
+                                        },
+                                        btn2: function (index) {
+
+                                        },
+                                    });
+
+                                    break;
+                                default:
+                                    layer.msg('tag类型ERROR');
+                                    break;
+                            }
+                        }
+                    } else {
+                        layer.msg('当前tag状态异常,不能进行操作');
+                    }
+                } else {
+                    layer.msg('未查询到tag')
+                }
+            },
+
+            // 查看 趋势图
+            watchTrend:function(){
+
+            },
+
+            /***************************组件方法*********************************/ 
+            // 闪烁方法
+            flashMethod: function (component) {
+                component.setColor("#03A3FC");
+                component.setStroke(1);
+                component.setGlow(true);
+                setTimeout(function () {
+                    component.setGlow(false);
+                    var userdata = component.getUserData();
+                    var type = '';
+                    switch (userdata.custom.blinkingType) {
+                        case 'defaults':
+                            type = 'defaults';
+                            break;
+                        case 'onTrue':
+                            type = 'onTrue';
+                            break;
+                        case 'onFalse':
+                            type = 'onFalse';
+                            break;
+                        case 'onAlarm':
+                            type = 'onAlarm';
+                            break;
+                        case 'onDisconnected':
+                            type = 'onDisconnected';
+                            break;
+                    }
+                    component.setColor(userdata[type].lineColor);
+                    component.setStroke(userdata[type].lineWidth);
+                }, 500);
+            },
+
+            // hover方法
+            hoverMethod: function (component, type) {
+                if (type) {
+                    var hint = component.userData.routine.hint;
+                    if (hint.flag) {
+                        if (hint.hintText != '') {
+                            var e = event || window.event;
+                            var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+                            var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+                            var x = e.pageX || e.clientX + scrollX;
+                            var y = e.pageY || e.clientY + scrollY;
+                            y -= 195;
+                            x -= 250;
+
+                            $('#tooltips').show().text(hint.hintText).css({ 'top': y, 'left': x });
+                        }
+                    }
+                } else {
+                    $('#tooltips').hide();
+                }
+
+            },
+
+            // 组件点击方法
+            comClickMethod: function (component) {
+                var _this = this;
+                console.log('点击');
+                console.log(JSON.stringify(component.userData.tag, null, 2));
+                console.log(JSON.stringify(component.userData.routine, null, 2));
+                console.log(JSON.stringify(_this.tableTrend,null,2))
+                var userData = component.userData;
+                var tag = userData.tag;
+
+                if (userData.routine.readOnly) {
+                    // layer.msg('组件只读');
+                } else {
+                    if (tag.tag_id === -1 || tag.is_readonly) {
+                        layer.msg('未绑定tag或tag只读')
+                    } else {
+                        var key = String(tag.tag_id);
+                        if(_this.tableTrend.hasOwnProperty(key)){
+                            var currentTag = _this.tableTrend[key];
+                            if(currentTag.status === 0){
+                                var values = currentTag.value;
+                                if (values == null) {
+                                    layer.msg('当前组件绑定tag的值为 null')
+                                }else{
+                                    if(tag.tag_type === currentTag.tag_type){
+                                        switch (tag.tag_type) {
+                                            case 1:
+                                                layer.open({
+                                                    title: ['操作'],
+                                                    type: 1,
+                                                    skin: 'bayax-layer-skin', 
+                                                    area: ['300px', '200px'], 
+                                                    content: $('#action-bool'),
+                                                    shift: 2,
+                                                    resize: false,
+                                                    btn: ['保存', '取消'],
+                                                    success: function () {
+                                                        if(Number(values) === 1){
+                                                            _this.layerData.actionBool = '1';
+                                                        }else{
+                                                            _this.layerData.actionBool = '0';
+                                                        }
+                                                    },
+                                                    yes: function (index) {
+                                                        console.log( _this.layerData.actionBool);
+
+                                                        _this.ajaxChangeTagValue({
+                                                            tag_id:tag.tag_id,
+                                                            value:Number( _this.layerData.actionBool)
+                                                        });
+                                                    },
+                                                    btn2: function (index) {
+                                                    },
+                                                });
+                                                break;
+                                            case 2:
+                                            case 3:
+                                                layer.open({
+                                                    title: ['操作'],
+                                                    type: 1,
+                                                    skin: 'bayax-layer-skin', 
+                                                    area: ['300px', '200px'], 
+                                                    content: $('#action-real'),
+                                                    shift: 2,
+                                                    resize: false,
+                                                    btn: ['保存', '取消'],
+                                                    success: function () {
+                                                       _this.layerData.acttionReal = values;
+                                                    },
+                                                    yes: function (index) {
+                                                        console.log(_this.layerData.acttionReal);
+
+                                                        if (_this.layerData.acttionReal === '') {
+                                                            layer.msg('请输入正确格式的数值')
+                                                        } else {
+                                                            _this.ajaxChangeTagValue({
+                                                                tag_id: tag.tag_id,
+                                                                value: Number(_this.layerData.acttionReal)
+                                                            });
+                                                        }
+                                                    },
+                                                    btn2: function (index) {
+                
+                                                    },
+                                                });
+                                                break;
+                                            case 4:
+                                                layer.open({
+                                                    title: ['操作'],
+                                                    type: 1,
+                                                    skin: 'bayax-layer-skin',
+                                                    area: ['300px', '200px'],
+                                                    content: $('#action-str'),
+                                                    shift: 2,
+                                                    resize: false,
+                                                    btn: ['保存', '取消'],
+                                                    success: function () {
+                                                        _this.layerData.actionString = values;
+                                                    },
+                                                    yes: function (index) {
+                                                        console.log(_this.layerData.actionString);
+                                                        _this.ajaxChangeTagValue({
+                                                            tag_id:tag.tag_id,
+                                                            value: _this.layerData.actionString
+                                                        });
+                                                    },
+                                                    btn2: function (index) {
+                                                        
+                                                    },
+                                                });
+                
+                                                break;
+                                            default:
+                                                layer.msg('tag类型ERROR');
+                                                break;
+                                        }
+                                    }else{
+                                        layer.msg('数据异常');
+                                    }
+                                    
+                                }
+                            }else{
+                                layer.msg('当前tag状态异常,不能进行操作');
+                            }
+                        }else{
+                            layer.msg('未查询到tag')
+                        }
+                       
+                    }
+                }
+            },
+            // 设置组件值(未完成)
+            ajaxChangeTagValue:function(data){
+                var _this = this;
+
+                console.log(JSON.stringify(data,null,2))
+
+                $.ajax({
+                    url: apiurl + "/tagvalue/" + data.tag_id + "?value=" + data.value,
+                    type: 'put',
+                    beforeSend: function() {
+                        _this.loadingShow = true;
+                    },
+                    complete: function() {
+                        _this.loadingShow = false;
+                    },
+                    success: function(data) {
+                      if (data.success) {
+                        console.log("返回的数据为:" + JSON.stringify(data, null, 2));
+                       
+                      } else {
+                        layer.msg("修改失败:" + data.error_message)
+                      }
+                    },
+                    error: function(data) {
+                        _this.loadingShow = true;
+                    }
+                  });
+            },
+
+
+            /***************************画布方法********************************/ 
+            /**
+             *  [更新canvas 画面]
+             *  @param  {result}  [组件]
+             */
+             reloadCanvas: function (result) {
                 var _this = this;
                 var data = result.data;
                 switch (result.type) {
@@ -685,9 +995,8 @@ layui.use(['layer', 'element', 'laydate'], function () {
                                                 _this.setComponentData(node, 'onAlarm', value);
                                                 break;
                                             case false:
-                                            default:
                                                 if (data[key].tag_type === 1) {
-                                                    switch (Number(data[key].value)) {
+                                                    switch (Number(value)) {
                                                         case 0:
                                                             _this.setComponentData(node, 'onFalse', value);
                                                             break;
@@ -718,10 +1027,41 @@ layui.use(['layer', 'element', 'laydate'], function () {
                         }
                         break;
                     case 'mqtt':
+                        var node = _this.getCanvasNode(result.com_id);
+                        var value = data.value;
+                        if(data.status == 0){
+                            if(node){
+                                 // 是否是报警
+                                 switch (data.isAlarm) {
+                                    case true:
+                                        _this.setComponentData(node, 'onAlarm', value);
+                                        break;
+                                    case false:
+                                        if (result.tag_type === 1) {
+                                            switch (Number(value)) {
+                                                case 0:
+                                                    _this.setComponentData(node, 'onFalse', value);
+                                                    break;
+                                                case 1:
+                                                    _this.setComponentData(node, 'onTrue', value);
+                                                    break;
+                                            }
+                                        } else {
+                                            _this.setComponentData(node, 'onTrue', value);
+                                        }
+                                        break;
+                                }
+                            }
+                        }else{
+                            if (node) {
+                                _this.setComponentData(node, 'onDisconnected', '通讯异常');
+                            } else {
+                                console.log('未找到组件');
+                            }
+                        }
                         break;
                 }
             },
-
 
             /**
              * [初始化 画布控件显示数据]
@@ -806,8 +1146,6 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 }
             },
 
-
-
             // canvas 初始化
             canvasInit: function () {
                 var _this = this;
@@ -820,11 +1158,11 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 filter.element.setAttribute("x", "-35%");
                 filter.element.setAttribute("y", "-35%");
 
-              
+
                 _this.setCanvasWH();
                 setTimeout(function () {
                     _this.setCanvasWH();
-                }, 80)
+                }, 80);
 
                 // 画布自适应缩放
                 window.onresize = function () {
@@ -835,252 +1173,8 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     }, 80)
                 }
 
-
-                var data = [
-                    {
-                      "type": "rectangleComponent",
-                      "id": "8d6d5f7d-eb6c-9020-e822-d3872d4ff735",
-                      "x": 602.6819923371647,
-                      "y": 268.9655172413793,
-                      "width": 50,
-                      "height": 50,
-                      "alpha": 1,
-                      "angle": 0,
-                      "userData": {
-                        "type": "basicComponent",
-                        "custom": {
-                          "newCreat": false,
-                          "editSatus": "defaults",
-                          "blinkingType": "defaults",
-                          "havepoint": true
-                        },
-                        "tag": {
-                          "tag_id": -1,
-                          "tag_type": -1,
-                          "tag_name": "",
-                          "is_readonly": false,
-                          "bingding_status": 0,
-                          "status": "default"
-                        },
-                        "routine": {
-                          "name": "矩形",
-                          "description": "",
-                          "visible": false,
-                          "enable": false,
-                          "accessLevel": 8,
-                          "hint": {
-                            "flag": false,
-                            "hintText": ""
-                          },
-                          "readOnly": false
-                        },
-                        "defaults": {
-                          "lineWidth": 5,
-                          "lineColor": "#F5A623",
-                          "fillColor": "#35C99D",
-                          "alpha": 1,
-                          "blinking": true
-                        },
-                        "onTrue": {
-                          "lineWidth": 0,
-                          "lineColor": "#000000",
-                          "fillColor": "#35C99D",
-                          "alpha": 1,
-                          "blinking": false
-                        },
-                        "onFalse": {
-                          "lineWidth": 0,
-                          "lineColor": "#000000",
-                          "fillColor": "#35C99D",
-                          "alpha": 1,
-                          "blinking": false
-                        },
-                        "onAlarm": {
-                          "lineWidth": 0,
-                          "lineColor": "#000000",
-                          "fillColor": "#35C99D",
-                          "alpha": 1,
-                          "blinking": false
-                        },
-                        "onDisconnected": {
-                          "lineWidth": 0,
-                          "lineColor": "#000000",
-                          "fillColor": "#35C99D",
-                          "alpha": 1,
-                          "blinking": false
-                        }
-                      },
-                      "cssClass": "rectangleComponent",
-                      "ports": [
-                        {
-                          "type": "draw2d.InputPort",
-                          "id": "ab90cb73-dd81-1c19-0ef0-a63a3a2479d9",
-                          "width": 10,
-                          "height": 10,
-                          "alpha": 1,
-                          "angle": 0,
-                          "userData": {},
-                          "cssClass": "draw2d_InputPort",
-                          "bgColor": "#4F6870",
-                          "color": "#1B1B1B",
-                          "stroke": 1,
-                          "dasharray": null,
-                          "maxFanOut": 9007199254740991,
-                          "name": "input0",
-                          "port": "draw2d.InputPort",
-                          "locator": "draw2d.layout.locator.InputPortLocator"
-                        },
-                        {
-                          "type": "draw2d.OutputPort",
-                          "id": "9ed7159a-dc67-5619-86dc-ca261632423e",
-                          "width": 10,
-                          "height": 10,
-                          "alpha": 1,
-                          "angle": 0,
-                          "userData": {},
-                          "cssClass": "draw2d_OutputPort",
-                          "bgColor": "#4F6870",
-                          "color": "#1B1B1B",
-                          "stroke": 1,
-                          "dasharray": null,
-                          "maxFanOut": 9007199254740991,
-                          "name": "output0",
-                          "port": "draw2d.OutputPort",
-                          "locator": "draw2d.layout.locator.OutputPortLocator"
-                        }
-                      ],
-                      "bgColor": "#35C99D",
-                      "color": "#F5A623",
-                      "stroke": 5,
-                      "radius": 0,
-                      "dasharray": null
-                    }
-                  ]
-
-                // 还原 canvas 数据
-                var reader = new draw2d.io.json.Reader();
-                reader.unmarshal(_this.canvas, data);
-
-
-
-
-                var writer = new draw2d.io.json.Writer();
-                writer.marshal(this.canvas, function (json) {
-                    // console.log(JSON.stringify(json, null, 2))
-                    for (var i in json) {
-
-                        // console.log(JSON.stringify(json[i], null, 2))
-                        //获得ID对应的节点对象
-                        var node = _this.getCanvasNode(json[i].id);
-                        //  控件的 输入输出节点(隐藏)
-                        if (node) {
-                            console.log('type：' + JSON.stringify(node.userData, null, 2))
-
-                            var userData = node.userData;
-                            if (userData.hasOwnProperty('type')) {
-                                if (userData.type === 'basicComponent') {
-                                    // 隐藏输入输出点
-                                    if (userData.hasOwnProperty("onlytype")) {
-                                        // 管道链接点(去掉)
-                                        node.resetPorts();
-                                    } else if (userData.custom.hasOwnProperty("havepoint")) {
-                                        node.getOutputPort(0).setVisible(false);
-                                        node.getInputPort(0).setVisible(false);
-                                    }
-                                }
-
-                                // 隐藏组件
-                                if (userData.routine.visible) {
-                                    node.setAlpha(0);
-                                    if (node.image) {
-                                        node.image.setAlpha(0);
-                                    }
-                                    if (node.label) {
-                                        node.label.setAlpha(0);
-                                    }
-                                    if (userData.hasOwnProperty("onlytype")) {
-                                        node.setVisible(false);
-                                    }
-
-                                }
-
-                                // 更改标题	
-                                if (userData.routine.hasOwnProperty("caption")) {
-                                    var caption = userData.routine.caption;
-                                    if (caption.flag) {
-                                        node.label.setVisible(true);
-                                    }
-                                    node.label.setText(caption.capText);
-                                }
-
-
-                                // 节点闪烁
-                                if (userData.defaults.blinking) {
-                                    node.startTimer(1000);
-                                }
-
-                                // 图片
-                                if (node.image) {
-                                    node.image.setHeight(node.getHeight());
-                                    node.image.setWidth(node.getWidth());
-                                }
-                                if (userData.defaults.hasOwnProperty("picture")) {
-                                    node.image.setPath(userData.defaults.picture);
-                                    node.image.setHeight(node.getHeight());
-                                    node.image.setWidth(node.getWidth());
-                                }
-                            }else{
-                                node.setDraggable(false);
-                                node.setSelectable(false);
-                            }
-
-
-
-                        }
-
-                    }
-                });
-
-
-
-
-
-
-
-
-
             },
 
-            // 闪烁方法
-            flashMethod: function(component) {
-                component.setColor("#03A3FC");
-                component.setStroke(1);
-                component.setGlow(true);
-                setTimeout(function() {
-                    component.setGlow(false);
-                    var userdata = component.getUserData();
-                    var type = '';
-                    switch (userdata.custom.blinkingType) {
-                        case 'defaults':
-                            type = 'defaults';
-                            break;
-                        case 'onTrue':
-                            type = 'onTrue';
-                            break;
-                        case 'onFalse':
-                            type = 'onFalse';
-                            break;
-                        case 'onAlarm':
-                            type = 'onAlarm';
-                            break;
-                        case 'onDisconnected':
-                            type = 'onDisconnected';
-                            break;
-                    }
-                    component.setColor(userdata[type].lineColor);
-                    component.setStroke(userdata[type].lineWidth);
-                }, 500);
-            },
             // 在 画布中找到 node
             getCanvasNode: function (id) {
                 if (id != '') {
@@ -1123,7 +1217,94 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 }, 50)
             },
 
+            /******************************MQTT***************************************/
+            MQTTconnect: function () {
+                var _this = this;
+                this.MqttOperation.mqtt = new Paho.MQTT.Client(
+                    // "demo.bayax.cn",
+                    "192.168.118.153",
+                    61614,
+                    String(parseInt(Math.random() * 100,
+                        10)));
+                var options = {
+                    // timeout: 3,
+                    useSSL: false,
+                    cleanSession: false,
+                    onSuccess: function () {
+                        _this.subscribeView();
+                    },
+                    onFailure: function (message) {
+                        console.log("connect Failure");
+                        // setTimeout(_this.MQTTconnect, _this.MqttOperation.reconnectTimeout);
+                    }
+                };
 
+                this.MqttOperation.mqtt.onConnectionLost = this.onConnectionLost;
+                this.MqttOperation.mqtt.onMessageArrived = this.onMessageArrived;
+                this.MqttOperation.mqtt.connect(options);
+            },
+            // 订阅画布消息
+            subscribeView: function () {
+                console.log('连接成功');
+                console.log('view_id' +  this.MqttOperation.view_id)
+                this.MqttOperation.restart = true;
+                this.MqttOperation.mqtt.subscribe('Bayax/Push/' + this.MqttOperation.view_id);
+            },
+            // 取消订阅
+            unsubscribeView:function(){
+                console.log('取消订阅');
+                this.MqttOperation.mqtt.unsubscribe('Bayax/Push/' + this.MqttOperation.view_id);
+            },
+
+            // 发送心跳包
+            sendHeadData:function(){
+               
+                var _this = this;
+                setInterval(function() {
+                    var view_id = _this.MqttOperation.view_id;
+                    if (Number(view_id) > 0 && _this.MqttOperation.mqtt) {
+                        var heatMessage = new Paho.MQTT.Message(view_id);
+                        heatMessage.destinationName = 'Bayax/View/' + _this.MqttOperation.clientID;
+                        heatMessage.qos = 0;
+                        mqtt.send(heatMessage);
+                        console.log('页面id：' + view_id)
+                    }
+                }, 15000);
+            },
+            //重新链接MQTT服务器
+            onConnectionLost:function(response){
+                if (this.MqttOperation.restart) {
+                    console.log("手动断开:" + JSON.stringify(response, null, 2));		
+                }else{
+                    console.log("意外断开:" + JSON.stringify(response, null, 2));	
+                    setTimeout(_this.MQTTconnect, _this.MqttOperation.reconnectTimeout);
+                }
+            },
+            //接受消息
+            onMessageArrived:function(messages){
+                var _this = this;
+                var message = JSON.parse(messages.payloadString);
+                console.log('查看MQTT返回的数据:' + JSON.stringify(message, null, 2));
+                // message.tagId  message.status 0,1,2       message.isAlarm true/false  message.value
+                var key = String(message.tagId);
+                if(this.tableTrend.hasOwnProperty(key)){
+                    var dic = this.tableTrend[key];
+                    // 更改 表格数据
+                    dic.status =  message.status;
+                    dic.alarm = message.isAlarm;
+                    dic.value = message.value;
+
+                    //更新 canvas
+                    dic.component.forEach(function(ele){
+                        _this.reloadCanvas({
+                            com_id:ele.id,
+                            tag_type:dic.tag_type,
+                            type:'mqtt',
+                            data:message
+                        });
+                    });
+                }
+            },
         }
     });
 

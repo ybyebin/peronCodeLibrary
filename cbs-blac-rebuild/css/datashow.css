@@ -569,4 +569,23 @@ table.table-trend span.mark.error{
 }
 
 
+/* 组件操作 */
+.action-div{
+    padding:10px 20px;
+    padding-bottom: 0;
+}
+.action-div:first-child{
+    /* padding-left: 40px; */
+    padding-top: 30px;
+    text-align: center;
+}
+.action-div .radio_data span{
+    display:inline-block;
+    position: relative;
+    top: -5px;
+    left: -10px;;
+    margin-right: 5px;
+}
+
+
 /* 设备监控   -end *

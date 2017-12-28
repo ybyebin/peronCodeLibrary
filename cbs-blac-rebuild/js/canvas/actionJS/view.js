@@ -136,7 +136,7 @@ example.Toolbar = Class.extend({
                     bg_color: canvasVue.canvas.bgColor.color,
                     bg_image: canvasVue.canvas.bgColor.bgimage,
                 }
-                console.log(JSON.stringify(canvasData, null, 2))
+                console.log(JSON.stringify(canvasData))
                 var data = {
                     view_data: JSON.stringify(canvasData),
                     id: sessionStorage.getItem("view_id"),
