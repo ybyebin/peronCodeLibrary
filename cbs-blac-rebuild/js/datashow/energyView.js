@@ -58,18 +58,12 @@ layui.use(['layer', 'element', 'laydate'], function() {
         mounted: function() {
             var _this = this;
 
-
             this.$nextTick(function() {
                 bayaxInit();
 
-
             });
-
         },
         methods: {
-
-
-
 
         }
     });

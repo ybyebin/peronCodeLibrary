@@ -24,19 +24,19 @@
 
             </div>
             <ul class="bayax-nav  bayax-layout-left">
-                <li class="layui-nav-item"><a href="">设备监控</a></li>
-                <li class="layui-nav-item "><a class="active" href="">报警</a></li>
-                <li class="layui-nav-item"><a href="">能源管理</a></li>
-                <li class="layui-nav-item"><a href="">系统管理</a></li>
+                    <li class="layui-nav-item"><a  href="./deviceControlCanvas.html">设备监控</a></li>
+                    <li class="layui-nav-item "><a  href="./warn.html">报警</a></li>
+                    <li class="layui-nav-item"><a class="active" href="./energyView.html">能源管理</a></li>
+                    <li class="layui-nav-item"><a href="./communicationException.html">系统管理</a></li>
 
             </ul>
             <div class="bayax-hover-select bayax-head-bar">
                 <span class="bayax-icon icon-format_list_bulleted"></span>
                 <ul class="bayax-hover-ul bayax-anim bayax-anim-upbit">
-                    <li><a href="">设备监控</a></li>
-                    <li><a href="">报警</a></li>
-                    <li><a href="">能源管理</a></li>
-                    <li><a href="">系统管理</a></li>
+                        <li><a href="./deviceControlCanvas.html">设备监控</a></li>
+                        <li><a href="warn.html">报警</a></li>
+                        <li><a href="./energyView.html">能源管理</a></li>
+                        <li><a href="./communicationException.html">系统管理</a></li>
                 </ul>
             </div>
 
@@ -64,33 +64,23 @@
 
         <div class="bayax-body">
             <div class="layui-tab">
-                <ul class="bayax-tab-title layui-tab-title">
+                <ul class="energy-tab-title bayax-tab-title layui-tab-title">
                     <li class="layui-this">能耗分析</li>
-                    <li @click='warnlogClick'>能耗报表</li>
-
+                    <li>能耗报表</li>
                 </ul>
-                <div class="layui-tab-content">
+                <div class="energy-content layui-tab-content">
                     <div class="bayax-tab-item layui-tab-item layui-show">
-                        <div class="content-main node-content-main">
-
-
-
+                        <div class="energy-analysis  content-main node-content-main">       
+                            123       
                         </div>
                     </div>
                     <div class="bayax-tab-item layui-tab-item  ">
-                        <div class="content-main node-content-main">
-
-
-
-
-
-
+                        <div class="energy-table content-main node-content-main">   
+                            456
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
 
         <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
@@ -106,7 +96,7 @@
     <script src="./js/basic/common.js"></script>
     <script src="plugin/vue.js "></script>
     <script src="plugin/layui/layui.js "></script>
-    <!-- <script src="./js/datashow/energyView.js"></script> -->
+    <script src="./js/datashow/energyView.js"></script>
 
 </body>
 

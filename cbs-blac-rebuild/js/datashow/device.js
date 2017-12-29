@@ -4,7 +4,48 @@ layui.use(['layer', 'element', 'laydate'], function () {
     var element = layui.element;
     var laydate = layui.laydate;
 
-    // vue 组件  点名称(代用)
+
+    var startime = laydate.render({
+        elem: '#startime',
+        theme: 'balck',
+        showBottom: false,
+        done: function(value, date, endDate) {
+            monitoringVue.trend.btnSelectTitle = '自定义';
+            monitoringVue.trend.startime = value;
+            $('#endtime').focus();
+            console.log('查看时间:' + monitoringVue.trend.startime);
+
+            // console.log(value); //得到日期生成的值，如：2017-08-18
+            // console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+            // console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+        }
+    });
+    var endtime = laydate.render({
+        elem: '#endtime',
+        theme: 'balck',
+        showBottom: false,
+        done: function(value, date, endDate) {
+            var st = monitoringVue.trend.startime;
+            var ed = monitoringVue.trend.endtime = value;
+            monitoringVue.trend.btnSelectTitle = '自定义';
+            console.log('查看时间：' + monitoringVue.trend.endtime);
+            if (st != '' && ed != '') {
+                if (bayaxCompareDate(st, ed, 1)) {
+
+                    if (compareYear(new Date(st), 10) <= value) {
+                        layer.msg("超过统计时间限制");
+                    } else {
+                        monitoringVue.searchTagValueHistoryTrend();
+                    }
+                } else {
+                    monitoringVue.trend.endtime = '';
+                    layer.msg("结束时间需晚于开始时间");
+                }
+            }
+        }
+    });
+
+    // vue 组件  点名称(待用)
     Vue.component('td-name', {
         render: function (createElement) {
             var _this = this;
@@ -102,7 +143,10 @@ layui.use(['layer', 'element', 'laydate'], function () {
                         },
                         on: {
                             'click': function () {
-                                console.log('查看:' + id)
+                                console.log('查看:' + id);
+                                monitoringVue.trend.tagid = id;
+                                // 查看趋势图
+                                monitoringVue.watchTrend();
                             }
                         }
                     }, '查看');
@@ -165,23 +209,36 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 acttionReal: '',//实数型
                 actionString: ''//字符型
             },
-            MqttOperation:{
-                view_id:'',//画面ID
-                mqtt:'',
-                reconnectTimeout:5000,//断开重连间隔时间
-                clientID:123,//(忘了)
-                restart:false //重置标志
+            MqttOperation: {
+                view_id: '',//画面ID
+                mqtt: '',
+                reconnectTimeout: 5000,//断开重连间隔时间
+                clientID: 123,//(忘了)
+                restart: false //重置标志
 
+            },
+            trend: {
+                tagid:'',
+                tagValue:'',
+                typeFlag:true,
+                realInterval:'',
+                btnSelectTitle: '',
+                btnSelectdata: [],
+                startime: '',
+                endtime: '',
             }
+
+
         },
         mounted: function () {
             // var _this = this;
 
 
             this.$nextTick(function () {
-
                 element.init();
 
+                bayaxInit();
+                this.trend.btnSelectdata = dateData();
                 this.canvasInit();
                 this.loadMonitoringGroups();
 
@@ -189,8 +246,6 @@ layui.use(['layer', 'element', 'laydate'], function () {
 
                 // mqtt心跳
                 this.sendHeadData();
-
-
 
             });
 
@@ -457,10 +512,12 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     this.unsubscribeView();
                     this.MqttOperation.mqtt.disconnect();
                     this.MqttOperation.restart = false;
-                  }
-                
-            
-                  this.MQTTconnect();
+                } else {
+
+                }
+
+
+                this.MQTTconnect();
                 // setTimeout(function () {
                 //     _this.setCanvasWH();
                 // }, 80);
@@ -554,7 +611,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 }
             },
 
-            /***************************表格方法**********************************/ 
+            /***************************表格方法**********************************/
             // 获取 列表与趋势图 数据
             getTableTrend: function (id) {
 
@@ -753,11 +810,34 @@ layui.use(['layer', 'element', 'laydate'], function () {
             },
 
             // 查看 趋势图
-            watchTrend:function(){
+            watchTrend: function (id) {
+                var _this = this;
+                layer.open({
+                    title: ['趋势图'],
+                    type: 1,
+                    skin: 'bayax-layer-skin',
+                    area: ['80%', '80%'],
+                    content: $('#trendMap'),
+                    shift: 2,
+                    resize: false,
+                    // btn: ['保存', '取消'],
+                    success: function () {
 
+                        // 该方法 会调用 获取 历史趋势方法
+                        _this.choiceTime(_this.trend.btnSelectdata[3]);
+
+                        // 实时趋势
+                        _this.searchTagValueRealTimeTrend();
+                    },
+                    cancel: function (index, layero) {
+                        // 停止弹窗 定时器
+                        clearInterval(_this.trend.realInterval);
+                    }  
+
+                });
             },
 
-            /***************************组件方法*********************************/ 
+            /***************************组件方法*********************************/
             // 闪烁方法
             flashMethod: function (component) {
                 component.setColor("#03A3FC");
@@ -818,7 +898,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 console.log('点击');
                 console.log(JSON.stringify(component.userData.tag, null, 2));
                 console.log(JSON.stringify(component.userData.routine, null, 2));
-                console.log(JSON.stringify(_this.tableTrend,null,2))
+                console.log(JSON.stringify(_this.tableTrend, null, 2))
                 var userData = component.userData;
                 var tag = userData.tag;
 
@@ -829,38 +909,38 @@ layui.use(['layer', 'element', 'laydate'], function () {
                         layer.msg('未绑定tag或tag只读')
                     } else {
                         var key = String(tag.tag_id);
-                        if(_this.tableTrend.hasOwnProperty(key)){
+                        if (_this.tableTrend.hasOwnProperty(key)) {
                             var currentTag = _this.tableTrend[key];
-                            if(currentTag.status === 0){
+                            if (currentTag.status === 0) {
                                 var values = currentTag.value;
                                 if (values == null) {
                                     layer.msg('当前组件绑定tag的值为 null')
-                                }else{
-                                    if(tag.tag_type === currentTag.tag_type){
+                                } else {
+                                    if (tag.tag_type === currentTag.tag_type) {
                                         switch (tag.tag_type) {
                                             case 1:
                                                 layer.open({
                                                     title: ['操作'],
                                                     type: 1,
-                                                    skin: 'bayax-layer-skin', 
-                                                    area: ['300px', '200px'], 
+                                                    skin: 'bayax-layer-skin',
+                                                    area: ['300px', '200px'],
                                                     content: $('#action-bool'),
                                                     shift: 2,
                                                     resize: false,
                                                     btn: ['保存', '取消'],
                                                     success: function () {
-                                                        if(Number(values) === 1){
+                                                        if (Number(values) === 1) {
                                                             _this.layerData.actionBool = '1';
-                                                        }else{
+                                                        } else {
                                                             _this.layerData.actionBool = '0';
                                                         }
                                                     },
                                                     yes: function (index) {
-                                                        console.log( _this.layerData.actionBool);
+                                                        console.log(_this.layerData.actionBool);
 
                                                         _this.ajaxChangeTagValue({
-                                                            tag_id:tag.tag_id,
-                                                            value:Number( _this.layerData.actionBool)
+                                                            tag_id: tag.tag_id,
+                                                            value: Number(_this.layerData.actionBool)
                                                         });
                                                     },
                                                     btn2: function (index) {
@@ -872,14 +952,14 @@ layui.use(['layer', 'element', 'laydate'], function () {
                                                 layer.open({
                                                     title: ['操作'],
                                                     type: 1,
-                                                    skin: 'bayax-layer-skin', 
-                                                    area: ['300px', '200px'], 
+                                                    skin: 'bayax-layer-skin',
+                                                    area: ['300px', '200px'],
                                                     content: $('#action-real'),
                                                     shift: 2,
                                                     resize: false,
                                                     btn: ['保存', '取消'],
                                                     success: function () {
-                                                       _this.layerData.acttionReal = values;
+                                                        _this.layerData.acttionReal = values;
                                                     },
                                                     yes: function (index) {
                                                         console.log(_this.layerData.acttionReal);
@@ -894,7 +974,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
                                                         }
                                                     },
                                                     btn2: function (index) {
-                
+
                                                     },
                                                 });
                                                 break;
@@ -914,71 +994,107 @@ layui.use(['layer', 'element', 'laydate'], function () {
                                                     yes: function (index) {
                                                         console.log(_this.layerData.actionString);
                                                         _this.ajaxChangeTagValue({
-                                                            tag_id:tag.tag_id,
+                                                            tag_id: tag.tag_id,
                                                             value: _this.layerData.actionString
                                                         });
                                                     },
                                                     btn2: function (index) {
-                                                        
+
                                                     },
                                                 });
-                
+
                                                 break;
                                             default:
                                                 layer.msg('tag类型ERROR');
                                                 break;
                                         }
-                                    }else{
+                                    } else {
                                         layer.msg('数据异常');
                                     }
-                                    
+
                                 }
-                            }else{
+                            } else {
                                 layer.msg('当前tag状态异常,不能进行操作');
                             }
-                        }else{
+                        } else {
                             layer.msg('未查询到tag')
                         }
-                       
+
                     }
                 }
             },
             // 设置组件值(未完成)
-            ajaxChangeTagValue:function(data){
+            ajaxChangeTagValue: function (data) {
                 var _this = this;
 
-                console.log(JSON.stringify(data,null,2))
+                console.log(JSON.stringify(data, null, 2))
 
                 $.ajax({
                     url: apiurl + "/tagvalue/" + data.tag_id + "?value=" + data.value,
                     type: 'put',
-                    beforeSend: function() {
+                    beforeSend: function () {
                         _this.loadingShow = true;
                     },
-                    complete: function() {
+                    complete: function () {
                         _this.loadingShow = false;
                     },
-                    success: function(data) {
-                      if (data.success) {
-                        console.log("返回的数据为:" + JSON.stringify(data, null, 2));
-                       
-                      } else {
-                        layer.msg("修改失败:" + data.error_message)
-                      }
+                    success: function (data) {
+                        if (data.success) {
+                            console.log("返回的数据为:" + JSON.stringify(data, null, 2));
+                            layer.msg('修改成功，等待生效');
+
+                        } else {
+                            layer.msg("修改失败:" + data.error_message)
+                        }
                     },
-                    error: function(data) {
-                        _this.loadingShow = true;
+                    error: function (data) {
+                        _this.loadingShow = false;
                     }
-                  });
+                });
             },
 
 
-            /***************************画布方法********************************/ 
+            /***************************画布方法********************************/
+            // canvas 初始化
+            canvasInit: function () {
+                var _this = this;
+
+                var canvas = new draw2d.Canvas("canvas"); //主画布
+                this.canvas = canvas;
+                // 边框阴影
+                var filter = canvas.paper.createFilter();
+                filter.createShadow(0, 0, 3, 0.3, "#000000");
+                filter.element.setAttribute("x", "-35%");
+                filter.element.setAttribute("y", "-35%");
+
+
+                _this.setCanvasWH();
+                setTimeout(function () {
+                    _this.setCanvasWH();
+                }, 80);
+
+                //全局初始化 
+                // 画布自适应缩放
+                window.onresize = function () {
+                    _this.setCanvasWH();
+                    console.log('缩放')
+                    setTimeout(function () {
+                        _this.setCanvasWH();
+                    }, 80)
+                }
+
+                $('.scrollFullBtn').mCustomScrollbar({
+                    autoHideScrollbar: true
+                });
+
+            },
+
+
             /**
              *  [更新canvas 画面]
              *  @param  {result}  [组件]
              */
-             reloadCanvas: function (result) {
+            reloadCanvas: function (result) {
                 var _this = this;
                 var data = result.data;
                 switch (result.type) {
@@ -1029,10 +1145,10 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     case 'mqtt':
                         var node = _this.getCanvasNode(result.com_id);
                         var value = data.value;
-                        if(data.status == 0){
-                            if(node){
-                                 // 是否是报警
-                                 switch (data.isAlarm) {
+                        if (data.status == 0) {
+                            if (node) {
+                                // 是否是报警
+                                switch (data.isAlarm) {
                                     case true:
                                         _this.setComponentData(node, 'onAlarm', value);
                                         break;
@@ -1052,7 +1168,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
                                         break;
                                 }
                             }
-                        }else{
+                        } else {
                             if (node) {
                                 _this.setComponentData(node, 'onDisconnected', '通讯异常');
                             } else {
@@ -1146,35 +1262,6 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 }
             },
 
-            // canvas 初始化
-            canvasInit: function () {
-                var _this = this;
-
-                var canvas = new draw2d.Canvas("canvas"); //主画布
-                this.canvas = canvas;
-                // 边框阴影
-                var filter = canvas.paper.createFilter();
-                filter.createShadow(0, 0, 3, 0.3, "#000000");
-                filter.element.setAttribute("x", "-35%");
-                filter.element.setAttribute("y", "-35%");
-
-
-                _this.setCanvasWH();
-                setTimeout(function () {
-                    _this.setCanvasWH();
-                }, 80);
-
-                // 画布自适应缩放
-                window.onresize = function () {
-                    _this.setCanvasWH();
-                    console.log('缩放')
-                    setTimeout(function () {
-                        _this.setCanvasWH();
-                    }, 80)
-                }
-
-            },
-
             // 在 画布中找到 node
             getCanvasNode: function (id) {
                 if (id != '') {
@@ -1206,6 +1293,10 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     // width: w + 'px',
                     height: w * 9 / 16 + 20 + 'px'
                 });
+                $('.scrollFullBtn').css({
+                    // width: w + 'px',
+                    height: w * 9 / 16 - 20 + 'px'
+                });
 
                 this.canvas.setZoom(s);
 
@@ -1215,6 +1306,15 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 setTimeout(function () {
                     _this.setCanvasWH();
                 }, 50)
+            },
+            /********************************全局按钮***********************************/
+            globalBtnMethod:function(item){
+                console.log(JSON.stringify(item,null,2))
+                var tag = item.tag;
+                this.ajaxChangeTagValue({
+                    tag_id:tag.tag_id,
+                    value:tag.tag_value
+                });
             },
 
             /******************************MQTT***************************************/
@@ -1246,21 +1346,21 @@ layui.use(['layer', 'element', 'laydate'], function () {
             // 订阅画布消息
             subscribeView: function () {
                 console.log('连接成功');
-                console.log('view_id' +  this.MqttOperation.view_id)
+                console.log('view_id' + this.MqttOperation.view_id)
                 this.MqttOperation.restart = true;
                 this.MqttOperation.mqtt.subscribe('Bayax/Push/' + this.MqttOperation.view_id);
             },
             // 取消订阅
-            unsubscribeView:function(){
+            unsubscribeView: function () {
                 console.log('取消订阅');
                 this.MqttOperation.mqtt.unsubscribe('Bayax/Push/' + this.MqttOperation.view_id);
             },
 
             // 发送心跳包
-            sendHeadData:function(){
-               
+            sendHeadData: function () {
+
                 var _this = this;
-                setInterval(function() {
+                setInterval(function () {
                     var view_id = _this.MqttOperation.view_id;
                     if (Number(view_id) > 0 && _this.MqttOperation.mqtt) {
                         var heatMessage = new Paho.MQTT.Message(view_id);
@@ -1272,41 +1372,486 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 }, 15000);
             },
             //重新链接MQTT服务器
-            onConnectionLost:function(response){
+            onConnectionLost: function (response) {
                 if (this.MqttOperation.restart) {
-                    console.log("手动断开:" + JSON.stringify(response, null, 2));		
-                }else{
-                    console.log("意外断开:" + JSON.stringify(response, null, 2));	
+                    console.log("手动断开:" + JSON.stringify(response, null, 2));
+                } else {
+                    console.log("意外断开:" + JSON.stringify(response, null, 2));
                     setTimeout(_this.MQTTconnect, _this.MqttOperation.reconnectTimeout);
                 }
             },
             //接受消息
-            onMessageArrived:function(messages){
+            onMessageArrived: function (messages) {
                 var _this = this;
                 var message = JSON.parse(messages.payloadString);
                 console.log('查看MQTT返回的数据:' + JSON.stringify(message, null, 2));
                 // message.tagId  message.status 0,1,2       message.isAlarm true/false  message.value
                 var key = String(message.tagId);
-                if(this.tableTrend.hasOwnProperty(key)){
+                if (this.tableTrend.hasOwnProperty(key)) {
                     var dic = this.tableTrend[key];
                     // 更改 表格数据
-                    dic.status =  message.status;
+                    dic.status = message.status;
                     dic.alarm = message.isAlarm;
                     dic.value = message.value;
 
                     //更新 canvas
-                    dic.component.forEach(function(ele){
+                    dic.component.forEach(function (ele) {
                         _this.reloadCanvas({
-                            com_id:ele.id,
-                            tag_type:dic.tag_type,
-                            type:'mqtt',
-                            data:message
+                            com_id: ele.id,
+                            tag_type: dic.tag_type,
+                            type: 'mqtt',
+                            data: message
                         });
                     });
+                    // 更新  实时趋势  数值
+                    if(message.tagId == this.trend.tagid){
+                        if(message.status === 0){
+                            var value = message.value;
+                            if (!isNaN(value)) {
+                                this.trend.tagValue =value;
+                            }
+                        }else{
+                            this.trend.tagValue =null;
+                        }
+                       
+                    }
                 }
             },
+
+            /**************************趋势图*******************************************/
+
+            // 时间选择下拉框
+            choiceTime: function (item) {
+                this.trend.btnSelectTitle = item.name;
+                this.trend.startime = item.startime;
+                this.trend.endtime = item.endtime;
+
+                if (item.type) {
+                    this.searchTagValueHistoryTrend();
+                }
+                console.log(JSON.stringify(item, null, 2))
+            },
+            // 查询  历史趋势
+            searchTagValueHistoryTrend: function () {
+                var _this = this;
+                var trend = this.trend;
+                // ajax请求
+                $.ajax({
+                    url: apiurl + 'tagTrendsData/' + trend.tagid,
+                    type: "GET",
+                    dataType: 'json',
+                    data: {
+                      start_time: trend.startime,
+                      end_time: trend.endtime + ' ' + '23:59:59'
+                    },
+                    beforeSend: function() {
+                        _this.loadingShow = true;
+                    },
+                    complete: function() {
+                        _this.loadingShow = false;
+                    },
+                    success: function(data) {
+                        _this.loadingShow = false;
+                
+                      if (data.success) {
+                        
+                        var arr = data.data.values;
+                        var highCharArr = [];
+                        if (arr !== null) {
+                            for (var key in arr) {
+                                var temp = [];
+                                temp.push(new Date(key).getTime());
+                                temp.push(Number(arr[key]));
+                                highCharArr.push(temp);
+                            }
+                            console.log("历史数据:" + JSON.stringify(highCharArr, null, 2))
+
+                            // 生成 图表
+
+                        }else{
+                            layer.msg('无数据')
+                        }
+                       
+
+                     
+                      } else {
+                        layer.msg("错误原因:" + data.error_message);
+                        console.log("错误原因:" + JSON.stringify(data, null, 2))
+                      }
+                    },
+                    error: function(data) {
+                        _this.loadingShow = false;
+                      publicAjaxError(data);
+                    }
+                  });
+
+
+
+
+
+
+
+
+                var data = [
+                    [
+                      1416182400000,
+                      7.204
+                    ],
+                    [
+                      1416268800000,
+                      7.058
+                    ],
+                    [
+                      1416355200000,
+                      6.961
+                    ],
+                    [
+                      1416441600000,
+                      6.947
+                    ],
+                    [
+                      1416528000000,
+                      6.975
+                    ]
+
+                  ]
+
+                  console.log(JSON.stringify(data, null, 2))
+                  Highcharts.stockChart('hisTrendContent', {
+
+                    chart: {
+                        backgroundColor: '#2B2E4B',
+                        alignTicks: false,
+                        type: 'spline'
+                    },
+                    rangeSelector: {
+                        // allButtonsEnabled: true,
+                        enabled: false,
+                        buttonTheme: {
+                            width: 60
+                        },
+                        selected: 2
+                    },
+                    title: {
+                        text: '历史趋势',
+                        style: {
+                            color: '#fff',
+                            fontWeight: 'normal',
+                            fontFamily: "微软雅黑",
+                            fontSize: "18px"
+                        }
+                    },
+                    plotOptions: {
+                        series: {
+                            showInLegend: true
+                        }
+                    },
+                    navigator: {
+                        enabled: true,
+                        xAxis: {
+                            lineColor: '#555769',
+                            type: 'datetime',
+                            dateTimeLabelFormats: {
+                                second: '%Y-%m-%d<br/>%H:%M:%S',
+                                minute: '%Y-%m-%d<br/>%H:%M',
+                                hour: '%Y-%m-%d %H:00',
+                                day: '%Y-%m-%d',
+                                week: '%Y-%m-%d',
+                                month: '%Y-%m',
+                                year: '%Y-'
+                            }
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0,
+                        enabled: false
+                    },
+                    xAxis: {
+                        labels: {
+                            style: {
+                                color: '#555769' //颜色
+                            }
+                        },
+                        lineColor: '#555769',
+                        tickColor: '#555769',
+                        type: 'datetime',
+                        dateTimeLabelFormats: {
+                            second: '%Y-%m-%d<br/>%H:%M:%S',
+                            minute: '%Y-%m-%d<br/>%H:%M',
+                            hour: '%Y-%m-%d %H:00',
+                            day: '%Y-%m-%d',
+                            week: '%Y-%m-%d',
+                            month: '%Y-%m',
+                            year: '%Y-'
+                        }
+                    },
+                    yAxis: {
+                        gridLineColor: '#555769',
+                        opposite: false
+                    },
+                    credits: {
+                        enabled: false
+                    },
+
+                    tooltip: {
+                        formatter: function () {
+                            var content = "";
+
+                            var date = new Date(this.x);
+                            content += '<span>' + date.format("yyyy-MM-dd hh:mm:ss") + '</span><br/><br/>'
+                            for (var i = 0; i < this.points.length; i++) {
+                                content += '<span style="color: ' + this.points[i].series.color + '">' + this.points[i].series.name + '</span>: ' + this.points[i].y;
+                            };
+                            return content;
+                        }
+                    },
+
+
+                    series: [{
+                        // type: 'line',
+                        id: '000001',
+                        name: '值',
+                        data: data
+                    }]
+                });
+
+            },
+            // 查询  实时趋势
+            searchTagValueRealTimeTrend:function(){
+                var _this = this;
+                var trend = this.trend;
+               
+                $.ajax({
+                    url: apiurl + "tagvalue/" + trend.tagid,
+                    type: 'GET',
+                    beforeSend: function() {
+                        _this.loadingShow = true;
+                    },
+                    complete: function() {
+                        _this.loadingShow = false;
+                    },
+                    success: function(data) {
+                        _this.loadingShow = false;
+                         console.log(JSON.stringify(data, null, 2));
+                         
+                
+                      if (data.success) {
+                        // var length = data.values.length;
+                        var arr = data.data.values;
+                        var highCharArr = [];
+                        if (arr === null) {
+                          trend.tagValue = null;
+
+                          highCharArr = (function () {
+                            var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+                            for (i = -10; i <= 0; i += 1) {
+                                data.push({
+                                    x: time + i * 1000,
+                                    y: 0
+                                });
+                            }
+                            return data;
+                        }());
+
+                        } else {
+                
+                          for (var key in arr) {
+                            var times = new Date(Date.parse(key.replace(/-/g, "/"))).getTime();
+                            var realdic = {
+                              x: times,
+                              y: Number(arr[key])
+                            }
+                            highCharArr.push(realdic);
+                          }
+
+                          trend.tagValue = highCharArr[highCharArr.length -1].y;
+                        }
+                
+                        console.log(JSON.stringify(highCharArr, null, 2))
+                       
+
+                        // 生成 图表
+                
+                       
+                      } else {
+                        layer.msg("实时数据:" + data.error_message)
+                        console.log("实时数据：" + JSON.stringify(data, null, 2))
+                      }
+                    },
+                    error: function(data) {
+                      publicAjaxError(data);
+                    }
+                
+                  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
+
+
+
+
+
+                $('#realTrendContent').highcharts({
+                    chart: {
+                        type: 'spline',
+                        backgroundColor: '#2B2E4B',
+                        animation: Highcharts.svg, // don't animate in old IE
+                        marginRight: 10,
+                        events: {
+                            load: function () {
+                                // set up the updating of the chart each second
+                                var series = this.series[0],
+                                    chart = this;
+                               trend.realInterval = setInterval(function () {
+                                    var x = (new Date()).getTime(), // current time
+                                        y = Math.random();
+                                    series.addPoint([x, y], true, true);
+
+                                    console.log('查看添加的数据：'+x)
+                                }, 1000);
+                            }
+                        }
+                    },
+                    title: {
+                        text: '实时趋势',
+                        style: {
+                          color: '#fff',
+                          fontWeight: 'normal',
+                          fontFamily: "微软雅黑",
+                          fontSize: "18px"
+                        }
+                      },
+                      xAxis: {
+                        labels: {
+                          style: {
+                            color: '#555769'
+                          }
+                        },
+                        lineColor: '#555769',
+                        type: 'datetime',
+                        dateTimeLabelFormats: {
+                          second: '%Y-%m-%d<br/>%H:%M:%S',
+                          minute: '%Y-%m-%d<br/>%H:%M',
+                          hour: '%Y-%m-%d %H:00',
+                          day: '%Y-%m-%d',
+                          week: '%Y-%m-%d',
+                          month: '%Y-%m',
+                          year: '%Y-'
+                        },
+                        tickColor: '#555769',
+                        tickLength: 10,
+                        tickPixelInterval: null,
+                        labels: {
+                          formatter: function() {
+                            return Highcharts.dateFormat('%H:%M:%S', this.value);
+                          }
+                        }
+            
+                      },
+                      yAxis: {
+                        title: {
+                          text: 'Value'
+                        },
+                        gridLineColor: '#555769',
+                        plotLines: [{
+                          value: 0,
+                          width: 1,
+                          color: '#808080'
+                        }]
+                      },
+                      tooltip: {
+                        formatter: function() {
+                          console.log('查看：' + this.x)
+                            // '<b>' + this.series.name + '</b><br/>' +
+            
+                          return Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' + '<span style="color: ' + this.series.color + '">值为：</span> ' +
+                            Highcharts.numberFormat(this.y, 2);
+                        }
+                      },
+                    legend: {
+                        enabled: false
+                    },
+                    exporting: {
+                        enabled: true
+                    },
+                    credits: {
+                        enabled: false
+                      },
+                    series: [{
+                        color: '#f5a623',
+                        name: '数据',
+                        data: (function () {
+                            // generate an array of random data
+                            var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+                            for (i = -10; i <= 0; i += 1) {
+                                data.push({
+                                    x: time + i * 1000,
+                                    y: Math.random()
+                                });
+                            }
+                            console.log('======================'+JSON.stringify(data,null,2))
+                            return data;
+                        }())
+                    }]
+                });
+            }
         }
     });
 
 });
 
+Highcharts.setOptions({
+    global: {
+        useUTC: false  
+    },
+    lang: {
+        contextButtonTitle: "图表导出菜单",
+        decimalPoint: ".",
+        downloadJPEG: "下载JPEG图片",
+        downloadPDF: "下载PDF文件",
+        downloadPNG: "下载PNG文件",
+        downloadSVG: "下载SVG文件",
+        drillUpText: "返回 {series.name}",
+        loading: "加载中",
+        months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        noData: "没有数据",
+        numericSymbols: ["千", "兆", "G", "T", "P", "E"],
+        printChart: "打印图表",
+        resetZoom: "恢复缩放",
+        resetZoomTitle: "恢复图表",
+        shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        thousandsSep: ",",
+        weekdays: ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期天"]
+    }
+});

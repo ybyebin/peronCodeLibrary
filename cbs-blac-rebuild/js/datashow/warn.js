@@ -21,6 +21,7 @@ layui.use(['layer', 'element', 'laydate'], function() {
     });
     var endtime = laydate.render({
         elem: '#endtime',
+        theme: 'balck',
         showBottom: false,
         done: function(value, date, endDate) {
             var st = warnVue.startime;

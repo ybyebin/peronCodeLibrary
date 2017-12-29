@@ -26,16 +26,6 @@
 
     <script type="text/javascript" src="js/canvas/basic/fraphael.js"></script>
     <script type="text/javascript" src="js/canvas/basic/draw2d.js"></script>
-
-
-
-
-
-
-
-
-
-
 </head>
 
 <body class="layui-layout-body">
@@ -49,19 +39,19 @@
 
             </div>
             <ul class="bayax-nav  bayax-layout-left">
-                <li class="layui-nav-item"><a class="active" href="">设备监控</a></li>
-                <li class="layui-nav-item "><a href="">报警</a></li>
-                <li class="layui-nav-item"><a href="">能源管理</a></li>
-                <li class="layui-nav-item"><a href="">系统管理</a></li>
+                <li class="layui-nav-item"><a class="active" href="./deviceControlCanvas.html">设备监控</a></li>
+                <li class="layui-nav-item "><a href="./warn.html">报警</a></li>
+                <li class="layui-nav-item"><a href="./energyView.html">能源管理</a></li>
+                <li class="layui-nav-item"><a href="./communicationException.html">系统管理</a></li>
 
             </ul>
             <div class="bayax-hover-select bayax-head-bar">
                 <span class="bayax-icon icon-format_list_bulleted"></span>
                 <ul class="bayax-hover-ul bayax-anim bayax-anim-upbit">
-                    <li><a href="">设备监控</a></li>
-                    <li><a href="">报警</a></li>
-                    <li><a href="">能源管理</a></li>
-                    <li><a href="">系统管理</a></li>
+                    <li><a href="./deviceControlCanvas.html">设备监控</a></li>
+                    <li><a href="warn.html">报警</a></li>
+                    <li><a href="./energyView.html">能源管理</a></li>
+                    <li><a href="./communicationException.html">系统管理</a></li>
                 </ul>
             </div>
 
@@ -129,10 +119,10 @@
                                     <span class="mark"></span>
                                     <span>操作</span>
                                 </p>
-                                <div>
+                                <div class="scrollFullBtn">
                                     <ul class="globalbtn-ul">
                                         <li v-for="item in globalBtnData">
-                                            <button v-text="item.name" class="bayax-btn"></button>
+                                            <button v-text="item.name" @click="globalBtnMethod(item)" class="bayax-btn"></button>
                                         </li>
                                 
                                     </ul>
@@ -209,6 +199,51 @@
         </div>
 
 
+        <!--趋势图 -->
+        <div id="trendMap" class="trendMap">
+            <div v-show="trend.typeFlag" class="historical-trend">
+                <div class="layui-inline">
+                    <div class="bayax-select-click bayax-btn-select ">
+                        <div class="bayax-select-title">
+                            <span v-text='trend.btnSelectTitle' class="bayax-select-span "></span>
+                            <i class="bayax-edge"></i>
+                        </div>
+                        <ul class="bayax-select-ul  bayax-anim bayax-anim-upbit">
+                            <li v-for="item in trend.btnSelectdata" @click="choiceTime(item)" v-text="item.name">
+                                </dd>
+                        </ul>
+                    </div>
+            
+                </div>
+            
+                <div class="tab-warn-div layui-inline">
+                    <div class="layui-input-inline">
+                        <input v-model="trend.startime" type="text" name="date" id="startime" lay-verify="date" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            
+                <div class="tab-warn-div  layui-inline">
+                    <span>至</span>
+                    <div class="layui-input-inline">
+                        <input v-model="trend.endtime" type="text" name="date" id="endtime" lay-verify="date" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="tab-warn-div-export  layui-inline">
+                    <button @click="trend.typeFlag = !trend.typeFlag" title="点击查看实时趋势" class="bayax-btn-export">实时趋势</button>
+                </div>
+                
+                <div id="hisTrendContent" class="hisTrendContent"></div>
+            </div>
+            
+            <div v-show="!trend.typeFlag" class="realtime-trend">
+                <div class="tab-warn-div-export  layui-inline">
+                    <button @click="trend.typeFlag = !trend.typeFlag" title="点击查看历史趋势" class="bayax-btn-export">历史趋势</button>
+                </div>
+
+                <div id="realTrendContent" class="realTrendContent"></div>
+            </div>
+        </div>
+
 
         <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
             <span></span>
@@ -223,9 +258,11 @@
     <script src="./js/basic/common.js"></script>
     <script src="plugin/vue.js "></script>
     <script src="plugin/layui/layui.js "></script>
-
+    <script src="./plugin/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./plugin/highchart/highstock.js"></script>
+    <script src="./plugin/highchart/exporting.js"></script>
     <script src="js/canvas/Component/component.js"></script>
-    <script type="text/javascript" src="js/basic/b/mqttws31.js"></script>
+    <script  src="js/basic/b/mqttws31.js"></script>
     <script src="./js/datashow/device.js"></script>
 
 </body>

@@ -487,10 +487,10 @@
 .global-btn-body {
     float: right;
     width: 145px;
-    height: 100%;
+    /* height: 100%; */
     max-height: 100%;
-    /* background: red; */
-    overflow: hidden;
+    box-sizing: border-box;
+    /* overflow: hidden; */
     padding: 0 3px;
 
 }
@@ -504,6 +504,9 @@
     border: 1px solid rgba(172,177,218,.1);
     border-bottom: none;
 }
+
+
+
 .global-btn-body >div{
     background-color: rgba(28, 31, 56, .1);
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
@@ -520,7 +523,22 @@
     left: 10px;
     font-size: 16px;
 }
+
+.global-btn-body .mCSB_inside > .mCSB_container{
+    margin-right: 0;
+}
+.global-btn-body .mCSB_scrollTools .mCSB_draggerRail{
+    background: transparent;
+}
+.scrollFullBtn{
+    box-sizing: border-box;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+
 .globalbtn-ul {
+    box-sizing: border-box;
     padding:15px;
     padding-top: 10px;
 }
@@ -587,5 +605,59 @@ table.table-trend span.mark.error{
     margin-right: 5px;
 }
 
+/* 趋势图 */
+.trendMap{
+    display: none;
+    padding: 20px 20px;
+    padding-bottom: 0;
+    min-width: 500px;
+}
+.trendMap > div>div.head-title{
+    text-align: center;
+    font-size: 18px;
+    padding-bottom: 10px;
+}
 
-/* 设备监控   -end *
+.hisTrendContent{
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    top: 65px;
+    min-width: 500px;
+    /* background: gray; */
+}
+.realTrendContent{
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    top: 65px;
+    min-width: 500px;
+    /* background: red; */
+}
+
+
+/* 设备监控   -end */
+
+/*能源管理  -begin*/
+.energy-tab-title li{
+    border-bottom: none!important;
+}
+.energy-content{
+    position: absolute;
+    bottom: 20px;
+    top: 81px;
+    left: 30px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.3);
+}  
+.energy-content >div{
+    height: 100%;
+}
+.energy-content >div >div.node-content-main{
+    height: 100%;
+    /* background: gray; */
+    box-sizing: border-box;
+}
+/*能源管理  -end*/
