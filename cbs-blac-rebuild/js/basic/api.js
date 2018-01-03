@@ -218,7 +218,8 @@ function isManagerLogin() {
 }
 // 自定义下拉群组的收回方法
 $('body').on('click', function() {
-    $('.bayax-select-group ul').hide();
+    // $('.bayax-select-group ul').hide();
+    // $('.bayax-select-click').removeClass('bayax-select-clicked');
 });
 
 
@@ -227,19 +228,20 @@ function bayaxInit() {
         $('.bayax-select-click').removeClass('bayax-select-clicked');
     });
     $('.bayax-select-title').on('click', function(e) {
-        window.event ? window.event.cancelBubble = true : e.stopPropagation();
+        var oEvent = e || event;
+        oEvent.stopPropagation(); //阻止事件冒泡
+        var flag = true;
         var parents = $(this).parent();
-        if (parents.hasClass('bayax-select-clicked')) {
-            parents.removeClass('bayax-select-clicked');
-        } else {
-            parents.addClass('bayax-select-clicked');
-        }
-    });
 
-    // $('.bayax-btn-dl').on('click', 'dd', function() {
-    //     var _this = $(this);
-    //     _this.parent().prev().find('span.bayax-select-span').text(_this.text());
-    // });
+        if (!parents.hasClass('bayax-select-clicked')) {
+            flag = false;
+        } 
+        $('.bayax-select-click').removeClass('bayax-select-clicked');
+
+        if (!flag) {
+            parents.addClass('bayax-select-clicked');
+        } 
+    });
 
     $('.bayax-division-icon').on('click', function(e) {
         var oEvent = e || event;

@@ -5,66 +5,64 @@
 //日期选择
 function dateData() {
     var dateArr = [],
-        lengts = 9;
+        lengths = 9;
 
     var nowdate = new Date();
     var nowMonth = Number(nowdate.getMonth() + 1);
-
-    for (var i = 0; i < lengts; i++) {
-        var dic = { type: true };
+    console.log('现在月份:'+nowMonth)
+    for (var i = 0; i < lengths; i++) {
+        var dic = { type: true }; //true(相对时间) fasle(绝对时间)
         switch (i) {
             case 0:
                 var time = FormatDate(nowdate, "yyyy-MM-dd");
                 dic.name = '今天';
+                dic.unit = '天';
                 dic.startime = time;
                 dic.endtime = time;
+                
                 break;
             case 1:
                 var time = compareDate(1, 1);
                 dic.name = '昨天';
+                dic.unit = '天';
                 dic.startime = time;
                 dic.endtime = time;
                 break;
             case 2:
                 dic.name = '最近3天';
+                dic.unit = '个3天';
                 dic.startime = compareDate(1, 2);
                 dic.endtime = FormatDate(nowdate, "yyyy-MM-dd");
                 break;
             case 3:
                 dic.name = '最近7天';
+                dic.unit = '个7天';
                 dic.startime = compareDate(1, 6);
                 dic.endtime = FormatDate(nowdate, "yyyy-MM-dd");
                 break;
             case 4:
                 dic.name = '最近30天';
+                dic.unit = '个30天';
                 dic.startime = compareDate(1, 29);
                 dic.endtime = FormatDate(nowdate, "yyyy-MM-dd");
                 break;
             case 5:
-                dic.name = compareDate(2, 1) + "月";
-                if (nowMonth === 1) {
-                    dic.startime = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 1) + '-01';
-                    dic.endtime = getCurrentMonthLastForSelect(dic.startime);
-
-                } else {
-                    dic.startime = nowdate.getFullYear() + '-' + compareDate(2, 1) + '-01';
-                    dic.endtime = getCurrentMonthLastForSelect(dic.startime);
-                }
-                break;
-            case 6:
                 dic.name = compareDate(2, 2) + "月";
-                if (nowMonth === 1 || nowMonth === 2) {
+                dic.unit = '个月';
+                if (nowMonth === 1) {
                     dic.startime = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 2) + '-01';
                     dic.endtime = getCurrentMonthLastForSelect(dic.startime);
-
                 } else {
+
                     dic.startime = nowdate.getFullYear() + '-' + compareDate(2, 2) + '-01';
                     dic.endtime = getCurrentMonthLastForSelect(dic.startime);
                 }
                 break;
-            case 7:
+            case 6:
                 dic.name = compareDate(2, 3) + "月";
-                if (nowMonth === 1 || nowMonth === 2 || nowMonth === 3) {
+                dic.unit = '个月';
+                if (nowMonth === 1 || nowMonth === 2) {
+                
                     dic.startime = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 3) + '-01';
                     dic.endtime = getCurrentMonthLastForSelect(dic.startime);
 
@@ -73,8 +71,22 @@ function dateData() {
                     dic.endtime = getCurrentMonthLastForSelect(dic.startime);
                 }
                 break;
+            case 7:
+                dic.name = compareDate(2, 4) + "月";
+                dic.unit = '个月';
+                if (nowMonth === 1 || nowMonth === 2 || nowMonth === 3) {
+               
+                    dic.startime = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 4) + '-01';
+                    dic.endtime = getCurrentMonthLastForSelect(dic.startime);
+
+                } else {
+                    dic.startime = nowdate.getFullYear() + '-' + compareDate(2, 4) + '-01';
+                    dic.endtime = getCurrentMonthLastForSelect(dic.startime);
+                }
+                break;
             default:
                 dic.name = '自定义';
+                dic.unit = '';
                 dic.startime = '';
                 dic.endtime = '';
                 dic.type = false;
@@ -118,6 +130,7 @@ function bayaxCompareDate(start, end, type) {
 function compareDate(type, counts) {
     var mydate;
     var nowdate = new Date();
+
     if (type == 1) {
         //现在时间减去天数
         mydate = CutDays(parseDates(FormatDate(nowdate, "yyyy-MM-dd")), counts);

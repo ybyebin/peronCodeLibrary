@@ -53,15 +53,15 @@ website:    http://code.google.com/p/jquerytree/
 }
 
 .ztree li a:hover {
-    text-decoration: underline
+    /* text-decoration: underline */
 }
 
 .ztree li a.curSelectedNode {
-    padding-top: 0px;
+    /* padding-top: 0px;
     background-color: #e5e5e5;
     color: black;
     height: 21px;
-    opacity: 0.8;
+    opacity: 0.8; */
 }
 
 .ztree li a.curSelectedNode_Edit {
@@ -132,15 +132,15 @@ website:    http://code.google.com/p/jquerytree/
 }
 
 .ztree li span.button.chk.checkbox_false_full_focus {
-    background-position: -5px -26px;
+    background-position: -5px -5px;
 }
 
 .ztree li span.button.chk.checkbox_false_part {
-    background-position: -5px -48px;
+    background-position: -5px -5px;
 }
 
 .ztree li span.button.chk.checkbox_false_part_focus {
-    background-position: -5px -68px;
+    background-position: -5px -5px;
 }
 
 .ztree li span.button.chk.checkbox_false_disable {
@@ -152,15 +152,15 @@ website:    http://code.google.com/p/jquerytree/
 }
 
 .ztree li span.button.chk.checkbox_true_full_focus {
-    background-position: -26px -26px;
+    background-position: -26px -5px;
 }
 
 .ztree li span.button.chk.checkbox_true_part {
-    background-position: -26px -48px;
+    background-position: -26px -5px;
 }
 
 .ztree li span.button.chk.checkbox_true_part_focus {
-    background-position: -26px -68px;
+    background-position: -26px -5px;
 }
 
 .ztree li span.button.chk.checkbox_true_disable {
@@ -209,7 +209,8 @@ website:    http://code.google.com/p/jquerytree/
 
 .ztree li span.button.switch {
     width: 21px;
-    height: 21px
+    height: 21px;
+    float: right;
 }
 
 .ztree li span.button.root_open {

@@ -7,6 +7,7 @@
     <title>智能建筑管理系统</title>
     <link rel="stylesheet" href="plugin/layui/css/layui.css">
     <link rel="stylesheet" href="plugin/jQuery/jquery.mCustomScrollbar.css" type="text/css">
+    <link rel="stylesheet" href="plugin/zTree/css/metroStyle/metroStyle.css" type="text/css">
     <link rel="stylesheet" href="./css/bayax.css">
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <!-- <link rel="stylesheet" href="./css/basegreen.css"> -->
@@ -19,44 +20,70 @@
             <div class="bayax-logo">
                 <img src="./images/logo.png" alt="">
                 <label>
-					<span class="bayax-proname">智能建筑管理系统</span>
-				</label>
+                    <span class="bayax-proname">智能建筑管理系统</span>
+                </label>
 
             </div>
             <ul class="bayax-nav  bayax-layout-left">
-                    <li class="layui-nav-item"><a  href="./deviceControlCanvas.html">设备监控</a></li>
-                    <li class="layui-nav-item "><a  href="./warn.html">报警</a></li>
-                    <li class="layui-nav-item"><a class="active" href="./energyView.html">能源管理</a></li>
-                    <li class="layui-nav-item"><a href="./communicationException.html">系统管理</a></li>
+                <li class="layui-nav-item">
+                    <a href="./deviceControlCanvas.html">设备监控</a>
+                </li>
+                <li class="layui-nav-item ">
+                    <a href="./warn.html">报警</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="active" href="./energyView.html">能源管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="./communicationException.html">系统管理</a>
+                </li>
 
             </ul>
             <div class="bayax-hover-select bayax-head-bar">
                 <span class="bayax-icon icon-format_list_bulleted"></span>
                 <ul class="bayax-hover-ul bayax-anim bayax-anim-upbit">
-                        <li><a href="./deviceControlCanvas.html">设备监控</a></li>
-                        <li><a href="warn.html">报警</a></li>
-                        <li><a href="./energyView.html">能源管理</a></li>
-                        <li><a href="./communicationException.html">系统管理</a></li>
+                    <li>
+                        <a href="./deviceControlCanvas.html">设备监控</a>
+                    </li>
+                    <li>
+                        <a href="warn.html">报警</a>
+                    </li>
+                    <li>
+                        <a href="./energyView.html">能源管理</a>
+                    </li>
+                    <li>
+                        <a href="./communicationException.html">系统管理</a>
+                    </li>
                 </ul>
             </div>
 
             <ul class="bayax-nav bayax-layout-right">
 
-                <li class="layui-nav-item"><a>2017-11-7 17:04:42</a></li>
-                <li class="layui-nav-item"><a href="">系统设置</a></li>
+                <li class="layui-nav-item">
+                    <a>2017-11-7 17:04:42</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">系统设置</a>
+                </li>
                 <li class="layui-nav-item person-operate bayax-hover-select">
                     <a href="javascript:;">
                         <img src="./images/People.png" class="">
                     </a>
                     <ul class="bayax-hover-ul bayax-anim bayax-anim-upbit">
-                        <li><a href="javascript:;">修改密码</a></li>
-                        <li><a href="javascript:;">退出登录</a></li>
+                        <li>
+                            <a href="javascript:;">修改密码</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">退出登录</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
             <ul class="bayax-nav bayax-layout-right head-warn">
                 <li>
-                    <a> <img src="images/warn.png"></a>
+                    <a>
+                        <img src="images/warn.png">
+                    </a>
                 </li>
             </ul>
 
@@ -70,32 +97,182 @@
                 </ul>
                 <div class="energy-content layui-tab-content">
                     <div class="bayax-tab-item layui-tab-item layui-show">
-                        <div class="energy-analysis  content-main node-content-main">       
-                            123       
+                        <div class="energy-analysis  content-main node-content-main">
+                            <div class="energy-slide">
+                                <div>
+                                    <!-- <div class="explain">暂无自定义图表</div> -->
+                                    <div class="slide-menu bayaxMscroll">
+                                        <p class="title">自定义图表</p>
+                                        <div class="menu">
+                                            <ul>
+                                                <li v-for="(item,index) in energyAnalysis.customList" v-text="item.name" :title="item.name" @click="getCustomAnalysisData(item)"></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="energy-main">
+                                <div class="title">
+                                    <div class="layui-inline">
+                                        <div class="bayax-select-click bayax-btn-select ">
+                                            <div class="bayax-select-title">
+                                                <span v-text='energyAnalysis.timeOption.btnSelectTitle' class="bayax-select-span "></span>
+                                                <i class="bayax-edge"></i>
+                                            </div>
+                                            <ul class="energy bayax-select-ul  bayax-anim bayax-anim-upbit">
+                                                <li v-for="item in energyAnalysis.timeOption.btnSelectdata" @click="choiceAnalysisTime(item)" v-text="item.name">
+                                                    </dd>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="tab-warn-div layui-inline">
+                                        <div class="layui-input-inline">
+                                            <input v-model="energyAnalysis.timeOption.startime"  id="startime" type="text" name="date" readonly="readonly" lay-verify="date" autocomplete="off"
+                                                class="layui-input">
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-warn-div layui-inline">
+                                        <span>至</span>
+                                        <div class="layui-input-inline">
+                                            <input v-model="energyAnalysis.timeOption.endtime" id="endtime" type="text" name="date" readonly="readonly" lay-verify="date" autocomplete="off"
+                                                class="layui-input">
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-inline div-btn-comhis">
+                                        <button class="bayax-btn">对比历史数据</button>
+                                    </div>
+                                    <div class="tab-warn-div-export  layui-inline div-btn-comhis">
+                                        <button  data-id="analysis-tree-body"   class="choice-tag-btn bayax-btn">选择统计对象</button>
+
+                                        <div id="analysis-tree-body" class="tag-tree">
+                                            <div class="tag-tree-head clearfix">
+                                                <div class="layui-input-inline content-search">
+                                                    <span class="search-span icon-search"></span>
+                                                    <input type="text" placeholder="请输入点名称" required>
+                                                    <span class="span-del icon-highlight_off"></span>
+                                                </div>
+                                            </div>
+                                            <div class="tag-tree-body">
+                                                <div class="bayaxtree-div">
+                                                    <div class="panel-heading">
+                                                        <h4 class="tree-panel-title" data-id="analysis-tree">
+                                                            <a class="projectName">智能建筑管理系统</a>
+                                                            <!-- <span class="icon-tree icon-remove"></span> -->
+                                                        </h4>
+                                                    </div>
+                                                    <div class="bayaxTree  bayaxMscroll">                                   
+                                                        <ul id="analysis-tree" class="ztree"></ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tag-tree-foot">
+                                                <div class="layui-inline ">
+                                                    <button class="bayax-btn">筛选</button>
+                                                </div>
+                                                <div class="layui-inline ">
+                                                    <button class="bayax-btn-cancel">清空筛选条件</button>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="tab-warn-div-export layui-inline div-btn-comhis">
+                                        <div class="bayax-select-click bayax-select-group">
+                                            <div class="bayax-select-title">
+                                                <button v-text="energyAnalysis.customOptionBtn.btn.name" class="layui-btn bayax-btn">保存</button>
+                                            </div>
+                                            <ul class="bayax-select-ul  bayax-anim bayax-anim-upbit">
+                                                <li v-for="(item,index) in energyAnalysis.customOptionBtn.data" v-text="item.name" @click=analysisOptionClick(item)>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="head">
+                                        <div class="getshi layui-inline">
+                                            <a href="javascript:;" class="active">时</a>
+                                            <a href="javascript:;">天</a>
+                                            <a href="javascript:;">月</a>
+                                            <a href="javascript:;">年</a>
+                                        </div>
+                                        <div class="gettrend layui-inline">
+                                            <a href="javascript:;" class="active">柱状图</a>
+                                            <a href="javascript:;">折线图</a>
+                                            <a href="javascript:;">饼图</a>
+                                            <a href="javascript:;">堆积图</a>
+                                        </div>
+                                    </div>
+                                    <div class="conten-main">
+                                        <!-- <div class="explain">
+                                            请选择统计对象绘制图表
+                                        </div> -->
+                                        <div id="analysisContent" class="analysisContent">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
+
                     <div class="bayax-tab-item layui-tab-item  ">
-                        <div class="energy-table content-main node-content-main">   
-                            456
+                        <div class="energy-table content-main node-content-main">
+                            <div class="energy-slide">
+                                <div>
+                                    <div class="explain">暂无自定义图表</div>
+                                    <div class="slide-menu bayaxMscroll">
+                                        <p class="title">自定义报表</p>
+                                        <div class="menu">
+                                            <ul>
+                                                <li>123</li>
+                                                <li>123</li>
+                                                <li>123</li>
+                                                <li>123</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="energy-main">
+    
+                            </div>
                         </div>
                     </div>
                 </div>
+               
             </div>
         </div>
+    </div>
 
-        <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+    <div v-bind:class="{ loadingShow:loadingShow }" class="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
     </div>
     <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
+    <script src="plugin/zTree/js/jquery.ztree.core.min.js"></script>
+    <script src="plugin/zTree/js/jquery.ztree.excheck.js"></script>
+    <script src="plugin/layui/layui.js "></script>
     <script src="js/basic/api.js "></script>
+    <script src="./plugin/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./plugin/highchart/highstock.js"></script>
+    <script src="./plugin/highchart/exporting.js"></script>
     <script src="./js/basic/common.js"></script>
     <script src="plugin/vue.js "></script>
-    <script src="plugin/layui/layui.js "></script>
+
     <script src="./js/datashow/energyView.js"></script>
 
 </body>

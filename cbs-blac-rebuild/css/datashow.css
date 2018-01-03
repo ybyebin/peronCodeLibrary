@@ -644,6 +644,9 @@ table.table-trend span.mark.error{
 .energy-tab-title li{
     border-bottom: none!important;
 }
+.energy-tab-title.bayax-tab-title li:first-child {
+    margin-left: 20px;
+}
 .energy-content{
     position: absolute;
     bottom: 20px;
@@ -657,7 +660,219 @@ table.table-trend span.mark.error{
 }
 .energy-content >div >div.node-content-main{
     height: 100%;
-    /* background: gray; */
     box-sizing: border-box;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 20px;
 }
+.energy-content .explain{
+    text-align: center;
+    color: #666;
+    font-size: 18px;
+    position: relative;
+    top: 40%;
+}
+.energy-slide{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 283px;
+    padding: 20px;
+    padding-left: 0;
+    border-right: 1px solid #6B6E80;
+    /* background: gray; */
+}
+.energy-slide > div{
+    height: 100%;
+    width: 100%;
+    /* background: #35c99d; */
+}
+.energy-content .slide-menu .title{
+    font-size: 18px;
+    padding-left:10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #6B6E80; 
+}
+.energy-slide div.menu{
+    position: absolute;
+    top: 55px;
+    bottom: 20px;
+    left: 10px;
+    right: 20px;
+    /* background: gray; */
+    overflow: hidden;
+}
+.energy-slide div.menu ul li{
+    padding: 10px 5px;
+    color: #9D9BAF;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.energy-slide div.menu ul li:nth-of-type(even) {
+    background: #262A50;
+}
+
+.energy-slide div.menu ul li:nth-of-type(odd) {
+    background-color: #1D2141;
+}
+.energy-main{
+    /* background: gray; */
+    position: absolute;
+    left: 324px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 10px 20px;
+}
+.energy-main ul.energy.bayax-select-ul{
+    top: 50px;
+}
+.energy-main span.bayax-select-span{
+    height: 44px;
+    padding-top: 12px;
+}
+.energy-main input{
+    height: 44px;
+}
+.div-btn-comhis{
+    margin-left: 15px;
+}
+.energy-main div.content{
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 80px;
+    bottom: 0;
+    background: gray;
+}
+.energy-main div.content .head{
+    border-bottom: 1px solid #6B6E80; 
+    padding: 10px 20px;
+}
+.energy-main div.content .head  a{
+    display: inline-block;  
+    padding: 5px;
+    margin-left: 10px;
+    color: #9D9BAF;
+    box-sizing: border-box;
+    text-align: center;
+}
+.energy-main div.content .head .getshi a{
+    border-radius: 50%;
+    width: 31px;
+    height: 31px;
+    border: 1px solid transparent;
+}
+.energy-main div.content .head  a.active{
+    color: #fff;
+    border-color: #fff;
+}
+.energy-main div.content .gettrend{
+    float: right;
+}
+.energy-main div.content .conten-main .explain{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    height: 30px;
+    width: 200px;
+}
+.energy-main div.content .conten-main .analysisContent{
+    position: absolute;
+    top: 55px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+/* tag-tree */
+.tag-tree{
+    position: absolute;
+    z-index: 10;
+    top: 51px;
+    right: 0;
+    /* height: 650px; */
+    max-height: 650px;
+    width: 432px;
+    background: #2D3452;
+    max-height: 680px;
+    border: 0 solid rgba(172,177,218,.7);
+    box-shadow: 0 5px 7px 3px rgba(0,0,0,.5);
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* display: none; */
+    /* padding: 10px; */
+    padding-top: 10px;
+}
+.tag-tree::before {
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #2D3452;
+    border-bottom-color: rgba(0,0,0,.2);
+    top: -7px;
+    right: 17px;
+}
+.tag-tree::after {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #2D3452;
+    top: -6px;
+    right: 18px;
+}
+.tag-tree::after, .tag-tree::before {
+    content: '';
+    border-top: 0;
+    display: inline-block;
+    position: absolute;
+}
+.tag-tree >div{
+    padding:10px;
+}
+.tag-tree .tag-tree-head{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4F546C;
+}
+.tag-tree .content-search{
+    box-sizing: border-box;
+    width: 100%;
+    margin-right: 0;
+    background-color: #3C4663;
+}
+.tag-tree .content-search input{
+    width: 86%;
+    background-color: #3C4663;
+}
+.tag-tree .tag-tree-body .panel-heading{
+    border-radius: 3px;
+    cursor: pointer;
+}
+.tag-tree .tag-tree-body .tree-panel-title{
+    padding: 10px;
+    font-size: 18px;
+
+}
+.tag-tree .tag-tree-body .bayaxTree{
+    /* background: red; */
+    padding-top: 10px;
+    max-height: 440px;
+    overflow-y: hidden;
+}
+
+.tag-tree .tag-tree-foot {
+    border-top: 1px solid #4F546C;
+    text-align: center;
+}
+.tag-tree .tag-tree-foot >div:last-child button{
+    margin-left: 30px;
+}
+
+
 /*能源管理  -end*/
