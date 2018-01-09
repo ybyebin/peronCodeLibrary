@@ -740,13 +740,18 @@ table.table-trend span.mark.error{
 .div-btn-comhis{
     margin-left: 15px;
 }
+
+.energy-content.layui-tab-content{
+    min-width: 1160px;
+}
+
 .energy-main div.content{
     position: absolute;
     left: 20px;
     right: 20px;
     top: 80px;
     bottom: 0;
-    background: gray;
+    /* background: gray; */
 }
 .energy-main div.content .head{
     border-bottom: 1px solid #6B6E80; 
@@ -793,6 +798,63 @@ table.table-trend span.mark.error{
     margin: auto;
 }
 
+
+/* 对比历史数据 */
+.comparise-body{
+    display: none;
+    padding: 30px;
+    padding-bottom: 50px;
+    /* background: red; */
+}
+.comparise-body .head span:not(:first-child){
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.comparise-body .add{
+    margin-top: 20px;
+
+} 
+.comparise-body .add a{
+    color: #A78FBE;
+}
+
+.comparise-body .add-time{
+    /* background: gray; */
+}
+
+.comparise-body .add-time ul> li.time-li{
+    padding: 5px 0;
+    text-align: center;
+}
+.comparise-body .add-time ul> li.time-li span.time-li-span{
+    margin-left: 10px;
+}
+#absolute.comparise-body .add-time ul> li.time-li span.time-li-span{
+    margin-right: 10px;
+}
+
+.comparise-body .add-time ul> li.time-li span.time-li-span:first-child{
+    margin-left: 0;
+}
+.comparise-body .add-time ul> li.time-li .bayax-select-title span{
+    padding-left: 30px;
+}
+.comparise-body .add-time ul> li.time-li .layui-inline{
+    text-align: left;
+}
+.comparise-body .add-time ul> li.time-li .bayax-select-ul li{
+    padding-left: 30px;
+}
+.comparise-body .add-time ul> li.time-li span.icon-highlight_off{
+    font-size: 18px;
+    position: relative;
+    top: 3px;
+    left: 17px;
+    cursor: pointer;
+}
+
+
 /* tag-tree */
 .tag-tree{
     position: absolute;
@@ -808,7 +870,7 @@ table.table-trend span.mark.error{
     box-shadow: 0 5px 7px 3px rgba(0,0,0,.5);
     border-radius: 4px;
     box-sizing: border-box;
-    /* display: none; */
+    display: none;
     /* padding: 10px; */
     padding-top: 10px;
 }
@@ -859,7 +921,7 @@ table.table-trend span.mark.error{
     font-size: 18px;
 
 }
-.tag-tree .tag-tree-body .bayaxTree{
+.tag-tree .tag-tree-body .bayax-tree{
     /* background: red; */
     padding-top: 10px;
     max-height: 440px;

@@ -17,6 +17,7 @@ function dateData() {
                 var time = FormatDate(nowdate, "yyyy-MM-dd");
                 dic.name = '今天';
                 dic.unit = '天';
+                dic.num = 0;
                 dic.startime = time;
                 dic.endtime = time;
                 
@@ -25,30 +26,35 @@ function dateData() {
                 var time = compareDate(1, 1);
                 dic.name = '昨天';
                 dic.unit = '天';
+                dic.num = 1;
                 dic.startime = time;
                 dic.endtime = time;
                 break;
             case 2:
                 dic.name = '最近3天';
                 dic.unit = '个3天';
+                dic.num = 2;
                 dic.startime = compareDate(1, 2);
                 dic.endtime = FormatDate(nowdate, "yyyy-MM-dd");
                 break;
             case 3:
                 dic.name = '最近7天';
                 dic.unit = '个7天';
+                dic.num = 3;
                 dic.startime = compareDate(1, 6);
                 dic.endtime = FormatDate(nowdate, "yyyy-MM-dd");
                 break;
             case 4:
                 dic.name = '最近30天';
                 dic.unit = '个30天';
+                dic.num = 4;
                 dic.startime = compareDate(1, 29);
                 dic.endtime = FormatDate(nowdate, "yyyy-MM-dd");
                 break;
             case 5:
                 dic.name = compareDate(2, 2) + "月";
                 dic.unit = '个月';
+                dic.num = 5;
                 if (nowMonth === 1) {
                     dic.startime = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 2) + '-01';
                     dic.endtime = getCurrentMonthLastForSelect(dic.startime);
@@ -61,6 +67,7 @@ function dateData() {
             case 6:
                 dic.name = compareDate(2, 3) + "月";
                 dic.unit = '个月';
+                dic.num = 6;
                 if (nowMonth === 1 || nowMonth === 2) {
                 
                     dic.startime = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 3) + '-01';
@@ -74,6 +81,7 @@ function dateData() {
             case 7:
                 dic.name = compareDate(2, 4) + "月";
                 dic.unit = '个月';
+                dic.num = 7;
                 if (nowMonth === 1 || nowMonth === 2 || nowMonth === 3) {
                
                     dic.startime = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 4) + '-01';
@@ -87,6 +95,7 @@ function dateData() {
             default:
                 dic.name = '自定义';
                 dic.unit = '';
+                dic.num = 8;
                 dic.startime = '';
                 dic.endtime = '';
                 dic.type = false;
@@ -120,6 +129,67 @@ function bayaxCompareDate(start, end, type) {
 
 }
 
+
+
+/**
+ * 相对历史数据对比  时间处理
+ * @param {对比时间 类型(今天。。昨天。。)} type 
+ * @param {*} conts 
+ * @param {*} selecti 
+ */
+function setRelativeHisTime(type, conts, selecti) {
+    console.log('今天:'+type)
+
+    var time = {};
+    switch(type){
+        case 0: //对比今天
+            console.log('对比今天')
+            time.start_time = compareDate(1, conts);
+            time.end_time = compareDate(1, conts);
+        break;
+        case 1: //对比昨天
+            console.log('对比昨天')
+            time.start_time = compareDate(1, conts+1);
+            time.end_time = compareDate(1, conts+1);
+        break;
+        case 2: //对比最近三天
+            console.log('对比最近三天')
+            var c = 3;
+            time.start_time = compareDate(1, c * conts + c - 1);
+            time.end_time = compareDate(1, c * conts);
+        break;
+        case 3: //对比最近七天
+            console.log('对比最近七天')
+            var c = 7;
+            time.start_time = compareDate(1, c * conts + c - 1);
+            time.end_time = compareDate(1, c * conts);
+        break;
+        case 4: //对比最近30天
+            console.log('对比最近30天')
+            var c = 30;
+            time.start_time = compareDate(1, c * conts + c - 1);
+            time.end_time = compareDate(1, c * conts);
+        break;
+        case 5: //对比最近1个月
+            console.log('对比最近1个月')
+            time.start_time = getCurrentMonthFirst(conts + 2);
+            time.end_time = getCurrentMonthLastForSelect(compareDate(3,  conts + 2));
+        break;
+        case 6: //对比最近2个月
+            console.log('对比最近2个月')
+            time.start_time = getCurrentMonthFirst(conts + 3);
+            time.end_time = getCurrentMonthLastForSelect(compareDate(3,  conts + 3));
+        break;
+        case 7: //对比最近3个月
+            console.log('对比最近3个月')
+            time.start_time = getCurrentMonthFirst(conts + 4);
+            time.end_time = getCurrentMonthLastForSelect(compareDate(3,  conts + 4));
+        break;
+        default:
+        break;
+    }
+    return time;  
+  }
 
 // ///////////////////////////////////////////////////////////////////////////
 
@@ -517,23 +587,6 @@ function fileName(name, type) {
 }
 
 
-//清空输入框
-function clearInput(name) {
-    $("#" + name + "").val("");
-}
 
 
 
-
-// 系统管理 折叠面板
-$('.syslog_open > a').on('click', function() {
-
-    if ($('.sys_all_log').css('display') == 'block') {
-        $('.sys_all_log').hide(300);
-        $('.iarrow').removeClass('iarrowopen');
-
-    } else {
-        $('.sys_all_log').show(300);
-        $('.iarrow').addClass('iarrowopen');
-    }
-});

@@ -227,12 +227,12 @@ function bayaxInit() {
     $('body').on('click', function() {
         $('.bayax-select-click').removeClass('bayax-select-clicked');
     });
-    $('.bayax-select-title').on('click', function(e) {
+    $('body').on('click','.bayax-select-title', function(e) {
         var oEvent = e || event;
         oEvent.stopPropagation(); //阻止事件冒泡
         var flag = true;
         var parents = $(this).parent();
-
+       
         if (!parents.hasClass('bayax-select-clicked')) {
             flag = false;
         } 

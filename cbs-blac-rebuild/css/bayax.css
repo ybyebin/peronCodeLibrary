@@ -393,7 +393,10 @@ a.nextPage {
     border: none;
 }
 
-
+.btn-disabled{
+    cursor: not-allowed;
+    opacity: 0.65;
+}
 /* 按钮  -end*/
 
 
