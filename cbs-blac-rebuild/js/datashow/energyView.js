@@ -10,7 +10,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
         theme: 'balck',
         showBottom: false,
         done: function (value, date, endDate) {
-            var energyAnalysis =energyVue.energyAnalysis.comparisonOfHistoricalData;
+            var energyAnalysis = energyVue.energyAnalysis.comparisonOfHistoricalData;
             var ed = energyVue.energyAnalysis.timeOption.endtime;
             var st = value;
             energyAnalysis.relativeData.data.length = 0;
@@ -30,11 +30,9 @@ layui.use(['layer', 'element', 'laydate'], function () {
 
                     // 这里要重新计算比较方法
                     if (compareYear(new Date(st), 10) <= value) {
-                        // energyVue.energyAnalysis.timeOption.startime = '';
                         layer.msg("超过统计时间限制");
-
                     } else {
-                        // 请求数据
+                        $('#endtime').focus();
                     }
                 } else {
                     energyVue.energyAnalysis.timeOption.startime = '';
@@ -58,7 +56,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
         theme: 'balck',
         showBottom: false,
         done: function (value, date, endDate) {
-            var energyAnalysis =energyVue.energyAnalysis.comparisonOfHistoricalData;
+            var energyAnalysis = energyVue.energyAnalysis.comparisonOfHistoricalData;
             var st = energyVue.energyAnalysis.timeOption.startime;
             var ed = value;
 
@@ -83,7 +81,101 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     if (compareYear(new Date(st), 10) <= value) {
                         layer.msg("超过统计时间限制");
                     } else {
-                        // warnVue.getWarnLog(1);
+                        var analysis_charts_time = energyVue.energyAnalysis.analysisCharts.time;
+
+                        var starts = new Date(st.replace(/\-/g, "/"));
+                        var ends = new Date(ed.replace(/\-/g, "/"));
+                        var cha = ends - starts;
+                        cha = cha / (60 * 60 * 24 * 1000) +1;
+                        // console.log('查看cha:'+cha)
+                        if(cha === 1){
+                            // hour
+                            analysis_charts_time.timeData.forEach(function (item) {
+                                if (item.type === 'hour') {
+                                    item.show = true;
+                                    item.isActive = true;
+                                    analysis_charts_time.timeType = 'hour';
+                                } else {
+                                    item.show = false;
+                                }
+    
+                            });
+                        }else if(cha>1 && cha<=7){
+                            // hour day
+
+                            analysis_charts_time.timeData.forEach(function (item) {
+                                var type = item.type;
+                                if (type === 'hour' || type === 'day') {
+                                    item.show = true;
+                                    item.isActive = false;
+                                    if (type === 'hour') {
+                                        item.isActive = true;
+                                        analysis_charts_time.timeType = 'hour';
+                                    }
+                                } else {
+                                    item.show = false;
+                                }
+    
+                            });
+                        }else if(cha>7 && cha <=30 ){
+                            // day
+                            analysis_charts_time.timeData.forEach(function (item) {
+                                if (item.type === 'day') {
+                                    item.show = true;
+                                    item.isActive = true;
+                                    analysis_charts_time.timeType = 'day';
+                                } else {
+                                    item.show = false;
+                                }
+    
+                            });
+                        }else if(cha > 30 && cha <= 180){
+                            // day month
+                            analysis_charts_time.timeData.forEach(function (item) {
+                                var type = item.type;
+                                if (type === 'day' || type === 'month') {
+                                    item.show = true;
+                                    item.isActive = false;
+                                    if (type === 'day') {
+                                        item.isActive = true;
+                                        analysis_charts_time.timeType = 'day';
+                                    }
+                                } else {
+                                    item.show = false;
+                                }
+    
+                            });
+                        }else if(cha > 180 && cha <= 365){
+                            // month
+                            analysis_charts_time.timeData.forEach(function (item) {
+                                if (item.type === 'month') {
+                                    item.show = true;
+                                    item.isActive = true;
+                                    analysis_charts_time.timeType = 'month';
+                                } else {
+                                    item.show = false;
+                                }
+    
+                            });
+                        }else{
+                            // month year
+                             analysis_charts_time.timeData.forEach(function (item) {
+                                var type = item.type;
+                                if (type === 'month' || type === 'year') {
+                                    item.show = true;
+                                    item.isActive = false;
+                                    if (type === 'month') {
+                                        item.isActive = true;
+                                        analysis_charts_time.timeType = 'month';
+                                    }
+                                } else {
+                                    item.show = false;
+                                }
+    
+                            });
+                        }
+                        
+                        energyVue.getAnalysisHighcharData(1,false,false);
                     }
                 } else {
                     energyVue.energyAnalysis.timeOption.endtime = '';
@@ -121,7 +213,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
                         "id": 40,
                         "create_time": "2017-07-27 17:10:50"
                     }
-                ], 
+                ],
                 timeOption: { //时间操作
                     flag: false, //初始化使用
                     btnSelectTitle: '', //当前时间类型
@@ -130,7 +222,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     endtime: '', //结束时间
                 },
                 comparisonOfHistoricalData: { //对比历史数据
-                    flag: true, //是否可以对比历史数据(true可对比/false不可对比)
+                    flag: false, //是否可以对比历史数据(true可对比/false不可对比)
                     relative: true, //true(相对时间)/false(绝对时间)
                     relativeData: { //相对时间 数据
                         comparisonTitle: '', //时间头部
@@ -139,11 +231,11 @@ layui.use(['layer', 'element', 'laydate'], function () {
                         data: []
                     },
                     absolutelyData: { //绝对时间 数据
-                        timeDifference:0, //绝对时间差值,
-                        item:{
-                            type:'',
-                            value:''
-                        },//当前编辑的时间
+                        timeDifference: 0, //绝对时间差值,
+                        item: {
+                            type: '',
+                            value: ''
+                        }, //当前编辑的时间
                         data: []
                     }
                 },
@@ -168,59 +260,62 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     ]
                 },
                 analysisCharts: { //能耗分析  图表数据
-                    time:{
-                        timeType: '', //图表数据时间类型  hour/day/month/year
-                        timeData:[
-                            {
-                                name:'时',
-                                type:'hour',
-                                isActive:true,
+                    time: {
+                        timeType: 'hour', //图表数据时间类型  hour/day/month/year
+                        timeData: [{
+                                name: '时',
+                                type: 'hour',
+                                isActive: true,
+                                show: true,
                             },
                             {
-                                name:'天',
-                                type:'day',
-                                isActive:false,
+                                name: '天',
+                                type: 'day',
+                                isActive: false,
+                                show: true,
                             },
                             {
-                                name:'月',
-                                type:'month',
-                                isActive:false,
+                                name: '月',
+                                type: 'month',
+                                isActive: false,
+                                show: true,
                             },
                             {
-                                name:'年',
-                                type:'year',
-                                isActive:false,
+                                name: '年',
+                                type: 'year',
+                                isActive: false,
+                                show: true,
                             }
                         ],
-                       
+
                     },
-                    chart:{
-                        chartType: '', //图表类型   column/spline/pie/area
-                        chartData:[
-                            {
-                                name:'柱状图',
-                                type:'column',
-                                isActive:true,
+                    chart: {
+                        chartType: 'column', //图表类型   column/spline/pie/area
+                        chartData: [{
+                                name: '柱状图',
+                                type: 'column',
+                                isActive: true,
                             },
                             {
-                                name:'折线图',
-                                type:'spline',
-                                isActive:false,
+                                name: '折线图',
+                                type: 'spline',
+                                isActive: false,
                             },
                             {
-                                name:'饼图',
-                                type:'pie',
-                                isActive:false,
+                                name: '饼图',
+                                type: 'pie',
+                                isActive: false,
                             },
                             {
-                                name:'堆积图',
-                                type:'area',
-                                isActive:false,
+                                name: '堆积图',
+                                type: 'area',
+                                isActive: false,
                             },
                         ]
-                    }
-                   
-                    
+                    },
+                    color:["#A4CD52", "#E7706F", "#9B77B3", "#4CB3E3", "#9B77B3", "#477B36", "#EABE43", "#135083", "#8B6527", "#B3CE59", "#E8767B", "#9980AF", "#5CB1E1", "#A977AB", "#427A46", "#D7AA5E", "#3B507B", "#3B507B", "#996725", "#C0D060", "#EA7D86", "#9789AA", "#67AEDE", "#B576A2", "#3C7856", "#C2956F", "#594F73", "#A66922", "#CDD065", "#EC8392", "#9491A3", "#71ABDB", "#C07698", "#347667", "#AF817C", "#714F6A", "#B46B1F", "#D9D06D", "#ED8A9F", "#91989A", "#7AA7D7", "#CA758E", "#2D7477", "#9C6D84", "#864E61", "#C06C1C", "#E4CF73", "#EE91AB", "#8D9E90", "#83A4D4", "#D57484", "#237286", "#895989", "#9A4C59", "#CC6E19", "#EECE79", "#F098B7", "#89A584", "#8BA0D1", "#DE717A", "#1D7095", "#75468E", "#AC494F", "#D86F14", "#F7CC7F", "#FFA2CB", "#85AB77", "#919BCD", "#E7706F", "#E7706F", "#1A6DA3", "#62328F", "#62328F", "#BC4746", "#E47113"]
+
+
 
                 },
             },
@@ -270,7 +365,8 @@ layui.use(['layer', 'element', 'laydate'], function () {
                             onCheck: function (event, treeId, treeNode) {
                                 var zTree = $.fn.zTree.getZTreeObj("analysis-tree");
                                 var nodes = zTree.getCheckedNodes(true);
-                                if (nodes.length > 1) {
+                                var length = nodes.length;
+                                if (length > 1 || length === 0) {
                                     energyVue.energyAnalysis.comparisonOfHistoricalData.flag = false;
                                 } else {
                                     energyVue.energyAnalysis.comparisonOfHistoricalData.flag = true;
@@ -359,7 +455,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     time_option.flag = true;
                 }
 
-                console.log(JSON.stringify(item, null, 2))
+                // console.log(JSON.stringify(item, null, 2))
             },
             /**
              * 能耗 时间处理---->时间数据设置
@@ -367,11 +463,12 @@ layui.use(['layer', 'element', 'laydate'], function () {
              * [type]  choice选择时间  / set自定义时间
              */
             analysisTimeSet: function (item, type) {
+                var _this = this;
                 var time_option = this.energyAnalysis.timeOption;
                 var com_his_data = this.energyAnalysis.comparisonOfHistoricalData;
+                var analysis_charts_time = this.energyAnalysis.analysisCharts.time;
 
                 time_option.btnSelectTitle = item.name;
-
 
                 com_his_data.relativeData.data.length = 0;
                 com_his_data.absolutelyData.data.length = 0;
@@ -385,15 +482,14 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     com_his_data.relativeData.timeUnit = item.unit;
                     com_his_data.relativeData.timeType = item.num;
 
-
-                } else {
+                }else {
                     com_his_data.relative = false;
                 }
 
                 switch (type) {
                     case 'choice':
-                        time_option.startime = item.startime;
-                        time_option.endtime = item.endtime;
+                        time_option.startime = item.start_time;
+                        time_option.endtime = item.end_time;
                         break;
                     case 'set':
                         if (item.time.type === 'start') {
@@ -405,6 +501,77 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     default:
                         break;
                 }
+
+                // 显示相应的 时间类型选择
+                switch (item.chart_time) {
+                    case 0:
+                        analysis_charts_time.timeData.forEach(function (item) {
+                            if (item.type === 'hour') {
+                                item.show = true;
+                                item.isActive = true;
+                                analysis_charts_time.timeType = 'hour';
+                            } else {
+                                item.show = false;
+                            }
+
+                        });
+
+                        break;
+                    case 1:
+                        analysis_charts_time.timeData.forEach(function (item) {
+                            var type = item.type;
+                            if (type === 'hour' || type === 'day') {
+                                item.show = true;
+                                item.isActive = false;
+                                if (type === 'hour') {
+                                    item.isActive = true;
+                                    analysis_charts_time.timeType = 'hour';
+                                }
+                            } else {
+                                item.show = false;
+                            }
+
+                        });
+                        break;
+                    case 2:
+                        analysis_charts_time.timeData.forEach(function (item) {
+                            if (item.type === 'day') {
+                                item.show = true;
+                                item.isActive = true;
+                                analysis_charts_time.timeType = 'day';
+                            } else {
+                                item.show = false;
+                            }
+
+                        });
+                        break;
+                    case 3:
+                        analysis_charts_time.timeData.forEach(function (item) {
+                            var type = item.type;
+                            if (type === 'day' || type === 'month') {
+                                item.show = true;
+                                item.isActive = false;
+                                if (type === 'day') {
+                                    item.isActive = true;
+                                    analysis_charts_time.timeType = 'day';
+                                }
+                            } else {
+                                item.show = false;
+                            }
+
+                        });
+                        break;
+                }
+
+
+                if (item.type) { //如果是 非自定义
+                    if(time_option.flag){ //是否是初始化(默认进入页面不请求)
+                        this.getAnalysisHighcharData(1,false,false);
+                    }
+                    
+                }
+
+
 
 
 
@@ -432,6 +599,24 @@ layui.use(['layer', 'element', 'laydate'], function () {
 
                         },
                         yes: function (index) {
+                            var arr = _this.energyAnalysis.comparisonOfHistoricalData.relativeData.data;
+                            var temp = {};
+                            var temp_arr = [];
+
+                            arr.forEach(function(item){
+                                console.log(item.num)
+                                temp[item.num] = item;
+                            });
+                            for (const key in temp) {
+                                temp_arr.push(temp[key]);
+                            }
+
+                            if (arr.length ===temp_arr.length) {
+                                _this.getAnalysisHighcharData(2,true,false);
+                                    
+                            }else{
+                                layer.msg('时间重复');
+                            }
 
                         },
                         btn2: function (index) {},
@@ -452,18 +637,64 @@ layui.use(['layer', 'element', 'laydate'], function () {
                             resize: false,
                             btn: ['保存', '取消'],
                             success: function () {
-                                
+
                                 var energyAnalysis = _this.energyAnalysis;
-                                var start =new Date(energyAnalysis.timeOption.startime.replace(/\-/g, "/")) ;
+                                var start = new Date(energyAnalysis.timeOption.startime.replace(/\-/g, "/"));
                                 var end = new Date(energyAnalysis.timeOption.endtime.replace(/\-/g, "/"));
-                                var time_difference = end-start;
-                                energyAnalysis.comparisonOfHistoricalData.absolutelyData.time_difference = end-start;
+                                // var time_difference = end - start;
+                                energyAnalysis.comparisonOfHistoricalData.absolutelyData.timeDifference = end - start;
                                 console.log(start);
                                 console.log(end);
 
-                                console.log('时间差:'+time_difference);
+                                console.log('时间差:' + (end - start));
                             },
                             yes: function (index) {
+                            
+
+                                var arr =deepClone(_this.energyAnalysis.comparisonOfHistoricalData.absolutelyData.data);
+                                var flag = true;
+                                arr.push({ //把对比时间 加入到去重行列
+                                    "isnull": false,
+                                    "start": {
+                                      "value": time_option.startime,
+                                      "type": "start"
+                                    },
+                                    "end": {
+                                      "value": time_option.endtime,
+                                      "type": "end"
+                                    }
+                                  });
+                                
+                              
+                                console.log(JSON.stringify(arr,null,2));
+                                arr.forEach(function(item){
+                                    if(item.isnull){
+                                        flag = false;
+                                    }
+                                    
+                                });
+                                if (flag) {
+                                    
+                                   
+                                    var temp = {};
+                                    var temp_arr = [];
+                                    arr.forEach(function(item){
+                                        temp[item.start.value] = item.end.value;
+                                    });
+                                    for (const key in temp) {
+                                        temp_arr.push(temp[key]);
+                                    }
+                                    if (arr.length === temp_arr.length) {
+                                            _this.getAnalysisHighcharData(2,false,false);
+                                    }else{
+                                        layer.msg('时间重复')
+                                    }
+
+                                }else{
+                                    layer.msg('对比时间不能为空');
+                                }
+
+
 
                             },
                             btn2: function (index) {},
@@ -517,12 +748,12 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 }
             },
             // 对比历史数据  删除【相对时间】
-            deleteRelativeTime:function(item){
+            deleteRelativeTime: function (item) {
                 var _this = this;
                 var relativeData = this.energyAnalysis.comparisonOfHistoricalData.relativeData;
                 var index = relativeData.data.indexOf(item);
-                if(index >-1){
-                    relativeData.data.splice(index,1);
+                if (index > -1) {
+                    relativeData.data.splice(index, 1);
                 }
             },
 
@@ -532,6 +763,9 @@ layui.use(['layer', 'element', 'laydate'], function () {
              *[items] 被选第几个对比时间
              */
             choiceRelativeTime: function (item, items) {
+                console.log(JSON.stringify(this.energyAnalysis.comparisonOfHistoricalData.relativeData.data,null,2))
+
+
 
                 item.num = items.name;
                 var time = {};
@@ -552,70 +786,72 @@ layui.use(['layer', 'element', 'laydate'], function () {
             addAbsoluteTime: function () {
                 var _this = this;
                 var absolutelyData = this.energyAnalysis.comparisonOfHistoricalData.absolutelyData;
-                if(absolutelyData.data.length < 9){
+                if (absolutelyData.data.length < 9) {
                     absolutelyData.data.push({
-                        name:'1',
-                        start:{
-                            value:'',
-                            type:'start'
+                        isnull: true,
+                        start: {
+                            value: '',
+                            type: 'start'
                         },
-                        end:{
-                            value:'',
-                            type:'end'
+                        end: {
+                            value: '',
+                            type: 'end'
                         },
-                        
+
                     });
                     this.$nextTick(function () {
-                        lay('.absolute-time').each(function(){
+                        lay('.absolute-time').each(function () {
                             laydate.render({
-                              elem: this,
-                              theme: 'balck',
-                              showBottom: false,
-                              done: function (value, date, endDate) {
-                                // console.log(energyVue);
-                                var item = energyVue.energyAnalysis.comparisonOfHistoricalData.absolutelyData.item;
-                                switch (item.type) {
-                                    case 'start':
-                                        item.value.start.value = value;
-                                        var times = Date.parse(new Date(value.replace(/\-/g, "/")))+energyVue.energyAnalysis.comparisonOfHistoricalData.absolutelyData.time_difference;
-                                        console.log(times);
-                                        item.value.end.value =new Date(times).format('yyyy-MM-dd');
-                                        console.log(new Date(times).format('yyyy-MM-dd'));
-                                        break;
-                                    case 'end':
-                                        item.value.end.value = value;
-                                        var times = Date.parse(new Date(value.replace(/\-/g, "/"))) - energyVue.energyAnalysis.comparisonOfHistoricalData.absolutelyData.time_difference;
-                                        item.value.start.value = new Date(times).format('yyyy-MM-dd');
-                                        break;
-                                    default:
-                                        break;
+                                elem: this,
+                                theme: 'balck',
+                                showBottom: false,
+                                done: function (value, date, endDate) {
+                                    console.log(JSON.stringify(energyVue.energyAnalysis.comparisonOfHistoricalData.absolutelyData,null,2) );
+                                    var item = energyVue.energyAnalysis.comparisonOfHistoricalData.absolutelyData.item;
+                                    var time_difference = energyVue.energyAnalysis.comparisonOfHistoricalData.absolutelyData.timeDifference;
+                                    item.value.isnull = false;
+                                    switch (item.type) {
+                                        case 'start':
+                                            item.value.start.value = value;
+                                            var times = Date.parse(new Date(value.replace(/\-/g, "/"))) + time_difference;
+                                            console.log(times);
+                                            item.value.end.value = new Date(times).format('yyyy-MM-dd');
+                                            console.log(new Date(times).format('yyyy-MM-dd'));
+                                            break;
+                                        case 'end':
+                                            item.value.end.value = value;
+                                            var times = Date.parse(new Date(value.replace(/\-/g, "/"))) - time_difference;
+                                            item.value.start.value = new Date(times).format('yyyy-MM-dd');
+                                            break;
+                                        default:
+                                            break;
+                                    }
                                 }
-                              }
                             });
-                          });
-                       
+                        });
+
                     });
-                }else{
+                } else {
                     layer.msg('最多添加9条对比数据');
                 }
-               
+
                 // var dic =
             },
             // 对比历史数据  设置绝对时间选择标志
-            setAbsoluteTimeFlag:function(item,type){
+            setAbsoluteTimeFlag: function (item, type) {
                 var absolutelyData = this.energyAnalysis.comparisonOfHistoricalData.absolutelyData;
                 absolutelyData.item.value = item;
                 absolutelyData.item.type = type;
-                console.log(JSON.stringify(item,null,2));
-                console.log('类型:'+type)
+                console.log(JSON.stringify(item, null, 2));
+                console.log('类型:' + type)
             },
             // 对比历史数据 删除【绝对时间】
-            deleteAbsoluteTime:function(item){
+            deleteAbsoluteTime: function (item) {
                 var _this = this;
                 var absolutelyData = this.energyAnalysis.comparisonOfHistoricalData.absolutelyData;
                 var index = absolutelyData.data.indexOf(item);
-                if(index >-1){
-                    absolutelyData.data.splice(index,1);
+                if (index > -1) {
+                    absolutelyData.data.splice(index, 1);
                 }
             },
 
@@ -629,12 +865,26 @@ layui.use(['layer', 'element', 'laydate'], function () {
             },
 
             // 能耗图表 时间类型选择
-            setChartsTimeType:function(item){
-                console.log(JSON.stringify(item,null,2));
+            setChartsTimeType: function (item) {
+                var time = this.energyAnalysis.analysisCharts.time;
+                time.timeType = item.type;
+                time.timeData.forEach(function(ele){
+                    ele.isActive = false;
+                });
+                item.isActive = true;
+                this.getAnalysisHighcharData(1,false,false);
+                
+                console.log(JSON.stringify(item, null, 2));
             },
             // 能耗图表  图表类型选择
-            setChartsType:function(item){
-
+            setChartsType: function (item) {
+                var chart =  this.energyAnalysis.analysisCharts.chart;
+                chart.chartType = item.type;
+                chart.chartData.forEach(function(ele){
+                    ele.isActive = false;
+                });
+                item.isActive = true;
+                this.getAnalysisHighcharData(1,false,true);
             },
 
             // 能耗图表生成
@@ -1249,13 +1499,20 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 var zTree = $.fn.zTree.getZTreeObj("analysis-tree");
                 zTree.checkAllNodes(false);
             },
-            // 能耗分析 树  btn-筛选
-            analysisBtnFilter: function () {
+            // 能耗分析 树  btn-筛选    获取highchar图  数据 
+            /**
+             * type   1:按钮触发  2对比历史数据触发
+             * isrelative (type== 2时：true相对 false绝对)
+             * ischarclick 是否是通过 点击highchart类型触发该方法
+             */
+            getAnalysisHighcharData: function (type,isrelative,ischarclick) {
+
                 var zTree = $.fn.zTree.getZTreeObj("analysis-tree");
                 var nodes = zTree.getCheckedNodes(true);
                 console.log('数组长度：' + nodes.length)
                 // console.log(JSON.stringify(nodes,null,2));
-                var tag = energyVue.tagTree.aTree.tag;
+                var tag = this.tagTree.aTree.tag;
+                var color = this.energyAnalysis.analysisCharts.color;
                 tag.energy_group_ids.length = 0;
                 tag.tag_ids.length = 0;
                 nodes.forEach(function (item, index) {
@@ -1273,7 +1530,10 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     }
                 });
 
-                var length = tag.energy_group_ids.length + tag.tag_ids;
+
+                var tag = this.tagTree.aTree.tag;
+                var length = tag.energy_group_ids.length + tag.tag_ids.length;
+                
 
                 console.log('数组长===:' + length);
                 if (length == 0) {
@@ -1281,10 +1541,147 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 } else if (length > 16) {
                     layer.msg('请选择不超过16条统计对象进行对比');
                 } else {
-                    $('.choice-tag-btn').click();
+                    if(type == 1)
+                    $('body').click();
+                    // $('.choice-tag-btn').click();
                     console.log('操作完成查看：' + JSON.stringify(tag, null, 2))
-                }
+                    var time_option = this.energyAnalysis.timeOption;
+                    if(time_option.startime == '' || time_option.endtime == ''){
+                        layer.msg('时间区间不能为空');
+                    }else{
+                        layer.msg('可以请求');
+                       
+                        if(!ischarclick){ //非点击类型 所有图表类型重置到 column
+                            var chart =  this.energyAnalysis.analysisCharts.chart;
+                            chart.chartType = 'column';
+                            chart.chartData.forEach(function(ele){
+                                ele.isActive = false;
+                                if(ele.type === 'column'){
+                                    ele.isActive = true;
+                                }
+                            });
 
+                        }
+                        var energyAnalysis = this.energyAnalysis;
+                        var chart_type = energyAnalysis.analysisCharts.chart.chartType; //当前选中的图表类型
+                        var url = '';
+                        var data = {
+                            statistics_type:energyAnalysis.analysisCharts.time.timeType //时间类型
+                        };
+
+                        data.graph_type = chart_type === 'pie'?2:1; //2:饼图,1:其他类型
+
+
+
+
+                        switch (type) {
+                            case 1: //按钮触发
+                                url = 'HistoryDataTagsContrast'; //同一个时间段多个tag组或者多个tag对比
+                                data.start_time = time_option.startime;
+                                data.end_time = time_option.endtime + ' 23:59:59';
+                                data.energy_group_ids = tag.energy_group_ids;
+                                data.tag_ids = tag.tag_ids;
+                                break;
+                            case 2: //对比历史数据触发
+                                var length = tag.energy_group_ids.length;
+                                var history = [];
+                                var time_data = [];
+                                if (isrelative) {
+                                    time_data = this.energyAnalysis.comparisonOfHistoricalData.relativeData.data;
+                                    history.push({
+                                        'start_time': time_option.startime,
+                                        'end_time': time_option.endtime + ' 23:59:59'
+                                    });
+                                    time_data.forEach(function (item) {
+                                        history.push({
+                                            'start_time': item.start_time,
+                                            'end_time': item.end_time + ' 23:59:59'
+                                        });
+                                    });
+                                } else {
+                                    time_data = this.energyAnalysis.comparisonOfHistoricalData.absolutelyData.data;
+
+                                    history.push({
+                                        'start_time': time_option.startime,
+                                        'end_time': time_option.endtime + ' 23:59:59'
+                                    });
+                                    time_data.forEach(function (item) {
+                                        history.push({
+                                            'start_time': item.start.value,
+                                            'end_time': item.end.value + ' 23:59:59'
+                                        });
+                                    });
+                                }
+
+                                data.history = history;
+                                data.id_type = length > 0 ? 2 : 1; //1:tag_id  2:tag_group_id
+                                data.id = length > 0 ? tag.energy_group_ids[0] : tag.tag_ids[0];
+                                url = 'HistoryDataTimesContrast'; //多个时间段同一个tag或能耗组对比
+                                break;
+                        }
+                     
+            
+                        console.log('data：'+JSON.stringify(data,null,2))
+
+                        switch(chart_type){
+                            case 'column':
+                            break;
+                            case 'spline':
+                            break;
+                            case 'pie':
+                            break;
+                            case 'area':
+                            break;
+                        }     
+
+                        $.ajax({
+                            type: "put",
+                            url: apiurl + url,
+                            dataType: 'json',
+                            data: data,
+                            beforeSend: function () {
+                               
+                            },
+                            success: function (result) {
+                                //同一个时间段多个tag组或者多个tag对比 HistoryDataTagsContrast
+                                //多个时间段同一个tag或能耗组对比 HistoryDataTimesContrast
+                                var series_data = [];//处理后图表数据
+
+                                if(result.success){
+                                    if(data.graph_type === 2){//饼图数据
+                                        var pie_data = result.data;
+                                        var j = 0;
+                                        for (var key in pie_data) {
+                                            series_data.push({
+                                                name:key,
+                                                y:pie_data[key],
+                                                color:color[j]
+                                            });
+                                            j++;
+                                          }
+
+                                    }else{//其他类型数据处理
+                                            
+                                    }
+                                }else{
+                                    // 无能耗数据
+                                }
+
+                               
+
+
+
+
+
+
+                            },
+                            error: function () {
+
+                            }
+                        });
+                    }
+                }
+               
 
             },
 
@@ -1412,9 +1809,10 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 // 下拉框时间数据初始化 (默认显示最近三天)
                 var time_option = this.energyAnalysis.timeOption;
                 time_option.btnSelectdata = dateData();
-                this.choiceAnalysisTime(time_option.btnSelectdata[2]);
-                // time_data[2].click();
-
+                this.choiceAnalysisTime(time_option.btnSelectdata[3]);
+                setTimeout(() => {
+                    time_option.flag = true;
+                }, 300);
 
                 // 滚动条初始化
                 $('.menu, .bayax-tree').mCustomScrollbar({

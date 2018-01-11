@@ -3,23 +3,36 @@
  */
 
 //日期选择
+
+/**
+ * dic.name 时间名称 参数：【'今天','昨天','最近3天','最近7天','最近30天','?月','自定义'】;
+ * dic.type 时间对比类型 参数：【'true相对时间','false绝对时间'】;  作用：用于历史数据对比 
+ * dic.unit 时间对比单位  参数：【'天','个3天','个7天','个30天','个月',''】; 作用：用于历史数据对比 
+ * dic.num  时间名称数字标志 ；作用：用于历史数据对比,计算时间
+ * dic.chart_time 能耗图表可选日期类型 参数：【'0(hour)','1(hour,day)','2(day)','3(day,month)','4(自定义day)'】 作用:用于设置图表可选日期类型
+ * dic.start_time 开始时间值;
+ * dic.end_time 结束时间值;
+ * @returns 
+ */
 function dateData() {
     var dateArr = [],
         lengths = 9;
 
     var nowdate = new Date();
     var nowMonth = Number(nowdate.getMonth() + 1);
-    console.log('现在月份:'+nowMonth)
     for (var i = 0; i < lengths; i++) {
+       
+
         var dic = { type: true }; //true(相对时间) fasle(绝对时间)
         switch (i) {
             case 0:
                 var time = FormatDate(nowdate, "yyyy-MM-dd");
                 dic.name = '今天';
-                dic.unit = '天';
+                dic.unit = '天'; 
                 dic.num = 0;
-                dic.startime = time;
-                dic.endtime = time;
+                dic.chart_time = 0;
+                dic.start_time = time;
+                dic.end_time = time;
                 
                 break;
             case 1:
@@ -27,77 +40,84 @@ function dateData() {
                 dic.name = '昨天';
                 dic.unit = '天';
                 dic.num = 1;
-                dic.startime = time;
-                dic.endtime = time;
+                dic.chart_time = 0;
+                dic.start_time = time;
+                dic.end_time = time;
                 break;
             case 2:
                 dic.name = '最近3天';
                 dic.unit = '个3天';
                 dic.num = 2;
-                dic.startime = compareDate(1, 2);
-                dic.endtime = FormatDate(nowdate, "yyyy-MM-dd");
+                dic.chart_time = 1;
+                dic.start_time = compareDate(1, 2);
+                dic.end_time = FormatDate(nowdate, "yyyy-MM-dd");
                 break;
             case 3:
                 dic.name = '最近7天';
                 dic.unit = '个7天';
                 dic.num = 3;
-                dic.startime = compareDate(1, 6);
-                dic.endtime = FormatDate(nowdate, "yyyy-MM-dd");
+                dic.chart_time = 1;
+                dic.start_time = compareDate(1, 6);
+                dic.end_time = FormatDate(nowdate, "yyyy-MM-dd");
                 break;
             case 4:
                 dic.name = '最近30天';
                 dic.unit = '个30天';
                 dic.num = 4;
-                dic.startime = compareDate(1, 29);
-                dic.endtime = FormatDate(nowdate, "yyyy-MM-dd");
+                dic.chart_time = 2;
+                dic.start_time = compareDate(1, 29);
+                dic.end_time = FormatDate(nowdate, "yyyy-MM-dd");
                 break;
             case 5:
                 dic.name = compareDate(2, 2) + "月";
                 dic.unit = '个月';
                 dic.num = 5;
+                dic.chart_time = 3;
                 if (nowMonth === 1) {
-                    dic.startime = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 2) + '-01';
-                    dic.endtime = getCurrentMonthLastForSelect(dic.startime);
+                    dic.start_time = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 2) + '-01';
+                    dic.end_time = getCurrentMonthLastForSelect(dic.start_time);
                 } else {
-
-                    dic.startime = nowdate.getFullYear() + '-' + compareDate(2, 2) + '-01';
-                    dic.endtime = getCurrentMonthLastForSelect(dic.startime);
+                    dic.start_time = nowdate.getFullYear() + '-' + compareDate(2, 2) + '-01';
+                    dic.end_time = getCurrentMonthLastForSelect(dic.start_time);
                 }
                 break;
             case 6:
                 dic.name = compareDate(2, 3) + "月";
                 dic.unit = '个月';
                 dic.num = 6;
+                dic.chart_time = 3;
                 if (nowMonth === 1 || nowMonth === 2) {
                 
-                    dic.startime = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 3) + '-01';
-                    dic.endtime = getCurrentMonthLastForSelect(dic.startime);
+                    dic.start_time = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 3) + '-01';
+                    dic.end_time = getCurrentMonthLastForSelect(dic.start_time);
 
                 } else {
-                    dic.startime = nowdate.getFullYear() + '-' + compareDate(2, 3) + '-01';
-                    dic.endtime = getCurrentMonthLastForSelect(dic.startime);
+                    dic.start_time = nowdate.getFullYear() + '-' + compareDate(2, 3) + '-01';
+                    dic.end_time = getCurrentMonthLastForSelect(dic.start_time);
                 }
                 break;
             case 7:
                 dic.name = compareDate(2, 4) + "月";
                 dic.unit = '个月';
                 dic.num = 7;
+                dic.chart_time = 3;
                 if (nowMonth === 1 || nowMonth === 2 || nowMonth === 3) {
                
-                    dic.startime = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 4) + '-01';
-                    dic.endtime = getCurrentMonthLastForSelect(dic.startime);
+                    dic.start_time = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 4) + '-01';
+                    dic.end_time = getCurrentMonthLastForSelect(dic.start_time);
 
                 } else {
-                    dic.startime = nowdate.getFullYear() + '-' + compareDate(2, 4) + '-01';
-                    dic.endtime = getCurrentMonthLastForSelect(dic.startime);
+                    dic.start_time = nowdate.getFullYear() + '-' + compareDate(2, 4) + '-01';
+                    dic.end_time = getCurrentMonthLastForSelect(dic.start_time);
                 }
                 break;
             default:
                 dic.name = '自定义';
                 dic.unit = '';
                 dic.num = 8;
-                dic.startime = '';
-                dic.endtime = '';
+                dic.chart_time = 2;
+                dic.start_time = '';
+                dic.end_time = '';
                 dic.type = false;
                 break;
         }

@@ -173,7 +173,7 @@
                                             </div>
                                             <div class="tag-tree-foot">
                                                 <div class="layui-inline ">
-                                                    <button @click='analysisBtnFilter' class="bayax-btn">筛选</button>
+                                                    <button @click='getAnalysisHighcharData(1,false,false)' class="bayax-btn">筛选</button>
                                                 </div>
                                                 <div class="layui-inline ">
                                                     <button @click="analysisCleanAll" class="bayax-btn-cancel">清空筛选条件</button>
@@ -200,10 +200,10 @@
                                 <div class="content">
                                     <div class="head">
                                         <div class="getshi layui-inline">
-                                            <a v-for="item in energyAnalysis.analysisCharts.time.timeData" v-bind:class="{active:item.isActive}" v-text="item.name" @click="setChartsTimeType(item)" href="javascript:;"></a>
+                                            <a v-for="item in energyAnalysis.analysisCharts.time.timeData" v-bind:class="{active:item.isActive}" v-show="item.show" v-text="item.name" @click="setChartsTimeType(item)" href="javascript:;"></a>
                                         </div>
                                         <div class="gettrend layui-inline">
-                                            <a v-for="item in energyAnalysis.analysisCharts.chart.chartData" v-bind:class="{active:item.isActive}" v-text="item.name" @click="setChartsType(item)" href="javascript:;"></a>
+                                            <a v-for="item in energyAnalysis.analysisCharts.chart.chartData" v-bind:class="{active:item.isActive}"  v-text="item.name" @click="setChartsType(item)" href="javascript:;"></a>
                                            
                                         </div>
                                     </div>
