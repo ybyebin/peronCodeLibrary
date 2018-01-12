@@ -19,6 +19,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
             energyVue.analysisTimeSet({
                 name: '自定义',
                 type: false,
+                num:8,
                 time: {
                     type: 'start',
                     value: value
@@ -65,6 +66,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
             energyVue.analysisTimeSet({
                 name: '自定义',
                 type: false,
+                num:8,
                 time: {
                     type: 'end',
                     value: value
@@ -185,8 +187,6 @@ layui.use(['layer', 'element', 'laydate'], function () {
         }
     });
 
-
-
     var energyVue = new Vue({
         el: '#app',
         data: {
@@ -197,25 +197,16 @@ layui.use(['layer', 'element', 'laydate'], function () {
             },
             loadingShow: false,
             energyAnalysis: { //能耗分析
-                customList: [ //自定义图表列表
-                    {
-                        "user_id": 29,
-                        "project_id": 1,
-                        "name": "6月月报6月月报6月月报6月月报6月月报6月月报6月月报6月月报",
-                        "start_time": "0001-01-01 00:00:00",
-                        "end_time": "0001-01-01 00:00:00",
-                        "date_type": 1,
-                        "length_unit": "month",
-                        "lengths": -2,
-                        "relative_history": "[]",
-                        "absolute_history": "[]",
-                        "tag_id_tree": "[{\"id\":\"65\",\"selected\":1,\"tags\":null},{\"id\":\"66\",\"selected\":1,\"tags\":null},{\"id\":\"67\",\"selected\":1,\"tags\":null},{\"id\":\"68\",\"selected\":1,\"tags\":null}]",
-                        "id": 40,
-                        "create_time": "2017-07-27 17:10:50"
-                    }
-                ],
+                customList:{
+                    isNull:true,
+                    inputName:'sdsdsd',//保存/另存为 输入名称
+                    item:{},//当前正在选中的自定义图表
+                    data: [], //自定义图表列表
+                },
+
                 timeOption: { //时间操作
                     flag: false, //初始化使用
+                    item:'',
                     btnSelectTitle: '', //当前时间类型
                     btnSelectdata: [], //时间下拉框数据
                     startime: '', //开始时间
@@ -363,13 +354,29 @@ layui.use(['layer', 'element', 'laydate'], function () {
                             },
                             // 筛选备用方法
                             onCheck: function (event, treeId, treeNode) {
+                                // console.log(treeNode.checked)
+                                
+                                var custom_list = energyVue.energyAnalysis.customList;
+                                var com_his_data = energyVue.energyAnalysis.comparisonOfHistoricalData;
                                 var zTree = $.fn.zTree.getZTreeObj("analysis-tree");
                                 var nodes = zTree.getCheckedNodes(true);
                                 var length = nodes.length;
+
+                                custom_list.item = {};
+                                custom_list.data.forEach(function(item){
+                                    item.isActive = false;
+                                });
+                                com_his_data.relativeData.data = [];
+                                com_his_data.relativeData.absolutelyData = [];
+                                
+
                                 if (length > 1 || length === 0) {
-                                    energyVue.energyAnalysis.comparisonOfHistoricalData.flag = false;
+                                    com_his_data.flag = false;
                                 } else {
-                                    energyVue.energyAnalysis.comparisonOfHistoricalData.flag = true;
+                                    com_his_data.flag = true;
+                                }
+                                if(length > 16){
+                                    layer.msg('请选择不超过16条统计对象进行对比');
                                 }
                                 console.log('操作完成查看：' + JSON.stringify(nodes, null, 2))
 
@@ -424,20 +431,497 @@ layui.use(['layer', 'element', 'laydate'], function () {
 
                 element.init();
                 this.vueInit();
-                this.drawAnalysis();
+                // this.drawAnalysisHighChart();
 
                 this.getTagTreeData();
 
+                this.getCustomAnalysisList();
 
-                // 对比历史
-                // this.comparisonHistory();
             });
         },
         methods: {
-            // 获取 能耗分析 自定义图表数据
+             // 获取 能耗分析 自定义图表列表
+            getCustomAnalysisList:function(){
+                var custom_list = this.energyAnalysis.customList;
+
+                var result = {
+                    "success": true,
+                    "data": {
+                        "pageCount": 0,
+                        "items": [
+                            {   
+                                'name':'123123',
+                                'id':1,
+                                "data_type": 1,
+                                "length_unit": "day",
+                                "lengths": -7,
+                                "start_time": "2018-01-06",
+                                "end_time": "2018-01-12",
+                                "relative_history": "[]",
+                                "absolute_history": "[]",
+                                "tag_id_tree": "{\"energy_group_ids\":[46,47],\"tag_ids\":[]}"
+                              
+                            },
+                            {
+                                'name':'呵呵',
+                                'id':2,
+                                "data_type": 1,
+                                "length_unit": "day",
+                                "lengths": -7,
+                                "start_time": "2018-01-06",
+                                "end_time": "2018-01-12",
+                                "relative_history": "[{\"unit\":1},{\"unit\":4}]",
+                                "absolute_history": "[]",
+                                "tag_id_tree": "{\"energy_group_ids\":[46],\"tag_ids\":[]}"
+                            }
+                        ]
+                    },
+                    "error_message": null
+                }
+
+
+
+
+                if (result.success) {
+                    var item = result.data.items;
+                    if (Array.isArray(item)) {
+                        if (item.length > 0) {
+                            // 有数据
+                            custom_list.isNull = false;
+                            item.forEach(function(ele){
+                                ele.isActive = false;
+                            });
+                            custom_list.data = item;
+                        } else {
+                            custom_list.isNull = true;
+                        }
+                    } else {
+                        custom_list.isNull = true;
+                    }
+                }
+
+
+
+
+
+                // $.ajax({
+                //     type: "GET",
+                //     url: apiurl + 'EnergyGraphConfig',
+                //     success: function(result) {
+                //         if (result.success) {
+                //             var item = result.data.items;
+                //            
+                                // if (result.success) {
+                                //     var item = result.data.items;
+                                //     if (Array.isArray(item)) {
+                                //         if (item.length > 0) {
+                                //             // 有数据
+                                //             custom_list.isNull = false;
+                                //             item.forEach(function(ele){
+                                //                 ele.isActive = false;
+                                //             });
+                                //             custom_list.data = item;
+                                //         } else {
+                                //             custom_list.isNull = true;
+                                //         }
+                                //     } else {
+                                //         custom_list.isNull = true;
+                                //     }
+                                // }
+                //         }
+                //     },
+                //     error:function(){
+
+                //     }
+                // });
+
+            },
+            // 获取 能耗分析 单个自定义图表数据
             getCustomAnalysisData: function (item) {
                 console.log('自定义图表:' + JSON.stringify(item, null, 2));
+
+                var custom_list = this.energyAnalysis.customList;
+                // 暂存当前选中的自定义图表
+                custom_list.item = item;
+                // 标记当前选中的自定义图表
+                custom_list.data.forEach(function(ele){
+                    ele.isActive = false;
+                });
+                item.isActive = true;
+
+                // 还原数据 并请求数据
+                var zTree = $.fn.zTree.getZTreeObj("analysis-tree");
+                var tag_id_tree =JSON.parse(item.tag_id_tree);
+                var com_his_data = this.energyAnalysis.comparisonOfHistoricalData;
+
+                // 清空 tag_tree
+                zTree.checkAllNodes(false);
+
+                // 还原 tag_tree
+                tag_id_tree.energy_group_ids.forEach(function(item){
+                    var nodes = zTree.getNodesByParam("id", "g"+item, null);
+                    if (nodes.length > 0) {
+                        zTree.checkNode(nodes[0], true, false);
+                    }
+                });
+                tag_id_tree.tag_ids.forEach(function(item){
+                    var nodes = zTree.getNodesByParam("id", item, null);
+                    if (nodes.length > 0) {
+                        zTree.checkNode(nodes[0], true, false);
+                    }
+                });
+                var nodes = zTree.getCheckedNodes(true);
+                var length = nodes.length;
+                if (length > 1 || length === 0) {
+                    com_his_data.flag = false;
+                } else {
+                    com_his_data.flag = true;
+                }
+
+
+                // "name": "123123",
+                // "id": 1,
+                // "data_type": 1,
+                // "length_unit": "day",
+                // "lengths": -7,
+                // "start_time": "2018-01-06",
+                // "end_time": "2018-01-12",
+                // "relative_history": "[]",
+                // "absolute_history": "[]",
+                // "tag_id_tree": "{\"energy_group_ids\":[46,47],\"tag_ids\":[]}",
+                // "isActive": false
+                
+                // if(item.data_type){
+
+                // }
+
+
+
+
+
+
+
+              
+               
+                
             },
+             // 能耗图表 自定义图表操作  保存/另存为/删除
+            analysisOptionClick: function (item) {
+                var _this = this;
+                var btn = this.energyAnalysis.customOptionBtn.btn;
+                var custom_list = this.energyAnalysis.customList;
+                btn.name = item.name;
+                btn.type = item.type;
+
+
+
+                switch (item.type) {
+                    case 1:
+                        // 可以保存
+                        layer.open({
+                            title: ['保存'],
+                            type: 1,
+                            skin: 'bayax-layer-skin',
+                            area: ['400px', '200px'],
+                            content: $('#save-othersave'),
+                            shift: 2,
+                            resize: false,
+                            btn: ['保存', '取消'],
+                            success: function () {
+                                custom_list.inputName = '';
+                            },
+                            yes: function (index) {
+                                var data =  _this.analysisOptionMethod(true);
+                                console.log('查看提交的自定义数据:'+JSON.stringify(data,null,2))
+                                if(data === false){
+
+                                }else{
+                                    // 网络请求
+                                    layer.close(index);
+                                }
+                               
+                            },
+                            btn2: function (index) { },
+                        });
+                        break;
+                    case 2:
+                        // 另存为
+                        if (custom_list.item.hasOwnProperty('name')) {
+                            layer.open({
+                                title: ['另存为'],
+                                type: 1,
+                                skin: 'bayax-layer-skin',
+                                area: ['400px', '200px'],
+                                content: $('#save-othersave'),
+                                shift: 2,
+                                resize: false,
+                                btn: ['保存', '取消'],
+                                success: function () {
+                                    custom_list.inputName = '';
+                                },
+                                yes: function (index) {
+                                    var data =  _this.analysisOptionMethod(false);
+                                    console.log('查看提交的自定义数据:'+JSON.stringify(data,null,2))
+                                    layer.close(index);
+                                },
+                                btn2: function (index) { },
+                            });
+                        } else {
+                            layer.msg('未选中自定义图表');
+                        }
+
+                        break;
+                    case 3:
+                        // 删除 
+                        if (custom_list.item.hasOwnProperty('name')) {
+                            layer.confirm('确认删除当前选中自定义图表？', {
+                                title: '删除',
+                                skin: 'bayax-layer-skin',
+                                success: function () {
+                                    $('.layui-layer-btn a').addClass('confirm');
+                                    $('.layui-layer.layui-layer-dialog.bayax-layer-skin .layui-layer-content').css('text-align', 'center');
+                                },
+                                btn: ['确定', '取消']
+                            }, function () {
+                                $.ajax({
+                                    url: apiurl,
+                                    type: "DELETE",
+                                    beforeSend: function () {
+                                        _this.loadingShow = true;
+                                    },
+                                    success: function (data) {
+
+
+                                    },
+                                    error: function (data) {
+                                    }
+                                });
+                            }, function () {
+
+                            });
+                        } else {
+                            layer.msg('未选中自定义图表');
+                        }
+
+                        break;
+                }
+
+            },
+            /**
+             * 能耗图表 自定义图表操作  保存/另存为 数据处理方法
+             * true 保存   false 另存为
+             */
+            analysisOptionMethod: function (flag) {
+                var _this = this;
+                var zTree = $.fn.zTree.getZTreeObj("analysis-tree");
+                var nodes = zTree.getCheckedNodes(true);
+                var com_his_data = energyVue.energyAnalysis.comparisonOfHistoricalData;
+                var tag = this.tagTree.aTree.tag;
+                var custom_list = this.energyAnalysis.customList;
+                // 清空被选tag及tag组(为下面重新计算)
+                tag.energy_group_ids.length = 0;
+                tag.tag_ids.length = 0;
+
+                // 统计被选tag及tag组
+                nodes.forEach(function (item, index) {
+                    console.log(index)
+                    if (item.isgroup) {
+                        var indexs = tag.energy_group_ids.indexOf(item.rel_id);
+                        if (indexs < 0) {
+                            tag.energy_group_ids.push(item.rel_id);
+                        }
+                    } else {
+                        var indexs = tag.tag_ids.indexOf(item.id);
+                        if (indexs < 0) {
+                            tag.tag_ids.push(item.id);
+                        }
+                    }
+                });
+
+                // 被选tag组的长度
+                var length = tag.energy_group_ids.length + tag.tag_ids.length;
+                console.log('被选数组长度:' + length);
+                if (length == 0) {
+                    layer.msg('统计对象为空');
+                    return false;
+                } else if (length > 16) {
+                    layer.msg('请选择不超过16条统计对象进行对比');
+                    return false;
+                } else {
+                    // 起止时间段
+                    var time_option = this.energyAnalysis.timeOption;
+
+                    if (time_option.startime == '' || time_option.endtime == '') {
+                        layer.msg('时间区间不能为空');
+                        return false;
+                    } else {
+                        var status = _this.nameRegeMatch(custom_list.inputName)
+                        switch (status) {
+                            case 1:
+                                layer.msg('名称不能为空');
+                                return false;
+                                break;
+                            case 2:
+                                layer.msg('输入不合法');
+                                return false;
+                                break;
+                            case 3:
+                                var name = custom_list.inputName;
+                                var data_type = com_his_data.relative === true ? 1 : 2; //1:相对时间，2:绝对时间
+                                var length_unit = '';//相对时间的计算单位：day,month,year
+                                var lengths = 0;//相对时间计算基数
+                                var start_time = time_option.startime;//绝对时间类型的开始时间
+                                var end_time = time_option.endtime;//绝对时间类型的结束时间
+                                var relative_history = [];//历史数据对比，相对时间集合，JSON格式
+                                var absolute_history = [];//历史数据对比，绝对时间集合，JSON格式
+                                var tag_id_tree = JSON.stringify(tag);//能耗统计被选中的tag
+                                
+                                switch (time_option.item.num) {
+                                    case 0:
+                                        length_unit = "day";
+                                        lengths = 0;
+                                        break;
+                                    case 1:
+                                        length_unit = "day";
+                                        lengths = -1;
+                                        break;
+                                    case 2:
+                                        length_unit = "day";
+                                        lengths = -3;
+                                        break;
+                                    case 3:
+                                        length_unit = "day";
+                                        lengths = -7;
+                                        break;
+                                    case 4:
+                                        length_unit = "day";
+                                        lengths = -30;
+                                        break;
+                                    case 5:
+                                        length_unit = "month";
+                                        lengths = -1;
+                                        break;
+                                    case 6:
+                                        length_unit = "month";
+                                        lengths = -2;
+                                        break;
+                                    case 7:
+                                        length_unit = "month";
+                                        lengths = -3;
+                                        break;
+                                    case 8:
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                                if (com_his_data.flag) {//存在对比历史数据
+                                    if (com_his_data.relative) {
+                                        // 相对
+                                        var arr = _this.energyAnalysis.comparisonOfHistoricalData.relativeData.data;
+                                        var temp = {};
+                                        var temp_arr = [];
+
+                                        arr.forEach(function (item) {
+                                            console.log(item.num)
+                                            temp[item.num] = item;
+                                        });
+                                        for (const key in temp) {
+                                            temp_arr.push(temp[key]);
+                                        }
+
+                                        if (arr.length === temp_arr.length) {
+                                            arr.forEach(function (ele) {
+                                                relative_history.push({
+                                                    unit: ele.num
+                                                })
+                                            });
+                                        } else {
+                                            layer.msg('对比时间重复');
+                                            return false;
+                                        }
+                                    } else {
+                                        //绝对
+                                        var arr_1 = _this.energyAnalysis.comparisonOfHistoricalData.absolutelyData.data
+                                        var arr = deepClone(arr_1);
+
+                                        var flag = true;
+                                        arr.push({ //把对比时间 加入到去重行列
+                                            "isnull": false,
+                                            "start": {
+                                                "value": time_option.startime,
+                                                "type": "start"
+                                            },
+                                            "end": {
+                                                "value": time_option.endtime,
+                                                "type": "end"
+                                            }
+                                        });
+
+
+                                        console.log(JSON.stringify(arr, null, 2));
+                                        arr.forEach(function (item) {
+                                            if (item.isnull) {
+                                                flag = false;
+                                            }
+
+                                        });
+                                        if (flag) {
+
+                                            var temp = {};
+                                            var temp_arr = [];
+                                            arr.forEach(function (item) {
+                                                temp[item.start.value] = item.end.value;
+                                            });
+                                            for (const key in temp) {
+                                                temp_arr.push(temp[key]);
+                                            }
+                                            if (arr.length === temp_arr.length) {
+                                                arr_1.forEach(function (ele) {
+                                                    absolute_history.push({
+                                                        start_time: ele.start.value,
+                                                        end_time: ele.end.value
+                                                    })
+                                                });
+                                            } else {
+                                                layer.msg('对比时间重复');
+                                                return false;
+                                            }
+
+                                        } else {
+                                            layer.msg('对比时间不能为空');
+                                            return false;
+                                        }
+                                    }
+                                }
+
+                                 // 保存
+                                 var return_data = {
+                                    name:name,
+                                    data_type:data_type,
+                                    length_unit:length_unit,
+                                    lengths:lengths,
+                                    start_time:start_time,
+                                    end_time:end_time,
+                                    relative_history:JSON.stringify(relative_history),
+                                    absolute_history:JSON.stringify(absolute_history),
+                                    tag_id_tree:tag_id_tree
+                                }
+                                if(!flag){
+                                    return_data.id = _this.energyAnalysis.customList.item.id
+                                }
+                                return return_data;
+                                break;
+                        }
+                    }
+                }
+
+
+
+
+            },
+
+
             // 能耗图表 时间选择
             choiceAnalysisTime: function (item) {
                 this.analysisTimeSet(item, 'choice');
@@ -461,20 +945,23 @@ layui.use(['layer', 'element', 'laydate'], function () {
              * 能耗 时间处理---->时间数据设置
              * [item] 
              * [type]  choice选择时间  / set自定义时间
+             * [isCustom]  是否是通过自定义图表触发
              */
-            analysisTimeSet: function (item, type) {
+            analysisTimeSet: function (item, type, isCustom) {
                 var _this = this;
                 var time_option = this.energyAnalysis.timeOption;
                 var com_his_data = this.energyAnalysis.comparisonOfHistoricalData;
                 var analysis_charts_time = this.energyAnalysis.analysisCharts.time;
-
+                time_option.item = item;
                 time_option.btnSelectTitle = item.name;
-
-                com_his_data.relativeData.data.length = 0;
-                com_his_data.absolutelyData.data.length = 0;
-                com_his_data.relativeData.comparisonTitle = '';
-                com_his_data.relativeData.timeUnit = '';
-                com_his_data.relativeData.timeType = '';
+                if(!isCustom){
+                    com_his_data.relativeData.data.length = 0;
+                    com_his_data.absolutelyData.data.length = 0;
+                    com_his_data.relativeData.comparisonTitle = '';
+                    com_his_data.relativeData.timeUnit = '';
+                    com_his_data.relativeData.timeType = '';
+                }
+               
 
                 if (item.type) {
                     com_his_data.relative = true;
@@ -566,7 +1053,13 @@ layui.use(['layer', 'element', 'laydate'], function () {
 
                 if (item.type) { //如果是 非自定义
                     if(time_option.flag){ //是否是初始化(默认进入页面不请求)
-                        this.getAnalysisHighcharData(1,false,false);
+                        if(!isCustom){
+                            this.getAnalysisHighcharData(1,false,false);
+
+                        }else{
+                            // _this.getAnalysisHighcharData(2,true,false);
+
+                        }
                     }
                     
                 }
@@ -579,8 +1072,7 @@ layui.use(['layer', 'element', 'laydate'], function () {
 
             },
 
-
-            // 对比历史数据
+            // 对比历史数据 弹窗
             comparisonHistory: function () {
                 var _this = this;
                 var type = this.energyAnalysis.comparisonOfHistoricalData.relative;
@@ -674,8 +1166,6 @@ layui.use(['layer', 'element', 'laydate'], function () {
                                     
                                 });
                                 if (flag) {
-                                    
-                                   
                                     var temp = {};
                                     var temp_arr = [];
                                     arr.forEach(function(item){
@@ -855,15 +1345,6 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 }
             },
 
-
-            // 能耗图表 自定义图表操作  保存/另存为/删除
-            analysisOptionClick: function (item) {
-                var btn = this.energyAnalysis.customOptionBtn.btn;
-                btn.name = item.name;
-                btn.type = item.type;
-
-            },
-
             // 能耗图表 时间类型选择
             setChartsTimeType: function (item) {
                 var time = this.energyAnalysis.analysisCharts.time;
@@ -887,150 +1368,302 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 this.getAnalysisHighcharData(1,false,true);
             },
 
-            // 能耗图表生成
-            drawAnalysis: function (data) {
-
-                var data = [{
-                        name: '机组A',
-                        marker: {
-                            enabled: true,
-                            radius: 3
-                        },
-                        color: '#A4CD52',
-                        data: [
-                            [1512086400000, 0],
-                            [1512172800000, 10],
-                            [1512259200000, 11],
-                            [1512345600000, 100],
-                            [1512432000000, 0],
-                            [1512518400000, 0],
-                            [1512604800000, 0],
-                            [1512691200000, 0],
-                            [1512777600000, 0],
-                            [1512864000000, 0],
-                            [1512950400000, 70],
-                            [1513036800000, 30],
-                            [1513123200000, 0],
-                            [1513209600000, 4],
-                            [1513296000000, 0],
-                            [1513382400000, 0],
-                            [1513468800000, 0],
-                            [1513555200000, 0],
-                            [1513641600000, 0],
-                            [1513728000000, 0],
-                            [1513814400000, 0],
-                            [1513900800000, 0],
-                            [1513987200000, 0],
-                            [1514073600000, 0],
-                            [1514160000000, 0],
-                            [1514246400000, 0],
-                            [1514332800000, 0],
-                            [1514419200000, 0],
-                            [1514505600000, 0],
-                            [1514592000000, 0],
-                            [1514678400000, 0]
-                        ]
-                    },
-                    {
-                        name: '机',
-                        marker: {
-                            enabled: true,
-                            radius: 3
-                        },
-                        color: '#E7706F',
-                        data: [
-                            [1512086400000, 0],
-                            [1512172800000, 20],
-                            [1512259200000, 100],
-                            [1512345600000, 80],
-                            [1512432000000, 0],
-                            [1512518400000, 0],
-                            [1512604800000, 0],
-                            [1512691200000, 0],
-                            [1512777600000, 0],
-                            [1512864000000, 0],
-                            [1512950400000, 0],
-                            [1513036800000, 0],
-                            [1513123200000, 0],
-                            [1513209600000, 0],
-                            [1513296000000, 100],
-                            [1513382400000, 0],
-                            [1513468800000, 0],
-                            [1513555200000, 0],
-                            [1513641600000, 0],
-                            [1513728000000, 0],
-                            [1513814400000, 0],
-                            [1513900800000, 0],
-                            [1513987200000, 0],
-                            [1514073600000, 0],
-                            [1514160000000, 0],
-                            [1514246400000, 0],
-                            [1514332800000, 0],
-                            [1514419200000, 0],
-                            [1514505600000, 0],
-                            [1514592000000, 0],
-                            [1514678400000, 0]
-                        ]
-                    }
-                ]
+           
+            drawAnalysisHighChart: function (data) {
 
 
-
-                var charname = 'column';
-                $('#analysisContent').highcharts('StockChart', {
-                    chart: {
-                        backgroundColor: '#1C203F',
-                        alignTicks: true,
-                        type: '' + charname + ''
-                    },
-                    title: {
-                        text: '能耗数据',
-                        style: {
-                            color: '#fff'
-                        }
-                    },
-                    rangeSelector: {
-                        enabled: false,
-                    },
-                    legend: {
-                        symbolHeight: 12,
-                        symbolWidth: 18,
-                        symbolRadius: 0,
-                        itemStyle: {
-                            color: '#ffffff'
-                        },
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0,
-                        enabled: true,
-                        labelFormatter: function () { //图例的内容
-                            //return this.name;//默认返回的内容
-                            var msg;
-                            msg = '<a title="' + this.name + '">';
-                            if (this.name.length > 14) {
-                                msg += (this.name).substring(0, 5);
-                                msg += '...';
-                                msg += (this.name).substring(this.name.length - 5, this.name.length);
-                            } else {
-                                msg += this.name;
+                //    数据测试
+                switch (data.type) {
+                    case 'pie':
+                        data.data = {
+                            "能耗02": 30,
+                            "能耗03": 80,
+                            "能耗能耗1111111": 100
+                        };
+                        break;
+                    case 'area':
+                    case 'column':
+                    case 'spline':
+                        data.data = [
+                            {
+                                "name": "能耗02",
+                                "values": {
+                                    "2018011200": 10,
+                                    "2018011201": 20,
+                                    "2018011202": 30,
+                                    "2018011203": 40,
+                                    "2018011204": 40,
+                                    "2018011205": 40,
+                                    "2018011206": 40,
+                                    "2018011207": 90,
+                                    "2018011208": 50,
+                                    "2018011209": 50,
+                                    "2018011210": 60,
+                                    "2018011211": 70,
+                                    "2018011212": 30,
+                                    "2018011213": 30,
+                                    "2018011214": 30,
+                                    "2018011215": 40,
+                                    "2018011216": 40,
+                                    "2018011217": 50,
+                                    "2018011218": 60,
+                                    "2018011219": 70,
+                                    "2018011220": 40,
+                                    "2018011221": 30,
+                                    "2018011222": 20,
+                                    "2018011223": 10
+                                }
+                            },
+                            {
+                                "name": "能耗03",
+                                "values": {
+                                    "2018011200": 10,
+                                    "2018011201": 20,
+                                    "2018011202": 30,
+                                    "2018011203": 40,
+                                    "2018011204": 40,
+                                    "2018011205": 40,
+                                    "2018011206": 40,
+                                    "2018011207": 50,
+                                    "2018011208": 50,
+                                    "2018011209": 50,
+                                    "2018011210": 50,
+                                    "2018011211": 20,
+                                    "2018011212": 30,
+                                    "2018011213": 70,
+                                    "2018011214": 30,
+                                    "2018011215": 40,
+                                    "2018011216": 70,
+                                    "2018011217": 50,
+                                    "2018011218": 60,
+                                    "2018011219": 70,
+                                    "2018011220": 40,
+                                    "2018011221": 30,
+                                    "2018011222": 20,
+                                    "2018011223": 10
+                                }
+                            },
+                            {
+                                "name": "能耗能耗11",
+                                "values": {
+                                    "2018011200": 10,
+                                    "2018011201": 20,
+                                    "2018011202": 30,
+                                    "2018011203": 40,
+                                    "2018011204": 40,
+                                    "2018011205": 40,
+                                    "2018011206": 40,
+                                    "2018011207": 50,
+                                    "2018011208": 50,
+                                    "2018011209": 50,
+                                    "2018011210": 99,
+                                    "2018011211": 30,
+                                    "2018011212": 89,
+                                    "2018011213": 30,
+                                    "2018011214": 80,
+                                    "2018011215": 40,
+                                    "2018011216": 20,
+                                    "2018011217": 50,
+                                    "2018011218": 60,
+                                    "2018011219": 70,
+                                    "2018011220": 40,
+                                    "2018011221": 30,
+                                    "2018011222": 20,
+                                    "2018011223": 10
+                                }
                             }
-                            msg += '</a>';
-                            return msg;
-                        }
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    plotOptions: {
-                        column: {
-                            borderWidth: 0
-                        }
-                    },
+                        ]
+                        break;
+                }
 
-                    navigator: {
-                        enabled: true,
+
+                console.log('查看获取到的数据:' + JSON.stringify(data, null, 2))
+
+                //同一个时间段多个tag组或者多个tag对比 HistoryDataTagsContrast
+                //多个时间段同一个tag或能耗组对比 HistoryDataTimesContrast
+                var color = this.energyAnalysis.analysisCharts.color; //HighChart备选颜色
+                var time_type = this.energyAnalysis.analysisCharts.time.timeType //时间类型
+                var chart_type = data.type;
+                var series_data = [];//处理后图表数据
+                switch (chart_type) { //判断当前选择的 Highchart类型 根据类型处理数据
+                    case 'pie':
+                        var pie_data = data.data;
+                        var j = 0;
+                        for (var key in pie_data) {
+                            series_data.push({
+                                name: key,
+                                y: pie_data[key],
+                                color: color[j]
+                            });
+                            j++;
+                        }
+                        break;
+                    case 'area':
+                        var area_data = data.data;
+                        var count = 0;
+                        area_data.forEach(function (item) {
+                            var dic = {
+                                name: item.name,
+                                color: color[count],
+                                data: []
+                            };
+                            count++;
+                            for (var key in item.values) {
+                                var time = '';
+                                switch (time_type) {
+                                    case 'hour':
+                                        time = new Date(key.substring(0, 4) + "/" + key.substring(4, 6) + "/" + key.substring(6, 8) + " " + key.substring(8, 10) + ":00:00").getTime();
+                                        break;
+                                    case 'day':
+                                        time = new Date(key.substring(0, 4) + "/" + key.substring(4, 6) + "/" + key.substring(6, 8) + " 00:00:00").getTime();
+                                        break;
+                                    case 'month':
+                                        time = new Date(key.substring(0, 4) + "/" + key.substring(4, 6) + "/01 00:00:00").getTime();
+                                        break;
+                                    case 'year':
+                                        time = new Date(key.substring(0, 4) + "/01/01 00:00:00").getTime();
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                dic.data.push([
+                                    time, item.values[key]
+                                ])
+                            }
+                            series_data.push(dic);
+                        });
+                        break;
+                    case 'column':
+                    case 'spline':
+                        var column_data = data.data;
+                        var count = 0;
+                        column_data.forEach(function (item) {
+                            var dic = {
+                                name: item.name,
+                                marker: {
+                                    enabled: true,
+                                    radius: 3
+                                },
+                                color: color[count],
+                                data: []
+                            };
+                            count++;
+                            for (var key in item.values) {
+                                var time = '';
+                                switch (time_type) {
+                                    case 'hour':
+                                        time = new Date(key.substring(0, 4) + "/" + key.substring(4, 6) + "/" + key.substring(6, 8) + " " + key.substring(8, 10) + ":00:00").getTime();
+                                        break;
+                                    case 'day':
+                                        time = new Date(key.substring(0, 4) + "/" + key.substring(4, 6) + "/" + key.substring(6, 8) + " 00:00:00").getTime();
+                                        break;
+                                    case 'month':
+                                        time = new Date(key.substring(0, 4) + "/" + key.substring(4, 6) + "/01 00:00:00").getTime();
+                                        break;
+                                    case 'year':
+                                        time = new Date(key.substring(0, 4) + "/01/01 00:00:00").getTime();
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                dic.data.push([
+                                    time, item.values[key]
+                                ])
+                            }
+                            series_data.push(dic);
+                        });
+                        break;
+                }
+
+                console.log('处理过的数据:' + JSON.stringify(series_data, null, 2));
+
+
+
+                if (chart_type === 'column' || chart_type === 'spline') {
+                    $('#analysisContent').highcharts('StockChart', {
+                        chart: {
+                            backgroundColor: '#1C203F',
+                            alignTicks: true,
+                            type: '' + chart_type + ''
+                        },
+                        title: {
+                            text: '能耗数据',
+                            style: {
+                                color: '#fff'
+                            }
+                        },
+                        rangeSelector: {
+                            enabled: false,
+                        },
+                        legend: {
+                            symbolHeight: 12,
+                            symbolWidth: 18,
+                            symbolRadius: 0,
+                            itemStyle: {
+                                color: '#ffffff'
+                            },
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle',
+                            borderWidth: 0,
+                            enabled: true,
+                            labelFormatter: function () { //图例的内容
+                                var msg;
+                                msg = '<a title="' + this.name + '">';
+                                if (this.name.length > 14) {
+                                    msg += (this.name).substring(0, 5);
+                                    msg += '...';
+                                    msg += (this.name).substring(this.name.length - 5, this.name.length);
+                                } else {
+                                    msg += this.name;
+                                }
+                                msg += '</a>';
+                                return msg;
+                            }
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        plotOptions: {
+                            column: {
+                                borderWidth: 0
+                            }
+                        },
+
+                        navigator: {
+                            enabled: true,
+                            xAxis: {
+                                lineColor: '#555769',
+                                type: 'datetime',
+                                dateTimeLabelFormats: {
+                                    second: '%Y-%m-%d<br/>%H:%M:%S',
+                                    minute: '%Y-%m-%d<br/>%H:%M',
+                                    hour: '%Y-%m-%d %H:00',
+                                    day: '%Y-%m-%d',
+                                    week: '%Y-%m-%d',
+                                    month: '%Y-%m',
+                                    year: '%Y-'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            formatter: function () {
+                                var content = "";
+
+                                var date = new Date(this.x);
+                                content += '<span>' + date.format("yyyy-MM-dd hh:mm:ss") + '</span><br/>'
+                                for (var i = 0; i < this.points.length; i++) {
+                                    content += '<br /><span style="color:' + this.points[i].series.color + '">\u25CF</span><span style="color: ' + this.points[i].series.color + ';">' + this.points[i].series.name + '</span>: ' + this.points[i].y;
+                                };
+                                return content;
+                            }
+                        },
                         xAxis: {
+                            labels: {
+                                style: {
+                                    color: '#ffffff' //颜色
+                                }
+                            },
                             lineColor: '#555769',
                             type: 'datetime',
                             dateTimeLabelFormats: {
@@ -1042,62 +1675,183 @@ layui.use(['layer', 'element', 'laydate'], function () {
                                 month: '%Y-%m',
                                 year: '%Y-'
                             }
-                        }
-                    },
-
-
-
-
-
-                    tooltip: {
-                        formatter: function () {
-                            var content = "";
-
-                            var date = new Date(this.x);
-                            content += '<span>' + date.format("yyyy-MM-dd hh:mm:ss") + '</span><br/>'
-                            for (var i = 0; i < this.points.length; i++) {
-                                content += '<br /><span style="color: ' + this.points[i].series.color + ';">' + this.points[i].series.name + '</span>: ' + this.points[i].y;
-                            };
-                            return content;
-                        }
-                    },
-                    xAxis: {
-                        labels: {
-                            style: {
-                                color: '#ffffff' //颜色
+                        },
+                        yAxis: {
+                            labels: {
+                                style: {
+                                    color: '#ffffff' //颜色
+                                }
+                            },
+                            gridLineColor: '#555769',
+                            opposite: false,
+                            title: {
+                                style: {
+                                    color: '#ffffff'
+                                },
+                                text: '耗电量(kWh)'
                             }
                         },
-                        lineColor: '#555769',
-                        type: 'datetime',
-                        dateTimeLabelFormats: {
-                            second: '%Y-%m-%d<br/>%H:%M:%S',
-                            minute: '%Y-%m-%d<br/>%H:%M',
-                            hour: '%Y-%m-%d %H:00',
-                            day: '%Y-%m-%d',
-                            week: '%Y-%m-%d',
-                            month: '%Y-%m',
-                            year: '%Y-'
-                        }
-                    },
-                    yAxis: {
-                        labels: {
-                            style: {
-                                color: '#ffffff' //颜色
-                            }
+
+
+                        series: series_data
+                    });
+                } else if (chart_type == 'pie') {
+                    $('#analysisContent').highcharts({
+                        chart: {
+                            backgroundColor: '#1C203F',
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false
                         },
-                        gridLineColor: '#555769',
-                        opposite: false,
                         title: {
-                            style: {
+                            text: ''
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name} : <b>{point.percentage:.1f}% ({point.y})</b>'
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        exporting: {
+                            // enabled: false
+                            width: 800
+                        },
+                        plotOptions: {
+                            pie: {
+                                borderWidth: 0,
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                    style: {
+                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || '#fff',
+                                        "fontWeight": "bold",
+                                        "textOutline": "none"
+                                    }
+                                }
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: '占比',
+                            data: series_data
+
+                        }]
+                    });
+
+                } else if (chart_type == 'area') {
+                    $('#analysisContent').highcharts('StockChart', {
+                        chart: {
+                            backgroundColor: '#1C203F',
+                            type: 'column'
+                        },
+                        tooltip: {
+                            xDateFormat: '%Y-%m-%d %H:%M:%S',
+                            shared: true
+                        },
+                        rangeSelector: {
+                            allButtonsEnabled: true,
+                            enabled: false,
+                            buttonTheme: {
+                                width: 60
+                            },
+                            selected: 2
+                        },
+                        navigator: {
+                            enabled: true,
+                            xAxis: {
+                                lineColor: '#555769',
+                                type: 'datetime',
+                                dateTimeLabelFormats: {
+                                    second: '%Y-%m-%d<br/>%H:%M:%S',
+                                    minute: '%Y-%m-%d<br/>%H:%M',
+                                    hour: '%Y-%m-%d %H:00',
+                                    day: '%Y-%m-%d',
+                                    week: '%Y-%m-%d',
+                                    month: '%Y-%m',
+                                    year: '%Y-'
+                                }
+                            }
+                        },
+                        title: {
+                            text: ''
+                        },
+                        legend: {
+                            symbolHeight: 12,
+                            symbolWidth: 18,
+                            symbolRadius: 0,
+                            itemStyle: {
                                 color: '#ffffff'
                             },
-                            text: '耗电量(kWh)'
-                        }
-                    },
-
-
-                    series: data
-                });
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle',
+                            borderWidth: 0,
+                            enabled: true,
+                            labelFormatter: function () { //图例的内容
+                                //return this.name;//默认返回的内容
+                                var msg;
+                                msg = '<a title="' + this.name + '">';
+                                if (this.name.length > 14) {
+                                    msg += (this.name).substring(0, 5);
+                                    msg += '...';
+                                    msg += (this.name).substring(this.name.length - 5, this.name.length);
+                                } else {
+                                    msg += this.name;
+                                }
+                                msg += '</a>';
+                                return msg;
+                            }
+                        },
+                        exporting: {
+                            // enabled: false
+                            width: 800
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        xAxis: {
+                            labels: {
+                                style: {
+                                    color: '#ffffff' //颜色
+                                }
+                            },
+                            lineColor: '#555769',
+                            type: 'datetime',
+                            dateTimeLabelFormats: {
+                                second: '%Y-%m-%d<br/>%H:%M:%S',
+                                minute: '%Y-%m-%d<br/>%H:%M',
+                                hour: '%Y-%m-%d %H:00',
+                                day: '%Y-%m-%d',
+                                week: '%Y-%m-%d',
+                                month: '%Y-%m',
+                                year: '%Y-'
+                            }
+                        },
+                        yAxis: {
+                            labels: {
+                                style: {
+                                    color: '#ffffff' //颜色
+                                }
+                            },
+                            gridLineColor: '#555769',
+                            opposite: false,
+                            title: {
+                                style: {
+                                    color: '#ffffff'
+                                },
+                                text: '耗电量(kWh)'
+                            }
+                        },
+                        plotOptions: {
+                            column: {
+                                stacking: 'normal'
+                            }
+                        },
+                        series: series_data
+                    })
+                }
 
             },
 
@@ -1499,22 +2253,24 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 var zTree = $.fn.zTree.getZTreeObj("analysis-tree");
                 zTree.checkAllNodes(false);
             },
-            // 能耗分析 树  btn-筛选    获取highchar图  数据 
             /**
-             * type   1:按钮触发  2对比历史数据触发
+             * 能耗分析 树  btn-筛选    获取highchar图  数据 
+             * 
+             * type   1:按钮触发(其他非对比历史触发都走这个类型)  2对比历史数据触发
              * isrelative (type== 2时：true相对 false绝对)
              * ischarclick 是否是通过 点击highchart类型触发该方法
              */
             getAnalysisHighcharData: function (type,isrelative,ischarclick) {
-
+                var _this = this;
                 var zTree = $.fn.zTree.getZTreeObj("analysis-tree");
                 var nodes = zTree.getCheckedNodes(true);
-                console.log('数组长度：' + nodes.length)
-                // console.log(JSON.stringify(nodes,null,2));
                 var tag = this.tagTree.aTree.tag;
-                var color = this.energyAnalysis.analysisCharts.color;
+
+                // 清空被选tag及tag组(为下面重新计算)
                 tag.energy_group_ids.length = 0;
                 tag.tag_ids.length = 0;
+
+                // 统计被选tag及tag组
                 nodes.forEach(function (item, index) {
                     console.log(index)
                     if (item.isgroup) {
@@ -1530,12 +2286,9 @@ layui.use(['layer', 'element', 'laydate'], function () {
                     }
                 });
 
-
-                var tag = this.tagTree.aTree.tag;
+                // 被选tag组的长度
                 var length = tag.energy_group_ids.length + tag.tag_ids.length;
-                
-
-                console.log('数组长===:' + length);
+                console.log('被选数组长度:' + length);
                 if (length == 0) {
                     layer.msg('统计对象为空');
                 } else if (length > 16) {
@@ -1543,15 +2296,17 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 } else {
                     if(type == 1)
                     $('body').click();
-                    // $('.choice-tag-btn').click();
                     console.log('操作完成查看：' + JSON.stringify(tag, null, 2))
+
+                    // 起止时间段
                     var time_option = this.energyAnalysis.timeOption;
+
                     if(time_option.startime == '' || time_option.endtime == ''){
                         layer.msg('时间区间不能为空');
                     }else{
                         layer.msg('可以请求');
                        
-                        if(!ischarclick){ //非点击类型 所有图表类型重置到 column
+                        if(!ischarclick){ //非图表点击类型 所有图表类型重置到 column
                             var chart =  this.energyAnalysis.analysisCharts.chart;
                             chart.chartType = 'column';
                             chart.chartData.forEach(function(ele){
@@ -1570,9 +2325,6 @@ layui.use(['layer', 'element', 'laydate'], function () {
                         };
 
                         data.graph_type = chart_type === 'pie'?2:1; //2:饼图,1:其他类型
-
-
-
 
                         switch (type) {
                             case 1: //按钮触发
@@ -1623,62 +2375,34 @@ layui.use(['layer', 'element', 'laydate'], function () {
             
                         console.log('data：'+JSON.stringify(data,null,2))
 
-                        switch(chart_type){
-                            case 'column':
-                            break;
-                            case 'spline':
-                            break;
-                            case 'pie':
-                            break;
-                            case 'area':
-                            break;
-                        }     
-
-                        $.ajax({
-                            type: "put",
-                            url: apiurl + url,
-                            dataType: 'json',
-                            data: data,
-                            beforeSend: function () {
-                               
-                            },
-                            success: function (result) {
-                                //同一个时间段多个tag组或者多个tag对比 HistoryDataTagsContrast
-                                //多个时间段同一个tag或能耗组对比 HistoryDataTimesContrast
-                                var series_data = [];//处理后图表数据
-
-                                if(result.success){
-                                    if(data.graph_type === 2){//饼图数据
-                                        var pie_data = result.data;
-                                        var j = 0;
-                                        for (var key in pie_data) {
-                                            series_data.push({
-                                                name:key,
-                                                y:pie_data[key],
-                                                color:color[j]
-                                            });
-                                            j++;
-                                          }
-
-                                    }else{//其他类型数据处理
-                                            
-                                    }
-                                }else{
-                                    // 无能耗数据
-                                }
-
-                               
 
 
 
-
-
-
-                            },
-                            error: function () {
-
-                            }
+                        _this.drawAnalysisHighChart({
+                            type:chart_type,
+                            data:''
                         });
+
+                        // $.ajax({
+                        //     type: "put",
+                        //     url: apiurl + url,
+                        //     dataType: 'json',
+                        //     data: data,
+                        //     beforeSend: function () {
+                        //     },
+                        //     success: function (result) {
+                        //         if(result.success){
+                        //             _this.drawAnalysisHighChart({
+                        //                 type:chart_type,
+                        //                 data:result.data
+                        //             });
+                        //         }else{
+                        //             // 无能耗数据
+                        //         }
+                        //     },
+                        //     error: function () {
+                        //     }
+                        // });
                     }
                 }
                
@@ -1690,8 +2414,6 @@ layui.use(['layer', 'element', 'laydate'], function () {
                 this.tagTree.aTree.search.value = '';
                 this.analysisSearch();
             },
-
-
 
             // 处理 tag数据
             handleAllTagData: function (item) {
@@ -1799,6 +2521,22 @@ layui.use(['layer', 'element', 'laydate'], function () {
                         }
                         leadingExc = false;
                     }, delay);
+                }
+            },
+            
+            /**
+             * [判断输入否合法]
+             * @param {[type]} val [字符串]
+             * return 1:字符串为空 2：不合法 
+             */
+            nameRegeMatch: function(val) {
+                var pattern = new RegExp(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\-_]/g);
+                if (val == '') {
+                    return 1;
+                } else if (pattern.test(val)) {
+                    return 2;
+                } else {
+                    return 3;
                 }
             },
             // 初始化

@@ -100,12 +100,13 @@
                         <div class="energy-analysis  content-main node-content-main">
                             <div class="energy-slide">
                                 <div>
-                                    <!-- <div class="explain">暂无自定义图表</div> -->
-                                    <div class="slide-menu bayaxMscroll">
+                                    <div v-show="energyAnalysis.customList.isNull" class="explain">暂无自定义图表</div>
+                                    <div v-show="!energyAnalysis.customList.isNull" class="slide-menu bayaxMscroll" style="display:none">
                                         <p class="title">自定义图表</p>
                                         <div class="menu">
                                             <ul>
-                                                <li v-for="(item,index) in energyAnalysis.customList" v-text="item.name" :title="item.name" @click="getCustomAnalysisData(item)"></li>
+                                                <li v-for="(item,index) in energyAnalysis.customList.data" :class="{active:item.isActive}" v-text="item.name" :title="item.name"
+                                                    @click="getCustomAnalysisData(item)"></li>
 
                                             </ul>
                                         </div>
@@ -200,11 +201,13 @@
                                 <div class="content">
                                     <div class="head">
                                         <div class="getshi layui-inline">
-                                            <a v-for="item in energyAnalysis.analysisCharts.time.timeData" v-bind:class="{active:item.isActive}" v-show="item.show" v-text="item.name" @click="setChartsTimeType(item)" href="javascript:;"></a>
+                                            <a v-for="item in energyAnalysis.analysisCharts.time.timeData" v-bind:class="{active:item.isActive}" v-show="item.show" v-text="item.name"
+                                                @click="setChartsTimeType(item)" href="javascript:;"></a>
                                         </div>
                                         <div class="gettrend layui-inline">
-                                            <a v-for="item in energyAnalysis.analysisCharts.chart.chartData" v-bind:class="{active:item.isActive}"  v-text="item.name" @click="setChartsType(item)" href="javascript:;"></a>
-                                           
+                                            <a v-for="item in energyAnalysis.analysisCharts.chart.chartData" v-bind:class="{active:item.isActive}" v-text="item.name"
+                                                @click="setChartsType(item)" href="javascript:;"></a>
+
                                         </div>
                                     </div>
                                     <div class="conten-main">
@@ -257,6 +260,14 @@
             <span></span>
         </div>
 
+        <!-- 保存/另存为 -->
+        <div id="save-othersave" class="save-othersave comparise-body">
+            <span class="time-li-span">名称</span>
+            <div class="layui-inline">
+                <input v-model="energyAnalysis.customList.inputName" type="text" autocomplete="off" class="layui-input" maxlength="30">
+            </div>
+        </div>
+
         <!-- 相对时间 对比 -->
         <div id="relative" class="comparise-body">
             <div class="head">
@@ -268,13 +279,13 @@
                 <span v-text="energyAnalysis.timeOption.endtime"></span>
             </div>
             <div class="add">
-                <a @click="addRelativeTime"  href="javascript:;" title="点击添加时间段">+添加时间段</a>
+                <a @click="addRelativeTime" href="javascript:;" title="点击添加时间段">+添加时间段</a>
             </div>
             <div class="add-time">
                 <ul>
                     <li class="time-li" v-for="(item,index) in energyAnalysis.comparisonOfHistoricalData.relativeData.data">
-                        <span class="time-li-span">对比时间段</span>  
-                        <span class="time-li-span">之前的第</span>  
+                        <span class="time-li-span">对比时间段</span>
+                        <span class="time-li-span">之前的第</span>
                         <div class="layui-inline">
                             <div class="bayax-select-click bayax-btn-select ">
                                 <div class="bayax-select-title">
@@ -282,16 +293,16 @@
                                     <i class="bayax-edge"></i>
                                 </div>
                                 <ul class="energy bayax-select-ul  bayax-anim bayax-anim-upbit">
-                                    <li v-for="items in item.numlist"  v-text="items.name" @click="choiceRelativeTime(item,items)"></li>
+                                    <li v-for="items in item.numlist" v-text="items.name" @click="choiceRelativeTime(item,items)"></li>
                                 </ul>
                             </div>
                         </div>
-                       
+
                         <span class="" v-text="energyAnalysis.comparisonOfHistoricalData.relativeData.timeUnit"></span>
                         <span class="time-li-span" v-text="item.start_time"></span>
                         <span class="time-li-span">至</span>
                         <span class="time-li-span" v-text="item.end_time"></span>
-                        <span @click="deleteRelativeTime(item)"     title="删除本条对比数据" class="icon-highlight_off"></span>
+                        <span @click="deleteRelativeTime(item)" title="删除本条对比数据" class="icon-highlight_off"></span>
                     </li>
                 </ul>
             </div>
@@ -299,42 +310,45 @@
 
         <!-- 绝对时间 对比 -->
         <div id="absolute" class="comparise-body">
-                <div class="head">
-                    <span class="timetext">原始时间段</span>
-                    <span v-text="energyAnalysis.timeOption.startime"></span>
-                    <span class="spare">至</span>
-                    <span v-text="energyAnalysis.timeOption.endtime"></span>
-                </div>
-                <div class="add">
-                    <a @click="addAbsoluteTime"  href="javascript:;">+添加时间段</a>
-                </div>
-                <div class="add-time">
-                    <ul>
-                        <li class="time-li" v-for="(item,index) in energyAnalysis.comparisonOfHistoricalData.absolutelyData.data">
-                            <span class="time-li-span">对比时间段</span>  
-                            <div class="layui-inline">
-                                <input v-model="item.start.value" v-on:focus="setAbsoluteTimeFlag(item,item.start.type)"  type="text" name="date" readonly="readonly" lay-verify="date"
-                                autocomplete="off" class="absolute-time layui-input">
-                            </div>
-                            <span  class="time-li-span">至</span>
-                            <div class="layui-inline">
-                                <input v-model="item.end.value" v-on:focus="setAbsoluteTimeFlag(item,item.end.type)" type="text" name="date" readonly="readonly" lay-verify="date"
-                                autocomplete="off" class="absolute-time layui-input">
-                            </div>
-                            <span @click="deleteAbsoluteTime(item)"     title="删除本条对比数据" class="icon-highlight_off"></span>
-                          
-                        </li>
-                    </ul>
-                </div>
+            <div class="head">
+                <span class="timetext">原始时间段</span>
+                <span v-text="energyAnalysis.timeOption.startime"></span>
+                <span class="spare">至</span>
+                <span v-text="energyAnalysis.timeOption.endtime"></span>
             </div>
+            <div class="add">
+                <a @click="addAbsoluteTime" href="javascript:;">+添加时间段</a>
+            </div>
+            <div class="add-time">
+                <ul>
+                    <li class="time-li" v-for="(item,index) in energyAnalysis.comparisonOfHistoricalData.absolutelyData.data">
+                        <span class="time-li-span">对比时间段</span>
+                        <div class="layui-inline">
+                            <input v-model="item.start.value" v-on:focus="setAbsoluteTimeFlag(item,item.start.type)" type="text" name="date" readonly="readonly"
+                                lay-verify="date" autocomplete="off" class="absolute-time layui-input">
+                        </div>
+                        <span class="time-li-span">至</span>
+                        <div class="layui-inline">
+                            <input v-model="item.end.value" v-on:focus="setAbsoluteTimeFlag(item,item.end.type)" type="text" name="date" readonly="readonly"
+                                lay-verify="date" autocomplete="off" class="absolute-time layui-input">
+                        </div>
+                        <span @click="deleteAbsoluteTime(item)" title="删除本条对比数据" class="icon-highlight_off"></span>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
 
 
 
 
     </div>
 
-    
-   
+
+
+
     <script src="plugin/jQuery/jquery-1.11.1.min.js"></script>
     <script src="plugin/zTree/js/jquery.ztree.core.min.js"></script>
     <script src="plugin/zTree/js/jquery.ztree.excheck.js"></script>

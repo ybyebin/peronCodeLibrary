@@ -1,39 +1,35 @@
-// 列表与趋势图 数据
-var data ={
-    tag_id:{
-        "com_readonly": false,
-        "name": "泵0",
-        "trends": false,// 是否有趋势数据
-        "tag_type": 1,
-        "readonly": false,
-        "alarm": null,
-        "status": null,
-        "value": null,
-    }
-}
 
-var data ={
-    tag_id:{
-        "name": "泵0",
-        "trends": false,// 是否有趋势数据
-        "tag_type": 1,
-        "readonly": false,
-        "alarm": null,
-        "status": null,
-        "value": null,
-        'component':[
-            {
-                id:"e4dd000a-ec98-67b9-8416-26119692beb3",
-                component:true
-            },
-            {
-                id:"4ccfbf00-31f0-6254-17f0-6dbfdeab6097",
-                component:true
-            },
-            {
-                id:"6k8prw44gus0000",
-                component:false
-            }
-        ]
+
+
+[
+    {
+      "name": "能耗02",
+      "values": {
+        "20180106": 0,
+        "20180107": 0,
+        "20180108": 0,
+        "20180109": 0,
+        "20180110": 0,
+        "20180111": 0,
+        "20180112": 0
+      }
     }
-}
+  ]
+
+[{
+    name: '能耗02',
+    marker: {
+        enabled: true,
+        radius: 3
+    },
+    color: '#A4CD52',
+    data: [
+        [1515196800000, 0],
+        [1515283200000, 0],
+        [1515369600000, 0],
+        [1515456000000, 0],
+        [1515542400000, 0],
+        [1515628800000, 0],
+        [1515715200000, 0]
+    ]
+}]

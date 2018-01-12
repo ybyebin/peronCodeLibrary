@@ -694,6 +694,7 @@ table.table-trend span.mark.error{
     border-bottom: 1px solid #6B6E80; 
 }
 .energy-slide div.menu{
+    padding-top: 5px;
     position: absolute;
     top: 55px;
     bottom: 20px;
@@ -718,8 +719,10 @@ table.table-trend span.mark.error{
 .energy-slide div.menu ul li:nth-of-type(odd) {
     background-color: #1D2141;
 }
+.energy-slide div.menu ul li.active {
+    border-left: 4px solid #A78FBE;
+}
 .energy-main{
-    /* background: gray; */
     position: absolute;
     left: 324px;
     right: 0;
@@ -936,5 +939,12 @@ table.table-trend span.mark.error{
     margin-left: 30px;
 }
 
+.save-othersave.comparise-body{
+    padding-bottom: 0;
+    text-align: center;
+}
+.save-othersave.comparise-body span{
+    margin-right: 10px;
+}
 
 /*能源管理  -end*/
