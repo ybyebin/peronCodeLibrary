@@ -33,3 +33,14 @@
         [1515715200000, 0]
     ]
 }]
+
+
+
+var  getAnalysisHighcharData; //获取图表数据
+
+var data = {
+    type:'btn_filter',//按钮筛选
+    type:'chart_time_filter',//图表时间筛选
+    type:'chart_type_filter',//图表类型筛选
+    
+}

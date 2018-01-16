@@ -743,9 +743,12 @@ table.table-trend span.mark.error{
 .div-btn-comhis{
     margin-left: 15px;
 }
-
+.energy-bayax-body .layui-tab{
+    min-width: 1130px; 
+    overflow: auto;
+}
 .energy-content.layui-tab-content{
-    min-width: 1160px;
+    min-width: 1130px;
 }
 
 .energy-main div.content{
@@ -788,7 +791,6 @@ table.table-trend span.mark.error{
     left: 0;
     right: 0;
     margin: auto;
-
     height: 30px;
     width: 200px;
 }
@@ -947,4 +949,73 @@ table.table-trend span.mark.error{
     margin-right: 10px;
 }
 
+.laydate-footer-btns span{
+    height: 28px!important;
+}
+.energy-main.table-main div.content{
+    top: 60px;
+}
+.energy-main.table-main div.content .head{
+    border: none;
+    padding: 0;
+}
+.table-main .conten-main{
+    position: absolute;
+    top: 10px;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: #1C203F;
+    width:inherit;
+    height: inherit;
+    
+}
+.table-main .conten-main > div:nth-child(1),
+.table-main .conten-main > div:nth-child(2){
+    text-align: right;
+    padding-bottom: 10px;
+    padding-right: 20px;
+}
+.table-main .conten-main > div:nth-child(1) a{
+    margin-right: 20px;
+}
+.table-main .conten-main > div:nth-child(2) span:first-child{
+    float: left;
+    padding-left: 20px;
+}
+.table-main .conten-main.screen{
+    padding-top: 40px;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+.energy-table-div{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #555769;
+    /* background: #666; */
+    overflow: auto;
+
+  
+}
+.energy-table{
+border: none;
+}
+.energy-table.bayax-table>thead>tr>th{
+    font-size: 14px;
+    padding: 10px 0;
+    padding-left:10px; 
+    text-align: center;
+    /* border: none; */
+}
+.energy-table.bayax-table>tbody>tr>td{
+    text-align: center;
+}
+
+
 /*能源管理  -end*/
+
+
+

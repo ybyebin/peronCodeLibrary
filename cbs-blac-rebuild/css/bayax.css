@@ -77,8 +77,8 @@ body {
 
 @font-face {
     font-family: 'icomoon';
-    src: url('../fonts/icomoon.eot?40uluf');
-    src: url('../fonts/icomoon.eot?40uluf#iefix') format('embedded-opentype'), url('../fonts/icomoon.ttf?40uluf') format('truetype'), url('../fonts/icomoon.woff?40uluf') format('woff'), url('../fonts/icomoon.svg?40uluf#icomoon') format('svg');
+    src: url('../fonts/icomoon.eot?q877pp');
+    src: url('../fonts/icomoon.eot?q877pp#iefix') format('embedded-opentype'), url('../fonts/icomoon.ttf?q877pp') format('truetype'), url('../fonts/icomoon.woff?q877pp') format('woff'), url('../fonts/icomoon.svg?q877pp#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -100,51 +100,43 @@ body {
 
 .icon-add:before {
     content: "\e145";
-}
-
-.icon-arrow_drop_down:before {
+  }
+  .icon-arrow_drop_down:before {
     content: "\e5c5";
-}
-
-.icon-arrow_drop_up:before {
+  }
+  .icon-arrow_drop_up:before {
     content: "\e5c7";
-}
-
-.icon-cancel:before {
+  }
+  .icon-cancel:before {
     content: "\e5c9";
-}
-
-.icon-format_list_bulleted:before {
+  }
+  .icon-format_list_bulleted:before {
     content: "\e241";
-}
-
-.icon-highlight_off:before {
+  }
+  .icon-highlight_off:before {
     content: "\e888";
-}
-
-.icon-keyboard_arrow_down:before {
+  }
+  .icon-keyboard_arrow_down:before {
     content: "\e313";
-}
-
-.icon-keyboard_arrow_left:before {
+  }
+  .icon-keyboard_arrow_left:before {
     content: "\e314";
-}
-
-.icon-keyboard_arrow_right:before {
+  }
+  .icon-keyboard_arrow_right:before {
     content: "\e315";
-}
-
-.icon-keyboard_arrow_up:before {
+  }
+  .icon-keyboard_arrow_up:before {
     content: "\e316";
-}
-
-.icon-remove:before {
+  }
+  .icon-remove:before {
     content: "\e15b";
-}
-
-.icon-search:before {
+  }
+  .icon-search:before {
     content: "\e8b6";
-}
+  }
+  .icon-zoom_out_map:before {
+    content: "\e56b";
+  }
 
 
 /*清浮动 -begin*/
@@ -183,7 +175,9 @@ body {
 
 
 /*隐藏 *显示  -begin*/
-
+.bayax-hide{
+    display: none;
+}
 .basehide {
     display: none!important;
 }

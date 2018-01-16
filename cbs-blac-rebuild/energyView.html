@@ -89,14 +89,14 @@
 
         </div>
 
-        <div class="bayax-body">
+        <div class="bayax-body energy-bayax-body">
             <div class="layui-tab">
                 <ul class="energy-tab-title bayax-tab-title layui-tab-title">
-                    <li class="layui-this">能耗分析</li>
-                    <li>能耗报表</li>
+                    <li>能耗分析</li>
+                    <li class="layui-this">能耗报表</li>
                 </ul>
                 <div class="energy-content layui-tab-content">
-                    <div class="bayax-tab-item layui-tab-item layui-show">
+                    <div class="bayax-tab-item layui-tab-item ">
                         <div class="energy-analysis  content-main node-content-main">
                             <div class="energy-slide">
                                 <div>
@@ -122,7 +122,7 @@
                                                 <i class="bayax-edge"></i>
                                             </div>
                                             <ul class="energy bayax-select-ul  bayax-anim bayax-anim-upbit">
-                                                <li v-for="item in energyAnalysis.timeOption.btnSelectdata" @click="choiceAnalysisTime(item)" v-text="item.name">
+                                                <li v-for="item in energyAnalysis.timeOption.btnSelectdata" @click="analysisTimeSet(item)" v-text="item.name">
                                                 </li>
                                             </ul>
                                         </div>
@@ -174,7 +174,7 @@
                                             </div>
                                             <div class="tag-tree-foot">
                                                 <div class="layui-inline ">
-                                                    <button @click='getAnalysisHighcharData(1,false,false)' class="bayax-btn">筛选</button>
+                                                    <button @click='getChartDatabyBtnFilter' class="bayax-btn">筛选</button>
                                                 </div>
                                                 <div class="layui-inline ">
                                                     <button @click="analysisCleanAll" class="bayax-btn-cancel">清空筛选条件</button>
@@ -202,11 +202,11 @@
                                     <div class="head">
                                         <div class="getshi layui-inline">
                                             <a v-for="item in energyAnalysis.analysisCharts.time.timeData" v-bind:class="{active:item.isActive}" v-show="item.show" v-text="item.name"
-                                                @click="setChartsTimeType(item)" href="javascript:;"></a>
+                                                @click="getChartDatabyChartTimeType(item)" href="javascript:;"></a>
                                         </div>
                                         <div class="gettrend layui-inline">
                                             <a v-for="item in energyAnalysis.analysisCharts.chart.chartData" v-bind:class="{active:item.isActive}" v-text="item.name"
-                                                @click="setChartsType(item)" href="javascript:;"></a>
+                                                @click="getChartDatabyChartType(item)" href="javascript:;"></a>
 
                                         </div>
                                     </div>
@@ -224,26 +224,132 @@
                         </div>
                     </div>
 
-                    <div class="bayax-tab-item layui-tab-item  ">
+                    <div class="bayax-tab-item layui-tab-item layui-show">
                         <div class="energy-table content-main node-content-main">
                             <div class="energy-slide">
                                 <div>
-                                    <div class="explain">暂无自定义图表</div>
-                                    <div class="slide-menu bayaxMscroll">
+                                    <div v-show="energyTable.customList.isNull" class="explain">暂无自定义图表</div>
+                                    <div v-show="!energyTable.customList.isNull" class="slide-menu bayaxMscroll" style="display:none">
                                         <p class="title">自定义报表</p>
                                         <div class="menu">
                                             <ul>
-                                                <li>123</li>
-                                                <li>123</li>
-                                                <li>123</li>
-                                                <li>123</li>
+                                                <li v-for="(item,index) in energyTable.customList.data" :class="{active:item.isActive}" v-text="item.name" :title="item.name"
+                                                    @click="getCustomTableData(item)"></li>
+
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="energy-main">
+                            <div class="energy-main table-main">
+                                <div class="title">
+                                    <div class="layui-inline">
+                                        <div class="bayax-select-click bayax-btn-select ">
+                                            <div class="bayax-select-title">
+                                                <span v-text='energyTable.timeOption.btnSelectTitle' class="bayax-select-span "></span>
+                                                <i class="bayax-edge"></i>
+                                            </div>
+                                            <ul class="energy bayax-select-ul  bayax-anim bayax-anim-upbit">
+                                                <li v-for="item in energyTable.timeOption.btnSelectdata" @click="tableTimeSet(item)" v-text="item.name">
+                                                </li>
+                                            </ul>
+                                        </div>
 
+                                    </div>
+
+                                    <div class="tab-warn-div layui-inline">
+                                        <div class="layui-input-inline">
+                                            <input  v-show="energyTable.timeOption.btnSelectdata[0].isShow" v-model="energyTable.timeOption.btnSelectdata[0].value"  id="table-day-time" type="text" name="date" readonly="readonly" lay-verify="date"
+                                                autocomplete="off" class="layui-input">
+                                            <input v-show="energyTable.timeOption.btnSelectdata[1].isShow"  v-model="energyTable.timeOption.btnSelectdata[1].value"  id="table-month-time" type="text" name="date" readonly="readonly" lay-verify="date"
+                                                autocomplete="off" class="layui-input" style="display:none">
+                                            <input v-show="energyTable.timeOption.btnSelectdata[2].isShow"  v-model="energyTable.timeOption.btnSelectdata[2].value" id="table-year-time" type="text" name="date" readonly="readonly" lay-verify="date"
+                                                autocomplete="off" class="layui-input" style="display:none">                                               
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-warn-div-export  layui-inline div-btn-comhis">
+                                        <button data-id="table-tree-body" class="choice-tag-btn bayax-btn">选择统计对象</button>
+
+                                        <div id="table-tree-body" class="tag-tree">
+                                            <div class="tag-tree-head clearfix">
+                                                <div class="layui-input-inline content-search">
+                                                    <span class="search-span icon-search"></span>
+                                                    <input v-model="tagTree.tTree.search.value" v-on:input="tableSearch" type="text" placeholder="请输入点名称" required>
+                                                    <span @click='tableCleanSearch' class="span-del icon-highlight_off"></span>
+                                                </div>
+                                            </div>
+                                            <div class="tag-tree-body">
+                                                <div class="bayaxtree-div">
+                                                    <div class="panel-heading">
+                                                        <h4 class="tree-panel-title" data-id="analysis-tree">
+                                                            <a class="projectName">智能建筑管理系统</a>
+                                                            <!-- <span class="icon-tree icon-remove"></span> -->
+                                                        </h4>
+                                                    </div>
+                                                    <div class="bayax-tree  bayaxMscroll">
+                                                        <ul id="table-tree" class="ztree"></ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tag-tree-foot">
+                                                <div class="layui-inline ">
+                                                    <button @click="getTableData" class="bayax-btn">筛选</button>
+                                                </div>
+                                                <div class="layui-inline ">
+                                                    <button @click="tableCleanAll" class="bayax-btn-cancel">清空筛选条件</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-warn-div-export layui-inline div-btn-comhis">
+                                        <div class="bayax-select-click bayax-select-group">
+                                            <div class="bayax-select-title">
+                                                <button v-text="energyTable.customOptionBtn.btn.name" class="layui-btn bayax-btn">保存</button>
+                                            </div>
+                                            <ul class="bayax-select-ul  bayax-anim bayax-anim-upbit">
+                                                <li v-for="(item,index) in energyTable.customOptionBtn.data" v-text="item.name" >
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="content">
+                                    <div v-show="energyTable.tableData.isNullTable" class="explain">请选择统计对象生成报表</div>
+                                    <div v-show="!energyTable.tableData.isNullTable"  id="tab-conten-main" class="conten-main" style="display:none">
+                                        <div v-show="!energyTable.tableData.isFullScreen">
+                                            <a>用电量(单位:KWh)</a>
+                                            <a  @click="fullScreenEnergyTable" href="javascript:;">
+                                                <span  class="icon-zoom_out_map"></span>全屏</a>
+                                        </div>
+                                        <div v-show="energyTable.tableData.isFullScreen" style="display:none">
+                                                <span class="">用电量(单位:KWh)</span>
+                                                <span class="">
+                                                    <button class="layui-btn bayax-btn" >导出文件</button>
+                                                    <button @click="exitFullScreen" class="layui-btn bayax-btn" >退出全屏</button>
+                                                </span>
+                                            </div>
+                                        <div class="energy-table-div">
+                                            <table class="bayax-table energy-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th v-for="item in energyTable.tableData.thead" v-text="item.name"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="items in energyTable.tableData.tbody">
+                                                        <td v-for="item in items" v-text="item.value"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                
+                                
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -338,12 +444,6 @@
                 </ul>
             </div>
         </div>
-
-
-
-
-
-
     </div>
 
 
