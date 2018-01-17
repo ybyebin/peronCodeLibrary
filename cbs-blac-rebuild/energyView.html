@@ -294,7 +294,7 @@
                                             </div>
                                             <div class="tag-tree-foot">
                                                 <div class="layui-inline ">
-                                                    <button @click="getTableData" class="bayax-btn">筛选</button>
+                                                    <button @click="getTableData(true)" class="bayax-btn">筛选</button>
                                                 </div>
                                                 <div class="layui-inline ">
                                                     <button @click="tableCleanAll" class="bayax-btn-cancel">清空筛选条件</button>
@@ -310,7 +310,7 @@
                                                 <button v-text="energyTable.customOptionBtn.btn.name" class="layui-btn bayax-btn">保存</button>
                                             </div>
                                             <ul class="bayax-select-ul  bayax-anim bayax-anim-upbit">
-                                                <li v-for="(item,index) in energyTable.customOptionBtn.data" v-text="item.name" >
+                                                <li v-for="(item,index) in energyTable.customOptionBtn.data" v-text="item.name" @click="tableOptionClick(item)">
                                                 </li>
                                             </ul>
                                         </div>
@@ -366,11 +366,19 @@
             <span></span>
         </div>
 
-        <!-- 保存/另存为 -->
+        <!-- energyAnalysis 保存/另存为 -->
         <div id="save-othersave" class="save-othersave comparise-body">
             <span class="time-li-span">名称</span>
             <div class="layui-inline">
                 <input v-model="energyAnalysis.customList.inputName" type="text" autocomplete="off" class="layui-input" maxlength="30">
+            </div>
+        </div>
+
+        <!--energytable 保存/另存为 -->
+        <div id="table-save-othersave" class="save-othersave comparise-body">
+            <span class="time-li-span">名称</span>
+            <div class="layui-inline">
+                <input v-model="energyTable.customList.inputName" type="text" autocomplete="off" class="layui-input" maxlength="30">
             </div>
         </div>
 
