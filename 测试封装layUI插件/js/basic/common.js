@@ -1,3 +1,4 @@
+
 /**
  * 公用的系统方法
  */
@@ -5,6 +6,8 @@
 //日期选择
 
 /**
+ * 日期选择
+ * 
  * dic.name 时间名称 参数：【'今天','昨天','最近3天','最近7天','最近30天','?月','自定义'】;
  * dic.type 时间对比类型 参数：【'true相对时间','false绝对时间'】;  作用：用于历史数据对比 
  * dic.unit 时间对比单位  参数：【'天','个3天','个7天','个30天','个月',''】; 作用：用于历史数据对比 
@@ -403,208 +406,17 @@ function getYear() {
 
 
 
-//滚动条
-function initScrollerA(ids, type) {
-    var is = true;
-    if (type) {
-        is = false;
-    }
-
-    $("#" + ids + "").mCustomScrollbar("destroy");
-    $("#" + ids + "").mCustomScrollbar({
-        axis: "y",
-        theme: "dark-thick", //3d-thick-dark，dark
-        autoHideScrollbar: false, //是否自动隐藏滚动条
-        scrollbarPosition: '', //'outside','inside'
-        advanced: {
-            autoExpandHorizontalScroll: false,
-            updateOnContentResize: true
-        },
-        scrollButtons: { //是否要左右的箭头按钮
-            enable: is
-        },
-        callbacks: {
-            onScroll: function() {}
-        }
-    });
-}
 
 
 
 
 
-/**设备监控左侧菜单 */
-function mainmenuScroll() {
-
-    // var topbar = $(".navbar-header").height();
-    // var projectinfo = $(".timeControl").innerHeight();
-
-    // var height = document.body.scrollHeight - topbar-5;
-
-    // $('#main-menu-wrapper').height(height).mCustomScrollbar({
-    //   axis: "y",
-    //   theme: "dark-thick", //3d-thick-dark，dark
-    //   autoHideScrollbar: false, //是否自动隐藏滚动条
-    //   scrollbarPosition: '', //'outside','inside'
-    //   advanced: {
-    //     autoExpandHorizontalScroll: false,
-    //     updateOnContentResize: true
-    //   }
-    // });
-    // $("#main-menu-wrapper .wraplist").height('auto');
-
-    // $("li.open > .sub-menu").attr("style", "display:block;");
-};
-
-function mainmenuCollapsed() {
-
-    if ($("#main-menu-wrapper").length > 0) {
-        var topbar = $(".navbar-header").height();
-        var windowheight = window.innerHeight;
-        var minheight = windowheight - topbar;
-        var fullheight = $("#tab").height();
-
-        var height = fullheight;
-        if (fullheight < minheight) {
-            height = minheight;
-        }
-
-
-        $('#main-menu-wrapper').mCustomScrollbar('destroy');
-
-        // $('#main-menu-wrapper .wraplist').height(height);
-
-        $("li.open .sub-menu").attr("style", "");
-
-    }
-
-};
-
-
-
-function getHeight() {
-    var left = $(".left").height();
-    var right = Number($(".right").height()) + 20;
-    if (document.body.scrollHeight > $(window).height()) {
-        $(".left").height(document.body.scrollHeight - 70 + "px");
-        return;
-    } else if (left >= right) {
-        $(".left").height($(window).height() - 70 + "px");
-    }
-}
-
-function mainMenu() {
-    $('.leftMenu li a').click(function(e) {
-        if ($(this).next().hasClass('sub-menu') === false) {
-            return;
-        }
-        var parent = $(this).parent().parent();
-        var sub = $(this).next();
-
-        parent.children('li.open').children('.sub-menu').slideUp(200);
-        parent.children('li.open').children('a').children('.arrow').removeClass('open');
-        parent.children('li').removeClass('open');
-
-        if (sub.is(":visible")) {
-            $(this).find(".arrow").removeClass("open");
-            sub.slideUp(200);
-        } else {
-            $(this).parent().addClass("open");
-            $(this).find(".arrow").addClass("open");
-            sub.slideDown(200);
-        }
-
-    });
-};
-
-
-
-$(window).resize(function() {
-    mainmenuCollapsed();
-    mainmenuScroll();
-});
-
-
-/**设备监控左侧菜单 结束*/
-
-/**
- * 接受地址栏参数
- * @AuthorHTL
- * @DateTime  2016-07-13T22:45:53+0800
- */
-var Url = function() {};
-Url.prototype = {
-    Type: function() { return GetQueryString("type") },
-    Id: function() { return GetQueryString("id") },
-    GetQueryString: function(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]);
-        return null;
-    }
-}
 
 
 
 
-//验证文件格式
-function fileName(name, type) {
 
-    var val = $("#" + name + "").val();
-    var len = 0;
-    var reg = "[`~\\\\!@#\$%\^&\*\(\)_\+<>\?\？:\"{},，。！\.\/;'\[\\]]";
-    var pattern = new RegExp(reg);
-    if (val) {
-        if (pattern.test(val)) {
-            //有非法字符
-            $("#" + name + "").next().html("不能输入特殊字符").show();
-            return false;
-        } else {
-            //判断字符长度
-            for (var i = 0; i < val.length; i++) {
-                if (val.charCodeAt(i) > 127 || val.charCodeAt(i) == 94) {
-                    len += 2;
-                } else {
-                    len++;
-                }
-            }
-            if (len > 64) {
-                $("#" + name + "").next().html("输入超过规定长度").show();
-                return false;
-            }
-        }
-        if (type == 1) {
-            var status = true;
-            $("#leftNames ul").find("li span a").each(function() {
-                if ($(this).html() == val) {
-                    status = false;
-                    return false;
-                }
-            })
-            if (!status) {
-                $("#" + name + "").next().html("该名称已经存在").show();
-                // layer.msg('该名称已经存在')
-                return false;
-            }
-        } else {
-            var status = true;
-            $("#bao_leftNames ul").find("li span a").each(function() {
-                if ($(this).html() == val) {
-                    status = false;
-                    return false;
-                }
 
-            })
-            if (!status) {
-                $("#" + name + "").next().html("该名称已经存在").show();
-                return false;
-            }
-        }
-        $("#" + name + "").next().hide();
-        return true;
-    }
-
-}
 
 
 

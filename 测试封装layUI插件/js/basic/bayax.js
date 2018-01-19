@@ -6,64 +6,152 @@
  
  */
 
-layui.define(function (exports) {
+layui.define(['jquery'],function (exports) {
     "use strict";
+    var $ = layui.jquery;
+    // var doc = document;
+    // var id = 'getElementById';
+    // var tag = 'getElementsByTagName';
 
-    var doc = document
-        , id = 'getElementById'
-        , tag = 'getElementsByTagName'
-
-        //字符常量
-        , MOD_NAME = 'laypage', DISABLED = 'layui-disabled'
-
-        //构造器
-        , Class = function (options) {
-            var that = this;
-            that.config = options || {};
-            that.config.index = ++laypage.index;
-            that.render(true);
-        };
+    var MOD_NAME = 'bayax';
 
 
+   
+    //比较现在时间 和指定时间 并返回天数
+    function compareDate(type, counts) {
+        var mydate;
+        var nowdate = new Date();
 
-    //外部接口
-    var laypage = {
-        //分页渲染
-        render: function (options) {
-            var o = new Class(options);
-            return o.index;
+        if (type == 1) {
+            //现在时间减去天数
+            mydate = CutDays(parseDates(FormatDate(nowdate, "yyyy-MM-dd")), counts);
+            return FormatDate(mydate, "yyyy-MM-dd");
+
+        } else if (type == 2) {
+            //现在时间减去月数   
+            mydate = CutMOnth(parseDates(FormatDate(nowdate, "yyyy-MM-dd")), counts);
+            return FormatDate(mydate, "MM");
+
+        } else { //现在时间减去月数
+            mydate = CutMOnth(parseDates(FormatDate(nowdate, "yyyy-MM-dd")), counts);
+            return FormatDate(mydate, "yyyy-MM-dd");
         }
-        , index: layui.laypage ? (layui.laypage.index + 10000) : 0
-        , on: function (elem, even, fn) {
-            elem.attachEvent ? elem.attachEvent('on' + even, function (e) { //for ie
-                e.target = e.srcElement;
-                fn.call(elem, e);
-            }) : elem.addEventListener(even, fn, false);
-            return this;
+
+    }
+
+    //替换字符串  
+    function Replace(str, from, to) {
+        return str.split(from).join(to);
+    }
+
+
+    // 日期类型格式成指定的字符串
+    function FormatDate(date, format) {
+        format = Replace(format, "yyyy", date.getFullYear());
+        format = Replace(format, "MM", GetFullMonth(date));
+        format = Replace(format, "dd", GetFullDate(date));
+        format = Replace(format, "hh", GetFullHours(date));
+        return format;
+    }
+
+    //返回月份(两位数)  
+    function GetFullMonth(date) {
+        var v = date.getMonth() + 1;
+        if (v > 9) return v.toString();
+        return "0" + v;
+    }
+
+    //返回日(两位数)  
+    function GetFullDate(date) {
+        var v = date.getDate();
+        if (v > 9) return v.toString();
+        return "0" + v;
+    }
+
+    //返回月份(两位数)  
+    function GetFullHours(date) {
+        var v = date.getHours();
+        if (v > 9) return v.toString();
+        return "0" + v;
+    }
+
+    //加减天  
+    function CutDays(date, value, type) {
+        if (type) {
+            date.setDate(date.getDate() + value);
+        } else {
+            date.setDate(date.getDate() - value);
         }
+
+        return date;
+    }
+
+    //减月
+    function CutMOnth(date, value) {
+        date.setMonth((date.getMonth() - value + 1), 1);
+        return date;
+    }
+
+    // 获取指定月的最后一天(时间选择框)
+    function getCurrentMonthLastForSelect(dates) {
+        var date = new Date(dates);
+        // var currentMonth = month - 1;
+        var currentMonth = date.getMonth();
+        var nextMonth = ++currentMonth;
+        var nextMonthFirstDay = new Date(date.getFullYear(), nextMonth, 1);
+        var oneDay = 1000 * 60 * 60 * 24;
+        return FormatDate(new Date(nextMonthFirstDay - oneDay), "yyyy-MM-dd");
+    }
+
+    //js日期字符串转换成日期类型
+    function parseDates(dateStr) {
+        return new Date(Replace(dateStr, "-", "/"));
     }
 
 
 
-
-
-    var doc = document;
-    var id = 'getElementById';
-    var tag = 'getElementsByTagName';
-
-    var MOD_NAME = 'bayax';
-
     var bayax = {
 
-        /************************本项目使用**********************************/ 
+        /************************本项目使用**********************************/
 
-        base_api_url:"/api/",
-        ws_socket:'', //mqtt 地址
+        base_api_url: "/api/",
+        ws_socket: '', //mqtt 地址
+
+
+        bayaxInit:function(){
+            $('body').on('click', function() {
+                $('.bayax-select-click').removeClass('bayax-select-clicked');
+            });
+            $('body').on('click','.bayax-select-title', function(e) {
+                var oEvent = e || event;
+                oEvent.stopPropagation(); //阻止事件冒泡
+                var flag = true;
+                var parents = $(this).parent();
+               
+                if (!parents.hasClass('bayax-select-clicked')) {
+                    flag = false;
+                } 
+                $('.bayax-select-click').removeClass('bayax-select-clicked');
+        
+                if (!flag) {
+                    parents.addClass('bayax-select-clicked');
+                } 
+            });
+        
+            $('.bayax-division-icon').on('click', function(e) {
+                var oEvent = e || event;
+                oEvent.stopPropagation(); //阻止事件冒泡
+                $('.bayax-select-ul').hide();
+                var str = '.' + $(this).data('for');
+                $(str).toggle();
+        
+            });
+        },
 
         // 判断输入字符串是否合法
-        strRegeMatch:function(str){
+        strRegeMatch: function (str) {
             var pattern = new RegExp(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\-_]/g);
-             if (pattern.test(val)) {
+            if (pattern.test(val)) {
                 return false;
             } else {
                 return true;
@@ -195,20 +283,29 @@ layui.define(function (exports) {
             return dateArr;
         },
 
+        publicAjaxError:function(data){
+            layer.msg(data.error_message);
+            if (Number(data.status) === 401) {
+                window.location.href = 'login.html';
+            }
+        },
 
 
 
 
-        /**********************************公共******************************************/ 
 
-         /**
-         * [时间格式化函数]
-         * @param  {[obj]} date [日期对象]
-         * @param  {[string]} format ["yyyy-MM-dd hh:mm:ss"]
-         * @return {[string]}        [返回格式化后的字符串]
-         * 
-         */
-        format:function(date,format){
+
+
+        /**********************************公共******************************************/
+
+        /**
+        * [时间格式化函数]
+        * @param  {[obj]} date [日期对象]
+        * @param  {[string]} format ["yyyy-MM-dd hh:mm:ss"]
+        * @return {[string]}        [返回格式化后的字符串]
+        * 
+        */
+        format: function (date, format) {
             var args = {
                 "M+": date.getMonth() + 1,
                 "d+": date.getDate(),
@@ -229,25 +326,25 @@ layui.define(function (exports) {
         },
 
         // 深拷贝
-        deepClone:function(obj){
+        deepClone: function (obj) {
             if (obj == null || typeof obj !== 'object') {
                 return obj;
-              }
-              switch (Object.prototype.toString.call(obj)) {
+            }
+            switch (Object.prototype.toString.call(obj)) {
                 case '[object Array]': {
-                  const result = new Array(obj.length);
-                  for (let i=0; i<result.length; ++i) {
-                    result[i] = deepClone(obj[i]);
-                  }
-                  return result;
+                    const result = new Array(obj.length);
+                    for (let i = 0; i < result.length; ++i) {
+                        result[i] = deepClone(obj[i]);
+                    }
+                    return result;
                 }
-            
+
                 case '[object Error]': {
-                  const result = new obj.constructor(obj.message);
-                  result.stack = obj.stack; // hack...
-                  return result;
+                    const result = new obj.constructor(obj.message);
+                    result.stack = obj.stack; // hack...
+                    return result;
                 }
-            
+
                 case '[object Date]':
                 case '[object RegExp]':
                 case '[object Int8Array]':
@@ -261,26 +358,26 @@ layui.define(function (exports) {
                 case '[object Float64Array]':
                 case '[object Map]':
                 case '[object Set]':
-                  return new obj.constructor(obj);
-            
+                    return new obj.constructor(obj);
+
                 case '[object Object]': {
-                  const keys = Object.keys(obj);
-                  const result = {};
-                  for (let i=0; i<keys.length; ++i) {
-                    const key = keys[i];
-                    result[key] = deepClone(obj[key]);
-                  }
-                  return result;
+                    const keys = Object.keys(obj);
+                    const result = {};
+                    for (let i = 0; i < keys.length; ++i) {
+                        const key = keys[i];
+                        result[key] = deepClone(obj[key]);
+                    }
+                    return result;
                 }
-            
+
                 default: {
-                  throw new Error("Unable to copy obj! Its type isn't supported.");
+                    throw new Error("Unable to copy obj! Its type isn't supported.");
                 }
-              }
+            }
         },
 
         // 回到顶部
-        goTop: function(duration) {
+        goTop: function (duration) {
             var durations = duration || 300;
             var y1 = 0;
             var y2 = 0;
@@ -295,28 +392,28 @@ layui.define(function (exports) {
             // 滚动条到页面顶部的垂直距离 
             var y = Math.max(y1, Math.max(y2, y3));
             for (var i = 60; i >= 0; i--) {
-                setTimeout(function(i) {
-                    return function() {
+                setTimeout(function (i) {
+                    return function () {
                         window.scrollTo(0, y * i / 60);
                     };
                 }(i), durations * (1 - i / 60));
             }
         },
-        
-         /**
-         * [时间格式化函数]
-         * @param  {[obj]} elem [要添加的 js对象]
-         * @param  {[string]} even ['click','input'。。。。。。]
-         * @param  {[]} fn [执行的方法]
-         * 
-         */
-        on:function(elem, even, fn){
-            elem.attachEvent ? elem.attachEvent('on'+ even, function(e){ //for ie
-              e.target = e.srcElement;
-              fn.call(elem, e);
+
+        /**
+        * [时间格式化函数]
+        * @param  {[obj]} elem [要添加的 js对象]
+        * @param  {[string]} even ['click','input'。。。。。。]
+        * @param  {[]} fn [执行的方法]
+        * 
+        */
+        on: function (elem, even, fn) {
+            elem.attachEvent ? elem.attachEvent('on' + even, function (e) { //for ie
+                e.target = e.srcElement;
+                fn.call(elem, e);
             }) : elem.addEventListener(even, fn, false);
             return this;
-          }
+        }
 
     }
 
