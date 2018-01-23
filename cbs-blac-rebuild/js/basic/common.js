@@ -21,19 +21,19 @@ function dateData() {
     var nowdate = new Date();
     var nowMonth = Number(nowdate.getMonth() + 1);
     for (var i = 0; i < lengths; i++) {
-       
+
 
         var dic = { type: true }; //true(相对时间) fasle(绝对时间)
         switch (i) {
             case 0:
                 var time = FormatDate(nowdate, "yyyy-MM-dd");
                 dic.name = '今天';
-                dic.unit = '天'; 
+                dic.unit = '天';
                 dic.num = 0;
                 dic.chart_time = 0;
                 dic.start_time = time;
                 dic.end_time = time;
-                
+
                 break;
             case 1:
                 var time = compareDate(1, 1);
@@ -87,7 +87,7 @@ function dateData() {
                 dic.num = 6;
                 dic.chart_time = 3;
                 if (nowMonth === 1 || nowMonth === 2) {
-                
+
                     dic.start_time = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 3) + '-01';
                     dic.end_time = getCurrentMonthLastForSelect(dic.start_time);
 
@@ -102,7 +102,7 @@ function dateData() {
                 dic.num = 7;
                 dic.chart_time = 3;
                 if (nowMonth === 1 || nowMonth === 2 || nowMonth === 3) {
-               
+
                     dic.start_time = (nowdate.getFullYear() - 1) + '-' + compareDate(2, 4) + '-01';
                     dic.end_time = getCurrentMonthLastForSelect(dic.start_time);
 
@@ -129,6 +129,10 @@ function dateData() {
 
 
 //比较时间大小
+
+
+
+
 function bayaxCompareDate(start, end, type) {
     if (type == 1) {
         // var startTime = $("#" + start + "").val();
@@ -158,58 +162,58 @@ function bayaxCompareDate(start, end, type) {
  * @param {*} selecti 
  */
 function setRelativeHisTime(type, conts, selecti) {
-    console.log('今天:'+type)
+    console.log('今天:' + type)
 
     var time = {};
-    switch(type){
+    switch (type) {
         case 0: //对比今天
             console.log('对比今天')
             time.start_time = compareDate(1, conts);
             time.end_time = compareDate(1, conts);
-        break;
+            break;
         case 1: //对比昨天
             console.log('对比昨天')
-            time.start_time = compareDate(1, conts+1);
-            time.end_time = compareDate(1, conts+1);
-        break;
+            time.start_time = compareDate(1, conts + 1);
+            time.end_time = compareDate(1, conts + 1);
+            break;
         case 2: //对比最近三天
             console.log('对比最近三天')
             var c = 3;
             time.start_time = compareDate(1, c * conts + c - 1);
             time.end_time = compareDate(1, c * conts);
-        break;
+            break;
         case 3: //对比最近七天
             console.log('对比最近七天')
             var c = 7;
             time.start_time = compareDate(1, c * conts + c - 1);
             time.end_time = compareDate(1, c * conts);
-        break;
+            break;
         case 4: //对比最近30天
             console.log('对比最近30天')
             var c = 30;
             time.start_time = compareDate(1, c * conts + c - 1);
             time.end_time = compareDate(1, c * conts);
-        break;
+            break;
         case 5: //对比最近1个月
             console.log('对比最近1个月')
             time.start_time = getCurrentMonthFirst(conts + 2);
-            time.end_time = getCurrentMonthLastForSelect(compareDate(3,  conts + 2));
-        break;
+            time.end_time = getCurrentMonthLastForSelect(compareDate(3, conts + 2));
+            break;
         case 6: //对比最近2个月
             console.log('对比最近2个月')
             time.start_time = getCurrentMonthFirst(conts + 3);
-            time.end_time = getCurrentMonthLastForSelect(compareDate(3,  conts + 3));
-        break;
+            time.end_time = getCurrentMonthLastForSelect(compareDate(3, conts + 3));
+            break;
         case 7: //对比最近3个月
             console.log('对比最近3个月')
             time.start_time = getCurrentMonthFirst(conts + 4);
-            time.end_time = getCurrentMonthLastForSelect(compareDate(3,  conts + 4));
-        break;
+            time.end_time = getCurrentMonthLastForSelect(compareDate(3, conts + 4));
+            break;
         default:
-        break;
+            break;
     }
-    return time;  
-  }
+    return time;
+}
 
 // ///////////////////////////////////////////////////////////////////////////
 
@@ -605,8 +609,3 @@ function fileName(name, type) {
     }
 
 }
-
-
-
-
-
