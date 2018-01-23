@@ -105,8 +105,7 @@
                                         <p class="title">自定义图表</p>
                                         <div class="menu">
                                             <ul>
-                                                <li v-for="(item,index) in energyAnalysis.customList.data" :class="{active:item.isActive}" v-text="item.name" :title="item.name"
-                                                    @click="getCustomAnalysisData(item)"></li>
+                                                <li v-for="(item,index) in energyAnalysis.customList.data" :class="{active:item.isActive}" v-text="item.name" :title="item.name" @click="getCustomAnalysisData(item)"></li>
 
                                             </ul>
                                         </div>
@@ -131,22 +130,19 @@
 
                                     <div class="tab-warn-div layui-inline">
                                         <div class="layui-input-inline">
-                                            <input v-model="energyAnalysis.timeOption.startime" id="startime" type="text" name="date" readonly="readonly" lay-verify="date"
-                                                autocomplete="off" class="layui-input">
+                                            <input v-model="energyAnalysis.timeOption.startime" id="startime" type="text" name="date" readonly="readonly" lay-verify="date" autocomplete="off" class="layui-input">
                                         </div>
                                     </div>
 
                                     <div class="tab-warn-div layui-inline">
                                         <span>至</span>
                                         <div class="layui-input-inline">
-                                            <input v-model="energyAnalysis.timeOption.endtime" id="endtime" type="text" name="date" readonly="readonly" lay-verify="date"
-                                                autocomplete="off" class="layui-input">
+                                            <input v-model="energyAnalysis.timeOption.endtime" id="endtime" type="text" name="date" readonly="readonly" lay-verify="date" autocomplete="off" class="layui-input">
                                         </div>
                                     </div>
 
                                     <div class="layui-inline div-btn-comhis">
-                                        <button :disabled="!energyAnalysis.comparisonOfHistoricalData.flag" :class="{'btn-disabled':!energyAnalysis.comparisonOfHistoricalData.flag}"
-                                            @click="comparisonHistory" class="bayax-btn">对比历史数据</button>
+                                        <button :disabled="!energyAnalysis.comparisonOfHistoricalData.flag" :class="{'btn-disabled':!energyAnalysis.comparisonOfHistoricalData.flag}" @click="comparisonHistory" class="bayax-btn">对比历史数据</button>
                                     </div>
                                     <div class="tab-warn-div-export  layui-inline div-btn-comhis">
                                         <button data-id="analysis-tree-body" class="choice-tag-btn bayax-btn">选择统计对象</button>
@@ -201,12 +197,10 @@
                                 <div class="content">
                                     <div class="head">
                                         <div class="getshi layui-inline">
-                                            <a v-for="item in energyAnalysis.analysisCharts.time.timeData" v-bind:class="{active:item.isActive}" v-show="item.show" v-text="item.name"
-                                                @click="getChartDatabyChartTimeType(item)" href="javascript:;"></a>
+                                            <a v-for="item in energyAnalysis.analysisCharts.time.timeData" v-bind:class="{active:item.isActive}" v-show="item.show" v-text="item.name" @click="getChartDatabyChartTimeType(item)" href="javascript:;"></a>
                                         </div>
                                         <div class="gettrend layui-inline">
-                                            <a v-for="item in energyAnalysis.analysisCharts.chart.chartData" v-bind:class="{active:item.isActive}" v-text="item.name"
-                                                @click="getChartDatabyChartType(item)" href="javascript:;"></a>
+                                            <a v-for="item in energyAnalysis.analysisCharts.chart.chartData" v-bind:class="{active:item.isActive}" v-text="item.name" @click="getChartDatabyChartType(item)" href="javascript:;"></a>
 
                                         </div>
                                     </div>
@@ -233,8 +227,7 @@
                                         <p class="title">自定义报表</p>
                                         <div class="menu">
                                             <ul>
-                                                <li v-for="(item,index) in energyTable.customList.data" :class="{active:item.isActive}" v-text="item.name" :title="item.name"
-                                                    @click="getCustomTableData(item)"></li>
+                                                <li v-for="(item,index) in energyTable.customList.data" :class="{active:item.isActive}" v-text="item.name" :title="item.name" @click="getCustomTableData(item)"></li>
 
                                             </ul>
                                         </div>
@@ -259,12 +252,9 @@
 
                                     <div class="tab-warn-div layui-inline">
                                         <div class="layui-input-inline">
-                                            <input  v-show="energyTable.timeOption.btnSelectdata[0].isShow" v-model="energyTable.timeOption.btnSelectdata[0].value"  id="table-day-time" type="text" name="date" readonly="readonly" lay-verify="date"
-                                                autocomplete="off" class="layui-input">
-                                            <input v-show="energyTable.timeOption.btnSelectdata[1].isShow"  v-model="energyTable.timeOption.btnSelectdata[1].value"  id="table-month-time" type="text" name="date" readonly="readonly" lay-verify="date"
-                                                autocomplete="off" class="layui-input" style="display:none">
-                                            <input v-show="energyTable.timeOption.btnSelectdata[2].isShow"  v-model="energyTable.timeOption.btnSelectdata[2].value" id="table-year-time" type="text" name="date" readonly="readonly" lay-verify="date"
-                                                autocomplete="off" class="layui-input" style="display:none">                                               
+                                            <input v-show="energyTable.timeOption.btnSelectdata[0].isShow" v-model="energyTable.timeOption.btnSelectdata[0].value" id="table-day-time" type="text" name="date" readonly="readonly" lay-verify="date" autocomplete="off" class="layui-input">
+                                            <input v-show="energyTable.timeOption.btnSelectdata[1].isShow" v-model="energyTable.timeOption.btnSelectdata[1].value" id="table-month-time" type="text" name="date" readonly="readonly" lay-verify="date" autocomplete="off" class="layui-input" style="display:none">
+                                            <input v-show="energyTable.timeOption.btnSelectdata[2].isShow" v-model="energyTable.timeOption.btnSelectdata[2].value" id="table-year-time" type="text" name="date" readonly="readonly" lay-verify="date" autocomplete="off" class="layui-input" style="display:none">
                                         </div>
                                     </div>
 
@@ -319,19 +309,19 @@
 
                                 <div class="content">
                                     <div v-show="energyTable.tableData.isNullTable" class="explain">请选择统计对象生成报表</div>
-                                    <div v-show="!energyTable.tableData.isNullTable"  id="tab-conten-main" class="conten-main" style="display:none">
+                                    <div v-show="!energyTable.tableData.isNullTable" id="tab-conten-main" class="conten-main" style="display:none">
                                         <div v-show="!energyTable.tableData.isFullScreen">
                                             <a>用电量(单位:KWh)</a>
-                                            <a  @click="fullScreenEnergyTable" href="javascript:;">
-                                                <span  class="icon-zoom_out_map"></span>全屏</a>
+                                            <a @click="fullScreenEnergyTable" href="javascript:;">
+                                                <span class="icon-zoom_out_map"></span>全屏</a>
                                         </div>
                                         <div v-show="energyTable.tableData.isFullScreen" style="display:none">
-                                                <span class="">用电量(单位:KWh)</span>
-                                                <span class="">
+                                            <span class="">用电量(单位:KWh)</span>
+                                            <span class="">
                                                     <button class="layui-btn bayax-btn" >导出文件</button>
                                                     <button @click="exitFullScreen" class="layui-btn bayax-btn" >退出全屏</button>
                                                 </span>
-                                            </div>
+                                        </div>
                                         <div class="energy-table-div">
                                             <table class="bayax-table energy-table">
                                                 <thead>
@@ -346,8 +336,8 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                
-                                
+
+
                                     </div>
                                 </div>
                             </div>
@@ -438,13 +428,11 @@
                     <li class="time-li" v-for="(item,index) in energyAnalysis.comparisonOfHistoricalData.absolutelyData.data">
                         <span class="time-li-span">对比时间段</span>
                         <div class="layui-inline">
-                            <input v-model="item.start.value" v-on:focus="setAbsoluteTimeFlag(item,item.start.type)" type="text" name="date" readonly="readonly"
-                                lay-verify="date" autocomplete="off" class="absolute-time layui-input">
+                            <input v-model="item.start.value" v-on:focus="setAbsoluteTimeFlag(item,item.start.type)" type="text" name="date" readonly="readonly" lay-verify="date" autocomplete="off" class="absolute-time layui-input">
                         </div>
                         <span class="time-li-span">至</span>
                         <div class="layui-inline">
-                            <input v-model="item.end.value" v-on:focus="setAbsoluteTimeFlag(item,item.end.type)" type="text" name="date" readonly="readonly"
-                                lay-verify="date" autocomplete="off" class="absolute-time layui-input">
+                            <input v-model="item.end.value" v-on:focus="setAbsoluteTimeFlag(item,item.end.type)" type="text" name="date" readonly="readonly" lay-verify="date" autocomplete="off" class="absolute-time layui-input">
                         </div>
                         <span @click="deleteAbsoluteTime(item)" title="删除本条对比数据" class="icon-highlight_off"></span>
 

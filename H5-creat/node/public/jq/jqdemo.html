@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/jqdemo.css">
+</head>
+
+<body>
+
+
+    <section class="sec sec-1">
+        <span class="monster" src="./image/5.png" alt=""></span>
+        <div class="sec1-content-2">
+            <div class="tips-1">
+
+            </div>
+            <div class="tips-2">
+
+            </div>
+        </div>
+
+        <div class="sec1-content-1">
+            <div class="imgs">
+            </div>
+            <div class="imgs-2">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- <section class="sec sec-demo">
+        <div class="finger">
+
+        </div>
+    </section> -->
+
+    <section class="sec sec-end">
+
+    </section>
+
+
+    <script>
+        var wh = document.documentElement.clientHeight;
+        console.log(wh)
+        var ww = wh * 375 / 667;
+        // document.documentElement.style.fontSize = wh / 16 + "px";
+
+        var secs = document.getElementsByClassName("sec");
+        for (var i = 0; i < secs.length; i++) {
+            secs[i].style.width = ww + 'px';
+            secs[i].style.height = wh + 'px';
+        }
+    </script>
+    <script src="./js/zepto.js"></script>
+    <script src="./js/jqdemo.js"></script>
+</body>
+
+</html>

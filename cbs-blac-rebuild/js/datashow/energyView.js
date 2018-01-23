@@ -1094,6 +1094,13 @@ layui.use(['layer', 'element', 'laydate'], function () {
              * isCustom  是否是 自定义图表 触发
              * 
              */
+
+
+
+
+
+
+            
             analysisTimeSet: function (item, isChoice) {
                 console.log(JSON.stringify(item, null, 2));
 
@@ -1206,6 +1213,8 @@ layui.use(['layer', 'element', 'laydate'], function () {
             },
 
             // 对比历史数据 弹窗
+
+          
             comparisonHistory: function () {
                 var _this = this;
                 var type = this.energyAnalysis.comparisonOfHistoricalData.relative;
